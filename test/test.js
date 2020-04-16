@@ -1,3 +1,3 @@
-import { Title } from '@patternfly/react-core';
+import { Title as MyTitle } from '@patternfly/react-core';
 
-export const Thing = () => <Title size="md">Title</Title>;
+export const Thing = () => <MyTitle size="md">Title</MyTitle>;
