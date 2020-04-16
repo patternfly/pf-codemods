@@ -1,0 +1,20 @@
+{
+  "name": "pf-3-to-4",
+  "version": "1.0.0",
+  "description": "Codemods for v4 breaking change release 2020.07",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint --rulesdir lib/rules test/test.js",
+    "test:integration": "eslint --config .eslintrc.json --no-eslintrc --rulesdir lib/rules --ext js,jsx,ts,tsx --quiet",
+    "test:koku": "npm run test:integration -- test/koku-ui",
+    "test:openshift": "npm run test:integration -- test/console",
+    "test:integreatly": "npm run test:integration -- test/tutorial-web-app"
+  },
+  "author": "Red Hat",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/parser": "^2.28.0",
+    "eslint": "^6.8.0",
+    "typescript": "^3.8.3"
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "title-heading-level": "error"
+    },
+    "noInlineConfig": true,
+    "reportUnusedDisableDirectives": false
+}
