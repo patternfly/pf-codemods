@@ -4,7 +4,7 @@
   "description": "Codemods for v4 breaking change release 2020.07",
   "main": "index.js",
   "scripts": {
-    "test": "eslint --rulesdir lib/rules test/test.js",
+    "test": "eslint --rulesdir lib/rules test/test.tsx",
     "test:integration": "eslint --config .eslintrc.json --no-eslintrc --rulesdir lib/rules --ext js,jsx,ts,tsx --quiet",
     "test:koku": "npm run test:integration -- test/koku-ui",
     "test:openshift": "npm run test:integration -- test/console",

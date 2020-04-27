@@ -12,7 +12,8 @@
         }
     },
     "rules": {
-        "title-heading-level": "error"
+        "title-heading-level": "error",
+        "remove-variant-enum": "error"
     },
     "noInlineConfig": true,
     "reportUnusedDisableDirectives": false
