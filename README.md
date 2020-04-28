@@ -19,7 +19,7 @@ CLI utility to help ease products transitioning to our new major @patternfly/rea
 ## Development
 This is what @redallen does to develop a rule:
 1. Copy a rule at `lib/rules/*`
-2. Add it to `lib/plugins.js` and to `.eslintrc.json`
+2. Add it to `.eslintrc.json`
 3. Copy a test at `test/rules/*`
 4. Put code into an AST explorer like https://astexplorer.net/ . Add code to "failing" version of test.
 5. Write rule targeting specific AST node. Confirm AST node exists in `lib/rules/ast-node-types.d.ts`.

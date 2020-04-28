@@ -11,10 +11,9 @@
             "jsx": true
         }
     },
-    "rules": {
-        "title-heading-level": "error",
-        "remove-variant-enum": "error"
-    },
     "noInlineConfig": true,
-    "reportUnusedDisableDirectives": false
+    "reportUnusedDisableDirectives": false,
+    "rules": {
+        "title-heading-level": "error"
+    }
 }
