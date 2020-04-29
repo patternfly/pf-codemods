@@ -55,13 +55,13 @@ const engine = new CLIEngine({
   rules: {
     "title-heading-level": "error"
   },
-  plugins: undefined,
+  plugins: ['pf-codemods'],
   globals: undefined,
   ignore: true,
   ignorePath: undefined,
   ignorePattern: undefined,
   configFile: undefined,
-  rulePaths: ['lib/rules'],
+  rulePaths: [],
   useEslintrc: false,
   parser: "@typescript-eslint/parser",
   parserOptions: {
