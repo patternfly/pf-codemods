@@ -4,15 +4,20 @@ const rule = require('../../lib/rules/title-heading-level');
 ruleTester.run("title-heading-level", rule, {
   valid: [
     {
-      code: `<Title size="lg" headingLevel="h2">{t('details.cost_value', { value: cost })}</Title>`,
+      code: `import { Title } from '@patternfly/react-core'; <Title headingLevel="h2" size="lg">{t('details.cost_value', { value: cost })}</Title>`,
+    },
+    {
+      // No @patternfly/react-core import
+      code: `<Title size="lg">{t('details.cost_value', { value: cost })}</Title>`,
     }
   ],
   invalid: [
     {
-      code: `<Title size="lg">{t('details.cost_value', { value: cost })}</Title>`,
+      code:   `import { Title } from '@patternfly/react-core'; <Title size="lg">{t('details.cost_value', { value: cost })}</Title>`,
+      output: `import { Title } from '@patternfly/react-core'; <Title headingLevel="h2" size="lg">{t('details.cost_value', { value: cost })}</Title>`,
       errors: [{
-        message: "Must include headingLevel attribute",
-        type: "JSXOpeningElement"
+        message: "headingLevel attribute is required for Title",
+        type: "JSXOpeningElement",
       }]
     }
   ]

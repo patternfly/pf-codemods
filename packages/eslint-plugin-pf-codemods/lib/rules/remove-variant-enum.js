@@ -1,17 +1,6 @@
 const { getPackageImports } = require('../helpers');
 
 module.exports = {
-  meta: {
-      docs: {
-          description: "desc",
-          category: "Fill me in",
-          recommended: false
-      },
-      fixable: 'code',  // or "code" or "whitespace"
-      schema: [
-          // fill in your schema
-      ]
-  },
   create: function(context) {
     const variantEnumImports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name.endsWith('Variant'));

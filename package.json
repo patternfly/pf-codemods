@@ -4,11 +4,10 @@
   "description": "PF codemods monorepo",
   "private": true,
   "scripts": {
-    "test": "eslint test/test.tsx",
-    "test:integration": "eslint --config .eslintrc.json --no-eslintrc --rulesdir lib/rules --ext js,jsx,ts,tsx --quiet",
-    "test:koku": "npm run test:integration -- test/koku-ui",
-    "test:openshift": "npm run test:integration -- test/console",
-    "test:integreatly": "npm run test:integration -- test/tutorial-web-app"
+    "test": "pf-codemods test/test.tsx",
+    "test:koku": "pf-codemods test/koku-ui",
+    "test:openshift": "pf-codemods test/console/frontend",
+    "test:integreatly": "pf-codemods test/tutorial-web-app"
   },
   "repository": {
     "type": "git",

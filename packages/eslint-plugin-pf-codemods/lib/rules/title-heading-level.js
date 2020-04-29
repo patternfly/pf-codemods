@@ -1,17 +1,7 @@
 const { getPackageImports } = require('../helpers');
 
+// #4 and #5 from https://github.com/patternfly/patternfly-react/pull/3922
 module.exports = {
-  meta: {
-      docs: {
-          description: "desc",
-          category: "Fill me in",
-          recommended: false
-      },
-      fixable: 'code',  // or "code" or "whitespace"
-      schema: [
-          // fill in your schema
-      ]
-  },
   create: function(context) {
     const titleImports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'Title');
@@ -22,7 +12,7 @@ module.exports = {
           if (!node.attributes.map(node => node.name.name).includes('headingLevel')) {
             context.report({
               node,
-              message: 'Must include headingLevel attribute',
+              message: `headingLevel attribute is required for ${node.name.name}`,
               fix(fixer) {
                 return fixer.insertTextAfter(node.name, ' headingLevel="h2"');
               }

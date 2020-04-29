@@ -21,6 +21,9 @@ function printResults(engine, results, format) {
     return false;
   }
 
+  // Don't show warnings
+  results.forEach(result => result.messages = result.messages.filter(message => message.severity === 2));
+
   const output = formatter(results, {
     get rulesMeta() {
       if (!rulesMeta) {
@@ -46,39 +49,28 @@ try {
 }
 
 const engine = new CLIEngine({
-  envs: [
-    "browser",
-    "node",
-    "es6"
-  ],
+  envs: undefined,
   extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
-  rules: {
-    "title-heading-level": "error"
-  },
-  plugins: ['pf-codemods'],
+  rules: undefined,
+  plugins: undefined,
   globals: undefined,
   ignore: true,
   ignorePath: undefined,
   ignorePattern: undefined,
-  configFile: undefined,
+  configFile: __dirname + '/.eslintrc.json',
   rulePaths: [],
   useEslintrc: false,
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
+  parser: undefined,
+  parserOptions: undefined,
   cache: false,
   cacheFile: '.eslintcache',
   cacheLocation: undefined,
   fix: currentOptions.fix,
   fixTypes: undefined,
-  allowInlineConfig: false,
-  reportUnusedDisableDirectives: false,
+  allowInlineConfig: undefined,
+  reportUnusedDisableDirectives: undefined,
   resolvePluginsRelativeTo: undefined,
-  errorOnUnmatchedPattern: true
+  errorOnUnmatchedPattern: undefined
 });
 
 const report = engine.executeOnFiles(currentOptions._);
