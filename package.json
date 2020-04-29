@@ -4,7 +4,7 @@
   "description": "PF codemods monorepo",
   "private": true,
   "scripts": {
-    "test": "eslint --rulesdir packages/eslint-plugin-pf-3-to-4/lib/rules test/test.tsx",
+    "test": "eslint test/test.tsx",
     "test:integration": "eslint --config .eslintrc.json --no-eslintrc --rulesdir lib/rules --ext js,jsx,ts,tsx --quiet",
     "test:koku": "npm run test:integration -- test/koku-ui",
     "test:openshift": "npm run test:integration -- test/console",

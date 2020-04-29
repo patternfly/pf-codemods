@@ -1,19 +1,4 @@
 {
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
-    "noInlineConfig": true,
-    "reportUnusedDisableDirectives": false,
-    "rules": {
-        "title-heading-level": "error"
-    }
+    "plugins": ["pf-codemods"],
+    "extends": ["plugin:pf-codemods/recommended"]
 }

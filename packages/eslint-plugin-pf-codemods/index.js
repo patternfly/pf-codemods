@@ -2,7 +2,11 @@ module.exports = {
   configs: {
     recommended: {
       plugins: ['pf-codemods'],
-      env: [ "browser", "node", "es6" ],
+      env: {
+        browser: true,
+        node: true,
+        es6: true
+      },
       noInlineConfig: true,
       reportUnusedDisableDirectives: false,
       parser: "@typescript-eslint/parser",
