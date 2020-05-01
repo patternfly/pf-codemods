@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const path = require('path');
 const options = require('eslint/lib/options');
 const { CLIEngine } = require('eslint/lib/cli-engine');
 
@@ -40,43 +41,47 @@ function printResults(engine, results, format) {
   return true;
 }
 
-let currentOptions;
-try {
-  currentOptions = options.parse(process.argv);
-} catch (error) {
-  console.error(error.message);
-  return 2;
+function main() {
+  let currentOptions;
+  try {
+    currentOptions = options.parse(process.argv);
+  } catch (error) {
+    console.error(error.message);
+    return 2;
+  }
+  
+  const engine = new CLIEngine({
+    envs: undefined,
+    extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
+    rules: undefined,
+    plugins: undefined,
+    globals: undefined,
+    ignore: true,
+    ignorePath: undefined,
+    ignorePattern: undefined,
+    configFile: path.join(__dirname, '/.eslintrc.json'),
+    rulePaths: [],
+    useEslintrc: false,
+    parser: undefined,
+    parserOptions: undefined,
+    cache: false,
+    cacheFile: '.eslintcache',
+    cacheLocation: undefined,
+    fix: currentOptions.fix,
+    fixTypes: undefined,
+    allowInlineConfig: undefined,
+    reportUnusedDisableDirectives: undefined,
+    resolvePluginsRelativeTo: __dirname,
+    errorOnUnmatchedPattern: undefined
+  });
+  
+  const report = engine.executeOnFiles(currentOptions._);
+  
+  if (currentOptions.fix) {
+    CLIEngine.outputFixes(report);
+  }
+  
+  printResults(engine, report.results, currentOptions.format);
 }
 
-const engine = new CLIEngine({
-  envs: undefined,
-  extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
-  rules: undefined,
-  plugins: undefined,
-  globals: undefined,
-  ignore: true,
-  ignorePath: undefined,
-  ignorePattern: undefined,
-  configFile: __dirname + '/.eslintrc.json',
-  rulePaths: [],
-  useEslintrc: false,
-  parser: undefined,
-  parserOptions: undefined,
-  cache: false,
-  cacheFile: '.eslintcache',
-  cacheLocation: undefined,
-  fix: currentOptions.fix,
-  fixTypes: undefined,
-  allowInlineConfig: undefined,
-  reportUnusedDisableDirectives: undefined,
-  resolvePluginsRelativeTo: undefined,
-  errorOnUnmatchedPattern: undefined
-});
-
-const report = engine.executeOnFiles(currentOptions._);
-
-if (currentOptions.fix) {
-  CLIEngine.outputFixes(report);
-}
-
-printResults(engine, report.results, currentOptions.format);
+main();
