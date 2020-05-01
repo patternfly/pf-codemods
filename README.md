@@ -1,6 +1,12 @@
 # pf-codemods
 An eslint plugin (with an extra CLI utility) to help ease products transitioning to our new major @patternfly/react-core 4.0.0 release.
 
+## Usage
+
+```sh
+npx pf-codemods ./path-to-src
+```
+
 ## Goals
 - We want to minimize code changes and respect existing code
 - We only want to make safe modifications
