@@ -1,7 +1,7 @@
 const ruleTester = require('./ruletester');
-const rule = require('../../lib/rules/application-launcher-items');
+const rule = require('../../lib/rules/application-launcher-rename-dropdownItems');
 
-ruleTester.run("application-launcher-items", rule, {
+ruleTester.run("application-launcher-rename-dropdownItems", rule, {
   valid: [
     {
       code: `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher />`,

@@ -1,7 +1,7 @@
 const ruleTester = require('./ruletester');
-const rule = require('../../lib/rules/select-isExpanded');
+const rule = require('../../lib/rules/select-rename-isExpanded');
 
-ruleTester.run("select-isExpanded", rule, {
+ruleTester.run("select-rename-isExpanded", rule, {
   valid: [
     {
       code: `import { Select } from '@patternfly/react-core'; <Select isOpen />`,

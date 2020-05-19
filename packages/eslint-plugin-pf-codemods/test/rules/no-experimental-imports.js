@@ -1,7 +1,7 @@
 const ruleTester = require('./ruletester');
-const rule = require('../../lib/rules/promoted-components');
+const rule = require('../../lib/rules/no-experimental-imports');
 
-ruleTester.run("promoted-components", rule, {
+ruleTester.run("no-experimental-imports", rule, {
   valid: [
     {
       code: `import { Divider } from '@patternfly/react-core';`,

@@ -1,7 +1,7 @@
 const ruleTester = require('./ruletester');
-const rule = require('../../lib/rules/title-heading-level');
+const rule = require('../../lib/rules/title-require-heading-level');
 
-ruleTester.run("title-heading-level", rule, {
+ruleTester.run("title-require-heading-level", rule, {
   valid: [
     {
       code: `import { Title } from '@patternfly/react-core'; <Title headingLevel="h2" size="lg">{t('details.cost_value', { value: cost })}</Title>`,
