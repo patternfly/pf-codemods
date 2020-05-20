@@ -1,7 +1,7 @@
 const ruleTester = require('./ruletester');
-const rule = require('../../lib/rules/remove-hasBodyPadding');
+const rule = require('../../lib/rules/wizard-rename-hasBodyPadding');
 
-ruleTester.run("remove-hasBodyPadding", rule, {
+ruleTester.run("wizard-rename-hasBodyPadding", rule, {
   valid: [
     {
       code: `import { Wizard } from '@patternfly/react-core'; <Wizard hasNoBodyPadding />`,

@@ -12,7 +12,7 @@ const rules = {
   "title-require-heading-level": require('./lib/rules/title-require-heading-level'),
   "title-size": require('./lib/rules/title-size'),
   "wizard-text": require('./lib/rules/wizard-text'),
-  "remove-hasBodyPadding": require('./lib/rules/remove-hasBodyPadding'),
+  "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
 };
 
 module.exports = {
