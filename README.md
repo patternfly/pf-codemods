@@ -22,12 +22,16 @@ npx pf-codemods ./path-to-src
 
 ## Development
 This is what @redallen does to develop a rule:
-1. Copy a similar rule from `eslint-plugin-pf-codemods/lib/rules/*`
-2. Add it to the `rules` object at the top of `eslint-plugin-pf-codemods/index.js`
-3. Copy a test at `test/rules/*` and write your test cases. Run `node test/rules/my-rule.js` to test the rule
+1. ~~Copy a similar rule from `eslint-plugin-pf-codemods/lib/rules/*`~~
+2. ~~Add it to the `rules` object at the top of `eslint-plugin-pf-codemods/index.js`~~
+3. ~~Copy a test at `test/rules/*` and write your test cases.~~
+
+We now have a generator.
+1. Run `node generate new-rule-name` to create the rule files
+2. Run `node test/rules/new-rule-name.js` to test the rule
 
 If you're having trouble writing a rule, you can:
 1. Put code into an AST explorer like https://astexplorer.net/ to inspect all the AST nodes
-2. `console.dir(node, { depth: 5 })` to better inspect the node
+2. `console.dir(node, { depth: 5 })` to better inspect a `node` you're dealing with
 3. Write rule targeting an AST node that has all the information you need. Confirm AST node exists in `lib/rules/ast-node-types.d.ts`.
 4. Ask zallen on the RHUX or PatternFly Slack
