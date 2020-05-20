@@ -12,6 +12,7 @@ const rules = {
   "title-require-heading-level": require('./lib/rules/title-require-heading-level'),
   "title-size": require('./lib/rules/title-size'),
   "wizard-text": require('./lib/rules/wizard-text'),
+  "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
 };
 
 module.exports = {
