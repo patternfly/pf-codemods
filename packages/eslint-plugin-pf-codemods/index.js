@@ -13,6 +13,7 @@ const rules = {
   "title-size": require('./lib/rules/title-size'),
   "wizard-text": require('./lib/rules/wizard-text'),
   "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
+  "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
 };
 
 module.exports = {
