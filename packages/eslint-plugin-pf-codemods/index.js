@@ -14,6 +14,7 @@ const rules = {
   "wizard-text": require('./lib/rules/wizard-text'),
   "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
   "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
+  "background-image-src-enum": require('./lib/rules/background-image-src-enum'),
 };
 
 module.exports = {
