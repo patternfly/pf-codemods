@@ -17,6 +17,7 @@ const rules = {
   "background-image-src-enum": require('./lib/rules/background-image-src-enum'),
   "skip-to-content-remove-component": require('./lib/rules/skip-to-content-remove-component'),
   "alert-new-action": require('./lib/rules/alert-new-action'),
+  "card-rename-components": require('./lib/rules/card-rename-components'),
 };
 
 module.exports = {
