@@ -18,6 +18,11 @@ const rules = {
   "skip-to-content-remove-component": require('./lib/rules/skip-to-content-remove-component'),
   "alert-new-action": require('./lib/rules/alert-new-action'),
   "card-rename-components": require('./lib/rules/card-rename-components'),
+  "chipgroup-remove-props": require('./lib/rules/chipgroup-remove-props'),
+  "chipgroup-remove-props": require('./lib/rules/chipgroup-remove-props'),
+  "chipgroup-remove-chipbutton": require('./lib/rules/chipgroup-remove-chipbutton'),
+  "chipgroup-remove-chipbutton": require('./lib/rules/chipgroup-remove-chipbutton'),
+  "chipgroup-remove-chipgrouptoolbaritem": require('./lib/rules/chipgroup-remove-chipgrouptoolbaritem'),
 };
 
 module.exports = {

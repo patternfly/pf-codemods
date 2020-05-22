@@ -53,7 +53,7 @@ The order of this might be tricky since CardHead should only become CardHeader a
 ## chip-overflow [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
 - [ ] The overflow chip no longer contains a button. To specify a overflow chip as a button do the following `<Chip component='button'  isOverflowChip>`
 
-## chipgroup-removed-props [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
+## chipgroup-remove-props [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
 - [ ] **ChipGroup**: `withToolbar` prop has been removed.  Add the `categoryName` prop instead to add a chip group with a category.
 - [ ] **ChipGroup**: `headingLevel` prop has been removed.  The category name has internally been switched to a `<span>`
 - [ ] **ChipGroupToolbarItem**: This component has been removed.  To Create a ChipGroup with a category, add the `categoryName` prop to `<ChipGroup>`.  All props that were on the `<ChipGroupToolbarItem>` have been added to `<ChipGroup>`.  So to convert to new API, move move all you props up to `<ChipGroup>` and remove `<ChipGroupToolbarItem>`.
