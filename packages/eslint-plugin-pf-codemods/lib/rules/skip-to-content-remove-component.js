@@ -1,6 +1,6 @@
 const { renameProp } = require('../helpers');
 
-// https://github.com/patternfly/patternfly-react/pull/YOURNUMBERHERE
+// https://github.com/patternfly/patternfly-react/pull/4116
 module.exports = {
   create: renameProp(
     ['SkipToContent'],
