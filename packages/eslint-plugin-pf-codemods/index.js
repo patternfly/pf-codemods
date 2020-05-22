@@ -15,6 +15,7 @@ const rules = {
   "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
   "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
   "background-image-src-enum": require('./lib/rules/background-image-src-enum'),
+  "skip-to-content-remove-component": require('./lib/rules/skip-to-content-remove-component'),
 };
 
 module.exports = {
