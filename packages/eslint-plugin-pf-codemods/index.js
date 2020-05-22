@@ -33,6 +33,7 @@ const rules = {
   "tab-title-text": require('./lib/rules/tab-title-text'),
   "table-removed-transforms": require('./lib/rules/table-removed-transforms'),
   "select-rename-checkbox": require('./lib/rules/select-rename-checkbox'),
+  "use-page-header-tools": require('./lib/rules/use-page-header-tools'),
 };
 
 module.exports = {
