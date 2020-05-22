@@ -3,9 +3,9 @@ const rule = require('../../lib/rules/alert-new-action');
 
 ruleTester.run("alert-new-action", rule, {
   valid: [
-    // {
-    //   code: `import { Alert } from '@patternfly/react-core'; <Alert actionClose="Close" />`,
-    // }
+    {
+      code: `import { Alert } from '@patternfly/react-core'; <Alert actionClose="Close" />`,
+    }
   ],
   invalid: [
     {
