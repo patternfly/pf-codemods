@@ -13,7 +13,7 @@ ruleTester.run("use-page-header-tools", rule, {
   ],
   invalid: [
     {
-      code:   `import { PageHeader } from '@patternfly/react-core'; <PageHeader avatar={<Avatar />} />`,
+      code:   `import { PageHeader } from '@patternfly/react-core'; <PageHeader avatar={<Avatar  />} />`,
       output: `import { PageHeader } from '@patternfly/react-core'; <PageHeader headerTools={<PageHeaderTools> <Avatar  /> </PageHeaderTools>} />`,
       errors: [{
         message: `avatar prop was removed. Nest the Avatar component in the PageHeaderTools component instead, which is passed into PageHeader via the headerTools prop.`,
