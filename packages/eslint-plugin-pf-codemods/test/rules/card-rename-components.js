@@ -3,17 +3,17 @@ const rule = require('../../lib/rules/card-rename-components');
 
 ruleTester.run("card-rename-components", rule, {
   valid: [
-    // {
-    //   code: `import { Card, CardTitle, CardHeaderMain, CardHeader } from '@patternfly/react-core';
-    //   <Card>
-    //     <CardHeader data-codemods="true">
-    //       <CardHeaderMain>Header</CardHeaderMain>
-    //     </CardHeader>
-    //     <CardTitle>
-    //       Title
-    //     </CardTitle>
-    //   </Card>`,
-    // },
+    {
+      code: `import { Card, CardTitle, CardHeaderMain, CardHeader } from '@patternfly/react-core';
+      <Card>
+        <CardHeader data-codemods="true">
+          <CardHeaderMain>Header</CardHeaderMain>
+        </CardHeader>
+        <CardTitle>
+          Title
+        </CardTitle>
+      </Card>`,
+    },
     { // no @patternfly import
       code: `<Card>
       <CardHead>
@@ -26,40 +26,52 @@ ruleTester.run("card-rename-components", rule, {
     }
   ],
   invalid: [
-//     {
-//       code:   `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
-// <Card>
-//   <CardHead>
-//     <CardHeadMain>Header</CardHeadMain>
-//   </CardHead>
-//   <CardHeader>
-//     Title
-//   </CardHeader>
-// </Card>`,
-//       output: `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
-// <Card>
-//   <CardHeader data-codemods="true">
-//     <CardHeaderMain>Header</CardHeaderMain>
-//   </CardHeader>
-//   <CardTitle>
-//     Title
-//   </CardTitle>
-// </Card>`,
-//       errors: [
-//         {
-//           message: 'CardHead renamed to CardHeader',
-//           type: 'JSXElement'
-//         },
-//         {
-//           message: 'CardHeadMain renamed to CardHeaderMain',
-//           type: 'JSXElement'
-//         },
-//         {
-//           message: 'CardHeader renamed to CardTitle',
-//           type: 'JSXElement'
-//         },
-//       ]
-//     },
+    {
+      code:   `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
+<Card>
+  <CardHead>
+    <CardHeadMain>Header</CardHeadMain>
+  </CardHead>
+  <CardHeader>
+    Title
+  </CardHeader>
+</Card>`,
+      output: `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
+<Card>
+  <CardHeader data-codemods="true">
+    <CardHeaderMain>Header</CardHeaderMain>
+  </CardHeader>
+  <CardTitle>
+    Title
+  </CardTitle>
+</Card>`,
+      errors: [
+        {
+          message: 'CardHead renamed to CardHeader',
+          type: 'JSXIdentifier'
+        },
+        {
+          message: 'CardHeadMain renamed to CardHeaderMain',
+          type: 'JSXIdentifier'
+        },
+        {
+          message: 'CardHeadMain renamed to CardHeaderMain',
+          type: 'JSXIdentifier'
+        },
+        {
+          message: 'CardHead renamed to CardHeader',
+          type: 'JSXIdentifier'
+        },
+        {
+          message: 'CardHeader renamed to CardTitle',
+          type: 'JSXIdentifier'
+        },
+        {
+          message: 'CardHeader renamed to CardTitle',
+          type: 'JSXIdentifier'
+        }
+      ]
+    },
     {
       code:   `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
 <CardHead><CardHeadMain>Main</CardHeadMain></CardHead>`,

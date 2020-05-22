@@ -14,16 +14,20 @@ module.exports = {
     
     return !imports ? {} : {
       JSXIdentifier(node) {
-        const alreadyFixed = node.parent.parent.openingElement && node.parent.parent.openingElement.attributes.includes(attr => attr.name === 'data-codemods');
-        if (!alreadyFixed && imports.map(imp => imp.local.name).includes(node.name)) {
-          const isOpeningCardHead = node.parent.type === 'JSXOpeningElement' && node.name === 'CardHead';
-          context.report({
-            node,
-            message: `${node.name} renamed to ${renames[node.name]}`,
-            fix(fixer) {
-              return fixer.replaceText(node, `${renames[node.name]}${isOpeningCardHead ? ' data-codemods="true"' : ''}`);
-            }
-          });
+        if (imports.map(imp => imp.local.name).includes(node.name)) {
+          const alreadyFixed = node.parent.parent.openingElement && node.parent.parent.openingElement.attributes
+            .map(attr => attr.name.name)
+            .includes('data-codemods');
+          if (!alreadyFixed) {
+            const isOpeningCardHead = node.parent.type === 'JSXOpeningElement' && node.name === 'CardHead';
+            context.report({
+              node,
+              message: `${node.name} renamed to ${renames[node.name]}`,
+              fix(fixer) {
+                return fixer.replaceText(node, `${renames[node.name]}${isOpeningCardHead ? ' data-codemods="true"' : ''}`);
+              }
+            });
+          }
         }
       }
     };
