@@ -39,7 +39,30 @@ function renameProp(components, propMap, message, replaceAttribute) {
   }
 }
 
+function renameComponent(componentMap, message) {
+  return function(context) {
+    const imports = getPackageImports(context, '@patternfly/react-core')
+      .filter(specifier => Object.keys(componentMap).includes(specifier.imported.name));
+      
+    return !imports ? {} : {
+      JSXIdentifier(node) {
+        if (imports.map(imp => imp.local.name).includes(node.name)) {
+          const newName = componentMap[node.name];
+          context.report({
+            node,
+            message: message(node, newName),
+            fix(fixer) {
+              return fixer.replaceText(node, newName);
+            }
+          });
+        }
+      }
+    };
+  }
+}
+
 module.exports = {
   getPackageImports,
-  renameProp
+  renameProp,
+  renameComponent
 }
