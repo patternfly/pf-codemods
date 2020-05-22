@@ -13,15 +13,18 @@ module.exports = {
     return !imports ? {} : {
       JSXIdentifier(node) {
         if (imports.map(imp => imp.local.name).includes(node.name)) {
-          const isOpeningToolbar = node.parent.type === 'JSXOpeningElement' && node.name === 'Toolbar';
+          const alreadyFixed = node.parent.parent.openingElement && node.parent.parent.openingElement.attributes
+          .map(attr => attr.name.name)
+          if (!alreadyFixed) {
           context.report({
             node,
             message: `${node.name} renamed to ${renames[node.name]}`,
             fix(fixer) {
-              return fixer.replaceText(node, `${renames[node.name]}${isOpeningToolbar ? ' data-codemods="true"' : ''}`);
+              return fixer.replaceText(node, `${renames[node.name]}`);
             }
           });
         }
+       }
       }
     };
   }
