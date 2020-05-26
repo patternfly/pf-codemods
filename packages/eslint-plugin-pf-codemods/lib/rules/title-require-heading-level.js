@@ -6,7 +6,7 @@ module.exports = {
     const titleImports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'Title');
 
-    return !titleImports ? {} : {
+    return titleImports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (titleImports.map(imp => imp.local.name).includes(node.name.name)) {
           if (!node.attributes.map(node => node.name.name).includes('headingLevel')) {

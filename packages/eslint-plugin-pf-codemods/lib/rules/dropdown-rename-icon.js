@@ -8,7 +8,7 @@ module.exports = {
     const dropdownItemImport = imports.find(imp => imp.imported.name === 'DropdownItem');
     const dropdownItemIconImport = imports.find(imp => imp.imported.name === 'DropdownItemIcon');
   
-    return !imports ? {} : {
+    return imports.length === 0 ? {} : {
       JSXElement(node) {
         if (dropdownItemImport && dropdownItemImport.local.name === node.openingElement.name.name) {
           const dropdownIcons = node.children.filter(child =>

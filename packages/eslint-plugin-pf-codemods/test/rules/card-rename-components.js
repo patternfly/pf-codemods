@@ -36,7 +36,7 @@ ruleTester.run("card-rename-components", rule, {
     Title
   </CardHeader>
 </Card>`,
-      output: `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
+      output: `import { Card, CardHead, CardHeadMain, CardHeader, CardTitle, CardHeaderMain } from '@patternfly/react-core';
 <Card>
   <CardHeader data-codemods="true">
     <CardHeaderMain>Header</CardHeaderMain>
@@ -46,6 +46,10 @@ ruleTester.run("card-rename-components", rule, {
   </CardTitle>
 </Card>`,
       errors: [
+        {
+          message: 'add missing imports CardTitle, CardHeaderMain from @patternfly/react-core',
+          type: 'ImportDeclaration'
+        },
         {
           message: 'CardHead renamed to CardHeader',
           type: 'JSXIdentifier'
@@ -75,9 +79,13 @@ ruleTester.run("card-rename-components", rule, {
     {
       code:   `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
 <CardHead><CardHeadMain>Main</CardHeadMain></CardHead>`,
-      output: `import { Card, CardHead, CardHeadMain, CardHeader } from '@patternfly/react-core';
+      output: `import { Card, CardHead, CardHeadMain, CardHeader, CardTitle, CardHeaderMain } from '@patternfly/react-core';
 <CardHeader data-codemods="true"><CardHeaderMain>Main</CardHeaderMain></CardHeader>`,
       errors: [
+        {
+          message: 'add missing imports CardTitle, CardHeaderMain from @patternfly/react-core',
+          type: 'ImportDeclaration'
+        },
         {
           message: 'CardHead renamed to CardHeader',
           type: 'JSXIdentifier'
