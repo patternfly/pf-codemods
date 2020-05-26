@@ -27,6 +27,8 @@ const rules = {
   "dropdown-toggle-rename-iconComponent": require('./lib/rules/dropdown-toggle-rename-iconComponent'),
   "empty-state-icon-removed-props": require('./lib/rules/empty-state-icon-removed-props'),
   "pagination-removed-variant": require('./lib/rules/pagination-removed-variant'),
+  "remove-isPseudo-props": require('./lib/rules/remove-isPseudo-props'),
+  "label-remove-isCompact": require('./lib/rules/label-remove-isCompact'),
 };
 
 module.exports = {
