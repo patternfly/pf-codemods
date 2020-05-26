@@ -11,9 +11,10 @@ const rules = {
   "select-rename-isExpanded": require('./lib/rules/select-rename-isExpanded'),
   "title-require-heading-level": require('./lib/rules/title-require-heading-level'),
   "title-size": require('./lib/rules/title-size'),
-  "wizard-text": require('./lib/rules/wizard-text'),
+  "wizard-text": require('./lib/rules/wizard-rename-text'),
   "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
   "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
+  "tab-title-text": require('./lib/rules/tab-title-text'),
 };
 
 module.exports = {
