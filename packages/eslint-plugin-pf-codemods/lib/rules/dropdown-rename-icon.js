@@ -10,7 +10,7 @@ module.exports = {
   
     return !imports ? {} : {
       JSXElement(node) {
-        if (dropdownItemImport.local.name === node.openingElement.name.name) {
+        if (dropdownItemImport && dropdownItemImport.local.name === node.openingElement.name.name) {
           const dropdownIcons = node.children.filter(child =>
             child.openingElement &&
             child.openingElement.name.name === dropdownItemIconImport.local.name

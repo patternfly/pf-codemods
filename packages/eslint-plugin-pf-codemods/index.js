@@ -26,6 +26,10 @@ const rules = {
   "dropdown-rename-icon": require('./lib/rules/dropdown-rename-icon'),
   "dropdown-toggle-rename-iconComponent": require('./lib/rules/dropdown-toggle-rename-iconComponent'),
   "empty-state-icon-removed-props": require('./lib/rules/empty-state-icon-removed-props'),
+  "pagination-removed-variant": require('./lib/rules/pagination-removed-variant'),
+  "remove-isPseudo-props": require('./lib/rules/remove-isPseudo-props'),
+  "label-remove-isCompact": require('./lib/rules/label-remove-isCompact'),
+  "rename-noPadding": require('./lib/rules/rename-noPadding'),
   "tab-title-text": require('./lib/rules/tab-title-text'),
 };
 
