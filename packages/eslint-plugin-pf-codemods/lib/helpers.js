@@ -98,9 +98,22 @@ function renameComponent(componentMap, message) {
   }
 }
 
+function addImport(context, fixer, package, currentImport, newImport) {
+  const specifierToAddTo = getPackageImports(context, package)
+    .filter(specifier => !currentImport || specifier.imported.name === currentImport)
+    .pop();
+  
+  if (!specifierToAddTo) {
+    return [];
+  }
+
+  return fixer.insertTextAfter(specifierToAddTo, `, ${newImport}`);
+}
+
 module.exports = {
   getPackageImports,
   renameProp,
   renameProps,
-  renameComponent
+  renameComponent,
+  addImport
 }

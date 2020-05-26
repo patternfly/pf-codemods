@@ -11,7 +11,7 @@ const rules = {
   "select-rename-isExpanded": require('./lib/rules/select-rename-isExpanded'),
   "title-require-heading-level": require('./lib/rules/title-require-heading-level'),
   "title-size": require('./lib/rules/title-size'),
-  "wizard-text": require('./lib/rules/wizard-text'),
+  "wizard-rename-text": require('./lib/rules/wizard-rename-text'),
   "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
   "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
   "background-image-src-enum": require('./lib/rules/background-image-src-enum'),
@@ -30,6 +30,7 @@ const rules = {
   "remove-isPseudo-props": require('./lib/rules/remove-isPseudo-props'),
   "label-remove-isCompact": require('./lib/rules/label-remove-isCompact'),
   "rename-noPadding": require('./lib/rules/rename-noPadding'),
+  "tab-title-text": require('./lib/rules/tab-title-text'),
 };
 
 module.exports = {
