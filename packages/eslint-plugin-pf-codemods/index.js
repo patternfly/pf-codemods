@@ -14,6 +14,18 @@ const rules = {
   "wizard-text": require('./lib/rules/wizard-rename-text'),
   "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
   "wizard-remove-props": require('./lib/rules/wizard-remove-props'),
+  "background-image-src-enum": require('./lib/rules/background-image-src-enum'),
+  "skip-to-content-remove-component": require('./lib/rules/skip-to-content-remove-component'),
+  "alert-new-action": require('./lib/rules/alert-new-action'),
+  "card-rename-components": require('./lib/rules/card-rename-components'),
+  "chipgroup-remove-props": require('./lib/rules/chipgroup-remove-props'),
+  "chipgroup-remove-props": require('./lib/rules/chipgroup-remove-props'),
+  "chipgroup-remove-chipbutton": require('./lib/rules/chipgroup-remove-chipbutton'),
+  "chipgroup-remove-chipbutton": require('./lib/rules/chipgroup-remove-chipbutton'),
+  "chipgroup-remove-chipgrouptoolbaritem": require('./lib/rules/chipgroup-remove-chipgrouptoolbaritem'),
+  "dropdown-rename-icon": require('./lib/rules/dropdown-rename-icon'),
+  "dropdown-toggle-rename-iconComponent": require('./lib/rules/dropdown-toggle-rename-iconComponent'),
+  "empty-state-icon-removed-props": require('./lib/rules/empty-state-icon-removed-props'),
   "tab-title-text": require('./lib/rules/tab-title-text'),
 };
 

@@ -58,8 +58,8 @@ ruleTester.run("${newRuleName}", rule, {
   ],
   invalid: [
     {
-      code:   \`INVALID_CODE_HERE\`,
-      output: \`VALID_CODE_FROM_AUTOFIXER_HERE\`,
+      code:   \`import { } from '@patternfly/react-core';\`,
+      output: \`import { } from '@patternfly/react-core';\`,
       errors: [{
         message: \`YOUR_MESSAGE_HERE\`,
         type: "JSXOpeningElement",
