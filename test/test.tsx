@@ -1,7 +1,7 @@
 import { Title, Title as MyTitle } from '@patternfly/react-core';
 
-export const Thing1 = () => <MyTitle headingLevel="h2" size="md">Title</MyTitle>;
-export const Thing2 = () => <Title headingLevel="h2" size="md">Title</Title>;
+export const Thing1 = () => <MyTitle size="md">Title</MyTitle>;
+export const Thing2 = () => <Title size="md">Title</Title>;
 
 import { List, ListVariant } from '@patternfly/react-core';
 
