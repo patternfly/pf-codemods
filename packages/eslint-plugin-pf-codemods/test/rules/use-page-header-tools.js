@@ -5,56 +5,56 @@ ruleTester.run("card-rename-components", rule, {
   valid: [
     {
       code: `import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
-      <Page>
-        <PageHeader header-tools={
-          <PageHeaderTools>
-            <PageHeaderToolsGroup>
-              <PageHeaderToolsItem />
-            </PageHeaderToolsGroup>
-          </PageHeaderTools>
-        } 
-        />
-      </Page>`
+<Page>
+  <PageHeader header-tools={
+    <PageHeaderTools>
+      <PageHeaderToolsGroup>
+        <PageHeaderToolsItem />
+      </PageHeaderToolsGroup>
+    </PageHeaderTools>
+  } 
+  />
+</Page>`
     },
     {
       // no @patternfly import
-      code: 
-      `<Page>
-        <PageHeader header-tools={
-          <PageHeaderTools>
-           <PageHeaderToolsGroup>
-            <PageHeaderToolsItem />
-          </PageHeaderToolsGroup>
-        </PageHeaderTools>
-      }
-      />
-      </Page>`
+      code: `
+<Page>
+  <PageHeader header-tools={
+    <PageHeaderTools>
+      <PageHeaderToolsGroup>
+      <PageHeaderToolsItem />
+    </PageHeaderToolsGroup>
+  </PageHeaderTools>
+}
+/>
+</Page>`
     }
   ],
   invalid: [
     {
       code: `import { Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
-              <Page>
-                <PageHeader toolbar={ 
-                  <Toolbar>
-                    <ToolbarGroup>
-                      <ToolbarItem  />
-                    </ToolbarGroup>
-                  </Toolbar>
-                  }
-                />
-              </Page>`,
-      output: `import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
-            <Page>
-              <PageHeader header-tools={
-                <PageHeaderTools>
-                <PageHeaderToolsGroup>
-                  <PageHeaderToolsItem />
-                </PageHeaderToolsGroup>
-              </PageHeaderTools>
-            }
-          />
-          </Page>`,
+<Page>
+  <PageHeader toolbar={
+    <Toolbar>
+      <ToolbarGroup>
+        <ToolbarItem />
+      </ToolbarGroup>
+    </Toolbar>
+  }
+  />
+</Page>`,
+      output: `import { Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+<Page>
+  <PageHeader headerTools={
+    <PageHeaderTools>
+      <PageHeaderToolsGroup>
+        <PageHeaderToolsItem />
+      </PageHeaderToolsGroup>
+    </PageHeaderTools>
+  }
+  />
+</Page>`,
       errors: [
         {
           message: "PageHeader has replaced toolbar prop with headerTools",
@@ -80,20 +80,19 @@ ruleTester.run("card-rename-components", rule, {
           message: "Toolbar renamed to PageHeaderTools",
           type: "JSXIdentifier"
         },
-
       ]
     },
-    {
-      code: `import { Avatar, PageHeader } from '@patternfly/react-core';
-            <PageHeader avatar={<Avatar  />} />`,
-      output: `import { Card, PageHeader, PageHeaderTools } from '@patternfly/react-core';
-            <PageHeader headerTools={<PageHeaderTools> <Avatar  /> </PageHeaderTools>} />`,
-      errors: [
-        {
-          message: "avatar prop has been removed for PageHeader",
-          type: "JSXOpeningElement"
-        },
-      ]
-    }
+    // {
+    //   code: `import { Avatar, PageHeader } from '@patternfly/react-core';
+    //         <PageHeader avatar={<Avatar  />} />`,
+    //   output: `import { Card, PageHeader, PageHeaderTools } from '@patternfly/react-core';
+    //         <PageHeader headerTools={<PageHeaderTools> <Avatar  /> </PageHeaderTools>} />`,
+    //   errors: [
+    //     {
+    //       message: "avatar prop has been removed for PageHeader",
+    //       type: "JSXOpeningElement"
+    //     },
+    //   ]
+    // }
   ]
 });
