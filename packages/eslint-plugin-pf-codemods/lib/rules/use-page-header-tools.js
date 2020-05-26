@@ -40,7 +40,7 @@ module.exports = {
                 fix(fixer) {
                   // Delete entire prop if newName is empty
                   return fixer.replaceText(
-                    !newName ? attribute : attribute.name + `${isOpeningPageHeader ? ' data-codemods="true"' : ''}`,
+                    !newName ? attribute : attribute.name + `${isOpeningPageHeader ? ' data-codemods="true" ' : ''}`,
                     newName
                   );
                 }
