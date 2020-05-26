@@ -25,6 +25,11 @@ module.exports = {
           .filter(imp => imp.imported.name === 'PageHeader')
           .find(imp => imp.local.name === node.name.name);
         if (imp) {
+          const alreadyFixed = node.attributes
+            .map(attr => attr.name.name)
+            .includes('data-codemods');
+          if (!alreadyFixed) {
+          const isOpeningPageHeader = node.parent.type === 'JSXOpeningElement' && node.name === 'PageHeader';
           node.attributes
             .filter(node => propMap.hasOwnProperty(node.name.name))
             .forEach(attribute => {
@@ -35,12 +40,13 @@ module.exports = {
                 fix(fixer) {
                   // Delete entire prop if newName is empty
                   return fixer.replaceText(
-                    !newName ? attribute : attribute.name,
+                    !newName ? attribute : attribute.name + `${isOpeningPageHeader ? ' data-codemods="true"' : ''}`,
                     newName
                   );
                 }
               })
             });
+          }
         }
       },
       // For Toolbar -> PageHeaderTools, ToolbarGroup -> PageHeaderToolsGroup, and ToolbarItem -> PageHeaderToolsItem
