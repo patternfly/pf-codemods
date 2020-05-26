@@ -32,6 +32,7 @@ const rules = {
   "rename-noPadding": require('./lib/rules/rename-noPadding'),
   "tab-title-text": require('./lib/rules/tab-title-text'),
   "table-removed-transforms": require('./lib/rules/table-removed-transforms'),
+  "select-rename-checkbox": require('./lib/rules/select-rename-checkbox'),
 };
 
 module.exports = {
