@@ -1,5 +1,6 @@
 // const { renameProp } = require('../helpers');
 const { getPackageImports } = require('../helpers');
+const { renameProp } = require('../helpers');
 
 const renames = {
   'Toolbar': 'PageHeaderTools',
@@ -7,6 +8,14 @@ const renames = {
   'ToolbarItem': 'PageHeaderToolsItem'
 };
 module.exports = {
+  create: renameProp(
+    'PageHeader',
+    { 'toolbar': 'headerTools', 'avatar': '' },
+    (node, attribute, replacement) => replacement !== '' ?
+     `${node.name.name} has replaced ${attribute.name.name} prop with ${replacement}` :
+     `${attribute.name.name} prop has been removed for ${node.name.name}`
+  ),
+
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => Object.keys(renames).includes(specifier.imported.name));

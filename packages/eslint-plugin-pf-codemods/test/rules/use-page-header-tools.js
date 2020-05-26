@@ -57,7 +57,7 @@ ruleTester.run("card-rename-components", rule, {
           </Page>`,
       errors: [
         {
-          message: "toolbar prop was removed. Use the headerTools prop instead.",
+          message: "PageHeader has replaced toolbar prop with headerTools",
           type: "JSXOpeningElement"
         },
         {
@@ -90,7 +90,7 @@ ruleTester.run("card-rename-components", rule, {
             <PageHeader headerTools={<PageHeaderTools> <Avatar  /> </PageHeaderTools>} />`,
       errors: [
         {
-          message: "avatar prop was removed. Nest the Avatar component in the PageHeaderTools component instead, which is passed into PageHeader via the headerTools prop.",
+          message: "avatar prop has been removed for PageHeader",
           type: "JSXOpeningElement"
         },
       ]
