@@ -6,7 +6,7 @@ module.exports = {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'BackgroundImageSrc');
       
-    return !imports ? {} : {
+    return imports.length == 0 ? {} : {
       Property(node) {
         if (node.key.object && imports.map(imp => imp.local.name).includes(node.key.object.name)) {
           const size = node.key.property.name;

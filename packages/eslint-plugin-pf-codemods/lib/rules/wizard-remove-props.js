@@ -14,7 +14,7 @@ module.exports = {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'Wizard');
       
-    return !imports ? {} : {
+    return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.map(imp => imp.local.name).includes(node.name.name)) {
           node.attributes

@@ -14,7 +14,7 @@ function renameProp(components, propMap, message, replaceAttribute) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => components.includes(specifier.imported.name));
       
-    return !imports ? {} : {
+    return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.map(imp => imp.local.name).includes(node.name.name)) {
           node.attributes
@@ -39,38 +39,42 @@ function renameProp(components, propMap, message, replaceAttribute) {
   }
 }
 
+function renameProps0(imports, node) {
+  if (imports.map(imp => imp.local.name).includes(node.name.name)) {
+    const renamedProps = renames[node.name.name];
+    node.attributes
+      .filter(attribute => renamedProps.hasOwnProperty(attribute.name.name))
+      .forEach(attribute => {
+        if (renamedProps[attribute.name.name] === '') {
+          context.report({
+            node,
+            message: `${attribute.name.name} prop for ${node.name.name} has been removed`,
+            fix(fixer) {
+              return fixer.replaceText(attribute, '');
+            }
+          });
+        }
+        else {
+          context.report({
+            node,
+            message: `${attribute.name.name} prop for ${node.name.name} has been renamed to ${renamedProps[attribute.name.name]}`,
+            fix(fixer) {
+              return fixer.replaceText(attribute.name, renamedProps[attribute.name.name]);
+            }
+          });
+        }
+      });
+  }
+}
+
 function renameProps(renames) {
   return function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => Object.keys(renames).includes(specifier.imported.name));
       
-    return !imports ? {} : {
+    return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
-        if (imports.map(imp => imp.local.name).includes(node.name.name)) {
-          const renamedProps = renames[node.name.name];
-          node.attributes
-            .filter(attribute => renamedProps.hasOwnProperty(attribute.name.name))
-            .forEach(attribute => {
-              if (renamedProps[attribute.name.name] === '') {
-                context.report({
-                  node,
-                  message: `${attribute.name.name} prop for ${node.name.name} has been removed`,
-                  fix(fixer) {
-                    return fixer.replaceText(attribute, '');
-                  }
-                });
-              }
-              else {
-                context.report({
-                  node,
-                  message: `${attribute.name.name} prop for ${node.name.name} has been renamed to ${renamedProps[attribute.name.name]}`,
-                  fix(fixer) {
-                    return fixer.replaceText(attribute.name, renamedProps[attribute.name.name]);
-                  }
-                });
-              }
-            });
-        }
+        renameProps0(imports, node)
       }
     };
   }
@@ -81,7 +85,7 @@ function renameComponent(componentMap, message) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => Object.keys(componentMap).includes(specifier.imported.name));
       
-    return !imports ? {} : {
+    return imports.length === 0 ? {} : {
       JSXIdentifier(node) {
         if (imports.map(imp => imp.local.name).includes(node.name)) {
           const newName = componentMap[node.name];
@@ -98,22 +102,34 @@ function renameComponent(componentMap, message) {
   }
 }
 
-function addImport(context, fixer, package, currentImport, newImport) {
-  const specifierToAddTo = getPackageImports(context, package)
-    .filter(specifier => !currentImport || specifier.imported.name === currentImport)
-    .pop();
-  
-  if (!specifierToAddTo) {
-    return [];
+function ensureImports(context, node, package, imports) {
+  if (node.source.value !== package) {
+    return;
   }
-
-  return fixer.insertTextAfter(specifierToAddTo, `, ${newImport}`);
+  const patternflyImports = getPackageImports(context, package);
+  const patternflyImportNames = patternflyImports.map(imp => imp.imported.name);
+  const myImports = node.specifiers.map(imp => imp.imported.name);
+  const missingImports = imports
+    .filter(imp => !patternflyImportNames.includes(imp)) // not added by consumer
+    .filter(imp => !myImports.includes(imp)) // not added by this rule
+    .join(', ');
+  if (missingImports) {
+    const lastSpecifier = node.specifiers[node.specifiers.length - 1];
+    context.report({
+      node,
+      message: `add missing imports ${missingImports} from ${node.source.value}`,
+      fix(fixer) {
+        return fixer.insertTextAfter(lastSpecifier, `, ${missingImports}`);
+      }
+    });
+  }
 }
 
 module.exports = {
   getPackageImports,
   renameProp,
   renameProps,
+  renameProps0,
   renameComponent,
-  addImport
+  ensureImports
 }

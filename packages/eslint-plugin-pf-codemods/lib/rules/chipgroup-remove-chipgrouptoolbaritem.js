@@ -8,9 +8,9 @@ module.exports = {
     const chipGroupImport = imports.find(imp => imp.imported.name === 'ChipGroup');
     const chipGroupToolbarItemImport = imports.find(imp => imp.imported.name === 'ChipGroupToolbarItem');
 
-    return !chipGroupImport ? {} : {
+    return !chipGroupImport || !chipGroupToolbarItemImport ? {} : {
       JSXElement(node) {
-        if (chipGroupToolbarItemImport && chipGroupToolbarItemImport.local.name === node.openingElement.name.name) {
+        if (chipGroupToolbarItemImport.local.name === node.openingElement.name.name) {
           const hasSingleChipGroupParent = node.parent
             && node.parent.openingElement.name.name === chipGroupImport.local.name
             && node.parent.children.filter(child => child.type === 'JSXElement').length === 1;
