@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../helpers');
+const { getPackageImports, addImport } = require('../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4146
 module.exports = {
@@ -6,17 +6,6 @@ module.exports = {
     const tabImport = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'Tab');
     
-    const addImportIfNeeded = fixer => {
-      const tabTitleTextImport = getPackageImports(context, '@patternfly/react-core')
-        .filter(specifier => specifier.imported.name === 'TabTitleText');
-      if (tabTitleTextImport.length) {
-        return [];
-      }
-      const pfImports = context.getSourceCode().ast.body
-        .filter(node => node.type === 'ImportDeclaration' && node.source.value === '@patternfly/react-core');
-      return fixer.insertTextAfter(pfImports[pfImports.length - 1].specifiers[pfImports[pfImports.length - 1].specifiers.length - 1], ', TabTitleText');
-    }
-
     return tabImport.length ? {
       JSXOpeningElement(node) {
         if (tabImport.map(imp => imp.local.name).includes(node.name.name)) {
@@ -53,7 +42,9 @@ module.exports = {
                 node,
                 message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
                 fix(fixer) {
-                  return replacement(fixer).concat(addImportIfNeeded(fixer));
+                  return replacement(fixer).concat(
+                    addImport(context, fixer, '@patternfly/react-core', 'Tab', 'TabTitleText')
+                  );
                 }
               });
             }
