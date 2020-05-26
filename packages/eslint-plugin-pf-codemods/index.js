@@ -29,6 +29,7 @@ const rules = {
   "pagination-removed-variant": require('./lib/rules/pagination-removed-variant'),
   "remove-isPseudo-props": require('./lib/rules/remove-isPseudo-props'),
   "label-remove-isCompact": require('./lib/rules/label-remove-isCompact'),
+  "rename-noPadding": require('./lib/rules/rename-noPadding'),
 };
 
 module.exports = {
