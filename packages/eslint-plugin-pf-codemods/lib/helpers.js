@@ -6,41 +6,7 @@ function getPackageImports(context, packageName) {
     .reduce((acc, val) => acc.concat(val), []);
 }
 
-function renameProp(components, propMap, message, replaceAttribute) {
-  if (typeof components === 'string') {
-    components = [ components ];
-  }
-  return function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => components.includes(specifier.imported.name));
-      
-    return imports.length === 0 ? {} : {
-      JSXOpeningElement(node) {
-        const imp = imports.find(imp => imp.local.name === node.name.name);
-        if (imp) {
-          node.attributes
-            .filter(node => Object.keys(propMap).includes(imp.imported.name))
-            .forEach(attribute => {
-              const newName = propMap[attribute.name.name];
-              context.report({
-                node,
-                message: message(node, attribute, newName),
-                fix(fixer) {
-                  // Delete entire prop if newName is empty
-                  return fixer.replaceText(
-                    !newName || replaceAttribute ? attribute : attribute.name,
-                    newName
-                  );
-                }
-              })
-            });
-        }
-      }
-    };
-  }
-}
-
-function renameProps0(imports, node) {
+function renameProps0(context, imports, node, renames) {
   if (imports.map(imp => imp.local.name).includes(node.name.name)) {
     const renamedProps = renames[node.name.name];
     node.attributes
@@ -75,7 +41,40 @@ function renameProps(renames) {
       
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
-        renameProps0(imports, node)
+        renameProps0(context, imports, node, renames);
+      }
+    };
+  }
+}
+
+function renameProp(components, propMap, message, replaceAttribute) {
+  if (typeof components === 'string') {
+    components = [ components ];
+  }
+  return function(context) {
+    const imports = getPackageImports(context, '@patternfly/react-core')
+      .filter(specifier => components.includes(specifier.imported.name));
+      
+    return imports.length === 0 ? {} : {
+      JSXOpeningElement(node) {
+        if (imports.find(imp => imp.local.name === node.name.name)) {
+          node.attributes
+            .filter(attr => Object.keys(propMap).includes(attr.name.name))
+            .forEach(attribute => {
+              const newName = propMap[attribute.name.name];
+              context.report({
+                node,
+                message: message(node, attribute, newName),
+                fix(fixer) {
+                  // Delete entire prop if newName is empty
+                  return fixer.replaceText(
+                    !newName || replaceAttribute ? attribute : attribute.name,
+                    newName
+                  );
+                }
+              })
+            });
+        }
       }
     };
   }
