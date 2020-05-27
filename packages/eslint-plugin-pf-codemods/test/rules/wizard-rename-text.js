@@ -1,7 +1,7 @@
 const ruleTester = require('./ruletester');
-const rule = require('../../lib/rules/wizard-text');
+const rule = require('../../lib/rules/wizard-rename-text');
 
-ruleTester.run("wizard-text", rule, {
+ruleTester.run("wizard-rename-text", rule, {
   valid: [
     {
       code: `import { WizardNavItem } from '@patternfly/react-core'; <WizardNavItem hasGutter />`,

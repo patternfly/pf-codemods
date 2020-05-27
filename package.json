@@ -4,7 +4,8 @@
   "description": "PF codemods monorepo",
   "private": true,
   "scripts": {
-    "test": "pf-codemods test/test.tsx",
+    "test": "mocha packages/eslint-plugin-pf-codemods/test/rules",
+    "test:single": "pf-codemods test/test.tsx",
     "test:koku": "pf-codemods test/koku-ui",
     "test:openshift": "pf-codemods test/console/frontend",
     "test:integreatly": "pf-codemods test/tutorial-web-app"
@@ -21,5 +22,8 @@
   "homepage": "https://github.com/patternfly/pf-codemods#readme",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "mocha": "^7.2.0"
+  }
 }

@@ -24,9 +24,7 @@ ruleTester.run("wizard-remove-props", rule, {
       code:   `import { Wizard } from '@patternfly/react-core'; <Wizard inPage />`,
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
-        message: `inPage prop for Wizard has been removed. 
-        By default the Wizard will be displayed in page, filling its parent container. 
-        If the consumer passes a managed isOpen flag, then the Wizard will be displayed in a modal.`,
+        message: `inPage prop for Wizard has been removed`,
         type: "JSXOpeningElement",
       }]
     },
