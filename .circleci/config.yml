@@ -55,5 +55,5 @@ jobs:
         name: Avoid Unknown Host for github.com
         command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
     - run:
-        name: Release to NPM
-        command: if [[ -z $CIRCLE_PULL_REQUEST ]]; then npx lerna publish --conventional-commits --create-release=github --yes | tee lerna-output.txt; fi;
+        name: Deploy to NPM
+        command: .circleci/release.sh
