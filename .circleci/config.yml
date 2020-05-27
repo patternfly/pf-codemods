@@ -8,7 +8,7 @@ references:
   - packages/eslint-plugin-pf-codemods/node_modules/
   - packages/pf-codemods/node_modules/
   js_deps_cache_key: &js_deps_cache_key
-    js-deps-v{{.Environment.CACHE_VERSION}}-{{checksum "yarn.json"}}
+    js-deps-v{{.Environment.CACHE_VERSION}}-{{checksum "yarn.lock"}}
   attach_workspace: &attach_workspace
     attach_workspace:
       at: ~/project
@@ -30,6 +30,10 @@ jobs:
     - image: circleci/node:12
     steps:
     - checkout
+    - persist_to_workspace:
+        root: ~/project
+        paths:
+          - "*"
     - restore_cache:
         keys:
         - *js_deps_cache_key
@@ -42,10 +46,6 @@ jobs:
     - run:
         name: Test rules
         command: yarn test
-    - persist_to_workspace:
-        root: ~/project
-        paths:
-          - "*"
   deploy:
     docker:
     - image: circleci/node:12
@@ -56,4 +56,4 @@ jobs:
         command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
     - run:
         name: Release to NPM
-        command: if [[ -z $CIRCLE_PULL_REQUEST ]]; then yarn lerna publish --conventional-commits --create-release=github --yes | tee lerna-output.txt; fi;
+        command: if [[ -z $CIRCLE_PULL_REQUEST ]]; then npx lerna publish --conventional-commits --create-release=github --yes | tee lerna-output.txt; fi;
