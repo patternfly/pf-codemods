@@ -16,9 +16,10 @@ function renameProp(components, propMap, message, replaceAttribute) {
       
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
-        if (imports.map(imp => imp.local.name).includes(node.name.name)) {
+        const imp = imports.find(imp => imp.local.name === node.name.name);
+        if (imp) {
           node.attributes
-            .filter(node => Object.keys(propMap).includes(node.name.name))
+            .filter(node => Object.keys(propMap).includes(imp.imported.name))
             .forEach(attribute => {
               const newName = propMap[attribute.name.name];
               context.report({

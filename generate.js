@@ -29,7 +29,7 @@ module.exports = {
           if (attribute) {
             context.report({
               node,
-              message: 'YOUR MESSAGE HERE',
+              message: 'YOUR_MESSAGE_HERE',
               fix(fixer) {
                 return fixer.replaceText(attribute, '');
               }
