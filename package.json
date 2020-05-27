@@ -24,6 +24,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "lerna": "^3.22.0",
     "mocha": "^7.2.0"
   }
 }
