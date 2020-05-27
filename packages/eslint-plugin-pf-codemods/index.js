@@ -31,6 +31,7 @@ const rules = {
   "label-remove-isCompact": require('./lib/rules/label-remove-isCompact'),
   "rename-noPadding": require('./lib/rules/rename-noPadding'),
   "tab-title-text": require('./lib/rules/tab-title-text'),
+  "nav-list-variant": require('./lib/rules/nav-list-variant'),
   "table-removed-transforms": require('./lib/rules/table-removed-transforms'),
   "select-rename-checkbox": require('./lib/rules/select-rename-checkbox'),
 };

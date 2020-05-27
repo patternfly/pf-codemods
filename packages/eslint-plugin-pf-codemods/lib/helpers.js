@@ -6,6 +6,10 @@ function getPackageImports(context, packageName) {
     .reduce((acc, val) => acc.concat(val), []);
 }
 
+function removeProp(components, propName, message) {
+  return renameProps(components, {propName: ''}, message);
+}
+
 function renameProps0(context, imports, node, renames) {
   if (imports.map(imp => imp.local.name).includes(node.name.name)) {
     const renamedProps = renames[node.name.name];
@@ -54,7 +58,7 @@ function renameProp(components, propMap, message, replaceAttribute) {
   return function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => components.includes(specifier.imported.name));
-      
+
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.find(imp => imp.local.name === node.name.name)) {
@@ -126,10 +130,11 @@ function ensureImports(context, node, package, imports) {
 }
 
 module.exports = {
+  ensureImports,
   getPackageImports,
+  removeProp,
   renameProp,
   renameProps,
   renameProps0,
   renameComponent,
-  ensureImports
 }
