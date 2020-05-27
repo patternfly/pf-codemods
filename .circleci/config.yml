@@ -1,0 +1,59 @@
+version: 2
+
+# Adapted from https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml
+# I'd love to find docs on this syntax.
+references:
+  js_deps_paths: &js_deps_paths
+  - node_modules/
+  - packages/eslint-plugin-pf-codemods/node_modules/
+  - packages/pf-codemods/node_modules/
+  js_deps_cache_key: &js_deps_cache_key
+    js-deps-v{{.Environment.CACHE_VERSION}}-{{checksum "yarn.json"}}
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: ~/project
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+    - test_mocha
+    - deploy:
+        requires:
+        - test_mocha
+        filters:
+          branches:
+            only: master
+jobs:
+  test_mocha:
+    docker:
+    - image: circleci/node:12
+    steps:
+    - checkout
+    - persist_to_workspace:
+        root: ~/project
+        paths:
+          - "*"
+    - restore_cache:
+        keys:
+        - *js_deps_cache_key
+    - run:
+        name: Conditional install
+        command: if [ ! -d node_modules ]; then yarn install; fi
+    - save_cache:
+        paths: *js_deps_paths
+        key: *js_deps_cache_key
+    - run:
+        name: Test rules
+        command: yarn test
+  deploy:
+    docker:
+    - image: circleci/node:12
+    steps:
+    - *attach_workspace
+    - run:
+        name: Avoid Unknown Host for github.com
+        command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+    - run:
+        name: Release to NPM
+        command: if [[ -z $CIRCLE_PULL_REQUEST ]]; then npx lerna@3.16.2 publish --conventional-commits --create-release=github --yes | tee lerna-output.txt; fi;
