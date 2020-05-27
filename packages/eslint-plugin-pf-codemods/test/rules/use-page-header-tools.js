@@ -44,7 +44,7 @@ ruleTester.run("card-rename-components", rule, {
   }
   />
 </Page>`,
-      output: `import { Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+      output: `import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
 <Page>
   <PageHeader data-codemods="true" headerTools={
     <PageHeaderTools>
