@@ -1,6 +1,13 @@
 const { getPackageImports } = require('../helpers');
+const { renameProps0 } = require('../helpers')
 
 // https://github.com/patternfly/patternfly-react/pull/4146
+
+const renames= {
+  'Tabs' : {
+    'variant': 'component'
+  }
+}
 module.exports = {
 
   create: function(context) {
@@ -9,7 +16,8 @@ module.exports = {
       const variantEnumImports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name.endsWith('Variant'));
     return !imports && !variantEnumImports ? {} : {
-      JSXExpressionContainer(node) {
+
+      JSXIdentifier(node) {
         if (node.expression && node.expression.object && variantEnumImports.map(imp => imp.local.name).includes(node.expression.object.name)) {
           context.report({
             node,
@@ -22,18 +30,9 @@ module.exports = {
       },
 
       JSXOpeningElement(node) {
-        if (imports.map(imp => imp.local.name).includes(node.name.name)) {
-          node.attributes
-          .filter(attribute => 'variant')
-              context.report({
-                node,
-                message: `variant prop has been renamed for ${node.name.name} . Use component prop instead`,
-                fix(fixer) {
-                  return fixer.replaceText('variant', 'component');
-                }
-              });
-        }
+        renameProps0(context, imports, node, renames);
       }
+      
     };
-  }
+  },
 };

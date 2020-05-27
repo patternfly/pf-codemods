@@ -10,9 +10,10 @@ ruleTester.run("tab-rename-variant", rule, {
   invalid: [
     {
       code: `import { Tabs } from '@patternfly/react-core'; <Tabs variant="nav" />`,
+      output: `import { Tabs } from '@patternfly/react-core'; <Tabs component="nav" />`,
       errors: [{
-        message: 'variant prop has been renamed for Tabs. Use component prop instead',
-        type: "JSXExpressionContainer"
+        message: 'variant prop for Tabs has been renamed to component',
+        type: "JSXOpeningElement"
       }]
     },
   ]
