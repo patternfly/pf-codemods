@@ -56,4 +56,4 @@ jobs:
         command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
     - run:
         name: Release to NPM
-        command: if [[ -z $CIRCLE_PULL_REQUEST ]]; then npx lerna@3.16.2 publish --conventional-commits --create-release=github --yes | tee lerna-output.txt; fi;
+        command: if [[ -z $CIRCLE_PULL_REQUEST ]]; then yarn lerna publish --conventional-commits --create-release=github --yes | tee lerna-output.txt; fi;

@@ -1,0 +1,18 @@
+{
+  "npmClient": "yarn",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "command": {
+    "publish": {
+      "message": "chore(release): releasing packages [ci skip]",
+      "conventionalCommits": true
+    }
+  },
+  "packages": [
+    "packages/eslint-plugin-pf-codemods",
+    "packages/pf-codemods"
+  ],
+  "version": "independent"
+}
