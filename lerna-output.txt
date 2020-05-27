@@ -1,0 +1,7 @@
+yarn run v1.22.4
+$ /home/circleci/project/node_modules/.bin/lerna publish --conventional-commits --create-release=github --yes
+
+Changes:
+ - eslint-plugin-pf-codemods: 1.0.6 => 1.0.7
+ - pf-codemods: 1.0.9 => 1.0.10
+
