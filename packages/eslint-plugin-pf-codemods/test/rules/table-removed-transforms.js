@@ -19,55 +19,55 @@ ruleTester.run("table-removed-transforms", rule, {
   invalid: [
     {
       code: `import { Table, TableHeader, TableBody, cellWidth } from '@patternfly/react-table';
-<Table rows={['Row 1']} cells={[{
-  title: 'Last Commit',
-  transforms: [cellWidth('max')]
-}]}>
-  <TableHeader />
-  <TableBody />
-</Table>`,
+        <Table rows={['Row 2']} cells={[{
+          title: 'Last Commit',
+          transforms: [cellWidth('max')]
+        }]}>
+          <TableHeader />
+          <TableBody />
+        </Table>`,
       output: `import { Table, TableHeader, TableBody, cellWidth } from '@patternfly/react-table';
-<Table rows={['Row 1']} cells={[{
-  title: 'Last Commit',
-  transforms: [cellWidth(100)]
-}]}>
-  <TableHeader />
-  <TableBody />
-</Table>`,
+        <Table rows={['Row 2']} cells={[{
+          title: 'Last Commit',
+          transforms: [cellWidth(100)]
+        }]}>
+          <TableHeader />
+          <TableBody />
+        </Table>`,
       errors: [{
         message: `cellWidth('max') has been replaced with cellWidth(100)`,
-        type: "CallExpression",
+        type: "Property",
       }]
     },
     {
-      code: `import { Table, TableHeader, TableBody, cellWidth, cellHeaderAuto } from '@patternfly/react-table';
-<Table rows={['Row 1']} cells={[{
-  title: 'Last Commit',
-  transforms: [cellWidth('max'), cellHeightAuto()]
-}]}>
-  <TableHeader />
-  <TableBody />
-</Table>`,
+      code: `import { Table, TableHeader, TableBody, cellWidth, cellHeightAuto } from '@patternfly/react-table';
+        <Table rows={['Row 3']} cells={[{
+          title: 'Last Commit',
+          transforms: [cellWidth('max'), cellHeightAuto()]
+        }]}>
+          <TableHeader />
+          <TableBody />
+        </Table>`,
       output: `import { Table, TableHeader, TableBody, cellWidth } from '@patternfly/react-table';
-<Table rows={['Row 1']} cells={[{
-  title: 'Last Commit',
-  transforms: [cellWidth(100)]
-}]}>
-  <TableHeader />
-  <TableBody />
-</Table>`,
+        <Table rows={['Row 3']} cells={[{
+          title: 'Last Commit',
+          transforms: [cellWidth(100)]
+        }]}>
+          <TableHeader />
+          <TableBody />
+        </Table>`,
       errors: [
         {
-          message: `cellWidth('max') has been replaced with cellWidth(100)`,
-          type: "CallExpression",
-        },
-        {
           message: `cellHeightAuto transformer has been deprecated, import removed`,
-          type: "ImportSpecifier"
+          type: "Property"
         },
         {
           message: `cellHeightAuto transformer has been deprecated, removed usage`,
-          type: "CallExpression"
+          type: "Property"
+        },
+        {
+          message: `cellWidth('max') has been replaced with cellWidth(100)`,
+          type: "Property",
         }
       ]
     },

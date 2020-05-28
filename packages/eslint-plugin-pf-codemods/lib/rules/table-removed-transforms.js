@@ -11,7 +11,7 @@ module.exports = {
       const hasCellWidthImport = cellWidthImport.length;
       const hasCellHeightAutoImport = cellHeightAutoImport.length;
 
-      return (hasCellWidthImport || hasCellHeightAutoImport) ? {} : {
+      return !(hasCellWidthImport || hasCellHeightAutoImport) ? {} : {
         Property(node) {
           const transforms = node.key.name === 'transforms' &&
             node.value.type === 'ArrayExpression' &&
@@ -19,6 +19,47 @@ module.exports = {
           const transformsArr = transforms.value && transforms.value.elements;
           if (!transformsArr) {
             return; 
+          }
+
+          if (hasCellHeightAutoImport) {
+            const cellHeightAutoImportStatements = context.getSourceCode().ast.body
+              .filter(node => node.type === 'ImportDeclaration')
+              .filter(node => node.source.value === '@patternfly/react-table')
+              .filter(node => node.specifiers.some(specifier => specifier.imported.name === 'cellHeightAuto'));
+            if (cellHeightAutoImportStatements.length) {
+              cellHeightAutoImportStatements.map(importStatement => {
+                const importStatementText = context.getSourceCode().getText(importStatement);
+                const newText = importStatementText
+                  .match(/\{([^)]+)\}/)[1] // get imports between { }
+                  .split(',')
+                  .filter(str => !str.trim().includes('cellHeightAuto'))
+                  .join(',');
+                context.report({
+                  node,
+                  message: `cellHeightAuto transformer has been deprecated, import removed`, 
+                  fix(fixer) {
+                    return fixer.replaceText(importStatement, `import {${newText} } from '@patternfly/react-table';`);
+                  }
+                });
+              });
+            }
+            
+            const cellHeightAutoNode = transformsArr.find(transform => transform.callee && transform.callee.name && 
+              transform.callee.name === 'cellHeightAuto');
+            if (cellHeightAutoNode) {
+              const transformsText = context.getSourceCode().getText(transforms.value).replace('[', '').replace(']', ''); // text between array brackets 
+              const newText = transformsText
+                .split(',')
+                .filter(str => str.trim() !== 'cellHeightAuto()')
+                .join(','); 
+              context.report({
+                node,
+                message: `cellHeightAuto transformer has been deprecated, removed usage`, 
+                fix(fixer) {
+                  return fixer.replaceText(transforms.value, `[${newText}]`);
+                }
+              });
+            }
           }
 
           if (hasCellWidthImport) {
@@ -40,48 +81,9 @@ module.exports = {
               });
             }
           }
-
-          if (hasCellHeightAutoImport) {
-            const cellHeightAutoImportStatements = context.getSourceCode().ast.body
-              .filter(node => node.type === 'ImportDeclaration')
-              .filter(node => node.source.value === '@patternfly/react-table')
-              .filter(node => node.specifiers.some(specifier => specifier.imported.name === 'cellHeightAuto'));
-            if (cellHeightAutoImportStatements.length) {
-              cellHeightAutoImportStatements.map(importStatement => {
-                const importStatementText = context.getSourceCode().getText(importStatement);
-                const newText = importStatementText
-                .split(',')
-                .filter(str => str.trim() !== 'cellHeightAuto')
-                .join(',');
-                context.report({
-                  node,
-                  message: `cellHeightAuto transformer has been deprecated, import removed`, 
-                  fix(fixer) {
-                    return fixer.replaceText(importStatement, newText);
-                  }
-                });
-              });
-            }
-            
-            const cellHeightAutoNode = transformsArr.find(transform => transform.callee && transform.callee.name && 
-              transform.callee.name === 'cellHeightAuto');
-            if (cellHeightAutoNode) {
-              const transformsText = context.getSourceCode().getText(transforms);
-              const newText = transformsText
-                .split(',')
-                .filter(str => str.trim() !== 'cellHeightAuto()')
-                .join(','); 
-              context.report({
-                node,
-                message: `cellHeightAuto transformer has been deprecated, removed usage`, 
-                fix(fixer) {
-                  return fixer.replaceText(transforms, newText);
-                }
-              });
-            }
-          }
         }
       }
     }
   }
 };
+
