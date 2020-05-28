@@ -7,7 +7,7 @@
     "test": "mocha packages/eslint-plugin-pf-codemods/test/rules",
     "test:single": "pf-codemods test/test.tsx",
     "test:koku": "pf-codemods test/koku-ui",
-    "test:openshift": "pf-codemods test/console/frontend",
+    "test:console": "pf-codemods test/console/frontend",
     "test:integreatly": "pf-codemods test/tutorial-web-app"
   },
   "repository": {
