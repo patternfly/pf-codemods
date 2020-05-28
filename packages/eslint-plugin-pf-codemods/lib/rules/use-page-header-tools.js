@@ -19,8 +19,23 @@ module.exports = {
       .filter(specifier => specifier.imported.name === 'PageHeader');
 
     return !imports && !pageHeaderImports ? {} : {
-      // For PageHeader prop renames
-      JSXOpeningElement(node) {
+      ImportSpecifier(node) {
+        if (node.parent.source.value === '@patternfly/react-core'
+         //renamed imports would go here ?
+        ) {
+          context.report({
+            node,
+            message: `${node.name} has been renamed ${renames[node.name]}`,
+            fix(fixer) {
+              return fixer.replaceText(node, `${renames[node.name]}`);
+            }
+          });
+        }
+      },
+      // For Toolbar -> PageHeaderTools, ToolbarGroup -> PageHeaderToolsGroup, and ToolbarItem -> PageHeaderToolsItem
+      JSXIdentifier(node) {
+
+        // For PageHeader prop renames
         const imp = pageHeaderImports
           .filter(imp => imp.imported.name === 'PageHeader')
           .find(imp => imp.local.name === node.name.name);
@@ -29,7 +44,7 @@ module.exports = {
             .map(attr => attr.name.name)
             .includes('data-codemods');
           if (!alreadyFixed) {
-          const isOpeningPageHeader = node.parent.type === 'JSXOpeningElement' && node.name === 'PageHeader';
+          const isOpeningPageHeader = node.parent.type === 'JSXIdentifier' && node.name === 'PageHeader';
           node.attributes
             .filter(node => propMap.hasOwnProperty(node.name.name))
             .forEach(attribute => {

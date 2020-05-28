@@ -57,8 +57,12 @@ ruleTester.run("card-rename-components", rule, {
 </Page>`,
       errors: [
         {
+          message: 'add missing imports CardTitle, CardHeaderMain from @patternfly/react-core',
+          type: 'ImportSpecifier'
+        },
+        {
           message: "PageHeader has replaced toolbar prop with headerTools",
-          type: "JSXOpeningElement"
+          type: "JSXIdentifier"
         },
         {
           message: "Toolbar renamed to PageHeaderTools",
@@ -82,17 +86,17 @@ ruleTester.run("card-rename-components", rule, {
         },
       ]
     },
-    // {
-    //   code: `import { Avatar, PageHeader } from '@patternfly/react-core';
-    //         <PageHeader avatar={<Avatar  />} />`,
-    //   output: `import { Card, PageHeader, PageHeaderTools } from '@patternfly/react-core';
-    //         <PageHeader headerTools={<PageHeaderTools> <Avatar  /> </PageHeaderTools>} />`,
-    //   errors: [
-    //     {
-    //       message: "avatar prop has been removed for PageHeader",
-    //       type: "JSXOpeningElement"
-    //     },
-    //   ]
-    // }
+    {
+      code: `import { Avatar, PageHeader } from '@patternfly/react-core';
+            <PageHeader avatar={<Avatar  />} />`,
+      output: `import { Card, PageHeader, PageHeaderTools } from '@patternfly/react-core';
+            <PageHeader headerTools={<PageHeaderTools> <Avatar  /> </PageHeaderTools>} />`,
+      errors: [
+        {
+          message: "avatar prop has been removed for PageHeader",
+          type: "JSXIdentifier"
+        },
+      ]
+    }
   ]
 });
