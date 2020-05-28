@@ -36,7 +36,6 @@ const rules = {
   "remove-unused-imports": require('./lib/rules/remove-unused-imports'),
   "tab-rename-variant": require('./lib/rules/tab-rename-variant'),
   "form-fix-isValid": require('./lib/rules/form-fix-isValid'),
-  "wizard-rename-hasBodyPadding": require('./lib/rules/wizard-rename-hasBodyPadding'),
 };
 
 module.exports = {
