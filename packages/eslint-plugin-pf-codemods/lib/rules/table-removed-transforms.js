@@ -55,7 +55,7 @@ module.exports = {
                 .join(',');
                 context.report({
                   node,
-                  message: `cellHeightAuto transformer has been deprecated`, 
+                  message: `cellHeightAuto transformer has been deprecated, import removed`, 
                   fix(fixer) {
                     return fixer.replaceText(importStatement, newText);
                   }
@@ -73,7 +73,7 @@ module.exports = {
                 .join(','); 
               context.report({
                 node,
-                message: `cellHeightAuto transformer has been deprecated`, 
+                message: `cellHeightAuto transformer has been deprecated, removed usage`, 
                 fix(fixer) {
                   return fixer.replaceText(transforms, newText);
                 }
