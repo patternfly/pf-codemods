@@ -19,7 +19,7 @@ module.exports = {
           });
 
           if (variantAttr && variantAttr.value !== null) {
-            const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
+            const variantVal = context.getSourceCode().getText(variantAttr);
             context.report({
               node,
               message: `variant has been removed from ${node.openingElement.name.name}, use <${navImport.local.name} ${variantVal}> instead`,
