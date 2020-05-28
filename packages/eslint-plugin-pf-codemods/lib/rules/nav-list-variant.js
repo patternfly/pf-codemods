@@ -18,16 +18,15 @@ module.exports = {
               return attribute.name.name === 'variant'
           });
 
-          if (variantAttr) {
-            const variantVal = '"horizontal" || "default" || "tertiary"';
-
+          if (variantAttr && variantAttr.value !== null) {
+            const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
             context.report({
               node,
-              message: `variant has been removed from ${node.openingElement.name.name}, use <${navImport.local.name} variant=${variantVal}> instead`,
+              message: `variant has been removed from ${node.openingElement.name.name}, use <${navImport.local.name} ${variantVal}> instead`,
               fix(fixer) {
                 const fixes = [fixer.replaceText(variantAttr, '')];
-                if(hasNavParent ){
-                  fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + context.getSourceCode().getText(variantAttr)))
+                if(hasNavParent) {
+                  fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
                 }
                 return fixes;
               }

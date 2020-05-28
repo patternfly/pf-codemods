@@ -1,8 +1,6 @@
 const ruleTester = require('./ruletester');
 const rule = require('../../lib/rules/nav-list-variant');
 
-const variantVal = '"horizontal" || "default" || "tertiary"'
-
 ruleTester.run("nav-list-variant", rule, {
   valid: [
     {
@@ -12,6 +10,14 @@ ruleTester.run("nav-list-variant", rule, {
         some item
     </NavList>
 </Nav>`
+    },
+    {
+      code: `import { Nav, NavList } from '@patternfly/react-core';
+<Nav>
+    <NavList variant>
+        some item
+    </NavList>
+</Nav>`,
     }
   ],
   invalid: [
@@ -29,7 +35,7 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant=${variantVal}> instead`,
+        message: `variant has been removed from NavList, use <Nav variant="default"> instead`,
         type: "JSXElement",
       }]
     },
@@ -47,7 +53,7 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant=${variantVal}> instead`,
+        message: `variant has been removed from NavList, use <Nav variant="tertiary"> instead`,
         type: "JSXElement",
       }]
     },
@@ -65,7 +71,7 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant=${variantVal}> instead`,
+        message: `variant has been removed from NavList, use <Nav variant="horizontal"> instead`,
         type: "JSXElement",
       }]
     }
