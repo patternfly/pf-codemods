@@ -19,7 +19,7 @@ module.exports = {
               .map(child => context.getSourceCode().getText(child))
               .join('')
               .trim();
-          const variant = node.openingElement.attributes.find(attr => attr.name.name === 'variant');
+          const variant = node.openingElement.attributes.find(attr => attr.name && attr.name.name === 'variant');
           if (variant || childText) {
             context.report({
               node,

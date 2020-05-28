@@ -10,7 +10,7 @@ function renameProps0(context, imports, node, renames) {
   if (imports.map(imp => imp.local.name).includes(node.name.name)) {
     const renamedProps = renames[node.name.name];
     node.attributes
-      .filter(attribute => renamedProps.hasOwnProperty(attribute.name.name))
+      .filter(attribute => attribute.name && renamedProps.hasOwnProperty(attribute.name.name))
       .forEach(attribute => {
         if (renamedProps[attribute.name.name] === '') {
           context.report({
@@ -59,7 +59,7 @@ function renameProp(components, propMap, message, replaceAttribute) {
       JSXOpeningElement(node) {
         if (imports.find(imp => imp.local.name === node.name.name)) {
           node.attributes
-            .filter(attr => Object.keys(propMap).includes(attr.name.name))
+            .filter(attr => attr.name && Object.keys(propMap).includes(attr.name.name))
             .forEach(attribute => {
               const newName = propMap[attribute.name.name];
               context.report({
