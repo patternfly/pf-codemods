@@ -4,7 +4,8 @@ const removedImports = [
   'CardHeadMain', // See card-rename-components rule for more info
   'BackgroundImgSrc', // See background-image-src-enum rule for more info
   'ChipButton', // See chipgroup-remove-chipbutton rule for more info
-  'ChipGroupToolbarItem' // See chipgroup-remove-chipgrouptoolbaritem rule for more info
+  'ChipGroupToolbarItem', // See chipgroup-remove-chipgrouptoolbaritem rule for more info
+  'TitleSize' // See title-size rule for more info
 ];
 
 // https://github.com/patternfly/pf-codemods/issues/39
