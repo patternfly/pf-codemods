@@ -9,30 +9,40 @@ const renames= {
   }
 }
 module.exports = {
-
   create: function(context) {
-      const imports = getPackageImports(context, '@patternfly/react-core')
+    const tabImports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'Tabs');
-      const variantEnumImports = getPackageImports(context, '@patternfly/react-core')
+    const variantEnumImports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'TabsVariant');
-    return !imports && !variantEnumImports ? {} : {
-
-      JSXIdentifier(node) {
-        if (node.expression && node.expression.object && variantEnumImports.map(imp => imp.local.name).includes(node.expression.object.name)) {
+    
+    return tabImports.length === 0 && variantEnumImports.length === 0 ? {} : {
+      ImportSpecifier(node) {
+        if (node.parent.source.value === '@patternfly/react-core'
+          && node.imported.name === 'TabsVariant'
+        ) {
           context.report({
             node,
-            message: `${node.expression.object.name} enum for ${node.name.name} has been renamed to TabsComponent`,
+            message: `${node.local.name} enum has been renamed to TabsComponent`,
             fix(fixer) {
-              return fixer.replaceText(node.expression.object.name, 'TabsComponent');
+              return fixer.replaceText(node, 'TabsComponent');
             }
           });
         }
       },
-
+      MemberExpression(node) {
+        if (variantEnumImports.map(imp => imp.local.name).includes(node.object.name)) {
+          context.report({
+            node,
+            message: `${node.object.name} enum has been renamed to TabsComponent`,
+            fix(fixer) {
+              return fixer.replaceText(node.object, 'TabsComponent');
+            }
+          });
+        }
+      },
       JSXOpeningElement(node) {
-        renameProps0(context, imports, node, renames);
+        renameProps0(context, tabImports, node, renames);
       }
-      
     };
   },
 };
