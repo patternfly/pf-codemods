@@ -10,11 +10,9 @@ module.exports = {
 
     return !NavListImport ? {} : {
       JSXElement(node) {
-
         if (NavListImport.local.name === node.openingElement.name.name) {
           let hasNavParent;
           let navImportName = "Nav";
-
           if (navImport) {
             hasNavParent = node.parent
                 && node.parent.openingElement.name.name === navImport.local.name
@@ -22,15 +20,10 @@ module.exports = {
 
             navImportName = navImport.local.name;
           }
-
           const variantAttr = node.openingElement.attributes.find(attribute => {
             return attribute.name.name === 'variant'
           });
-
           const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
-
-          console.log("Variant: " + variantVal);
-
           if (variantAttr) {
             if (variantAttr.value !== null) {
               context.report({
