@@ -82,7 +82,7 @@ ruleTester.run("nav-list-variant", rule, {
 </Nav>`,
       output: `import { Nav, NavList } from '@patternfly/react-core';
 <Nav>
-    <NavList variant>
+    <NavList >
         some item
     </NavList>
 </Nav>`,

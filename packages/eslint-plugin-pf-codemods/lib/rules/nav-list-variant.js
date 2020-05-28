@@ -48,6 +48,10 @@ module.exports = {
               context.report({
                 node,
                 message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} variant={"horizontal" | "default" | "tertiary"}> instead`,
+                fix(fixer) {
+                  const fixes = [fixer.replaceText(variantAttr, '')];
+                  return fixes;
+                }
               });
             }
           }
