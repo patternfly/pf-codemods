@@ -6,7 +6,7 @@ module.exports = {
     const imports = getPackageImports(context, '@patternfly/react-table')
       .filter(specifier => specifier.imported.name === 'cellWidth');
     
-    return !imports ? {} : {
+    return imports.length === 0 ? {} : {
       CallExpression(node) {
         const maxNode = node.callee.name && 
           node.callee.name === 'cellWidth' &&

@@ -12,6 +12,7 @@ module.exports = {
       JSXElement(node) {
         if (chipGroupToolbarItemImport.local.name === node.openingElement.name.name) {
           const hasSingleChipGroupParent = node.parent
+            && node.parent.openingElement
             && node.parent.openingElement.name.name === chipGroupImport.local.name
             && node.parent.children.filter(child => child.type === 'JSXElement').length === 1;
           const report = {

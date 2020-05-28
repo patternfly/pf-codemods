@@ -14,7 +14,7 @@ module.exports = {
     return titleImports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (titleImports.map(imp => imp.local.name).includes(node.name.name)) {
-          const sizeAttribute = node.attributes.find(n => n.name.name === 'size');
+          const sizeAttribute = node.attributes.find(n => n.name && n.name.name === 'size');
           const sizeValue = sizeAttribute.value.value;
           if (sizeAttribute && !validSizes.includes(sizeValue)) {
             const sizeValueString = context.getSourceCode().getText(sizeAttribute.value);

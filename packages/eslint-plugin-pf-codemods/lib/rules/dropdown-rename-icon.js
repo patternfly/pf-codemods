@@ -8,9 +8,9 @@ module.exports = {
     const dropdownItemImport = imports.find(imp => imp.imported.name === 'DropdownItem');
     const dropdownItemIconImport = imports.find(imp => imp.imported.name === 'DropdownItemIcon');
   
-    return imports.length === 0 ? {} : {
+    return !dropdownItemImport || !dropdownItemIconImport ? {} : {
       JSXElement(node) {
-        if (dropdownItemImport && dropdownItemImport.local.name === node.openingElement.name.name) {
+        if (dropdownItemImport.local.name === node.openingElement.name.name) {
           const dropdownIcons = node.children.filter(child =>
             child.openingElement &&
             child.openingElement.name.name === dropdownItemIconImport.local.name
@@ -19,7 +19,7 @@ module.exports = {
               .map(child => context.getSourceCode().getText(child))
               .join('')
               .trim();
-          const variant = node.openingElement.attributes.find(attr => attr.name.name === 'variant');
+          const variant = node.openingElement.attributes.find(attr => attr.name && attr.name.name === 'variant');
           if (variant || childText) {
             context.report({
               node,

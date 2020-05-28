@@ -12,7 +12,7 @@ module.exports = {
       },
       JSXOpeningElement(node) {
         if (tabImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const attribute = node.attributes.find(node => node.name.name === 'title');
+          const attribute = node.attributes.find(node => node.name && node.name.name === 'title');
           if (attribute) {
             const { value } = attribute;
             let replacement;
