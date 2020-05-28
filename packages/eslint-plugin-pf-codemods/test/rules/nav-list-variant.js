@@ -10,6 +10,12 @@ ruleTester.run("nav-list-variant", rule, {
         some item
     </NavList>
 </Nav>`
+    },
+    {
+      code: `import { NavList } from '@patternfly/react-core';
+    <NavList>
+        some item
+    </NavList>`
     }
   ],
   invalid: [
