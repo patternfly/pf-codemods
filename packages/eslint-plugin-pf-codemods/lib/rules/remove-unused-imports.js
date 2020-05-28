@@ -1,4 +1,4 @@
-const removedComponents = [
+const removedImports = [
   'NavVariants', // Use the variant prop on the Nav component with one of these values: 'default' | 'horizontal' | 'tertiary'
   'CardHead', // See card-rename-components rule for more info
   'CardHeadMain', // See card-rename-components rule for more info
@@ -22,7 +22,7 @@ module.exports = {
             let hasImportAlias = false; // i.e: NavVariants as MyThing
             let removePreviousComma = false;
             const tokenText = sourceCode.getText(token);
-            if (removedComponents.includes(tokenText)) {
+            if (removedImports.includes(tokenText)) {
               const previousToken = sourceCode.getTokenBefore(token);
               const nextToken = sourceCode.getTokenAfter(token);
               if (sourceCode.getText(nextToken) === ',') {
