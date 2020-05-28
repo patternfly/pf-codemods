@@ -10,14 +10,6 @@ ruleTester.run("nav-list-variant", rule, {
         some item
     </NavList>
 </Nav>`
-    },
-    {
-      code: `import { Nav, NavList } from '@patternfly/react-core';
-<Nav>
-    <NavList variant>
-        some item
-    </NavList>
-</Nav>`,
     }
   ],
   invalid: [
@@ -70,6 +62,38 @@ ruleTester.run("nav-list-variant", rule, {
         some item
     </NavList>
 </Nav>`,
+      errors: [{
+        message: `variant has been removed from NavList, use <Nav variant="horizontal"> instead`,
+        type: "JSXElement",
+      }]
+    },
+    {
+      code: `import { Nav, NavList } from '@patternfly/react-core';
+<Nav>
+    <NavList variant>
+        some item
+    </NavList>
+</Nav>`,
+      output: `import { Nav, NavList } from '@patternfly/react-core';
+<Nav>
+    <NavList variant>
+        some item
+    </NavList>
+</Nav>`,
+      errors: [{
+        message: `variant has been removed from NavList, use <Nav variant={"horizontal" | "default" | "tertiary"}> instead`,
+        type: "JSXElement",
+      }]
+    },
+    {
+      code: `import { NavList } from '@patternfly/react-core';
+<NavList variant="horizontal">
+    some item
+</NavList>`,
+      output: `import { NavList } from '@patternfly/react-core';
+<NavList >
+    some item
+</NavList>`,
       errors: [{
         message: `variant has been removed from NavList, use <Nav variant="horizontal"> instead`,
         type: "JSXElement",

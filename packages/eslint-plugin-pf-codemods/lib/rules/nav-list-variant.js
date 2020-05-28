@@ -8,32 +8,51 @@ module.exports = {
     const navImport = imports.find(imp => imp.imported.name === 'Nav');
     const NavListImport = imports.find(imp => imp.imported.name === 'NavList');
 
-    return !navImport || !NavListImport ? {} : {
+    return !NavListImport ? {} : {
       JSXElement(node) {
+
         if (NavListImport.local.name === node.openingElement.name.name) {
-          const hasNavParent = node.parent
-              && node.parent.openingElement.name.name === navImport.local.name
-              && node.parent.children.filter(child => child.type === 'JSXElement').length === 1;
+          let hasNavParent;
+          let navImportName = "Nav";
+
+          if (navImport) {
+            hasNavParent = node.parent
+                && node.parent.openingElement.name.name === navImport.local.name
+                && node.parent.children.filter(child => child.type === 'JSXElement').length === 1;
+
+            navImportName = navImport.local.name;
+          }
+
           const variantAttr = node.openingElement.attributes.find(attribute => {
-              return attribute.name.name === 'variant'
+            return attribute.name.name === 'variant'
           });
 
-          if (variantAttr && variantAttr.value !== null) {
-            const variantVal = context.getSourceCode().getText(variantAttr);
-            context.report({
-              node,
-              message: `variant has been removed from ${node.openingElement.name.name}, use <${navImport.local.name} ${variantVal}> instead`,
-              fix(fixer) {
-                const fixes = [fixer.replaceText(variantAttr, '')];
-                if(hasNavParent) {
-                  fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
+          const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
+
+          console.log("Variant: " + variantVal);
+
+          if (variantAttr) {
+            if (variantAttr.value !== null) {
+              context.report({
+                node,
+                message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} ${variantVal}> instead`,
+                fix(fixer) {
+                  const fixes = [fixer.replaceText(variantAttr, '')];
+                  if (hasNavParent) {
+                    fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
+                  }
+                  return fixes;
                 }
-                return fixes;
-              }
-            });
+              });
+            } else {
+              context.report({
+                node,
+                message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} variant={"horizontal" | "default" | "tertiary"}> instead`,
+              });
+            }
           }
         }
       }
-    };
+    }
   }
-};
+}
