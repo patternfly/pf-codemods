@@ -14,14 +14,14 @@ module.exports = {
       const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === 'Tabs');
       const variantEnumImports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name.endsWith('Variant'));
+      .filter(specifier => specifier.imported.name === 'TabsVariant');
     return !imports && !variantEnumImports ? {} : {
 
       JSXIdentifier(node) {
         if (node.expression && node.expression.object && variantEnumImports.map(imp => imp.local.name).includes(node.expression.object.name)) {
           context.report({
             node,
-            message: `${node.expression.object.name} enum has been renamed to TabsComponent`,
+            message: `${node.expression.object.name} enum for ${node.name.name} has been renamed to TabsComponent`,
             fix(fixer) {
               return fixer.replaceText(node.expression.object.name, 'TabsComponent');
             }
