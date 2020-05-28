@@ -12,16 +12,18 @@ module.exports = {
       JSXElement(node) {
         if (NavListImport.local.name === node.openingElement.name.name) {
           const navImportName = "Nav";
+          const variantAttr = node.openingElement.attributes.find(attribute => {
+            return attribute.name.name === 'variant'
+          });
+          const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
+
           let hasNavParent;
           if (navImport) {
             hasNavParent = node.parent
                 && node.parent.openingElement.name.name === navImport.local.name
                 && node.parent.children.filter(child => child.type === 'JSXElement').length === 1;
           }
-          const variantAttr = node.openingElement.attributes.find(attribute => {
-            return attribute.name.name === 'variant'
-          });
-          const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
+
           if (variantAttr) {
             if (variantAttr.value !== null) {
               context.report({
