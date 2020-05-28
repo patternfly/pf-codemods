@@ -28,7 +28,7 @@ const images = {
   [BackgroundImageSrc.sm2x]: '/assets/images/pfbg_768@2x.jpg',
   [BackgroundImageSrc.xs]: '/assets/images/pfbg_576.jpg',
   [BackgroundImageSrc.xs2x]: '/assets/images/pfbg_576@2x.jpg',
-  [BackgroundImageSrc.filter]: '/assets/images/background-filter.svg'
+  [BackgroundImageSrc.filter]: '/assets/images/background-filter.svg',
 };
 <BackgroundImage src={images} />`,
       output: `import { BackgroundImage, BackgroundImageSrc } from '@patternfly/react-core';
