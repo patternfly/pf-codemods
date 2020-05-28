@@ -54,7 +54,7 @@ function renameProp(components, propMap, message, replaceAttribute) {
   return function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => components.includes(specifier.imported.name));
-      
+
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.find(imp => imp.local.name === node.name.name)) {
@@ -126,10 +126,10 @@ function ensureImports(context, node, package, imports) {
 }
 
 module.exports = {
+  ensureImports,
   getPackageImports,
   renameProp,
   renameProps,
   renameProps0,
   renameComponent,
-  ensureImports
 }
