@@ -1,13 +1,6 @@
-const { getPackageImports } = require('../helpers');
-const { renameProps0 } = require('../helpers')
+const { getPackageImports, renameProps0 } = require('../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4146
-
-const renames= {
-  'Tabs' : {
-    'variant': 'component'
-  }
-}
 module.exports = {
   create: function(context) {
     const tabImports = getPackageImports(context, '@patternfly/react-core')
@@ -41,7 +34,11 @@ module.exports = {
         }
       },
       JSXOpeningElement(node) {
-        renameProps0(context, tabImports, node, renames);
+        renameProps0(context, tabImports, node, {
+          'Tabs' : {
+            'variant': 'component'
+          }
+        });
       }
     };
   },
