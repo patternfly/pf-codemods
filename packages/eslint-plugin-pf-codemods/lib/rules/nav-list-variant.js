@@ -30,9 +30,12 @@ module.exports = {
                 node,
                 message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} ${variantVal}> instead`,
                 fix(fixer) {
-                  const fixes = [fixer.replaceText(variantAttr, '')];
+                  const fixes = [];
                   if (hasNavParent) {
+                    fixes.push(fixer.replaceText(variantAttr, ''));
                     fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
+                  } else {
+                    fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
                   }
                   return fixes;
                 }
@@ -42,7 +45,8 @@ module.exports = {
                 node,
                 message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} variant={"horizontal" | "default" | "tertiary"}> instead`,
                 fix(fixer) {
-                  const fixes = [fixer.replaceText(variantAttr, '')];
+                  const fixes = [];
+                  fixes.push(fixer.replaceText(variantAttr, ''));
                   return fixes;
                 }
               });
