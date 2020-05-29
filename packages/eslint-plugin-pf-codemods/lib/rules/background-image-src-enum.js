@@ -15,7 +15,15 @@ module.exports = {
               node,
               message: `BackgroundImageSrc.filter has been removed. If you want a custom filter, use the new filter prop instead`,
               fix(fixer) {
-                return fixer.replaceText(node, '');
+                const fixes = [
+                  fixer.remove(node)
+                ];
+                const nextToken = context.getSourceCode().getTokenAfter(node);
+                // Remove trailing ,
+                if (nextToken && nextToken.value === ',') {
+                  fixes.push(fixer.remove(nextToken));
+                }
+                return fixes;
               }
             });
           }

@@ -9,7 +9,7 @@ module.exports = {
     return titleImports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (titleImports.map(imp => imp.local.name).includes(node.name.name)) {
-          if (!node.attributes.map(node => node.name.name).includes('headingLevel')) {
+          if (!node.attributes.filter(node => node.name).map(node => node.name.name).includes('headingLevel')) {
             context.report({
               node,
               message: `headingLevel attribute is required for ${node.name.name}`,
