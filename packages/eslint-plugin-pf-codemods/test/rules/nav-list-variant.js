@@ -1,5 +1,13 @@
 const ruleTester = require('./ruletester');
 const rule = require('../../lib/rules/nav-list-variant');
+const navName = "Nav"
+const navListName = "NavList"
+const variant = {
+  default: 'variant="default"',
+  tertiary: 'variant="tertiary"',
+  horizontal: 'variant="horizontal"',
+  all: 'variant={"horizontal" | "default" | "tertiary"}'
+}
 
 ruleTester.run("nav-list-variant", rule, {
   valid: [
@@ -33,7 +41,12 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant="default"> instead`,
+        messageId: "removeNavListVariant",
+        data: {
+          navListName: navListName,
+          navName: navName,
+          variantVal: variant.default
+        },
         type: "JSXElement",
       }]
     },
@@ -51,7 +64,12 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant="tertiary"> instead`,
+        messageId: "removeNavListVariant",
+        data: {
+          navListName: navListName,
+          navName: navName,
+          variantVal: variant.tertiary
+        },
         type: "JSXElement",
       }]
     },
@@ -69,7 +87,12 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant="horizontal"> instead`,
+        messageId: "removeNavListVariant",
+        data: {
+          navListName: navListName,
+          navName: navName,
+          variantVal: variant.horizontal
+        },
         type: "JSXElement",
       }]
     },
@@ -87,21 +110,31 @@ ruleTester.run("nav-list-variant", rule, {
     </NavList>
 </Nav>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant={"horizontal" | "default" | "tertiary"}> instead`,
+        messageId: "removeNavListVariant",
+        data: {
+          navListName: navListName,
+          navName: navName,
+          variantVal: variant.all
+        },
         type: "JSXElement",
       }]
     },
     {
       code: `import { NavList } from '@patternfly/react-core';
-    <NavList variant>
-        some item
-    </NavList>`,
+<NavList variant>
+    some item
+</NavList>`,
       output: `import { NavList } from '@patternfly/react-core';
-    <NavList >
-        some item
-    </NavList>`,
+<NavList >
+    some item
+</NavList>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant={"horizontal" | "default" | "tertiary"}> instead`,
+        messageId: "removeNavListVariant",
+        data: {
+          navListName: navListName,
+          navName: navName,
+          variantVal: variant.all
+        },
         type: "JSXElement",
       }]
     },
@@ -111,11 +144,48 @@ ruleTester.run("nav-list-variant", rule, {
     some item
 </NavList>`,
       output: `import { NavList } from '@patternfly/react-core';
+<NavList /*TODO: move to Nav - variant="horizontal"*/>
+    some item
+</NavList>`,
+      errors: [{
+        messageId: "removeNavListVariant",
+        data: {
+          navListName: navListName,
+          navName: navName,
+          variantVal: variant.horizontal
+        },
+        type: "JSXElement",
+      }]
+    },
+    {
+      code: `import { NavList } from '@patternfly/react-core';
+<NavList variant="simple">
+    some item
+</NavList>`,
+      output: `import { NavList } from '@patternfly/react-core';
 <NavList >
     some item
 </NavList>`,
       errors: [{
-        message: `variant has been removed from NavList, use <Nav variant="horizontal"> instead`,
+        messageId: "removeNavListSimpleVariant",
+        type: "JSXElement",
+      }]
+    },
+    {
+      code: `import { NavList } from '@patternfly/react-core';
+<Nav>
+  <NavList variant="simple">
+      some item
+  </NavList>
+</Nav>`,
+      output: `import { NavList } from '@patternfly/react-core';
+<Nav>
+  <NavList >
+      some item
+  </NavList>
+</Nav>`,
+      errors: [{
+        messageId: "removeNavListSimpleVariant",
         type: "JSXElement",
       }]
     }

@@ -2,6 +2,14 @@ const { getPackageImports } = require('../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4225
 module.exports = {
+  meta: {
+    messages: {
+      removeNavListVariant: "variant has been removed from {{ navListName }}, use <{{ navName }} {{ variantVal }}> instead",
+      removeNavListSimpleVariant: "variant has been removed from NavList and 'simple' is no longer a valid value.",
+    },
+    fixable: "code",
+    schema: []
+  },
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
         .filter(specifier => ['NavList', 'Nav'].includes(specifier.imported.name));
@@ -26,30 +34,60 @@ module.exports = {
 
           if (variantAttr) {
             if (variantAttr.value !== null) {
-              context.report({
-                node,
-                message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} ${variantVal}> instead`,
-                fix(fixer) {
-                  const fixes = [fixer.replaceText(variantAttr, '')];
-                  if (hasNavParent) {
-                    fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
+              if (variantAttr.value.value == "simple") {
+                context.report({
+                  node,
+                  messageId: "removeNavListSimpleVariant",
+                  fix(fixer) {
+                    const fixes = [];
+                    fixes.push(fixer.replaceText(variantAttr, ''));
+                    return fixes;
                   }
-                  return fixes;
-                }
-              });
+                });
+              } else {
+                context.report({
+                  node,
+                  messageId: "removeNavListVariant",
+                  data: {
+                    navListName: node.openingElement.name.name,
+                    navName: navImportName,
+                    variantVal: variantVal
+                  },
+                  fix(fixer) {
+                    const fixes = [];
+                    if (hasNavParent) {
+                      fixes.push(fixer.replaceText(variantAttr, ''));
+                      fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
+                    } else {
+                      if (variantAttr.value.value == "default") {
+                        fixes.push(fixer.replaceText(variantAttr, ''));
+                      } else {
+                        fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
+                      }
+                    }
+                    return fixes;
+                  }
+                });
+              }
             } else {
-              context.report({
-                node,
-                message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} variant={"horizontal" | "default" | "tertiary"}> instead`,
-                fix(fixer) {
-                  const fixes = [fixer.replaceText(variantAttr, '')];
-                  return fixes;
-                }
-              });
+                context.report({
+                  node,
+                  messageId: "removeNavListVariant",
+                  data: {
+                    navListName: node.openingElement.name.name,
+                    navName: navImportName,
+                    variantVal: 'variant={"horizontal" | "default" | "tertiary"}'
+                  },
+                  fix(fixer) {
+                    const fixes = [];
+                    fixes.push(fixer.replaceText(variantAttr, ''));
+                    return fixes;
+                  }
+                });
+              }
             }
           }
         }
       }
     }
-  }
 }
