@@ -37,3 +37,4 @@ export const TestTab5 = <Tab title={<TabTextComp />}>Content</Tab>;
 export const TestTab6 = <Tab title={<div>hello</div>}>Content</Tab>;
 export const TestTab7 = <Tab title={<UsersIcon />}>Content</Tab>;
 export const TestTab8 = <Tab title={<><UsersIcon /> Text</>}>Content</Tab>;
+// <Tab title={<><TabTitleIcon><UsersIcon /></TabTitleIcon> <TabTitleText>Users</TabTitleText>  </>}>
