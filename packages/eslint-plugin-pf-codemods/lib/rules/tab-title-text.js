@@ -15,6 +15,10 @@ module.exports = {
           const attribute = node.attributes.find(node => node.name && node.name.name === 'title');
           if (attribute) {
             const { value } = attribute;
+            const valueText = context.getSourceCode().getText(value);
+            if (valueText.indexOf('TabTitleText') !== -1 || valueText.indexOf('TabTitleIcon') !== -1) {
+              return;
+            }
             let replacement;
             if (value.type === 'Literal') {
               // i.e. title="Title"
@@ -32,8 +36,8 @@ module.exports = {
                 replacement = fixer => [
                   fixer.replaceText(attribute.value, `{<TabTitleText>{${attribute.value.expression.name}}</TabTitleText>}`)
                 ];
-              } else if (value.expression.type === 'JSXElement' && value.expression.openingElement.name.name !== 'TabTitleText') {
-                // i.e. title={<Mycomp2 />}
+              } else if (value.expression.type === 'JSXElement' || value.expression.type === 'JSXFragment') {
+                // i.e. title={<Mycomp2 />} or title={<>Something</>}
                 replacement = fixer => [
                   fixer.insertTextBefore(attribute.value.expression, `<TabTitleText>`),
                   fixer.insertTextAfter(attribute.value.expression, `</TabTitleText>`)
