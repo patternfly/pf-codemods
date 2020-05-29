@@ -24,7 +24,7 @@ export const MyButtonWithCustomEnum = (
   <Button variant={MyPfEnums.plain} />
 )
 
-import { Tab } from '@patternfly/react-core';
+import { Tab, TitleSize } from '@patternfly/react-core';
 const tabText = <TabTitleText>After</TabTitleText>;
 const TabTextComp = () => <TabTitleText>After</TabTitleText>;
 export const TestTab = <Tab title="hello">Content</Tab>;
@@ -38,8 +38,6 @@ export const TestTab6 = <Tab title={<div>hello</div>}>Content</Tab>;
 
 export const TestTab7 = <Tab title={<UsersIcon />}>Content</Tab>;
 export const TestTab8 = <Tab title={<><UsersIcon /> Text</>}>Content</Tab>;
-// <Tab title={<><TabTitleIcon><UsersIcon /></TabTitleIcon> <TabTitleText>Users</TabTitleText>  </>}>
-
 
 import { Table, cellWidth } from "@patternfly/react-table";
 export const TableA = <Table cells={[{ transforms: [cellWidth('max')] }]}></Table>;
@@ -47,3 +45,10 @@ export const TableA = <Table cells={[{ transforms: [cellWidth('max')] }]}></Tabl
 import { Table, cellWidth, cellHeightAuto } from '@patternfly/react-table';
 export const TableB = <Table cells={[{ transforms: [ cellWidth('max'), cellHeightAuto() ] }]}></Table>
 export const TableC = <Table cells={[{ transforms: [ cellHeightAuto() ] }]}></Table>
+
+import { Wizard } from '@patternfly/react-core'; 
+// should change to hasNoBodyPadding
+export const WizA = <Wizard hasBodyPadding={ false } />
+// should remove the prop since hasNoBodyPadding defaults to false
+export const WizB = <Wizard hasBodyPadding />
+export const WizC = <Wizard hasBodyPadding={ true } />
