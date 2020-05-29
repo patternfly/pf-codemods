@@ -33,68 +33,30 @@ module.exports = {
             node.callee.name === 'cellHeightAuto';
           if (isCellHeightAutoNode) {
             const sourceCode = context.getSourceCode();
-            sourceCode.getTokens(node).forEach(token => {
-              // console.log('currentToken: ',token.value);
-              let removeFollowingComma = false;
-              let aliasRemoveFollowingComma = false;
-              let hasImportAlias = false; // i.e: NavVariants as MyThing 
-              let removePreviousComma = false;
-              const tokenText = sourceCode.getText(token);
-              const previousToken = sourceCode.getTokenBefore(token);
-              const previousTokenText = sourceCode.getText(previousToken);
-              const nextToken = sourceCode.getTokenAfter(token);
-              const nextTokenText = sourceCode.getText(nextToken);
-              // console.log('nextToken: ',sourceCode.getText(nextToken))
-              // console.log('previousToken: ',sourceCode.getText(previousToken));
-              if (nextTokenText === ',') {
-                removeFollowingComma = true;
-              } else if (nextTokenText === '}' && previousTokenText === ',') {
-                removePreviousComma = true;
-              } else if (nextTokenText === 'as') {
-                hasImportAlias = true;
-                const whatFollowsAlias = sourceCode.getTokensAfter(token, {
-                  count: 3
-                });
-                if (sourceCode.getText(whatFollowsAlias[whatFollowsAlias.length - 1]) === ',') {
-                  aliasRemoveFollowingComma = true;
-                } else if (sourceCode.getText(whatFollowsAlias[whatFollowsAlias.length - 1]) === '}' && previousTokenText === ',') {
-                  removePreviousComma = true;
+            const previousToken = sourceCode.getTokenBefore(node);
+            const previousTokenText = sourceCode.getText(previousToken);
+            const lastNodeToken = sourceCode.getLastToken(node);
+            const nextToken = sourceCode.getTokenAfter(lastNodeToken);
+            const nextTokenText = sourceCode.getText(nextToken);
+            console.log('previousToken: ',previousTokenText);
+            console.log(`nextToken: ${nextTokenText}`);
+
+            context.report({
+              node, 
+              message: `cellHeightAuto transformer has been deprecated, removed usage`, 
+              fix(fixer) {
+                const fixes = [
+                  fixer.remove(node)
+                ];
+                if (nextTokenText === ']' && previousTokenText === ',') {
+                  // it's the last item but has a preceding item, clean up previous comma
+                  fixes.push(fixer.remove(previousToken));
                 }
+                if (nextTokenText === ',') {
+                  fixes.push(fixer.remove(nextTokenText));
+                }
+                return fixes;
               }
-              context.report({
-                node, 
-                message: `cellHeightAuto transformer has been deprecated, removed usage`, 
-                fix(fixer) {
-                  const fixes = [
-                    fixer.remove(token)
-                  ];
-                  // console.log('remove1: ', token);
-                  if (removePreviousComma) {
-                    fixes.push(fixer.remove(previousToken));
-                    // console.log('remove2: ', previousToken);
-                  }
-                  if (hasImportAlias) {
-                    let additionalTokensToRemove;
-                    if (aliasRemoveFollowingComma) {
-                      // We have something like `NavVariants as MyVariants,` with a comma at the end 
-                      additionalTokensToRemove = sourceCode.getTokensAfter(token, {
-                        count: 3
-                      });
-                    } else {
-                      // Without a comma
-                      additionalTokensToRemove = sourceCode.getTokensAfter(token, {
-                        count: 2
-                      });
-                    }
-                    additionalTokensToRemove.forEach(additionalToken => fixes.push(fixer.remove(additionalToken)));
-                    // console.log('remove4: ', additionalToken);
-                  } else if (removeFollowingComma) {
-                    fixes.push(fixer.remove(nextToken));
-                    // console.log('remove5: ', nextToken);
-                  }
-                  return fixes;
-                }
-              });
             });
           }
           //////////// end cellHeightAuto()
