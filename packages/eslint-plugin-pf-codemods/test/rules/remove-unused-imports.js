@@ -72,5 +72,15 @@ ruleTester.run("remove-unused-imports", rule, {
         type: "ImportDeclaration",
       }]
     },
+    {
+      code:   `import { Card } from '@patternfly/react-core';
+        import { cellHeightAuto } from '@patternfly/react-table';`,
+      output: `import { Card } from '@patternfly/react-core';
+        import {  } from '@patternfly/react-table';`,
+      errors: [{
+        message: `cellHeightAuto was removed`,
+        type: "ImportDeclaration",
+      }]
+    },
   ]
 });
