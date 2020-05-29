@@ -34,49 +34,60 @@ module.exports = {
 
           if (variantAttr) {
             if (variantAttr.value !== null) {
-              context.report({
-                node,
-                messageId: "removeNavListVariant",
-                data: {
-                  navListName: node.openingElement.name.name,
-                  navName: navImportName,
-                  variantVal: variantVal
-                },
-                fix(fixer) {
-                  const fixes = [];
-                  if (hasNavParent) {
+              if (variantAttr.value.value == "simple") {
+                context.report({
+                  node,
+                  messageId: "removeNavListSimpleVariant",
+                  fix(fixer) {
+                    const fixes = [];
                     fixes.push(fixer.replaceText(variantAttr, ''));
-                    fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
-                  } else {
-                    if (variantAttr.value.value == "default") {
-                      fixes.push(fixer.replaceText(variantAttr, ''));
-                      return fixes;
-                    }
-
-                    fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
+                    return fixes;
                   }
-                  return fixes;
-                }
-              });
+                });
+              } else {
+                context.report({
+                  node,
+                  messageId: "removeNavListVariant",
+                  data: {
+                    navListName: node.openingElement.name.name,
+                    navName: navImportName,
+                    variantVal: variantVal
+                  },
+                  fix(fixer) {
+                    const fixes = [];
+                    if (hasNavParent) {
+                      fixes.push(fixer.replaceText(variantAttr, ''));
+                      fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
+                    } else {
+                      if (variantAttr.value.value == "default") {
+                        fixes.push(fixer.replaceText(variantAttr, ''));
+                      } else {
+                        fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
+                      }
+                    }
+                    return fixes;
+                  }
+                });
+              }
             } else {
-              context.report({
-                node,
-                messageId: "removeNavListVariant",
-                data: {
-                  navListName: node.openingElement.name.name,
-                  navName: navImportName,
-                  variantVal: 'variant={"horizontal" | "default" | "tertiary"}'
-                },
-                fix(fixer) {
-                  const fixes = [];
-                  fixes.push(fixer.replaceText(variantAttr, ''));
-                  return fixes;
-                }
-              });
+                context.report({
+                  node,
+                  messageId: "removeNavListVariant",
+                  data: {
+                    navListName: node.openingElement.name.name,
+                    navName: navImportName,
+                    variantVal: 'variant={"horizontal" | "default" | "tertiary"}'
+                  },
+                  fix(fixer) {
+                    const fixes = [];
+                    fixes.push(fixer.replaceText(variantAttr, ''));
+                    return fixes;
+                  }
+                });
+              }
             }
           }
         }
       }
     }
-  }
 }

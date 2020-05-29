@@ -156,6 +156,38 @@ ruleTester.run("nav-list-variant", rule, {
         },
         type: "JSXElement",
       }]
+    },
+    {
+      code: `import { NavList } from '@patternfly/react-core';
+<NavList variant="simple">
+    some item
+</NavList>`,
+      output: `import { NavList } from '@patternfly/react-core';
+<NavList >
+    some item
+</NavList>`,
+      errors: [{
+        messageId: "removeNavListSimpleVariant",
+        type: "JSXElement",
+      }]
+    },
+    {
+      code: `import { NavList } from '@patternfly/react-core';
+<Nav>
+  <NavList variant="simple">
+      some item
+  </NavList>
+</Nav>`,
+      output: `import { NavList } from '@patternfly/react-core';
+<Nav>
+  <NavList >
+      some item
+  </NavList>
+</Nav>`,
+      errors: [{
+        messageId: "removeNavListSimpleVariant",
+        type: "JSXElement",
+      }]
     }
   ]
 });
