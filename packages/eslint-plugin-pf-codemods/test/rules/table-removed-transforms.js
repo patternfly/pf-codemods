@@ -34,7 +34,7 @@ ruleTester.run("table-removed-transforms", rule, {
         //   type: "CallExpression"
         // },
         {
-          message: `cellHeightAuto transformer has been deprecated, removed usage`,
+          message: `cellHeightAuto has been deprecated, remove usage`,
           type: "CallExpression"
         }
       ]

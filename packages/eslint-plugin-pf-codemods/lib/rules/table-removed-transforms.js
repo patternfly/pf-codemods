@@ -11,8 +11,6 @@ module.exports = {
       
       return (!cellWidthImport.length && !cellHeightAutoImport.length) ? {} : {
         CallExpression(node) {
-          // console.log('node: ', node.callee.name);
-          //////// cellWidth('max')
           const maxNode = node.callee.name && 
             node.callee.name === 'cellWidth' &&
             node.arguments.find(arg => arg.value === 'max');
@@ -26,11 +24,7 @@ module.exports = {
             });
           }
 
-          ////////// end cellWidth('max')
-          ////////// cellHeightAuto() 
-          // console.log(node); 
-          const isCellHeightAutoNode = node.callee.name && 
-            node.callee.name === 'cellHeightAuto';
+          const isCellHeightAutoNode = node.callee.name && node.callee.name === 'cellHeightAuto';
           if (isCellHeightAutoNode) {
             const sourceCode = context.getSourceCode();
             const previousToken = sourceCode.getTokenBefore(node);
@@ -38,12 +32,9 @@ module.exports = {
             const lastNodeToken = sourceCode.getLastToken(node);
             const nextToken = sourceCode.getTokenAfter(lastNodeToken);
             const nextTokenText = sourceCode.getText(nextToken);
-            console.log('previousToken: ',previousTokenText);
-            console.log(`nextToken: ${nextTokenText}`);
-
             context.report({
               node, 
-              message: `cellHeightAuto transformer has been deprecated, removed usage`, 
+              message: `cellHeightAuto has been deprecated, remove usage`, 
               fix(fixer) {
                 const fixes = [
                   fixer.remove(node)
@@ -59,7 +50,6 @@ module.exports = {
               }
             });
           }
-          //////////// end cellHeightAuto()
         }
       }
     }

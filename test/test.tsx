@@ -37,15 +37,7 @@ export const TestTab6 = <Tab title={<div>hello</div>}>Content</Tab>;
 
 import { Table, cellWidth } from "@patternfly/react-table";
 export const TableA = <Table cells={[{ transforms: [cellWidth('max')] }]}></Table>;
-/*
-import { Table, cellWidth } from "@patternfly/react-table";
-        <Table cells={[{ transforms: [cellWidth(100)] }]}></Table>
-*/
 
 import { Table, cellWidth, cellHeightAuto } from '@patternfly/react-table';
 export const TableB = <Table cells={[{ transforms: [ cellWidth('max'), cellHeightAuto() ] }]}></Table>
 export const TableC = <Table cells={[{ transforms: [ cellHeightAuto() ] }]}></Table>
-/*
-import { Table, TableHeader, TableBody, cellWidth, cellHeightAuto } from '@patternfly/react-table';
-        <Table cells={[{ transforms: [cellWidth(100)] }]}></Table>
-*/
