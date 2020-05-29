@@ -1,15 +1,15 @@
-import { Title, Title as MyTitle, TabTitleText, TabTitleIcon } from '@patternfly/react-core';
+import { Title, Title as MyTitle } from '@patternfly/react-core';
 
-export const Thing1 = () => <MyTitle headingLevel="h2" size="md">Title</MyTitle>;
-export const Thing2 = () => <Title headingLevel="h2" size="md">Title</Title>;
+export const Thing1 = () => <MyTitle size="md">Title</MyTitle>;
+export const Thing2 = () => <Title size="md">Title</Title>;
 
-import { List, ListVariant, TabTitleText, TabTitleIcon } from '@patternfly/react-core';
+import { List, ListVariant } from '@patternfly/react-core';
 
 export const MyList = (
   <List variant={ListVariant.plain} />
 )
 
-import { Button, ButtonVariant as MyButtonVaraitn, TabTitleText, TabTitleIcon } from '@patternfly/react-core';
+import { Button, ButtonVariant as MyButtonVaraitn } from '@patternfly/react-core';
 
 export const MyButton = (
   <Button variant={MyButtonVaraitn.plain} />
@@ -27,7 +27,7 @@ export const MyButtonWithCustomEnum = (
 import { Tab, TitleSize } from '@patternfly/react-core';
 const tabText = <TabTitleText>After</TabTitleText>;
 const TabTextComp = () => <TabTitleText>After</TabTitleText>;
-export const TestTab = <Tab title={<TabTitleText>hello</TabTitleText>}>Content</Tab>;
+export const TestTab = <Tab title="hello">Content</Tab>;
 export const TestTab2a = <Tab title={<TabTitleText>hello</TabTitleText>}>Content</Tab>;
 export const TestTab2b = <Tab title={<TabTitleIcon><UsersIcon /></TabTitleIcon>}>Content</Tab>;
 export const TestTab3 = <Tab title={'hello'}>Content</Tab>;
@@ -40,7 +40,7 @@ export const TestTab7 = <Tab title={<UsersIcon />}>Content</Tab>;
 export const TestTab8 = <Tab title={<><UsersIcon /> Text</>}>Content</Tab>;
 
 import { Table, cellWidth } from "@patternfly/react-table";
-export const TableA = <Table cells={[{ transforms: [cellWidth(100)] }]}></Table>;
+export const TableA = <Table cells={[{ transforms: [cellWidth('max')] }]}></Table>;
 
 import { Table, cellWidth, cellHeightAuto } from '@patternfly/react-table';
 export const TableB = <Table cells={[{ transforms: [ cellWidth('max'), cellHeightAuto() ] }]}></Table>
@@ -53,5 +53,5 @@ export const WizA = <Wizard hasBodyPadding={ false } />
 export const WizB = <Wizard hasBodyPadding />
 export const WizC = <Wizard hasBodyPadding={ true } />
 
-import { ExpandableSection } from '@patternfly/react-core';
-export const TestExpandable = <ExpandableSection toggleText="Show More"></ExpandableSection>;
+import { Expandable } from '@patternfly/react-core';
+export const TestExpandable = <Expandable toggleText="Show More" ></Expandable>;
