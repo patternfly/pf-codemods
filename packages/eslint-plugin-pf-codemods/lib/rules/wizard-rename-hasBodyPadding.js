@@ -16,9 +16,8 @@ module.exports = {
               node,
               message: `hasBodyPadding prop has been removed for ${node.name.name}. Use hasNoBodyPadding instead`,
               fix(fixer) {
-                const attrText = sourceCode.getText(attribute);
-                const attrValue = attrText.split('=')[1];
-                return fixer.replaceText(attribute, attrValue && attrValue.includes('false') ? 'hasNoBodyPadding' : '');
+                const attrText = attribute.value ? sourceCode.getText(attribute.value.expression) : null;
+                return fixer.replaceText(attribute, attrText && attrText.includes('false') ? 'hasNoBodyPadding' : '');
               }
             });
           }
