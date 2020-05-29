@@ -5,6 +5,7 @@ module.exports = {
   meta: {
     messages: {
       removeNavListVariant: "variant has been removed from {{ navListName }}, use <{{ navName }} {{ variantVal }}> instead",
+      removeNavListSimpleVariant: "variant has been removed from NavList and 'simple' is no longer a valid value.",
     },
     fixable: "code",
     schema: []
@@ -47,6 +48,11 @@ module.exports = {
                     fixes.push(fixer.replaceText(variantAttr, ''));
                     fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
                   } else {
+                    if (variantAttr.value.value == "default") {
+                      fixes.push(fixer.replaceText(variantAttr, ''));
+                      return fixes;
+                    }
+
                     fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
                   }
                   return fixes;
