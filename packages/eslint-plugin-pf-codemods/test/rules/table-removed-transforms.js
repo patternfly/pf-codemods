@@ -29,10 +29,6 @@ ruleTester.run("table-removed-transforms", rule, {
           message: `cellWidth('max') has been replaced with cellWidth(100)`,
           type: "CallExpression",
         },
-        // {
-        //   message: `cellHeightAuto transformer has been deprecated, import removed`,
-        //   type: "CallExpression"
-        // },
         {
           message: `cellHeightAuto has been deprecated, remove usage`,
           type: "CallExpression"
