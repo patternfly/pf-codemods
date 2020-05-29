@@ -12,7 +12,7 @@ module.exports = {
           const attribute = node.attributes.find(node => node.name && node.name.name === 'variant');
           if (attribute) {
             const attributeValue = context.getSourceCode().getText(attribute.value);
-            if (['"left"', '"right"'].includes(attributeValue))
+            if (/left|right/.test(attributeValue))
               context.report({
                 node,
                 message: `variant ${attributeValue} has been removed from ${node.name.name}`,

@@ -4,7 +4,8 @@ const removedImports = [
   'CardHeadMain', // See card-rename-components rule for more info
   'BackgroundImgSrc', // See background-image-src-enum rule for more info
   'ChipButton', // See chipgroup-remove-chipbutton rule for more info
-  'ChipGroupToolbarItem', // See chipgroup-remove-chipgrouptoolbaritem rule for more info
+  'ChipGroupToolbarItem', // See chipgroup-remove-chipgrouptoolbaritem rule for more info,
+  'cellHeightAuto', // See table-removed-transforms rule for more info
   'TitleSize' // See title-size rule for more info
 ];
 
@@ -16,7 +17,7 @@ module.exports = {
       ImportDeclaration(node) {
         const sourceCode = context.getSourceCode();
         // console.log(context.getSourceCode().getTokens(node));
-        if (/\@patternfly\/react-core/.test(node.source.value)) {
+        if (/\@patternfly\/react-(core|table)/.test(node.source.value)) {
           context.getSourceCode().getTokens(node).forEach(token => {
             let removeFollowingComma = false;
             let aliasRemoveFollowingComma = false;

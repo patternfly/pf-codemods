@@ -4,7 +4,7 @@ const { getPackageImports } = require('../helpers');
 module.exports = {
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === 'Wizard');
+      .filter(specifier => ['Wizard', 'WizardBody', 'WizardToggle'].includes(specifier.imported.name));
     const sourceCode = context.getSourceCode();
       
     return imports.length == 0 ? {} : {
@@ -14,24 +14,11 @@ module.exports = {
           if (attribute) {
             context.report({
               node,
-              message: 'The Wizard hasBodyPadding prop was removed in favor of hasNoBodyPadding',
+              message: `hasBodyPadding prop has been removed for ${node.name.name}. Use hasNoBodyPadding instead`,
               fix(fixer) {
                 const attrText = sourceCode.getText(attribute);
                 const attrValue = attrText.split('=')[1];
-                let fixes = [];
-                if (!attrValue) {
-                  // Used hasBodyPadding without value which implicitly means true, thus we can remove the prop
-                  fixes.push(fixer.remove(attribute));
-                } else {
-                  if (attrValue.indexOf('false') > -1) {
-                    // hasBodyPadding={false} -> replace with hasNoBodyPadding
-                    fixes.push(fixer.replaceText(attribute, 'hasNoBodyPadding'));
-                  } else if (attrValue.indexOf('true') > -1) {
-                    // hasBodyPadding={true} -> remove prop
-                    fixes.push(fixer.remove(attribute));
-                  }
-                }
-                return fixes;
+                return fixer.replaceText(attribute, attrValue && attrValue.includes('false') ? 'hasNoBodyPadding' : '');
               }
             });
           }

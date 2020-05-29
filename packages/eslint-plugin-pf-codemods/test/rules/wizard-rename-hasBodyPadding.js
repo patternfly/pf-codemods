@@ -16,7 +16,7 @@ ruleTester.run("wizard-rename-hasBodyPadding", rule, {
       code:   `import { Wizard } from '@patternfly/react-core'; <Wizard hasBodyPadding={false} />`,
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard hasNoBodyPadding />`,
       errors: [{
-        message: `The Wizard hasBodyPadding prop was removed in favor of hasNoBodyPadding`,
+        message: `hasBodyPadding prop has been removed for Wizard. Use hasNoBodyPadding instead`,
         type: "JSXOpeningElement",
       }]
     },
@@ -24,7 +24,7 @@ ruleTester.run("wizard-rename-hasBodyPadding", rule, {
       code:   `import { Wizard } from '@patternfly/react-core'; <Wizard hasBodyPadding={true} />`,
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
-        message: `The Wizard hasBodyPadding prop was removed in favor of hasNoBodyPadding`,
+        message: `hasBodyPadding prop has been removed for Wizard. Use hasNoBodyPadding instead`,
         type: "JSXOpeningElement",
       }]
     },
@@ -32,7 +32,7 @@ ruleTester.run("wizard-rename-hasBodyPadding", rule, {
       code:   `import { Wizard } from '@patternfly/react-core'; <Wizard hasBodyPadding />`,
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
-        message: `The Wizard hasBodyPadding prop was removed in favor of hasNoBodyPadding`,
+        message: `hasBodyPadding prop has been removed for Wizard. Use hasNoBodyPadding instead`,
         type: "JSXOpeningElement",
       }]
     },
