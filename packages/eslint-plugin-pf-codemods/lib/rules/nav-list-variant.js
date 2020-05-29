@@ -2,6 +2,13 @@ const { getPackageImports } = require('../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4225
 module.exports = {
+  meta: {
+    messages: {
+      removeNavListVariant: "variant has been removed from {{ navListName }}, use <{{ navName }} {{ variantVal }}> instead",
+    },
+    fixable: "code",
+    schema: []
+  },
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
         .filter(specifier => ['NavList', 'Nav'].includes(specifier.imported.name));
@@ -28,7 +35,12 @@ module.exports = {
             if (variantAttr.value !== null) {
               context.report({
                 node,
-                message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} ${variantVal}> instead`,
+                messageId: "removeNavListVariant",
+                data: {
+                  navListName: node.openingElement.name.name,
+                  navName: navImportName,
+                  variantVal: variantVal
+                },
                 fix(fixer) {
                   const fixes = [];
                   if (hasNavParent) {
@@ -43,7 +55,12 @@ module.exports = {
             } else {
               context.report({
                 node,
-                message: `variant has been removed from ${node.openingElement.name.name}, use <${navImportName} variant={"horizontal" | "default" | "tertiary"}> instead`,
+                messageId: "removeNavListVariant",
+                data: {
+                  navListName: node.openingElement.name.name,
+                  navName: navImportName,
+                  variantVal: 'variant={"horizontal" | "default" | "tertiary"}'
+                },
                 fix(fixer) {
                   const fixes = [];
                   fixes.push(fixer.replaceText(variantAttr, ''));
