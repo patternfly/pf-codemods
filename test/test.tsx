@@ -34,3 +34,10 @@ export const TestTab3a = <Tab title={5}>Content</Tab>;
 export const TestTab4 = <Tab title={tabText}>Content</Tab>;
 export const TestTab5 = <Tab title={<TabTextComp />}>Content</Tab>;
 export const TestTab6 = <Tab title={<div>hello</div>}>Content</Tab>;
+
+import { Table, cellWidth } from "@patternfly/react-table";
+export const TableA = <Table cells={[{ transforms: [cellWidth('max')] }]}></Table>;
+
+import { Table, cellWidth, cellHeightAuto } from '@patternfly/react-table';
+export const TableB = <Table cells={[{ transforms: [ cellWidth('max'), cellHeightAuto() ] }]}></Table>
+export const TableC = <Table cells={[{ transforms: [ cellHeightAuto() ] }]}></Table>
