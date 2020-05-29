@@ -36,12 +36,14 @@ module.exports = {
                 replacement = fixer => [
                   fixer.replaceText(attribute.value, `{<TabTitleText>{${attribute.value.expression.name}}</TabTitleText>}`)
                 ];
-              } else if (value.expression.type === 'JSXElement' || value.expression.type === 'JSXFragment') {
-                // i.e. title={<Mycomp2 />} or title={<>Something</>}
+              } else if (value.expression.type === 'JSXElement') {
+                // i.e. title={<Mycomp2 />}
                 replacement = fixer => [
                   fixer.insertTextBefore(attribute.value.expression, `<TabTitleText>`),
                   fixer.insertTextAfter(attribute.value.expression, `</TabTitleText>`)
                 ];
+              } else if (value.expression.type === 'JSXFragment') {
+                // i.e. title={<>Something</>}
               }
             }
             if (replacement) {
