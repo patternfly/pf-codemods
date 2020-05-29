@@ -22,9 +22,13 @@ ruleTester.run("table-removed-transforms", rule, {
     {
       code: `import { Table, cellWidth, cellHeightAuto } from '@patternfly/react-table';
         <Table cells={[{ transforms: [ cellWidth('max'), cellHeightAuto() ] }]}></Table>`,
-      output: `import { Table, TableHeader, TableBody, cellWidth, cellHeightAuto } from '@patternfly/react-table';
-        <Table cells={[{ transforms: [cellWidth(100)] }]}></Table>`,
+      output: `import { Table, cellWidth, cellHeightAuto } from '@patternfly/react-table';
+        <Table cells={[{ transforms: [ cellWidth(100)  ] }]}></Table>`,
       errors: [
+        {
+          message: `cellWidth('max') has been replaced with cellWidth(100)`,
+          type: "CallExpression",
+        },
         // {
         //   message: `cellHeightAuto transformer has been deprecated, import removed`,
         //   type: "CallExpression"
@@ -32,10 +36,6 @@ ruleTester.run("table-removed-transforms", rule, {
         {
           message: `cellHeightAuto transformer has been deprecated, removed usage`,
           type: "CallExpression"
-        },
-        {
-          message: `cellWidth('max') has been replaced with cellWidth(100)`,
-          type: "Property",
         }
       ]
     },
