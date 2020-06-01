@@ -55,3 +55,6 @@ export const WizC = <Wizard hasBodyPadding={ true } />
 
 import { Expandable } from '@patternfly/react-core';
 export const TestExpandable = <Expandable toggleText="Show More" ></Expandable>;
+
+import { ChipButton } from '@patternfly/react-core';
+export const TestChipButton = <ChipButton></ChipButton>;
