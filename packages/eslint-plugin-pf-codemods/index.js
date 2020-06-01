@@ -41,6 +41,7 @@ const rules = {
   "rename-toolbar-components": require('./lib/rules/rename-toolbar-components'),
   "page-header-prop-rename": require('./lib/rules/page-header-prop-rename'),
   "page-header-move-avatar": require('./lib/rules/page-header-move-avatar'),
+  "refactor-breakpointmods": require('./lib/rules/refactor-breakpointmods'),
 };
 
 module.exports = {
