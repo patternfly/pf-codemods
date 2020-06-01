@@ -80,20 +80,56 @@ function renameProp(components, propMap, message, replaceAttribute) {
   }
 }
 
-function renameComponent(componentMap, message) {
+function renameComponent(
+  componentMap,
+  message = (prevName, newName) => `${prevName} has been replaced with ${newName}`
+) {
   return function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => Object.keys(componentMap).includes(specifier.imported.name));
+    const importedNamesArr = imports.map(imp => imp.imported.name);
       
     return imports.length === 0 ? {} : {
-      JSXIdentifier(node) {
-        if (imports.map(imp => imp.local.name).includes(node.name)) {
-          const newName = componentMap[node.name];
+      // update component's import statement
+      ImportSpecifier(node) {
+        const importedName = node.imported.name;
+	      if (importedNamesArr.includes(importedName)) {
+          const localName = node.local.name;
+          const isAliased = importedName !== localName;
+          const aliasText = isAliased ? ` as ${localName}` : '';
+          const newName = `${componentMap[importedName]}${aliasText}`;
           context.report({
             node,
-            message: message(node, newName),
+            message: message(importedName, newName),
             fix(fixer) {
               return fixer.replaceText(node, newName);
+            }
+          });
+        }
+      },
+      // update component's JSX usage
+      JSXElement(node) {
+        const { openingElement, closingElement } = node;
+        const nodeName = openingElement.name.name;
+        const importedNode = imports.find(imp => imp.local.name === nodeName);
+        if (
+          importedNamesArr.includes(nodeName) &&
+          importedNode.imported.name === importedNode.local.name // don't rename an aliased component
+        ) {
+          const newName = componentMap[nodeName];
+          const updateTagName = node => context
+          	.getSourceCode()
+          	.getText(node)
+          	.replace(nodeName, newName);
+          context.report({
+            node,
+            message: message(nodeName, newName),
+            fix(fixer) {
+              const fixes = [
+                fixer.replaceText(openingElement, updateTagName(openingElement)),
+                fixer.replaceText(closingElement, updateTagName(closingElement))
+              ];
+              return fixes;
             }
           });
         }

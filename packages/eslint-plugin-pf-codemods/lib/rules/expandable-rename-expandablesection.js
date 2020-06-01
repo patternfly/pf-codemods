@@ -1,8 +1,9 @@
 const { renameComponent } = require('../helpers');
 
-// https://github.com/patternfly/patternfly-react/pull/4246
+// https://github.com/patternfly/patternfly-react/pull/4116
 module.exports = {
   create: renameComponent(
-    { 'ChipButton': 'Button' }
+    { 'Expandable': 'ExpandableSection' }
   )
 };
+
