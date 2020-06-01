@@ -17,7 +17,7 @@ ruleTester.run("expandable-rename-expandablesection", rule, {
       code:   `import { Expandable } from '@patternfly/react-core';`,
       output: `import { ExpandableSection } from '@patternfly/react-core';`,
       errors: [{
-        message: `Expandable has been renamed to ExpandableSection, update import`,
+        message: `Expandable has been replaced with ExpandableSection`,
         type: "ImportSpecifier",
       }]
     },
@@ -28,11 +28,11 @@ ruleTester.run("expandable-rename-expandablesection", rule, {
         <ExpandableSection toggleText="Show More"></ExpandableSection>`,
       errors: [
         {
-          message: `Expandable has been renamed to ExpandableSection, update import`,
+          message: `Expandable has been replaced with ExpandableSection`,
           type: "ImportSpecifier",
         },
         {
-          message: 'Expandable has been renamed to ExpandableSection, update usage',
+          message: 'Expandable has been replaced with ExpandableSection',
           type: "JSXElement"
         }
       ]
