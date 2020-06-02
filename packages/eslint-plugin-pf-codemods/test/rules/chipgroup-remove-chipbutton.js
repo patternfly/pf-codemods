@@ -23,6 +23,10 @@ ruleTester.run("chipgroup-remove-chipbutton", rule, {
           message: `ChipButton has been replaced with Button`,
           type: "JSXElement",
         },
+        {
+          message: `ChipButton has been replaced with Button`,
+          type: "JSXElement",
+        },
       ]
     },
   ]

@@ -5,6 +5,7 @@ const components = [
   'PageHeaderTools'
 ]
 
+// https://github.com/patternfly/patternfly-react/pull/4246
 module.exports = {
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
