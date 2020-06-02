@@ -39,6 +39,8 @@ const rules = {
   "form-fix-isValid": require('./lib/rules/form-fix-isValid'),
   "expandable-rename-expandablesection": require('./lib/rules/expandable-rename-expandablesection'),
   "rename-toolbar-components": require('./lib/rules/rename-toolbar-components'),
+  "page-header-prop-rename": require('./lib/rules/page-header-prop-rename'),
+  "use-page-header-tools": require('./lib/rules/use-page-header-tools'),
 };
 
 module.exports = {

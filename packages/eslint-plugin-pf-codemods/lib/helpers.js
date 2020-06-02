@@ -108,9 +108,8 @@ function renameComponent(
         }
       },
       // update component's JSX usage
-      JSXElement(node) {
-        const { openingElement, closingElement } = node;
-        const nodeName = openingElement.name.name;
+      JSXIdentifier(node) {
+        const nodeName = node.name;
         const importedNode = imports.find(imp => imp.local.name === nodeName);
         if (
           importedNamesArr.includes(nodeName) &&
@@ -126,8 +125,7 @@ function renameComponent(
             message: message(nodeName, newName),
             fix(fixer) {
               const fixes = [
-                fixer.replaceText(openingElement, updateTagName(openingElement)),
-                fixer.replaceText(closingElement, updateTagName(closingElement))
+                fixer.replaceText(node, updateTagName(node))
               ];
               return fixes;
             }

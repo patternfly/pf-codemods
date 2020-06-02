@@ -4,17 +4,87 @@ const rule = require('../../lib/rules/rename-toolbar-components');
 ruleTester.run("rename-toolbar-components", rule, {
   valid: [
     {
-      code: `VALID_CODE_HERE`,
+      code: `import { PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
+      <PageHeaderTools>
+        <PageHeaderToolsGroup>
+          <PageHeaderToolsItem />
+        </PageHeaderToolsGroup>
+      </PageHeaderTools>
+      `,
+    },
+    {
+      // No @patternfly/react-core import
+      code: `
+      <Toolbar>
+        <ToolbarGroup>
+          <ToolbarItem />
+        </ToolbarGroup>
+      </Toolbar>
+    `
     }
   ],
   invalid: [
     {
-      code:   `import { } from '@patternfly/react-core';`,
-      output: `import { } from '@patternfly/react-core';`,
-      errors: [{
-        message: `YOUR_MESSAGE_HERE`,
-        type: "JSXOpeningElement",
-      }]
+      code:   `
+      import { Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+      <Page>
+        <PageHeader toolbar={
+          <Toolbar>
+            <ToolbarGroup>
+              <ToolbarItem />
+            </ToolbarGroup>
+          </Toolbar>
+        }
+        />
+      </Page>
+      `,
+      output: `
+      import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
+      <Page>
+        <PageHeader toolbar={
+          <PageHeaderTools>
+            <PageHeaderToolsGroup>
+              <PageHeaderToolsItem />
+            </PageHeaderToolsGroup>
+          </PageHeaderTools>
+        }
+        />
+      </Page>
+      `,
+      errors: [
+        {
+          message: `Toolbar has been replaced with PageHeaderTools`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `ToolbarGroup has been replaced with PageHeaderToolsGroup`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `ToolbarItem has been replaced with PageHeaderToolsItem`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `Toolbar has been replaced with PageHeaderTools`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `ToolbarGroup has been replaced with PageHeaderToolsGroup`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `ToolbarItem has been replaced with PageHeaderToolsItem`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `ToolbarGroup has been replaced with PageHeaderToolsGroup`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `Toolbar has been replaced with PageHeaderTools`,
+          type: "JSXIdentifier",
+        },
+      ]
     },
   ]
 });
