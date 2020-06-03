@@ -387,6 +387,35 @@ Out:
 import { Divider } from '@patternfly/react-core';
 ```
 
+### page-header-move-avatar [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
+This rule tries to move the PageHeader avatar prop value into the headerTools prop. If it can't it will comment the avatar prop and value out.
+It depends on the `rename-toolbar-components` and `page-header-prop-rename` props to be run first.
+
+#### Examples
+In:
+```jsx
+<PageHeader avatar={<Avatar />} />
+<PageHeader avatar={<Avatar />} headerTools={<PageHeaderTools></PageHeaderTools>} />
+```
+Out:
+```jsx
+<PageHeader /*TODO: move to PageHeaderTools - avatar={<Avatar />}*/ />
+<PageHeader headerTools={<PageHeaderTools><Avatar /></PageHeaderTools>} />
+```
+
+### page-header-prop-rename [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
+Renames the PageHeader `toolbar` prop to `headerTools`
+
+#### Examples
+In:
+```jsx
+<PageHeader toolbar="tools" />
+```
+Out:
+```jsx
+<PageHeader headerTools="tools" />
+```
+
 ### pagination-removed-variant [(#4202)](https://github.com/patternfly/patternfly-react/pull/4202)
 Removed obsolete 'left' and 'right' variants. These can be replaced with 'top' (default) or 'bottom' if needed.
 
@@ -500,6 +529,40 @@ Out:
 <DrawerHead hasNoPadding />
 <DrawerPanelBody hasNoPadding />
 <PageSection hasNoPadding />
+```
+
+### rename-toolbar-components [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
+Renames the `Toolbar` related imports and components to `PageHeader` related imports and components.
+Note: The PageHeader `toolbar` prop is renamed in the `page-header-prop-rename` rule.
+
+#### Examples
+In:
+```jsx
+import { Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+<Page>
+  <PageHeader toolbar={
+    <Toolbar>
+      <ToolbarGroup>
+        <ToolbarItem />
+      </ToolbarGroup>
+    </Toolbar>
+  }
+  />
+</Page>
+```
+Out:
+```jsx
+import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
+<Page>
+  <PageHeader toolbar={
+    <PageHeaderTools>
+      <PageHeaderToolsGroup>
+        <PageHeaderToolsItem />
+      </PageHeaderToolsGroup>
+    </PageHeaderTools>
+  }
+  />
+</Page>
 ```
 
 ### react-icons-remove-icon [(#3978)](https://github.com/patternfly/patternfly-react/pull/3978)
