@@ -24,28 +24,7 @@ module.exports = {
           });
         }
       },
-      // update opening element
-      JSXOpeningElement(node) {
-        const nodeName = node.name.name;
-        const importedNode = imports.find(imp => imp.local.name === nodeName);
-        if (
-          nodeName === 'DataToolbar' &&
-          importedNode.imported.name === importedNode.local.name && // don't rename an aliased component
-          (!node.attributes.length || !node.attributes.find(attribute => attribute.name.name === 'data-codemods'))
-        ) {
-          const tagText = context.getSourceCode().getText(node);
-          const newTagName = tagText.replace('DataToolbar', 'Toolbar');
-          const newTag = `${newTagName.slice(0, -1)} data-codemods="true">`;
-          context.report({
-            node,
-            message: `DataToolbar has been replaced with Toolbar`,
-            fix(fixer) {
-              return fixer.replaceText(node, newTag);
-            }
-          });
-        }
-      },
-      // update closing element
+      // update opening/closing elements
       JSXIdentifier(node) {
         const nodeName = node.name;
         const importedNode = imports.find(imp => imp.local.name === nodeName);
@@ -53,17 +32,21 @@ module.exports = {
           nodeName === 'DataToolbar' &&
           importedNode.imported.name === importedNode.local.name // don't rename an aliased component
         ) {
-          const newName = 'Toolbar';
           const updateTagName = node => context
           	.getSourceCode()
           	.getText(node)
-          	.replace(nodeName, newName);
+          	.replace(nodeName, 'Toolbar');
+          const isOpeningTag = context.getSourceCode().getTokenBefore(node).value !== '/';
+          const newOpeningParentTag = `${updateTagName(node.parent).slice(0, -1)} data-codemods="true">`;
+          const newClosingTag = updateTagName(node);
           context.report({
             node,
             message: `DataToolbar has been replaced with Toolbar`,
             fix(fixer) {
               const fixes = [
-                fixer.replaceText(node, updateTagName(node))
+                isOpeningTag
+                ? fixer.replaceText(node.parent, newOpeningParentTag)
+                : fixer.replaceText(node, newClosingTag)
               ];
               return fixes;
             }
@@ -72,5 +55,4 @@ module.exports = {
       }
     };
   }
-};
-
+}

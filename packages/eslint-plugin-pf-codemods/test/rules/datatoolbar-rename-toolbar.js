@@ -21,10 +21,6 @@ ruleTester.run("datatoolbar-rename-toolbar", rule, {
         },
         {
           message: `DataToolbar has been replaced with Toolbar`,
-          type: "JSXOpeningElement",
-        },
-        {
-          message: `DataToolbar has been replaced with Toolbar`,
           type: "JSXIdentifier",
         },
         {
