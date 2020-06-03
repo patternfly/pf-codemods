@@ -2,6 +2,7 @@
 const path = require('path');
 const options = require('eslint/lib/options');
 const { CLIEngine } = require('eslint/lib/cli-engine');
+const lodash = require('lodash');
 
 /**
  * Outputs the results of the linting.
@@ -43,8 +44,15 @@ function printResults(engine, results, format) {
 
 function main() {
   let currentOptions;
+
   try {
-    currentOptions = options.parse(process.argv);
+    let arguments = lodash.cloneDeep(process.argv);
+
+    // remove --rules for parsing purposes
+    if (process.argv.includes('--rules')) {
+      arguments.splice(arguments.indexOf('--rules'),2);
+    }
+    currentOptions = options.parse(arguments);
   } catch (error) {
     console.error(error.message);
     return 2;
