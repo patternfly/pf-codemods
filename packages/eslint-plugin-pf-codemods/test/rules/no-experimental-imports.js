@@ -12,7 +12,7 @@ ruleTester.run("no-experimental-imports", rule, {
       code:   `import { Divider } from '@patternfly/react-core/dist/esm/experimental';`,
       output: `import { Divider } from '@patternfly/react-core';`,
       errors: [{
-        message: `Divider has been promoted. Import it directly from @patternfly/react-core instead`,
+        message: `Experimental imports have been removed. Import directly from @patternfly/react-core instead`,
         type: "ImportDeclaration",
       }]
     }
