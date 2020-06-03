@@ -69,7 +69,7 @@ module.exports = {
                 const newAttr = `show={{ ${breakpointVal}: 'show' }}`
                 context.report({
                   node,
-                  message: `hasNoPadding prop on Page component removed in favor of padding={{ default: 'noPadding' }}`,
+                  message: `breakpoint prop on ToolbarToggleGroup removed in favor of show={{ ${breakpointVal}: 'show' }}`,
                   fix(fixer) {
                     return fixer.replaceText(attribute, newAttr);
                   }
@@ -86,7 +86,7 @@ module.exports = {
             ) {
               const breakpointModsArr = attribute.value.expression.elements;
               const newModifier = {};
-              breakpointModsArr.map(breakpointModObj => {
+              breakpointModsArr.forEach(breakpointModObj => {
                 if (breakpointModObj.type === 'ObjectExpression') {
                   const modifierNode = breakpointModObj.properties.find(prop => prop.key.name === 'modifier');
                   const modVal = modifierNode.value;

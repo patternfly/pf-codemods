@@ -6,7 +6,11 @@ const removedImports = [
   'ChipButton', // See chipgroup-remove-chipbutton rule for more info
   'ChipGroupToolbarItem', // See chipgroup-remove-chipgrouptoolbaritem rule for more info,
   'cellHeightAuto', // See table-removed-transforms rule for more info
-  'TitleSize' // See title-size rule for more info
+  'TitleSize', // See title-size rule for more info
+  'FlexModifiers', // See refactor-breakpointmods rule for more info
+  'FlexBreakpoints', // See refactor-breakpointmods rule for more info
+  'FlexBreakpointMod', // See refactor-breakpointmods rule for more info
+  'FlexItemBreakpointMod' // See refactor-breakpointmods rule for more info
 ];
 
 // https://github.com/patternfly/pf-codemods/issues/39

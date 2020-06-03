@@ -4,21 +4,25 @@ const rule = require('../../lib/rules/refactor-breakpointmods');
 ruleTester.run("refactor-breakpointmods", rule, {
   valid: [
     {
-      code: `<Flex alignSelf={{default: "alignSelfStretch"}}>
+      code: `import { Flex, FlexItem } from '@patternfly/react-core';
+      <Flex alignSelf={{default: "alignSelfStretch"}}>
         <FlexItem alignSelf={{default: "alignSelfStretch"}}></FlexItem>
       </Flex>`
     },
     {
-      code: `<PageSection padding={{ default: 'noPadding' }}></PageSection>`
+      code: `import { PageSection } from '@patternfly/react-core';
+      <PageSection padding={{ default: 'noPadding' }}></PageSection>`
     },
     {
-      code: `<ToolbarItem visibility={{
+      code: `import { ToolbarItem } from '@patternfly/react-core';
+      <ToolbarItem visibility={{
         default: 'visible',
         lg: 'hidden'
       }}></ToolbarItem>`
     },
     {
-      code: `<ToolbarToggleGroup spacer={{default: "spacerNone"}} show={{xl: 'show'}}></ToolbarToggleGroup>`
+      code: `import { ToolbarToggleGroup } from '@patternfly/react-core';
+      <ToolbarToggleGroup spacer={{default: "spacerNone"}} show={{xl: 'show'}}></ToolbarToggleGroup>`
     }
   ],
   invalid: [
@@ -85,7 +89,7 @@ ruleTester.run("refactor-breakpointmods", rule, {
         <ToolbarToggleGroup show={{ xl: 'show' }} visibility={{"default":"visible","lg":"hidden"}} ></ToolbarToggleGroup>`,
       errors: [
         {
-          message: `hasNoPadding prop on Page component removed in favor of padding={{ default: 'noPadding' }}`,
+          message: `breakpoint prop on ToolbarToggleGroup removed in favor of show={{ xl: 'show' }}`,
           type: "JSXOpeningElement",
         },
         {
