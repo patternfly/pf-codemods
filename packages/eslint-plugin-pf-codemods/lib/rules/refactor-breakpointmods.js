@@ -35,7 +35,7 @@ const errorMessages = {
   ToolbarToggleGroup: 'Removed breakpointMods prop from ToolbarToggleGroup in favor of visiblity, alignment, spacer, and spaceItems'
 };
 
-// https://github.com/patternfly/patternfly-react/pull/YOURNUMBERHERE
+// https://github.com/patternfly/patternfly-react/pull/4310
 module.exports = {
   create: function(context) {
     
@@ -90,7 +90,6 @@ module.exports = {
                 if (breakpointModObj.type === 'ObjectExpression') {
                   const modifierNode = breakpointModObj.properties.find(prop => prop.key.name === 'modifier');
                   const modVal = modifierNode.value;
-;                  // let modifierValue = camelCase(modifierNode.value.value || modifierNode.value.property.value);
                   const modifierValue = camelCase(
                     modVal.type === 'Literal' && modVal.value ||
                     modVal.type === 'MemberExpression' && modVal.property.type === 'Literal' && modVal.property.value ||
