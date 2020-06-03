@@ -40,7 +40,7 @@ const rules = {
   "expandable-rename-expandablesection": require('./lib/rules/expandable-rename-expandablesection'),
   "rename-toolbar-components": require('./lib/rules/rename-toolbar-components'),
   "page-header-prop-rename": require('./lib/rules/page-header-prop-rename'),
-  "use-page-header-tools": require('./lib/rules/use-page-header-tools'),
+  "page-header-move-avatar": require('./lib/rules/page-header-move-avatar'),
 };
 
 module.exports = {
