@@ -1,9 +1,9 @@
 [submodule "test/console"]
 	path = test/console
-	url = https://github.com/redallen/console
+	url = https://github.com/openshift/console
 [submodule "test/koku-ui"]
 	path = test/koku-ui
-	url = https://github.com/redallen/koku-ui
+	url = https://github.com/project-koku/koku-ui
 [submodule "test/tutorial-web-app"]
 	path = test/tutorial-web-app
-	url = https://github.com/redallen/tutorial-web-app
+	url = https://github.com/integr8ly/tutorial-web-app
