@@ -38,6 +38,9 @@ const rules = {
   "tab-rename-variant": require('./lib/rules/tab-rename-variant'),
   "form-fix-isValid": require('./lib/rules/form-fix-isValid'),
   "expandable-rename-expandablesection": require('./lib/rules/expandable-rename-expandablesection'),
+  "rename-toolbar-components": require('./lib/rules/rename-toolbar-components'),
+  "page-header-prop-rename": require('./lib/rules/page-header-prop-rename'),
+  "page-header-move-avatar": require('./lib/rules/page-header-move-avatar'),
 };
 
 module.exports = {

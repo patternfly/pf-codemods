@@ -33,7 +33,11 @@ ruleTester.run("expandable-rename-expandablesection", rule, {
         },
         {
           message: 'Expandable has been replaced with ExpandableSection',
-          type: "JSXElement"
+          type: "JSXIdentifier"
+        },
+        {
+          message: 'Expandable has been replaced with ExpandableSection',
+          type: "JSXIdentifier"
         }
       ]
     },

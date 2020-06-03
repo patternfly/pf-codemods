@@ -58,3 +58,15 @@ export const TestExpandable = <Expandable toggleText="Show More" ></Expandable>;
 
 import { ChipButton } from '@patternfly/react-core';
 export const TestChipButton = <ChipButton></ChipButton>;
+
+import { Avatar, Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+<Page>
+  <PageHeader avatar={<Avatar />} toolbar={
+    <Toolbar>
+      <ToolbarGroup>
+        <ToolbarItem></ToolbarItem>
+      </ToolbarGroup>
+    </Toolbar>
+  }
+  />
+</Page>
