@@ -1,6 +1,5 @@
 const ruleTester = require('./ruletester');
 const rule = require('../../lib/rules/nav-list-variant');
-const navName = "Nav"
 const navListName = "NavList"
 const variant = {
   default: 'variant="default"',
@@ -44,7 +43,6 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListVariant",
         data: {
           navListName: navListName,
-          navName: navName,
           variantVal: variant.default
         },
         type: "JSXElement",
@@ -67,7 +65,6 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListVariant",
         data: {
           navListName: navListName,
-          navName: navName,
           variantVal: variant.tertiary
         },
         type: "JSXElement",
@@ -90,7 +87,6 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListVariant",
         data: {
           navListName: navListName,
-          navName: navName,
           variantVal: variant.horizontal
         },
         type: "JSXElement",
@@ -113,7 +109,6 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListVariant",
         data: {
           navListName: navListName,
-          navName: navName,
           variantVal: variant.all
         },
         type: "JSXElement",
@@ -132,7 +127,6 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListVariant",
         data: {
           navListName: navListName,
-          navName: navName,
           variantVal: variant.all
         },
         type: "JSXElement",
@@ -151,7 +145,6 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListVariant",
         data: {
           navListName: navListName,
-          navName: navName,
           variantVal: variant.horizontal
         },
         type: "JSXElement",
@@ -188,6 +181,28 @@ ruleTester.run("nav-list-variant", rule, {
         messageId: "removeNavListSimpleVariant",
         type: "JSXElement",
       }]
+    },
+    {
+      code: `import { Nav, NavList, NavListVariants } from '@patternfly/react-core';
+<Nav>
+  <NavList variant={NavListVariants.tertiary}>
+      some item
+  </NavList>
+</Nav>`,
+      output: `import { Nav, NavList, NavListVariants } from '@patternfly/react-core';
+<Nav variant="tertiary">
+  <NavList >
+      some item
+  </NavList>
+</Nav>`,
+    errors: [{
+      messageId: "removeNavListVariant",
+      data: {
+        navListName: navListName,
+        variantVal: `variant="tertiary"`
+      },
+      type: "JSXElement",
+    }]
     }
   ]
 });
