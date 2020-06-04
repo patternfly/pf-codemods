@@ -43,27 +43,64 @@ function printResults(engine, results, format) {
 
 function main() {
   let currentOptions;
+
   try {
-    currentOptions = options.parse(process.argv);
+    // remove --rules for parsing purposes
+    let arguments = [...process.argv];
+    if (process.argv.includes('--rules')) {
+      arguments.splice(arguments.indexOf('--rules'),2);
+    }
+    currentOptions = options.parse(arguments);
+
   } catch (error) {
     console.error(error.message);
     return 2;
   }
-  
+
+  // construct rules from cli, if provide
+  let finalRules = [];
+  if (process.argv.includes('--rules')) {
+    const cliRules = process.argv.splice(process.argv.indexOf('--rules') + 1, 1)[0].split(' ');
+
+    for (let i = 0; i < cliRules.length; i++) {
+      try {
+        finalRules[cliRules[i]] = require('../eslint-plugin-pf-codemods/lib/rules/' + cliRules[i]);
+
+      } catch (error) {
+        const iRule = error.message.split("/");
+        console.error("Invalid Rule: " + iRule[iRule.lastIndexOf('rules') + 1])
+        return 2;
+      }
+    }
+
+    currentOptions.env = { browser: true, node: true,es6: true };
+    currentOptions.parser = "@typescript-eslint/parser";
+    currentOptions.parserOptions = {sourceType: "module", ecmaFeatures: { jsx: true }};
+    currentOptions.configFile = undefined;
+    currentOptions.rules = Object.keys(finalRules).reduce((acc, rule) => {
+      acc[`pf-codemods/${rule}`] = "error";
+      return acc;
+    }, {});
+
+  } else {
+    currentOptions.configFile = path.join(__dirname, '/.eslintrc.json');
+  }
+
+
   const engine = new CLIEngine({
-    envs: undefined,
+    env: currentOptions.env,
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
-    rules: undefined,
+    rules:  currentOptions.rules,
     plugins: undefined,
     globals: undefined,
     ignore: true,
     ignorePath: undefined,
     ignorePattern: '**/node_modules/**',
-    configFile: path.join(__dirname, '/.eslintrc.json'),
+    configFile: currentOptions.configFile,
     rulePaths: [],
     useEslintrc: false,
-    parser: undefined,
-    parserOptions: undefined,
+    parser: currentOptions.parser,
+    parserOptions: currentOptions.parserOptions,
     cache: true,
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
