@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/skip-to-content-remove-component');
 
 ruleTester.run("skip-to-content-remove-component", rule, {

@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/card-rename-components');
 
 ruleTester.run("card-rename-components", rule, {

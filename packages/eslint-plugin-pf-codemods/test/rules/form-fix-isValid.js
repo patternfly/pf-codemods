@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/form-fix-isValid');
 
 ruleTester.run("form-fix-isValid", rule, {

@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/wizard-rename-text');
 
 ruleTester.run("wizard-rename-text", rule, {

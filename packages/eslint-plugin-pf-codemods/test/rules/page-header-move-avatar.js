@@ -1,4 +1,4 @@
-const ruleTester = require("./ruletester");
+const ruleTester = require('../ruletester');
 const rule = require("../../lib/rules/page-header-move-avatar");
 
 ruleTester.run("page-header-move-avatar", rule, {

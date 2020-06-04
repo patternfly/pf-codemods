@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/wizard-remove-props');
 
 ruleTester.run("wizard-remove-props", rule, {

@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/application-launcher-rename-dropdownItems');
 
 ruleTester.run("application-launcher-rename-dropdownItems", rule, {

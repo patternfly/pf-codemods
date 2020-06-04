@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/remove-isPseudo-props');
 
 ruleTester.run("remove-isPseudo-props", rule, {

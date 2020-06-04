@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/chipgroup-remove-chipgrouptoolbaritem');
 
 ruleTester.run("chipgroup-remove-chipgrouptoolbaritem", rule, {

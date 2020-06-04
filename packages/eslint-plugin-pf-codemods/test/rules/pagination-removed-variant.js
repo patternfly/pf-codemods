@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/pagination-removed-variant');
 
 ruleTester.run("pagination-removed-variant", rule, {

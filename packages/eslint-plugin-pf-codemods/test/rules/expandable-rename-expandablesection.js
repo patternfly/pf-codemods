@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/expandable-rename-expandablesection');
 
 ruleTester.run("expandable-rename-expandablesection", rule, {

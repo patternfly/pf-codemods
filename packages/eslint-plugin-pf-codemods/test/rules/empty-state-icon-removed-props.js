@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/empty-state-icon-removed-props');
 
 ruleTester.run("empty-state-icon-removed-props", rule, {

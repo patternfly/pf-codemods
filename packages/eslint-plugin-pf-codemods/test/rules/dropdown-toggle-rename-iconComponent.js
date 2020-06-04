@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/dropdown-toggle-rename-iconComponent');
 
 ruleTester.run("dropdown-toggle-rename-iconComponent", rule, {

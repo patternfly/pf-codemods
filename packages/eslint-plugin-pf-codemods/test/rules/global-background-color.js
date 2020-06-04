@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/global-background-color');
 
 ruleTester.run("global-background-color", rule, {

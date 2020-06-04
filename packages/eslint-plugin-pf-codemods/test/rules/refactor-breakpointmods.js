@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/refactor-breakpointmods');
 
 ruleTester.run("refactor-breakpointmods", rule, {
@@ -102,7 +102,7 @@ ruleTester.run("refactor-breakpointmods", rule, {
       code: `import { Flex } from '@patternfly/react-core';
         <Flex breakpointMods={[{ modifier: 'justify-content-space-between' }] as any}></Flex>`,
       output: `import { Flex } from '@patternfly/react-core';
-        <Flex justifyContent={{"default": "justifyContentSpaceBetween" }}></Flex>`,
+        <Flex justifyContent={{"default":"justifyContentSpaceBetween"}} ></Flex>`,
       errors: [ {
         message: `Removed breakpointMods prop from Flex in favor of spacer, spaceItems, grow, shrink, flex, direction, alignItems, alignContent, alignSelf, align, justifyContent, display, fullWidth and flexWrap`,
         type: "JSXOpeningElement",

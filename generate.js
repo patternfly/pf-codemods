@@ -47,7 +47,7 @@ fs.writeFileSync(path.join(
   'packages/eslint-plugin-pf-codemods/test/rules',
   `${newRuleName}.js`
 ),
-`const ruleTester = require('./ruletester');
+`const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/${newRuleName}');
 
 ruleTester.run("${newRuleName}", rule, {
