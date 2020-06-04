@@ -20,7 +20,7 @@ ruleTester.run("datatoolbar-rename-toolbar", rule, {
         </DataToolbar>`,
       output: `import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
         <Toolbar data-codemods="true">
-          <ToolbarContent data-codemods="true">
+          <ToolbarContent>
             <ToolbarGroup data-codemods="true">
               <ToolbarItem data-codemods="true"></ToolbarItem>
             </ToolbarGroup>

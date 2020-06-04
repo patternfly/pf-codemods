@@ -4,7 +4,7 @@ const { getPackageImports } = require('../helpers');
 module.exports = {
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name.includes('DataToolbar'));
+      .filter(specifier => ['DataToolbar', 'DataToolbarChipGroupContent', 'DataToolbarContent', 'DataToolbarExpandableContent', 'DataToolbarFilter', 'DataToolbarGroup', 'DataToolbarItem', 'DataToolbarToggleGroup'].includes(specifier.imported.name));
       
     return imports.length === 0 ? {} : {
       // update component's import statement
@@ -33,12 +33,15 @@ module.exports = {
           nodeName.includes('DataToolbar') &&
           importedNode.imported.name === importedNode.local.name // don't rename an aliased component
         ) {
+          const toolbarName = nodeName.replace('DataToolbar', 'Toolbar');
+          const needsDataAttr = ['Toolbar', 'ToolbarGroup', 'ToolbarItem'].includes(toolbarName);
+          const addDataAttr = jsxStr => `${jsxStr.slice(0, -1)} data-codemods="true">`;
           const updateTagName = node => context
           	.getSourceCode()
           	.getText(node)
-          	.replace('DataToolbar', 'Toolbar');
+            .replace('DataToolbar', 'Toolbar');
           const isOpeningTag = context.getSourceCode().getTokenBefore(node).value !== '/';
-          const newOpeningParentTag = `${updateTagName(node.parent).slice(0, -1)} data-codemods="true">`;
+          const newOpeningParentTag = needsDataAttr ? addDataAttr(updateTagName(node.parent)) : updateTagName(node.parent);
           const newClosingTag = updateTagName(node);
           context.report({
             node,
