@@ -4,7 +4,7 @@ const { getPackageImports } = require('../helpers');
 module.exports = {
   meta: {
     messages: {
-      removeNavListVariant: "variant has been removed from {{ navListName }}, use <{{ navName }} {{ variantVal }}> instead",
+      removeNavListVariant: "variant has been removed from {{ navListName }}, use <Nav {{ variantVal }}> instead",
       removeNavListSimpleVariant: "variant has been removed from NavList and 'simple' is no longer a valid value.",
     },
     fixable: "code",
@@ -14,80 +14,79 @@ module.exports = {
     const imports = getPackageImports(context, '@patternfly/react-core')
         .filter(specifier => ['NavList', 'Nav'].includes(specifier.imported.name));
     const navImport = imports.find(imp => imp.imported.name === 'Nav');
-    const NavListImport = imports.find(imp => imp.imported.name === 'NavList');
+    const navListImport = imports.find(imp => imp.imported.name === 'NavList');
 
-    return !NavListImport ? {} : {
+    return !navListImport ? {} : {
       JSXElement(node) {
-        if (NavListImport.local.name === node.openingElement.name.name) {
-          const navImportName = "Nav";
-          const variantAttr = node.openingElement.attributes.find(attribute => {
-            return attribute.name.name === 'variant'
-          });
-          const variantVal = context.getSourceCode().getText(variantAttr) || '"horizontal" | "default" | "tertiary"';
+        if (navListImport.local.name === node.openingElement.name.name) {
+          const variantAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'variant');
 
-          let hasNavParent;
-          if (navImport) {
-            hasNavParent = node.parent
+          if (!variantAttr) {
+            return;
+          }
+
+          if (variantAttr.value === null) {
+            context.report({
+              node,
+              messageId: "removeNavListVariant",
+              data: {
+                navListName: node.openingElement.name.name,
+                variantVal: 'variant={"horizontal" | "default" | "tertiary"}'
+              },
+              fix(fixer) {
+                const fixes = [];
+                fixes.push(fixer.replaceText(variantAttr, ''));
+                return fixes;
+              }
+            });
+            return;
+          }
+
+          if (variantAttr.value.value === "simple") {
+            context.report({
+              node,
+              messageId: "removeNavListSimpleVariant",
+              fix(fixer) {
+                const fixes = [];
+                fixes.push(fixer.replaceText(variantAttr, ''));
+                return fixes;
+              }
+            });
+            return;
+          }
+
+          const variantVal = variantAttr.value.expression && variantAttr.value.expression.object.name === 'NavListVariants'
+            ? `variant="${variantAttr.value.expression.property.name}"`
+            : context.getSourceCode().getText(variantAttr);
+          context.report({
+            node,
+            messageId: "removeNavListVariant",
+            data: {
+              navListName: node.openingElement.name.name,
+              variantVal
+            },
+            fix(fixer) {
+              const fixes = [];
+              if (
+                navImport
+                && node.parent
                 && node.parent.openingElement.name.name === navImport.local.name
-                && node.parent.children.filter(child => child.type === 'JSXElement').length === 1;
-          }
-
-          if (variantAttr) {
-            if (variantAttr.value !== null) {
-              if (variantAttr.value.value == "simple") {
-                context.report({
-                  node,
-                  messageId: "removeNavListSimpleVariant",
-                  fix(fixer) {
-                    const fixes = [];
-                    fixes.push(fixer.replaceText(variantAttr, ''));
-                    return fixes;
-                  }
-                });
+                && node.parent.children.filter(child => child.type === 'JSXElement').length === 1
+              ) {
+                fixes.push(fixer.replaceText(variantAttr, ''));
+                fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
               } else {
-                context.report({
-                  node,
-                  messageId: "removeNavListVariant",
-                  data: {
-                    navListName: node.openingElement.name.name,
-                    navName: navImportName,
-                    variantVal: variantVal
-                  },
-                  fix(fixer) {
-                    const fixes = [];
-                    if (hasNavParent) {
-                      fixes.push(fixer.replaceText(variantAttr, ''));
-                      fixes.push(fixer.insertTextAfter(node.parent.openingElement.name, ' ' + variantVal))
-                    } else {
-                      if (variantAttr.value.value == "default") {
-                        fixes.push(fixer.replaceText(variantAttr, ''));
-                      } else {
-                        fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
-                      }
-                    }
-                    return fixes;
-                  }
-                });
+                if (variantAttr.value.value == "default") {
+                  fixes.push(fixer.replaceText(variantAttr, ''));
+                } else {
+                  fixes.push(fixer.replaceText(variantAttr, `/*TODO: move to Nav - ${variantVal}*/`));
+                }
               }
-            } else {
-                context.report({
-                  node,
-                  messageId: "removeNavListVariant",
-                  data: {
-                    navListName: node.openingElement.name.name,
-                    navName: navImportName,
-                    variantVal: 'variant={"horizontal" | "default" | "tertiary"}'
-                  },
-                  fix(fixer) {
-                    const fixes = [];
-                    fixes.push(fixer.replaceText(variantAttr, ''));
-                    return fixes;
-                  }
-                });
-              }
+              return fixes;
             }
-          }
+          });
         }
       }
     }
+  }
 }
