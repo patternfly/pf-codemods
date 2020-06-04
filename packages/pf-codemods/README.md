@@ -330,17 +330,18 @@ Out:
 <Label >Label</Label>
 ```
 
-### modal-remove-footer-alignment [(#4017)](https://github.com/patternfly/patternfly-react/pull/4017)
-Removed prop `isFooterLeftAligned` from Modal and ModalBoxFooter.
+### modal-remove-props [(#4017)](https://github.com/patternfly/patternfly-react/pull/4017)
+- Removed props `isFooterLeftAligned` and `isFooterLeftAligned` from Modal and ModalBoxFooter.
+- Removed prop `hideTitle` from Modal. To hide the Modal header, do not pass a title prop, a description prop, or a header prop. If there is no title or header passed, please provide an aria-label prop to the Modal component to make it accessible.
 
 #### Examples
 In:
 ```jsx
-<Modal isFooterLeftAligned />
+<Modal isFooterLeftAligned hideTitle />
 ```
 Out:
 ```jsx
-<Modal  />
+<Modal   />
 ```
 
 ### modal-variant [(#3920)](https://github.com/patternfly/patternfly-react/pull/3920)

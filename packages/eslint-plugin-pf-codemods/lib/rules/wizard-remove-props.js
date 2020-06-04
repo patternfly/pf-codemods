@@ -5,12 +5,14 @@ const renames = {
     'isCompactNav': '',
     'inPage': '',
     'isFullWidth': '',
-    'isFullHeight': ''
+    'isFullHeight': '',
+    'inPage': ''
   }
 };
 
-// https://github.com/patternfly/patternfly-react/pull/4142
 // https://github.com/patternfly/patternfly-react/pull/4116
+// https://github.com/patternfly/patternfly-react/pull/4140
+// https://github.com/patternfly/patternfly-react/pull/4142
 module.exports = {
   create: renameProps(renames)
 };
