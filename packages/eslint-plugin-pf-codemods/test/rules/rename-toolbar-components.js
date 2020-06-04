@@ -53,16 +53,16 @@ ruleTester.run("rename-toolbar-components", rule, {
       `,
       errors: [
         {
-          message: `Toolbar has been replaced with PageHeaderTools`,
-          type: "ImportSpecifier",
+          message: `add missing imports PageHeaderTools from @patternfly/react-core`,
+          type: "ImportDeclaration",
         },
         {
-          message: `ToolbarGroup has been replaced with PageHeaderToolsGroup`,
-          type: "ImportSpecifier",
+          message: `add missing imports PageHeaderToolsGroup from @patternfly/react-core`,
+          type: "ImportDeclaration",
         },
         {
-          message: `ToolbarItem has been replaced with PageHeaderToolsItem`,
-          type: "ImportSpecifier",
+          message: `add missing imports PageHeaderToolsItem from @patternfly/react-core`,
+          type: "ImportDeclaration",
         },
         {
           message: `Toolbar has been replaced with PageHeaderTools`,

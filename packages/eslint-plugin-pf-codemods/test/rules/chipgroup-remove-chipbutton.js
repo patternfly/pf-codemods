@@ -13,11 +13,11 @@ ruleTester.run("chipgroup-remove-chipbutton", rule, {
   invalid: [
     {
       code:   `import { ChipButton } from '@patternfly/react-core'; <ChipButton>button</ChipButton>`,
-      output: `import { Button } from '@patternfly/react-core'; <Button>button</Button>`,
+      output: `import { ChipButton, Button } from '@patternfly/react-core'; <Button>button</Button>`,
       errors: [
         {
-          message: `ChipButton has been replaced with Button`,
-          type: "ImportSpecifier",
+          message: `add missing imports Button from @patternfly/react-core`,
+          type: "ImportDeclaration",
         },
         {
           message: `ChipButton has been replaced with Button`,
