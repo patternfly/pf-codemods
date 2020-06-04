@@ -63,7 +63,14 @@ function main() {
     const cliRules = process.argv.splice(process.argv.indexOf('--rules') + 1, 1)[0].split(' ');
 
     for (let i = 0; i < cliRules.length; i++) {
-      finalRules[cliRules[i]]= require('../eslint-plugin-pf-codemods/lib/rules/' + cliRules[i]);
+      try {
+        finalRules[cliRules[i]] = require('../eslint-plugin-pf-codemods/lib/rules/' + cliRules[i]);
+
+      } catch (error) {
+        const iRule = error.message.split("/");
+        console.error("Invalid Rule: " + iRule[iRule.lastIndexOf('rules') + 1])
+        return 2;
+      }
     }
 
     currentOptions.env = { browser: true, node: true,es6: true };
