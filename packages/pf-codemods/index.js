@@ -58,9 +58,10 @@ function main() {
   }
 
   // construct rules from cli, if provide
-  let finalRules = [];
+  let finalRules = {};
   if (process.argv.includes('--rules')) {
     const cliRules = process.argv.splice(process.argv.indexOf('--rules') + 1, 1)[0].split(' ');
+    console.log("RULES: " + cliRules)
 
     for (let i = 0; i < cliRules.length; i++) {
       try {
@@ -73,10 +74,11 @@ function main() {
       }
     }
 
+    currentOptions.configFile = undefined;
     currentOptions.env = { browser: true, node: true,es6: true };
     currentOptions.parser = "@typescript-eslint/parser";
     currentOptions.parserOptions = {sourceType: "module", ecmaFeatures: { jsx: true }};
-    currentOptions.configFile = undefined;
+    currentOptions.plugins = ["pf-codemods"],
     currentOptions.rules = Object.keys(finalRules).reduce((acc, rule) => {
       acc[`pf-codemods/${rule}`] = "error";
       return acc;
@@ -91,7 +93,7 @@ function main() {
     env: currentOptions.env,
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
     rules:  currentOptions.rules,
-    plugins: undefined,
+    plugins: currentOptions.plugins,
     globals: undefined,
     ignore: true,
     ignorePath: undefined,
@@ -109,7 +111,7 @@ function main() {
     allowInlineConfig: undefined,
     reportUnusedDisableDirectives: undefined,
     resolvePluginsRelativeTo: __dirname,
-    errorOnUnmatchedPattern: undefined
+    errorOnUnmatchedPattern: undefined,
   });
   
   const report = engine.executeOnFiles(currentOptions._);
