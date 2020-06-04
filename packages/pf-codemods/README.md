@@ -4,6 +4,18 @@
 
 Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@3.x.x code to 4.x.x. I hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones.
 
+## Usage
+
+```sh
+npx pf-codemods ./path-to-src
+```
+
+Giving node more RAM can help for large codebases.
+
+```sh
+NODE_OPTIONS=--max-old-space-size=4096 npx pf-codemods ./path-to-src
+```
+
 ## Rules
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
@@ -51,61 +63,45 @@ Out:
 
 ### aria-props [(#3924)](https://github.com/patternfly/patternfly-react/pull/3924)
 We've renamed and removed many of our aria labels.
-- AboutModalContainer: {
-  'ariaLabelledbyId': 'aboutModalBoxHeaderId',
-  'ariaDescribedById': 'aboutModalBoxContentId'
-},
-- ChipButton: {
+- AboutModalContainer
+  - 'ariaLabelledbyId': 'aboutModalBoxHeaderId',
+  - 'ariaDescribedById': 'aboutModalBoxContentId'
+- ChipButton
   'ariaLabel': 'aria-label'
-},
-- DropdownToggle: {
-  'ariaHasPopup': 'aria-haspopup'
-},
-- LoginForm: {
-  'rememberMeAriaLabel': ''
-},
-- Modal: {
-  'ariaDescribedById': 'modalContentAriaDescribedById'
-},
-- ModalContent: {
-  'ariaDescribedById': 'modalBoxAriaDescribedById'
-},
-- OptionsMenu: {
-  'ariaLabelMenu': ''
-},
-- OptionsMenuItemGroup: {
-  'ariaLabel': 'aria-label'
-},
-- OptionsMenuToggleWithText: {
-  'ariaHasPopup': 'aria-haspopup'
-},
-- ProgressBar: {
-  'ariaProps': 'progressBarAriaProps'
-},
-- ProgressContainer: {
-  'ariaProps': 'progressBarAriaProps'
-},
-- Select: {
-  'ariaLabelledBy': 'aria-labelledby',
-  'ariaLabelTypeAhead': 'typeAheadAriaLabel',
-  'ariaLabelClear': 'clearSelectionsAriaLabel',
-  'ariaLabelToggle': 'toggleAriaLabel',
-  'ariaLabelRemove': 'removeSelectionAriaLabel'
-},
-- SelectToggle: {
-  'ariaLabelledBy': 'aria-labelledby',
-  'ariaLabelToggle': 'aria-label'
-},
-- Wizard: {
-  'ariaLabelNav': 'navAriaLabel',
-  'ariaLabelCloseButton': 'closeButtonAriaLabel'
-},
-- WizardHeader: {
-  'ariaLabelCloseButton': 'closeButtonAriaLabel'
-},
-- WizardNav: {
-  'ariaLabel': 'aria-label'
-}
+- DropdownToggle
+  - 'ariaHasPopup': 'aria-haspopup'
+- LoginForm
+  - 'rememberMeAriaLabel': ''
+- Modal
+  - 'ariaDescribedById': 'modalContentAriaDescribedById'
+- ModalContent
+  - 'ariaDescribedById': 'modalBoxAriaDescribedById'
+- OptionsMenu
+  - 'ariaLabelMenu': ''
+- OptionsMenuItemGroup
+  - 'ariaLabel': 'aria-label'
+- OptionsMenuToggleWithText
+  - 'ariaHasPopup': 'aria-haspopup'
+- ProgressBar
+  - 'ariaProps': 'progressBarAriaProps'
+- ProgressContainer
+  - 'ariaProps': 'progressBarAriaProps'
+- Select
+  - 'ariaLabelledBy': 'aria-labelledby',
+  - 'ariaLabelTypeAhead': 'typeAheadAriaLabel',
+  - 'ariaLabelClear': 'clearSelectionsAriaLabel',
+  - 'ariaLabelToggle': 'toggleAriaLabel',
+  - 'ariaLabelRemove': 'removeSelectionAriaLabel'
+- SelectToggle
+  - 'ariaLabelledBy': 'aria-labelledby',
+  - 'ariaLabelToggle': 'aria-label'
+- Wizard
+  - 'ariaLabelNav': 'navAriaLabel',
+  - 'ariaLabelCloseButton': 'closeButtonAriaLabel'
+- WizardHeader
+  - 'ariaLabelCloseButton': 'closeButtonAriaLabel'
+- WizardNav
+  - 'ariaLabel': 'aria-label'
 
 
 #### Examples
@@ -322,7 +318,7 @@ import { global_background_color_200 as global_background_color_150 } from '@pat
 ```
 
 ### label-remove-isCompact [(#4116)](https://github.com/patternfly/patternfly-react/pull/4116)
-We've redone label styling and labels are now compact by default.
+We've changed label styling and labels are now compact by default.
 
 #### Examples
 In:
@@ -335,7 +331,7 @@ Out:
 ```
 
 ### modal-remove-footer-alignment [(#4017)](https://github.com/patternfly/patternfly-react/pull/4017)
-- Modal and ModalBoxFooter: Removes prop `isFooterLeftAligned`. This prop is no longer used.
+Removed prop `isFooterLeftAligned` from Modal and ModalBoxFooter.
 
 #### Examples
 In:
@@ -362,16 +358,24 @@ Out:
 ```
 
 ### nav-list-variant [(#4225)](https://github.com/patternfly/patternfly-react/pull/4225)
-- **Nav:** `variant` prop has been removed from `NavList`. Pass variant={`horizontal` | `tertiary`} to `Nav` instead.
+`variant` prop has been removed from `NavList`. Pass variant={`horizontal` | `tertiary`} to `Nav` instead. Additionally the enum `NavListVariants` has been removed.
 
 #### Examples
 In:
 ```jsx
-<Accordion noBoxShadow />
+<Nav>
+  <NavList variant={NavListVariants.tertiary}>
+      some item
+  </NavList>
+</Nav>
 ```
 Out:
 ```jsx
-<Accordion  />
+<Nav variant="tertiary">
+  <NavList >
+      some item
+  </NavList>
+</Nav>
 ```
 
 ### no-experimental-imports [(#4029)](https://github.com/patternfly/patternfly-react/pull/4029) [(#4176)](https://github.com/patternfly/patternfly-react/pull/4176)
@@ -491,6 +495,7 @@ Out:
 ```
 
 ### remove-prop-types [(#4076)](https://github.com/patternfly/patternfly-react/pull/4076)
+**This rule is not yet implemented**
 - Removed `AnyPatternFlyImport.PropTypes` since we no longer define `propTypes` for our components. Consider using our Typescript types under each packages' `dist/js` folder instead.
 
 #### Examples
@@ -566,19 +571,19 @@ import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderTool
 ```
 
 ### react-icons-remove-icon [(#3978)](https://github.com/patternfly/patternfly-react/pull/3978)
+**This rule is not yet implemented**
 - Removed `OutlinedFontAwesomeLogoFullIcon`. Import it from @fortawesome instead.
 
 #### Examples
 In:
 ```jsx
-<Accordion noBoxShadow />
 ```
 Out:
 ```jsx
-<Accordion  />
 ```
 
 ### react-styles-remove-emotion [(#3886)](https://github.com/patternfly/patternfly-react/pull/3886)
+**This rule is not yet implemented**
 - Removed all non `css` imports from '@patternfly/react-styles'
 
 #### Examples
@@ -587,6 +592,28 @@ In:
 ```
 Out:
 ```jsx
+```
+
+### refactor-breakpointmods [(#4116)](https://github.com/patternfly/patternfly-react/pull/4310)
+We've removed the `breakpointMods` prop from Flex, FlexItem, PageSection, ToolbarItem, and ToolbarToggleGroup in favor of a new API.
+
+#### Examples
+In:
+```jsx
+<Flex breakpointMods={[
+  {modifier: FlexModifiers.column},
+  {modifier: FlexModifiers["align-self-stretch"]},
+  {modifier: 'spacer-none'},
+  {modifier: 'row', breakpoint: 'sm'}
+]}>
+  Flex
+</Flex>
+```
+Out:
+```jsx
+<Flex direction={{"default":"column","sm":"row"}} alignSelf={{"default":"alignSelfStretch"}} spacer={{"default":"spacerNone"}} >
+  Flex
+</Flex>
 ```
 
 ### select-rename-checkbox [(#3945)](https://github.com/patternfly/patternfly-react/pull/3945)
@@ -742,19 +769,8 @@ Out:
 ```
 
 ### upgrade-react [(#4144)](https://github.com/patternfly/patternfly-react/pull/4144)
-- Our packages now can possibly use hooks, which requires `react@^16.8.0` instead of `react@^16.4.0`. We recommend upgrading your version of React if it is below 16.8.0. (I think our parser works on package.json files to do this)
-
-#### Examples
-In:
-```jsx
-```
-Out:
-```jsx
-```
-
-### use-page-header-tools [(#4223)](https://github.com/patternfly/patternfly-react/pull/4223)
-- **PageHeader**: `avatar` prop was removed. Add the avatar to the `PageHeaderTools` component instead (which is passed into `PageHeader` via the `headerTools` prop.
-- **PageHeader**: `toolbar` prop was removed. Use the `headerTools` prop instead. Also, if you previously used the `Toolbar`, `ToolbarGroup`, or `ToolbarItem` components for the header, replace them with the `PageHeaderTools`, `PageHeaderToolsGroup`, and `PageHeaderToolsItem` components.
+**This rule is not yet implemented**
+Our packages now can possibly use hooks, which requires `react@^16.8.0` instead of `react@^16.4.0`. We recommend upgrading your version of React if it is below 16.8.0.
 
 #### Examples
 In:
