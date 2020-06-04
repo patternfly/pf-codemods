@@ -80,11 +80,15 @@ module.exports = {
             const attribute = node.attributes.find(attr => attr.name && attr.name.name === 'breakpointMods');
             if (
               attribute &&
+              attribute.value &&
               attribute.value.type === 'JSXExpressionContainer' &&
               attribute.value.expression &&
-              attribute.value.expression.type === 'ArrayExpression'
+              (attribute.value.expression.type === 'ArrayExpression' || attribute.value.expression.type === 'TSAsExpression')
             ) {
-              const breakpointModsArr = attribute.value.expression.elements;
+              const breakpointModsArrNode = (attribute.value.expression.type === 'TSAsExpression')
+                ? attribute.value.expression.expression
+                : attribute.value.expression;
+              const breakpointModsArr = breakpointModsArrNode.elements;
               const newModifier = {};
               breakpointModsArr.forEach(breakpointModObj => {
                 if (breakpointModObj.type === 'ObjectExpression') {
