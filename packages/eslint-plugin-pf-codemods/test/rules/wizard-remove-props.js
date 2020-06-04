@@ -43,6 +43,14 @@ ruleTester.run("wizard-remove-props", rule, {
         message: `isFullWidth prop for Wizard has been removed`,
         type: "JSXOpeningElement",
       }]
+    },
+    {
+      code:   `import { Wizard } from '@patternfly/react-core'; <Wizard inPage />`,
+      output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
+      errors: [{
+        message: `inPage prop for Wizard has been removed`,
+        type: "JSXOpeningElement",
+      }]
     }
   ]
 });

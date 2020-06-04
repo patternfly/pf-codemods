@@ -3,7 +3,7 @@ const rules = {
   "application-launcher-rename-dropdownItems": require('./lib/rules/application-launcher-rename-dropdownItems'),
   "aria-props": require('./lib/rules/aria-props'),
   "global-background-color": require('./lib/rules/global-background-color'),
-  "modal-remove-footer-alignment": require('./lib/rules/modal-remove-footer-alignment'),
+  "modal-remove-props": require('./lib/rules/modal-remove-props'),
   "modal-variant": require('./lib/rules/modal-variant'),
   "no-experimental-imports": require('./lib/rules/no-experimental-imports'),
   "progress-remove-info-variant": require('./lib/rules/progress-remove-info-variant'),
