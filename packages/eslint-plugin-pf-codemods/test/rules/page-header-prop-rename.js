@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/page-header-prop-rename');
 
 ruleTester.run("page-header-prop-rename", rule, {

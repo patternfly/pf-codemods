@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/select-rename-checkbox');
 
 ruleTester.run("select-rename-checkbox", rule, {

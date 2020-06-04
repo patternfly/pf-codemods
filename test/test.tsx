@@ -69,4 +69,7 @@ import { Avatar, Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem } from '@p
     </Toolbar>
   }
   />
-</Page>
+</Page>;
+
+import { Flex } from '@patternfly/react-core';
+<Flex breakpointMods={[{ modifier: 'justify-content-space-between' }] as any}></Flex>

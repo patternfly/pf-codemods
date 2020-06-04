@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/accordion-remove-noBoxShadow');
 
 ruleTester.run("accordion-remove-noBoxShadow", rule, {

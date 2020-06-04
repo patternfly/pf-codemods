@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/chipgroup-remove-props');
 
 ruleTester.run("chipgroup-remove-props", rule, {

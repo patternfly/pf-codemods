@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/chipgroup-remove-chipbutton');
 
 ruleTester.run("chipgroup-remove-chipbutton", rule, {

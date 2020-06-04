@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/alert-new-action');
 
 ruleTester.run("alert-new-action", rule, {

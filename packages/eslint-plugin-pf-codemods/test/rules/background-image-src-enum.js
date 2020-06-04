@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/background-image-src-enum');
 
 ruleTester.run("background-image-src-enum", rule, {

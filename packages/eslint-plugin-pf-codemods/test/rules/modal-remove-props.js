@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/modal-remove-props');
 
 ruleTester.run("modal-remove-props", rule, {

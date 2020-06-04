@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/remove-unused-imports');
 
 ruleTester.run("remove-unused-imports", rule, {

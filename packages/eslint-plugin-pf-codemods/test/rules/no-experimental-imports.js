@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/no-experimental-imports');
 
 ruleTester.run("no-experimental-imports", rule, {

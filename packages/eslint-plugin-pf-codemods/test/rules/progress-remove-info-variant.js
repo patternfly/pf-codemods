@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/progress-remove-info-variant');
 
 ruleTester.run("progress-remove-info-variant", rule, {

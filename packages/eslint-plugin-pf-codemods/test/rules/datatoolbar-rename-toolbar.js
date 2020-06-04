@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/datatoolbar-rename-toolbar');
 
 ruleTester.run("datatoolbar-rename-toolbar", rule, {

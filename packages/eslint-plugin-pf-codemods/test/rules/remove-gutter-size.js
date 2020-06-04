@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/remove-gutter-size');
 
 ruleTester.run("remove-gutter-size", rule, {

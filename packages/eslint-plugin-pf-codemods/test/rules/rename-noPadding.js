@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/rename-noPadding');
 
 ruleTester.run("rename-noPadding", rule, {

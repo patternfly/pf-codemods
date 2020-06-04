@@ -1,4 +1,4 @@
-const ruleTester = require('./ruletester');
+const ruleTester = require('../ruletester');
 const rule = require('../../lib/rules/title-require-heading-level');
 
 ruleTester.run("title-require-heading-level", rule, {
