@@ -43,6 +43,7 @@ const rules = {
   "page-header-move-avatar": require('./lib/rules/page-header-move-avatar'),
   "refactor-breakpointmods": require('./lib/rules/refactor-breakpointmods'),
   "datatoolbar-rename-toolbar": require('./lib/rules/datatoolbar-rename-toolbar'),
+  "no-unused-vars": require('./lib/rules/no-unused-vars'),
 };
 
 module.exports = {
