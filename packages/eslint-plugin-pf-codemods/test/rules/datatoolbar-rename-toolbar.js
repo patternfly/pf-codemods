@@ -10,17 +10,65 @@ ruleTester.run("datatoolbar-rename-toolbar", rule, {
   ],
   invalid: [
     {
-      code: `import { DataToolbar } from '@patternfly/react-core';
-        <DataToolbar></DataToolbar>`,
-      output: `import { Toolbar } from '@patternfly/react-core';
-        <Toolbar data-codemods="true"></Toolbar>`,
+      code: `import { DataToolbar, DataToolbarContent, DataToolbarGroup, DataToolbarItem } from '@patternfly/react-core';
+        <DataToolbar>
+          <DataToolbarContent>
+            <DataToolbarGroup>
+              <DataToolbarItem></DataToolbarItem>
+            </DataToolbarGroup>
+          </DataToolbarContent>
+        </DataToolbar>`,
+      output: `import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+        <Toolbar data-codemods="true">
+          <ToolbarContent data-codemods="true">
+            <ToolbarGroup data-codemods="true">
+              <ToolbarItem data-codemods="true"></ToolbarItem>
+            </ToolbarGroup>
+          </ToolbarContent>
+        </Toolbar>`,
       errors: [
         {
           message: `DataToolbar has been replaced with Toolbar`,
           type: "ImportSpecifier",
         },
         {
+          message: `DataToolbarContent has been replaced with ToolbarContent`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `DataToolbarGroup has been replaced with ToolbarGroup`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `DataToolbarItem has been replaced with ToolbarItem`,
+          type: "ImportSpecifier",
+        },
+        {
           message: `DataToolbar has been replaced with Toolbar`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `DataToolbarContent has been replaced with ToolbarContent`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `DataToolbarGroup has been replaced with ToolbarGroup`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `DataToolbarItem has been replaced with ToolbarItem`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `DataToolbarItem has been replaced with ToolbarItem`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `DataToolbarGroup has been replaced with ToolbarGroup`,
+          type: "JSXIdentifier",
+        },
+        {
+          message: `DataToolbarContent has been replaced with ToolbarContent`,
           type: "JSXIdentifier",
         },
         {
