@@ -34,7 +34,7 @@ const rules = {
   "nav-list-variant": require('./lib/rules/nav-list-variant'),
   "table-removed-transforms": require('./lib/rules/table-removed-transforms'),
   "select-rename-checkbox": require('./lib/rules/select-rename-checkbox'),
-  "remove-unused-imports": require('./lib/rules/remove-unused-imports'),
+  "no-unused-imports": require('./lib/rules/no-unused-imports'),
   "tab-rename-variant": require('./lib/rules/tab-rename-variant'),
   "form-fix-isValid": require('./lib/rules/form-fix-isValid'),
   "expandable-rename-expandablesection": require('./lib/rules/expandable-rename-expandablesection'),

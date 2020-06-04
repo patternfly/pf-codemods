@@ -507,14 +507,24 @@ Out:
 ```jsx
 ```
 
-### remove-unused-imports
-This rule cleans up the following removed imports:
+### no-unused-imports
+This rule is meant to be run after all other rules to remove unneeded imports added or no longer necessary such as:
 - 'NavVariants', Use the variant prop on the Nav component with one of these values: 'default' | 'horizontal' | 'tertiary'
 - 'CardHead', See card-rename-components rule for more info
 - 'CardHeadMain', See card-rename-components rule for more info
 - 'BackgroundImgSrc', See background-image-src-enum rule for more info
 - 'ChipButton', See chipgroup-remove-chipbutton rule for more info
 - 'ChipGroupToolbarItem' See chipgroup-remove-chipgrouptoolbaritem rule for more info
+
+#### Examples
+In:
+```jsx
+import { Nav, NavVariants } from '@patternfly/react-core'; <Nav variant="default" />
+```
+Out:
+```jsx
+import { Nav  } from '@patternfly/react-core'; <Nav variant="default" />
+```
 
 ### rename-noPadding [(#4133)](https://github.com/patternfly/patternfly-react/pull/4133)
 We've renamed `noPadding` to `hasNoPadding` for DataListContent, DrawerHead, DrawerPanelBody, and PageSection components.

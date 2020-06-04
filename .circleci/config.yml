@@ -46,6 +46,11 @@ jobs:
     - run:
         name: Test rules
         command: yarn test
+    - run:
+        name: Test single file
+        command: yarn test:single
+        when: always
+
   deploy:
     docker:
     - image: circleci/node:12
