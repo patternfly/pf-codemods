@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.24](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.23...eslint-plugin-pf-codemods@1.0.24) (2020-06-05)
+
+**Note:** Version bump only for package eslint-plugin-pf-codemods
+
+
+
+
+
 ## [1.0.23](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.22...eslint-plugin-pf-codemods@1.0.23) (2020-06-04)
 
 **Note:** Version bump only for package eslint-plugin-pf-codemods

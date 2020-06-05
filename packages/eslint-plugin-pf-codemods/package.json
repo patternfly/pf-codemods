@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-pf-codemods",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "ESLint plugin for PF codemods",
   "main": "./index.js",
   "author": "Red Hat",
