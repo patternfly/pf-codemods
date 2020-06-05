@@ -39,7 +39,7 @@ ruleTester.run("rename-toolbar-components", rule, {
       </Page>
       `,
       output: `
-      import { Page, PageHeader, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
+      import { Page, PageHeader, Toolbar, ToolbarGroup, ToolbarItem, PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem } from '@patternfly/react-core';
       <Page>
         <PageHeader toolbar={
           <PageHeaderTools>
@@ -53,15 +53,7 @@ ruleTester.run("rename-toolbar-components", rule, {
       `,
       errors: [
         {
-          message: `add missing imports PageHeaderTools from @patternfly/react-core`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `add missing imports PageHeaderToolsGroup from @patternfly/react-core`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `add missing imports PageHeaderToolsItem from @patternfly/react-core`,
+          message: `add missing imports PageHeaderTools, PageHeaderToolsGroup, PageHeaderToolsItem from @patternfly/react-core`,
           type: "ImportDeclaration",
         },
         {
