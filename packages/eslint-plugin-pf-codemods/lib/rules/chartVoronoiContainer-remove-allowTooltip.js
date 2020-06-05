@@ -1,4 +1,4 @@
-const { renamePropsProper } = require('../helpers');
+const { renameProps } = require('../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4330
 const renames = {
@@ -8,5 +8,5 @@ const renames = {
 };
 
 module.exports = {
-  create: renamePropsProper(renames, '@patternfly/react-charts')
+  create: renameProps(renames, '@patternfly/react-charts')
 };
