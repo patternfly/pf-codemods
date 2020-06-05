@@ -82,32 +82,18 @@ function renameProp(components, propMap, message, replaceAttribute) {
 
 function renameComponent(
   componentMap,
-  message = (prevName, newName) => `${prevName} has been replaced with ${newName}`
+  message = (prevName, newName) => `${prevName} has been replaced with ${newName}`,
+  package = '@patternfly/react-core'
 ) {
   return function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
+    const imports = getPackageImports(context, package)
       .filter(specifier => Object.keys(componentMap).includes(specifier.imported.name));
     const importedNamesArr = imports.map(imp => imp.imported.name);
       
     return imports.length === 0 ? {} : {
-      // update component's import statement
-      ImportSpecifier(node) {
-        const importedName = node.imported.name;
-	      if (importedNamesArr.includes(importedName)) {
-          const localName = node.local.name;
-          const isAliased = importedName !== localName;
-          const aliasText = isAliased ? ` as ${localName}` : '';
-          const newName = `${componentMap[importedName]}${aliasText}`;
-          context.report({
-            node,
-            message: message(importedName, newName),
-            fix(fixer) {
-              return fixer.replaceText(node, newName);
-            }
-          });
-        }
+      ImportDeclaration(node) {
+        ensureImports(context, node, package, Object.values(componentMap));
       },
-      // update component's JSX usage
       JSXIdentifier(node) {
         const nodeName = node.name;
         const importedNode = imports.find(imp => imp.local.name === nodeName);
@@ -115,19 +101,29 @@ function renameComponent(
           importedNamesArr.includes(nodeName) &&
           importedNode.imported.name === importedNode.local.name // don't rename an aliased component
         ) {
+          // if data-codemods attribute, do nothing
+          const parentNode = node.parent;
+          const isOpeningTag = parentNode.type === 'JSXOpeningElement';
+          const openingTagAttributes = isOpeningTag ? parentNode.attributes : parentNode.parent.openingElement.attributes;
+          const hasDataAttr = openingTagAttributes && openingTagAttributes.filter(attr => attr.name.name === 'data-codemods').length;
+          if (hasDataAttr) {
+            return;
+          }
+          // if no data-codemods && opening tag, add attribute & rename
+          // if no data-codemods && closing tag, rename
           const newName = componentMap[nodeName];
-          const updateTagName = node => context
-          	.getSourceCode()
-          	.getText(node)
-          	.replace(nodeName, newName);
+          const updateTagName = node => context.getSourceCode().getText(node).replace(nodeName, newName);
+          const addDataAttr = jsxStr => `${jsxStr.slice(0, -1)} data-codemods="true">`;
+          const newOpeningParentTag = newName.includes('Toolbar')
+            ? addDataAttr(updateTagName(parentNode))
+            : updateTagName(parentNode);
           context.report({
             node,
             message: message(nodeName, newName),
             fix(fixer) {
-              const fixes = [
-                fixer.replaceText(node, updateTagName(node))
-              ];
-              return fixes;
+              return isOpeningTag
+                ? fixer.replaceText(parentNode, newOpeningParentTag)
+                : fixer.replaceText(node, updateTagName(node));
             }
           });
         }

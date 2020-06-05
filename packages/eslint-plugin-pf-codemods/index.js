@@ -19,8 +19,6 @@ const rules = {
   "alert-new-action": require('./lib/rules/alert-new-action'),
   "card-rename-components": require('./lib/rules/card-rename-components'),
   "chipgroup-remove-props": require('./lib/rules/chipgroup-remove-props'),
-  "chipgroup-remove-props": require('./lib/rules/chipgroup-remove-props'),
-  "chipgroup-remove-chipbutton": require('./lib/rules/chipgroup-remove-chipbutton'),
   "chipgroup-remove-chipbutton": require('./lib/rules/chipgroup-remove-chipbutton'),
   "chipgroup-remove-chipgrouptoolbaritem": require('./lib/rules/chipgroup-remove-chipgrouptoolbaritem'),
   "dropdown-rename-icon": require('./lib/rules/dropdown-rename-icon'),
