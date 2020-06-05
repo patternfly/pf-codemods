@@ -34,7 +34,7 @@ function renameProps0(context, imports, node, renames) {
   }
 }
 
-function renamePropsProper(renames, packageName) {
+function renameProps(renames, packageName='@patternfly/react-core') {
   return function(context) {
     const imports = getPackageImports(context, packageName)
       .filter(specifier => Object.keys(renames).includes(specifier.imported.name));
@@ -45,10 +45,6 @@ function renamePropsProper(renames, packageName) {
       }
     };
   }
-}
-
-function renameProps(renames) {
-  return renamePropsProper(renames, '@patternfly/react-core');
 }
 
 function renameProp(components, propMap, message, replaceAttribute) {
@@ -163,8 +159,7 @@ module.exports = {
   ensureImports,
   getPackageImports,
   renameProp,
-  renameProps,
   renameProps0,
-  renamePropsProper,
+  renameProps,
   renameComponent,
 }
