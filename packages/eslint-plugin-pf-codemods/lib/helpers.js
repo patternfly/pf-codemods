@@ -80,7 +80,7 @@ function renameProp(components, propMap, message, replaceAttribute) {
   }
 }
 
-function renameComponent(
+function renameComponents(
   componentMap,
   condition = (_context, _package) => true,
   message = (prevName, newName) => `${prevName} has been replaced with ${newName}`,
@@ -161,5 +161,5 @@ module.exports = {
   renameProp,
   renameProps0,
   renameProps,
-  renameComponent,
+  renameComponents,
 }

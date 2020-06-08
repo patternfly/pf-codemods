@@ -1,4 +1,4 @@
-const { renameComponent, getPackageImports } = require('../helpers');
+const { renameComponents, getPackageImports } = require('../helpers');
 
 function hasPageHeaderImport(context, package) {
   const imports = getPackageImports(context, package).map(imp => imp.imported.name);
@@ -8,7 +8,7 @@ function hasPageHeaderImport(context, package) {
 
 // https://github.com/patternfly/patternfly-react/pull/4246
 module.exports = {
-  create: renameComponent(
+  create: renameComponents(
     { 
       'Toolbar': 'PageHeaderTools',
       'ToolbarGroup': 'PageHeaderToolsGroup',
