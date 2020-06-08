@@ -14,6 +14,17 @@ ruleTester.run("card-rename-components", rule, {
         </CardTitle>
       </Card>`,
     },
+    { // Has CardTitle import, trust renaming is already taken care of
+      code: `import { Card, CardTitle, CardHeaderMain, CardHeader } from '@patternfly/react-core';
+      <Card>
+        <CardHeader>
+          <CardHeaderMain>Header</CardHeaderMain>
+        </CardHeader>
+        <CardTitle>
+          Title
+        </CardTitle>
+      </Card>`,
+    },
     { // no @patternfly import
       code: `<Card>
       <CardHead>
