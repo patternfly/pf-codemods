@@ -47,7 +47,7 @@ function renameProps(renames, packageName='@patternfly/react-core') {
   }
 }
 
-function renameProp(components, propMap, message, replaceAttribute) {
+function renameProp(components, propMap, message, replaceAttribute, leaveComment = true) {
   if (typeof components === 'string') {
     components = [ components ];
   }
@@ -58,8 +58,9 @@ function renameProp(components, propMap, message, replaceAttribute) {
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.find(imp => imp.local.name === node.name.name)) {
-          node.attributes
-            .filter(attr => attr.name && Object.keys(propMap).includes(attr.name.name))
+          const namedAttributes = node.attributes.filter(attr => attr.name);
+
+          namedAttributes.filter(attr => Object.keys(propMap).includes(attr.name.name))
             .forEach(attribute => {
               const newName = propMap[attribute.name.name];
               context.report({
@@ -67,8 +68,17 @@ function renameProp(components, propMap, message, replaceAttribute) {
                 message: message(node, attribute, newName),
                 fix(fixer) {
                   // Delete entire prop if newName is empty
+                  if (!newName || replaceAttribute) {
+                    return fixer.replaceText(attribute, newName);
+                  }
+                  const newNameAttrName = newName.split('=')[0];
+                  // Leave a comment if there's an existing prop with this name
+                  if (namedAttributes.find(attr => attr.name.name === newNameAttrName)) {
+                    return fixer.replaceText(attribute, leaveComment ? `/* ${newName} */` : '');
+                  }
+
                   return fixer.replaceText(
-                    !newName || replaceAttribute ? attribute : attribute.name,
+                    attribute.name,
                     newName
                   );
                 }

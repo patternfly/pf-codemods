@@ -12,6 +12,8 @@ module.exports = {
       else {
         return `headingLevel has been removed from ${node.name.name} since the category name is now a <span>`
       }
-    }
+    },
+    false,
+    false
   )
 };

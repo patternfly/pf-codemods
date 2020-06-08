@@ -19,6 +19,16 @@ ruleTester.run("chipgroup-remove-props", rule, {
       ]
     },
     {
+      code:   `import { ChipGroup } from '@patternfly/react-core'; <ChipGroup categoryName="I already have a categoryName" withToolbar>button</ChipGroup>`,
+      output: `import { ChipGroup } from '@patternfly/react-core'; <ChipGroup categoryName="I already have a categoryName" >button</ChipGroup>`,
+      errors: [
+        {
+          message: `withToolbar has been removed from ChipGroup. Add the categoryName prop instead for a category.`,
+          type: "JSXOpeningElement",
+        },
+      ]
+    },
+    {
       code:   `import { ChipGroup } from '@patternfly/react-core'; <ChipGroup headingLevel="123">button</ChipGroup>`,
       output: `import { ChipGroup } from '@patternfly/react-core'; <ChipGroup >button</ChipGroup>`,
       errors: [
