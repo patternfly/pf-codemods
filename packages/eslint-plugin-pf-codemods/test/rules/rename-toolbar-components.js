@@ -21,7 +21,16 @@ ruleTester.run("rename-toolbar-components", rule, {
         </ToolbarGroup>
       </Toolbar>
     `
-    }
+    },
+    { // No PageHeader import
+      code: `import { Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
+      <Toolbar>
+        <ToolbarGroup>
+          <ToolbarItem />
+        </ToolbarGroup>
+      </Toolbar>
+      `,
+    },
   ],
   invalid: [
     {
