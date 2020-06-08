@@ -82,15 +82,15 @@ function renameProp(components, propMap, message, replaceAttribute) {
 
 function renameComponent(
   componentMap,
+  condition = (_context, _package) => true,
   message = (prevName, newName) => `${prevName} has been replaced with ${newName}`,
   package = '@patternfly/react-core'
 ) {
   return function(context) {
     const imports = getPackageImports(context, package)
       .filter(specifier => Object.keys(componentMap).includes(specifier.imported.name));
-    const importedNamesArr = imports.map(imp => imp.imported.name);
-      
-    return imports.length === 0 ? {} : {
+    
+    return imports.length === 0 || !condition(context, package) ? {} : {
       ImportDeclaration(node) {
         ensureImports(context, node, package, Object.values(componentMap));
       },
@@ -98,7 +98,7 @@ function renameComponent(
         const nodeName = node.name;
         const importedNode = imports.find(imp => imp.local.name === nodeName);
         if (
-          importedNamesArr.includes(nodeName) &&
+          imports.find(imp => imp.imported.name === nodeName) &&
           importedNode.imported.name === importedNode.local.name // don't rename an aliased component
         ) {
           // if data-codemods attribute, do nothing
