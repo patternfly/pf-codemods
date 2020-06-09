@@ -30,7 +30,7 @@ module.exports = {
               .includes('data-codemods');
 
           if (!alreadyFixed) {
-            const isOpeningCardHead = node.parent.type === 'JSXOpeningElement' && node.name === cardHeadImport.local.name;
+            const isOpeningCardHead = node.parent.type === 'JSXOpeningElement' && cardHeadImport && node.name === cardHeadImport.local.name;
             const replacement = `${renames[node.name]}${isOpeningCardHead ? ' data-codemods="true"' : ''}`;
             context.report({
               node,
