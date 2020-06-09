@@ -25,8 +25,8 @@ import { ChartGroup } from '@patternfly/react-charts';
             "some-chart"
         </ChartGroup>
 </Chart>`,
-      output: `import { VictoryZoomContainer } from 'victory-zoom-container';
-import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
+      output: `import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
+import { VictoryZoomContainer } from 'victory-zoom-container';
 <Chart containerComponent={<VictoryZoomContainer />}>
     <ChartAxis/>
         <ChartGroup  offset={11} horizontal>
@@ -34,14 +34,12 @@ import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
         </ChartGroup>
 </Chart>`,
       errors: [{
-        messageId: "missingImportMsg",
-        data: {
-          missingImports: 'VictoryZoomContainer',
-          ensurePackage: 'victory-zoom-container'
-        }},
+          message: `add missing import { VictoryZoomContainer } from 'victory-zoom-container';`,
+          type: "ImportDeclaration",
+        },
         {
-        message: `allowZoom prop for Chart has been renamed to containerComponent={<VictoryZoomContainer />}`,
-        type: "JSXOpeningElement",
+          message: `allowZoom prop for Chart has been renamed to containerComponent={<VictoryZoomContainer />}`,
+          type: "JSXOpeningElement",
         },
         {
           message: `allowZoom prop for ChartGroup has been removed`,
