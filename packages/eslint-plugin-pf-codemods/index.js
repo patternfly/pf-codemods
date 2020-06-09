@@ -42,6 +42,7 @@ const rules = {
   "refactor-breakpointmods": require('./lib/rules/refactor-breakpointmods'),
   "datatoolbar-rename-toolbar": require('./lib/rules/datatoolbar-rename-toolbar'),
   "chartVoronoiContainer-remove-allowTooltip": require('./lib/rules/chartVoronoiContainer-remove-allowTooltip'),
+  "chart-remove-allowZoom": require('./lib/rules/chartVoronoiContainer-remove-allowTooltip'),
 };
 
 module.exports = {

@@ -841,3 +841,30 @@ Out:
 ```jsx
 <WizardNavItem content="sm" />
 ```
+
+### chart-remove-allowZoom [(#4278)](https://github.com/patternfly/patternfly-react/pull/4278)
+- **Chart**: Remove `allowZoom` property.
+- **Chart**: Add `containerComponent={<VictoryZoomContainer />}` property.
+- **ChartGroup**: Remove `allowZoom` property
+- Add Import: `import { VictoryZoomContainer } from 'victory-zoom-container';`
+#### Examples
+In:
+```jsx
+<Chart allowZoom>
+    <ChartAxis />
+        <ChartGroup allowZoom offset={11} horizontal>
+            "some-chart"
+        <ChartGroup/>
+<Chart />
+```
+Out:
+```jsx
+import { VictoryZoomContainer } from 'victory-zoom-container';
+
+<Chart containerComponent={<VictoryZoomContainer />}>
+    <ChartAxis />
+        <ChartGroup offset={11} horizontal>
+            "some-chart"
+        <ChartGroup/>
+<Chart />
+```
