@@ -19,6 +19,7 @@ import { ChartGroup } from '@patternfly/react-charts';
   invalid: [
     {
       code: `import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
+import { Button } from '@patternfly/react-core';
 <Chart allowZoom>
     <ChartAxis/>
         <ChartGroup allowZoom offset={11} horizontal>
@@ -26,6 +27,7 @@ import { ChartGroup } from '@patternfly/react-charts';
         </ChartGroup>
 </Chart>`,
       output: `import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
+import { Button } from '@patternfly/react-core';
 import { VictoryZoomContainer } from 'victory-zoom-container';
 <Chart containerComponent={<VictoryZoomContainer />}>
     <ChartAxis/>
@@ -33,7 +35,8 @@ import { VictoryZoomContainer } from 'victory-zoom-container';
             "some-chart"
         </ChartGroup>
 </Chart>`,
-      errors: [{
+      errors: [
+        {
           message: `add missing import { VictoryZoomContainer } from 'victory-zoom-container';`,
           type: "ImportDeclaration",
         },

@@ -11,22 +11,27 @@ const renames = {
 };
 
 module.exports = {
-  meta: {
-    messages: {
-      missingImportMsg: "`add missing imports {{ missingImports }} from {{ ensurePackage }}",
-    },
-    fixable: "code",
-    schema: []
-  },
   create: function(context) {
-      const imports = getPackageImports(context, '@patternfly/react-charts');
-      return imports.length === 0 ? {} : {
-        JSXOpeningElement(node) {
-          renameProps0(context, imports, node, renames);
-        },
-        ImportDeclaration(node) {
-          ensureImports(context, node, 'victory-zoom-container', [ 'VictoryZoomContainer' ])
+    const imports = getPackageImports(context, '@patternfly/react-charts');
+    const victoryCoreImports = getPackageImports(context, 'victory-zoom-container');
+    if (victoryCoreImports.length === 0) {
+      const lastImportNode = context.getSourceCode().ast.body
+        .filter(node => node.type === 'ImportDeclaration')
+        .pop();
+      const importStatement = `import { VictoryZoomContainer } from 'victory-zoom-container';`
+      context.report({
+        node: lastImportNode,
+        message: `add missing ${importStatement}`,
+        fix(fixer) {
+          return fixer.insertTextAfter(lastImportNode, '\n' + importStatement)
         }
-      };
+      });
     }
+
+    return imports.length === 0 ? {} : {
+      JSXOpeningElement(node) {
+        renameProps0(context, imports, node, renames);
+      },
+    };
+  }
 };

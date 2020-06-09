@@ -143,41 +143,25 @@ function renameComponents(
 }
 
 function ensureImports(context, node, package, imports) {
-  const packageImports = getPackageImports(context, package);
-  const packageImportNames = packageImports.map(imp => imp.imported.name);
-
-  // Handle case of no existing import
-  if (packageImports.length === 0) {
-    const lastImportNode = context.getSourceCode().ast.body
-      .filter(node => node.type === 'ImportDeclaration')
-      .pop();
-
-    const importStatement = `import { ${imports.join(', ')} } from '${package}';`
+  if (node.source.value !== package) {
+    return;
+  }
+  const patternflyImports = getPackageImports(context, package);
+  const patternflyImportNames = patternflyImports.map(imp => imp.imported.name);
+  const myImports = node.specifiers.map(imp => imp.imported.name);
+  const missingImports = imports
+    .filter(imp => !patternflyImportNames.includes(imp)) // not added by consumer
+    .filter(imp => !myImports.includes(imp)) // not added by this rule
+    .join(', ');
+  if (missingImports) {
+    const lastSpecifier = node.specifiers[node.specifiers.length - 1];
     context.report({
       node,
-      message: `add missing ${importStatement}`,
+      message: `add missing imports ${missingImports} from ${node.source.value}`,
       fix(fixer) {
-        return fixer.insertTextAfter(lastImportNode, '\n' + importStatement)
+        return fixer.insertTextAfter(lastSpecifier, `, ${missingImports}`);
       }
     });
-  }
-  // Handle case of adding imports to existing imports
-  if (node.source.value === package) {
-    const myImports = node.specifiers.map(imp => imp.imported.name);
-    const missingImports = imports
-      .filter(imp => !packageImportNames.includes(imp)) // not added by consumer
-      .filter(imp => !myImports.includes(imp)) // not added by this rule
-      .join(', ');
-    if (missingImports) {
-      const lastSpecifier = node.specifiers[node.specifiers.length - 1];
-      context.report({
-        node,
-        message: `add missing imports ${missingImports} from ${node.source.value}`,
-        fix(fixer) {
-          return fixer.insertTextAfter(lastSpecifier, `, ${missingImports}`);
-        }
-      });
-    }
   }
 }
 
