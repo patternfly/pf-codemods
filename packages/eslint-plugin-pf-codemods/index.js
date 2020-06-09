@@ -41,9 +41,8 @@ const rules = {
   "page-header-move-avatar": require('./lib/rules/page-header-move-avatar'),
   "refactor-breakpointmods": require('./lib/rules/refactor-breakpointmods'),
   "datatoolbar-rename-toolbar": require('./lib/rules/datatoolbar-rename-toolbar'),
-  "chartVoronoiContainer-remove-allowTooltip": require('./lib/rules/chartVoronoiContainer-remove-allowTooltip'),
-  "createContainer-insteadof-allowZoom": require('./lib/rules/createContainer-insteadof-allowZoom'),
-  "createContainer-insteadof-allowZoom": require('./lib/rules/createContainer-insteadof-allowZoom'),
+  "chartVoronoiContainer-remove-allowTooltip": require('./lib/rules/chart-remove-allowZoom'),
+  "chart-remove-allowZoom": require('./lib/rules/chart-remove-allowZoom'),
 };
 
 module.exports = {

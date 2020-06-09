@@ -1,5 +1,5 @@
 const ruleTester = require('../ruletester');
-const rule = require('../../lib/rules/chartVoronoiContainer-remove-allowTooltip');
+const rule = require('../../lib/rules/chart-remove-allowZoom');
 
 ruleTester.run("chartVoronoiContainer-remove-allowTooltip", rule, {
   valid: [
