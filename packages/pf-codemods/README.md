@@ -842,7 +842,7 @@ Out:
 <WizardNavItem content="sm" />
 ```
 
-### createContainer-insteadof-allowZoom [(#4278)](https://github.com/patternfly/patternfly-react/pull/4278)
+### chart-remove-allowZoom [(#4278)](https://github.com/patternfly/patternfly-react/pull/4278)
 - **Chart**: Remove `allowZoom` property.
 - **Chart**: Add `containerComponent={<VictoryZoomContainer />}` property.
 - **ChartGroup**: Remove `allowZoom` property
