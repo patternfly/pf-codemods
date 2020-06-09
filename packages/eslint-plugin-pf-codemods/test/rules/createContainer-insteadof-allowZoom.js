@@ -33,11 +33,12 @@ import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
             "some-chart"
         </ChartGroup>
 </Chart>`,
-      errors: [
-        {
-          message: `add missing imports VictoryZoomContainer from victory-zoom-container`,
-          type: "ImportDeclaration",
-        },
+      errors: [{
+        messageId: "missingImportMsg",
+        data: {
+          missingImports: 'VictoryZoomContainer',
+          ensurePackage: 'victory-zoom-container'
+        }},
         {
         message: `allowZoom prop for Chart has been renamed to containerComponent={<VictoryZoomContainer />}`,
         type: "JSXOpeningElement",

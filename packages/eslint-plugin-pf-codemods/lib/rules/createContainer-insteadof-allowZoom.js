@@ -14,6 +14,13 @@ const ensurePackage = 'victory-zoom-container';
 const compMap =[ 'VictoryZoomContainer' ];
 
 module.exports = {
+  meta: {
+    messages: {
+      missingImportMsg: "`add missing imports {{ missingImports }} from {{ ensurePackage }}",
+    },
+    fixable: "code",
+    schema: []
+  },
   create: function(context) {
       const imports = getPackageImports(context, '@patternfly/react-charts');
       return imports.length === 0 ? {} : {
@@ -32,7 +39,11 @@ module.exports = {
           if (packageImports.length == 0 ) {
             context.report({
               node,
-              message: `add missing imports ${missingImports} from ${ensurePackage}`,
+              messageId: "missingImportMsg",
+              data: {
+                missingImports: missingImports,
+                ensurePackage: ensurePackage
+              },
               fix(fixer) {
                 return fixer.insertTextBefore(context.getSourceCode().getNodeByRangeIndex(0),
                     `import { ${missingImports} } from '${ensurePackage}';\n`);
@@ -43,7 +54,11 @@ module.exports = {
             const lastSpecifier = node.specifiers[node.specifiers.length - 1];
             context.report({
               node,
-              message: `add missing imports ${missingImports} from ${ensurePackage}`,
+              messageId: "missingImportMsg",
+              data: {
+                missingImports: missingImports,
+                ensurePackage: ensurePackage
+              },
               fix(fixer) {
                 return fixer.insertTextAfter(lastSpecifier, `, ${missingImports}`);
               }
