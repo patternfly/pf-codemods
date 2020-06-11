@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/patternfly/pf-codemods/compare/pf-codemods@1.0.37...pf-codemods@1.1.0) (2020-06-11)
+
+
+### Features
+
+* **cli:** use commander and allow including/excluding rules ([#104](https://github.com/patternfly/pf-codemods/issues/104)) ([3e14dfd](https://github.com/patternfly/pf-codemods/commit/3e14dfd98ed3427f57ed35fd892a8df3b4fbf407))
+
+
+
+
+
 ## [1.0.37](https://github.com/patternfly/pf-codemods/compare/pf-codemods@1.0.36...pf-codemods@1.0.37) (2020-06-09)
 
 **Note:** Version bump only for package pf-codemods
