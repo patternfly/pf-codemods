@@ -1,19 +1,35 @@
 # pf-codemods
 
-**We have not officially released this package yet. It will officially be released with 4.x.x.**
+Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@3.x.x code to 4.x.x.
 
-Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@3.x.x code to 4.x.x. I hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones.
+I hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones.
 
 ## Usage
 
+### Simple case
 ```sh
-npx pf-codemods ./path-to-src
+npx pf-codemods ./src
 ```
 
 Giving node more RAM can help for large codebases.
 
 ```sh
 NODE_OPTIONS=--max-old-space-size=4096 npx pf-codemods ./path-to-src
+```
+
+### Options
+```sh
+Usage: pf-codemods [options] <path> [otherPaths...]
+
+Run codemods on path using eslint.
+
+Options:
+  -V, --version      output the version number
+  --only <rules>     Comma-seperated list of rules to run
+  --exclude <rules>  Run recommended rules EXCLUDING this comma-seperated list
+  --fix              Whether to run fixer
+  --format <format>  What eslint report format to use (default: "stylish")
+  -h, --help         display help for command
 ```
 
 ## Rules
@@ -549,7 +565,9 @@ Out:
 
 ### rename-toolbar-components [(#4246)](https://github.com/patternfly/patternfly-react/pull/4246)
 Renames the `Toolbar` related imports and components to `PageHeader` related imports and components.
-Note: The PageHeader `toolbar` prop is renamed in the `page-header-prop-rename` rule.
+
+**Note: This rule WILL NOT RUN if you do not have a PageHeader import in the same file since it cannot discern whether your Toolbar was used in a PageHeader.**
+**Note: The PageHeader `toolbar` prop is renamed in the `page-header-prop-rename` rule.**
 
 #### Examples
 In:
