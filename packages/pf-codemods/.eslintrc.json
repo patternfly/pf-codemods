@@ -1,4 +1,0 @@
-{
-    "plugins": ["pf-codemods"],
-    "extends": ["plugin:pf-codemods/recommended"]
-}

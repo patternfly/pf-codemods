@@ -1,7 +1,19 @@
 #!/usr/bin/env node
-const path = require('path');
 const options = require('eslint/lib/options');
 const { CLIEngine } = require('eslint/lib/cli-engine');
+const { configs } = require('eslint-plugin-pf-codemods');
+const { Command } = require('commander');
+const program = new Command();
+
+program
+  .version(require('./package.json').version)
+  .description('Run codemods on path using eslint.')
+  .arguments('<path> [otherPaths...]')
+  .option('--only <rules>', 'Comma-seperated list of rules to run')
+  .option('--exclude <rules>', 'Run recommended rules EXCLUDING this comma-seperated list')
+  .option('--fix', 'Whether to run fixer')
+  .option('--format <format>', 'What eslint report format to use', 'stylish')
+  .action(runCodemods);
 
 /**
  * Outputs the results of the linting.
@@ -41,86 +53,42 @@ function printResults(engine, results, format) {
   return true;
 }
 
-function main() {
-  let currentOptions;
-
-  try {
-    // remove --rules for parsing purposes
-    let arguments = [...process.argv];
-    if (process.argv.includes('--rules')) {
-      arguments.splice(arguments.indexOf('--rules'),2);
-    }
-    currentOptions = options.parse(arguments);
-
-  } catch (error) {
-    console.error(error.message);
-    return 2;
+function runCodemods(path, otherPaths, options) {
+  if (options.only) {
+    // Set rules to error like eslint likes
+    configs.recommended.rules = options.only
+      .split(',')
+      .reduce((acc, rule) => {
+        acc[rule] = 'error';
+        return acc;
+      }, {});
   }
-
-  // construct rules from cli, if provide
-  let finalRules = {};
-  if (process.argv.includes('--rules')) {
-    const cliRules = process.argv.splice(process.argv.indexOf('--rules') + 1, 1)[0].split(' ');
-    console.log("RULES: " + cliRules)
-
-    for (let i = 0; i < cliRules.length; i++) {
-      try {
-        finalRules[cliRules[i]] = require('../eslint-plugin-pf-codemods/lib/rules/' + cliRules[i]);
-
-      } catch (error) {
-        const iRule = error.message.split("/");
-        console.error("Invalid Rule: " + iRule[iRule.lastIndexOf('rules') + 1])
-        return 2;
-      }
-    }
-
-    currentOptions.configFile = undefined;
-    currentOptions.env = { browser: true, node: true,es6: true };
-    currentOptions.parser = "@typescript-eslint/parser";
-    currentOptions.parserOptions = {sourceType: "module", ecmaFeatures: { jsx: true }};
-    currentOptions.plugins = ["pf-codemods"],
-    currentOptions.rules = Object.keys(finalRules).reduce((acc, rule) => {
-      acc[`pf-codemods/${rule}`] = "error";
-      return acc;
-    }, {});
-
-  } else {
-    currentOptions.configFile = path.join(__dirname, '/.eslintrc.json');
+  if (options.exclude) {
+    options.exclude.split(',').forEach(rule => delete configs.recommended.rules[rule]);
   }
-
 
   const engine = new CLIEngine({
-    env: currentOptions.env,
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
-    rules:  currentOptions.rules,
-    plugins: currentOptions.plugins,
-    globals: undefined,
+    baseConfig: configs.recommended,
     ignore: true,
-    ignorePath: undefined,
     ignorePattern: '**/node_modules/**',
-    configFile: currentOptions.configFile,
+    configFile: false,
     rulePaths: [],
     useEslintrc: false,
-    parser: currentOptions.parser,
-    parserOptions: currentOptions.parserOptions,
     cache: true,
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
-    fix: currentOptions.fix,
-    fixTypes: undefined,
-    allowInlineConfig: undefined,
-    reportUnusedDisableDirectives: undefined,
-    resolvePluginsRelativeTo: __dirname,
-    errorOnUnmatchedPattern: undefined,
+    fix: options.fix,
+    resolvePluginsRelativeTo: __dirname
   });
   
-  const report = engine.executeOnFiles(currentOptions._);
+  const report = engine.executeOnFiles(otherPaths.concat(path));
   
-  if (currentOptions.fix) {
+  if (options.fix) {
     CLIEngine.outputFixes(report);
   }
   
-  printResults(engine, report.results, currentOptions.format);
+  printResults(engine, report.results, options.format);
 }
 
-main();
+program.parse(process.argv);
