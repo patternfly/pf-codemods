@@ -8,28 +8,30 @@ module.exports = {
 
     const fortAwesomeImports = getPackageImports(context, '@fortawesome/free-regular-svg-icons');
     const importStatement = `import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`
-    if (fortAwesomeImports.length === 0) {
-      const lastImportNode = context.getSourceCode().ast.body
-        .filter(node => node.type === 'ImportDeclaration')
-        .pop();
-      context.report({
-        node: lastImportNode,
-        message: `add missing ${importStatement}`,
-        fix(fixer) {
-          return fixer.insertTextAfter(lastImportNode, '\n' + importStatement)
-        }
-      });
-    } else {
-      const hasFontAwesomeLogoFullImport = fortAwesomeImports.find(imp => imp.imported.name === 'fontAwesomeLogoFull');
-      if (!hasFontAwesomeLogoFullImport) {
-        const lastImportedIcon = fortAwesomeImports[fortAwesomeImports.length - 1];
+    if (imports.length) {
+      if (fortAwesomeImports.length === 0) {
+        const lastImportNode = context.getSourceCode().ast.body
+          .filter(node => node.type === 'ImportDeclaration')
+          .pop();
         context.report({
-          node: lastImportedIcon.parent,
+          node: lastImportNode,
           message: `add missing ${importStatement}`,
           fix(fixer) {
-            return fixer.insertTextAfter(lastImportedIcon, ', fontAwesomeLogoFull');
+            return fixer.insertTextAfter(lastImportNode, '\n' + importStatement)
           }
         });
+      } else {
+        const hasFontAwesomeLogoFullImport = fortAwesomeImports.find(imp => imp.imported.name === 'fontAwesomeLogoFull');
+        if (!hasFontAwesomeLogoFullImport) {
+          const lastImportedIcon = fortAwesomeImports[fortAwesomeImports.length - 1];
+          context.report({
+            node: lastImportedIcon.parent,
+            message: `add missing ${importStatement}`,
+            fix(fixer) {
+              return fixer.insertTextAfter(lastImportedIcon, ', fontAwesomeLogoFull');
+            }
+          });
+        }
       }
     }
       
