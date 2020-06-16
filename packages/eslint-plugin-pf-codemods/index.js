@@ -43,6 +43,7 @@ const rules = {
   "datatoolbar-rename-toolbar": require('./lib/rules/datatoolbar-rename-toolbar'),
   "chartVoronoiContainer-remove-allowTooltip": require('./lib/rules/chartVoronoiContainer-remove-allowTooltip'),
   "chart-remove-allowZoom": require('./lib/rules/chartVoronoiContainer-remove-allowTooltip'),
+  "react-icons-remove-icon": require('./lib/rules/react-icons-remove-icon'),
 };
 
 module.exports = {
