@@ -31,10 +31,10 @@ module.exports = {
                 replacement = fixer => [
                   fixer.replaceText(value, `{<TabTitleText>${value.expression.value}</TabTitleText>}`)
                 ];
-              } else if (value.expression.type === 'Identifier') {
-                // i.e. title={myVariable}
+              } else if (value.expression.type === 'Identifier' || value.expression.type === 'MemberExpression') {
+                // i.e. title={myVariable} or title={tab.title}
                 replacement = fixer => [
-                  fixer.replaceText(value, `{<TabTitleText>{${value.expression.name}}</TabTitleText>}`)
+                  fixer.replaceText(value, `{<TabTitleText>${valueText}</TabTitleText>}`)
                 ];
               } else if (value.expression.type === 'JSXElement' || value.expression.type === 'JSXFragment') {
                 if (value.expression.children.length === 0) {
