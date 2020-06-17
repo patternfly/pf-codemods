@@ -17,16 +17,22 @@ ruleTester.run("tab-title-text", rule, {
 <Tab title="Title">Content</Tab>;
 <Tab title="Title">Content</Tab>;
 <Tab title={<UsersIcon />}>Content</Tab>;
-<Tab title={<><UsersIcon /> Text</>}>Content</Tab>;`,
+<Tab title={<><UsersIcon /> Text</>}>Content</Tab>;
+<Tab title={tab.title}>Content</Tab>;`,
       output: `import { Tab, TabTitleText, TabTitleIcon } from '@patternfly/react-core';
 <Tab title={<TabTitleText>Title</TabTitleText>}>Content</Tab>;
 <Tab title={<TabTitleText>Title</TabTitleText>}>Content</Tab>;
 <Tab title={<TabTitleIcon><UsersIcon /></TabTitleIcon>}>Content</Tab>;
-<Tab title={<><TabTitleIcon><UsersIcon /></TabTitleIcon><TabTitleText> Text</TabTitleText></>}>Content</Tab>;`,
+<Tab title={<><TabTitleIcon><UsersIcon /></TabTitleIcon><TabTitleText> Text</TabTitleText></>}>Content</Tab>;
+<Tab title={<TabTitleText>{tab.title}</TabTitleText>}>Content</Tab>;`,
       errors: [
         {
           message: 'add missing imports TabTitleText, TabTitleIcon from @patternfly/react-core',
           type: "ImportDeclaration"
+        },
+        {
+          message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
+          type: "JSXOpeningElement",
         },
         {
           message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
