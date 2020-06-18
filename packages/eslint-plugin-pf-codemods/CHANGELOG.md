@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.34](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.33...eslint-plugin-pf-codemods@1.0.34) (2020-06-18)
+
+
+### Bug Fixes
+
+* **chip:** dont remove isReadOnly ([#109](https://github.com/patternfly/pf-codemods/issues/109)) ([dd86804](https://github.com/patternfly/pf-codemods/commit/dd86804579c0e3010aca53c7e3263bbaf1c71fca))
+
+
+
+
+
 ## [1.0.33](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.32...eslint-plugin-pf-codemods@1.0.33) (2020-06-17)
 
 **Note:** Version bump only for package eslint-plugin-pf-codemods
