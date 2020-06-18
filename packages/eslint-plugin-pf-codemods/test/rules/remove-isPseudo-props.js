@@ -35,16 +35,6 @@ ruleTester.run("remove-isPseudo-props", rule, {
           type: "JSXOpeningElement",
         },
       ]
-    },
-    {
-      code:   `import { Chip } from '@patternfly/react-core'; <Chip isReadOnly />`,
-      output: `import { Chip } from '@patternfly/react-core'; <Chip  />`,
-      errors: [
-        {
-          message: `isReadOnly prop for Chip has been removed`,
-          type: "JSXOpeningElement",
-        },
-      ]
-    },
+    }
   ]
 });

@@ -6,9 +6,6 @@ const renames = {
     isHover: '',
     isFocus: ''
   },
-  'Chip': {
-    isReadOnly: ''
-  },
   'Toggle': {
     isHover: '',
     isFocus: ''
