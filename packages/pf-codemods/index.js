@@ -81,10 +81,8 @@ async function runCodemods(path, otherPaths, options) {
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
     fix: options.fix,
-    parser: '@typescript-eslint/parser',
-    parserOptions: { sourceType: "module", ecmaFeatures: { jsx: true } },
     // Allow `npx` to work its magic
-    cwd: __dirname
+    resolvePluginsRelativeTo: __dirname
   });
   
   const report = engine.executeOnFiles(otherPaths.concat(path));
