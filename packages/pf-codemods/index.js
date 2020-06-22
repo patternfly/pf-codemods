@@ -67,6 +67,9 @@ function runCodemods(path, otherPaths, options) {
     options.exclude.split(',').forEach(rule => delete configs.recommended.rules[rule]);
   }
 
+  delete configs.recommended.parser;
+  delete configs.recommended.parserOptions;
+
   const engine = new CLIEngine({
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
     baseConfig: configs.recommended,
