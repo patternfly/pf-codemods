@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const options = require('eslint/lib/options');
+const fspath = require('path');
 const { CLIEngine } = require('eslint/lib/cli-engine');
 const { configs } = require('eslint-plugin-pf-codemods');
 const { Command } = require('commander');
@@ -74,7 +74,7 @@ async function runCodemods(path, otherPaths, options) {
     baseConfig: configs.recommended,
     ignore: true,
     ignorePattern: '**/node_modules/**',
-    configFile: false,
+    configFile: fspath.resolve(__dirname, '.eslintrc'),
     rulePaths: [],
     useEslintrc: false,
     cache: true,
