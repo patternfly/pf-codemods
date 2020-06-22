@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/patternfly/pf-codemods/compare/pf-codemods@1.1.14...pf-codemods@1.2.0) (2020-06-22)
+
+
+### Features
+
+* **npx:** remove 5s wait ([d575c9a](https://github.com/patternfly/pf-codemods/commit/d575c9a428b4f3e3ecda4ad44862a5b34ad4a377))
+
+
+
+
+
 ## [1.1.14](https://github.com/patternfly/pf-codemods/compare/pf-codemods@1.1.13...pf-codemods@1.1.14) (2020-06-22)
 
 **Note:** Version bump only for package pf-codemods
