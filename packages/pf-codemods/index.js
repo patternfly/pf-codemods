@@ -78,8 +78,7 @@ function runCodemods(path, otherPaths, options) {
     cache: true,
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
-    fix: options.fix,
-    resolvePluginsRelativeTo: __dirname
+    fix: options.fix
   });
   
   const report = engine.executeOnFiles(otherPaths.concat(path));
