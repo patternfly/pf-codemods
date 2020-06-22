@@ -78,7 +78,10 @@ function runCodemods(path, otherPaths, options) {
     cache: true,
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
-    fix: options.fix
+    fix: options.fix,
+    parser: '@typescript-eslint/parser',
+    parserOptions: { sourceType: "module", ecmaFeatures: { jsx: true } },
+    resolvePluginsRelativeTo: __dirname
   });
   
   const report = engine.executeOnFiles(otherPaths.concat(path));
