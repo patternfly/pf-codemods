@@ -53,9 +53,7 @@ function printResults(engine, results, format) {
   return true;
 }
 
-async function runCodemods(path, otherPaths, options) {
-  console.log('Waiting 5ss');
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+function runCodemods(path, otherPaths, options) {
   if (options.only) {
     // Set rules to error like eslint likes
     configs.recommended.rules = options.only
