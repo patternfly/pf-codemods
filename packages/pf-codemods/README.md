@@ -7,6 +7,9 @@ I hope these rules and their autofixers will help you more quickly adopt our bre
 ## Usage
 
 ### Simple case
+
+Requires Node.js >= 10.
+
 ```sh
 npx pf-codemods ./src
 ```

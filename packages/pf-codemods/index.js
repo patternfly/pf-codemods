@@ -54,7 +54,7 @@ function printResults(engine, results, format) {
 }
 
 async function runCodemods(path, otherPaths, options) {
-  console.log('Waiting 5s', process.cwd(), __dirname);
+  console.log('Waiting 5s');
   await new Promise((resolve) => setTimeout(resolve, 5000));
   if (options.only) {
     // Set rules to error like eslint likes
@@ -68,9 +68,6 @@ async function runCodemods(path, otherPaths, options) {
   if (options.exclude) {
     options.exclude.split(',').forEach(rule => delete configs.recommended.rules[rule]);
   }
-
-  delete configs.recommended.parser;
-  delete configs.recommended.parserOptions;
 
   const engine = new CLIEngine({
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
@@ -86,7 +83,8 @@ async function runCodemods(path, otherPaths, options) {
     fix: options.fix,
     parser: '@typescript-eslint/parser',
     parserOptions: { sourceType: "module", ecmaFeatures: { jsx: true } },
-    resolvePluginsRelativeTo: __dirname
+    // Allow `npx` to work its magic
+    cwd: __dirname
   });
   
   const report = engine.executeOnFiles(otherPaths.concat(path));
