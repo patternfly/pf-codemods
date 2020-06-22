@@ -30,10 +30,6 @@ jobs:
     - image: circleci/node:12
     steps:
     - checkout
-    - persist_to_workspace:
-        root: ~/project
-        paths:
-          - "*"
     - restore_cache:
         keys:
         - *js_deps_cache_key
@@ -55,7 +51,7 @@ jobs:
     docker:
     - image: circleci/node:12
     steps:
-    - *attach_workspace
+    - checkout
     - restore_cache:
         keys:
         - *js_deps_cache_key
