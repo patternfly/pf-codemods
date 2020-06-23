@@ -13,6 +13,10 @@ ruleTester.run("title-size", rule, {
     {
       code: `import { Title } from '@patternfly/react-core'; <Title size="4xl" />`,
     },
+    {
+      // No size attribute
+      code: `import { Title } from '@patternfly/react-core'; <Title />`,
+    },
   ],
   invalid: [
     {
