@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.36](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.35...eslint-plugin-pf-codemods@1.0.36) (2020-06-23)
+
+
+### Bug Fixes
+
+* **title-size:** check for sizeAttribute to be truthy before proceeding ([#117](https://github.com/patternfly/pf-codemods/issues/117)) ([a6510b5](https://github.com/patternfly/pf-codemods/commit/a6510b54d94cfbf2fca2034cf737d3020319b933))
+
+
+
+
+
 ## [1.0.35](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.34...eslint-plugin-pf-codemods@1.0.35) (2020-06-22)
 
 **Note:** Version bump only for package eslint-plugin-pf-codemods
