@@ -4,7 +4,10 @@
   "description": "PF codemods monorepo",
   "private": true,
   "scripts": {
-    "test": "mocha packages/eslint-plugin-pf-codemods/test/rules",
+    "test": "mocha packages/eslint-plugin-pf-codemods/test/rules/v5",
+    "test:v4": "mocha packages/eslint-plugin-pf-codemods/test/rules/v4",
+    "test:v5": "mocha packages/eslint-plugin-pf-codemods/test/rules/v5",
+    "test:all": "mocha packages/eslint-plugin-pf-codemods/test/rules/*",
     "test:single": "pf-codemods test/test.tsx",
     "test:koku": "pf-codemods test/koku-ui",
     "test:console": "pf-codemods test/console/frontend",
