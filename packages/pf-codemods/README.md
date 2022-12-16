@@ -94,7 +94,7 @@ Out:
 
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
-We've removed the deprecated `visiblity` prop. This rule will replace it with the correct spelled `visibility` prop.
+We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
 
 #### Examples
 
