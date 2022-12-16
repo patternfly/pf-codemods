@@ -1,6 +1,6 @@
 const { renameProp } = require('../../helpers');
 
-// https://github.com/patternfly/pf-codemods/issues/163
+// https://github.com/patternfly/patternfly-react/pull/8388
 module.exports = {
   meta: { fixable: 'code' },
   create: renameProp(
