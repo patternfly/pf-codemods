@@ -73,3 +73,21 @@ Out:
 ```jsx
 <ToolbarContent visibility={{ default: "hidden" }} />
 ```
+
+### tooltip-remove-props [(#8231)](https://github.com/patternfly/patternfly-react/pull/8231)
+
+We've removed the `boundary`, `tippyProps`, and `isAppLauncher` properties from Tooltip.
+
+#### Examples
+
+In:
+
+```jsx
+<Tooltip boundary={} tippyProps={} isAppLauncher />
+```
+
+Out:
+
+```jsx
+<Tooltip >
+```
