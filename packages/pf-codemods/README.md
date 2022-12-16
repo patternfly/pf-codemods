@@ -55,7 +55,7 @@ In:
 Out:
 
 ```jsx
-<DataList  />
+<DataList />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload  />
+<FileUpload />
 ```
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
@@ -108,6 +108,53 @@ Out:
 
 ```jsx
 <Pagination PaginationToggleTemplateProps />
+```
+
+### pagination-rename-props [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
+
+We've renamed and/or removed several props for Pagination:
+
+- `currPage`: `currPageAriaLabel`,
+- `paginationTitle`: `paginationAriaLabel`,
+- `toFirstPage`: `toFirstPageAriaLabel`,
+- `toLastPage`: `toLastPageAriaLabel`,
+- `toNextPage`: `toNextPageAriaLabel`,
+- `toPreviousPage`: `toPreviousPageAriaLabel`,
+- `optionsToggle`: `optionsToggleAriaLabel`,
+- `defaultToFullPage`: `isLastFullPageShown`,
+- `perPageComponenet`: removed
+
+#### Examples
+
+In:
+
+```jsx
+<Pagination
+  currPage='text'
+  paginationTitle='text'
+  toFirstPage='text'
+  toLastPage='text'
+  toNextPage='text'
+  toPreviousPage='text'
+  optionsToggle='text'
+  defaultToFullPage
+  perPageComponenet='div'
+/>
+```
+
+Out:
+
+```jsx
+<Pagination
+  currPageAriaLabel='text'
+  paginationAriaLabel='text'
+  toFirstPageAriaLabel='text'
+  toLastPageAriaLabel='text'
+  toNextPageAriaLabel='text'
+  toPreviousPageAriaLabel='text'
+  optionsToggleAriaLabel='text'
+  isLastFullPageShown
+/>
 ```
 
 ### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
@@ -129,7 +176,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable  />
+<TableComposable />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -172,7 +219,6 @@ Out:
 
 We've removed the `boundary`, `tippyProps`, and `isAppLauncher` properties from Tooltip.
 
-
 #### Examples
 
 In:
@@ -184,5 +230,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip     />
+<Tooltip />
 ```
