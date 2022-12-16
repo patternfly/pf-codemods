@@ -71,7 +71,7 @@ In:
 Out:
 
 ```jsx
-<Card  />
+<Card />
 ```
 
 ### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<DataList  />
+<DataList />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -141,7 +141,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload  />
+<FileUpload />
 ```
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
@@ -182,15 +182,15 @@ In:
 
 ```jsx
 <Pagination
-  currPage='text'
-  paginationTitle='text'
-  toFirstPage='text'
-  toLastPage='text'
-  toNextPage='text'
-  toPreviousPage='text'
-  optionsToggle='text'
+  currPage="text"
+  paginationTitle="text"
+  toFirstPage="text"
+  toLastPage="text"
+  toNextPage="text"
+  toPreviousPage="text"
+  optionsToggle="text"
   defaultToFullPage
-  perPageComponenet='div'
+  perPageComponenet="div"
 />
 ```
 
@@ -198,13 +198,13 @@ Out:
 
 ```jsx
 <Pagination
-  currPageAriaLabel='text'
-  paginationAriaLabel='text'
-  toFirstPageAriaLabel='text'
-  toLastPageAriaLabel='text'
-  toNextPageAriaLabel='text'
-  toPreviousPageAriaLabel='text'
-  optionsToggleAriaLabel='text'
+  currPageAriaLabel="text"
+  paginationAriaLabel="text"
+  toFirstPageAriaLabel="text"
+  toLastPageAriaLabel="text"
+  toNextPageAriaLabel="text"
+  toPreviousPageAriaLabel="text"
+  optionsToggleAriaLabel="text"
   isLastFullPageShown
 />
 ```
@@ -250,7 +250,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable  />
+<TableComposable />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -269,6 +269,24 @@ Out:
 
 ```jsx
 <SimpleList isActive />
+```
+
+### spinner-svg-default [(#8183)](https://github.com/patternfly/patternfly-react/pull/8183)
+
+We've updated the Spinner to default to an svg, so the `isSVG` property is no longer required.
+
+#### Examples
+
+In:
+
+```jsx
+<Spinner isSVG />
+```
+
+Out:
+
+```jsx
+<Spinner />
 ```
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
@@ -322,5 +340,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip     />
+<Tooltip />
 ```
