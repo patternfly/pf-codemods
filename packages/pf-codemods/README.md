@@ -108,21 +108,32 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+<<<<<<< HEAD
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've renamed the `large` prop value of `displaySize` to `lg`.
+=======
+### popover-remove-props [(#8201)](https://github.com/patternfly/patternfly-react/pull/8201)
+
+We've removed the `boundary` and `tippyProps` from Popover, as well as removed the first parameter of `shouldClose` and all parameters of `onHidden`, `onHide`, `onMount`, `onShow`, and `onShown`.
+>>>>>>> 0eb426e (feat(Popover): remove deprecated props and params)
 
 #### Examples
 
 In:
 
 ```jsx
+<<<<<<< HEAD
 <ExpandableSection displaySize="large" />
+=======
+<Popover boundary={} tippyProps={} shouldClose={(tip, hideFunction) => {/* ... */}} onHidden={(tip) => {/* ... */}} onHide={(tip) => {/* ... */}} onMount={(tip) => {/* ... */}} onShow={(tip) => {/* ... */}} onShown={(tip) => {/* ... */}} />
+>>>>>>> 0eb426e (feat(Popover): remove deprecated props and params)
 ```
 
 Out:
 
 ```jsx
+<<<<<<< HEAD
 <ExpandableSection displaySize="lg" />
 ```
 
@@ -331,6 +342,30 @@ Out:
 <Toggle toggleVariant="primary" />
 ```
 
+=======
+<Popover
+  shouldClose={(hideFunction) => {
+    /* ... */
+  }}
+  onHidden={() => {
+    /* ... */
+  }}
+  onHide={() => {
+    /* ... */
+  }}
+  onMount={() => {
+    /* ... */
+  }}
+  onShow={() => {
+    /* ... */
+  }}
+  onShown={() => {
+    /* ... */
+  }}
+/>
+```
+
+>>>>>>> 0eb426e (feat(Popover): remove deprecated props and params)
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
