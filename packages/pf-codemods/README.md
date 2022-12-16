@@ -1,6 +1,6 @@
 # pf-codemods
 
-Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@3.x.x code to 4.x.x.
+Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@4.x.x code to 5.x.x.
 
 I hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones.
 
@@ -56,6 +56,24 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### fileUpload-remove-onChange [(#8155)](https://github.com/patternfly/patternfly-react/pull/8155)
+
+We've removed the deprecated `onChange` prop. This rule will remove the prop from the FileUpload component and suggest replacing it with the `onFileInputChange`, `onTextChange`, `onDataChange`, and `onClearClick` props as needed.
+
+#### Examples
+
+In:
+
+```jsx
+<FileUpload onChange={onChange} />
+```
+
+Out:
+
+```jsx
+<FileUpload />
+```
+
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 
 We've removed the depracated `hasSelectableRowCaption` prop.
@@ -71,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable  />
+<TableComposable />
 ```
 
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
@@ -107,5 +125,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip     />
+<Tooltip />
 ```
