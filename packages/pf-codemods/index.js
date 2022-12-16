@@ -35,7 +35,7 @@ function printResults(engine, results, format) {
   }
 
   // Don't show warnings
-  results.forEach(result => result.messages = result.messages.filter(message => message.severity === 2));
+  // results.forEach(result => result.messages = result.messages.filter(message => message.severity === 2));
 
   const output = formatter(results, {
     get rulesMeta() {
