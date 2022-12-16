@@ -47,16 +47,17 @@ const rules = {
   "toolbar-remove-visiblity": require('./lib/rules/v5/toolbar-remove-visiblity'),
   "tooltip-remove-props": require('./lib/rules/v5/tooltip-remove-props'),
   "divider-remove-isVertical": require('./lib/rules/v5/divider-remove-isVertical'),
+  "resizeObserver-function-param": require('./lib/rules/v5/resizeObserver-function-param'),
 };
 
 module.exports = {
   configs: {
     recommended: {
-      plugins: ['pf-codemods'],
+      plugins: ["pf-codemods"],
       env: {
         browser: true,
         node: true,
-        es6: true
+        es6: true,
       },
       noInlineConfig: true,
       reportUnusedDisableDirectives: false,
@@ -64,14 +65,14 @@ module.exports = {
       parserOptions: {
         sourceType: "module",
         ecmaFeatures: {
-          jsx: true
-        }
+          jsx: true,
+        },
       },
       rules: Object.keys(rules).reduce((acc, rule) => {
         acc[`pf-codemods/${rule}`] = "error";
         return acc;
-      }, {})
-    }
+      }, {}),
+    },
   },
-  rules
+  rules,
 };
