@@ -4,11 +4,11 @@ const rule = require('../../../lib/rules/v5/divider-remove-isVertical');
 ruleTester.run("divider-remove-isVertical", rule, {
   valid: [
     {
-      code: `import { Divider } from '@patternfly/react-core'; <Divider />`,
+      code: `import { Divider } from '@patternfly/react-core'; <Divider orientation={{ default: 'vertical' }} />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Divider />`,
+      code: `<Divider isVertical />`,
     }
   ],
   invalid: [

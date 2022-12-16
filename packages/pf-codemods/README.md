@@ -40,6 +40,22 @@ Options:
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
+### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
+
+We've replaced the `isVertical` flag with the `orientation` property that can define verticality on different breakpoints.
+
+#### Examples
+
+```jsx
+<Divider isVertical />
+```
+
+Out:
+
+```jsx
+<Divider orientation={{ default: "vertical" }} />
+```
+
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule wil replace it with the correct spelled `visibility` prop.
