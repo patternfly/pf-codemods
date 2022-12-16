@@ -71,7 +71,7 @@ In:
 Out:
 
 ```jsx
-<Card  />
+<Card />
 ```
 
 ### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<DataList  />
+<DataList />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -141,7 +141,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload  />
+<FileUpload />
 ```
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
@@ -182,15 +182,15 @@ In:
 
 ```jsx
 <Pagination
-  currPage='text'
-  paginationTitle='text'
-  toFirstPage='text'
-  toLastPage='text'
-  toNextPage='text'
-  toPreviousPage='text'
-  optionsToggle='text'
+  currPage="text"
+  paginationTitle="text"
+  toFirstPage="text"
+  toLastPage="text"
+  toNextPage="text"
+  toPreviousPage="text"
+  optionsToggle="text"
   defaultToFullPage
-  perPageComponenet='div'
+  perPageComponenet="div"
 />
 ```
 
@@ -198,15 +198,57 @@ Out:
 
 ```jsx
 <Pagination
-  currPageAriaLabel='text'
-  paginationAriaLabel='text'
-  toFirstPageAriaLabel='text'
-  toLastPageAriaLabel='text'
-  toNextPageAriaLabel='text'
-  toPreviousPageAriaLabel='text'
-  optionsToggleAriaLabel='text'
+  currPageAriaLabel="text"
+  paginationAriaLabel="text"
+  toFirstPageAriaLabel="text"
+  toLastPageAriaLabel="text"
+  toNextPageAriaLabel="text"
+  toPreviousPageAriaLabel="text"
+  optionsToggleAriaLabel="text"
   isLastFullPageShown
 />
+```
+
+### remove-removeFindDomNode [(#8371)](https://github.com/patternfly/patternfly-react/pull/8371) [(#8316)](https://github.com/patternfly/patternfly-react/pull/8316)
+
+We've removed the `removeFindDomNode` property as it is now the default behavior. The affected components are as follows: ApplicationLauncher, ClipboardCopy, ContextSelector, Dropdown, NavItem, OptionsMenu, Popover, SearchInput, Select, OverflowTab, Timepicker, Tooltip, Truncate.
+
+#### Examples
+
+In:
+
+```jsx
+<ApplicationLauncher removeFindDomNode />
+<ClipboardCopy removeFindDomNode />
+<ContextSelector removeFindDomNode />
+<Dropdown removeFindDomNode />
+<NavItem removeFindDomNode />
+<OptionsMenu removeFindDomNode />
+<Popover removeFindDomNode />
+<SearchInput removeFindDomNode />
+<Select removeFindDomNode />
+<OverflowTab removeFindDomNode />
+<Timepicker removeFindDomNode />
+<Tooltip removeFindDomNode />
+<Truncate removeFindDomNode />
+```
+
+Out:
+
+```jsx
+<ApplicationLauncher  />
+<ClipboardCopy  />
+<ContextSelector  />
+<Dropdown  />
+<NavItem  />
+<OptionsMenu  />
+<Popover  />
+<SearchInput  />
+<Select  />
+<OverflowTab  />
+<Timepicker  />
+<Tooltip  />
+<Truncate  />
 ```
 
 ### remove-sticky-props [(#8220)](https://github.com/patternfly/patternfly-react/pull/8220)
@@ -250,7 +292,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable  />
+<TableComposable />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -322,5 +364,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip     />
+<Tooltip />
 ```

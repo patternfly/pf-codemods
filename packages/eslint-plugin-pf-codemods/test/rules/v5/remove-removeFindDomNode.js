@@ -8,91 +8,91 @@ ruleTester.run("remove-removeFindDomNode", rule, {
     },
     {
       // No @patternfly/react-core import
-      code: `<ApplicationLauncher />`,
+      code: `<ApplicationLauncher removeFindDomNode />`,
     },
     {
       code: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<ClipboardCopy />`,
+      code: `<ClipboardCopy removeFindDomNode />`,
     },
     {
       code: `import { ContextSelector } from '@patternfly/react-core'; <ContextSelector />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<ContextSelector />`,
+      code: `<ContextSelector removeFindDomNode />`,
     },
     {
       code: `import { Dropdown } from '@patternfly/react-core'; <Dropdown />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Dropdown />`,
+      code: `<Dropdown removeFindDomNode />`,
     },
     {
       code: `import { NavItem } from '@patternfly/react-core'; <NavItem />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<NavItem />`,
+      code: `<NavItem removeFindDomNode />`,
     },
     {
       code: `import { OptionsMenu } from '@patternfly/react-core'; <OptionsMenu />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<OptionsMenu />`,
+      code: `<OptionsMenu removeFindDomNode />`,
     },
     {
       code: `import { Popover } from '@patternfly/react-core'; <Popover />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Popover />`,
+      code: `<Popover removeFindDomNode />`,
     },
     {
       code: `import { SearchInput } from '@patternfly/react-core'; <SearchInput />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<SearchInput />`,
+      code: `<SearchInput removeFindDomNode />`,
     },
     {
       code: `import { Select } from '@patternfly/react-core'; <Select />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Select />`,
+      code: `<Select removeFindDomNode />`,
     },
     {
       code: `import { OverflowTab } from '@patternfly/react-core'; <OverflowTab />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<OverflowTab />`,
+      code: `<OverflowTab removeFindDomNode />`,
     },
     {
       code: `import { Timepicker } from '@patternfly/react-core'; <Timepicker />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Timepicker />`,
+      code: `<Timepicker removeFindDomNode />`,
     },
     {
       code: `import { Tooltip } from '@patternfly/react-core'; <Tooltip />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Tooltip />`,
+      code: `<Tooltip removeFindDomNode />`,
     },
     {
       code: `import { Truncate } from '@patternfly/react-core'; <Truncate />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<Truncate />`,
+      code: `<Truncate removeFindDomNode />`,
     }
   ],
   invalid: [
