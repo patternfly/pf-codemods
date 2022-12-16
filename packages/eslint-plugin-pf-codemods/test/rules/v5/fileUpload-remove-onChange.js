@@ -7,7 +7,7 @@ ruleTester.run("fileUpload-remove-onChange", rule, {
       code: `import { FileUpload } from '@patternfly/react-core'; <FileUpload />`,
     },
     // No @patternfly/react-core import
-    { code: "<FileUpload />" },
+    { code: "<FileUpload onChange />" },
   ],
   invalid: [
     {
