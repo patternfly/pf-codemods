@@ -40,6 +40,20 @@ Options:
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
+### card-remove-isHoverable [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
+
+We've removed the deprecated `isHoverable` prop from Card.
+
+```jsx
+<Card isHoverable />
+```
+
+Out:
+
+```jsx
+<Card  />
+```
+
 ### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel` props. This rule will remove them and suggest the user use the DragDrop component.
@@ -230,5 +244,9 @@ In:
 Out:
 
 ```jsx
+<<<<<<< HEAD
 <Tooltip     />
+=======
+<Card  />
+>>>>>>> 2bd2ef5 (feat(card): remove isHoverable)
 ```
