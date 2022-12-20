@@ -40,6 +40,24 @@ Options:
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
+### accordion-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
+
+We've renamed the `large` prop value of `displaySize` to `lg`.
+
+#### Examples
+
+In:
+
+```jsx
+<Accordion displaySize="large" />
+```
+
+Out:
+
+```jsx
+<Accordion displaySize="lg" />
+```
+
 ### card-remove-isHoverable [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
 
 We've removed the deprecated `isHoverable` prop from Card.
@@ -88,6 +106,24 @@ Out:
 
 ```jsx
 <Divider orientation={{ default: "vertical" }} />
+```
+
+### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
+
+We've renamed the `large` prop value of `displaySize` to `lg`.
+
+#### Examples
+
+In:
+
+```jsx
+<ExpandableSection displaySize="large" />
+```
+
+Out:
+
+```jsx
+<ExpandableSection displaySize="lg" />
 ```
 
 ### fileUpload-remove-onChange [(#8155)](https://github.com/patternfly/patternfly-react/pull/8155)
