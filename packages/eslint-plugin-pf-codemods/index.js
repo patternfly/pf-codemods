@@ -28,6 +28,7 @@ const rules = {
   "empty-state-icon-removed-props": require('./lib/rules/v4/empty-state-icon-removed-props'),
   "pagination-removed-variant": require('./lib/rules/v4/pagination-removed-variant'),
   "remove-isPseudo-props": require('./lib/rules/v4/remove-isPseudo-props'),
+  "remove-sticky-props": require('./lib/rules/v5/remove-sticky-props'),
   "label-remove-isCompact": require('./lib/rules/v4/label-remove-isCompact'),
   "rename-noPadding": require('./lib/rules/v4/rename-noPadding'),
   "tab-title-text": require('./lib/rules/v4/tab-title-text'),
