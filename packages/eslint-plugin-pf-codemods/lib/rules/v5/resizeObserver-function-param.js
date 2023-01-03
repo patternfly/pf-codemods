@@ -21,27 +21,23 @@ module.exports = {
                 message: `A third parameter, useRequestAnimationFrame, has been added to the getResizeObserver function.`,
                 suggest: [
                   {
-                    desc: "Pass in a value of false when the callback passed in is debounced. This maintains the previous functionality.",
+                    desc: "Omit the third argument or pass in a value of false when the callback passed in is debounced. This is the new default functionality.",
                     fix: function (fixer) {
-                      if (node.arguments.length !== 3) {
-                        const lastToken = context.getLastToken(node);
-                        const fixes = [
-                          fixer.insertTextBefore(lastToken, ", false"),
-                        ];
-                        return fixes;
-                      }
+                      const lastToken = context.getLastToken(node);
+                      const fixes = [
+                        fixer.insertTextBefore(lastToken, ", false"),
+                      ];
+                      return fixes;
                     },
                   },
                   {
-                    desc: "Omit the third argument or pass in a value of true if the callback passed in is not debounced. This is the new default functionality.",
+                    desc: "Pass in a value of true if the callback passed in is not debounced. This maintains the previous functionality.",
                     fix: function (fixer) {
-                      if (node.arguments.length !== 3) {
-                        const lastToken = context.getLastToken(node);
-                        const fixes = [
-                          fixer.insertTextBefore(lastToken, ", true"),
-                        ];
-                        return fixes;
-                      }
+                      const lastToken = context.getLastToken(node);
+                      const fixes = [
+                        fixer.insertTextBefore(lastToken, ", true"),
+                      ];
+                      return fixes;
                     },
                   },
                 ],

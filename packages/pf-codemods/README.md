@@ -55,7 +55,7 @@ In:
 Out:
 
 ```jsx
-<DataList  />
+<DataList />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -91,6 +91,10 @@ Out:
 ```jsx
 <FileUpload  />
 ```
+
+### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
+
+We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
 
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 
