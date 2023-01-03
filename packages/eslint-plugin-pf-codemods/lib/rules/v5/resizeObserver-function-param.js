@@ -45,15 +45,6 @@ module.exports = {
                     },
                   },
                 ],
-                // fix(fixer) {
-                //   if (node.arguments.length !== 3) {
-                //     const lastToken = context.getLastToken(node);
-                //     const fixes = [
-                //       fixer.insertTextBefore(lastToken, ", false"),
-                //     ];
-                //     return fixes;
-                //   }
-                // },
               });
             }
           },
