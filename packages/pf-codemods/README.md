@@ -89,5 +89,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip >
+<Tooltip     />
 ```
