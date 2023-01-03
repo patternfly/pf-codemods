@@ -13,155 +13,61 @@ module.exports = {
     return !popoverImport ? {} : {
       JSXElement(node) {
         if (popoverImport.local.name === node.openingElement.name.name) {
-          const boundaryAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'boundary');
-          const tippyAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'tippyProps');
+          const removeProps = ['boundary', 'tippyProps'];
           const shouldCloseAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'shouldClose');
-          const onHiddenAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'onHidden');
-          const onHideAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'onHide');
-          const onMountAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'onMount');
-          const onShowAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'onShow');
-          const onShownAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'onShown');
-
-
-          if (boundaryAttr) {
-            context.report({
-              node,
-              message: "Popover boundary prop has been removed.",
-              fix(fixer) {
-                const fixes = [];
-                fixes.push(fixer.replaceText(boundaryAttr, ''));
-                return fixes;
-              }
-            });
-          }
-
-          if (tippyAttr) {
-            context.report({
-              node,
-              message: "Popover tippyProps prop has been removed.",
-              fix(fixer) {
-                const fixes = [];
-                fixes.push(fixer.replaceText(tippyAttr, ''));
-                return fixes;
-              }
-            });
-          }
-
+          const removeFunctionParam = ['onHidden', 'onHide', 'onMount', 'onShow', 'onShown'];
+          removeProps.forEach(name => {
+            const attr = node.openingElement.attributes.find(attribute => attribute.name.name === name)
+            if (attr) {
+              context.report({
+                node,
+                message: "Popover " + attr.name.name + " prop has been removed.",
+                fix(fixer) {
+                  const fixes = [];
+                  fixes.push(fixer.replaceText(attr, ''));
+                  return fixes;
+                }
+              });
+            }
+          });
           if(shouldCloseAttr) {
             const params = shouldCloseAttr.value.expression.params;
             if(params.length === 2) { // only attempt to remove first param if 2 are passed
               const firstParam = params[0];
+              const secondParam = params[1];
               context.report({
                 node,
                 message: "Popover shouldClose function's first parameter has been removed.",
                 fix(fixer) {
                   const fixes = [];
-                  fixes.push(fixer.removeRange([firstParam.range[0], firstParam.range[1] + 1])); // remove first property and following comma
+                  fixes.push(fixer.removeRange([firstParam.range[0], secondParam.range[0]])); // remove first property
                   return fixes;
                 }
               });
             }
           }
-
-          if(onHiddenAttr) {
-            const funct = onHiddenAttr.value.expression;
-            if(funct.params.length === 1) {
-              const firstParam = funct.params[0];
-              context.report({
-                node,
-                message: "Popover onHidden function's parameter has been removed.",
-                fix(fixer) {
-                  const fixes = [];
-                  if (funct.range[0] === firstParam.range[0]) {
-                    fixes.push(fixer.replaceText(firstParam, '()'));
-                  } else  {
-                    fixes.push(fixer.remove(firstParam));
+          removeFunctionParam.forEach( name => {
+            const attr = node.openingElement.attributes.find(attribute => attribute.name.name === name)
+            if(attr) {
+              const funct = attr.value.expression;
+              if(funct.params.length === 1) {
+                const firstParam = funct.params[0];
+                context.report({
+                  node,
+                  message: "Popover " + attr.name.name + " function's parameter has been removed.",
+                  fix(fixer) {
+                    const fixes = [];
+                    if (funct.range[0] === firstParam.range[0]) {
+                      fixes.push(fixer.replaceText(firstParam, '()'));
+                    } else  {
+                      fixes.push(fixer.remove(firstParam));
+                    }
+                    return fixes;
                   }
-                  return fixes;
-                }
-              });
+                });
+              }
             }
-          }
-
-          if(onHideAttr) {
-            const funct = onHideAttr.value.expression;
-            if(funct.params.length === 1) {
-              const firstParam = funct.params[0];
-              context.report({
-                node,
-                message: "Popover onHide function's parameter has been removed.",
-                fix(fixer) {
-                  const fixes = [];
-                  if (funct.range[0] === firstParam.range[0]) {
-                    fixes.push(fixer.replaceText(firstParam, '()'));
-                  } else  {
-                    fixes.push(fixer.remove(firstParam));
-                  }
-                  return fixes;
-                }
-              });
-            }
-          }
-
-          if(onMountAttr) {
-            const funct = onMountAttr.value.expression;
-            if(funct.params.length === 1) {
-              const firstParam = funct.params[0];
-              context.report({
-                node,
-                message: "Popover onMount function's parameter has been removed.",
-                fix(fixer) {
-                  const fixes = [];
-                  if (funct.range[0] === firstParam.range[0]) {
-                    fixes.push(fixer.replaceText(firstParam, '()'));
-                  } else  {
-                    fixes.push(fixer.remove(firstParam));
-                  }
-                  return fixes;
-                }
-              });
-            }
-          }
-
-          if(onShowAttr) {
-            const funct = onShowAttr.value.expression;
-            if(funct.params.length === 1) {
-              const firstParam = funct.params[0];
-              context.report({
-                node,
-                message: "Popover onShow function's parameter has been removed.",
-                fix(fixer) {
-                  const fixes = [];
-                  if (funct.range[0] === firstParam.range[0]) {
-                    fixes.push(fixer.replaceText(firstParam, '()'));
-                  } else  {
-                    fixes.push(fixer.remove(firstParam));
-                  }
-                  return fixes;
-                }
-              });
-            }
-          }
-
-          if(onShownAttr) {
-            const funct = onShownAttr.value.expression;
-            if(funct.params.length === 1) {
-              const firstParam = funct.params[0];
-              context.report({
-                node,
-                message: "Popover onShown function's parameter has been removed.",
-                fix(fixer) {
-                  const fixes = [];
-                  if (funct.range[0] === firstParam.range[0]) {
-                    fixes.push(fixer.replaceText(firstParam, '()'));
-                  } else  {
-                    fixes.push(fixer.remove(firstParam));
-                  }
-                  return fixes;
-                }
-              });
-            }
-          }
+          });
         }
       }
     }

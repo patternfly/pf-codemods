@@ -26,7 +26,7 @@ ruleTester.run("popover-remove-props", rule, {
     },
     {
       code:   `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(tip, hideFunct) => {}} />`,
-      output: `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={( hideFunct) => {}} />`,
+      output: `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(hideFunct) => {}} />`,
       errors: [ 
       {
         message: "Popover shouldClose function's first parameter has been removed.",
