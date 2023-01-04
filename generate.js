@@ -11,10 +11,10 @@ console.log('Generating rule', newRuleName);
 // Write rule file
 fs.writeFileSync(path.join(
     __dirname,
-    'packages/eslint-plugin-pf-codemods/lib/rules',
+    'packages/eslint-plugin-pf-codemods/lib/rules/v5',
     `${newRuleName}.js`
   ),
-  `const { getPackageImports } = require('../helpers');
+  `const { getPackageImports } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/YOURNUMBERHERE
 module.exports = {
@@ -44,11 +44,11 @@ module.exports = {
 // Write test file
 fs.writeFileSync(path.join(
   __dirname,
-  'packages/eslint-plugin-pf-codemods/test/rules',
+  'packages/eslint-plugin-pf-codemods/test/rules/v5',
   `${newRuleName}.js`
 ),
-`const ruleTester = require('../ruletester');
-const rule = require('../../lib/rules/${newRuleName}');
+`const ruleTester = require('../../ruletester');
+const rule = require('../../../lib/rules/v5/${newRuleName}');
 
 ruleTester.run("${newRuleName}", rule, {
   valid: [
@@ -76,5 +76,5 @@ const ruleIndex = fs.readFileSync(ruleIndexPath, 'utf8');
 fs.writeFileSync(
   ruleIndexPath,
   // (ab)Use fact that `rules` object is at top of file
-  ruleIndex.replace("};", `  "${newRuleName}": require('./lib/rules/${newRuleName}'),\n};`)
+  ruleIndex.replace("};", `  "${newRuleName}": require('./lib/rules/v5/${newRuleName}'),\n};`)
 );
