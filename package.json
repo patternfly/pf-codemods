@@ -1,6 +1,6 @@
 {
   "name": "pf-codemods",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "PF codemods monorepo",
   "private": true,
   "scripts": {
