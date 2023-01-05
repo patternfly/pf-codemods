@@ -2,7 +2,7 @@ name: test
 on:
   workflow_call:
 jobs:
-  test_jest:
+  test:
     runs-on: ubuntu-latest
     env:
       GH_PR_NUM: ${{ github.event.number }}
