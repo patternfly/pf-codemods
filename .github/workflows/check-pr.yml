@@ -2,7 +2,7 @@ name: check-pr
 on:
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   test:
     uses: ./.github/workflows/test.yml
