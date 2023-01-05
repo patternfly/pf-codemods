@@ -1,6 +1,6 @@
 {
   "name": "pf-codemods",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Codemods for v4 breaking change release 2020.07",
   "author": "Red Hat",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "@typescript-eslint/parser": "^3.4.0",
     "commander": "^5.1.0",
     "eslint": "^7.3.0",
-    "eslint-plugin-pf-codemods": "^1.0.36",
+    "eslint-plugin-pf-codemods": "^1.0.37",
     "typescript": "^3.8.3"
   }
 }
