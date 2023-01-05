@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.36...eslint-plugin-pf-codemods@1.2.0) (2023-01-05)
+
+
+### Features
+
+* **Divider:** rename isVertical to orientation ([#177](https://github.com/patternfly/pf-codemods/issues/177)) ([33d04c4](https://github.com/patternfly/pf-codemods/commit/33d04c45429fd3b036e3dcba01be0e2d1dddd4fd))
+* **TableComposable:** remove hasSelectableRowCaption ([#192](https://github.com/patternfly/pf-codemods/issues/192)) ([bae6898](https://github.com/patternfly/pf-codemods/commit/bae689827c4815633cac0a04f4cc6829bae8f7da))
+* **Tooltip:** remove deprecated props ([#181](https://github.com/patternfly/pf-codemods/issues/181)) ([9bba680](https://github.com/patternfly/pf-codemods/commit/9bba680d9ba6eaa3c0f9164a8d7332f046f060e3))
+
+
+
+
+
 ## [1.0.36](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.35...eslint-plugin-pf-codemods@1.0.36) (2020-06-23)
 
 
