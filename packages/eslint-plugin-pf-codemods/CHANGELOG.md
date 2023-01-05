@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.9.1...@patternfly/eslint-plugin-pf-codemods@1.9.2) (2023-01-05)
+
+
+### Bug Fixes
+
+* **packaging:** make public ([385d2c0](https://github.com/patternfly/pf-codemods/commit/385d2c07e154c21e9a8da6a6b410b96c87f401c1))
+
+
+
+
+
 ## [1.9.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.9.0...@patternfly/eslint-plugin-pf-codemods@1.9.1) (2023-01-05)
 
 
