@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2023-01-05)
+
+
+### Features
+
+* **TableComposable:** remove hasSelectableRowCaption ([#192](https://github.com/patternfly/pf-codemods/issues/192)) ([bae6898](https://github.com/patternfly/pf-codemods/commit/bae689827c4815633cac0a04f4cc6829bae8f7da))
+
+
+
+
+
 ## [1.0.36](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.35...eslint-plugin-pf-codemods@1.0.36) (2020-06-23)
 
 

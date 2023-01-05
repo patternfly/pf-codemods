@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2023-01-05)
+
+
+### Features
+
+* **TableComposable:** remove hasSelectableRowCaption ([#192](https://github.com/patternfly/pf-codemods/issues/192)) ([bae6898](https://github.com/patternfly/pf-codemods/commit/bae689827c4815633cac0a04f4cc6829bae8f7da))
+
+
+
+
+
 ## [1.2.1](https://github.com/patternfly/pf-codemods/compare/pf-codemods@1.2.0...pf-codemods@1.2.1) (2020-06-23)
 
 **Note:** Version bump only for package pf-codemods
