@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.9.0 (2023-01-05)
+
+
+### Bug Fixes
+
+* **chip:** dont remove isReadOnly ([#109](https://github.com/patternfly/pf-codemods/issues/109)) ([dd86804](https://github.com/patternfly/pf-codemods/commit/dd86804579c0e3010aca53c7e3263bbaf1c71fca))
+* **packaging:** release packages under [@patternfly](https://github.com/patternfly) scope ([f190ba7](https://github.com/patternfly/pf-codemods/commit/f190ba7886deb0b183e70a36d617b44e03228da8))
+* **packaging:** update token name ([6692192](https://github.com/patternfly/pf-codemods/commit/6692192317598d9dff90cd859dd46568cf1f2713))
+* **packaging:** update versions ([dab4eba](https://github.com/patternfly/pf-codemods/commit/dab4eba773ce981cb7e313f42f9a2a32d7c6b9a4))
+* **packaging:** update versions ([95895a9](https://github.com/patternfly/pf-codemods/commit/95895a9610fe14d0f75fd891c2767e53aeb3cbc2))
+* **packaging:** update versions ([8470d2e](https://github.com/patternfly/pf-codemods/commit/8470d2e1ea944c26af29480e24727e113456ab5f))
+* **packaging:** update versions ([#199](https://github.com/patternfly/pf-codemods/issues/199)) ([740e0c1](https://github.com/patternfly/pf-codemods/commit/740e0c1ba8530f43bab4373527b468dc32e48ac7))
+* **title-size:** check for sizeAttribute to be truthy before proceeding ([#117](https://github.com/patternfly/pf-codemods/issues/117)) ([a6510b5](https://github.com/patternfly/pf-codemods/commit/a6510b54d94cfbf2fca2034cf737d3020319b933))
+
+
+### Features
+
+* **Divider:** rename isVertical to orientation ([#177](https://github.com/patternfly/pf-codemods/issues/177)) ([33d04c4](https://github.com/patternfly/pf-codemods/commit/33d04c45429fd3b036e3dcba01be0e2d1dddd4fd))
+* **TableComposable:** remove hasSelectableRowCaption ([#192](https://github.com/patternfly/pf-codemods/issues/192)) ([bae6898](https://github.com/patternfly/pf-codemods/commit/bae689827c4815633cac0a04f4cc6829bae8f7da))
+* **Tooltip:** remove deprecated props ([#181](https://github.com/patternfly/pf-codemods/issues/181)) ([9bba680](https://github.com/patternfly/pf-codemods/commit/9bba680d9ba6eaa3c0f9164a8d7332f046f060e3))
+
+
+
+
+
 # [1.8.0](https://github.com/patternfly/pf-codemods/compare/eslint-plugin-pf-codemods@1.0.36...eslint-plugin-pf-codemods@1.8.0) (2023-01-05)
 
 

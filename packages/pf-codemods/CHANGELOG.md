@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.11.0 (2023-01-05)
+
+
+### Bug Fixes
+
+* **packaging:** release packages under [@patternfly](https://github.com/patternfly) scope ([f190ba7](https://github.com/patternfly/pf-codemods/commit/f190ba7886deb0b183e70a36d617b44e03228da8))
+* **packaging:** update token name ([6692192](https://github.com/patternfly/pf-codemods/commit/6692192317598d9dff90cd859dd46568cf1f2713))
+* **packaging:** update versions ([dab4eba](https://github.com/patternfly/pf-codemods/commit/dab4eba773ce981cb7e313f42f9a2a32d7c6b9a4))
+* **packaging:** update versions ([95895a9](https://github.com/patternfly/pf-codemods/commit/95895a9610fe14d0f75fd891c2767e53aeb3cbc2))
+* **packaging:** update versions ([8470d2e](https://github.com/patternfly/pf-codemods/commit/8470d2e1ea944c26af29480e24727e113456ab5f))
+* **packaging:** update versions ([#199](https://github.com/patternfly/pf-codemods/issues/199)) ([740e0c1](https://github.com/patternfly/pf-codemods/commit/740e0c1ba8530f43bab4373527b468dc32e48ac7))
+
+
+### Features
+
+* **cli:** use commander and allow including/excluding rules ([#104](https://github.com/patternfly/pf-codemods/issues/104)) ([3e14dfd](https://github.com/patternfly/pf-codemods/commit/3e14dfd98ed3427f57ed35fd892a8df3b4fbf407))
+* **Divider:** rename isVertical to orientation ([#177](https://github.com/patternfly/pf-codemods/issues/177)) ([33d04c4](https://github.com/patternfly/pf-codemods/commit/33d04c45429fd3b036e3dcba01be0e2d1dddd4fd))
+* **npx:** remove 5s wait ([d575c9a](https://github.com/patternfly/pf-codemods/commit/d575c9a428b4f3e3ecda4ad44862a5b34ad4a377))
+* **TableComposable:** remove hasSelectableRowCaption ([#192](https://github.com/patternfly/pf-codemods/issues/192)) ([bae6898](https://github.com/patternfly/pf-codemods/commit/bae689827c4815633cac0a04f4cc6829bae8f7da))
+* **Tooltip:** remove deprecated props ([#181](https://github.com/patternfly/pf-codemods/issues/181)) ([9bba680](https://github.com/patternfly/pf-codemods/commit/9bba680d9ba6eaa3c0f9164a8d7332f046f060e3))
+
+
+
+
+
 # [1.10.0](https://github.com/patternfly/pf-codemods/compare/pf-codemods@1.2.1...pf-codemods@1.10.0) (2023-01-05)
 
 
