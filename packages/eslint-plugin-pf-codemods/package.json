@@ -5,6 +5,9 @@
   "main": "./index.js",
   "author": "Red Hat",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@typescript-eslint/parser": "^3.4.0",
     "eslint": ">=0.8.0",

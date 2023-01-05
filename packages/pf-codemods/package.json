@@ -10,6 +10,9 @@
   "engines": {
     "node": ">=8"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@typescript-eslint/parser": "^3.4.0",
     "commander": "^5.1.0",
