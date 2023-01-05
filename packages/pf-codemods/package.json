@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/pf-codemods",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "Codemods for v4 breaking change release 2020.07",
   "author": "Red Hat",
   "license": "MIT",
@@ -18,4 +18,3 @@
     "typescript": "^3.8.3"
   }
 }
-

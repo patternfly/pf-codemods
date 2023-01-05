@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/eslint-plugin-pf-codemods",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "ESLint plugin for PF codemods",
   "main": "./index.js",
   "author": "Red Hat",
@@ -11,4 +11,3 @@
     "typescript": "^3.8.3"
   }
 }
-
