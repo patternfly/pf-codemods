@@ -29,5 +29,5 @@ jobs:
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-      - name: PF4 Jest Tests
+      - name: Run tests
         run: yarn test --maxWorkers=2
