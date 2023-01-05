@@ -1,6 +1,6 @@
 {
   "name": "pf-codemods",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Codemods for v4 breaking change release 2020.07",
   "author": "Red Hat",
   "license": "MIT",
