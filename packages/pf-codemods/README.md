@@ -56,6 +56,24 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
+
+We've removed the depracated `hasSelectableRowCaption` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<TableComposable hasSelectableRowCaption />
+```
+
+Out:
+
+```jsx
+<TableComposable  />
+```
+
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule wil replace it with the correct spelled `visibility` prop.
