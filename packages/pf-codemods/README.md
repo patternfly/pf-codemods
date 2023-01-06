@@ -55,7 +55,7 @@ In:
 Out:
 
 ```jsx
-<DataList />
+<DataList  />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
