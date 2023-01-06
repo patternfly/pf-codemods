@@ -8,7 +8,7 @@ ruleTester.run("toolbar-remove-visiblity", rule, {
     },
     {
       // No @patternfly/react-core import
-      code: `<ToolbarContent visibility />`,
+      code: `<ToolbarContent visiblity />`,
     }
   ],
   invalid: [
