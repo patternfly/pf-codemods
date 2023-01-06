@@ -2,7 +2,7 @@ name: release
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   test:
     uses: ./.github/workflows/test.yml
@@ -33,9 +33,9 @@ jobs:
         name: Cache npm deps
         with:
           path: |
-           node_modules
-           **/node_modules
-           ~/.cache/Cypress
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
