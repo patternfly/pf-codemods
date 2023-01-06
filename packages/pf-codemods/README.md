@@ -92,6 +92,24 @@ Out:
 <FileUpload  />
 ```
 
+### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
+
+We've removed the depracated `ToggleTemplateProps` prop and replaced it with `PaginationToggleTemplateProps`.
+
+#### Examples
+
+In:
+
+```jsx
+<Pagination ToggleTemplateProps />
+```
+
+Out:
+
+```jsx
+<Pagination PaginationToggleTemplateProps />
+```
+
 ### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
