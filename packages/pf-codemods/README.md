@@ -71,7 +71,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload />
+<FileUpload  />
 ```
 
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable />
+<TableComposable  />
 ```
 
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
@@ -125,5 +125,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip />
+<Tooltip     />
 ```
