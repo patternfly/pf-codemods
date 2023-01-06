@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.10.0...@patternfly/eslint-plugin-pf-codemods@1.11.0) (2023-01-06)
+
+
+### Features
+
+* **FileUpload:** remove onChange prop ([#175](https://github.com/patternfly/pf-codemods/issues/175)) ([2777b80](https://github.com/patternfly/pf-codemods/commit/2777b80f76f3dbe623ea482c779d41e8ec45c7ee))
+
+
+
+
+
 # [1.10.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.9.2...@patternfly/eslint-plugin-pf-codemods@1.10.0) (2023-01-06)
 
 
