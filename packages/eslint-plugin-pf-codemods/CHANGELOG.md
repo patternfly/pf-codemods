@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.11.0...@patternfly/eslint-plugin-pf-codemods@1.12.0) (2023-01-06)
+
+
+### Features
+
+* **ResizeObserver:** added new parameter ([#179](https://github.com/patternfly/pf-codemods/issues/179)) ([dfa554f](https://github.com/patternfly/pf-codemods/commit/dfa554f846b5dd41cd1229fb5e4a509c306a708b))
+
+
+
+
+
 # [1.11.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.10.0...@patternfly/eslint-plugin-pf-codemods@1.11.0) (2023-01-06)
 
 
