@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.11.3...@patternfly/pf-codemods@1.12.0) (2023-01-06)
+
+
+### Features
+
+* **dataList:** remove ondrag props ([#174](https://github.com/patternfly/pf-codemods/issues/174)) ([6d1c443](https://github.com/patternfly/pf-codemods/commit/6d1c4437f46bbc678215671295aa93bca598052d))
+
+
+
+
+
 ## [1.11.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.11.2...@patternfly/pf-codemods@1.11.3) (2023-01-06)
 
 
