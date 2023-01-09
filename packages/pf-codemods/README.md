@@ -110,6 +110,53 @@ Out:
 <Pagination PaginationToggleTemplateProps />
 ```
 
+### pagination-rename-props [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
+
+We've renamed and/or removed several props for Pagination:
+
+- `currPage`: `currPageAriaLabel`,
+- `paginationTitle`: `paginationAriaLabel`,
+- `toFirstPage`: `toFirstPageAriaLabel`,
+- `toLastPage`: `toLastPageAriaLabel`,
+- `toNextPage`: `toNextPageAriaLabel`,
+- `toPreviousPage`: `toPreviousPageAriaLabel`,
+- `optionsToggle`: `optionsToggleAriaLabel`,
+- `defaultToFullPage`: `isLastFullPageShown`,
+- `perPageComponenet`: removed
+
+#### Examples
+
+In:
+
+```jsx
+<Pagination
+  currPage='text'
+  paginationTitle='text'
+  toFirstPage='text'
+  toLastPage='text'
+  toNextPage='text'
+  toPreviousPage='text'
+  optionsToggle='text'
+  defaultToFullPage
+  perPageComponenet='div'
+/>
+```
+
+Out:
+
+```jsx
+<Pagination
+  currPageAriaLabel='text'
+  paginationAriaLabel='text'
+  toFirstPageAriaLabel='text'
+  toLastPageAriaLabel='text'
+  toNextPageAriaLabel='text'
+  toPreviousPageAriaLabel='text'
+  optionsToggleAriaLabel='text'
+  isLastFullPageShown
+/>
+```
+
 ### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
@@ -171,7 +218,6 @@ Out:
 ### tooltip-remove-props [(#8231)](https://github.com/patternfly/patternfly-react/pull/8231)
 
 We've removed the `boundary`, `tippyProps`, and `isAppLauncher` properties from Tooltip.
-
 
 #### Examples
 
