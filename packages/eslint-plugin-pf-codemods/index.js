@@ -1,4 +1,5 @@
 const rules = {
+  "accordion-rename-displaySize-large": require('./lib/rules/v5/accordion-rename-displaySize-large'),
   "accordion-remove-noBoxShadow": require('./lib/rules/v4/accordion-remove-noBoxShadow'),
   "application-launcher-rename-dropdownItems": require('./lib/rules/v4/application-launcher-rename-dropdownItems'),
   "aria-props": require('./lib/rules/v4/aria-props'),
@@ -36,6 +37,7 @@ const rules = {
   "no-unused-imports": require('./lib/rules/v4/no-unused-imports'),
   "tab-rename-variant": require('./lib/rules/v4/tab-rename-variant'),
   "form-fix-isValid": require('./lib/rules/v4/form-fix-isValid'),
+  "expandable-section-rename-displaySize-large": require('./lib/rules/v5/expandable-section-rename-displaySize-large'),
   "expandable-rename-expandablesection": require('./lib/rules/v4/expandable-rename-expandablesection'),
   "rename-toolbar-components": require('./lib/rules/v4/rename-toolbar-components'),
   "page-header-prop-rename": require('./lib/rules/v4/page-header-prop-rename'),
