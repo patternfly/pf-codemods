@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.12.0...@patternfly/eslint-plugin-pf-codemods@1.13.0) (2023-01-09)
+
+
+### Features
+
+* **simpleList:** rename isCurrent to isActive ([#186](https://github.com/patternfly/pf-codemods/issues/186)) ([f352983](https://github.com/patternfly/pf-codemods/commit/f352983f37fc228d7a9c8cbc57c857bbe8588dbd))
+
+
+
+
+
 # [1.12.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.11.0...@patternfly/eslint-plugin-pf-codemods@1.12.0) (2023-01-06)
 
 
