@@ -9,7 +9,7 @@ const lowerCasedComponentName = componentName[0].toLowerCase() + componentName.s
 const newRuleName = `${lowerCasedComponentName}-remove-${oldPropName}`
 
 if (!componentName || !oldPropName || !newPropName || !referencePR) {
-  console.log('usage: node generate [componentName] [oldPropName] [newPropName] [referencePR]');
+  console.log('usage: node generate-replace-prop-v5 [componentName] [oldPropName] [newPropName] [referencePR]');
   process.exit(1);
 }
 

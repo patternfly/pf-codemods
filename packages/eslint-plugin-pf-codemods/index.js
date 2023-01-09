@@ -47,6 +47,7 @@ const rules = {
   "datalist-remove-ondrags": require('./lib/rules/v5/datalist-remove-ondrags'),
   "divider-remove-isVertical": require('./lib/rules/v5/divider-remove-isVertical'),
   "fileUpload-remove-onChange": require('./lib/rules/v5/fileUpload-remove-onChange'),
+  "pagination-remove-ToggleTemplateProps": require('./lib/rules/v5/pagination-remove-ToggleTemplateProps'),
   "resizeObserver-function-param": require('./lib/rules/v5/resizeObserver-function-param'),
   "simpleList-remove-isCurrent": require('./lib/rules/v5/simpleList-remove-isCurrent'),
   "tableComposable-remove-hasSelectableRowCaption": require('./lib/rules/v5/tableComposable-remove-hasSelectableRowCaption'),
