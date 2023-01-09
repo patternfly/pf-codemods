@@ -44,6 +44,8 @@ These rules are based off the breaking change notes for React. Each rule links t
 
 We've removed the deprecated `isHoverable` prop from Card.
 
+In:
+
 ```jsx
 <Card isHoverable />
 ```
@@ -244,9 +246,5 @@ In:
 Out:
 
 ```jsx
-<<<<<<< HEAD
 <Tooltip     />
-=======
-<Card  />
->>>>>>> 2bd2ef5 (feat(card): remove isHoverable)
 ```
