@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.15.0...@patternfly/pf-codemods@1.16.0) (2023-01-09)
+
+
+### Features
+
+* **Pagination:** replace toggleTemplateProps with paginationToggleTemplateProps ([#201](https://github.com/patternfly/pf-codemods/issues/201)) ([08126b5](https://github.com/patternfly/pf-codemods/commit/08126b53e1dd656b3b46440af0e79e31b1e97cf5))
+
+
+
+
+
 # [1.15.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.14.0...@patternfly/pf-codemods@1.15.0) (2023-01-09)
 
 
