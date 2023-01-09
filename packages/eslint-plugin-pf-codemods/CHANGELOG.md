@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.15.0...@patternfly/eslint-plugin-pf-codemods@1.16.0) (2023-01-09)
+
+
+### Features
+
+* **card:** remove isHoverable ([#183](https://github.com/patternfly/pf-codemods/issues/183)) ([ea466ae](https://github.com/patternfly/pf-codemods/commit/ea466aefeea33c2ad379c2bd28151f41809bf18a))
+
+
+
+
+
 # [1.15.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.14.0...@patternfly/eslint-plugin-pf-codemods@1.15.0) (2023-01-09)
 
 
