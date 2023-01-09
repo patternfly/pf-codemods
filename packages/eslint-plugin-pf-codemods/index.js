@@ -44,11 +44,11 @@ const rules = {
   "chartVoronoiContainer-remove-allowTooltip": require('./lib/rules/v4/chartVoronoiContainer-remove-allowTooltip'),
   "chart-remove-allowZoom": require('./lib/rules/v4/chartVoronoiContainer-remove-allowTooltip'),
   "react-icons-remove-icon": require('./lib/rules/v4/react-icons-remove-icon'),
-  
   "datalist-remove-ondrags": require('./lib/rules/v5/datalist-remove-ondrags'),
   "divider-remove-isVertical": require('./lib/rules/v5/divider-remove-isVertical'),
   "fileUpload-remove-onChange": require('./lib/rules/v5/fileUpload-remove-onChange'),
   "resizeObserver-function-param": require('./lib/rules/v5/resizeObserver-function-param'),
+  "simpleList-remove-isCurrent": require('./lib/rules/v5/simpleList-remove-isCurrent'),
   "tableComposable-remove-hasSelectableRowCaption": require('./lib/rules/v5/tableComposable-remove-hasSelectableRowCaption'),
   "toolbar-remove-visiblity": require('./lib/rules/v5/toolbar-remove-visiblity'),
   "tooltip-remove-props": require('./lib/rules/v5/tooltip-remove-props'),

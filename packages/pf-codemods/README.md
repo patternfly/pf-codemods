@@ -114,6 +114,24 @@ Out:
 <TableComposable  />
 ```
 
+### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
+
+We've removed the deprecated the `isCurrent` prop. This rule wil replace it with `isActive`.
+
+#### Examples
+
+In:
+
+```jsx
+<SimpleList isCurrent />
+```
+
+Out:
+
+```jsx
+<SimpleList isActive />
+```
+
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
@@ -135,6 +153,7 @@ Out:
 ### tooltip-remove-props [(#8231)](https://github.com/patternfly/patternfly-react/pull/8231)
 
 We've removed the `boundary`, `tippyProps`, and `isAppLauncher` properties from Tooltip.
+
 
 #### Examples
 
