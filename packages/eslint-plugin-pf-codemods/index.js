@@ -17,6 +17,7 @@ const rules = {
   "background-image-src-enum": require('./lib/rules/v4/background-image-src-enum'),
   "skip-to-content-remove-component": require('./lib/rules/v4/skip-to-content-remove-component'),
   "alert-new-action": require('./lib/rules/v4/alert-new-action'),
+  "card-remove-isHoverable": require('./lib/rules/v5/card-remove-isHoverable'),
   "card-rename-components": require('./lib/rules/v4/card-rename-components'),
   "chipgroup-remove-props": require('./lib/rules/v4/chipgroup-remove-props'),
   "chipgroup-remove-chipbutton": require('./lib/rules/v4/chipgroup-remove-chipbutton'),
