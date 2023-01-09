@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.16.0...@patternfly/eslint-plugin-pf-codemods@1.17.0) (2023-01-09)
+
+
+### Features
+
+* **accordion, expandablesection:** rename displaySize prop value ([#184](https://github.com/patternfly/pf-codemods/issues/184)) ([e87b618](https://github.com/patternfly/pf-codemods/commit/e87b6189489f857f78154d66df0f5ff371aa5989))
+
+
+
+
+
 # [1.16.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.15.0...@patternfly/eslint-plugin-pf-codemods@1.16.0) (2023-01-09)
 
 
