@@ -368,6 +368,48 @@ Out:
 <Spinner  />
 ```
 
+### tabs-rename-hasBorderBottom [(#8517)](https://github.com/patternfly/patternfly-react/pull/8517)
+
+We've renamed the `hasBorderBottom` prop to `hasNoBorderBottom`.
+
+#### Examples
+
+In:
+
+```jsx
+<Tabs hasBorderBottom />
+<Tabs hasBorderBottom={true} />
+<Tabs hasBorderBottom={false} />
+<Tabs hasBorderBottom={someVar} />
+```
+
+Out:
+
+```jsx
+<Tabs  />
+<Tabs  />
+<Tabs hasNoBorderBottom />
+<Tabs hasNoBorderBottom={!someVar} />
+```
+
+### tabs-rename-hasSecondaryBorderBottom [(#8517)](https://github.com/patternfly/patternfly-react/pull/8517)
+
+We've removed the deprecated `hasSecondaryBorderBottom` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<Tabs hasSecondaryBorderBottom />
+```
+
+Out:
+
+```jsx
+<Tabs  />
+```
+
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
