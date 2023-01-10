@@ -249,6 +249,24 @@ Out:
 <SimpleList isActive />
 ```
 
+### toggle-remove-isprimary [(#8212)](https://github.com/patternfly/patternfly-react/pull/8179)
+
+We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<Toggle isPrimary />
+```
+
+Out:
+
+```jsx
+<Toggle toggleVariant="primary" />
+```
+
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
