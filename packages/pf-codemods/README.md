@@ -71,7 +71,7 @@ In:
 Out:
 
 ```jsx
-<Card />
+<Card  />
 ```
 
 ### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<DataList />
+<DataList  />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -105,7 +105,7 @@ We've replaced the `isVertical` flag with the `orientation` property that can de
 Out:
 
 ```jsx
-<Divider orientation={{default: "vertical"}} />
+<Divider orientation={{ default: "vertical" }} />
 ```
 
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
@@ -141,7 +141,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload />
+<FileUpload  />
 ```
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
@@ -182,15 +182,15 @@ In:
 
 ```jsx
 <Pagination
-  currPage="text"
-  paginationTitle="text"
-  toFirstPage="text"
-  toLastPage="text"
-  toNextPage="text"
-  toPreviousPage="text"
-  optionsToggle="text"
+  currPage='text'
+  paginationTitle='text'
+  toFirstPage='text'
+  toLastPage='text'
+  toNextPage='text'
+  toPreviousPage='text'
+  optionsToggle='text'
   defaultToFullPage
-  perPageComponenet="div"
+  perPageComponenet='div'
 />
 ```
 
@@ -198,13 +198,13 @@ Out:
 
 ```jsx
 <Pagination
-  currPageAriaLabel="text"
-  paginationAriaLabel="text"
-  toFirstPageAriaLabel="text"
-  toLastPageAriaLabel="text"
-  toNextPageAriaLabel="text"
-  toPreviousPageAriaLabel="text"
-  optionsToggleAriaLabel="text"
+  currPageAriaLabel='text'
+  paginationAriaLabel='text'
+  toFirstPageAriaLabel='text'
+  toLastPageAriaLabel='text'
+  toNextPageAriaLabel='text'
+  toPreviousPageAriaLabel='text'
+  optionsToggleAriaLabel='text'
   isLastFullPageShown
 />
 ```
@@ -250,7 +250,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable />
+<TableComposable  />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -280,13 +280,13 @@ We've removed the deprecated `visiblity` prop. This rule will replace it with th
 In:
 
 ```jsx
-<ToolbarContent visiblity={{default: "hidden"}} />
+<ToolbarContent visiblity={{ default: "hidden" }} />
 ```
 
 Out:
 
 ```jsx
-<ToolbarContent visibility={{default: "hidden"}} />
+<ToolbarContent visibility={{ default: "hidden" }} />
 ```
 
 ### tooltip-remove-props [(#8231)](https://github.com/patternfly/patternfly-react/pull/8231)
@@ -304,5 +304,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip />
+<Tooltip     />
 ```
