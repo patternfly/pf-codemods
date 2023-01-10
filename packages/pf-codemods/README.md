@@ -209,6 +209,28 @@ Out:
 />
 ```
 
+### remove-sticky-props [(#8220)](https://github.com/patternfly/patternfly-react/pull/8220)
+
+We've removed the deprecated `sticky` prop from `PageSection`, `PageGroup`, `PageNavigation`, and `PageBreadcrumb`.
+
+In:
+
+```jsx
+<PageSection sticky="top" />
+<PageGroup sticky="top" />
+<PageNavigation sticky="top" />
+<PageBreadcrumb sticky="top" />
+```
+
+Out:
+
+```jsx
+<PageSection  />
+<PageGroup  />
+<PageNavigation  />
+<PageBreadcrumb  />
+```
+
 ### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
