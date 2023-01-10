@@ -249,7 +249,7 @@ Out:
 <SimpleList isActive />
 ```
 
-### toggle-remove-isprimary [(#8212)](https://github.com/patternfly/patternfly-react/pull/8179)
+### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
 
