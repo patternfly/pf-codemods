@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.19.0...@patternfly/pf-codemods@1.20.0) (2023-01-10)
+
+
+### Features
+
+* **page components:** remove sticky prop ([#185](https://github.com/patternfly/pf-codemods/issues/185)) ([778ff8c](https://github.com/patternfly/pf-codemods/commit/778ff8cfa888c50d2bc6a1c61dd918ff1e554c79))
+
+
+
+
+
 # [1.19.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.18.0...@patternfly/pf-codemods@1.19.0) (2023-01-09)
 
 
