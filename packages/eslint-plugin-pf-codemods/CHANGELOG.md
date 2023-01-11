@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.18.0...@patternfly/eslint-plugin-pf-codemods@1.19.0) (2023-01-11)
+
+
+### Features
+
+* **Toggle:** replace isPrimary with toggleVariant="primary" ([#204](https://github.com/patternfly/pf-codemods/issues/204)) ([4373bbc](https://github.com/patternfly/pf-codemods/commit/4373bbc16c3e756a4b358820edaa24269603a8c5))
+
+
+
+
+
 # [1.18.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.17.0...@patternfly/eslint-plugin-pf-codemods@1.18.0) (2023-01-10)
 
 
