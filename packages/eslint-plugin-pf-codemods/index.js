@@ -56,6 +56,7 @@ const rules = {
   "resizeObserver-function-param": require('./lib/rules/v5/resizeObserver-function-param'),
   "simpleList-remove-isCurrent": require('./lib/rules/v5/simpleList-remove-isCurrent'),
   "tableComposable-remove-hasSelectableRowCaption": require('./lib/rules/v5/tableComposable-remove-hasSelectableRowCaption'),
+  "toggle-remove-isPrimary": require('./lib/rules/v5/toggle-remove-isPrimary'),
   "toolbar-remove-visiblity": require('./lib/rules/v5/toolbar-remove-visiblity'),
   "tooltip-remove-props": require('./lib/rules/v5/tooltip-remove-props'),
 };
