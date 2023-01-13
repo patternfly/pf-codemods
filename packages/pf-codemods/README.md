@@ -62,6 +62,8 @@ Out:
 
 We've removed the deprecated `isHoverable` prop from Card.
 
+#### Examples
+
 In:
 
 ```jsx
@@ -74,7 +76,27 @@ Out:
 <Card  />
 ```
 
-### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
+### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
+
+We've removed the PopoverPosition type for the `position` prop on both ClipboardCopy and ClipboardCopyButton.
+
+#### Examples
+
+In:
+
+```jsx
+<ClipboardCopy position={PopoverPosition.top} />
+<ClipboardCopyButton position={PopoverPosition.bottom} />
+```
+
+Out:
+
+```jsx
+<ClipboardCopy position="top" />
+<ClipboardCopyButton position="bottom" />
+```
+
+### datalist-remove-ondrags [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel` props. This rule will remove them and suggest the user use the DragDrop component.
 
