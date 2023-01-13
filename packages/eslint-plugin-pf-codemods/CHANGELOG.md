@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.19.1...@patternfly/eslint-plugin-pf-codemods@1.20.0) (2023-01-13)
+
+
+### Features
+
+* **Popover:** remove deprecated props and params ([#180](https://github.com/patternfly/pf-codemods/issues/180)) ([881809f](https://github.com/patternfly/pf-codemods/commit/881809f198b0f8ab30c39507d488ebf0aa18a3c0))
+
+
+
+
+
 ## [1.19.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.19.0...@patternfly/eslint-plugin-pf-codemods@1.19.1) (2023-01-12)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
