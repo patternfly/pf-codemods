@@ -60,6 +60,7 @@ const rules = {
   "toolbar-remove-visiblity": require('./lib/rules/v5/toolbar-remove-visiblity'),
   "tooltip-remove-props": require('./lib/rules/v5/tooltip-remove-props'),
   "remove-removeFindDomNode": require('./lib/rules/v5/remove-removeFindDomNode'),
+  "popover-remove-props": require('./lib/rules/v5/popover-remove-props'),
 };
 
 module.exports = {

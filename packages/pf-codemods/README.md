@@ -71,7 +71,7 @@ In:
 Out:
 
 ```jsx
-<Card />
+<Card  />
 ```
 
 ### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<DataList />
+<DataList  />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -141,7 +141,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload />
+<FileUpload  />
 ```
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
@@ -206,6 +206,43 @@ Out:
   toPreviousPageAriaLabel="text"
   optionsToggleAriaLabel="text"
   isLastFullPageShown
+/>
+```
+
+### popover-remove-props [(#8201)](https://github.com/patternfly/patternfly-react/pull/8201)
+
+We've removed the `boundary` and `tippyProps` from Popover, as well as removed the first parameter of `shouldClose` and all parameters of `onHidden`, `onHide`, `onMount`, `onShow`, and `onShown`.
+
+#### Examples
+
+In:
+
+```jsx
+<Popover boundary={} tippyProps={} shouldClose={(tip, hideFunction) => {/* ... */}} onHidden={(tip) => {/* ... */}} onHide={(tip) => {/* ... */}} onMount={(tip) => {/* ... */}} onShow={(tip) => {/* ... */}} onShown={(tip) => {/* ... */}} />
+```
+
+Out:
+
+```jsx
+<Popover
+  shouldClose={(hideFunction) => {
+    /* ... */
+  }}
+  onHidden={() => {
+    /* ... */
+  }}
+  onHide={() => {
+    /* ... */
+  }}
+  onMount={() => {
+    /* ... */
+  }}
+  onShow={() => {
+    /* ... */
+  }}
+  onShown={() => {
+    /* ... */
+  }}
 />
 ```
 
@@ -292,7 +329,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable />
+<TableComposable  />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -364,5 +401,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip />
+<Tooltip     />
 ```
