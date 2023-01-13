@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fspath = require('path');
 const { CLIEngine } = require('eslint/lib/cli-engine');
-const { configs } = require('eslint-plugin-pf-codemods');
+const { configs } = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
 const program = new Command();
 
@@ -33,9 +33,6 @@ function printResults(engine, results, format) {
     log.error(e.message);
     return false;
   }
-
-  // Don't show warnings
-  results.forEach(result => result.messages = result.messages.filter(message => message.severity === 2));
 
   const output = formatter(results, {
     get rulesMeta() {
