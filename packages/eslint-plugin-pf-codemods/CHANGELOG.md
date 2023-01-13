@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.20.0...@patternfly/eslint-plugin-pf-codemods@1.21.0) (2023-01-13)
+
+
+### Features
+
+* **Spinner:** remove isSVG ([#182](https://github.com/patternfly/pf-codemods/issues/182)) ([bb6522b](https://github.com/patternfly/pf-codemods/commit/bb6522b367a2b357b0422ca723acd654e177e2ce))
+
+
+
+
+
 # [1.20.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.19.1...@patternfly/eslint-plugin-pf-codemods@1.20.0) (2023-01-13)
 
 

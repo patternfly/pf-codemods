@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.22.0...@patternfly/pf-codemods@1.23.0) (2023-01-13)
+
+
+### Features
+
+* **Spinner:** remove isSVG ([#182](https://github.com/patternfly/pf-codemods/issues/182)) ([bb6522b](https://github.com/patternfly/pf-codemods/commit/bb6522b367a2b357b0422ca723acd654e177e2ce))
+
+
+
+
+
 # [1.22.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.21.1...@patternfly/pf-codemods@1.22.0) (2023-01-13)
 
 
