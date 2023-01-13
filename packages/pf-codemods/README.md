@@ -350,6 +350,24 @@ Out:
 <SimpleList isActive />
 ```
 
+### spinner-svg-default [(#8183)](https://github.com/patternfly/patternfly-react/pull/8183)
+
+We've updated the Spinner to default to an svg, so the `isSVG` property is no longer required.
+
+#### Examples
+
+In:
+
+```jsx
+<Spinner isSVG />
+```
+
+Out:
+
+```jsx
+<Spinner  />
+```
+
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
