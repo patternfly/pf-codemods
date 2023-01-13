@@ -55,6 +55,7 @@ const rules = {
   "pagination-rename-props": require('./lib/rules/v5/pagination-rename-props'),
   "resizeObserver-function-param": require('./lib/rules/v5/resizeObserver-function-param'),
   "simpleList-remove-isCurrent": require('./lib/rules/v5/simpleList-remove-isCurrent'),
+  "spinner-svg-default": require('./lib/rules/v5/spinner-svg-default'),
   "tableComposable-remove-hasSelectableRowCaption": require('./lib/rules/v5/tableComposable-remove-hasSelectableRowCaption'),
   "toggle-remove-isPrimary": require('./lib/rules/v5/toggle-remove-isPrimary'),
   "toolbar-remove-visiblity": require('./lib/rules/v5/toolbar-remove-visiblity'),
