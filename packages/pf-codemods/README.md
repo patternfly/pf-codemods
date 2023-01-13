@@ -76,6 +76,24 @@ Out:
 <Card  />
 ```
 
+### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
+
+We've removed the `getResizeObserver` function from react-charts in favor of react-core's `getResizeObserver`. This helper function now has a third parameter, `useRequestAnimationFrame`, and allows a single function to be maintained going forward.
+
+#### Examples
+
+In:
+
+```jsx
+import { getResizeObserver } from '@patternfly/react-charts';
+```
+
+Out:
+
+```jsx
+import { getResizeObserver } from '@patternfly/react-core';
+```
+
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
 
 We've removed the PopoverPosition type for the `position` prop on both ClipboardCopy and ClipboardCopyButton.
@@ -484,22 +502,4 @@ Out:
 
 ```jsx
 <Tooltip     />
-```
-
-### chart-resizeObserver-function [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
-
-We've removed the `getResizeObserver` function from react-charts in favor of react-core's `getResizeObserver`. This helper function now has a third parameter, `useRequestAnimationFrame`, and allows a single function to be maintained going forward.
-
-#### Examples
-
-In:
-
-```jsx
-import { getResizeObserver } from '@patternfly/react-charts';
-```
-
-Out:
-
-```jsx
-import { getResizeObserver } from '@patternfly/react-core';
 ```
