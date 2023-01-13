@@ -71,7 +71,7 @@ In:
 Out:
 
 ```jsx
-<Card />
+<Card  />
 ```
 
 ### datalist-remove-ondrags [(#163)](https://github.com/patternfly/pf-codemods/issues/163)
@@ -89,7 +89,7 @@ In:
 Out:
 
 ```jsx
-<DataList />
+<DataList  />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -141,7 +141,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload />
+<FileUpload  />
 ```
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
@@ -250,7 +250,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable />
+<TableComposable  />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -286,7 +286,7 @@ In:
 Out:
 
 ```jsx
-<Spinner />
+<Spinner  />
 ```
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
@@ -340,5 +340,5 @@ In:
 Out:
 
 ```jsx
-<Tooltip />
+<Tooltip    />
 ```
