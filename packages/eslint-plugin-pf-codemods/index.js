@@ -53,6 +53,7 @@ const rules = {
   "datalist-remove-ondrags": require('./lib/rules/v5/datalist-remove-ondrags'),
   "divider-remove-isVertical": require('./lib/rules/v5/divider-remove-isVertical'),
   "fileUpload-remove-onChange": require('./lib/rules/v5/fileUpload-remove-onChange'),
+  "horizontalSubnav-ariaLabel": require('./lib/rules/v5/horizontalSubnav-ariaLabel'),
   "pagination-optionsToggle": require('./lib/rules/v5/pagination-optionsToggle'),
   "pagination-remove-ToggleTemplateProps": require('./lib/rules/v5/pagination-remove-ToggleTemplateProps'),
   "pagination-rename-props": require('./lib/rules/v5/pagination-rename-props'),

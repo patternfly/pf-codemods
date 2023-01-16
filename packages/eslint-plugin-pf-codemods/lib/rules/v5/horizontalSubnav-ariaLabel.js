@@ -1,0 +1,32 @@
+const { getPackageImports } = require("../../helpers");
+
+// https://github.com/patternfly/patternfly-react/pull/8213
+module.exports = {
+  create: function (context) {
+    const toggleImport = getPackageImports(
+      context,
+      "@patternfly/react-core"
+    ).filter((specifier) => specifier.imported.name == "Nav");
+
+    return toggleImport.length === 0
+      ? {}
+      : {
+          JSXOpeningElement(node) {
+            if (
+              toggleImport.map((imp) => imp.local.name).includes(node.name.name)
+            ) {
+              const variantAttr = node.attributes.find(
+                (attr) => attr.name && attr.name.name === "variant"
+              );
+
+              if (variantAttr.value.value === "horizontal-subnav") {
+                context.report({
+                  node,
+                  message: `The default value of the aria-label for ${node.name.name} with a 'horizontal-subnav' variant has been updated to "local".`,
+                });
+              }
+            }
+          },
+        };
+  },
+};

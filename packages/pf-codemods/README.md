@@ -184,6 +184,10 @@ Out:
 <FileUpload  />
 ```
 
+### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
+
+We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
+
 ### pagination-optionsToggle [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
 
 We've removed the `OptionsToggle` used by `Pagination` and replaced it with `Menu` and `MenuToggle`.
