@@ -2,7 +2,6 @@ const { getPackageImports } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8174
 module.exports = {
-  meta: { fixable: "code" },
   create: function (context) {
     const imports = getPackageImports(context, "@patternfly/react-core").filter(
       (specifier) => specifier.imported.name === "KEY_CODES"
