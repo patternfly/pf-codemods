@@ -77,3 +77,5 @@ import { Flex } from '@patternfly/react-core';
 
 import { DataToolbar } from '@patternfly/react-core';
 <DataToolbar></DataToolbar>
+
+import { KEY_CODES } from '@patternfly/react-core';
