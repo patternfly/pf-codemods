@@ -84,8 +84,7 @@ module.exports = {
         },
       },
       rules: Object.keys(rules).reduce((acc, rule) => {
-        const severity = rule.includes('warn') ? 'warn' : 'error';
-        acc[`@patternfly/pf-codemods/${rule}`] = severity;
+        acc[`@patternfly/pf-codemods/${rule}`] = "error";
         return acc;
       }, {}),
     },
