@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.23.1...@patternfly/pf-codemods@1.24.0) (2023-01-16)
+
+
+### Features
+
+* **ClipboardCopy:** removed PopoverPosition type ([#207](https://github.com/patternfly/pf-codemods/issues/207)) ([6226585](https://github.com/patternfly/pf-codemods/commit/622658513406e84436d4bd174c20e5d2b4b12d2a))
+
+
+
+
+
 ## [1.23.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.23.0...@patternfly/pf-codemods@1.23.1) (2023-01-16)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
