@@ -7,7 +7,13 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
       code: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy position={TooltipPosition.top} />`,
     },
     {
+      code: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy />`,
+    },
+    {
       code: `import { ClipboardCopyButton } from '@patternfly/react-core'; <ClipboardCopyButton position={TooltipPosition.top} />`,
+    },
+    {
+      code: `import { ClipboardCopyButton } from '@patternfly/react-core'; <ClipboardCopyButton />`,
     },
     {
       // No @patternfly/react-core import

@@ -24,8 +24,8 @@ module.exports = {
                 (nodeAttr) => nodeAttr.name && nodeAttr.name.name === "position"
               );
               if (
-                positionAttr.value.expression &&
-                positionAttr.value.expression.object.name === "PopoverPosition"
+                positionAttr?.value?.expression?.object?.name ===
+                "PopoverPosition"
               ) {
                 context.report({
                   node,
