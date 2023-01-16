@@ -35,7 +35,7 @@ module.exports = {
                     fixes.push(
                       fixer.insertTextAfterRange(
                         node.range,
-                        "import {getResizeObserver} from '@patternfly/react-core';"
+                        "\nimport {getResizeObserver} from '@patternfly/react-core';"
                       )
                     );
                   } else {
