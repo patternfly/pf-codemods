@@ -13,6 +13,7 @@ program
   .option('--exclude <rules>', 'Run recommended rules EXCLUDING this comma-seperated list')
   .option('--fix', 'Whether to run fixer')
   .option('--format <format>', 'What eslint report format to use', 'stylish')
+  .option('--no-cache', 'Disables eslint caching')
   .action(runCodemods);
 
 /**
@@ -72,7 +73,7 @@ function runCodemods(path, otherPaths, options) {
     configFile: fspath.resolve(__dirname, '.eslintrc'),
     rulePaths: [],
     useEslintrc: false,
-    cache: true,
+    cache: options.cache,
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
     fix: options.fix,

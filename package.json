@@ -7,10 +7,10 @@
     "test": "mocha packages/eslint-plugin-pf-codemods/test/rules/*",
     "test:v4": "mocha packages/eslint-plugin-pf-codemods/test/rules/v4",
     "test:v5": "mocha packages/eslint-plugin-pf-codemods/test/rules/v5",
-    "test:single": "pf-codemods test/test.tsx",
-    "test:koku": "pf-codemods test/koku-ui",
-    "test:console": "pf-codemods test/console/frontend",
-    "test:integreatly": "pf-codemods test/tutorial-web-app"
+    "test:single": "pf-codemods --no-cache test/test.tsx",
+    "test:koku": "pf-codemods --no-cache test/koku-ui",
+    "test:console": "pf-codemods --no-cache test/console/frontend",
+    "test:integreatly": "pf-codemods --no-cache test/tutorial-web-app"
   },
   "repository": {
     "type": "git",
