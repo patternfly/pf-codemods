@@ -60,7 +60,7 @@ const rules = {
   "spinner-svg-default": require('./lib/rules/v5/spinner-svg-default'),
   "tableComposable-remove-hasSelectableRowCaption": require('./lib/rules/v5/tableComposable-remove-hasSelectableRowCaption'),
   "tabs-rename-hasBorderBottom": require('./lib/rules/v5/tabs-rename-hasBorderBottom'),
-  "tabs-remove-hasSecondaryBorderBottom": require('./lib/rules/v5/tabs-rename-hasSecondaryBorderBottom'),
+  "tabs-remove-hasSecondaryBorderBottom": require('./lib/rules/v5/tabs-remove-hasSecondaryBorderBottom'),
   "toggle-remove-isPrimary": require('./lib/rules/v5/toggle-remove-isPrimary'),
   "toolbar-remove-visiblity": require('./lib/rules/v5/toolbar-remove-visiblity'),
   "tooltip-remove-props": require('./lib/rules/v5/tooltip-remove-props'),
