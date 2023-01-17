@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.24.0...@patternfly/pf-codemods@1.25.0) (2023-01-17)
+
+
+### Features
+
+* **KEY_CODES:** warn about KEY_CODES removal ([#210](https://github.com/patternfly/pf-codemods/issues/210)) ([6322a9e](https://github.com/patternfly/pf-codemods/commit/6322a9e4688966f59f72bf365c5e5083703947fb))
+
+
+
+
+
 # [1.24.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.23.1...@patternfly/pf-codemods@1.24.0) (2023-01-16)
 
 
