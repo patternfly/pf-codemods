@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.23.1...@patternfly/eslint-plugin-pf-codemods@1.24.0) (2023-01-17)
+
+
+### Features
+
+* **Pagination:** add codemod for optionstoggle ([#208](https://github.com/patternfly/pf-codemods/issues/208)) ([3b6b308](https://github.com/patternfly/pf-codemods/commit/3b6b3081be96f278e176da5859bcfbb1e8485d17))
+
+
+
+
+
 ## [1.23.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.23.0...@patternfly/eslint-plugin-pf-codemods@1.23.1) (2023-01-17)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
