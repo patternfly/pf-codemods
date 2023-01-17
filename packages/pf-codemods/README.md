@@ -76,6 +76,24 @@ Out:
 <Card  />
 ```
 
+### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
+
+We've removed the `getResizeObserver` function from react-charts in favor of react-core's `getResizeObserver`. This helper function now has a third parameter, `useRequestAnimationFrame`, and allows a single function to be maintained going forward.
+
+#### Examples
+
+In:
+
+```jsx
+import { getResizeObserver } from '@patternfly/react-charts';
+```
+
+Out:
+
+```jsx
+import { getResizeObserver } from '@patternfly/react-core';
+```
+
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
 
 We've removed the PopoverPosition type for the `position` prop on both ClipboardCopy and ClipboardCopyButton.
@@ -168,7 +186,7 @@ Out:
 
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
 
-We've removed the depracated `ToggleTemplateProps` prop and replaced it with `PaginationToggleTemplateProps`.
+We've removed the deprecated `ToggleTemplateProps` prop and replaced it with `PaginationToggleTemplateProps`.
 
 #### Examples
 
@@ -338,7 +356,7 @@ We've updated the default value of the `getResizeObserver` helper function's thi
 
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 
-We've removed the depracated `hasSelectableRowCaption` prop.
+We've removed the deprecated `hasSelectableRowCaption` prop.
 
 #### Examples
 

@@ -1,3 +1,4 @@
 node_modules
 lerna-output.txt
 .cache*
+.idea
