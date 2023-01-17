@@ -7,6 +7,9 @@ ruleTester.run("horizontalSubnav-ariaLabel", rule, {
       code: `import { Nav } from '@patternfly/react-core'; <Nav variant="horizontal" />`,
     },
     {
+      code: `import { Nav } from '@patternfly/react-core'; <Nav variant="horizontal-subnav" aria-label="Test text" />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<Nav variant="horizontal-subnav" />`,
     },
