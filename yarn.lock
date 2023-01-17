@@ -954,11 +954,6 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@patternfly/eslint-plugin-pf-codemods@^1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@patternfly/eslint-plugin-pf-codemods/-/eslint-plugin-pf-codemods-1.9.2.tgz#10bdf1d513c65f47bcaf5131fbf17318fa1809c7"
-  integrity sha512-+CtjBJ3SUP0LWLeKaBxGlHmWCpVVoIH5LKeCYeEvXYbOvQ246EhWAjx3TZbOx5V8rR1blc2Tvw+ffBl49yRY3g==
-
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"

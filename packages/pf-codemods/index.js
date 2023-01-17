@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fspath = require('path');
 const { CLIEngine } = require('eslint/lib/cli-engine');
-const { configs } = require('eslint-plugin-pf-codemods');
+const { configs } = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
 const program = new Command();
 
@@ -13,6 +13,7 @@ program
   .option('--exclude <rules>', 'Run recommended rules EXCLUDING this comma-seperated list')
   .option('--fix', 'Whether to run fixer')
   .option('--format <format>', 'What eslint report format to use', 'stylish')
+  .option('--no-cache', 'Disables eslint caching')
   .action(runCodemods);
 
 /**
@@ -33,9 +34,6 @@ function printResults(engine, results, format) {
     log.error(e.message);
     return false;
   }
-
-  // Don't show warnings
-  results.forEach(result => result.messages = result.messages.filter(message => message.severity === 2));
 
   const output = formatter(results, {
     get rulesMeta() {
@@ -75,7 +73,7 @@ function runCodemods(path, otherPaths, options) {
     configFile: fspath.resolve(__dirname, '.eslintrc'),
     rulePaths: [],
     useEslintrc: false,
-    cache: true,
+    cache: options.cache,
     cacheFile: '.eslintcache',
     cacheLocation: process.cwd(),
     fix: options.fix,

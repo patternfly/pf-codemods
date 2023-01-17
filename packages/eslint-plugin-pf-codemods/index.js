@@ -65,12 +65,13 @@ const rules = {
   "tooltip-remove-props": require('./lib/rules/v5/tooltip-remove-props'),
   "remove-removeFindDomNode": require('./lib/rules/v5/remove-removeFindDomNode'),
   "popover-remove-props": require('./lib/rules/v5/popover-remove-props'),
+  "warn-key-codes-removed": require('./lib/rules/v5/warn-key-codes-removed'),
 };
 
 module.exports = {
   configs: {
     recommended: {
-      plugins: ["pf-codemods"],
+      plugins: ["@patternfly/pf-codemods"],
       env: {
         browser: true,
         node: true,
@@ -86,7 +87,7 @@ module.exports = {
         },
       },
       rules: Object.keys(rules).reduce((acc, rule) => {
-        acc[`pf-codemods/${rule}`] = "error";
+        acc[`@patternfly/pf-codemods/${rule}`] = "error";
         return acc;
       }, {}),
     },
