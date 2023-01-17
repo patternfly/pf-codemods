@@ -73,7 +73,7 @@ In:
 Out:
 
 ```jsx
-<Card  />
+<Card />
 ```
 
 ### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
@@ -85,13 +85,13 @@ We've removed the `getResizeObserver` function from react-charts in favor of rea
 In:
 
 ```jsx
-import { getResizeObserver } from '@patternfly/react-charts';
+import { getResizeObserver } from "@patternfly/react-charts";
 ```
 
 Out:
 
 ```jsx
-import { getResizeObserver } from '@patternfly/react-core';
+import { getResizeObserver } from "@patternfly/react-core";
 ```
 
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
@@ -129,7 +129,7 @@ In:
 Out:
 
 ```jsx
-<DataList  />
+<DataList />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -181,7 +181,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload  />
+<FileUpload />
 ```
 
 ### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
@@ -358,6 +358,10 @@ Out:
 <PageBreadcrumb  />
 ```
 
+### remove-toggleMenuBaseProps [(#8235)](https://github.com/patternfly/patternfly-react/pull/8235)
+
+We've removed the deprecated `ToggleMenuBaseProps` interface.
+
 ### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
@@ -377,7 +381,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable  />
+<TableComposable />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -413,7 +417,7 @@ In:
 Out:
 
 ```jsx
-<Spinner  />
+<Spinner />
 ```
 
 ### tabs-rename-hasBorderBottom [(#8517)](https://github.com/patternfly/patternfly-react/pull/8517)
@@ -455,7 +459,7 @@ In:
 Out:
 
 ```jsx
-<Tabs  />
+<Tabs />
 ```
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
@@ -509,7 +513,7 @@ In:
 Out:
 
 ```jsx
-<Tooltip     />
+<Tooltip />
 ```
 
 ### warn-key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
@@ -517,3 +521,4 @@ Out:
 We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
 
 This rule will raise a warning when `KEY_CODES` is imported in a file, but it will not make any code changes.
+
