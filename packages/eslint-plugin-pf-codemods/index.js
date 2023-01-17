@@ -69,6 +69,9 @@ const rules = {
   "warn-key-codes-removed": require('./lib/rules/v5/warn-key-codes-removed'),
 };
 
+// if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
+const warningRules = []
+
 module.exports = {
   configs: {
     recommended: {
@@ -88,7 +91,8 @@ module.exports = {
         },
       },
       rules: Object.keys(rules).reduce((acc, rule) => {
-        acc[`@patternfly/pf-codemods/${rule}`] = "error";
+        const severity = warningRules.includes(rule) ? "warn" : "error"
+        acc[`@patternfly/pf-codemods/${rule}`] = severity;
         return acc;
       }, {}),
     },
