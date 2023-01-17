@@ -184,6 +184,10 @@ Out:
 <FileUpload  />
 ```
 
+### pagination-optionsToggle [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
+
+We've removed the `OptionsToggle` used by `Pagination` and replaced it with `Menu` and `MenuToggle`.
+
 ### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
 
 We've removed the deprecated `ToggleTemplateProps` prop and replaced it with `PaginationToggleTemplateProps`.
