@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.24.0...@patternfly/eslint-plugin-pf-codemods@1.25.0) (2023-01-18)
+
+
+### Features
+
+* **rules:** add severity customization ([#213](https://github.com/patternfly/pf-codemods/issues/213)) ([d572a28](https://github.com/patternfly/pf-codemods/commit/d572a2824c1dd8ca7a610f02b108c7315da6098d))
+
+
+
+
+
 # [1.24.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.23.1...@patternfly/eslint-plugin-pf-codemods@1.24.0) (2023-01-17)
 
 
