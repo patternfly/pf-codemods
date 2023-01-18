@@ -64,12 +64,3 @@ ruleTester.run("${newRuleName}", rule, {
 });
 `
 );
-
-// Update index file
-const ruleIndexPath = path.join(__dirname, 'packages/eslint-plugin-pf-codemods/index.js');
-const ruleIndex = fs.readFileSync(ruleIndexPath, 'utf8');
-fs.writeFileSync(
-  ruleIndexPath,
-  // (ab)Use fact that `rules` object is at top of file
-  ruleIndex.replace("};", `  "${newRuleName}": require('./lib/rules/v5/${newRuleName}'),\n};`)
-);
