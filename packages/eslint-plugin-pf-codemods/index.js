@@ -53,6 +53,7 @@ const rules = {
   "datalist-remove-ondrags": require('./lib/rules/v5/datalist-remove-ondrags'),
   "divider-remove-isVertical": require('./lib/rules/v5/divider-remove-isVertical'),
   "fileUpload-remove-onChange": require('./lib/rules/v5/fileUpload-remove-onChange'),
+  "horizontalSubnav-ariaLabel": require('./lib/rules/v5/horizontalSubnav-ariaLabel'),
   "pagination-optionsToggle": require('./lib/rules/v5/pagination-optionsToggle'),
   "pagination-remove-ToggleTemplateProps": require('./lib/rules/v5/pagination-remove-ToggleTemplateProps'),
   "pagination-rename-props": require('./lib/rules/v5/pagination-rename-props'),
@@ -71,7 +72,7 @@ const rules = {
 };
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
-const warningRules = []
+const warningRules = ["horizontalSubnav-ariaLabel"]
 
 module.exports = {
   configs: {
