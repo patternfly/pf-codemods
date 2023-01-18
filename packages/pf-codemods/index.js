@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fspath = require('path');
 const { CLIEngine } = require('eslint/lib/cli-engine');
-const { configs } = require('@patternfly/eslint-plugin-pf-codemods');
+const { configs, ruleVersionMapping } = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
 const program = new Command();
 
@@ -14,6 +14,7 @@ program
   .option('--fix', 'Whether to run fixer')
   .option('--format <format>', 'What eslint report format to use', 'stylish')
   .option('--no-cache', 'Disables eslint caching')
+  .option('--v4', 'Run v3 to v4 codemods')
   .action(runCodemods);
 
 /**
@@ -62,8 +63,12 @@ function runCodemods(path, otherPaths, options) {
       }, {});
   }
   if (options.exclude) {
-    options.exclude.split(',').forEach(rule => delete configs.recommended.rules[rule]);
-  }
+    options.exclude.split(',').forEach(rule => {
+      delete configs.recommended.rules[rule];
+    });
+  }  
+  const prefix = "@patternfly/pf-codemods/";
+  ruleVersionMapping[options.v4 ? "v5" : "v4"].forEach(rule => delete configs.recommended.rules[prefix + rule]);
 
   const engine = new CLIEngine({
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
