@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.25.0...@patternfly/eslint-plugin-pf-codemods@1.26.0) (2023-01-18)
+
+
+### Features
+
+* **Nav:** updated aria-label default value ([#209](https://github.com/patternfly/pf-codemods/issues/209)) ([4276b75](https://github.com/patternfly/pf-codemods/commit/4276b756e0d6e85dc6ddbe3e445a64aa2d74d75f))
+
+
+
+
+
 # [1.25.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.24.0...@patternfly/eslint-plugin-pf-codemods@1.25.0) (2023-01-18)
 
 
