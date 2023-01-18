@@ -29,3 +29,5 @@ If you're having trouble writing a rule, you can:
 2. `console.dir(node, { depth: 5 })` to better inspect a `node` you're dealing with
 3. Write rule targeting an AST node that has all the information you need. Confirm AST node exists in `lib/rules/ast-node-types.d.ts`.
 4. Ask zallen on the RHUX or PatternFly Slack
+
+If the rule you're adding should have a severity of `warning` rather than `error`, add the rule name to the `warningRules` array in `eslint-plugin-pf-codemods/index.js`.
