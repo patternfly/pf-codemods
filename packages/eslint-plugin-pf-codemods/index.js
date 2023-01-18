@@ -72,7 +72,7 @@ const rules = {
 };
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
-const warningRules = []
+const warningRules = ["horizontalSubnav-ariaLabel"]
 
 module.exports = {
   configs: {
