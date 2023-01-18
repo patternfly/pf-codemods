@@ -63,9 +63,7 @@ function runCodemods(path, otherPaths, options) {
       }, {});
   }
   if (options.exclude) {
-    options.exclude.split(',').forEach(rule => {
-      delete configs.recommended.rules[rule];
-    });
+    options.exclude.split(',').forEach(rule =>  delete configs.recommended.rules[rule]);
   }  
   const prefix = "@patternfly/pf-codemods/";
   ruleVersionMapping[options.v4 ? "v5" : "v4"].forEach(rule => delete configs.recommended.rules[prefix + rule]);
