@@ -73,7 +73,7 @@ In:
 Out:
 
 ```jsx
-<Card />
+<Card  />
 ```
 
 ### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
@@ -129,7 +129,7 @@ In:
 Out:
 
 ```jsx
-<DataList />
+<DataList  />
 ```
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
@@ -181,7 +181,7 @@ In:
 Out:
 
 ```jsx
-<FileUpload />
+<FileUpload  />
 ```
 
 ### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
@@ -381,7 +381,7 @@ In:
 Out:
 
 ```jsx
-<TableComposable />
+<TableComposable  />
 ```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
@@ -417,7 +417,7 @@ In:
 Out:
 
 ```jsx
-<Spinner />
+<Spinner  />
 ```
 
 ### tabs-rename-hasBorderBottom [(#8517)](https://github.com/patternfly/patternfly-react/pull/8517)
@@ -459,7 +459,7 @@ In:
 Out:
 
 ```jsx
-<Tabs />
+<Tabs  />
 ```
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
@@ -513,7 +513,7 @@ In:
 Out:
 
 ```jsx
-<Tooltip />
+<Tooltip     />
 ```
 
 ### warn-key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
