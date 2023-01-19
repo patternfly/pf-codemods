@@ -2,7 +2,11 @@ const ruleTester = require("../../ruletester");
 const rule = require("../../../lib/rules/v5/wizard-warn-button-order");
 
 ruleTester.run("wizard-warn-button-order", rule, {
-  valid: [],
+  valid: [
+    {
+      code: `import {Wizard} from '@patternfly/react-core/next';`,
+    },
+  ],
   invalid: [
     {
       code: `import {Wizard} from '@patternfly/react-core';`,

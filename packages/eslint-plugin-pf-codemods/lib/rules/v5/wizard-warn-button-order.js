@@ -5,8 +5,11 @@ module.exports = {
   create: function (context) {
     return {
       ImportDeclaration(node) {
-        const wizardImport = node.specifiers.find((specifier) =>
-          ["Wizard", "WizardFooter"].includes(specifier.imported.name)
+        const wizardImport = node.specifiers.find(
+          (specifier) =>
+            (specifier.imported.name === "Wizard" &&
+              node.source.value === "@patternfly/react-core") ||
+            specifier.imported.name === "WizardFooter"
         );
 
         if (wizardImport) {
