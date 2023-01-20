@@ -76,6 +76,12 @@ Out:
 <Card  />
 ```
 
+### app-launcher-warn-input-change [(#8293)](https://github.com/patternfly/patternfly-react/pull/8293)
+
+We've replaced the `<input>` in `ApplicationLauncher` with our `SearchInput` component. You may need to update unit tests or other references to the input that will be impacted by this DOM structure change.
+
+This rule will raise a warning when `ApplicationLauncher` is imported in a file, but it will not make any code changes.
+
 ### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
 
 We've removed the `getResizeObserver` function from react-charts in favor of react-core's `getResizeObserver`. This helper function now has a third parameter, `useRequestAnimationFrame`, and allows a single function to be maintained going forward.
