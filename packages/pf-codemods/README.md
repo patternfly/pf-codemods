@@ -76,6 +76,10 @@ Out:
 <Accordion displaySize="lg" />
 ```
 
+### applicationLauncher-warn-input [(#8293)](https://github.com/patternfly/patternfly-react/pull/8293)
+
+We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
+
 ### card-remove-isHoverable [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
 
 We've removed the deprecated `isHoverable` prop from Card.
