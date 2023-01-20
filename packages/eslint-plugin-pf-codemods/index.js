@@ -11,7 +11,7 @@ const v5rules = createListOfRules("5");
 const v4rules = createListOfRules("4");
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
-const warningRules = ["horizontalSubnav-ariaLabel"]
+const warningRules = ["horizontalSubnav-ariaLabel", "wizard-warn-button-order"]
 
 const createRules = (rules) => {
   return Object.keys(rules).reduce((acc, rule) => {
