@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.26.2...@patternfly/eslint-plugin-pf-codemods@1.27.0) (2023-01-20)
+
+
+### Features
+
+* **Wizard:** updated button order ([#215](https://github.com/patternfly/pf-codemods/issues/215)) ([733c757](https://github.com/patternfly/pf-codemods/commit/733c7576b959b8a34c4a7ff6498161144b2fccfe))
+
+
+
+
+
 ## [1.26.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.26.1...@patternfly/eslint-plugin-pf-codemods@1.26.2) (2023-01-19)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
