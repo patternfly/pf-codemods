@@ -183,9 +183,25 @@ In:
 ```
 
 Out:
-
 ```jsx
 <DropdownMenu  />
+```
+### dropdownToggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
+
+We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<DropdownToggle isPrimary />
+```
+
+Out:
+
+```jsx
+<DropdownToggle toggleVariant="primary" />
 ```
 
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
