@@ -1,5 +1,3 @@
-const { getPackageImports } = require("../../helpers");
-
 // https://github.com/patternfly/patternfly-react/pull/8409
 module.exports = {
   create: function (context) {
