@@ -10,13 +10,13 @@ const { getPackageImports } = require('../../helpers');
       return packageImport.length === 0 ? {} : {
         JSXOpeningElement(node) {
           if (packageImport.map(imp => imp.local.name).includes(node.name.name)) {
-            const isPrimaryAttr = node.attributes.find(n => n.name && n.name.name === 'isPrimary');
+            const isPrimaryAttr = node.attributes.find(a => a.name?.name === 'isPrimary');
             if (isPrimaryAttr) {
               context.report({
                 node,
                 message: `isPrimary prop has been removed for ${node.name.name} and replaced by using 'primary' value on the toggleVariant prop.`,
                 fix(fixer) {
-                  return fixer.replaceTextRange(isPrimaryAttr.range, 'toggleVariant="primary"');
+                  return fixer.replaceText(isPrimaryAttr, 'toggleVariant="primary"');
                 }
               });
             }
