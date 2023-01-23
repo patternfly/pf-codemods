@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.28.0...@patternfly/pf-codemods@1.29.0) (2023-01-23)
+
+
+### Features
+
+* **DropdownMenu:** remove openedOnEnter ([075c100](https://github.com/patternfly/pf-codemods/commit/075c1004e49517624bc08b5300bbdd2c001956ce))
+
+
+
+
+
 # [1.28.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.27.2...@patternfly/pf-codemods@1.28.0) (2023-01-20)
 
 
