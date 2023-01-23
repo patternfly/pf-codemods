@@ -69,6 +69,19 @@ function renameProp(components, propMap, message, replaceAttribute, leaveComment
                 fix(fixer) {
                   // Delete entire prop if newName is empty
                   if (!newName || replaceAttribute) {
+                    /** 
+                     * (dallas)
+                     * TODO: remove extra space? the following works but issues arise when attempting to remove multiple props.
+                     * i assume the ranges become invalid in the forEach loop? even though it seems to track attr correctly
+                     * (see datalist-remove-ondrags for example)
+                     * 
+                     * const tokenBefore = context.getSourceCode().getTokenBefore(attribute);
+                     * return fixer.replaceTextRange([tokenBefore.range[1], attribute.range[1]], '');
+                     * 
+                     * or
+                     * 
+                     * return fixer.replaceTextRange([attribute.range[0] - 1, attribute.range[1]], '');
+                     */
                     return fixer.replaceText(attribute, newName);
                   }
                   const newNameAttrName = newName.split('=')[0];
@@ -76,7 +89,6 @@ function renameProp(components, propMap, message, replaceAttribute, leaveComment
                   if (namedAttributes.find(attr => attr.name.name === newNameAttrName)) {
                     return fixer.replaceText(attribute, leaveComment ? `/* ${newName} */` : '');
                   }
-
                   return fixer.replaceText(
                     attribute.name,
                     newName

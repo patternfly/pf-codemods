@@ -148,6 +148,24 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### dropdownMenu-remove-openedOnEnter [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
+
+We've removed the `openedOnEnter` prop for the `DropdownMenu`.
+
+#### Examples
+
+In:
+
+```jsx
+<DropdownMenu openedOnEnter={false} />
+```
+
+Out:
+
+```jsx
+<DropdownMenu  />
+```
+
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've renamed the `large` prop value of `displaySize` to `lg`.
