@@ -16,7 +16,7 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
   invalid: [
     {
       code: `import { AccordionExpandedContentBody } from '@patternfly/react-core'; <AccordionExpandedContentBody>Body</AccordionExpandedContentBody>`,
-      output: `import { AccordionExpandableContentBody } from '@patternfly/react-core'; <AccordionExpandableContentBody>Body</AccordionExpandableContentBody>`,
+      output: `import { AccordionExpandedContentBody, AccordionExpandableContentBody } from '@patternfly/react-core'; <AccordionExpandableContentBody>Body</AccordionExpandableContentBody>`,
       errors: [
         {
           message: `add missing imports AccordionExpandableContentBody from @patternfly/react-core`,
