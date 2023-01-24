@@ -13,10 +13,16 @@ module.exports = {
       ? {}
       : {
           ImportDeclaration(node) {
-            context.report({
-              node,
-              message: `The internal input within ApplicationLauncher has been updated to use the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.`,
-            });
+            if (
+              appLauncherImports
+                .map((imp) => imp.local.name)
+                .includes(node.specifiers[0].imported.name)
+            ) {
+              context.report({
+                node,
+                message: `The internal input within ApplicationLauncher has been updated to use the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.`,
+              });
+            }
           },
         };
   },

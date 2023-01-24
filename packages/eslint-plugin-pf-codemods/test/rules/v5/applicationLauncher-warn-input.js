@@ -2,7 +2,12 @@ const ruleTester = require("../../ruletester");
 const rule = require("../../../lib/rules/v5/applicationLauncher-warn-input");
 
 ruleTester.run("applicationLauncher-warn-input", rule, {
-  valid: [],
+  valid: [
+    {
+      // No @patternfly/react-core import
+      code: `<ApplicationLauncher />`,
+    },
+  ],
   invalid: [
     {
       code: `import { ApplicationLauncher } from '@patternfly/react-core';`,
