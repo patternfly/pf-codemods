@@ -116,6 +116,38 @@ Out:
 import { getResizeObserver } from "@patternfly/react-core";
 ```
 
+### chart-themeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
+
+We've removed the deprecated `themeVariant` properties from all react-charts components. This functionality was previously a noop and replaced by PatternFly core's dark theme support.
+
+#### Examples
+
+In:
+
+```jsx
+import { Chart, ChartThemeColor, ChartThemeVariant, getCustomTheme } from '@patternfly/react-charts';
+
+const customTheme = {...};
+const newTheme = getCustomTheme(ChartThemeColor.default, ChartThemeVariant.light, customTheme);
+
+return (
+  <Chart themeVariant={ChartThemeVariant.light} theme={newTheme}/>
+);
+```
+
+Out:
+
+```jsx
+import { Chart, ChartThemeColor, getCustomTheme } from '@patternfly/react-charts';
+
+const customTheme = {...};
+const newTheme = getCustomTheme(ChartThemeColor.default, customTheme);
+
+return (
+  <Chart theme={newTheme}/>
+);
+```
+
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
 
 We've removed the PopoverPosition type for the `position` prop on both ClipboardCopy and ClipboardCopyButton.
