@@ -80,7 +80,7 @@ Out:
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
 
-### card-warn-component [(#8293)](https://github.com/patternfly/patternfly-react/pull/8601)
+### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
 
 We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
 
