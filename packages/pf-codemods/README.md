@@ -502,6 +502,12 @@ Out:
 <Tabs  />
 ```
 
+### tabs-warn-children-type-changed [(#8217)](https://github.com/patternfly/patternfly-react/pull/8217)
+
+We've restricted the type of elements that can be passed to the `Tabs` component.
+
+This rule will raise a warning when `Tabs` is imported in a file, even if the children passed to it are already of the appropriate type. It will not make any code changes.
+
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
