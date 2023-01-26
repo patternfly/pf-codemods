@@ -80,6 +80,10 @@ Out:
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
 
+### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
+
+We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
+
 ### card-remove-isHoverable [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
 
 We've removed the deprecated `isHoverable` prop from Card.
