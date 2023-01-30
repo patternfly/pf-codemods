@@ -386,6 +386,10 @@ Out:
 />
 ```
 
+### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
+
+The `react-dropzone` dependency used with FileUpload, MultipleFileUpload, and CodeEditor has been updated from version 9 to version 14.
+
 ### remove-removeFindDomNode [(#8371)](https://github.com/patternfly/patternfly-react/pull/8371) [(#8316)](https://github.com/patternfly/patternfly-react/pull/8316)
 
 We've removed the `removeFindDomNode` property as it is now the default behavior. The affected components are as follows: ApplicationLauncher, ClipboardCopy, ContextSelector, Dropdown, NavItem, OptionsMenu, Popover, SearchInput, Select, OverflowTab, Timepicker, Tooltip, Truncate.
@@ -458,24 +462,6 @@ We've removed the deprecated `ToggleMenuBaseProps` interface.
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
 
-### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
-
-We've removed the deprecated `hasSelectableRowCaption` prop.
-
-#### Examples
-
-In:
-
-```jsx
-<TableComposable hasSelectableRowCaption />
-```
-
-Out:
-
-```jsx
-<TableComposable  />
-```
-
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
 
 We've removed the deprecated the `isCurrent` prop. This rule wil replace it with `isActive`.
@@ -510,6 +496,24 @@ Out:
 
 ```jsx
 <Spinner  />
+```
+
+### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
+
+We've removed the deprecated `hasSelectableRowCaption` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<TableComposable hasSelectableRowCaption />
+```
+
+Out:
+
+```jsx
+<TableComposable  />
 ```
 
 ### tabs-rename-hasBorderBottom [(#8517)](https://github.com/patternfly/patternfly-react/pull/8517)

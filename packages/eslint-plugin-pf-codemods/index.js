@@ -1,27 +1,36 @@
 const createListOfRules = (version) => {
   const rules = {};
-  require('glob').sync(`./packages/eslint-plugin-pf-codemods/lib/rules/v${version}/*.js`).forEach( function( file ) {
-    const ruleName = /.*\/([^.]+)/.exec(file)[1];
-    rules[ruleName] = require(`./lib/rules/v${version}/${ruleName}`);
-  });
+  require("glob")
+    .sync(`./packages/eslint-plugin-pf-codemods/lib/rules/v${version}/*.js`)
+    .forEach(function (file) {
+      const ruleName = /.*\/([^.]+)/.exec(file)[1];
+      rules[ruleName] = require(`./lib/rules/v${version}/${ruleName}`);
+    });
   return rules;
-}
+};
 
 const v5rules = createListOfRules("5");
 const v4rules = createListOfRules("4");
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
-const warningRules = ["applicationLauncher-warn-input", "card-warn-component", "horizontalSubnav-ariaLabel", "tabs-warn-children-type-changed", "wizard-warn-button-order"]
+const warningRules = [
+  "applicationLauncher-warn-input",
+  "card-warn-component",
+  "horizontalSubnav-ariaLabel",
+  "react-dropzone-warn-upgrade",
+  "tabs-warn-children-type-changed",
+  "wizard-warn-button-order",
+];
 
 const createRules = (rules) => {
   return Object.keys(rules).reduce((acc, rule) => {
-    const severity = warningRules.includes(rule) ? "warn" : "error"
+    const severity = warningRules.includes(rule) ? "warn" : "error";
     acc[`@patternfly/pf-codemods/${rule}`] = severity;
     return acc;
-  }, {})
-}
+  }, {});
+};
 
-const mappedRules = {...createRules(v5rules), ...createRules(v4rules)};
+const mappedRules = { ...createRules(v5rules), ...createRules(v4rules) };
 
 module.exports = {
   configs: {
@@ -44,6 +53,6 @@ module.exports = {
       rules: mappedRules,
     },
   },
-  rules: {...v5rules, ...v4rules},
-  ruleVersionMapping: {"v4": Object.keys(v4rules), "v5": Object.keys(v5rules)}
+  rules: { ...v5rules, ...v4rules },
+  ruleVersionMapping: { v4: Object.keys(v4rules), v5: Object.keys(v5rules) },
 };
