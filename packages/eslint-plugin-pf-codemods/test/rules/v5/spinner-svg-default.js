@@ -7,9 +7,6 @@ ruleTester.run("spinner-svg-default", rule, {
       code: `import { Spinner } from '@patternfly/react-core'; <Spinner />`,
     },
     {
-      code: `import { Spinner } from '@patternfly/react-core'; <Spinner isSVG={false} />`,
-    },
-    {
       // No @patternfly/react-core import
       code: `<Spinner isSVG />`,
     }
@@ -19,7 +16,7 @@ ruleTester.run("spinner-svg-default", rule, {
       code:   `import { Spinner } from '@patternfly/react-core'; <Spinner isSVG />`,
       output: `import { Spinner } from '@patternfly/react-core'; <Spinner  />`,
       errors: [{
-        message: `Spinner isSVG prop default value has changed from false to true.`,
+        message: `Spinner's isSVG prop has been removed. Spinner will now only use SVG.`,
         type: "JSXOpeningElement",
       }]
     },
@@ -27,7 +24,7 @@ ruleTester.run("spinner-svg-default", rule, {
       code:   `import { Spinner } from '@patternfly/react-core'; <Spinner isSVG={true} />`,
       output: `import { Spinner } from '@patternfly/react-core'; <Spinner  />`,
       errors: [{
-        message: `Spinner isSVG prop default value has changed from false to true.`,
+        message: `Spinner's isSVG prop has been removed. Spinner will now only use SVG.`,
         type: "JSXOpeningElement",
       }]
     }
