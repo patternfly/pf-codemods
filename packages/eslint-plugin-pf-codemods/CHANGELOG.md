@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.28.0...@patternfly/eslint-plugin-pf-codemods@1.29.0) (2023-01-30)
+
+
+### Features
+
+* **AccordionExpandableContent:** rename expanded refs ([#217](https://github.com/patternfly/pf-codemods/issues/217)) ([d6c7cc0](https://github.com/patternfly/pf-codemods/commit/d6c7cc03a091f3b6281cc62afb570404229e2c7f))
+* **ApplicationLauncher:** updated input to SearchInput ([#218](https://github.com/patternfly/pf-codemods/issues/218)) ([be13bd1](https://github.com/patternfly/pf-codemods/commit/be13bd1e25303115a56be837c1e64d8c7960a18d))
+* **card:** add warning for card default component ([#231](https://github.com/patternfly/pf-codemods/issues/231)) ([b8cbd95](https://github.com/patternfly/pf-codemods/commit/b8cbd95033938270c4de7e2d24c0b3de52962978))
+* **react-dropzone:** updated to latest version ([#216](https://github.com/patternfly/pf-codemods/issues/216)) ([02bcea1](https://github.com/patternfly/pf-codemods/commit/02bcea1bef2a4023a67d6ea4a79440efbcefb68a))
+* **Tabs:** added warning that the type of Tabs children is now limited ([#220](https://github.com/patternfly/pf-codemods/issues/220)) ([6d8470a](https://github.com/patternfly/pf-codemods/commit/6d8470a523029f393fcab28b943688de1aebe801))
+
+
+
+
+
 # [1.28.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.27.0...@patternfly/eslint-plugin-pf-codemods@1.28.0) (2023-01-23)
 
 
