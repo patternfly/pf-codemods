@@ -5,13 +5,12 @@ const componentName = process.argv[2]
 const oldPropName = process.argv[3]
 const newPropName = process.argv[4]
 const referencePR = process.argv[5]
-const lowerCasedComponentName = componentName[0].toLowerCase() + componentName.substring(1);
-const newRuleName = `${lowerCasedComponentName}-remove-${oldPropName}`
-
 if (!componentName || !oldPropName || !newPropName || !referencePR) {
   console.log('usage: node generate-replace-prop-v5 [componentName] [oldPropName] [newPropName] [referencePR]');
   process.exit(1);
 }
+const lowerCasedComponentName = componentName[0].toLowerCase() + componentName.substring(1);
+const newRuleName = `${lowerCasedComponentName}-remove-${oldPropName}`
 
 console.log('Generating rule', newRuleName);
 // Write rule file
