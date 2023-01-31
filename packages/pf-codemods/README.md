@@ -176,6 +176,20 @@ Out:
 
 We've removed the deprecated `entryDelay`, `exitDelay`, `maxWidth`, `position`, and `toolTipText` props. This rule will remove them from your code and suggest that you use the tooltipProps prop instead.
 
+#### Examples
+
+In:
+
+```jsx
+<CodeEditor entryDelay="500" exitDelay="500" maxWidth="15rem" position="top" toolTipText="hi" />
+```
+
+Out:
+
+```jsx
+<CodeEditor      />
+```
+
 ### datalist-remove-ondrags [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel` props. This rule will remove them and suggest the user use the DragDrop component.
