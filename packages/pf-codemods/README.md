@@ -2,7 +2,7 @@
 
 Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@4.x.x code to 5.x.x.
 
-I hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones.
+We hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones as well as point out the more complicated ones and offer suggestions on how you might go about fixing them.
 
 ## Usage
 
@@ -19,6 +19,8 @@ Giving node more RAM can help for large codebases.
 ```sh
 NODE_OPTIONS=--max-old-space-size=4096 npx pf-codemods ./path-to-src
 ```
+
+These commands will show you places in your code that may have issues with our breaking changes similar to linting. Add the `--fix` flag to allow us to autofix issues where possible.
 
 ### Options
 
