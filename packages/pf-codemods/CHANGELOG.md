@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.30.0...@patternfly/pf-codemods@1.31.0) (2023-02-02)
+
+
+### Features
+
+* **MenuItemAction:** made aria-label prop required ([#233](https://github.com/patternfly/pf-codemods/issues/233)) ([1305e28](https://github.com/patternfly/pf-codemods/commit/1305e28329ffbbf6a43e48481bea22e0ab0cdc72))
+
+
+
+
+
 # [1.30.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.29.0...@patternfly/pf-codemods@1.30.0) (2023-01-30)
 
 
