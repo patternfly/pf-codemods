@@ -192,7 +192,7 @@ Out:
 <CodeEditor      />
 ```
 
-### clipboardCopy-remove-popoverPosition [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
+### clipboardCopy-remove-switchDelay [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
 
 We've removed the switchDelay prop the `ClipBoardCopy` component.
 
