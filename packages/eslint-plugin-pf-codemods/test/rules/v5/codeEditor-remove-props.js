@@ -4,7 +4,7 @@ const rule = require('../../../lib/rules/v5/codeEditor-remove-props');
 ruleTester.run("codeEditor-remove-props", rule, {
   valid: [
     {
-      code: `import { CodeEditor } from '@patternfly/react-core'; <CodeEditor no />`,
+      code: `import { CodeEditor } from '@patternfly/react-core'; <CodeEditor />`,
     },
     {
       // No @patternfly/react-core import
