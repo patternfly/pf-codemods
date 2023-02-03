@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.29.0...@patternfly/eslint-plugin-pf-codemods@1.31.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **release:** manually bump package versions ([3f758e4](https://github.com/patternfly/pf-codemods/commit/3f758e44d161104c3020a85864fd2f4717167841))
+
+
+### Features
+
+* **ClipboardCopy:** remove switchDelay prop ([#238](https://github.com/patternfly/pf-codemods/issues/238)) ([b1a6138](https://github.com/patternfly/pf-codemods/commit/b1a6138f2f3bc719cfdb07602fdc9a2352c0bd52))
+* **MenuItemAction:** made aria-label prop required ([#233](https://github.com/patternfly/pf-codemods/issues/233)) ([1305e28](https://github.com/patternfly/pf-codemods/commit/1305e28329ffbbf6a43e48481bea22e0ab0cdc72))
+
+
+
+
+
 # [1.29.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.28.0...@patternfly/eslint-plugin-pf-codemods@1.29.0) (2023-01-30)
 
 
