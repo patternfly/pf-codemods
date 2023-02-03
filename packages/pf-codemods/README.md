@@ -524,7 +524,7 @@ Out:
 <SimpleList isActive />
 ```
 
-### spinner-svg-default [(#8616)](https://github.com/patternfly/patternfly-react/pull/8616)
+### spinner-remove-issvg [(#8616)](https://github.com/patternfly/patternfly-react/pull/8616)
 
 We've updated the Spinner to only be an svg and have removed the isSVG prop.
 

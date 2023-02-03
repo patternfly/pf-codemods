@@ -1,7 +1,7 @@
 const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/spinner-svg-default');
+const rule = require('../../../lib/rules/v5/spinner-remove-issvg');
 
-ruleTester.run("spinner-svg-default", rule, {
+ruleTester.run("spinner-remove-isvg", rule, {
   valid: [
     {
       code: `import { Spinner } from '@patternfly/react-core'; <Spinner />`,
