@@ -192,6 +192,24 @@ Out:
 <CodeEditor      />
 ```
 
+### clipboardCopy-remove-switchDelay [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
+
+We've removed the switchDelay prop from the `ClipBoardCopy` component.
+
+#### Examples
+
+In:
+
+```jsx
+<ClipboardCopy switchDelay="500" />
+```
+
+Out:
+
+```jsx
+<ClipboardCopy  />
+```
+
 ### datalist-remove-ondrags [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel` props. This rule will remove them and suggest the user use the DragDrop component.
