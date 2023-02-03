@@ -194,14 +194,14 @@ Out:
 
 ### clipboardCopy-remove-popoverPosition [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
 
-We've removed the delaySwitch prop the `ClipBoardCopy` component.
+We've removed the switchDelay prop the `ClipBoardCopy` component.
 
 #### Examples
 
 In:
 
 ```jsx
-<ClipboardCopy delaySwitch="500" />
+<ClipboardCopy switchDelay="500" />
 ```
 
 Out:
