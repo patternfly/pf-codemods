@@ -451,6 +451,10 @@ Out:
 />
 ```
 
+### popover-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
+
+The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
+
 ### popover-remove-props [(#8201)](https://github.com/patternfly/patternfly-react/pull/8201)
 
 We've removed the `boundary` and `tippyProps` from Popover, as well as removed the first parameter of `shouldClose` and all parameters of `onHidden`, `onHide`, `onMount`, `onShow`, and `onShown`.

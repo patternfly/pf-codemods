@@ -14,6 +14,7 @@ import { KEY_CODES } from "@patternfly/react-core";
 import { MenuItem, MenuItemAction } from "@patternfly/react-core";
 import { MultipleFileUpload } from "@patternfly/react-core";
 import { Nav } from "@patternfly/react-core";
+import { Popover } from "@patternfly/react-core";
 import { Tabs } from "@patternfly/react-core";
 import { TreeView } from "@patternfly/react-core";
 import { Wizard } from "@patternfly/react-core";
@@ -25,7 +26,8 @@ import { WizardFooter } from "@patternfly/react-core/next";
   <DropdownToggle isPrimary />
   <MenuItem hasCheck />
   <MenuItemAction />
-  <Nav variant='horizontal-subnav' />;
+  <Nav variant='horizontal-subnav' />
+  <Popover />
   <SelectOption hasCheck />
   <Toggle isPrimary />
   <Button isLarge />
