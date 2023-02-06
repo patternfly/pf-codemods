@@ -352,6 +352,28 @@ Out:
 <FileUpload  />
 ```
 
+### hasCheck-prop-rename [(#8403)](https://github.com/patternfly/patternfly-react/pull/8403)
+
+We've renamed the `hasCheck` prop for TreeView, MenuItem, and the Next implementation of SelectOption to `hasCheckbox`.
+
+#### Examples
+
+In:
+
+```jsx
+<SelectOption hasCheck />
+<TreeView hasCheck />
+<MenuItem hasCheck />
+```
+
+Out:
+
+```jsx
+<SelectOption hasCheckbox />
+<TreeView hasCheckbox />
+<MenuItem hasCheckbox />
+```
+
 ### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
