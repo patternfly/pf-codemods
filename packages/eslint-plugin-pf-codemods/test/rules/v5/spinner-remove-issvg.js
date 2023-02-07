@@ -1,7 +1,7 @@
 const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/spinner-remove-issvg');
+const rule = require('../../../lib/rules/v5/spinner-remove-isSvg');
 
-ruleTester.run("spinner-remove-isvg", rule, {
+ruleTester.run("spinner-remove-isSvg", rule, {
   valid: [
     {
       code: `import { Spinner } from '@patternfly/react-core'; <Spinner />`,
@@ -16,15 +16,7 @@ ruleTester.run("spinner-remove-isvg", rule, {
       code:   `import { Spinner } from '@patternfly/react-core'; <Spinner isSVG />`,
       output: `import { Spinner } from '@patternfly/react-core'; <Spinner  />`,
       errors: [{
-        message: `Spinner's isSVG prop has been removed. Spinner will now only use SVG.`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { Spinner } from '@patternfly/react-core'; <Spinner isSVG={true} />`,
-      output: `import { Spinner } from '@patternfly/react-core'; <Spinner  />`,
-      errors: [{
-        message: `Spinner's isSVG prop has been removed. Spinner will now only use SVG.`,
+        message: `Spinner's isSVG prop has been removed because Spinner now exclusively uses an SVG.`,
         type: "JSXOpeningElement",
       }]
     }

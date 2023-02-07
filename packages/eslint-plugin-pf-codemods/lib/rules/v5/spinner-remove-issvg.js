@@ -6,6 +6,6 @@ module.exports = {
   create: renameProp(
     'Spinner',
     {'isSVG': ``},
-    node =>  `Spinner's isSVG prop has been removed. Spinner will now only use SVG.`
+    node =>  `Spinner's isSVG prop has been removed because Spinner now exclusively uses an SVG.`
   ),
 };
