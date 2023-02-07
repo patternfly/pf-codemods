@@ -282,6 +282,23 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### dropdownItem-remove-isHovered [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
+
+We've removed the `isHovered` prop for the `DropdownItem`.
+
+#### Examples
+
+In:
+
+```jsx
+<DropdownItem isHovered={isHovered} />
+```
+
+Out:
+```jsx
+<DropdownItem  />
+```
+
 ### dropdownMenu-remove-openedOnEnter [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the `openedOnEnter` prop for the `DropdownMenu`.
@@ -298,6 +315,7 @@ Out:
 ```jsx
 <DropdownMenu  />
 ```
+
 ### dropdownToggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
