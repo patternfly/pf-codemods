@@ -16,7 +16,7 @@ module.exports = {
               node,
               message: `The default PageHeader logoComponent type has be updated to switch between an anchor, button, and span based on whether a href, onClick or neither are present. It is also recommended to use Masthead in place of PageHeader.`,
               fix(fixer) {
-                return fixer.insertTextAfter(node.name, ` component="a"`);
+                return fixer.insertTextAfter(node.name, ` logoComponent="a"`);
               }
             });
           }
