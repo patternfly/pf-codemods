@@ -82,7 +82,7 @@ Out:
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
 
-### button-remove-isSmallisLarge [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
+### button-remove-isSmallisLarge [(#8144)](https://github.com/patternfly/patternfly-react/pull/8144)
 
 We've removed the `isSmall` and `isLarge` props for Button and replaced them with the `size` prop using the values `"sm"` and `"lg"`, respectively.
 
