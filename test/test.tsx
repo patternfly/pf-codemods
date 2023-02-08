@@ -2,7 +2,7 @@ import { AccordionExpandableContent } from "@patternfly/react-core";
 import { ApplicationLauncher } from "@patternfly/react-core";
 import { Card } from "@patternfly/react-core";
 import { CodeEditor } from "@patternfly/react-code-editor";
-import { DropdownToggle, Toggle } from "@patternfly/react-core";
+import { DropdownToggle, Toggle, Button } from "@patternfly/react-core";
 import { FileUpload } from "@patternfly/react-core";
 import { KEY_CODES } from "@patternfly/react-core";
 import { MenuItemAction } from "@patternfly/react-core";
@@ -17,4 +17,6 @@ import { WizardFooter } from "@patternfly/react-core/next";
   <MenuItemAction />
   <Nav variant='horizontal-subnav' />;
   <Toggle isPrimary />
+  <Button isLarge />
+  <Button isSmall />
 </>;

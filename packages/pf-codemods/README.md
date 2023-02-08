@@ -82,6 +82,26 @@ Out:
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
 
+### button-remove-isSmallisLarge [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
+
+We've removed the `isSmall` and `isLarge` props for Button and replaced them with the `size` prop using the values `"sm"` and `"lg"`, respectively.
+
+#### Examples
+
+In:
+
+```jsx
+<Button isSmall />
+<Button isLarge />
+```
+
+Out:
+
+```jsx
+<Button size="sm" />
+<Button size="lg" />
+```
+
 ### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
 
 We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
