@@ -7,6 +7,6 @@ module.exports = {
     "Alert",
     { "aria-label": "" },
     (node, attribute) =>
-      `${attribute.name.name} prop for ${node.name.name} has been removed and should not be used as it is not well supported on div element without a role.`
+      `${attribute.name.name} prop for ${node.name.name} has been removed and should not be used as it is not well supported on div elements without a role.`
   ),
 };

@@ -17,7 +17,7 @@ ruleTester.run("alert-remove-ariaLabel", rule, {
       output: `import { Alert } from '@patternfly/react-core'; <Alert  />`,
       errors: [
         {
-          message: `aria-label prop for Alert has been removed and should not be used as it is not well supported on div element without a role.`,
+          message: `aria-label prop for Alert has been removed and should not be used as it is not well supported on div elements without a role.`,
           type: "JSXOpeningElement",
         },
       ],
