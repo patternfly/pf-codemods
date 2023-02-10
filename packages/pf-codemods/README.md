@@ -78,6 +78,24 @@ Out:
 <Accordion displaySize="lg" />
 ```
 
+### alert-remove-ariaLabel [(#8649)](https://github.com/patternfly/patternfly-react/pull/8649)
+
+We've removed the `aria-label` prop from Alert. This prop should not be used on an Alert as it is not well supported by assistive technologies on `<div>` elements.
+
+#### Examples
+
+In:
+
+```jsx
+<Alert aria-label="Error alert" />
+```
+
+Out:
+
+```jsx
+<Alert  />
+```
+
 ### applicationLauncher-warn-input [(#8293)](https://github.com/patternfly/patternfly-react/pull/8293)
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.

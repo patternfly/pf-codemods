@@ -1,4 +1,5 @@
 import { AccordionExpandableContent } from "@patternfly/react-core";
+import { Alert } from "@patternfly/react-core";
 import { ApplicationLauncher } from "@patternfly/react-core";
 import { Card } from "@patternfly/react-core";
 import { CodeEditor } from "@patternfly/react-code-editor";
@@ -13,6 +14,7 @@ import { Wizard } from "@patternfly/react-core";
 import { WizardFooter } from "@patternfly/react-core/next";
 
 <>
+  <Alert aria-label='tester' />
   <DropdownToggle isPrimary />
   <MenuItemAction />
   <Nav variant='horizontal-subnav' />;
