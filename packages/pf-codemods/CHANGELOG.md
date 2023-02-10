@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.33.0...@patternfly/pf-codemods@1.34.0) (2023-02-10)
+
+
+### Features
+
+* **Button:** replace isSmall and isLarge with size ([#246](https://github.com/patternfly/pf-codemods/issues/246)) ([2d2f413](https://github.com/patternfly/pf-codemods/commit/2d2f413d2d227fdcfe4bcf2f62f82d44abc8d725))
+
+
+
+
+
 # [1.33.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.32.1...@patternfly/pf-codemods@1.33.0) (2023-02-10)
 
 
