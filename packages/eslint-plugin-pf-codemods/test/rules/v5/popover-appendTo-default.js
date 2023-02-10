@@ -14,7 +14,7 @@ ruleTester.run("popover-appendTo-default", rule, {
       output: `import { Popover } from '@patternfly/react-core'; <Popover />`,
       errors: [
         {
-          message: `The default value of the Popover prop 'appendTo' has been updated and may cause markup changes that require updating selectors used in tests.`,
+          message: `The default value of the Popover prop 'appendTo' has been updated to a value of "inline" and may cause markup changes that require updating selectors used in tests.`,
           type: "JSXOpeningElement",
         },
       ],
