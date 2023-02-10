@@ -1,6 +1,6 @@
 const { getPackageImports } = require('../../helpers');
 
-  // https://github.com/patternfly/patternfly-react/pull/8090
+  // https://github.com/patternfly/patternfly-react/pull/8626
   module.exports = {
     meta: { fixable: 'code' },
     create: function(context) {

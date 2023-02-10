@@ -392,6 +392,34 @@ Out:
 <MenuItem hasCheckbox />
 ```
 
+We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
+
+### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
+
+We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
+
+### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
+
+We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
+
+#### Examples
+
+In:
+
+```jsx
+<SelectOption hasCheck />
+<TreeView hasCheck />
+<MenuItem hasCheck />
+```
+
+Out:
+
+```jsx
+<SelectOption hasCheckbox />
+<TreeView hasCheckbox />
+<MenuItem hasCheckbox />
+```
+
 ### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
@@ -420,44 +448,48 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
-<<<<<<< HEAD
-### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
-
-We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
-=======
 ### notificationBadge-remove-isRead [(#8090)](https://github.com/patternfly/patternfly-react/pull/8090)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
->>>>>>> 285fcf4 (feat(NotificationBadge): remove isRead prop)
 
 #### Examples
 
 In:
 
 ```jsx
-<<<<<<< HEAD
-<PageHeader />
-<PageHeader logoComponent="div" />
-=======
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
   <NotificationBadge isRead={isRead || markedRead} />
->>>>>>> 285fcf4 (feat(NotificationBadge): remove isRead prop)
 ```
 
 Out:
 
 ```jsx
-<<<<<<< HEAD
-<PageHeader logoComponent="a" />
-<PageHeader logoComponent="div" />
-=======
   <NotificationBadge variant="read" />
   <NotificationBadge variant="unread" />
   <NotificationBadge variant={isRead ? "read" : "unread"} />
   <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
->>>>>>> 285fcf4 (feat(NotificationBadge): remove isRead prop)
+```
+
+### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
+
+We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
+
+#### Examples
+
+In:
+
+```jsx
+<PageHeader />
+<PageHeader logoComponent="div" />
+```
+
+Out:
+
+```jsx
+<PageHeader logoComponent="a" />
+<PageHeader logoComponent="div" />
 ```
 
 ### pagination-optionsToggle [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
