@@ -546,22 +546,6 @@ Out:
 
 `collapseAllAriaLabel` on `ThExpandType` has been updated to a `string` from `''`. Workarounds casting this property to an empty string are no longer required.
 
-#### Examples
-
-In:
-
-```jsx
-<Table collapseAllAriaLabel="label" />
-<Th collapseAllAriaLabel="label" />
-```
-
-Out:
-
-```jsx
-<Table collapseAllAriaLabel="label" />
-<Th collapseAllAriaLabel="label" />
-```
-
 
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 

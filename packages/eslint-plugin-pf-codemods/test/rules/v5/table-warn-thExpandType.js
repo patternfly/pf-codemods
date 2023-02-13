@@ -16,20 +16,23 @@ ruleTester.run("table-warn-thExpandType", rule, {
     {
       // No @patternfly/react-table import
       code: `<Th />`,
-    }
+    },
+    {
+      code: `import { Table } from '@patternfly/react-table'; <Table collapseAllAriaLabel="test" />`,
+    },
   ],
   invalid: [
     {
-      code:   `import { Table } from '@patternfly/react-table'; <Table collapseAllAriaLabel="test" />`,
-      output: `import { Table } from '@patternfly/react-table'; <Table collapseAllAriaLabel="test" />`,
+      code:   `import { Table } from '@patternfly/react-table'; <Table collapseAllAriaLabel={"test" as ''} />`,
+      output: `import { Table } from '@patternfly/react-table'; <Table collapseAllAriaLabel={"test" as ''} />`,
       errors: [{
         message: `collapseAllAriaLabel has been updated to a string type. Workarounds casting this property to an empty string are no longer required.`,
         type: "JSXOpeningElement",
       }]
     },
     {
-      code:   `import { Th } from '@patternfly/react-table'; <Th collapseAllAriaLabel="test" />`,
-      output: `import { Th } from '@patternfly/react-table'; <Th collapseAllAriaLabel="test" />`,
+      code:   `import { Th } from '@patternfly/react-table'; <Th collapseAllAriaLabel={"test" as ''} />`,
+      output: `import { Th } from '@patternfly/react-table'; <Th collapseAllAriaLabel={"test" as ''} />`,
       errors: [{
         message: `collapseAllAriaLabel has been updated to a string type. Workarounds casting this property to an empty string are no longer required.`,
         type: "JSXOpeningElement",

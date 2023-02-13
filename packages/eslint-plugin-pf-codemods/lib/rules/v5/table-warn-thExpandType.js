@@ -10,8 +10,8 @@ module.exports = {
     return tableImport.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (tableImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const hasCollapseAllAriaLabel = node.attributes.find(n => n.name && n.name.name === 'collapseAllAriaLabel');;
-          if (hasCollapseAllAriaLabel) {
+          const collapseAllAriaLabel = node.attributes.find(n => n.name && n.name.name === 'collapseAllAriaLabel');
+          if (collapseAllAriaLabel?.value?.expression?.type === 'TSAsExpression') {
             context.report({
               node,
               message: `collapseAllAriaLabel has been updated to a string type. Workarounds casting this property to an empty string are no longer required.`,
