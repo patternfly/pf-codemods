@@ -664,10 +664,13 @@ Out:
 <Spinner  />
 ```
 
+### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
+
+Table and TableComposable's `ActionsColumn` has been updated to use the newer 'next' version of Dropdown. The toggle passed to the actions column should now be a `MenuToggle` instead of a `DropdownToggle`. The `dropdownPosition`, `dropdownDirection` and `menuAppendTo` properties are removed and `Popper` properties can be passed in using `popperProps` instead (via `direction`, `position`, `appendTo`, etc.).
+
 ### table-warn-thExpandType [(#8634)](https://github.com/patternfly/patternfly-react/pull/8634)
 
 `collapseAllAriaLabel` on `ThExpandType` has been updated to a `string` from `''`. Workarounds casting this property to an empty string are no longer required.
-
 
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 
