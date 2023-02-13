@@ -898,6 +898,30 @@ function toggleDropdown(_event, isOpen) {};
 <DropdownToggle onToggle={toggleDropdown}>
 ```
 
+### overflowMenu-warn-updated-dropdownItem [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
+
+OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.
+
+This rule will raise a warning when OverflowMenuDropdownItem is imported, but will not update any code.
+
+### overflowMenuDropdownItem-renamed-prop [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
+
+We've renamed the `index` prop for OverflowMenuDropdownItem to `itemId`, and updated its type to `string | number`.
+
+#### Examples
+
+In:
+
+```jsx
+<OverflowMenuDropdownItem index={0}>
+```
+
+Out:
+
+```jsx
+<OverflowMenuDropdownItem itemId={0}>
+```
+
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.

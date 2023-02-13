@@ -26,6 +26,8 @@ const warningRules = [
   "horizontalSubnav-ariaLabel",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
+  "onToggle-warn-event",
+  "overflowMenu-warn-updated-dropdownItem",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
