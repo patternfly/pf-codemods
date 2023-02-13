@@ -4,7 +4,7 @@ const { getPackageImports } = require("../../helpers");
 module.exports = {
   meta: {},
   create: function (context) {
-    const tableImport =  getPackageImports(context, '@patternfly/react-core')
+    const tableImport =  getPackageImports(context, '@patternfly/react-table')
     .filter(specifier => specifier.imported.name == 'Table' || specifier.imported.name === 'Th');
 
     return tableImport.length === 0 ? {} : {
