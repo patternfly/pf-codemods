@@ -43,13 +43,9 @@ module.exports = {
                       (specifier) => specifier.imported.name == "MenuList"
                     ).length
                   ) {
-                    const { range, selfClosing } = menuLists[0].openingElement;
-                    const rangeToReplace = selfClosing
-                      ? range[1] - 2
-                      : range[1] - 1;
                     fixes.push(
-                      fixer.replaceTextRange(
-                        [rangeToReplace, rangeToReplace],
+                      fixer.insertTextAfter(
+                        menuLists[0].openingElement.name,
                         ` aria-label="${menuAriaLabel.value.value}"`
                       )
                     );

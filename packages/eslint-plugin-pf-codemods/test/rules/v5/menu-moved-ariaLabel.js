@@ -31,7 +31,17 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
     },
     {
       code: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu aria-label="tester"><MenuList /></Menu>`,
-      output: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu ><MenuList  aria-label="tester"/></Menu>`,
+      output: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu ><MenuList aria-label="tester" /></Menu>`,
+      errors: [
+        {
+          message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      code: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu aria-label="tester"><MenuList></MenuList></Menu>`,
+      output: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu ><MenuList aria-label="tester"></MenuList></Menu>`,
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
@@ -61,8 +71,8 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       ],
     },
     {
-      code: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu aria-label="tester"><MenuList aria-label="another label" /></Menu>`,
-      output: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu ><MenuList aria-label="another label" /></Menu>`,
+      code: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu aria-label="tester"><MenuList aria-label="another label"/></Menu>`,
+      output: `import { Menu, MenuList } from '@patternfly/react-core'; <Menu ><MenuList aria-label="another label"/></Menu>`,
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
