@@ -427,6 +427,7 @@ Out:
 We've updated several ARIA related props so that they will now only be conditionally applied when passed in for the following components:
 
 | Component | Prop | Condition |
+| -- | -- | -- |
 | `Wizard` | `mainAriaLabel`, `mainAriaLabelledBy` | Only when the Wizard's body contents overflows and causes a scrollbar. A tabindex of "0" will also be applied when the contents oveflows. |
 | `WizardBody` (Next implementation) | `aria-label`, `aria-labelledby` | Only when the WizardBody contents overflows and causes a scrollbar. A tabindex of "0" will also be applied when the contents oveflows. |
 | `MenuItem` | `aria-label` | When `hasCheckbox` is also passed, the prop is applied to the internal `<li>` element. Otherwise it is applied to the element passed into the `component` prop. |
