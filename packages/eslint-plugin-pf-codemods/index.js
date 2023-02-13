@@ -18,6 +18,7 @@ const warningRules = [
   "card-warn-component",
   "horizontalSubnav-ariaLabel",
   "react-dropzone-warn-upgrade",
+  "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
   "wizard-warn-button-order",
 ];
