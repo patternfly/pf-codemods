@@ -5,6 +5,7 @@ import {
   ApplicationLauncher,
   Button,
   Card,
+  DatePicker,
   DropdownItem,
   DropdownToggle,
   FileUpload,
@@ -28,6 +29,7 @@ const isRead = true;
   <Alert aria-label='tester' />
   <Button isLarge />
   <Button isSmall />
+  <DatePicker />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary />
   <MenuItem hasCheck />

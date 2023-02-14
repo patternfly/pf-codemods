@@ -16,6 +16,7 @@ const v4rules = createListOfRules("4");
 const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
+  "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
   "onToggle-warn-event",
   "popover-appendTo-default",
