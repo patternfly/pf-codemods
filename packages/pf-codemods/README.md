@@ -816,6 +816,10 @@ Out:
 <Tooltip     />
 ```
 
+### warn-event-api [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
+
+We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
+
 ### warn-key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
 
 We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
