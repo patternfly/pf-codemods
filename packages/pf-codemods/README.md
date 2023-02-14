@@ -454,6 +454,10 @@ Out:
   <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
 ```
 
+### onToggle-warn-event [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
+
+We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
+
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
@@ -825,10 +829,6 @@ Out:
 ```jsx
 <Tooltip     />
 ```
-
-### warn-event-api [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
-
-We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
 
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
 
