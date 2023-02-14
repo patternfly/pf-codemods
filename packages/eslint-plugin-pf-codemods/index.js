@@ -22,6 +22,7 @@ const warningRules = [
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
   "wizard-warn-button-order",
+  "warn-event-api"
 ];
 
 const createRules = (rules) => {
