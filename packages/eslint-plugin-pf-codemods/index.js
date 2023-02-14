@@ -17,6 +17,7 @@ const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
   "horizontalSubnav-ariaLabel",
+  "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
   "tabs-warn-children-type-changed",
   "wizard-warn-button-order",
