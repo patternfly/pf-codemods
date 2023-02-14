@@ -1,37 +1,39 @@
-import { AccordionExpandableContent } from "@patternfly/react-core";
-import { Alert } from "@patternfly/react-core";
-import { ApplicationLauncher } from "@patternfly/react-core";
-import { Card } from "@patternfly/react-core";
 import { CodeEditor } from "@patternfly/react-code-editor";
 import {
-  DropdownToggle,
-  Toggle,
+  AccordionExpandableContent,
+  Alert,
+  ApplicationLauncher,
   Button,
+  Card,
+  DropdownItem,
+  DropdownToggle,
+  FileUpload,
+  KEY_CODES,
+  MenuItem,
+  MenuItemAction,
+  MultipleFileUpload,
+  Nav,
+  Popover,
   Spinner,
+  Tabs,
+  Toggle,
+  TreeView,
+  Wizard,
 } from "@patternfly/react-core";
-import { FileUpload } from "@patternfly/react-core";
-import { KEY_CODES } from "@patternfly/react-core";
-import { MenuItem, MenuItemAction } from "@patternfly/react-core";
-import { MultipleFileUpload } from "@patternfly/react-core";
-import { Nav } from "@patternfly/react-core";
-import { Popover } from "@patternfly/react-core";
-import { Tabs } from "@patternfly/react-core";
-import { TreeView } from "@patternfly/react-core";
-import { Wizard } from "@patternfly/react-core";
-import { SelectOption } from "@patternfly/react-core/next";
-import { WizardFooter } from "@patternfly/react-core/next";
+import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
 
 <>
   <Alert aria-label='tester' />
+  <Button isLarge />
+  <Button isSmall />
+  <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav variant='horizontal-subnav' />
   <Popover />
   <SelectOption hasCheck />
-  <Toggle isPrimary />
-  <Button isLarge />
-  <Button isSmall />
   <Spinner isSVG />
+  <Toggle isPrimary />
   <TreeView hasCheck />
 </>;
