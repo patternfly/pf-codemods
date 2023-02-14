@@ -9,7 +9,7 @@ const { getPackageImports } = require("../../helpers");
         "@patternfly/react-core"
       ).filter((specifier) => specifier.imported.name === "DatePicker");
 
-      return imports === 0
+      return imports.length === 0
         ? {}
         : {
             JSXOpeningElement(node) {
