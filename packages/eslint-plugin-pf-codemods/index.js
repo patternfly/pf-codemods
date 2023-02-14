@@ -17,12 +17,12 @@ const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
   "horizontalSubnav-ariaLabel",
+  "onToggle-warn-event",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
-  "wizard-warn-button-order",
-  "warn-event-api"
+  "wizard-warn-button-order"
 ];
 
 const createRules = (rules) => {
