@@ -396,6 +396,12 @@ Out:
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
+### key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
+
+We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
+
+This rule will raise an error when `KEY_CODES` is imported in a file, but it will not make any code changes.
+
 ### masthead-update-component [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `MastheadBrand` to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `component` properties will remain unchanged, but if it is not specified a default will be added.
@@ -823,12 +829,6 @@ Out:
 ### warn-event-api [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
-
-### warn-key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
-
-We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
-
-This rule will raise a warning when `KEY_CODES` is imported in a file, but it will not make any code changes.
 
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
 

@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/warn-key-codes-removed");
+const rule = require("../../../lib/rules/v5/key-codes-removed");
 
-ruleTester.run("warn-key-codes-removed", rule, {
+ruleTester.run("key-codes-removed", rule, {
   valid: [
     {
       // No @patternfly/react-core import
