@@ -16,12 +16,12 @@ const v4rules = createListOfRules("4");
 const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
+  "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
-  "warn-datePicker-appendTo-default-value-changed",
   "wizard-warn-button-order",
 ];
 

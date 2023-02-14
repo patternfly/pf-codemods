@@ -1,7 +1,7 @@
 const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/warn-datePicker-appendTo-default-value-changed');
+const rule = require('../../../lib/rules/v5/datePicker-warn-appendTo-default-value-changed');
 
-ruleTester.run("warn-datePicker-appendTo-default-value-changed", rule, {
+ruleTester.run("datePicker-warn-appendTo-default-value-changed", rule, {
   valid: [
     {
       // No @patternfly/react-core import
