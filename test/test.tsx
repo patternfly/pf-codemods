@@ -13,6 +13,7 @@ import {
   MenuItemAction,
   MultipleFileUpload,
   Nav,
+  NotificationBadge,
   Popover,
   Spinner,
   Tabs,
@@ -22,6 +23,7 @@ import {
 } from "@patternfly/react-core";
 import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
 
+const isRead = true;
 <>
   <Alert aria-label='tester' />
   <Button isLarge />
@@ -31,6 +33,9 @@ import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav variant='horizontal-subnav' />
+  <NotificationBadge isRead />
+  <NotificationBadge isRead={false} />
+  <NotificationBadge isRead={isRead} />
   <Popover />
   <SelectOption hasCheck />
   <Spinner isSVG />

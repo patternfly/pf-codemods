@@ -420,6 +420,30 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
+### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
+
+We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
+
+#### Examples
+
+In:
+
+```jsx
+  <NotificationBadge isRead />
+  <NotificationBadge isRead={false} />
+  <NotificationBadge isRead={isRead} />
+  <NotificationBadge isRead={isRead || markedRead} />
+```
+
+Out:
+
+```jsx
+  <NotificationBadge variant="read" />
+  <NotificationBadge variant="unread" />
+  <NotificationBadge variant={isRead ? "read" : "unread"} />
+  <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
+```
+
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
