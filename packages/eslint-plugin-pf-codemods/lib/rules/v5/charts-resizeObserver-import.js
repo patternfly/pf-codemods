@@ -13,7 +13,13 @@ module.exports = {
       ? {}
       : {
           ImportDeclaration(node) {
-            if (node.source.value === "@patternfly/react-charts") {
+            if (
+              node.specifiers.filter((specifier) =>
+                chartResizeImport
+                  .map((imp) => imp.local.name)
+                  .includes(specifier.imported.name)
+              ).length
+            ) {
               context.report({
                 node,
                 message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
