@@ -19,11 +19,12 @@ const warningRules = [
   "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
   "onToggle-warn-event",
+  "nav-warn-flyouts-now-inline",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
-  "wizard-warn-button-order"
+  "wizard-warn-button-order",
 ];
 
 const createRules = (rules) => {

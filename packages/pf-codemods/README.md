@@ -400,6 +400,12 @@ Out:
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
+### key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
+
+We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
+
+This rule will raise an error when `KEY_CODES` is imported in a file, but it will not make any code changes.
+
 ### masthead-update-component [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `MastheadBrand` to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `component` properties will remain unchanged, but if it is not specified a default will be added.
@@ -424,6 +430,10 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
+### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
+
+The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
+
 ### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
@@ -447,6 +457,10 @@ Out:
   <NotificationBadge variant={isRead ? "read" : "unread"} />
   <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
 ```
+
+### onToggle-warn-event [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
+
+We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
@@ -819,16 +833,6 @@ Out:
 ```jsx
 <Tooltip     />
 ```
-
-### warn-event-api [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
-
-We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
-
-### warn-key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
-
-We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
-
-This rule will raise a warning when `KEY_CODES` is imported in a file, but it will not make any code changes.
 
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
 

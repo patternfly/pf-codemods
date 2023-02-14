@@ -34,6 +34,7 @@ const isRead = true;
   <DropdownToggle isPrimary />
   <MenuItem hasCheck />
   <MenuItemAction />
+  <Nav flyout={'menu'} />
   <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
