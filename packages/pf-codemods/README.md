@@ -420,7 +420,7 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
-### notificationBadge-remove-isRead [(#8090)](https://github.com/patternfly/patternfly-react/pull/8090)
+### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
 
