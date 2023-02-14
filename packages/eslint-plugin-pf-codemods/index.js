@@ -18,11 +18,11 @@ const warningRules = [
   "card-warn-component",
   "horizontalSubnav-ariaLabel",
   "onToggle-warn-event",
+  "nav-warn-flyouts-now-inline",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
-  "warn-nav-flyouts-now-inline",
   "wizard-warn-button-order",
 ];
 

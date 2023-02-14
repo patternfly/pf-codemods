@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/warn-nav-flyouts-now-inline");
+const rule = require("../../../lib/rules/v5/nav-warn-flyouts-now-inline");
 
-ruleTester.run("warn-nav-flyouts-now-inline", rule, {
+ruleTester.run("nav-warn-flyouts-now-inline", rule, {
   valid: [
     {
       code: `import { Nav } from '@patternfly/react-core'; <Nav />`,

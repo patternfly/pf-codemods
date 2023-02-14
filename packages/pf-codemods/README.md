@@ -420,6 +420,10 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
+### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
+
+The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
+
 ### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
@@ -825,11 +829,6 @@ We've updated the `onToggle` function to include the `event` as its first parame
 We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
 
 This rule will raise a warning when `KEY_CODES` is imported in a file, but it will not make any code changes.
-
-### warn-nav-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
-
-The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
-
 
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
 
