@@ -4,17 +4,15 @@ const { getPackageImports } = require("../../helpers");
 module.exports = {
   meta: {},
   create: function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-core").filter(
+    const navImports = getPackageImports(context, "@patternfly/react-core").find(
       (specifier) => specifier.imported.name === "Nav"
     );
 
-    return imports.length === 0
+    return !navImports
       ? {}
       : {
           JSXOpeningElement(node) {
-            const hasNav = imports
-              .map((imp) => imp.local.name)
-              .includes(node.name.name);
+            const hasNav = navImports.local.name.includes(node.name.name);
 
             const hasFlyout = node.attributes.find(
               (n) => n.name && n.name.name === "flyout"
