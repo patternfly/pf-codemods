@@ -3,6 +3,7 @@ import {
   AccordionExpandableContent,
   Alert,
   ApplicationLauncher,
+  Button,
   Card,
   DropdownItem,
   DropdownToggle,
@@ -13,11 +14,10 @@ import {
   MultipleFileUpload,
   Nav,
   Popover,
+  Spinner,
   Tabs,
   Toggle,
   TreeView,
-  Button,
-  Spinner,
   Wizard,
 } from "@patternfly/react-core";
 import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
@@ -33,7 +33,7 @@ import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
   <Nav variant='horizontal-subnav' />
   <Popover />
   <SelectOption hasCheck />
+  <Spinner isSVG />
   <Toggle isPrimary />
   <TreeView hasCheck />
-  <Spinner isSVG />
 </>;
