@@ -22,7 +22,8 @@ const warningRules = [
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
-  "wizard-warn-button-order"
+  "warn-nav-flyouts-now-inline",
+  "wizard-warn-button-order",
 ];
 
 const createRules = (rules) => {

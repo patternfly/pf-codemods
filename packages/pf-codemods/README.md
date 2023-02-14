@@ -826,6 +826,11 @@ We've removed the `KEY_CODES` constant from our constants file. If your code rel
 
 This rule will raise a warning when `KEY_CODES` is imported in a file, but it will not make any code changes.
 
+### warn-nav-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
+
+The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
+
+
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
 
 The order of the "next" and "back" buttons in the Wizard has been updated, with the "next" button now coming after the "back" button. This update has also been made in the Next implementation of the WizardFooter. We recommend updating any tests that may rely on relative selectors and updating any composable implementations to match this new button order.
