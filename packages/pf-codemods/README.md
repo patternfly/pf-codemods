@@ -392,12 +392,6 @@ Out:
 <MenuItem hasCheckbox />
 ```
 
-We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
-
-### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
-
-We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
-
 ### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
