@@ -12,7 +12,7 @@ module.exports = {
       ? {}
       : {
           JSXOpeningElement(node) {
-            const hasNav = navImports.local.name.includes(node.name.name);
+            const hasNav = navImports.local.name === node.name.name;
 
             const hasFlyout = node.attributes.find(
               (n) => n.name && n.name.name === "flyout"
