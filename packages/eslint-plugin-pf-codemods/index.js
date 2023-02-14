@@ -21,6 +21,7 @@ const warningRules = [
   "react-dropzone-warn-upgrade",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
+  "warn-datePicker-appendTo-default-value-changed",
   "wizard-warn-button-order",
 ];
 
