@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.34.4...@patternfly/pf-codemods@1.35.0) (2023-02-14)
+
+
+### Features
+
+* **DropdownItem:** remove ishovered prop ([#244](https://github.com/patternfly/pf-codemods/issues/244)) ([8b5de82](https://github.com/patternfly/pf-codemods/commit/8b5de82adc846a36678fd07c45930dec1bd7a5b9))
+
+
+
+
+
 ## [1.34.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.34.3...@patternfly/pf-codemods@1.34.4) (2023-02-14)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
