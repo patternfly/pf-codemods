@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.34.2...@patternfly/eslint-plugin-pf-codemods@1.35.0) (2023-02-14)
+
+
+### Features
+
+* **NotificationBadge:** remove isRead prop ([#247](https://github.com/patternfly/pf-codemods/issues/247)) ([cb80fed](https://github.com/patternfly/pf-codemods/commit/cb80fed39786f90d484f82d4882902d7180c7bc7))
+
+
+
+
+
 ## [1.34.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.34.1...@patternfly/eslint-plugin-pf-codemods@1.34.2) (2023-02-14)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
