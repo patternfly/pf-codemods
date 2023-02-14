@@ -34,10 +34,12 @@ import {
 import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
 
 const isRead = true;
+const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
   <Button isLarge />
   <Button isSmall />
+  <Chart themeVariant />
   <DatePicker />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary />
