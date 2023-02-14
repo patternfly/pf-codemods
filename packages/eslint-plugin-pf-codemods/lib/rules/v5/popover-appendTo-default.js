@@ -9,7 +9,7 @@ module.exports = {
       "@patternfly/react-core"
     ).filter((specifier) => specifier.imported.name === "Popover");
 
-    return popoverImports === 0
+    return popoverImports.length === 0
       ? {}
       : {
           JSXOpeningElement(node) {

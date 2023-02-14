@@ -8,7 +8,7 @@ module.exports = {
       (specifier) => specifier.imported.name === "Nav"
     );
 
-    return imports === 0
+    return imports.length === 0
       ? {}
       : {
           JSXOpeningElement(node) {
