@@ -1,4 +1,11 @@
-import { ChartLegend, getResizeObserver } from "@patternfly/react-charts";
+import {
+  Chart,
+  ChartLegend,
+  DarkBlueColorTheme,
+  getCustomTheme,
+  getResizeObserver,
+  LightBlueColorTheme,
+} from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
 import {
   AccordionExpandableContent,
@@ -36,7 +43,7 @@ const isRead = true;
   <DropdownToggle isPrimary />
   <MenuItem hasCheck />
   <MenuItemAction />
-  <Nav flyout={'menu'} />
+  <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
