@@ -19,6 +19,7 @@ const warningRules = [
   "horizontalSubnav-ariaLabel",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
+  "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
   "wizard-warn-button-order",
 ];

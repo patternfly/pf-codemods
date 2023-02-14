@@ -664,6 +664,11 @@ Out:
 <Spinner  />
 ```
 
+### table-warn-thExpandType [(#8634)](https://github.com/patternfly/patternfly-react/pull/8634)
+
+`collapseAllAriaLabel` on `ThExpandType` has been updated to a `string` from `''`. Workarounds casting this property to an empty string are no longer required.
+
+
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 
 We've removed the deprecated `hasSelectableRowCaption` prop.
