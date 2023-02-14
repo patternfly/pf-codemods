@@ -378,9 +378,49 @@ Out:
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
+### masthead-update-component [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
+
+We've updated `MastheadBrand` to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `component` properties will remain unchanged, but if it is not specified a default will be added.
+
+#### Examples
+
+In:
+
+```jsx
+<MastheadBrand />
+<MastheadBrand component="div" />
+```
+
+Out:
+
+```jsx
+<MastheadBrand component="a" />
+<MastheadBrand component="div" />
+```
+
 ### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
+
+### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
+
+We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
+
+#### Examples
+
+In:
+
+```jsx
+<PageHeader />
+<PageHeader logoComponent="div" />
+```
+
+Out:
+
+```jsx
+<PageHeader logoComponent="a" />
+<PageHeader logoComponent="div" />
+```
 
 ### pagination-optionsToggle [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
 
