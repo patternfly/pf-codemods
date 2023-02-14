@@ -12,7 +12,7 @@ module.exports = {
         if (TableImport) {
           context.report({
             node,
-            message: "The ActionsColumn now uses the new version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the new popperProps property.",
+            message: "The ActionsColumn now uses the Next version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the new popperProps property.",
           });
         }
       },
