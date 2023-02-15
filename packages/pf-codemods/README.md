@@ -160,22 +160,63 @@ Out:
 import { getResizeObserver } from "@patternfly/react-core";
 ```
 
-### chart-themeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
+### charts-lightThemeObjects [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
 
-We've removed the deprecated `themeVariant` properties from all react-charts components. This functionality was previously a noop and replaced by PatternFly core's dark theme support.
+We've renamed all light theme objects to remove `Light` from their name. Additionally, these theme objects have been marked `@private` and should not be used directly. Instead you should use the `getTheme` function from react-charts.
+
+This rule will throw an error, but will not make any changes.
+
+### charts-remove-darkThemeObjects [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
+
+We've removed all dark theme objects from react-charts.
+
+#### Examples
+
+In:
+```jsx
+import { DarkBlueColorTheme, DarkCyanColorTheme, DarkGoldColorTheme, DarkGrayColorTheme, DarkGreenColorTheme, DarkMultiColorOrderedTheme, DarkMultiColorUnorderedTheme,
+DarkOrangeColorTheme, DarkPurpleColorTheme, ChartLegend } from '@patternfly/react-charts'
+```
+
+Out:
+```jsx
+import { ChartLegend } from '@patternfly/react-charts'
+```
+
+### charts-remove-ChartThemeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
+
+We've removed `ChartThemeVariant` from react-charts.
 
 #### Examples
 
 In:
 
 ```jsx
-import { Chart, ChartThemeColor, ChartThemeVariant, getCustomTheme } from '@patternfly/react-charts';
+import { Chart, ChartThemeVariant } from '@patternfly/react-charts';
+```
+
+Out:
+
+```jsx
+import { Chart } from '@patternfly/react-charts';
+```
+
+### charts-remove-themeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
+
+We've removed the deprecated `themeVariant` properties from all react-charts components and the react-charts `getCustomTheme` function. This functionality was previously a noop and replaced by PatternFly core's dark theme support.
+
+#### Examples
+
+In:
+
+```jsx
+import { Chart, ChartThemeColor, getCustomTheme } from '@patternfly/react-charts';
 
 const customTheme = {...};
-const newTheme = getCustomTheme(ChartThemeColor.default, ChartThemeVariant.light, customTheme);
+const newTheme = getCustomTheme(ChartThemeColor.default, 'light', customTheme);
 
 return (
-  <Chart themeVariant={ChartThemeVariant.light} theme={newTheme}/>
+  <Chart themeVariant='light' theme={newTheme}/>
 );
 ```
 
