@@ -174,13 +174,13 @@ We've removed all dark theme objects from react-charts.
 
 In:
 ```jsx
-import {DarkBlueColorTheme, DarkCyanColorTheme, DarkGoldColorTheme, DarkGrayColorTheme, DarkGreenColorTheme, DarkMultiColorOrderedTheme, DarkMultiColorUnorderedTheme,
-DarkOrangeColorTheme, DarkPurpleColorTheme, ChartLegend} from '@patternfly/react-charts'
+import { DarkBlueColorTheme, DarkCyanColorTheme, DarkGoldColorTheme, DarkGrayColorTheme, DarkGreenColorTheme, DarkMultiColorOrderedTheme, DarkMultiColorUnorderedTheme,
+DarkOrangeColorTheme, DarkPurpleColorTheme, ChartLegend } from '@patternfly/react-charts'
 ```
 
 Out:
 ```jsx
-import {         ChartLegend} from '@patternfly/react-charts'
+import { ChartLegend } from '@patternfly/react-charts'
 ```
 
 ### charts-remove-ChartThemeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
@@ -198,7 +198,7 @@ import { Chart, ChartThemeVariant } from '@patternfly/react-charts';
 Out:
 
 ```jsx
-import { Chart,  } from '@patternfly/react-charts';
+import { Chart } from '@patternfly/react-charts';
 ```
 
 ### charts-remove-themeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
@@ -226,10 +226,10 @@ Out:
 import { Chart, ChartThemeColor, getCustomTheme } from '@patternfly/react-charts';
 
 const customTheme = {...};
-const newTheme = getCustomTheme(ChartThemeColor.default,  customTheme);
+const newTheme = getCustomTheme(ChartThemeColor.default, customTheme);
 
 return (
-  <Chart  theme={newTheme}/>
+  <Chart theme={newTheme}/>
 );
 ```
 
