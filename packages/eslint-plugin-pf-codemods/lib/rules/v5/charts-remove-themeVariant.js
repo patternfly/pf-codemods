@@ -11,7 +11,6 @@ module.exports = {
 
     const codemodFunctions = {
       JSXOpeningElement(node) {
-        console.log(node);
         if (
           chartsImports.map((imp) => imp.local.name).includes(node.name.name)
         ) {
@@ -25,7 +24,13 @@ module.exports = {
               message:
                 "The themeVariant prop has been removed for all react-charts components.",
               fix(fixer) {
-                return fixer.replaceTextRange(themeVariantProp.range, "");
+                const prevToken = context
+                  .getSourceCode()
+                  .getTokenBefore(themeVariantProp);
+                return fixer.replaceTextRange(
+                  [prevToken.range[1], themeVariantProp.range[1]],
+                  ""
+                );
               },
             });
           }
@@ -48,8 +53,11 @@ module.exports = {
               "The themeVariant argument has been removed from the react-charts' getCustomTheme function.",
             fix(fixer) {
               const { range } = node.arguments[1];
+              const prevToken = context
+                .getSourceCode()
+                .getTokenBefore(node.arguments[1]);
 
-              return fixer.replaceTextRange([range[0], range[1] + 1], "");
+              return fixer.replaceTextRange([prevToken.range[0], range[1]], "");
             },
           });
         }

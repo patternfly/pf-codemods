@@ -15,13 +15,13 @@ module.exports = {
           "DarkOrangeColorTheme",
           "DarkPurpleColorTheme",
         ];
-        const darkThemeImports = node.specifiers.find(
+        const darkThemeImport = node.specifiers.find(
           (specifier) =>
             removedThemeObjects.includes(specifier.imported.name) &&
             /^@patternfly\/react-charts/.test(node.source.value)
         );
 
-        if (darkThemeImports) {
+        if (darkThemeImport) {
           context.report({
             node,
             message:
@@ -31,13 +31,23 @@ module.exports = {
                 return fixer.remove(node);
               }
 
-              const { range } = darkThemeImports;
+              const { range } = darkThemeImport;
+              const prevToken = context
+                .getSourceCode()
+                .getTokenBefore(darkThemeImport);
               const nextToken = context
                 .getSourceCode()
-                .getTokenAfter(darkThemeImports);
+                .getTokenAfter(darkThemeImport);
+
+              const rangeStart =
+                prevToken.value === ","
+                  ? prevToken.range[0]
+                  : prevToken.range[1];
               const rangeEnd =
-                nextToken && nextToken.value === "," ? range[1] + 1 : range[1];
-              return fixer.replaceTextRange([range[0], rangeEnd], "");
+                prevToken.value === "{" && nextToken.value === ","
+                  ? nextToken.range[1]
+                  : range[1];
+              return fixer.replaceTextRange([rangeStart, rangeEnd], "");
             },
           });
         }

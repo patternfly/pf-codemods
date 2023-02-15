@@ -14,11 +14,11 @@ module.exports = {
       : {
           ImportDeclaration(node) {
             if (
-              node.specifiers.filter((specifier) =>
-                chartThemeVariantImport
-                  .map((imp) => imp.local.name)
-                  .includes(specifier.imported.name)
-              ).length
+              node.specifiers.find(
+                (specifier) =>
+                  specifier.imported.name ===
+                  chartThemeVariantImport[0].local.name
+              )
             )
               context.report({
                 node,
@@ -30,14 +30,22 @@ module.exports = {
                   }
 
                   const { range } = chartThemeVariantImport[0];
+                  const prevToken = context
+                    .getSourceCode()
+                    .getTokenBefore(chartThemeVariantImport[0]);
                   const nextToken = context
                     .getSourceCode()
                     .getTokenAfter(chartThemeVariantImport[0]);
+
+                  const rangeStart =
+                    prevToken.value === ","
+                      ? prevToken.range[0]
+                      : prevToken.range[1];
                   const rangeEnd =
-                    nextToken && nextToken.value === ","
-                      ? range[1] + 1
+                    prevToken.value === "{" && nextToken.value === ","
+                      ? nextToken.range[1]
                       : range[1];
-                  return fixer.replaceTextRange([range[0], rangeEnd], "");
+                  return fixer.replaceTextRange([rangeStart, rangeEnd], "");
                 },
               });
           },

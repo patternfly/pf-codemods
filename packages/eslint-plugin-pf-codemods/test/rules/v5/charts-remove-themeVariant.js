@@ -21,7 +21,7 @@ ruleTester.run("charts-remove-themeVariant", rule, {
   invalid: [
     {
       code: `import { getCustomTheme } from '@patternfly/react-charts'; const newTheme = getCustomTheme(ChartThemeColor.default, variant, customTheme);`,
-      output: `import { getCustomTheme } from '@patternfly/react-charts'; const newTheme = getCustomTheme(ChartThemeColor.default,  customTheme);`,
+      output: `import { getCustomTheme } from '@patternfly/react-charts'; const newTheme = getCustomTheme(ChartThemeColor.default, customTheme);`,
       errors: [
         {
           message: `The themeVariant argument has been removed from the react-charts' getCustomTheme function.`,
@@ -31,7 +31,7 @@ ruleTester.run("charts-remove-themeVariant", rule, {
     },
     {
       code: `import { Chart } from '@patternfly/react-charts'; <Chart themeVariant />`,
-      output: `import { Chart } from '@patternfly/react-charts'; <Chart  />`,
+      output: `import { Chart } from '@patternfly/react-charts'; <Chart />`,
       errors: [
         {
           message: `The themeVariant prop has been removed for all react-charts components.`,
