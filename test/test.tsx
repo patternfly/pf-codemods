@@ -1,3 +1,4 @@
+import { ChartLegend, getResizeObserver } from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
 import {
   AccordionExpandableContent,
@@ -19,6 +20,7 @@ import {
   Spinner,
   Tabs,
   Toggle,
+  Tooltip,
   TreeView,
   Wizard,
 } from "@patternfly/react-core";

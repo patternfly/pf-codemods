@@ -192,6 +192,12 @@ return (
 );
 ```
 
+### charts-tooltip-warning [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
+
+When using the `react-core` Tooltip component inside of a `react-charts` component, the Tooltip should be wrapped inside a `foreignObject`. The Tooltip may not render properly otherwise due to it outputting a `<div>` element inside an `<svg>` element.
+
+This rule will raise a warning when Tooltip is imported from `@patternfly/react-core` and at least one other import is from `@patternfly/react-charts`, but will not update any code.
+
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
 
 We've removed the PopoverPosition type for the `position` prop on both ClipboardCopy and ClipboardCopyButton.
