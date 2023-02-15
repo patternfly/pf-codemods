@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.36.3...@patternfly/pf-codemods@1.36.4) (2023-02-15)
+
+
+### Bug Fixes
+
+* **Charts:** fixed broken tooltip examples ([#265](https://github.com/patternfly/pf-codemods/issues/265)) ([8cd44a5](https://github.com/patternfly/pf-codemods/commit/8cd44a5bfc9da22cf27f09b5bdc10e6615185f2a))
+
+
+
+
+
 ## [1.36.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.36.2...@patternfly/pf-codemods@1.36.3) (2023-02-14)
 
 **Note:** Version bump only for package @patternfly/pf-codemods

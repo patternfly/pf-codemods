@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.35.3...@patternfly/eslint-plugin-pf-codemods@1.35.4) (2023-02-15)
+
+
+### Bug Fixes
+
+* **Charts:** fixed broken tooltip examples ([#265](https://github.com/patternfly/pf-codemods/issues/265)) ([8cd44a5](https://github.com/patternfly/pf-codemods/commit/8cd44a5bfc9da22cf27f09b5bdc10e6615185f2a))
+
+
+
+
+
 ## [1.35.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.35.2...@patternfly/eslint-plugin-pf-codemods@1.35.3) (2023-02-14)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
