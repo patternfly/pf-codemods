@@ -1,7 +1,7 @@
 const createListOfRules = (version) => {
   const rules = {};
   require("glob")
-    .sync(`./packages/eslint-plugin-pf-codemods/lib/rules/v${version}/*.js`)
+    .sync(require.resolve('@patternfly/eslint-plugin-pf-codemods').replace('index.js', `lib/rules/v${version}/*.js`))
     .forEach(function (file) {
       const ruleName = /.*\/([^.]+)/.exec(file)[1];
       rules[ruleName] = require(`./lib/rules/v${version}/${ruleName}`);
