@@ -5,7 +5,7 @@ ruleTester.run("card-warn-component", rule, {
   valid: [
     {
       // No @patternfly/react-core import
-      code: `<Card />`,
+      code: `import foo from Bar; <Card />`,
     },
   ],
   invalid: [
