@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.36.6...@patternfly/pf-codemods@1.37.0) (2023-02-16)
+
+
+### Features
+
+* **Toolbar:** remove/replace alignment prop for a few components ([#271](https://github.com/patternfly/pf-codemods/issues/271)) ([f59fa83](https://github.com/patternfly/pf-codemods/commit/f59fa837a8e9da8f85de4b61007817996d33dca4))
+
+
+
+
+
 ## [1.36.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.36.5...@patternfly/pf-codemods@1.36.6) (2023-02-16)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
