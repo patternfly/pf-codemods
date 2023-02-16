@@ -96,6 +96,22 @@ Out:
 <Alert  />
 ```
 
+### alert-replace-titleHeadingLevel [(#8518)](https://github.com/patternfly/patternfly-react/pull/8518)
+
+We've removed the `titleHeadlingLevel` prop and replaced it with the `component` prop.
+
+In:
+
+```jsx
+<Alert titleHeadingLevel="h4" />
+```
+
+Out:
+
+```jsx
+<Alert component="h4" />
+```
+
 ### applicationLauncher-warn-input [(#8293)](https://github.com/patternfly/patternfly-react/pull/8293)
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
