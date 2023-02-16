@@ -7,9 +7,7 @@ module.exports = {
     const appLauncherImports = getPackageImports(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => {
-      return specifier.imported.name == "ApplicationLauncher"
-    });
+    ).filter((specifier) => specifier.imported.name == "ApplicationLauncher");
 
     return appLauncherImports.length === 0
       ? {}
