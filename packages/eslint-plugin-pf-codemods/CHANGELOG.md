@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.35.5...@patternfly/eslint-plugin-pf-codemods@1.35.6) (2023-02-16)
+
+
+### Bug Fixes
+
+* **index:** dynamically resolve path to rules ([#280](https://github.com/patternfly/pf-codemods/issues/280)) ([c763c0a](https://github.com/patternfly/pf-codemods/commit/c763c0ae4f1801e94299c9f26b752289a358fe0b))
+* **various:** some rules failing on certain import syntax ([#281](https://github.com/patternfly/pf-codemods/issues/281)) ([f7ef5c4](https://github.com/patternfly/pf-codemods/commit/f7ef5c4b4528ab2661c86f5902200f0b9c3fdfc2))
+
+
+
+
+
 ## [1.35.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.35.4...@patternfly/eslint-plugin-pf-codemods@1.35.5) (2023-02-15)
 
 
