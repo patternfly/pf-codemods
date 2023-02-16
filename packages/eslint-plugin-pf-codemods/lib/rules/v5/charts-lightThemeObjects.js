@@ -17,8 +17,8 @@ module.exports = {
         ];
         const lightThemeImports = node.specifiers.find(
           (specifier) =>
-            oldLightThemeObjects.includes(specifier.imported.name) &&
-            /^@patternfly\/react-charts/.test(node.source.value)
+            /^@patternfly\/react-charts/.test(node.source.value) &&
+              oldLightThemeObjects.includes(specifier.imported?.name)
         );
 
         if (lightThemeImports) {

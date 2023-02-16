@@ -15,10 +15,11 @@ module.exports = {
       : {
           ImportDeclaration(node) {
             if (
+              /^@patternfly\/react-core/.test(node.source.value) &&
               node.specifiers.filter((specifier) =>
                 tooltipImport
                   .map((imp) => imp.local.name)
-                  .includes(specifier.imported.name)
+                  .includes(specifier.imported?.name)
               ).length
             ) {
               context.report({

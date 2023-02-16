@@ -7,10 +7,10 @@ module.exports = {
         const reactCoreImports = ["FileUpload", "MultipleFileUpload"];
         const importsWithDropzone = node.specifiers.find(
           (specifier) =>
-            (reactCoreImports.includes(specifier.imported.name) &&
-              node.source.value === "@patternfly/react-core") ||
-            (specifier.imported.name === "CodeEditor" &&
-              node.source.value === "@patternfly/react-code-editor")
+            (node.source.value === "@patternfly/react-core") &&
+              reactCoreImports.includes(specifier.imported?.name) ||
+            (node.source.value === "@patternfly/react-code-editor" &&
+              specifier.imported?.name === "CodeEditor")
         );
 
         if (importsWithDropzone) {

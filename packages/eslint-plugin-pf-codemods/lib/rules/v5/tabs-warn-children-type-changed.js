@@ -5,8 +5,8 @@ module.exports = {
       ImportDeclaration(node) {
         const TabsImport = node.specifiers.find(
           (specifier) =>
-            specifier.imported.name === "Tabs" &&
-            node.source.value === "@patternfly/react-core"
+            node.source.value === "@patternfly/react-core" &&
+            specifier.imported?.name === "Tabs"
         );
 
         if (TabsImport) {

@@ -5,8 +5,8 @@ module.exports = {
       ImportDeclaration(node) {
         const TableImport = node.specifiers.find(
           (specifier) =>
-            (specifier.imported.name === "Table" || specifier.imported.name === "TableComposable") &&
-            node.source.value === "@patternfly/react-table"
+            node.source.value === "@patternfly/react-table" &&
+            (specifier.imported.name === "Table" || specifier.imported.name === "TableComposable")
         );
 
         if (TableImport) {
