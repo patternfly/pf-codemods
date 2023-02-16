@@ -845,6 +845,28 @@ Out:
 <Toggle toggleVariant="primary" />
 ```
 
+### toolbarVarious-remove-alignment [(#8563)](https://github.com/patternfly/patternfly-react/pull/8563)
+
+We've removed the `alignment` prop from `ToolbarContent`, `ToolbarGroup`, and `ToolbarItem`. For `ToolbarGroup` and `ToolbarItem` it has been replaced with `align`.
+
+#### Examples
+
+In:
+
+```jsx
+<ToolbarContent alignment={{ default: 'alignLeft' }} />
+<ToolbarGroup alignment={{ default: 'alignLeft' }} />
+<ToolbarItem alignment={{ default: 'alignLeft' }} />
+```
+
+Out:
+
+```jsx
+<ToolbarContent  />
+<ToolbarGroup align={{ default: 'alignLeft' }} />
+<ToolbarItem align={{ default: 'alignLeft' }} />
+```
+
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
