@@ -5,8 +5,8 @@ module.exports = {
       ImportDeclaration(node) {
         const cardImport = node.specifiers.find(
           (specifier) =>
-            (specifier.imported.name === "Card" &&
-              node.source.value === "@patternfly/react-core")
+            (node.source.value === "@patternfly/react-core" &&
+              specifier.imported?.name === "Card")
         );
 
         if (cardImport) {

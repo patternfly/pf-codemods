@@ -17,8 +17,8 @@ module.exports = {
         ];
         const darkThemeImport = node.specifiers.find(
           (specifier) =>
-            removedThemeObjects.includes(specifier.imported.name) &&
-            /^@patternfly\/react-charts/.test(node.source.value)
+            /^@patternfly\/react-charts/.test(node.source.value) &&
+            removedThemeObjects.includes(specifier.imported?.name)
         );
 
         if (darkThemeImport) {

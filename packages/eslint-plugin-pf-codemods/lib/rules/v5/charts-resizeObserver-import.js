@@ -14,10 +14,11 @@ module.exports = {
       : {
           ImportDeclaration(node) {
             if (
+              /^@patternfly\/react-charts/.test(node.source.value) &&
               node.specifiers.filter((specifier) =>
                 chartResizeImport
                   .map((imp) => imp.local.name)
-                  .includes(specifier.imported.name)
+                  .includes(specifier.imported?.name)
               ).length
             ) {
               context.report({

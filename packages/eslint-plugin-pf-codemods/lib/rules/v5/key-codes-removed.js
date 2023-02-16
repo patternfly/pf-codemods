@@ -3,9 +3,10 @@ module.exports = {
   create: function (context) {
     return {
       ImportDeclaration(node) {
-        const keycode = node.specifiers.find(
-          (specifier) => specifier.imported.name === "KEY_CODES"
-        );
+        const keycode = /^@patternfly\/react-core/.test(node.source.value) &&
+          node.specifiers.find(
+            (specifier) => specifier.imported?.name === "KEY_CODES"
+          );
 
         if (keycode) {
           context.report({
