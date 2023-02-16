@@ -37,6 +37,7 @@ const isRead = true;
 const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
+  <Alert titleHeadingLevel={"h4"}/>
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
