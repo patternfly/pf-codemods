@@ -16,10 +16,10 @@ module.exports = {
               navImport.map((imp) => imp.local.name).includes(node.name.name)
             ) {
               const variantAttr = node.attributes.find(
-                (attr) => attr.name && attr.name.name === "variant"
+                (attr) => attr.name?.name === "variant"
               );
               const existingAriaLabel = node.attributes.find(
-                (attr) => attr.name && attr.name.name === "aria-label"
+                (attr) => attr.name?.name === "aria-label"
               );
 
               if (

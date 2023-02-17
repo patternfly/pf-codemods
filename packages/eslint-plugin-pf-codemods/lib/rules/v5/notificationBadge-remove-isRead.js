@@ -10,7 +10,7 @@ const { getPackageImports } = require('../../helpers');
       return !nbImport ? {} : {
         JSXOpeningElement(node) {
           if (nbImport.local.name === node.name.name) {
-            const isReadAttr = node.attributes.find(a => a.name.name === 'isRead');
+            const isReadAttr = node.attributes.find(a => a.name?.name === 'isRead');
             if (!isReadAttr) {
               return;
             }

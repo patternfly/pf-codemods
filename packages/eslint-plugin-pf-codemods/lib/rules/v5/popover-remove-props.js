@@ -14,10 +14,10 @@ module.exports = {
       JSXElement(node) {
         if (popoverImport.local.name === node.openingElement.name.name) {
           const removeProps = ['boundary', 'tippyProps'];
-          const shouldCloseAttr = node.openingElement.attributes.find(attribute => attribute.name.name === 'shouldClose');
+          const shouldCloseAttr = node.openingElement.attributes.find(attribute => attribute.name?.name === 'shouldClose');
           const removeFunctionParam = ['onHidden', 'onHide', 'onMount', 'onShow', 'onShown'];
           removeProps.forEach(name => {
-            const attr = node.openingElement.attributes.find(attribute => attribute.name.name === name)
+            const attr = node.openingElement.attributes.find(attribute => attribute.name?.name === name)
             if (attr) {
               context.report({
                 node,
@@ -47,7 +47,7 @@ module.exports = {
             }
           }
           removeFunctionParam.forEach( name => {
-            const attr = node.openingElement.attributes.find(attribute => attribute.name.name === name)
+            const attr = node.openingElement.attributes.find(attribute => attribute.name?.name === name)
             if(attr) {
               const funct = attr.value.expression;
               if(funct.params.length === 1) {

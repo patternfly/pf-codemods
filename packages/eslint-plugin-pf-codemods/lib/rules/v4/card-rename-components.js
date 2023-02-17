@@ -27,7 +27,7 @@ module.exports = {
             && node.parent.parent // JSXElement
             && node.parent.parent.openingElement
             && node.parent.parent.openingElement.attributes
-              .map(attr => attr.name.name)
+              .map(attr => attr.name?.name)
               .includes('data-codemods');
 
           if (!alreadyFixed) {

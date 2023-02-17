@@ -10,7 +10,7 @@ const { getPackageImports } = require('../../helpers');
       return toggleImport.length === 0 ? {} : {
         JSXOpeningElement(node) {
           if (toggleImport.map(imp => imp.local.name).includes(node.name.name)) {
-            const isPrimaryAttr = node.attributes.find(n => n.name && n.name.name === 'isPrimary');;
+            const isPrimaryAttr = node.attributes.find(a => a.name?.name === 'isPrimary');;
             if (isPrimaryAttr) {
               context.report({
                 node,

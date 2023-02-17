@@ -10,7 +10,7 @@ module.exports = {
     return pageHeaderImport.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (pageHeaderImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const componentAttr = node.attributes.find(n => n.name && n.name.name === 'logoComponent');
+          const componentAttr = node.attributes.find(a => a.name?.name === 'logoComponent');
           if (!componentAttr) {
             context.report({
               node,

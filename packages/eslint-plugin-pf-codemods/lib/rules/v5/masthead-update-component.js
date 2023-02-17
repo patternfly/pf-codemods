@@ -10,7 +10,7 @@ module.exports = {
     return mastheadBrandImport.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (mastheadBrandImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const componentAttr = node.attributes.find(n => n.name && n.name.name === 'component');
+          const componentAttr = node.attributes.find(a => a.name?.name === 'component');
           if (!componentAttr) {
             context.report({
               node,

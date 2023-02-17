@@ -11,7 +11,7 @@ module.exports = {
     return accordionImports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (accordionImports.map(imp => imp.local.name).includes(node.name.name)) {
-          const sizeAttribute = node.attributes.find(n => n.name && n.name.name === 'displaySize');;
+          const sizeAttribute = node.attributes.find(a => a.name?.name === 'displaySize');;
           if (sizeAttribute && sizeAttribute.value.value === "large") {
             const sizeValueString = context.getSourceCode().getText(sizeAttribute.value);
             const valueGuess = 'lg';

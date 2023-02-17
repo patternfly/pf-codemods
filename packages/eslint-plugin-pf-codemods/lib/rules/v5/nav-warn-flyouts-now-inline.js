@@ -15,7 +15,7 @@ module.exports = {
             const hasNav = navImports.local.name === node.name.name;
 
             const hasFlyout = node.attributes.find(
-              (n) => n.name && n.name.name === "flyout"
+              (a) => a.name?.name === "flyout"
             );
 
             if (hasNav && hasFlyout) {

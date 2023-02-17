@@ -15,7 +15,7 @@ module.exports = {
           chartsImports.map((imp) => imp.local.name).includes(node.name.name)
         ) {
           const themeVariantProp = node.attributes.find(
-            (attribute) => attribute.name.name === "themeVariant"
+            (attribute) => attribute.name?.name === "themeVariant"
           );
 
           if (themeVariantProp) {
