@@ -11,7 +11,7 @@ module.exports = {
     return imports.length == 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.map(imp => imp.local.name).includes(node.name.name)) {
-          const attribute = node.attributes.find(node => node.name && node.name.name === 'hasBorderBottom');
+          const attribute = node.attributes.find(a => a.name?.name === 'hasBorderBottom');
           if (attribute) {
             context.report({
               node,

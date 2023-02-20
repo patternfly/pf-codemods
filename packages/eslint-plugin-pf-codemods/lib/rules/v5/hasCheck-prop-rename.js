@@ -25,7 +25,7 @@ module.exports = {
             ) {
               const hasCheckAttribute = node.attributes.find(
                 (attribute) =>
-                  attribute.name && attribute.name.name === "hasCheck"
+                  attribute.name?.name === "hasCheck"
               );
 
               if (hasCheckAttribute) {

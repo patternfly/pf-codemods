@@ -127,7 +127,7 @@ function renameComponents(
           const parentNode = node.parent;
           const isOpeningTag = parentNode.type === 'JSXOpeningElement';
           const openingTagAttributes = isOpeningTag ? parentNode.attributes : parentNode.parent.openingElement.attributes;
-          const hasDataAttr = openingTagAttributes && openingTagAttributes.filter(attr => attr.name.name === 'data-codemods').length;
+          const hasDataAttr = openingTagAttributes && openingTagAttributes.filter(attr => attr.name?.name === 'data-codemods').length;
           if (hasDataAttr) {
             return;
           }

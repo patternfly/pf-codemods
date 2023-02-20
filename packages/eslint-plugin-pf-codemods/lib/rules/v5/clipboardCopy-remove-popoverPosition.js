@@ -21,7 +21,7 @@ module.exports = {
                 .includes(node.name.name)
             ) {
               const positionAttr = node.attributes.find(
-                (nodeAttr) => nodeAttr.name && nodeAttr.name.name === "position"
+                (nodeAttr) => nodeAttr.name?.name === "position"
               );
               if (
                 positionAttr?.value?.expression?.object?.name ===

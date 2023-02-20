@@ -18,7 +18,7 @@ module.exports = {
                 .includes(node.name.name)
             ) {
               const existingAriaLabel = node.attributes.find(
-                (attr) => attr.name && attr.name.name === "aria-label"
+                (attr) => attr.name?.name === "aria-label"
               );
 
               if (!existingAriaLabel) {

@@ -10,7 +10,7 @@ module.exports = {
     return tableImport.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (tableImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const collapseAllAriaLabel = node.attributes.find(n => n.name && n.name.name === 'collapseAllAriaLabel');
+          const collapseAllAriaLabel = node.attributes.find(a => a.name?.name === 'collapseAllAriaLabel');
           if (collapseAllAriaLabel?.value?.expression?.type === 'TSAsExpression') {
             context.report({
               node,
