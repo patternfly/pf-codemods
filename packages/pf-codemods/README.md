@@ -505,6 +505,24 @@ Out:
   <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
 ```
 
+### numberInput-remove-allowEmptyInput [(#8526)](https://github.com/patternfly/patternfly-react/pull/8526)
+
+We've removed the `allowEmptyInput` prop from NumberInput.
+
+#### Examples
+
+In:
+
+```jsx
+<NumberInput allowEmptyInput />
+```
+
+Out:
+
+```jsx
+<NumberInput  />
+```
+
 ### onToggle-warn-event [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
