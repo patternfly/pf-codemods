@@ -22,7 +22,7 @@ ruleTester.run("react-dropzone-warn-upgrade", rule, {
       output: `import { FileUpload } from '@patternfly/react-core';`,
       errors: [
         {
-          message: `As part of the react-dropzone dependency upgrade from version 9 to 14, the FileUpload prop 'dropzoneProps' has had its typing updated to react-dropzone's DropzoneOptions. Additionally, the 'onFileInputChange' prop has had its event parameter typing updated to react-dropzone's DropEvent.`,
+          message: `The react-dropzone dependency used within FileUpload has been updated from version 9 to version 14. Among the changes from this update, the 'dropzoneProps' prop type is now react-dropzone's DropzoneOptions, and react-dropzone's 'accept' prop type is now an array of strings. Additionally, the 'onFileInputChange' prop has had its event parameter typing updated to react-dropzone's DropEvent.`,
           type: "ImportDeclaration",
         },
       ],
@@ -32,7 +32,7 @@ ruleTester.run("react-dropzone-warn-upgrade", rule, {
       output: `import { MultipleFileUpload } from '@patternfly/react-core';`,
       errors: [
         {
-          message: `As part of the react-dropzone dependency upgrade from version 9 to 14, the MultipleFileUpload prop 'dropzoneProps' has had its typing updated to react-dropzone's DropzoneOptions.`,
+          message: `The react-dropzone dependency used within MultipleFileUpload has been updated from version 9 to version 14. Among the changes from this update, the 'dropzoneProps' prop type is now react-dropzone's DropzoneOptions, and react-dropzone's 'accept' prop type is now an array of strings.`,
           type: "ImportDeclaration",
         },
       ],
