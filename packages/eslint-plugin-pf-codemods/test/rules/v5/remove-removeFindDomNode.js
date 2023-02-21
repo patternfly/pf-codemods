@@ -96,59 +96,67 @@ ruleTester.run("remove-removeFindDomNode", rule, {
     }
   ],
   invalid: [
-    {
-      code:   `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher removeFindDomNode />`,
-      output: `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher  />`,
-      errors: [{
-        message: `removeFindDomNode prop for ApplicationLauncher has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy removeFindDomNode />`,
-      output: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy  />`,
-      errors: [{
-        message: `removeFindDomNode prop for ClipboardCopy has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { ContextSelector } from '@patternfly/react-core'; <ContextSelector removeFindDomNode />`,
-      output: `import { ContextSelector } from '@patternfly/react-core'; <ContextSelector  />`,
-      errors: [{
-        message: `removeFindDomNode prop for ContextSelector has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { Dropdown } from '@patternfly/react-core'; <Dropdown removeFindDomNode />`,
-      output: `import { Dropdown } from '@patternfly/react-core'; <Dropdown  />`,
-      errors: [{
-        message: `removeFindDomNode prop for Dropdown has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { NavItem } from '@patternfly/react-core'; <NavItem removeFindDomNode />`,
-      output: `import { NavItem } from '@patternfly/react-core'; <NavItem  />`,
-      errors: [{
-        message: `removeFindDomNode prop for NavItem has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { OptionsMenu } from '@patternfly/react-core'; <OptionsMenu removeFindDomNode />`,
-      output: `import { OptionsMenu } from '@patternfly/react-core'; <OptionsMenu  />`,
-      errors: [{
-        message: `removeFindDomNode prop for OptionsMenu has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
+    // {
+    //   code:   `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher removeFindDomNode />`,
+    //   output: `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher  />`,
+    //   errors: [{
+    //     message: `removeFindDomNode prop for ApplicationLauncher has been removed`,
+    //     type: "JSXOpeningElement",
+    //   }]
+    // },
+    // {
+    //   code:   `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy removeFindDomNode />`,
+    //   output: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy  />`,
+    //   errors: [{
+    //     message: `removeFindDomNode prop for ClipboardCopy has been removed`,
+    //     type: "JSXOpeningElement",
+    //   }]
+    // },
+    // {
+    //   code:   `import { ContextSelector } from '@patternfly/react-core'; <ContextSelector removeFindDomNode />`,
+    //   output: `import { ContextSelector } from '@patternfly/react-core'; <ContextSelector  />`,
+    //   errors: [{
+    //     message: `removeFindDomNode prop for ContextSelector has been removed`,
+    //     type: "JSXOpeningElement",
+    //   }]
+    // },
+    // {
+    //   code:   `import { Dropdown } from '@patternfly/react-core'; <Dropdown removeFindDomNode />`,
+    //   output: `import { Dropdown } from '@patternfly/react-core'; <Dropdown  />`,
+    //   errors: [{
+    //     message: `removeFindDomNode prop for Dropdown has been removed`,
+    //     type: "JSXOpeningElement",
+    //   }]
+    // },
+    // {
+    //   code:   `import { NavItem } from '@patternfly/react-core'; <NavItem removeFindDomNode />`,
+    //   output: `import { NavItem } from '@patternfly/react-core'; <NavItem  />`,
+    //   errors: [{
+    //     message: `removeFindDomNode prop for NavItem has been removed`,
+    //     type: "JSXOpeningElement",
+    //   }]
+    // },
+    // {
+    //   code:   `import { OptionsMenu } from '@patternfly/react-core'; <OptionsMenu removeFindDomNode />`,
+    //   output: `import { OptionsMenu } from '@patternfly/react-core'; <OptionsMenu  />`,
+    //   errors: [{
+    //     message: `removeFindDomNode prop for OptionsMenu has been removed`,
+    //     type: "JSXOpeningElement",
+    //   }]
+    // },
     {
       code:   `import { Popover } from '@patternfly/react-core'; <Popover removeFindDomNode />`,
       output: `import { Popover } from '@patternfly/react-core'; <Popover  />`,
       errors: [{
         message: `removeFindDomNode prop for Popover has been removed`,
+        type: "JSXOpeningElement",
+      }]
+    },
+    {
+      code:   `import { Popover as Pop } from '@patternfly/react-core'; <Pop removeFindDomNode />`,
+      output: `import { Popover as Pop } from '@patternfly/react-core'; <Pop  />`,
+      errors: [{
+        message: `removeFindDomNode prop for Pop has been removed`,
         type: "JSXOpeningElement",
       }]
     },

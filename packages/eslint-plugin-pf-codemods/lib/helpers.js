@@ -8,7 +8,9 @@ function getPackageImports(context, packageName) {
 
 function renameProps0(context, imports, node, renames) {
   if (imports.map(imp => imp.local.name).includes(node.name.name)) {
-    const renamedProps = renames[node.name.name];
+    const renamedProps = renames[node.name.name] || renames[
+      imports.find(imp => imp.local?.name === node.name.name)?.imported?.name
+    ];
     node.attributes
       .filter(attribute => attribute.name && renamedProps.hasOwnProperty(attribute.name.name))
       .forEach(attribute => {
@@ -54,7 +56,6 @@ function renameProp(components, propMap, message, replaceAttribute, leaveComment
   return function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => components.includes(specifier.imported.name));
-
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (imports.find(imp => imp.local.name === node.name.name)) {

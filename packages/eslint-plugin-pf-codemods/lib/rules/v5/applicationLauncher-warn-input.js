@@ -16,7 +16,7 @@ module.exports = {
             if (
               appLauncherImports
                 .map((imp) => imp.local.name)
-                .includes(node.specifiers[0]?.imported?.name)
+                .includes(node.specifiers[0]?.local?.name)
             ) {
               context.report({
                 node,

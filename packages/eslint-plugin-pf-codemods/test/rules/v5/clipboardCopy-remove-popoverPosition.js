@@ -45,5 +45,25 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
         },
       ],
     },
+    {
+      code: `import { ClipboardCopy as PFClipCopy } from '@patternfly/react-core'; <PFClipCopy position={PopoverPosition.top} />`,
+      output: `import { ClipboardCopy as PFClipCopy } from '@patternfly/react-core'; <PFClipCopy position="top" />`,
+      errors: [
+        {
+          message: `PopoverPosition type has been removed for the position prop on PFClipCopy.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ClipboardCopyButton as PFClipCopyButton } from '@patternfly/react-core'; <PFClipCopyButton position={PopoverPosition.top} />`,
+      output: `import { ClipboardCopyButton as PFClipCopyButton } from '@patternfly/react-core'; <PFClipCopyButton position="top" />`,
+      errors: [
+        {
+          message: `PopoverPosition type has been removed for the position prop on PFClipCopyButton.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
   ],
 });
