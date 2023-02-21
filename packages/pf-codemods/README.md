@@ -505,7 +505,7 @@ Out:
   <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
 ```
 
-### numberInput-remove-allowEmptyInput [(#8526)](https://github.com/patternfly/patternfly-react/pull/8526)
+### numberInput-remove-allowEmptyInput [(#8715)](https://github.com/patternfly/patternfly-react/pull/8715)
 
 We've removed the `allowEmptyInput` prop from NumberInput.
 
