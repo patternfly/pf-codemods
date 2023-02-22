@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.37.3...@patternfly/pf-codemods@1.38.0) (2023-02-22)
+
+
+### Features
+
+* **NumberInput:** remove allowEmptyInput prop ([#285](https://github.com/patternfly/pf-codemods/issues/285)) ([ad69b2b](https://github.com/patternfly/pf-codemods/commit/ad69b2bb703c15bed433774371308842fb70dcf1))
+
+
+
+
+
 ## [1.37.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.37.2...@patternfly/pf-codemods@1.37.3) (2023-02-21)
 
 **Note:** Version bump only for package @patternfly/pf-codemods

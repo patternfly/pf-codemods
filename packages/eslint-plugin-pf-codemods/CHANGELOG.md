@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.36.2...@patternfly/eslint-plugin-pf-codemods@1.37.0) (2023-02-22)
+
+
+### Bug Fixes
+
+* **various:** several codemods were failing with alias imports ([#290](https://github.com/patternfly/pf-codemods/issues/290)) ([4023864](https://github.com/patternfly/pf-codemods/commit/4023864d96a5cb3a402733b05b72eb4a4d0f0716))
+
+
+### Features
+
+* **NumberInput:** remove allowEmptyInput prop ([#285](https://github.com/patternfly/pf-codemods/issues/285)) ([ad69b2b](https://github.com/patternfly/pf-codemods/commit/ad69b2bb703c15bed433774371308842fb70dcf1))
+
+
+
+
+
 ## [1.36.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.36.1...@patternfly/eslint-plugin-pf-codemods@1.36.2) (2023-02-21)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
