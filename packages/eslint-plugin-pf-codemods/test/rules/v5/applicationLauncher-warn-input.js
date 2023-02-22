@@ -19,5 +19,15 @@ ruleTester.run("applicationLauncher-warn-input", rule, {
         },
       ],
     },
+    {
+      code: `import { ApplicationLauncher as PFLauncher } from '@patternfly/react-core';`,
+      output: `import { ApplicationLauncher as PFLauncher } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: `The internal input within ApplicationLauncher has been updated to use the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });

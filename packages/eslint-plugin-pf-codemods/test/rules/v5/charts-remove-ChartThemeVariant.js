@@ -51,5 +51,15 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
         },
       ],
     },
+    {
+      code: `import { ChartThemeVariant as CTV } from '@patternfly/react-charts';`,
+      output: ``,
+      errors: [
+        {
+          message: `ChartThemeVariant has been removed from react-charts.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });

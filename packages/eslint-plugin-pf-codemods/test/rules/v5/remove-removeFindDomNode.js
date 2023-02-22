@@ -153,6 +153,14 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       }]
     },
     {
+      code:   `import { Popover as Pop } from '@patternfly/react-core'; <Pop removeFindDomNode />`,
+      output: `import { Popover as Pop } from '@patternfly/react-core'; <Pop  />`,
+      errors: [{
+        message: `removeFindDomNode prop for Pop has been removed`,
+        type: "JSXOpeningElement",
+      }]
+    },
+    {
       code:   `import { SearchInput } from '@patternfly/react-core'; <SearchInput removeFindDomNode />`,
       output: `import { SearchInput } from '@patternfly/react-core'; <SearchInput  />`,
       errors: [{

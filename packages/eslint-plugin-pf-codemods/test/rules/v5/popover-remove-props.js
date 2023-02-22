@@ -25,6 +25,18 @@ ruleTester.run("popover-remove-props", rule, {
       }],
     },
     {
+      code:   `import { Popover as Pop } from '@patternfly/react-core'; <Pop boundary={} tippyProps={} />`,
+      output: `import { Popover as Pop } from '@patternfly/react-core'; <Pop   />`,
+      errors: [{
+        message: "Popover boundary prop has been removed.",
+        type: "JSXElement",
+      },
+      {
+        message: "Popover tippyProps prop has been removed.",
+        type: "JSXElement",
+      }],
+    },
+    {
       code:   `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(tip, hideFunct) => {}} />`,
       output: `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(hideFunct) => {}} />`,
       errors: [ 

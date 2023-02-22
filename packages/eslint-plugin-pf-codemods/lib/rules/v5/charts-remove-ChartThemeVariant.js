@@ -17,7 +17,7 @@ module.exports = {
               node.specifiers.find(
                 (specifier) =>
                   specifier.imported.name ===
-                  chartThemeVariantImport[0].local.name
+                  chartThemeVariantImport[0].imported.name
               )
             )
               context.report({

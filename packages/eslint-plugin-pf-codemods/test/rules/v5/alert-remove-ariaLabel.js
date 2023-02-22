@@ -22,5 +22,15 @@ ruleTester.run("alert-remove-ariaLabel", rule, {
         },
       ],
     },
+    {
+      code: `import { Alert as Al } from '@patternfly/react-core'; <Al aria-label="tester" />`,
+      output: `import { Alert as Al } from '@patternfly/react-core'; <Al  />`,
+      errors: [
+        {
+          message: `aria-label prop for Al has been removed and should not be used as it is not well supported on div elements without a role.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
   ],
 });

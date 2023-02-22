@@ -18,7 +18,7 @@ module.exports = {
               /^@patternfly\/react-core/.test(node.source.value) &&
               node.specifiers.filter((specifier) =>
                 tooltipImport
-                  .map((imp) => imp.local.name)
+                  .map((imp) => imp.imported.name)
                   .includes(specifier.imported?.name)
               ).length
             ) {

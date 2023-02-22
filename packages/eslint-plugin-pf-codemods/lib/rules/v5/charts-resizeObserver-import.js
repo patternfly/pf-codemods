@@ -17,7 +17,7 @@ module.exports = {
               /^@patternfly\/react-charts/.test(node.source.value) &&
               node.specifiers.filter((specifier) =>
                 chartResizeImport
-                  .map((imp) => imp.local.name)
+                  .map((imp) => imp.imported.name)
                   .includes(specifier.imported?.name)
               ).length
             ) {
