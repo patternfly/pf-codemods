@@ -23,6 +23,7 @@ import {
   MultipleFileUpload,
   Nav,
   NotificationBadge,
+  NumberInput,
   Popover,
   Spinner,
   Tabs,
@@ -53,6 +54,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
+  <NumberInput allowEmptyInput />
   <Popover />
   <SelectOption hasCheck />
   <Spinner isSVG />
