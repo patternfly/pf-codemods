@@ -37,8 +37,6 @@ import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from Bar;
 
-//eslint-disable-next-line
-
 const isRead = true;
 const newTheme = getCustomTheme("1", "2", "3");
 <>
