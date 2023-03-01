@@ -36,6 +36,13 @@ function printResults(engine, results, format) {
     return false;
   }
 
+  // suppress non-pf-codemod related (BaseConfig/eslint-disable-next-line) warnings
+  results.forEach(result => {
+    let numFiltered = 0;
+    result.messages = result.messages.filter(message => !(message.ruleId === null && message.severity === 1 && ++numFiltered));
+    result.warningCount -= numFiltered;
+  });
+
   const output = formatter(results, {
     get rulesMeta() {
       if (!rulesMeta) {
