@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.37.2...@patternfly/eslint-plugin-pf-codemods@1.37.3) (2023-03-01)
+
+
+### Reverts
+
+* Revert "chore(config): disable noInlineConfig (#298)" (#300) ([4361301](https://github.com/patternfly/pf-codemods/commit/43613013b0d00d786050f45492b110aae1afea52)), closes [#298](https://github.com/patternfly/pf-codemods/issues/298) [#300](https://github.com/patternfly/pf-codemods/issues/300)
+
+
+
+
+
 ## [1.37.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.37.1...@patternfly/eslint-plugin-pf-codemods@1.37.2) (2023-03-01)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
