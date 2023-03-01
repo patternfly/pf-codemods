@@ -47,7 +47,7 @@ module.exports = {
         node: true,
         es6: true,
       },
-      noInlineConfig: true,
+      noInlineConfig: false,
       reportUnusedDisableDirectives: false,
       parser: "@typescript-eslint/parser",
       parserOptions: {
