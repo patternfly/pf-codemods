@@ -36,6 +36,9 @@ function printResults(engine, results, format) {
     return false;
   }
 
+  // suppress eslint-disable-next-line related warnings
+  results.forEach(result => result.messages = result.messages.filter(message => !message.message.includes('eslint-disable-next-line')));
+
   const output = formatter(results, {
     get rulesMeta() {
       if (!rulesMeta) {
