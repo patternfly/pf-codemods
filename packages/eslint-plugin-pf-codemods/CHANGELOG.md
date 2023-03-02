@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.37.3...@patternfly/eslint-plugin-pf-codemods@1.37.4) (2023-03-02)
+
+
+### Bug Fixes
+
+* **Pagination:** updated codemod for prop renaming ([#302](https://github.com/patternfly/pf-codemods/issues/302)) ([5b98a39](https://github.com/patternfly/pf-codemods/commit/5b98a39b9591526a5574b8831f898d19e056aa19))
+
+
+
+
+
 ## [1.37.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.37.2...@patternfly/eslint-plugin-pf-codemods@1.37.3) (2023-03-01)
 
 
