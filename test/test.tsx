@@ -24,6 +24,7 @@ import {
   Nav,
   NotificationBadge,
   NumberInput,
+  Pagination,
   Popover,
   Spinner,
   Tabs,
@@ -58,6 +59,15 @@ const newTheme = getCustomTheme("1", "2", "3");
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
   <NumberInput allowEmptyInput />
+  <Pagination defaultToFullPage perPageComponent="div" titles={{
+    currPage: "test",
+    paginationTitle: "test",
+    toFirstPage: "test",
+    toLastPage: "test",
+    toNextPage: "test",
+    toPreviousPage: "test",
+    optionsToggle: "test"
+  }} />
   <Popover />
   <SelectOption hasCheck />
   <Spinner isSVG />

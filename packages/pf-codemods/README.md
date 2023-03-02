@@ -589,6 +589,11 @@ Out:
 
 We've renamed and/or removed several props for Pagination:
 
+- `defaultToFullPage`: `isLastFullPageShown`,
+- `perPageComponenet`: removed
+
+We've also renamed several sub-props of Pagination's "title" prop:
+
 - `currPage`: `currPageAriaLabel`,
 - `paginationTitle`: `paginationAriaLabel`,
 - `toFirstPage`: `toFirstPageAriaLabel`,
@@ -596,8 +601,6 @@ We've renamed and/or removed several props for Pagination:
 - `toNextPage`: `toNextPageAriaLabel`,
 - `toPreviousPage`: `toPreviousPageAriaLabel`,
 - `optionsToggle`: `optionsToggleAriaLabel`,
-- `defaultToFullPage`: `isLastFullPageShown`,
-- `perPageComponenet`: removed
 
 #### Examples
 
@@ -605,15 +608,17 @@ In:
 
 ```jsx
 <Pagination
-  currPage="text"
-  paginationTitle="text"
-  toFirstPage="text"
-  toLastPage="text"
-  toNextPage="text"
-  toPreviousPage="text"
-  optionsToggle="text"
-  defaultToFullPage
   perPageComponenet="div"
+  defaultToFullPage
+  titles={{
+    currPage: "text"
+    paginationTitle: "text"
+    toFirstPage: "text"
+    toLastPage: "text"
+    toNextPage: "text"
+    toPreviousPage: "text"
+    optionsToggle: "text"
+  }}
 />
 ```
 
@@ -621,14 +626,16 @@ Out:
 
 ```jsx
 <Pagination
-  currPageAriaLabel="text"
-  paginationAriaLabel="text"
-  toFirstPageAriaLabel="text"
-  toLastPageAriaLabel="text"
-  toNextPageAriaLabel="text"
-  toPreviousPageAriaLabel="text"
-  optionsToggleAriaLabel="text"
   isLastFullPageShown
+  titles={{
+    currPageAriaLabel: "text"
+    paginationAriaLabel: "text"
+    toFirstPageAriaLabel: "text"
+    toLastPageAriaLabel: "text"
+    toNextPageAriaLabel: "text"
+    toPreviousPageAriaLabel: "text"
+    optionsToggleAriaLabel: "text"
+  }}
 />
 ```
 
