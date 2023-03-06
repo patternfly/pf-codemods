@@ -311,6 +311,24 @@ Out:
 <ClipboardCopy  />
 ```
 
+### datalist-remove-itemOrder [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
+
+We've removed the deprecated `itemOrder` prop from the `DataList` component.
+
+#### Examples
+
+In:
+
+```jsx
+<DataList itemOrder={['1', '2', '3']} />
+```
+
+Out:
+
+```jsx
+<DataList  />
+```
+
 ### datalist-remove-ondrags [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel` props. This rule will remove them and suggest the user use the DragDrop component.
