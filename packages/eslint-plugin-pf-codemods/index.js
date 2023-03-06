@@ -24,7 +24,6 @@ const warningRules = [
   "dataList-warn-updated-callback",
   "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
-  "onToggle-warn-event",
   "nav-warn-flyouts-now-inline",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",

@@ -50,16 +50,16 @@ const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
-  <ApplicationLauncher onToggle />
-  <BadgeToggle onToggle />
+  <ApplicationLauncher onToggle={} />
+  <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
   <DataList onSelectDataListItem />
   <DatePicker />
   <DropdownItem isHovered={true} />
-  <DropdownToggle isPrimary onToggle />
-  <KebabToggle onToggle />
+  <DropdownToggle isPrimary onToggle={} />
+  <KebabToggle onToggle={} />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav flyout={"menu"} />
@@ -78,10 +78,10 @@ const newTheme = getCustomTheme("1", "2", "3");
     optionsToggle: "test"
   }} />
   <Popover />
-  <Select onToggle />
+  <Select onToggle={} />
   <SelectOption hasCheck />
-  <SelectToggle onToggle />
+  <SelectToggle onToggle={} />
   <Spinner isSVG />
-  <Toggle isPrimary onToggle />
+  <Toggle isPrimary onToggle={} />
   <TreeView hasCheck />
 </>;
