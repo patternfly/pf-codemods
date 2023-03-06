@@ -16,7 +16,7 @@ module.exports = {
             if (
               node.specifiers.filter((specifier) =>
                 appLauncherImports
-                  .map((imp) => imp.local.name)
+                  .map((imp) => imp.imported.name)
                   .includes(specifier?.imported?.name)
               ).length
             ) {

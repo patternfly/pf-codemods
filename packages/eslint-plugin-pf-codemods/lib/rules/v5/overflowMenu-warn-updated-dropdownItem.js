@@ -18,8 +18,8 @@ module.exports = {
             if (
               node.specifiers.filter((specifier) =>
                 overflowDropdownItemImport
-                  .map((imp) => imp.local.name)
-                  .includes(specifier.imported.name)
+                  .map((imp) => imp.imported.name)
+                  .includes(specifier?.imported?.name)
               ).length
             ) {
               context.report({
