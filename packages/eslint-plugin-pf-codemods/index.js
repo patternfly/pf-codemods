@@ -1,7 +1,11 @@
 const createListOfRules = (version) => {
   const rules = {};
   require("glob")
-    .sync(require.resolve('@patternfly/eslint-plugin-pf-codemods').replace('index.js', `lib/rules/v${version}/*.js`))
+    .sync(
+      require
+        .resolve("@patternfly/eslint-plugin-pf-codemods")
+        .replace("index.js", `lib/rules/v${version}/*.js`)
+    )
     .forEach(function (file) {
       const ruleName = /.*\/([^.]+)/.exec(file)[1];
       rules[ruleName] = require(`./lib/rules/v${version}/${ruleName}`);
@@ -17,6 +21,7 @@ const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
   "charts-tooltip-warning",
+  "dataList-warn-updated-callback",
   "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
   "onToggle-warn-event",

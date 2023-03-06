@@ -329,6 +329,12 @@ Out:
 <DataList  />
 ```
 
+### dataList-warn-updated-callback [(#8723)](https://github.com/patternfly/patternfly-react/pull/8723)
+
+We've updated the `onSelectDataListItem` prop for DataList to include the `event` as its first parameter. Handlers may require an update.
+
+This rule will raise a warning, but will not make any changes.
+
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
@@ -542,6 +548,8 @@ Out:
 ### onToggle-warn-event [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
+
+This rule will raise a warning, but will not make any changes.
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
