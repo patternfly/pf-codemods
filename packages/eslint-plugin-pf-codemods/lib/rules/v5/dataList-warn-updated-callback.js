@@ -13,9 +13,7 @@ module.exports = {
       : {
           JSXOpeningElement(node) {
             if (
-              imports
-                .map((imp) => imp.imported.name)
-                .includes(node.name.name) &&
+              imports.map((imp) => imp.local.name).includes(node.name.name) &&
               node.attributes.find(
                 (attr) => attr.name.name === "onSelectDataListItem"
               )

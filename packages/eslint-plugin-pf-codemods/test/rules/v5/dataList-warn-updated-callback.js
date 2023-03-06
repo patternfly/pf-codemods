@@ -23,8 +23,8 @@ ruleTester.run("dataList-warn-updated-callback", rule, {
       ],
     },
     {
-      code: `import { DataList as PFdl } from '@patternfly/react-core'; <PFdl onSelectDataListItem />;`,
-      output: `import { DataList as PFdl } from '@patternfly/react-core'; <PFdl onSelectDataListItem />;`,
+      code: `import { DataList as PFDataList } from '@patternfly/react-core'; <PFDataList onSelectDataListItem />;`,
+      output: `import { DataList as PFDataList } from '@patternfly/react-core'; <PFDataList onSelectDataListItem />;`,
       errors: [
         {
           message: `The "onSelectDataListItem" prop for DataList has been updated to include the event parameter as its first parameter. "onSelectDataListItem" handlers may require an update.`,
