@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/popover-appendTo-default");
+const rule = require("../../../lib/rules/v5/popover-warn-appendTo-default");
 
-ruleTester.run("popover-appendTo-default", rule, {
+ruleTester.run("popover-warn-appendTo-default", rule, {
   valid: [
     {
       // No @patternfly/react-core import

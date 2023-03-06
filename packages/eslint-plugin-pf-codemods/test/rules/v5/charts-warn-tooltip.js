@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/charts-tooltip-warning");
+const rule = require("../../../lib/rules/v5/charts-warn-tooltip");
 
-ruleTester.run("charts-tooltip-warning", rule, {
+ruleTester.run("charts-warn-tooltip", rule, {
   valid: [
     {
       code: `import { Chart } from '@patternfly/react-charts';`,

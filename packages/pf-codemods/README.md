@@ -338,7 +338,7 @@ return (
 );
 ```
 
-### charts-tooltip-warning [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
+### charts-warn-tooltip [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
 
 When using the `react-core` Tooltip component inside of a `react-charts` component, the Tooltip should be wrapped inside a `foreignObject`. The Tooltip may not render properly otherwise due to it outputting a `<div>` element inside an `<svg>` element.
 
@@ -710,7 +710,7 @@ Out:
 <MenuItem hasCheckbox />
 ```
 
-### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
+### horizontalSubnav-warn-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
@@ -1075,6 +1075,10 @@ Out:
   }}
 />
 ```
+
+### popover-warn-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
+
+The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
 
 ### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
 
