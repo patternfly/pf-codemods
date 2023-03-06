@@ -72,5 +72,6 @@ const newTheme = getCustomTheme("1", "2", "3");
   <SelectOption hasCheck />
   <Spinner isSVG />
   <Toggle isPrimary />
+  <Tooltip reference />
   <TreeView hasCheck />
 </>;
