@@ -6,6 +6,6 @@ const { renameProp } = require('../../helpers');
     create: renameProp(
       'Tooltip',
       {'reference': 'triggerRef'},
-      node =>  `The 'reference' prop for ${node.name.name} has been renamed to 'triggerRef'.`
+      node =>  `reference prop has been removed for ${node.name.name} and replaced with the triggerRef prop.`
     ),
   };
