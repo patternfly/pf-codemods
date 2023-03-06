@@ -275,6 +275,12 @@ Out:
 <ClipboardCopyButton position="bottom" />
 ```
 
+### clipboardCopy-warn-onChange-event-added [(#8747)](https://github.com/patternfly/patternfly-react/pull/8747)
+
+The `onChange` prop for ClipboardCopy has been updated to include the `event` as its first parameter. `onChange` handlers may require an update.
+
+This rule will raise a warning, but will not make any changes.
+
 ### codeeditor-remove-deprecated-props [(#8624)](https://github.com/patternfly/patternfly-react/pull/8624)
 
 We've removed the deprecated `entryDelay`, `exitDelay`, `maxWidth`, `position`, and `toolTipText` props. This rule will remove them from your code and suggest that you use the tooltipProps prop instead.
