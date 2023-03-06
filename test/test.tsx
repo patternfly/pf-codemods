@@ -68,7 +68,7 @@ const newTheme = getCustomTheme("1", "2", "3");
     toPreviousPage: "test",
     optionsToggle: "test"
   }} />
-  <Popover />
+  <Popover reference />
   <SelectOption hasCheck />
   <Spinner isSVG />
   <Toggle isPrimary />
