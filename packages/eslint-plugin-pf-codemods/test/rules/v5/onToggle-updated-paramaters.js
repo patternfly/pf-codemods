@@ -15,6 +15,9 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
     ...onToggleAPIUpdateList.map((component) => ({
       code: `import { ${component} } from '@patternfly/react-core'; <${component} />;`,
     })),
+    ...onToggleAPIUpdateList.map((component) => ({
+      code: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={() => onToggle} />;`,
+    })),
     // No @patternfly/react-core import
     ...onToggleAPIUpdateList.map((component) => ({
       code: `<${component} onToggle />;`,
@@ -22,8 +25,8 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
   ],
   invalid: [
     ...onToggleAPIUpdateList.map((component) => ({
-      code: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={() => onToggle} />;`,
-      output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={() => onToggle} />;`,
+      code: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(isOpen) => onToggle(isOpen)} />;`,
+      output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(_event, isOpen) => onToggle(isOpen)} />;`,
       errors: [
         {
           message: `${component} onToggle prop has been updated to include the event parameter as its first parameter. onToggle handlers may require an update.`,
@@ -32,18 +35,8 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
       ],
     })),
     ...onToggleAPIUpdateList.map((component) => ({
-      code: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(isOpen) => onToggle()} />;`,
-      output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(_event, isOpen) => onToggle()} />;`,
-      errors: [
-        {
-          message: `${component} onToggle prop has been updated to include the event parameter as its first parameter. onToggle handlers may require an update.`,
-          type: "JSXOpeningElement",
-        },
-      ],
-    })),
-    ...onToggleAPIUpdateList.map((component) => ({
-      code: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={isOpen => onToggle()} />;`,
-      output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(_event, isOpen) => onToggle()} />;`,
+      code: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={isOpen => onToggle(isOpen)} />;`,
+      output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(_event, isOpen) => onToggle(isOpen)} />;`,
       errors: [
         {
           message: `${component} onToggle prop has been updated to include the event parameter as its first parameter. onToggle handlers may require an update.`,

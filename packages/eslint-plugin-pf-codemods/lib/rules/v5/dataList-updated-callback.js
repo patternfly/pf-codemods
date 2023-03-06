@@ -1,32 +1,23 @@
 const { getPackageImports } = require("../../helpers");
 
-// https://github.com/patternfly/patternfly-react/pull/8667
+// https://github.com/patternfly/patternfly-react/pull/8723
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const onToggleAPIUpdateList = [
-      "ApplicationLauncher",
-      "BadgeToggle",
-      "DropdownToggle",
-      "KebabToggle",
-      "Toggle",
-      "Select",
-      "SelectToggle",
-    ];
     const imports = getPackageImports(context, "@patternfly/react-core").filter(
-      (specifier) => onToggleAPIUpdateList.includes(specifier.imported.name)
+      (specifier) => specifier.imported.name === "DataList"
     );
 
     return imports.length === 0
       ? {}
       : {
           JSXOpeningElement(node) {
-            const onToggleProp = node.attributes.find(
-              (attr) => attr.name.name === "onToggle"
+            const onSelectDataListItemProp = node.attributes.find(
+              (attr) => attr.name.name === "onSelectDataListItem"
             );
 
             const { type, params, name } =
-              onToggleProp?.value?.expression || {};
+              onSelectDataListItemProp?.value?.expression || {};
 
             if (
               imports.map((imp) => imp.local.name).includes(node.name.name) &&
@@ -35,7 +26,7 @@ module.exports = {
             ) {
               context.report({
                 node,
-                message: `${node.name.name} onToggle prop has been updated to include the event parameter as its first parameter. onToggle handlers may require an update.`,
+                message: `The "onSelectDataListItem" prop for DataList has been updated to include the event parameter as its first parameter. "onSelectDataListItem" handlers may require an update.`,
                 fix(fixer) {
                   const fixes = [];
                   const createReplacerFix = (functionParam) => {
