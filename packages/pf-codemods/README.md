@@ -412,6 +412,12 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### drawer-warn-updated-callback [(#8736)](https://github.com/patternfly/patternfly-react/pull/8736)
+
+We've updated the `onResize` prop for Drawer to include the `event` as its first parameter. Handlers may require an update.
+
+This rule will raise a warning, but will not make any changes.
+
 ### dropdownItem-remove-isHovered [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the `isHovered` prop for the `DropdownItem`.

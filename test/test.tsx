@@ -18,6 +18,7 @@ import {
   DataList,
   DataListCheck,
   DatePicker,
+  Drawer,
   DropdownItem,
   DropdownToggle,
   FileUpload,
@@ -63,6 +64,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
   <DataListCheck onChange={(id) => handler} />
   <DatePicker />
+  <Drawer onResize />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <KebabToggle onToggle={} />
