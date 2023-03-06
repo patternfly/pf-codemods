@@ -15,6 +15,7 @@ import {
   Button,
   Card,
   DataList,
+  DataListCheck,
   DatePicker,
   DropdownItem,
   DropdownToggle,
@@ -56,6 +57,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Button isSmall />
   <Chart themeVariant />
   <DataList onSelectDataListItem />
+  <DataListCheck onChange />
   <DatePicker />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />

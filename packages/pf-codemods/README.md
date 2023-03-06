@@ -359,6 +359,12 @@ function toggle2(_event, id) {};
 <DataList onSelectDataListItem={toggle2}>
 ```
 
+### dataListCheck-warn-updated-callback [(#8735)](https://github.com/patternfly/patternfly-react/pull/8735)
+
+We've updated the `onChange` prop for DataListCheck so that the `event` parameter is the first parameter. Handlers may require an update.
+
+This rule will raise a warning, but will not make any changes.
+
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.

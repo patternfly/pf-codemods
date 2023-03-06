@@ -21,6 +21,7 @@ const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
   "charts-tooltip-warning",
+  "dataListCheck-warn-updated-callback",
   "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
   "nav-warn-flyouts-now-inline",
