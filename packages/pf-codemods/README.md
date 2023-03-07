@@ -499,6 +499,24 @@ We've removed the `KEY_CODES` constant from our constants file. If your code rel
 
 This rule will raise an error when `KEY_CODES` is imported in a file, but it will not make any code changes.
 
+### label-remove-isTruncated [(#8771)](https://github.com/patternfly/patternfly-react/pull/8771)
+
+We've removed the `isTruncated` property from Label. This is now the default behavior. In addition, you can limit the text width using the new `textMaxWidth` property.
+
+#### Examples
+
+In:
+
+```jsx
+<Label isTruncated />
+```
+
+Out:
+
+```jsx
+<Label  />
+```
+
 ### masthead-update-component [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `MastheadBrand` to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `component` properties will remain unchanged, but if it is not specified a default will be added.

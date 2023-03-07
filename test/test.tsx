@@ -21,6 +21,7 @@ import {
   FileUpload,
   KebabToggle,
   KEY_CODES,
+  Label,
   MenuItem,
   MenuItemAction,
   MultipleFileUpload,
@@ -60,6 +61,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <KebabToggle onToggle={} />
+  <Label isTruncated />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav flyout={"menu"} />
