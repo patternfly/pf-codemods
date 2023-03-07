@@ -11,5 +11,5 @@ const onToggleAPIUpdateList = [
 // https://github.com/patternfly/patternfly-react/pull/8667
 module.exports = {
   meta: { fixable: "code" },
-  create: addCallbackParam(onToggleAPIUpdateList, { onToggle: "event" }),
+  create: addCallbackParam(onToggleAPIUpdateList, { onToggle: "_event" }),
 };

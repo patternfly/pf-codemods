@@ -35,7 +35,7 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
       output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(_event, isOpen) => onToggle(isOpen)} />;`,
       errors: [
         {
-          message: `The "onToggle" prop for ${component} has been updated to include the "event" parameter as its first parameter. "onToggle" handlers may require an update.`,
+          message: `The "onToggle" prop for ${component} has been updated to include the "_event" parameter as its first parameter. "onToggle" handlers may require an update.`,
           type: "JSXOpeningElement",
         },
       ],
@@ -45,7 +45,7 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
       output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={(_event, isOpen) => onToggle(isOpen)} />;`,
       errors: [
         {
-          message: `The "onToggle" prop for ${component} has been updated to include the "event" parameter as its first parameter. "onToggle" handlers may require an update.`,
+          message: `The "onToggle" prop for ${component} has been updated to include the "_event" parameter as its first parameter. "onToggle" handlers may require an update.`,
           type: "JSXOpeningElement",
         },
       ],
@@ -55,7 +55,7 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
       output: `import { ${component} } from '@patternfly/react-core'; const onToggle = (_event, isOpen) => {}; <${component} onToggle={onToggle} />;`,
       errors: [
         {
-          message: `The "onToggle" prop for ${component} has been updated to include the "event" parameter as its first parameter. "onToggle" handlers may require an update.`,
+          message: `The "onToggle" prop for ${component} has been updated to include the "_event" parameter as its first parameter. "onToggle" handlers may require an update.`,
           type: "JSXOpeningElement",
         },
       ],
@@ -65,7 +65,7 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
       output: `import { ${component} } from '@patternfly/react-core'; function onToggle(_event, isOpen) {}; <${component} onToggle={onToggle} />;`,
       errors: [
         {
-          message: `The "onToggle" prop for ${component} has been updated to include the "event" parameter as its first parameter. "onToggle" handlers may require an update.`,
+          message: `The "onToggle" prop for ${component} has been updated to include the "_event" parameter as its first parameter. "onToggle" handlers may require an update.`,
           type: "JSXOpeningElement",
         },
       ],
@@ -75,7 +75,7 @@ ruleTester.run("onToggle-updated-paramaters", rule, {
       output: `import { ${component} } from '@patternfly/react-core'; <${component} onToggle={this.onToggle} />;`,
       errors: [
         {
-          message: `The "onToggle" prop for ${component} has been updated to include the "event" parameter as its first parameter. "onToggle" handlers may require an update.`,
+          message: `The "onToggle" prop for ${component} has been updated to include the "_event" parameter as its first parameter. "onToggle" handlers may require an update.`,
           type: "JSXOpeningElement",
         },
       ],

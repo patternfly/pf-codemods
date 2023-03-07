@@ -232,7 +232,7 @@ function addCallbackParam(componentsArray, propMap) {
                       const createReplacerFix = (functionParam) => {
                         const hasParenthesis =
                           context.getTokenAfter(functionParam).value === ")";
-                        const replacementParams = `_${newParam}, ${functionParam.name}`;
+                        const replacementParams = `${newParam}, ${functionParam.name}`;
 
                         return fixer.replaceText(
                           functionParam,
