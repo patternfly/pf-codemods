@@ -1,14 +1,14 @@
 const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/datalist-remove-ondrags');
+const rule = require('../../../lib/rules/v5/datalist-remove-props');
 
-ruleTester.run("datalist-remove-ondrags", rule, {
+ruleTester.run("datalist-remove-props", rule, {
   valid: [
     {
       code: `import { DataList } from '@patternfly/react-core'; <DataList />`,
     },
     {
       // No @patternfly/react-core import
-      code: `<DataList onDragFinish onDragStart onDragMove onDragCancel />`,
+      code: `<DataList onDragFinish onDragStart onDragMove onDragCancel itemOrder />`,
     }
   ],
   invalid: [
@@ -21,6 +21,14 @@ ruleTester.run("datalist-remove-ondrags", rule, {
           type: "JSXOpeningElement",
         }
       }),
+    },
+    {
+      code:   `import { DataList } from '@patternfly/react-core'; <DataList itemOrder />`,
+      output: `import { DataList } from '@patternfly/react-core'; <DataList  />`,
+      errors: [{
+        message: `itemOrder prop for DataList has been removed.`,
+        type: "JSXOpeningElement",
+      }]
     }
   ]
 });

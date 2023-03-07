@@ -55,6 +55,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
+  <DataList onDragStart itemOrder={['1', '2', '3']} />
   <DataList onSelectDataListItem />
   <DatePicker />
   <DropdownItem isHovered={true} />
