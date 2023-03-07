@@ -363,7 +363,32 @@ function toggle2(_event, id) {};
 
 We've updated the `onChange` prop for DataListCheck so that the `event` parameter is the first parameter. Handlers may require an update.
 
-This rule will raise a warning, but will not make any changes.
+#### Examples
+
+In:
+
+```jsx
+<DataListCheck onChange={(checked) => onChange(checked)} />
+
+const onChange1 = (checked) => {};
+<DataListCheck onChange={onChange1}>
+
+function onChange2(checked) {};
+<DataListCheck onChange={onChange2}>
+```
+
+Out:
+
+```jsx
+<DataListCheck onChange={(_event, checked) => onChange(checked)} />
+
+const onChange1 = (_event, checked) => {};
+<DataListCheck onChange={onChange1}>
+
+function onChange2(_event, checked) {};
+<DataListCheck onChange={onChange2}>
+```
+
 
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
