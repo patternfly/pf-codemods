@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
 const rule = require("../../../lib/rules/v5/label-warn-truncated-default");
 
-ruleTester.run("label-remove-isTruncated", rule, {
+ruleTester.run("label-warn-truncated-default", rule, {
   valid: [
     {
       // isTruncated exists - this will be picked up by the label-remove-isTruncated test
