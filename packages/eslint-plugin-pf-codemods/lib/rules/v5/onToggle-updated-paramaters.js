@@ -25,13 +25,34 @@ module.exports = {
               (attr) => attr.name.name === "onToggle"
             );
 
-            const { type, params, name } =
-              onToggleProp?.value?.expression || {};
+            const propProperties = {
+              type: onToggleProp?.value?.expression?.type,
+              name: onToggleProp?.value?.expression?.name,
+            };
+
+            if (propProperties.type === "ArrowFunctionExpression") {
+              propProperties.params = onToggleProp?.value?.expression?.params;
+            } else if (propProperties.type === "Identifier") {
+              const currentScope = context.getScope();
+              const matchingVariable = currentScope.variables.find(
+                (variable) => variable.name === propProperties.name
+              );
+              const matchingDefinition = matchingVariable.defs.find(
+                (def) => def.name.name === propProperties.name
+              );
+
+              propProperties.params =
+                matchingDefinition.type === "FunctionName"
+                  ? matchingDefinition.node.params
+                  : matchingDefinition.node.init.params;
+            }
+            const { type, params } = propProperties;
 
             if (
               imports.map((imp) => imp.local.name).includes(node.name.name) &&
-              ((type === "ArrowFunctionExpression" && params?.length === 1) ||
-                type === "Identifier")
+              ((params?.length === 1 &&
+                ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
+                type === "MemberExpression")
             ) {
               context.report({
                 node,
@@ -52,29 +73,10 @@ module.exports = {
                   };
 
                   if (
-                    type === "ArrowFunctionExpression" &&
+                    ["ArrowFunctionExpression", "Identifier"].includes(type) &&
                     params.length === 1
                   ) {
                     fixes.push(createReplacerFix(params[0]));
-                  }
-
-                  if (type === "Identifier") {
-                    const currentScope = context.getScope();
-                    const matchingVariables = currentScope.variables.find(
-                      (variable) => variable.name === name
-                    );
-                    const matchingDefinition = matchingVariables.defs.find(
-                      (def) => def.name.name === name
-                    );
-
-                    const definitionParams =
-                      matchingDefinition.type === "FunctionName"
-                        ? matchingDefinition.node.params
-                        : matchingDefinition.node.init.params;
-
-                    if (definitionParams.length === 1) {
-                      fixes.push(createReplacerFix(definitionParams[0]));
-                    }
                   }
 
                   return fixes;
