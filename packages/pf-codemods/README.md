@@ -329,6 +329,36 @@ Out:
 <DataList  />
 ```
 
+### dataList-updated-callback [(#8723)](https://github.com/patternfly/patternfly-react/pull/8723)
+
+We've updated the `onSelectDataListItem` prop for DataList to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DataList onSelectDataListItem={(id) => onSelect(id)} />
+
+const toggle1 = (id) => {};
+<DataList onSelectDataListItem={toggle1}>
+
+function toggle2(id) {};
+<DataList onSelectDataListItem={toggle2}>
+```
+
+Out:
+
+```jsx
+<DataList onSelectDataListItem={(_event, id) => onSelect(id)} />
+
+const toggle1 = (_event, id) => {};
+<DataList onSelectDataListItem={toggle1}>
+
+function toggle2(_event, id) {};
+<DataList onSelectDataListItem={toggle2}>
+```
+
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
@@ -539,9 +569,35 @@ Out:
 <NumberInput  />
 ```
 
-### onToggle-warn-event [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
+### onToggle-updated-parameters [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Toggle onToggle={(isOpen) => onToggle(isOpen)} />
+
+const toggleBadge = (isOpen) => {};
+<BadgeToggle onToggle={toggleBadge}>
+
+function toggleDropdown(isOpen) {};
+<DropdownToggle onToggle={toggleDropdown}>
+```
+
+Out:
+
+```jsx
+<Toggle onToggle={(_event, isOpen) => onToggle(isOpen)} />
+
+const toggleBadge = (_event, isOpen) => {};
+<BadgeToggle onToggle={toggleBadge}>
+
+function toggleDropdown(_event, isOpen) {};
+<DropdownToggle onToggle={toggleDropdown}>
+```
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 

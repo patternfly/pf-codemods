@@ -178,6 +178,90 @@ function ensureImports(context, node, package, imports) {
   }
 }
 
+function addCallbackParam(componentsArray, propMap) {
+  return function (context) {
+    const imports = getPackageImports(context, "@patternfly/react-core").filter(
+      (specifier) => componentsArray.includes(specifier.imported.name)
+    );
+
+    return !imports.length
+      ? {}
+      : {
+          JSXOpeningElement(node) {
+            if (imports.map((imp) => imp.local.name).includes(node.name.name)) {
+              const namedAttributes = node.attributes.filter((attr) =>
+                Object.keys(propMap).includes(attr.name?.name)
+              );
+
+              namedAttributes.forEach((attribute) => {
+                const newParam = propMap[attribute.name.name];
+
+                const propProperties = {
+                  type: attribute.value?.expression?.type,
+                  name: attribute.value?.expression?.name,
+                };
+
+                if (propProperties.type === "ArrowFunctionExpression") {
+                  propProperties.params = attribute.value?.expression?.params;
+                } else if (propProperties.type === "Identifier") {
+                  const currentScope = context.getScope();
+                  const matchingVariable = currentScope.variables.find(
+                    (variable) => variable.name === propProperties.name
+                  );
+                  const matchingDefinition = matchingVariable.defs.find(
+                    (def) => def.name.name === propProperties.name
+                  );
+
+                  propProperties.params =
+                    matchingDefinition.type === "FunctionName"
+                      ? matchingDefinition.node.params
+                      : matchingDefinition.node.init.params;
+                }
+                const { type, params } = propProperties;
+
+                if (
+                  (params?.length === 1 &&
+                    ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
+                  type === "MemberExpression"
+                ) {
+                  context.report({
+                    node,
+                    message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated to include the "${newParam}" parameter as its first parameter. "${attribute.name.name}" handlers may require an update.`,
+                    fix(fixer) {
+                      const fixes = [];
+                      const createReplacerFix = (functionParam) => {
+                        const hasParenthesis =
+                          context.getTokenAfter(functionParam).value === ")";
+                        const replacementParams = `${newParam}, ${functionParam.name}`;
+
+                        return fixer.replaceText(
+                          functionParam,
+                          hasParenthesis
+                            ? replacementParams
+                            : `(${replacementParams})`
+                        );
+                      };
+
+                      if (
+                        ["ArrowFunctionExpression", "Identifier"].includes(
+                          type
+                        ) &&
+                        params.length === 1
+                      ) {
+                        fixes.push(createReplacerFix(params[0]));
+                      }
+
+                      return fixes;
+                    },
+                  });
+                }
+              });
+            }
+          },
+        };
+  };
+}
+
 module.exports = {
   ensureImports,
   getPackageImports,
@@ -185,4 +269,5 @@ module.exports = {
   renameProps0,
   renameProps,
   renameComponents,
+  addCallbackParam
 }
