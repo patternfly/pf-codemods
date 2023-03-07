@@ -13,6 +13,7 @@ import {
   ApplicationLauncher,
   Button,
   Card,
+  DataList,
   DatePicker,
   DropdownItem,
   DropdownToggle,
@@ -48,6 +49,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
+  <DataList itemOrder={['1', '2', '3']} />
   <DatePicker />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary />
