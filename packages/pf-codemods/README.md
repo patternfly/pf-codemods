@@ -602,6 +602,7 @@ We've also renamed several sub-props of Pagination's "title" prop:
 - `toPreviousPage`: `toPreviousPageAriaLabel`,
 - `optionsToggle`: `optionsToggleAriaLabel`,
 
+
 #### Examples
 
 In:
@@ -638,7 +639,23 @@ Out:
   }}
 />
 ```
+### popper-remove-popperMatchesTriggerWidth [(#8724)](https://github.com/patternfly/patternfly-react/pull/8724)
 
+We've removed the `popperMatchesTriggerWidth` prop from Popper, minWidth, maxWidth and width props now can be used to modify the popper width.
+
+#### Examples
+
+In:
+
+```jsx
+<Popper popperMatchesTriggerWidth />
+```
+
+Out:
+
+```jsx
+<Popper  />
+```
 ### popover-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
 
 The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.

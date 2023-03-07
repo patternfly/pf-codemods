@@ -7,6 +7,6 @@ const { renameProp } = require('../../helpers');
     renameProp(
       'Popper',
       {'popperMatchesTriggerWidth': ''},
-      node =>  `popperMatchesTriggerWidth prop has been removed for ${node.name.name}, minWidth now covers this by default.`
+      node =>  `popperMatchesTriggerWidth prop has been removed for ${node.name.name}, minWidth now covers this by default. Minimum and maximum width can be modified via the new minWidth and maxWidth properties`
     ),
   };
