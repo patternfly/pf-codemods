@@ -313,7 +313,9 @@ Out:
 
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
-We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel`, and `itemOrder` props. This rule will remove them and suggest the user use the DragDrop component.
+We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
+
+In addition to removing these props, this rule will suggest using the DragDrop component instead of the `onDrag...` props.
 
 #### Examples
 
