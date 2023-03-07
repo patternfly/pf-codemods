@@ -641,7 +641,7 @@ Out:
 ```
 ### popper-remove-popperMatchesTriggerWidth [(#8724)](https://github.com/patternfly/patternfly-react/pull/8724)
 
-We've removed the `popperMatchesTriggerWidth` prop from Popper, minWidth, maxWidth and width props now can be used to modify the popper width.
+We've removed the `popperMatchesTriggerWidth` prop from Popper. `minWidth`, `maxWidth`, and `width` props can instead be used to modify the Popper width.
 
 #### Examples
 

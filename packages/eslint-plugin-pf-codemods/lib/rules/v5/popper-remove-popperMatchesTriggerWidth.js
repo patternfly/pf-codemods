@@ -1,12 +1,12 @@
 const { renameProp } = require('../../helpers');
 
-  // https://github.com/patternfly/patternfly-react/pull/https://github.com/patternfly/patternfly-react/pull/8724
+  // https://github.com/patternfly/patternfly-react/pull/8724
   module.exports = {
     meta: { fixable: 'code' },
     create: 
     renameProp(
       'Popper',
       {'popperMatchesTriggerWidth': ''},
-      node =>  `popperMatchesTriggerWidth prop has been removed for ${node.name.name}, minWidth now covers this by default. Minimum and maximum width can be modified via the new minWidth and maxWidth properties`
+      node =>  `popperMatchesTriggerWidth prop has been removed for ${node.name.name}.  The width can instead be modified via the new minWidth, maxWidth, and width properties`
     ),
   };
