@@ -112,6 +112,37 @@ Out:
 <Alert component="h4" />
 ```
 
+### applicationLauncher-updated-params [(#8756)](https://github.com/patternfly/patternfly-react/pull/8756)
+
+We've updated the `onFavorite` and `onSearch` props for ApplicationLauncher to include the `event` as their first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<ApplicationLauncher onFavorite={(id) => handler(id)} onSearch={(text) => searchHandler(text)}/>
+const handler1 = (id) => {};
+const searchHandler1 = (text) => {};
+<ApplicationLauncher onFavorite={handler1} onSearch={searchHandler1}>
+function handler2(id) {};
+function searchHandler2(text) {};
+<ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
+```
+
+Out:
+
+```jsx
+<ApplicationLauncher onFavorite={(_event, id) => handler(id)} onSearch={(_event, text) => searchHandler(text)}/>
+const handler1 = (_event, id) => {};
+const searchHandler1 = (_event, text) => {};
+<ApplicationLauncher onFavorite={handler1} onSearch={searchHandler1}>
+function handler2(_event, id) {};
+function searchHandler2(_event, text) {};
+<ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
+```
+
+
 ### applicationLauncher-warn-input [(#8293)](https://github.com/patternfly/patternfly-react/pull/8293)
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
