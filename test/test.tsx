@@ -11,6 +11,7 @@ import {
   AccordionExpandableContent,
   Alert,
   ApplicationLauncher,
+  BadgeToggle,
   Button,
   Card,
   DataList,
@@ -18,6 +19,7 @@ import {
   DropdownItem,
   DropdownToggle,
   FileUpload,
+  KebabToggle,
   KEY_CODES,
   MenuItem,
   MenuItemAction,
@@ -27,6 +29,8 @@ import {
   NumberInput,
   Pagination,
   Popover,
+  Select,
+  SelectToggle,
   Spinner,
   Tabs,
   Toggle,
@@ -46,13 +50,17 @@ const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
+  <ApplicationLauncher onToggle={} />
+  <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
   <DataList onDragStart itemOrder={['1', '2', '3']} />
+  <DataList onSelectDataListItem />
   <DatePicker />
   <DropdownItem isHovered={true} />
-  <DropdownToggle isPrimary />
+  <DropdownToggle isPrimary onToggle={} />
+  <KebabToggle onToggle={} />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav flyout={"menu"} />
@@ -71,8 +79,10 @@ const newTheme = getCustomTheme("1", "2", "3");
     optionsToggle: "test"
   }} />
   <Popover />
+  <Select onToggle={} />
   <SelectOption hasCheck />
+  <SelectToggle onToggle={} />
   <Spinner isSVG />
-  <Toggle isPrimary />
+  <Toggle isPrimary onToggle={} />
   <TreeView hasCheck />
 </>;
