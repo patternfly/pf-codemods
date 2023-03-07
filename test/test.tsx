@@ -1,11 +1,11 @@
 import {
   Chart,
   ChartLegend,
-  DarkBlueColorTheme,
   getCustomTheme,
-  getResizeObserver,
+  
   LightBlueColorTheme,
 } from "@patternfly/react-charts";
+import {getResizeObserver} from '@patternfly/react-core';
 import { CodeEditor } from "@patternfly/react-code-editor";
 import {
   AccordionExpandableContent,
@@ -42,37 +42,37 @@ import foo from Bar;
 //eslint-disable-next-line @typescript/foo
 
 const isRead = true;
-const newTheme = getCustomTheme("1", "2", "3");
+const newTheme = getCustomTheme("1", "3");
 <>
-  <Alert aria-label='tester' />
-  <Alert titleHeadingLevel={"h4"}/>
-  <Button isLarge />
-  <Button isSmall />
-  <Chart themeVariant />
-  <DataList itemOrder={['1', '2', '3']} />
+  <Alert  />
+  <Alert component={"h4"}/>
+  <Button size="lg" />
+  <Button size="sm" />
+  <Chart />
+  <DataList  />
   <DatePicker />
-  <DropdownItem isHovered={true} />
-  <DropdownToggle isPrimary />
-  <MenuItem hasCheck />
+  <DropdownItem  />
+  <DropdownToggle toggleVariant="primary" />
+  <MenuItem hasCheckbox />
   <MenuItemAction />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
-  <NotificationBadge isRead />
-  <NotificationBadge isRead={false} />
-  <NotificationBadge isRead={isRead} />
-  <NumberInput allowEmptyInput />
-  <Pagination defaultToFullPage perPageComponent="div" titles={{
-    currPage: "test",
-    paginationTitle: "test",
-    toFirstPage: "test",
-    toLastPage: "test",
-    toNextPage: "test",
-    toPreviousPage: "test",
-    optionsToggle: "test"
+  <NotificationBadge variant="read" />
+  <NotificationBadge variant="unread" />
+  <NotificationBadge variant={isRead ? "read" : "unread"} />
+  <NumberInput  />
+  <Pagination isLastFullPageShown  titles={{
+    currPageAriaLabel: "test",
+    paginationAriaLabel: "test",
+    toFirstPageAriaLabel: "test",
+    toLastPageAriaLabel: "test",
+    toNextPageAriaLabel: "test",
+    toPreviousPageAriaLabel: "test",
+    optionsToggleAriaLabel: "test"
   }} />
   <Popover />
-  <SelectOption hasCheck />
-  <Spinner isSVG />
-  <Toggle isPrimary />
-  <TreeView hasCheck />
+  <SelectOption hasCheckbox />
+  <Spinner  />
+  <Toggle toggleVariant="primary" />
+  <TreeView hasCheckbox />
 </>;
