@@ -62,6 +62,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DropdownToggle isPrimary onToggle={} />
   <KebabToggle onToggle={} />
   <Label isTruncated />
+  <Label />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav flyout={"menu"} />
