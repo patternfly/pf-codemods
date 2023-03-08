@@ -7,6 +7,7 @@ import {
   LightBlueColorTheme,
 } from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
+
 import {
   AccordionExpandableContent,
   Alert,
@@ -28,6 +29,7 @@ import {
   NotificationBadge,
   NumberInput,
   Pagination,
+  Popper,
   Popover,
   Select,
   SelectToggle,
@@ -78,6 +80,7 @@ const newTheme = getCustomTheme("1", "2", "3");
     toPreviousPage: "test",
     optionsToggle: "test"
   }} />
+  <Popper popperMatchesTriggerWidth={false}/>
   <Popover />
   <Select onToggle={} />
   <SelectOption hasCheck />
