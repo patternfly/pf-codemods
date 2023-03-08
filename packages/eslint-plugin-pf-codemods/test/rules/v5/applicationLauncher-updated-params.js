@@ -1,8 +1,8 @@
-const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/applicationLauncher-updated-params');
-const propNames = ['onFavorite', 'onSearch'];
+const ruleTester = require("../../ruletester");
+const rule = require("../../../lib/rules/v5/applicationLauncher-updated-params");
+const propNames = ["onFavorite", "onSearch"];
 
-const ruleRunner = (prop) => {
+propNames.forEach((prop) => {
   ruleTester.run("applicationLauncher-updated-params", rule, {
     valid: [
       {
@@ -85,6 +85,4 @@ const ruleRunner = (prop) => {
       },
     ],
   });
-}
-
-propNames.forEach(prop => ruleRunner(prop));
+});
