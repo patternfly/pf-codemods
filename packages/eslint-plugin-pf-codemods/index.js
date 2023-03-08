@@ -23,6 +23,7 @@ const warningRules = [
   "charts-tooltip-warning",
   "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
+  "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
   "popover-appendTo-default",
   "react-dropzone-warn-upgrade",
