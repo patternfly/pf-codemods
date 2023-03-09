@@ -361,6 +361,37 @@ function toggle2(_event, id) {};
 <DataList onSelectDataListItem={toggle2}>
 ```
 
+### dataListCheck-warn-updated-callback [(#8735)](https://github.com/patternfly/patternfly-react/pull/8735)
+
+We've updated the `onChange` prop for DataListCheck so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DataListCheck onChange={(checked) => onChange(checked)} />
+
+const onChange1 = (checked) => {};
+<DataListCheck onChange={onChange1}>
+
+function onChange2(checked) {};
+<DataListCheck onChange={onChange2}>
+```
+
+Out:
+
+```jsx
+<DataListCheck onChange={(_event, checked) => onChange(checked)} />
+
+const onChange1 = (_event, checked) => {};
+<DataListCheck onChange={onChange1}>
+
+function onChange2(_event, checked) {};
+<DataListCheck onChange={onChange2}>
+```
+
+
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
