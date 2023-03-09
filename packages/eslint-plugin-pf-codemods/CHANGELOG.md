@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.38.2...@patternfly/eslint-plugin-pf-codemods@1.39.0) (2023-03-08)
+
+
+### Features
+
+* **Label:** remove isTruncated from Label ([#317](https://github.com/patternfly/pf-codemods/issues/317)) ([13a8c63](https://github.com/patternfly/pf-codemods/commit/13a8c6300def3739e87561ae399feaa4edc724b0))
+
+
+
+
+
+## [1.38.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.38.1...@patternfly/eslint-plugin-pf-codemods@1.38.2) (2023-03-08)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+## [1.38.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.38.0...@patternfly/eslint-plugin-pf-codemods@1.38.1) (2023-03-07)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+# [1.38.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.37.4...@patternfly/eslint-plugin-pf-codemods@1.38.0) (2023-03-07)
+
+
+### Features
+
+* **DataList:** added event param to callback ([#306](https://github.com/patternfly/pf-codemods/issues/306)) ([4103878](https://github.com/patternfly/pf-codemods/commit/41038781df40a826dc73278d67ea5955257429da))
+
+
+
+
+
 ## [1.37.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.37.3...@patternfly/eslint-plugin-pf-codemods@1.37.4) (2023-03-02)
 
 

@@ -7,17 +7,22 @@ import {
   LightBlueColorTheme,
 } from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
+
 import {
   AccordionExpandableContent,
   Alert,
   ApplicationLauncher,
+  BadgeToggle,
   Button,
   Card,
+  DataList,
   DatePicker,
   DropdownItem,
   DropdownToggle,
   FileUpload,
+  KebabToggle,
   KEY_CODES,
+  Label,
   MenuItem,
   MenuItemAction,
   MultipleFileUpload,
@@ -25,7 +30,10 @@ import {
   NotificationBadge,
   NumberInput,
   Pagination,
+  Popper,
   Popover,
+  Select,
+  SelectToggle,
   Spinner,
   Tabs,
   Toggle,
@@ -45,12 +53,19 @@ const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
+  <ApplicationLauncher onToggle={} />
+  <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
+  <DataList onDragStart itemOrder={['1', '2', '3']} />
+  <DataList onSelectDataListItem />
   <DatePicker />
   <DropdownItem isHovered={true} />
-  <DropdownToggle isPrimary />
+  <DropdownToggle isPrimary onToggle={} />
+  <KebabToggle onToggle={} />
+  <Label isTruncated />
+  <Label />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav flyout={"menu"} />
@@ -69,9 +84,12 @@ const newTheme = getCustomTheme("1", "2", "3");
     optionsToggle: "test"
   }} />
   <Popover reference />
+  <Popper popperMatchesTriggerWidth={false}/>
+  <Select onToggle={} />
   <SelectOption hasCheck />
+  <SelectToggle onToggle={} />
   <Spinner isSVG />
-  <Toggle isPrimary />
+  <Toggle isPrimary onToggle={} />
   <Tooltip reference />
   <TreeView hasCheck />
 </>;

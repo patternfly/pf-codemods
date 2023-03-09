@@ -311,22 +311,54 @@ Out:
 <ClipboardCopy  />
 ```
 
-### datalist-remove-ondrags [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
+### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
-We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, and `onDragCancel` props. This rule will remove them and suggest the user use the DragDrop component.
+We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
+
+In addition to removing these props, this rule will suggest using the DragDrop component instead of the `onDrag...` props.
 
 #### Examples
 
 In:
 
 ```jsx
-<DataList onDragStart />
+<DataList onDragFinish onDragStart onDragMove onDragCancel itemOrder />
 ```
 
 Out:
 
 ```jsx
-<DataList  />
+<DataList      />
+```
+
+### dataList-updated-callback [(#8723)](https://github.com/patternfly/patternfly-react/pull/8723)
+
+We've updated the `onSelectDataListItem` prop for DataList to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DataList onSelectDataListItem={(id) => onSelect(id)} />
+
+const toggle1 = (id) => {};
+<DataList onSelectDataListItem={toggle1}>
+
+function toggle2(id) {};
+<DataList onSelectDataListItem={toggle2}>
+```
+
+Out:
+
+```jsx
+<DataList onSelectDataListItem={(_event, id) => onSelect(id)} />
+
+const toggle1 = (_event, id) => {};
+<DataList onSelectDataListItem={toggle1}>
+
+function toggle2(_event, id) {};
+<DataList onSelectDataListItem={toggle2}>
 ```
 
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
@@ -469,6 +501,24 @@ We've removed the `KEY_CODES` constant from our constants file. If your code rel
 
 This rule will raise an error when `KEY_CODES` is imported in a file, but it will not make any code changes.
 
+### label-remove-isTruncated [(#8771)](https://github.com/patternfly/patternfly-react/pull/8771)
+
+We've removed the `isTruncated` property from Label. This is now the default behavior. In addition, you can limit the text width using the new `textMaxWidth` property.
+
+#### Examples
+
+In:
+
+```jsx
+<Label isTruncated />
+```
+
+Out:
+
+```jsx
+<Label  />
+```
+
 ### masthead-update-component [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `MastheadBrand` to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `component` properties will remain unchanged, but if it is not specified a default will be added.
@@ -539,9 +589,35 @@ Out:
 <NumberInput  />
 ```
 
-### onToggle-warn-event [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
+### onToggle-updated-parameters [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Toggle onToggle={(isOpen) => onToggle(isOpen)} />
+
+const toggleBadge = (isOpen) => {};
+<BadgeToggle onToggle={toggleBadge}>
+
+function toggleDropdown(isOpen) {};
+<DropdownToggle onToggle={toggleDropdown}>
+```
+
+Out:
+
+```jsx
+<Toggle onToggle={(_event, isOpen) => onToggle(isOpen)} />
+
+const toggleBadge = (_event, isOpen) => {};
+<BadgeToggle onToggle={toggleBadge}>
+
+function toggleDropdown(_event, isOpen) {};
+<DropdownToggle onToggle={toggleDropdown}>
+```
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
@@ -602,6 +678,7 @@ We've also renamed several sub-props of Pagination's "title" prop:
 - `toPreviousPage`: `toPreviousPageAriaLabel`,
 - `optionsToggle`: `optionsToggleAriaLabel`,
 
+
 #### Examples
 
 In:
@@ -638,7 +715,23 @@ Out:
   }}
 />
 ```
+### popper-remove-popperMatchesTriggerWidth [(#8724)](https://github.com/patternfly/patternfly-react/pull/8724)
 
+We've removed the `popperMatchesTriggerWidth` prop from Popper. `minWidth`, `maxWidth`, and `width` props can instead be used to modify the Popper width.
+
+#### Examples
+
+In:
+
+```jsx
+<Popper popperMatchesTriggerWidth />
+```
+
+Out:
+
+```jsx
+<Popper  />
+```
 ### popover-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
 
 The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
