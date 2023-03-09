@@ -30,6 +30,7 @@ import {
   NotificationBadge,
   NumberInput,
   Pagination,
+  ToggleTemplateProps,
   Popper,
   Popover,
   Select,
@@ -82,7 +83,9 @@ const newTheme = getCustomTheme("1", "2", "3");
     toNextPage: "test",
     toPreviousPage: "test",
     optionsToggle: "test"
-  }} />
+  }} 
+    toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
+  />
   <Popper popperMatchesTriggerWidth={false}/>
   <Popover />
   <Select onToggle={} />
