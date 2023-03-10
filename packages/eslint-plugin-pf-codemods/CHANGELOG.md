@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.39.0...@patternfly/eslint-plugin-pf-codemods@1.39.1) (2023-03-09)
+
+
+### Bug Fixes
+
+* **DataListCheck:** reordered onChange params ([#307](https://github.com/patternfly/pf-codemods/issues/307)) ([74a804e](https://github.com/patternfly/pf-codemods/commit/74a804e59c62770c6692dcd5561a702946e6b9c1))
+
+
+
+
+
 # [1.39.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.38.2...@patternfly/eslint-plugin-pf-codemods@1.39.0) (2023-03-08)
 
 
