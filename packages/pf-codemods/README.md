@@ -804,24 +804,6 @@ Out:
 />
 ```
 
-### popover-rename-reference [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
-
-We've renamed the `reference` property to `triggerRef` in Popover.
-
-#### Examples
-
-In:
-
-```jsx
-<Popover reference={componentRef} />
-```
-
-Out:
-
-```jsx
-<Popover triggerRef={componentRef} />
-```
-
 ### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
 
 The `react-dropzone` dependency used with FileUpload, MultipleFileUpload, and CodeEditor has been updated from version 9 to version 14. As part of this upgrade, FileUpload has had type changes to its `onFileInputChange` and `dropzoneProps` props, and MultipleFileUpload has had a type change to its `dropzoneProps` prop.
@@ -1086,21 +1068,23 @@ Out:
 <Tooltip     />
 ```
 
-### tooltip-rename-reference [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
+### various-rename-reference [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
 
-We've renamed the `reference` property to `triggerRef` in Tooltip.
+We've renamed the `reference` property to `triggerRef` in Popover and Tooltip components.
 
 #### Examples
 
 In:
 
 ```jsx
+<Popover reference={componentRef} />
 <Tooltip reference={componentRef} />
 ```
 
 Out:
 
 ```jsx
+<Popover triggerRef={componentRef} />
 <Tooltip triggerRef={componentRef} />
 ```
 
