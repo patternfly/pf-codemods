@@ -1,7 +1,7 @@
 const ruleTester = require("./ruletester");
 
 function getAddCallbackParamMessage(componentName, propName, newParamName) {
-  return `The "${propName}" prop for ${componentName} has been updated to include the "${newParamName}" parameter as its first parameter. "${propName}" handlers may require an update.`
+  return `The "${propName}" prop for ${componentName} has been updated so that the "${newParamName}" parameter is the first parameter. "${propName}" handlers may require an update.`
 }
 
 function getValidAddCallbackParamTests(componentNameArray, propNameArray) {
