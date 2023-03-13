@@ -279,12 +279,14 @@ function addCallbackParam(componentsArray, propMap) {
                     fix(fixer) {
                       const fixes = [];
 
+                      const newParamHasUnderscore = newParam[0] === "_";
+
                       const getIsNewParam = (param) => {
                         if (param.name === newParam) {
                           return true;
                         }
 
-                        if (newParam[0] === "_") {
+                        if (newParamHasUnderscore) {
                           return param.name === newParam.slice(1);
                         }
 
@@ -293,6 +295,25 @@ function addCallbackParam(componentsArray, propMap) {
 
                       const getIsFirst = (param) =>
                         context.getTokenBefore(param).value === "(";
+
+                      // meant to preserve _ being used to signal that the param isn't being used (or not)
+                      const formatNewParam = (paramNameInCurrentUse) => {
+                        const currentUseOfNewParamHasUnderscore =
+                          paramNameInCurrentUse[0] === "_";
+
+                        if (
+                          newParamHasUnderscore ===
+                          currentUseOfNewParamHasUnderscore
+                        ) {
+                          return newParam;
+                        }
+
+                        if (newParamHasUnderscore) {
+                          return newParam.slice(1);
+                        }
+
+                        return "_" + newParam;
+                      };
 
                       const createParamAdditionFix = (params) => {
                         const firstParam = params[0];
@@ -315,15 +336,25 @@ function addCallbackParam(componentsArray, propMap) {
                         );
                       };
 
-                      const createParamSwapFix = (param) => {
-                        const isNew = getIsNewParam(param);
+                      const createParamSwapFix = (
+                        param,
+                        currentUseOfNewParam
+                      ) => {
+                        const isCurrentUseOfNewParam = param === currentUseOfNewParam;
                         const isFirst = getIsFirst(param);
 
-                        if (isNew && isFirst) {
+                        // guard clause for if the new param is already the first, prevents issues if the swap doesn't need to be done
+                        if (isCurrentUseOfNewParam && isFirst) {
                           return;
                         }
 
-                        if (isNew) {
+                        // guard clause for if the param being evaluated is neither the param to be swapped or the first, since in that case we don't need to do anything with it
+                        if (!isCurrentUseOfNewParam && !isFirst) {
+                          return;
+                        }
+
+                        if (isCurrentUseOfNewParam) {
+                          // the range manipulation here is to remove the leading comma and space, since we know the param in question isn't the first at this point
                           return fixer.replaceText(
                             {
                               ...param,
@@ -333,12 +364,12 @@ function addCallbackParam(componentsArray, propMap) {
                           );
                         }
 
-                        if (isFirst) {
-                          return fixer.replaceText(
-                            param,
-                            `${newParam}, ${param.name}`
-                          );
-                        }
+                        return fixer.replaceText(
+                          param,
+                          `${formatNewParam(currentUseOfNewParam.name)}, ${
+                            param.name
+                          }`
+                        );
                       };
 
                       if (
@@ -349,9 +380,15 @@ function addCallbackParam(componentsArray, propMap) {
                         return fixes;
                       }
 
-                      if (params?.some((param) => getIsNewParam(param))) {
+                      const currentUseOfNewParam = params?.find((param) =>
+                        getIsNewParam(param)
+                      );
+
+                      if (currentUseOfNewParam) {
                         params.forEach((param) =>
-                          fixes.push(createParamSwapFix(param))
+                          fixes.push(
+                            createParamSwapFix(param, currentUseOfNewParam)
+                          )
                         );
                       } else {
                         fixes.push(createParamAdditionFix(params));
