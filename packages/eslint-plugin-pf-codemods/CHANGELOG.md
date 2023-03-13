@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.39.1...@patternfly/eslint-plugin-pf-codemods@1.40.0) (2023-03-13)
+
+
+### Features
+
+* **Helpers:** added test helper for callback param adding ([#334](https://github.com/patternfly/pf-codemods/issues/334)) ([e9bf6e9](https://github.com/patternfly/pf-codemods/commit/e9bf6e963cabbb37a9fe849a248349be5c2577bc))
+
+
+
+
+
 ## [1.39.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.39.0...@patternfly/eslint-plugin-pf-codemods@1.39.1) (2023-03-09)
 
 
