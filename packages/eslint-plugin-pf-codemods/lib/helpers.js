@@ -278,36 +278,52 @@ function addCallbackParam(componentsArray, propMap) {
                     message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${newParam}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
                     fix(fixer) {
                       const fixes = [];
-                      const createReplacerFix = (functionParam) => {
+
+                      const getIsNewParam = (param) => {
+                        if (param.name === newParam) {
+                          return true;
+                        }
+
+                        if (newParam[0] === "_") {
+                          return param.name === newParam.slice(1);
+                        }
+
+                        return param.name === "_" + newParam;
+                      };
+
+                      const getIsFirst = (param) =>
+                        context.getTokenBefore(param).value === "(";
+
+                      const createParamAdditionFix = (params) => {
+                        const firstParam = params[0];
+                        if (params.length > 1) {
+                          return fixer.replaceText(
+                            firstParam,
+                            `${newParam}, ${firstParam.name}`
+                          );
+                        }
+
                         const hasParenthesis =
-                          context.getTokenAfter(functionParam).value === ")";
-                        const replacementParams = `${newParam}, ${functionParam.name}`;
+                          context.getTokenAfter(firstParam).value === ")";
+                        const replacementParams = `${newParam}, ${firstParam.name}`;
 
                         return fixer.replaceText(
-                          functionParam,
+                          firstParam,
                           hasParenthesis
                             ? replacementParams
                             : `(${replacementParams})`
                         );
                       };
 
-                      const isNewParam = (param) => {
-                        if (newParam[0] === "_") {
-                          return [newParam, newParam.slice(1)].includes(param.name);
-                        }
+                      const createParamSwapFix = (param) => {
+                        const isNew = getIsNewParam(param);
+                        const isFirst = getIsFirst(param);
 
-                        return [newParam, "_" + newParam].includes(param.name)
-                      };
-
-                      const createSwapFix = (param) => {
-                        const isFirst =
-                          context.getTokenBefore(param).value === "(";
-
-                        if (isNewParam(param) && isFirst) {
+                        if (isNew && isFirst) {
                           return;
                         }
 
-                        if (isNewParam(param)) {
+                        if (isNew) {
                           return fixer.replaceText(
                             {
                               ...param,
@@ -333,12 +349,12 @@ function addCallbackParam(componentsArray, propMap) {
                         return fixes;
                       }
 
-                      if (params.length === 1) {
-                        fixes.push(createReplacerFix(params[0]));
-                      } else if (params?.some((param) => isNewParam(param))) {
+                      if (params?.some((param) => getIsNewParam(param))) {
                         params.forEach((param) =>
-                          fixes.push(createSwapFix(param))
+                          fixes.push(createParamSwapFix(param))
                         );
+                      } else {
+                        fixes.push(createParamAdditionFix(params));
                       }
 
                       // remove any fixes that aren't actually fixes (i.e. undefined) as those will break eslint

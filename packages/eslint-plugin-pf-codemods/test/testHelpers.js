@@ -51,6 +51,20 @@ function getInvalidAddCallbackParamTests(
         ],
       });
       tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(id, text) => handler(id)} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id, text) => handler(id)} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={id => handler(id)} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
@@ -79,8 +93,36 @@ function getInvalidAddCallbackParamTests(
         ],
       });
       tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id, text) => {}; <${componentName} ${propName}={handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id, text) => {}; <${componentName} ${propName}={handler} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id) {}; <${componentName} ${propName}={handler} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id) {}; <${componentName} ${propName}={handler} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id, text) {}; <${componentName} ${propName}={handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id, text) {}; <${componentName} ${propName}={handler} />;`,
         errors: [
           {
             message: getAddCallbackParamMessage(
@@ -120,6 +162,20 @@ function getInvalidAddCallbackParamTests(
           },
         ],
       });
+      tests.push({
+        code: `import { ${componentName} as PF${componentName} } from '@patternfly/react-core'; <PF${componentName} ${propName}={(id, text) => handler(id)} />;`,
+        output: `import { ${componentName} as PF${componentName} } from '@patternfly/react-core'; <PF${componentName} ${propName}={(${newParamName}, id, text) => handler(id)} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              `PF${componentName}`,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
     });
   });
   return tests;
@@ -139,7 +195,7 @@ function getInvalidSwapCallbackParamTests(
   componentNameArray.forEach((componentName) => {
     propNameArray.forEach((propName) => {
       tests.push({
-        code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(id, event) => handler(id)} />;`,
+        code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(id, ${newParamName}) => handler(id)} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
@@ -153,7 +209,21 @@ function getInvalidSwapCallbackParamTests(
         ],
       });
       tests.push({
-        code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id, event) => {}; <${componentName} ${propName}={handler} />;`,
+        code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(id, ${newParamName}, text) => handler(id)} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id, text) => handler(id)} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id, ${newParamName}) => {}; <${componentName} ${propName}={handler} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id) => {}; <${componentName} ${propName}={handler} />;`,
         errors: [
           {
@@ -167,8 +237,36 @@ function getInvalidSwapCallbackParamTests(
         ],
       });
       tests.push({
-        code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id, event) {}; <${componentName} ${propName}={handler} />;`,
+        code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id, ${newParamName}, text) => {}; <${componentName} ${propName}={handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id, text) => {}; <${componentName} ${propName}={handler} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id, ${newParamName}) {}; <${componentName} ${propName}={handler} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id) {}; <${componentName} ${propName}={handler} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id, ${newParamName}, text) {}; <${componentName} ${propName}={handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id, text) {}; <${componentName} ${propName}={handler} />;`,
         errors: [
           {
             message: getAddCallbackParamMessage(
