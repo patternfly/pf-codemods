@@ -291,16 +291,58 @@ function addCallbackParam(componentsArray, propMap) {
                         );
                       };
 
+                      const isNewParam = (param) => {
+                        if (newParam[0] === "_") {
+                          return [newParam, newParam.slice(1)].includes(param.name);
+                        }
+
+                        return [newParam, "_" + newParam].includes(param.name)
+                      };
+
+                      const createSwapFix = (param) => {
+                        const isFirst =
+                          context.getTokenBefore(param).value === "(";
+
+                        if (isNewParam(param) && isFirst) {
+                          return;
+                        }
+
+                        if (isNewParam(param)) {
+                          return fixer.replaceText(
+                            {
+                              ...param,
+                              range: [param.range[0] - 2, param.range[1]],
+                            },
+                            ""
+                          );
+                        }
+
+                        if (isFirst) {
+                          return fixer.replaceText(
+                            param,
+                            `${newParam}, ${param.name}`
+                          );
+                        }
+                      };
+
                       if (
-                        ["ArrowFunctionExpression", "Identifier"].includes(
+                        !["ArrowFunctionExpression", "Identifier"].includes(
                           type
-                        ) &&
-                        params.length === 1
+                        )
                       ) {
-                        fixes.push(createReplacerFix(params[0]));
+                        return fixes;
                       }
 
-                      return fixes;
+                      if (params.length === 1) {
+                        fixes.push(createReplacerFix(params[0]));
+                      } else if (params?.some((param) => isNewParam(param))) {
+                        params.forEach((param) =>
+                          fixes.push(createSwapFix(param))
+                        );
+                      }
+
+                      // remove any fixes that aren't actually fixes (i.e. undefined) as those will break eslint
+                      return fixes.filter((fix) => fix?.range);
                     },
                   });
                 }
