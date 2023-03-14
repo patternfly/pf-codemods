@@ -13,6 +13,7 @@ import {
   Alert,
   ApplicationLauncher,
   BadgeToggle,
+  Banner,
   Button,
   Card,
   DataList,
@@ -56,6 +57,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Alert titleHeadingLevel={"h4"}/>
   <ApplicationLauncher onToggle={} />
   <BadgeToggle onToggle={} />
+  <Banner variant="danger" />
   <Button isLarge />
   <Button isSmall />
   <Chart themeVariant />
