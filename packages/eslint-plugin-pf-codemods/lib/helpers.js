@@ -325,16 +325,11 @@ function addCallbackParam(componentsArray, propMap) {
                         const hasParenthesis =
                           context.getTokenBefore(firstParam).value === "(";
 
-                        if (hasParenthesis) {
-                          return fixer.replaceText(
-                            firstParam,
-                            replacementParams
-                          );
-                        }
-
                         return fixer.replaceText(
                           firstParam,
-                          `(${replacementParams})`
+                          hasParenthesis
+                            ? replacementParams
+                            : `(${replacementParams})`
                         );
                       };
 
