@@ -293,11 +293,8 @@ function addCallbackParam(componentsArray, propMap) {
                         return param.name === "_" + newParam;
                       };
 
-                      const getIsFirst = (param) =>
-                        context.getTokenBefore(param).value === "(";
-
                       // meant to preserve _ being used to signal that the param isn't being used (or not)
-                      const formatNewParam = (paramNameInCurrentUse) => {
+                      const formatNewParam = (paramNameInCurrentUse = "_") => {
                         const currentUseOfNewParamHasUnderscore =
                           paramNameInCurrentUse[0] === "_";
 
@@ -315,61 +312,41 @@ function addCallbackParam(componentsArray, propMap) {
                         return "_" + newParam;
                       };
 
-                      const createParamAdditionFix = (params) => {
+                      const createParamAdditionFix = (
+                        params,
+                        paramNameInCurrentUse
+                      ) => {
                         const firstParam = params[0];
-                        if (params.length > 1) {
-                          return fixer.replaceText(
-                            firstParam,
-                            `${newParam}, ${firstParam.name}`
-                          );
-                        }
+
+                        const replacementParams = `${formatNewParam(
+                          paramNameInCurrentUse
+                        )}, ${firstParam.name}`;
 
                         const hasParenthesis =
-                          context.getTokenAfter(firstParam).value === ")";
-                        const replacementParams = `${newParam}, ${firstParam.name}`;
+                          context.getTokenBefore(firstParam).value === "(";
+
+                        if (hasParenthesis) {
+                          return fixer.replaceText(
+                            firstParam,
+                            replacementParams
+                          );
+                        }
 
                         return fixer.replaceText(
                           firstParam,
-                          hasParenthesis
-                            ? replacementParams
-                            : `(${replacementParams})`
+                          `(${replacementParams})`
                         );
                       };
 
-                      const createParamSwapFix = (
-                        param,
+                      const createRemoveCurrentParamUseFix = (
                         currentUseOfNewParam
                       ) => {
-                        const isCurrentUseOfNewParam = param === currentUseOfNewParam;
-                        const isFirst = getIsFirst(param);
+                        const targetRange = [
+                          currentUseOfNewParam.range[0] - 2,
+                          currentUseOfNewParam.range[1],
+                        ];
 
-                        // guard clause for if the new param is already the first, prevents issues if the swap doesn't need to be done
-                        if (isCurrentUseOfNewParam && isFirst) {
-                          return;
-                        }
-
-                        // guard clause for if the param being evaluated is neither the param to be swapped or the first, since in that case we don't need to do anything with it
-                        if (!isCurrentUseOfNewParam && !isFirst) {
-                          return;
-                        }
-
-                        if (isCurrentUseOfNewParam) {
-                          // the range manipulation here is to remove the leading comma and space, since we know the param in question isn't the first at this point
-                          return fixer.replaceText(
-                            {
-                              ...param,
-                              range: [param.range[0] - 2, param.range[1]],
-                            },
-                            ""
-                          );
-                        }
-
-                        return fixer.replaceText(
-                          param,
-                          `${formatNewParam(currentUseOfNewParam.name)}, ${
-                            param.name
-                          }`
-                        );
+                        return fixer.replaceTextRange(targetRange, "");
                       };
 
                       if (
@@ -380,22 +357,28 @@ function addCallbackParam(componentsArray, propMap) {
                         return fixes;
                       }
 
-                      const currentUseOfNewParam = params?.find((param) =>
-                        getIsNewParam(param)
+                      const currentIndexOfNewParam = params?.findIndex(
+                        (param) => getIsNewParam(param)
                       );
 
-                      if (currentUseOfNewParam) {
-                        params.forEach((param) =>
-                          fixes.push(
-                            createParamSwapFix(param, currentUseOfNewParam)
+                      if (currentIndexOfNewParam > 0) {
+                        const currentUseOfNewParam =
+                          params[currentIndexOfNewParam];
+
+                        fixes.push(
+                          createRemoveCurrentParamUseFix(currentUseOfNewParam)
+                        );
+                        fixes.push(
+                          createParamAdditionFix(
+                            params,
+                            currentUseOfNewParam.name
                           )
                         );
                       } else {
                         fixes.push(createParamAdditionFix(params));
                       }
 
-                      // remove any fixes that aren't actually fixes (i.e. undefined) as those will break eslint
-                      return fixes.filter((fix) => fix?.range);
+                      return fixes;
                     },
                   });
                 }
