@@ -227,6 +227,8 @@ function ensureImports(context, node, package, imports) {
   }
 }
 
+// propMap structure: { propName: { defaultParamName: string, previousParamIndex?: number, otherMatchers?: /regex/ } | string }
+// example:           { onClick: { defaultParamName: '_event', previousParamIndex: 1, otherMatchers?: /_?(event|ev|e)/ } }
 function addCallbackParam(componentsArray, propMap) {
   return function (context) {
     const imports = getPackageImports(context, "@patternfly/react-core").filter(
@@ -243,7 +245,7 @@ function addCallbackParam(componentsArray, propMap) {
               );
 
               namedAttributes.forEach((attribute) => {
-                const newParam = propMap[attribute.name.name];
+                let newParam;
 
                 const propProperties = {
                   type: attribute.value?.expression?.type,
@@ -268,6 +270,39 @@ function addCallbackParam(componentsArray, propMap) {
                 }
                 const { type, params } = propProperties;
 
+                // if a simple string is passed for the parameter just assign it to newParam like we used to and skip everything else
+                if (typeof propMap[attribute.name.name] === "string") {
+                  newParam = propMap[attribute.name.name];
+                } else {
+                  const {
+                    defaultParamName,
+                    previousParamIndex,
+                    otherMatchers,
+                  } = propMap[attribute.name.name];
+
+                  const paramNameAtGivenIndex =
+                    params && params[previousParamIndex]?.name;
+
+                  // if the expected index of the newParam exceeds the number of current params just set treat it like a param addition with the default param value
+                  if (previousParamIndex >= params?.length) {
+                    newParam = defaultParamName;
+                  }
+
+                  // if there is a param in the location where we expect the newParam to be, and it matches the supplied matcher, treat that matched value as the new param value
+                  else if (paramNameAtGivenIndex?.match(otherMatchers)) {
+                    newParam = paramNameAtGivenIndex;
+                  }
+
+                  // if it doesn't match the supplied matcher, early return with no fixer
+                  else {
+                    context.report({
+                      node,
+                      message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${defaultParamName}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
+                    });
+                    return;
+                  }
+                }
+
                 if (
                   (params?.length >= 1 &&
                     ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
@@ -279,48 +314,12 @@ function addCallbackParam(componentsArray, propMap) {
                     fix(fixer) {
                       const fixes = [];
 
-                      const newParamHasUnderscore = newParam[0] === "_";
-
-                      const getIsNewParam = (param) => {
-                        if (param.name === newParam) {
-                          return true;
-                        }
-
-                        if (newParamHasUnderscore) {
-                          return param.name === newParam.slice(1);
-                        }
-
-                        return param.name === "_" + newParam;
-                      };
-
-                      // meant to preserve _ being used to signal that the param isn't being used (or not)
-                      const formatNewParam = (paramNameInCurrentUse = "_") => {
-                        const currentUseOfNewParamHasUnderscore =
-                          paramNameInCurrentUse[0] === "_";
-
-                        if (
-                          newParamHasUnderscore ===
-                          currentUseOfNewParamHasUnderscore
-                        ) {
-                          return newParam;
-                        }
-
-                        if (newParamHasUnderscore) {
-                          return newParam.slice(1);
-                        }
-
-                        return "_" + newParam;
-                      };
-
-                      const createParamAdditionFix = (
-                        params,
-                        paramNameInCurrentUse
-                      ) => {
+                      const createParamAdditionFix = (params) => {
                         const firstParam = params[0];
 
-                        const replacementParams = `${formatNewParam(
-                          paramNameInCurrentUse
-                        )}, ${context.getSourceCode().getText(firstParam)}`;
+                        const replacementParams = `${newParam}, ${context
+                          .getSourceCode()
+                          .getText(firstParam)}`;
 
                         const hasParenthesis =
                           context.getTokenBefore(firstParam).value === "(";
@@ -353,7 +352,7 @@ function addCallbackParam(componentsArray, propMap) {
                       }
 
                       const currentIndexOfNewParam = params?.findIndex(
-                        (param) => getIsNewParam(param)
+                        (param) => param.name === newParam
                       );
 
                       if (currentIndexOfNewParam > 0) {
@@ -369,7 +368,7 @@ function addCallbackParam(componentsArray, propMap) {
                             currentUseOfNewParam.name
                           )
                         );
-                      } else {
+                      } else if (params[0].name !== newParam) {
                         fixes.push(createParamAdditionFix(params));
                       }
 

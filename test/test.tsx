@@ -60,8 +60,8 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Button isSmall />
   <Chart themeVariant />
   <DataList onDragStart itemOrder={['1', '2', '3']} />
-  <DataList onSelectDataListItem />
-  <DataListCheck onChange />
+  <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
+  <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
