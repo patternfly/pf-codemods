@@ -320,7 +320,7 @@ function addCallbackParam(componentsArray, propMap) {
 
                         const replacementParams = `${formatNewParam(
                           paramNameInCurrentUse
-                        )}, ${firstParam.name}`;
+                        )}, ${context.getSourceCode().getText(firstParam)}`;
 
                         const hasParenthesis =
                           context.getTokenBefore(firstParam).value === "(";
