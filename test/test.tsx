@@ -35,6 +35,8 @@ import {
   DropdownPosition,
   DropdownToggle,
   EmptyStateIcon,
+  EmptyStatePrimary,
+  EmptyStateSecondaryActions,
   FileUpload,
   KebabToggle,
   KEY_CODES,
@@ -104,6 +106,8 @@ const newTheme = getCustomTheme("1", "2", "3");
   <EmptyStateIcon />
   <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <EmptyStatePrimary>Primary action</EmptyStatePrimary>
+  <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
   <KebabToggle onToggle={} />
   <Label isTruncated />
   <Label />

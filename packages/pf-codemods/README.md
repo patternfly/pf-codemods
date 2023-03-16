@@ -828,6 +828,27 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
+### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've renamed the `EmptyStatePrimary` component to `EmptyStateActions`.
+We've renamed the `EmptyStateSecondaryActions` component to `EmptyStateActions`.
+
+#### Examples
+
+In:
+
+```jsx
+<EmptyStatePrimary>Primary action</EmptyStatePrimary>
+<EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
+```
+
+Out:
+
+```jsx
+<EmptyStateActions>Primary action</EmptyStateActions>
+<EmptyStateActions>Other actions</EmptyStateActions>
+```
+
 ### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've made the `icon` prop required on EmptyStateIcon.
