@@ -412,6 +412,36 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### drawerPanelContent-warn-updated-callback [(#8736)](https://github.com/patternfly/patternfly-react/pull/8736)
+
+We've updated the `onResize` prop for DrawerPanelContent to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DrawerPanelContent onResize={(width, id) => onChange(checked)} />
+
+const onResize1 = (width, id) => {};
+<DrawerPanelContent onResize={onResize1}>
+
+function onResize2(width, id) {};
+<DrawerPanelContent onResize={onResize2}>
+```
+
+Out:
+
+```jsx
+<DrawerPanelContent onResize={(_event, width, id) => onChange(checked)} />
+
+const onResize1 = (_event, width, id) => {};
+<DrawerPanelContent onResize={onResize1}>
+
+function onResize2(_event, width, id) {};
+<DrawerPanelContent onResize={onResize2}>
+```
+
 ### dropdownItem-remove-isHovered [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the `isHovered` prop for the `DropdownItem`.
