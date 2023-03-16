@@ -362,12 +362,7 @@ function addCallbackParam(componentsArray, propMap) {
                         fixes.push(
                           createRemoveCurrentParamUseFix(currentUseOfNewParam)
                         );
-                        fixes.push(
-                          createParamAdditionFix(
-                            params,
-                            currentUseOfNewParam.name
-                          )
-                        );
+                        fixes.push(createParamAdditionFix(params));
                       } else if (params[0].name !== newParam) {
                         fixes.push(createParamAdditionFix(params));
                       }
