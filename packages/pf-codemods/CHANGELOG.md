@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.41.0...@patternfly/pf-codemods@1.42.0) (2023-03-16)
+
+
+### Features
+
+* **ClipboardCopy:** added event to onChange ([#315](https://github.com/patternfly/pf-codemods/issues/315)) ([01b0909](https://github.com/patternfly/pf-codemods/commit/01b0909e2b675d7464ff0c479b96251d9296f220))
+
+
+
+
+
 # [1.41.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.40.4...@patternfly/pf-codemods@1.41.0) (2023-03-16)
 
 
