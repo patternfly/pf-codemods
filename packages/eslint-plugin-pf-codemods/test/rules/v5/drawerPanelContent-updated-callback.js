@@ -1,7 +1,7 @@
 const { addCallbackParamTester } = require("../../testHelpers");
 
 addCallbackParamTester(
-  "drawer-updated-callback",
+  "drawerPanelContent-updated-callback",
   "DrawerPanelContent",
   "onResize"
 );
