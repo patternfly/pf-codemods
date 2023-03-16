@@ -167,6 +167,38 @@ Out:
 <Button size="lg" />
 ```
 
+### calendarMonth-update-onChange-onMonthChange-params [(#8753)](https://github.com/patternfly/patternfly-react/pull/8753)
+
+We've updated the `onMonthChange` prop for CalendarMonth to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<CalendarMonth onChange={(date) => handler(date)} onMonthChange={(newDate) => handler(newDate)} />
+<CalendarMonth onMonthChange={(newDate, event) => handler(newDate, event)} />
+const changeHandler1 = (date) => {};
+const handler1 = (newDate, event) => {};
+<CalendarMonth onChange={changeHandler1} onMonthChange={handler1}>
+function changeHandler2(date) {};
+function handler2(newDate, event) {};
+<CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
+```
+
+Out:
+
+```jsx
+<CalendarMonth onChange={(_event, date) => handler(date)} onMonthChange={(_event, newDate) => handler(newDate)} />
+<CalendarMonth onMonthChange={(event, newDate) => handler(newDate, event)} />
+const changeHandler1 = (_event, date) => {};
+const handler1 = (_event, newDate) => {};
+<CalendarMonth onMonthChange={handler1}>
+function changeHandler2(_event, date) {};
+function handler2(_event, newDate) {};
+<CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
+```
+
 ### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
 
 We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
