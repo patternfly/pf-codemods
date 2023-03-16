@@ -21,7 +21,6 @@ const warningRules = [
   "applicationLauncher-warn-input",
   "card-warn-component",
   "charts-tooltip-warning",
-  "clipboardCopy-warn-onChange-event-added",
   "datePicker-warn-appendTo-default-value-changed",
   "horizontalSubnav-ariaLabel",
   "label-warn-truncated-default",
