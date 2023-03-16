@@ -1,3 +1,3 @@
-const { addCallbackParamTester } = require("../../testHelpers");
+const { swapCallbackParamTester } = require("../../testHelpers");
 
-addCallbackParamTester('dataListCheck-updated-callback', 'DataListCheck', 'onChange')
+swapCallbackParamTester('dataListCheck-updated-callback', 'DataListCheck', 'onChange', 1)
