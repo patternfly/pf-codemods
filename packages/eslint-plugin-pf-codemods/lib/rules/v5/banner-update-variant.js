@@ -24,14 +24,18 @@ module.exports = {
                 (attribute) => attribute.name.name === "variant"
               );
 
-              if (variantProp) {
+              if (
+                variantProp &&
+                (variantMap[variantProp.value?.value] ||
+                  variantProp.value?.type !== "Literal")
+              ) {
                 context.report({
                   node,
                   message: `The "variant" prop type for Banner has been updated. "default" is still a valid value, but the previous status values of "info", "success", "warning", and "danger" have been replaced with color values of "blue", "green", "gold", and "red", respectively.`,
                   fix(fixer) {
                     const fixes = [];
 
-                    if (variantMap[variantProp.value?.value]) {
+                    if (variantMap[variantProp.value.value]) {
                       fixes.push(
                         fixer.replaceText(
                           variantProp.value,
