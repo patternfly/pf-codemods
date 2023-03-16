@@ -637,13 +637,13 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
-### emptyStateIcon-icon-required
+### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've made the `icon` prop required on EmptyStateIcon.
 
 This rule will throw an error, but will not make any changes.
 
-### emptyStateIcon-remove-props
+### emptyStateIcon-remove-props [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've removed the `variant` prop from EmptyStateIcon.
 We've removed the `component` prop from EmptyStateIcon and replaced it with the `icon` prop.
