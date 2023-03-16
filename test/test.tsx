@@ -54,7 +54,7 @@ const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
-  <ApplicationLauncher onToggle={} />
+  <ApplicationLauncher onToggle={} onFavorite={(id, isFavorite) => handler(id, isFavorite)} onSearch={text => handleText(text)}/>
   <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
