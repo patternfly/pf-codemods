@@ -255,6 +255,34 @@ When using the `react-core` Tooltip component inside of a `react-charts` compone
 
 This rule will raise a warning when Tooltip is imported from `@patternfly/react-core` and at least one other import is from `@patternfly/react-charts`, but will not update any code.
 
+### checkbox-reorder-onChange-params [(#8750)](https://github.com/patternfly/patternfly-react/pull/8750)
+
+We've updated the `onChange` prop for Checkbox to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Checkbox onChange={(id) => handler(id)} />
+<Checkbox onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<Checkbox onChange={handler1}>
+function handler2(id, event) {};
+<Checkbox onChange={handler2}>
+```
+
+Out:
+
+```jsx
+<Checkbox onChange={(_event, id) => handler(id)} />
+<Checkbox onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<Checkbox onChange={handler1}>
+function handler2(_event, id) {};
+<Checkbox onChange={handler2}>
+```
+
 ### clipboardCopy-onChange-event-added [(#8747)](https://github.com/patternfly/patternfly-react/pull/8747)
 
 The `onChange` prop for ClipboardCopy has been updated to include the `event` as its first parameter. `onChange` handlers may require an update.
