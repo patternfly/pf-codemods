@@ -22,7 +22,6 @@ const warningRules = [
   "card-warn-component",
   "charts-tooltip-warning",
   "datePicker-warn-appendTo-default-value-changed",
-  "drawer-warn-updated-callback",
   "horizontalSubnav-ariaLabel",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
