@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.40.4...@patternfly/pf-codemods@1.41.0) (2023-03-16)
+
+
+### Features
+
+* **Drawer:** added event param to onResize ([#308](https://github.com/patternfly/pf-codemods/issues/308)) ([dca1985](https://github.com/patternfly/pf-codemods/commit/dca198579a2e22179c65047c5b3d9bab3fb4300c))
+
+
+
+
+
 ## [1.40.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.40.3...@patternfly/pf-codemods@1.40.4) (2023-03-16)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
