@@ -255,6 +255,32 @@ When using the `react-core` Tooltip component inside of a `react-charts` compone
 
 This rule will raise a warning when Tooltip is imported from `@patternfly/react-core` and at least one other import is from `@patternfly/react-charts`, but will not update any code.
 
+### clipboardCopy-onChange-event-added [(#8747)](https://github.com/patternfly/patternfly-react/pull/8747)
+
+The `onChange` prop for ClipboardCopy has been updated to include the `event` as its first parameter. `onChange` handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<ClipboardCopy onChange={(text) => handleChange(text)} />
+const handleChange1 = (text) => {};
+<ClipboardCopy onChange={toggle1}>
+function handleChange2(text) {};
+<ClipboardCopy onChange={toggle2}>
+```
+
+Out:
+
+```jsx
+<ClipboardCopy onChange={(_event, text) => handleChange(text)} />
+const handleChange1 = (_event, text) => {};
+<ClipboardCopy onChange={toggle1}>
+function handleChange2(_event, text) {};
+<ClipboardCopy onChange={toggle2}>
+```
+
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
 
 We've removed the PopoverPosition type for the `position` prop on both ClipboardCopy and ClipboardCopyButton.
