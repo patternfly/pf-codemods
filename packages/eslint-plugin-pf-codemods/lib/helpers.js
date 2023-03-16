@@ -228,7 +228,7 @@ function ensureImports(context, node, package, imports) {
 }
 
 // propMap structure: { propName: { defaultParamName: string, previousParamIndex?: number, otherMatchers?: /regex/ } | string }
-// example:           { onClick: { defaultParamName: '_event', previousParamIndex: 1, otherMatchers?: /_?(event|ev|e)/ } }
+// example:           { onClick: { defaultParamName: '_event', previousParamIndex: 1, otherMatchers?: /^_?(ev\w*|e$)/ } }
 function addCallbackParam(componentsArray, propMap) {
   return function (context) {
     const imports = getPackageImports(context, "@patternfly/react-core").filter(

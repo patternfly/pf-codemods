@@ -58,6 +58,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
+  <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <Chart themeVariant />
   <DataList onDragStart itemOrder={['1', '2', '3']} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
