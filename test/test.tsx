@@ -85,12 +85,13 @@ const newTheme = getCustomTheme("1", "2", "3");
     toPreviousPage: "test",
     optionsToggle: "test"
   }} />
+  <Popover reference />
   <Popper popperMatchesTriggerWidth={false}/>
-  <Popover />
   <Select onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
   <Spinner isSVG />
   <Toggle isPrimary onToggle={} />
+  <Tooltip reference />
   <TreeView hasCheck />
 </>;
