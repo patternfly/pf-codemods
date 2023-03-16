@@ -258,35 +258,52 @@ function getInvalidSwapCallbackParamTests(
   const formattedNewParamName =
     newParamName[0] === "_" ? newParamName.slice(1) : newParamName;
 
-  componentNameArray.forEach((componentName) => {
-    propNameArray.forEach((propName) => {
-      // the following tests are specific to 'event' at the moment as I can't think of a good totally generic way to do this. Make new tests relevant to your param name if it isn't event.
-      if (formattedNewParamName === "event") {
-        const expectedEventVariations = ['e', '_e', 'ev', '_ev', 'evt', '_evt', 'event', '_event']
-        const genericArgs = ['id', 'text', 'foo', 'bar', 'bash', 'bang']
+  const expectedVariations = [];
+  const genericArgs = ["id", "text", "foo", "bar", "bash", "bang"];
 
-        expectedEventVariations.forEach(variation => {
+  switch (formattedNewParamName) {
+    case "event":
+      expectedVariations.push(
+        ...["e", "_e", "ev", "_ev", "evt", "_evt", "event", "_event"]
+      );
+      break;
+  }
+
+  if (expectedVariations.length) {
+    componentNameArray.forEach((componentName) => {
+      propNameArray.forEach((propName) => {
+        expectedVariations.forEach((variation) => {
           const stringifyArgs = (args) => {
-            return args.reduce((acc, arg) => `${acc}, ${arg}`, '').slice(2)
-          }
+            return args.reduce((acc, arg) => `${acc}, ${arg}`, "").slice(2);
+          };
 
-          const initialArgs = stringifyArgs([...genericArgs.slice(0, previousParamIndex), variation])
-          const fixedArgs = stringifyArgs([variation, ...genericArgs.slice(0, previousParamIndex)])
+          const selectedGenericArgs = genericArgs.slice(0, previousParamIndex);
+
+          const initialArgs = stringifyArgs([
+            ...selectedGenericArgs,
+            variation,
+          ]);
+          const fixedArgs = stringifyArgs([variation, ...selectedGenericArgs]);
 
           tests.push({
             code: `import { ${componentName} } from '@patternfly/react-core'; function handler(${initialArgs}) {}; <${componentName} ${propName}={handler} />;`,
             output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
             errors: [
               {
-                message: getAddCallbackParamMessage(componentName, propName, variation),
+                message: getAddCallbackParamMessage(
+                  componentName,
+                  propName,
+                  variation
+                ),
                 type: "JSXOpeningElement",
               },
             ],
           });
-        })
-      }
+        });
+      });
     });
-  });
+  }
+
   return tests;
 }
 
