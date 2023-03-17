@@ -60,6 +60,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
+  <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <Chart themeVariant />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
   <DataList onDragStart itemOrder={['1', '2', '3']} />

@@ -189,6 +189,32 @@ Out:
 <Card  />
 ```
 
+### card-reorder-onSelectableInputChange-props [(#8752)](https://github.com/patternfly/patternfly-react/pull/8752)
+
+We've updated the `onSelectableInputChange` prop for Card to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Card onSelectableInputChange={(id) => handler(id)} />
+const handler1 = (id) => {};
+<Card onSelectableInputChange={handler1}>
+function handler2(id) {};
+<Card onSelectableInputChange={handler2}>
+```
+
+Out:
+
+```jsx
+<Card onSelectableInputChange={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<Card onSelectableInputChange={handler1}>
+function handler2(_event, id) {};
+<Card onSelectableInputChange={handler2}>
+```
+
 ### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
 
 We've removed the `getResizeObserver` function from react-charts in favor of react-core's `getResizeObserver`. This helper function now has a third parameter, `useRequestAnimationFrame`, and allows a single function to be maintained going forward.
