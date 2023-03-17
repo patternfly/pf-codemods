@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.46.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.45.0...@patternfly/eslint-plugin-pf-codemods@1.46.0) (2023-03-17)
+
+
+### Features
+
+* **CalendarMonth:** update onChange and onMonthChange params ([#343](https://github.com/patternfly/pf-codemods/issues/343)) ([743fe36](https://github.com/patternfly/pf-codemods/commit/743fe360dc30f6ed6a46919ffcc155a63df38bb8))
+
+
+
+
+
 # [1.45.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.44.0...@patternfly/eslint-plugin-pf-codemods@1.45.0) (2023-03-17)
 
 
