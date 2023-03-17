@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.42.0...@patternfly/pf-codemods@1.43.0) (2023-03-17)
+
+
+### Features
+
+* **ApplicationLauncher:** added event params to onSearch and onFavorite ([#321](https://github.com/patternfly/pf-codemods/issues/321)) ([2617249](https://github.com/patternfly/pf-codemods/commit/26172498dfcfd91fe0f39464ca12325f8d107d5c))
+
+
+
+
+
 # [1.42.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.41.0...@patternfly/pf-codemods@1.42.0) (2023-03-16)
 
 
