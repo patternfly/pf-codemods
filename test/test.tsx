@@ -15,6 +15,7 @@ import {
   BadgeToggle,
   Button,
   Card,
+  Checkbox,
   ClipboardCopy,
   DataList,
   DataListCheck,
@@ -62,6 +63,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Button isSmall />
   <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <Chart themeVariant />
+  <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
   <DataList onDragStart itemOrder={['1', '2', '3']} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
