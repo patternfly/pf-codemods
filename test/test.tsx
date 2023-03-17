@@ -14,6 +14,7 @@ import {
   ApplicationLauncher,
   BadgeToggle,
   Button,
+  CalendarMonth,
   Card,
   Checkbox,
   ClipboardCopy,
@@ -61,6 +62,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
+  <CalendarMonth onChange={date => handleChange(date)} onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)} />
   <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <Chart themeVariant />
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
