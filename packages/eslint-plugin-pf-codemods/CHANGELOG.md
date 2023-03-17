@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.45.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.44.0...@patternfly/eslint-plugin-pf-codemods@1.45.0) (2023-03-17)
+
+
+### Features
+
+* **Checkbox:** reorder onChange params ([#342](https://github.com/patternfly/pf-codemods/issues/342)) ([76a2ceb](https://github.com/patternfly/pf-codemods/commit/76a2ceb67a29fbea5a2e77fb752b208853edd210))
+
+
+
+
+
 # [1.44.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.43.0...@patternfly/eslint-plugin-pf-codemods@1.44.0) (2023-03-17)
 
 
