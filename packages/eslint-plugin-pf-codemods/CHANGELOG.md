@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.47.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.46.2...@patternfly/eslint-plugin-pf-codemods@1.47.0) (2023-03-20)
+
+
+### Features
+
+* **OverflowMenuDropdownItem:** updated to use Next DropdownItem ([#260](https://github.com/patternfly/pf-codemods/issues/260)) ([64a9b37](https://github.com/patternfly/pf-codemods/commit/64a9b37fbe0a11ad33731dd6bc07283f51a23278))
+
+
+
+
+
 ## [1.46.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.46.1...@patternfly/eslint-plugin-pf-codemods@1.46.2) (2023-03-20)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
