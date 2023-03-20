@@ -34,6 +34,7 @@ import {
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
+  EmptyState,
   EmptyStateIcon,
   EmptyStatePrimary,
   EmptyStateSecondaryActions,
@@ -62,6 +63,7 @@ import {
   SelectToggle,
   Spinner,
   Tabs,
+  Title,
   Toggle,
   Tooltip,
   TreeView,
@@ -106,6 +108,12 @@ const newTheme = getCustomTheme("1", "2", "3");
   <EmptyStateIcon />
   <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <EmptyState>
+    <EmptyStateIcon icon={CubesIcon} />
+    <Title headingLevel="h5" size="4xl">
+      Empty state
+    </Title>
+  </EmptyState>
   <EmptyStatePrimary>Primary action</EmptyStatePrimary>
   <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
   <KebabToggle onToggle={} />

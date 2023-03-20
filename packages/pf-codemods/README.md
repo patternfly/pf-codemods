@@ -828,6 +828,34 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
+### emptyState-add-header [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've added the `EmptyStateHeader` component, which should include EmptyStateIcon and text of the title.
+
+This rule produces only warnings, but suggested changes are fixable via --fix option.
+
+#### Examples
+
+In:
+
+```jsx
+<EmptyState variant={EmptyStateVariant.xl}>
+  <EmptyStateIcon icon={CubesIcon} />
+  <Title headingLevel="h5" size="4xl">
+    Empty state
+  </Title>
+</EmptyState>
+```
+
+Out:
+
+```jsx
+<EmptyState variant={EmptyStateVariant.xl}>
+  <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5"/>
+
+</EmptyState>
+```
+
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've renamed the `EmptyStatePrimary` component to `EmptyStateActions`.
