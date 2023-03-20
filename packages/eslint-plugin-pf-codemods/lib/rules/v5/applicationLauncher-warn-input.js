@@ -14,9 +14,11 @@ module.exports = {
       : {
           ImportDeclaration(node) {
             if (
-              appLauncherImports
-                .map((imp) => imp.imported.name)
-                .includes(node.specifiers[0]?.imported?.name)
+              node.specifiers.filter((specifier) =>
+                appLauncherImports
+                  .map((imp) => imp.imported.name)
+                  .includes(specifier?.imported?.name)
+              ).length
             ) {
               context.report({
                 node,

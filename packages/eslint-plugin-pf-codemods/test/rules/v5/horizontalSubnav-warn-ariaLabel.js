@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/horizontalSubnav-ariaLabel");
+const rule = require("../../../lib/rules/v5/horizontalSubnav-warn-ariaLabel");
 
-ruleTester.run("horizontalSubnav-ariaLabel", rule, {
+ruleTester.run("horizontalSubnav-warn-ariaLabel", rule, {
   valid: [
     {
       code: `import { Nav } from '@patternfly/react-core'; <Nav variant="horizontal" />`,

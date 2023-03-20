@@ -14,11 +14,17 @@ import {
   ApplicationLauncher,
   BadgeToggle,
   Button,
+  CalendarMonth,
   Card,
+  Checkbox,
+  ClipboardCopy,
   DataList,
+  DataListCheck,
   DatePicker,
+  DrawerPanelContent,
   DropdownItem,
   DropdownToggle,
+  EmptyStateIcon,
   FileUpload,
   KebabToggle,
   KEY_CODES,
@@ -29,10 +35,14 @@ import {
   Nav,
   NotificationBadge,
   NumberInput,
+  OverflowMenuDropdownItem,
+  PageGroup,
+  PageNavigation,
   Pagination,
   ToggleTemplateProps,
   Popper,
   Popover,
+  ProgressStep,
   Select,
   SelectToggle,
   Spinner,
@@ -42,7 +52,7 @@ import {
   TreeView,
   Wizard,
 } from "@patternfly/react-core";
-import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
+import { SelectOption, WizardBody, WizardFooter } from "@patternfly/react-core/next";
 
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from Bar;
@@ -54,20 +64,30 @@ const newTheme = getCustomTheme("1", "2", "3");
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
-  <ApplicationLauncher onToggle={} />
+  <ApplicationLauncher onToggle={} onFavorite={(id, isFavorite) => handler(id, isFavorite)} onSearch={text => handleText(text)}/>
   <BadgeToggle onToggle={} />
   <Button isLarge />
   <Button isSmall />
+  <CalendarMonth onChange={date => handleChange(date)} onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)} />
+  <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <Chart themeVariant />
+  <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
+  <ClipboardCopy onChange={(foo) => handleChange(foo)} />
   <DataList onDragStart itemOrder={['1', '2', '3']} />
-  <DataList onSelectDataListItem />
+  <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
+  <DataListCheck onChange={(id) => handler} />
   <DatePicker />
+  <DrawerPanelContent onResize={(id, width) => {}} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
+  <EmptyStateIcon />
+  <EmptyStateIcon icon={CubesIcon} variant="icon"/>
+  <EmptyStateIcon component={Spinner} variant="container"/>
   <KebabToggle onToggle={} />
   <Label isTruncated />
   <Label />
-  <MenuItem hasCheck />
+  <Menu aria-label='tester' />
+  <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
@@ -75,6 +95,9 @@ const newTheme = getCustomTheme("1", "2", "3");
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
   <NumberInput allowEmptyInput />
+  <OverflowMenuDropdownItem index={0} />
+  <PageGroup aria-label="tester" />
+  <PageNavigation aria-label="tester" />
   <Pagination defaultToFullPage perPageComponent="div" titles={{
     currPage: "test",
     paginationTitle: "test",
@@ -86,12 +109,20 @@ const newTheme = getCustomTheme("1", "2", "3");
   }} 
     toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
   />
+  <Popover reference />
   <Popper popperMatchesTriggerWidth={false}/>
-  <Popover />
+  <ProgressStep />
   <Select onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
   <Spinner isSVG />
   <Toggle isPrimary onToggle={} />
+  <Tooltip reference />
   <TreeView hasCheck />
+  <Wizard />
+  <Wizard mainAriaLabel />
+  <Wizard mainAriaLabelledBy />
+  <WizardBody />
+  <WizardBody aria-label />
+  <WizardBody aria-labelledby />
 </>;

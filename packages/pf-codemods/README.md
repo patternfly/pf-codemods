@@ -112,6 +112,37 @@ Out:
 <Alert component="h4" />
 ```
 
+### applicationLauncher-updated-params [(#8756)](https://github.com/patternfly/patternfly-react/pull/8756)
+
+We've updated the `onFavorite` and `onSearch` props for ApplicationLauncher to include the `event` as their first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<ApplicationLauncher onFavorite={(id) => handler(id)} onSearch={(text) => searchHandler(text)}/>
+const handler1 = (id) => {};
+const searchHandler1 = (text) => {};
+<ApplicationLauncher onFavorite={handler1} onSearch={searchHandler1}>
+function handler2(id) {};
+function searchHandler2(text) {};
+<ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
+```
+
+Out:
+
+```jsx
+<ApplicationLauncher onFavorite={(_event, id) => handler(id)} onSearch={(_event, text) => searchHandler(text)}/>
+const handler1 = (_event, id) => {};
+const searchHandler1 = (_event, text) => {};
+<ApplicationLauncher onFavorite={handler1} onSearch={searchHandler1}>
+function handler2(_event, id) {};
+function searchHandler2(_event, text) {};
+<ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
+```
+
+
 ### applicationLauncher-warn-input [(#8293)](https://github.com/patternfly/patternfly-react/pull/8293)
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
@@ -136,6 +167,38 @@ Out:
 <Button size="lg" />
 ```
 
+### calendarMonth-update-onChange-onMonthChange-params [(#8753)](https://github.com/patternfly/patternfly-react/pull/8753)
+
+We've updated the `onMonthChange` prop for CalendarMonth to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<CalendarMonth onChange={(date) => handler(date)} onMonthChange={(newDate) => handler(newDate)} />
+<CalendarMonth onMonthChange={(newDate, event) => handler(newDate, event)} />
+const changeHandler1 = (date) => {};
+const handler1 = (newDate, event) => {};
+<CalendarMonth onChange={changeHandler1} onMonthChange={handler1}>
+function changeHandler2(date) {};
+function handler2(newDate, event) {};
+<CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
+```
+
+Out:
+
+```jsx
+<CalendarMonth onChange={(_event, date) => handler(date)} onMonthChange={(_event, newDate) => handler(newDate)} />
+<CalendarMonth onMonthChange={(event, newDate) => handler(newDate, event)} />
+const changeHandler1 = (_event, date) => {};
+const handler1 = (_event, newDate) => {};
+<CalendarMonth onMonthChange={handler1}>
+function changeHandler2(_event, date) {};
+function handler2(_event, newDate) {};
+<CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
+```
+
 ### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
 
 We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
@@ -156,6 +219,32 @@ Out:
 
 ```jsx
 <Card  />
+```
+
+### card-reorder-onSelectableInputChange-props [(#8752)](https://github.com/patternfly/patternfly-react/pull/8752)
+
+We've updated the `onSelectableInputChange` prop for Card to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Card onSelectableInputChange={(id) => handler(id)} />
+const handler1 = (id) => {};
+<Card onSelectableInputChange={handler1}>
+function handler2(id) {};
+<Card onSelectableInputChange={handler2}>
+```
+
+Out:
+
+```jsx
+<Card onSelectableInputChange={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<Card onSelectableInputChange={handler1}>
+function handler2(_event, id) {};
+<Card onSelectableInputChange={handler2}>
 ```
 
 ### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
@@ -249,11 +338,65 @@ return (
 );
 ```
 
-### charts-tooltip-warning [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
+### charts-warn-tooltip [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
 
 When using the `react-core` Tooltip component inside of a `react-charts` component, the Tooltip should be wrapped inside a `foreignObject`. The Tooltip may not render properly otherwise due to it outputting a `<div>` element inside an `<svg>` element.
 
 This rule will raise a warning when Tooltip is imported from `@patternfly/react-core` and at least one other import is from `@patternfly/react-charts`, but will not update any code.
+
+### checkbox-reorder-onChange-params [(#8750)](https://github.com/patternfly/patternfly-react/pull/8750)
+
+We've updated the `onChange` prop for Checkbox to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Checkbox onChange={(id) => handler(id)} />
+<Checkbox onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<Checkbox onChange={handler1}>
+function handler2(id, event) {};
+<Checkbox onChange={handler2}>
+```
+
+Out:
+
+```jsx
+<Checkbox onChange={(_event, id) => handler(id)} />
+<Checkbox onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<Checkbox onChange={handler1}>
+function handler2(_event, id) {};
+<Checkbox onChange={handler2}>
+```
+
+### clipboardCopy-onChange-event-added [(#8747)](https://github.com/patternfly/patternfly-react/pull/8747)
+
+The `onChange` prop for ClipboardCopy has been updated to include the `event` as its first parameter. `onChange` handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<ClipboardCopy onChange={(text) => handleChange(text)} />
+const handleChange1 = (text) => {};
+<ClipboardCopy onChange={toggle1}>
+function handleChange2(text) {};
+<ClipboardCopy onChange={toggle2}>
+```
+
+Out:
+
+```jsx
+<ClipboardCopy onChange={(_event, text) => handleChange(text)} />
+const handleChange1 = (_event, text) => {};
+<ClipboardCopy onChange={toggle1}>
+function handleChange2(_event, text) {};
+<ClipboardCopy onChange={toggle2}>
+```
 
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
 
@@ -275,6 +418,24 @@ Out:
 <ClipboardCopyButton position="bottom" />
 ```
 
+### clipboardCopy-remove-switchDelay [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
+
+We've removed the switchDelay prop from the `ClipBoardCopy` component.
+
+#### Examples
+
+In:
+
+```jsx
+<ClipboardCopy switchDelay="500" />
+```
+
+Out:
+
+```jsx
+<ClipboardCopy  />
+```
+
 ### codeeditor-remove-deprecated-props [(#8624)](https://github.com/patternfly/patternfly-react/pull/8624)
 
 We've removed the deprecated `entryDelay`, `exitDelay`, `maxWidth`, `position`, and `toolTipText` props. This rule will remove them from your code and suggest that you use the tooltipProps prop instead.
@@ -293,23 +454,20 @@ Out:
 <CodeEditor      />
 ```
 
-### clipboardCopy-remove-switchDelay [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
+### conditional-aria [(#8649)](https://github.com/patternfly/patternfly-react/pull/8649)
 
-We've removed the switchDelay prop from the `ClipBoardCopy` component.
+We've updated several ARIA related props so that they will now only be conditionally applied when passed in for the following components:
 
-#### Examples
+| Component | Prop | Condition |
+| -- | -- | -- |
+| `Wizard` | `mainAriaLabel`, `mainAriaLabelledBy` | Only when the Wizard's body contents overflows and causes a scrollbar. A tabindex of "0" will also be applied when the contents oveflows. |
+| `WizardBody` (Next implementation) | `aria-label`, `aria-labelledby` | Only when the WizardBody contents overflows and causes a scrollbar. A tabindex of "0" will also be applied when the contents oveflows. |
+| `MenuItem` | `aria-label` | When `hasCheckbox` is also passed, the prop is applied to the internal `<li>` element. Otherwise it is applied to the element passed into the `component` prop. |
+| `PageGroup`, `PageNavigation` | `aria-label` | Only when `hasOverflowScroll` is true. |
 
-In:
+Additionally, the internal `aria-labelledby` for ProgressStep will only be applied when the `popoverRender` prop is also passed.
 
-```jsx
-<ClipboardCopy switchDelay="500" />
-```
-
-Out:
-
-```jsx
-<ClipboardCopy  />
-```
+This rule will raise a warning, but will not make any code changes.
 
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
@@ -361,6 +519,37 @@ function toggle2(_event, id) {};
 <DataList onSelectDataListItem={toggle2}>
 ```
 
+### dataListCheck-warn-updated-callback [(#8735)](https://github.com/patternfly/patternfly-react/pull/8735)
+
+We've updated the `onChange` prop for DataListCheck so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DataListCheck onChange={(checked) => onChange(checked)} />
+
+const onChange1 = (checked) => {};
+<DataListCheck onChange={onChange1}>
+
+function onChange2(checked) {};
+<DataListCheck onChange={onChange2}>
+```
+
+Out:
+
+```jsx
+<DataListCheck onChange={(_event, checked) => onChange(checked)} />
+
+const onChange1 = (_event, checked) => {};
+<DataListCheck onChange={onChange1}>
+
+function onChange2(_event, checked) {};
+<DataListCheck onChange={onChange2}>
+```
+
+
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
@@ -379,6 +568,36 @@ Out:
 
 ```jsx
 <Divider orientation={{ default: "vertical" }} />
+```
+
+### drawerPanelContent-warn-updated-callback [(#8736)](https://github.com/patternfly/patternfly-react/pull/8736)
+
+We've updated the `onResize` prop for DrawerPanelContent to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DrawerPanelContent onResize={(width, id) => onChange(checked)} />
+
+const onResize1 = (width, id) => {};
+<DrawerPanelContent onResize={onResize1}>
+
+function onResize2(width, id) {};
+<DrawerPanelContent onResize={onResize2}>
+```
+
+Out:
+
+```jsx
+<DrawerPanelContent onResize={(_event, width, id) => onChange(checked)} />
+
+const onResize1 = (_event, width, id) => {};
+<DrawerPanelContent onResize={onResize1}>
+
+function onResize2(_event, width, id) {};
+<DrawerPanelContent onResize={onResize2}>
 ```
 
 ### dropdownItem-remove-isHovered [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
@@ -431,6 +650,33 @@ Out:
 
 ```jsx
 <DropdownToggle toggleVariant="primary" />
+```
+
+### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've made the `icon` prop required on EmptyStateIcon.
+
+This rule will throw an error, but will not make any changes.
+
+### emptyStateIcon-remove-props [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've removed the `variant` prop from EmptyStateIcon.
+We've removed the `component` prop from EmptyStateIcon and replaced it with the `icon` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<EmptyStateIcon icon={CubesIcon} variant="icon"/>
+<EmptyStateIcon component={Spinner} variant="container"/>
+```
+
+Out:
+
+```jsx
+<EmptyStateIcon icon={CubesIcon} />
+<EmptyStateIcon icon={Spinner} />
 ```
 
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
@@ -491,7 +737,7 @@ Out:
 <MenuItem hasCheckbox />
 ```
 
-### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
+### horizontalSubnav-warn-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
@@ -537,6 +783,66 @@ Out:
 ```jsx
 <MastheadBrand component="a" />
 <MastheadBrand component="div" />
+```
+
+### menu-moved-ariaLabel [(#8649)](https://github.com/patternfly/patternfly-react/pull/8649)
+
+We've removed the `aria-label` prop on Menu as it should be passed to MenuList instead. If you are also using MenuGroup with a `label` prop passed to it, an `aria-label` on MenuList is not necessary.
+
+#### Examples
+
+In:
+
+```jsx
+<Menu aria-label="tester">
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu aria-label="tester">
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu aria-label="tester">
+  <MenuGroup>
+    <MenuList>
+      ...menu items placed here
+    </MenuList>
+  </MenuGroup>
+</Menu>
+```
+
+Out:
+
+```jsx
+<Menu >
+  <MenuList aria-label="tester">
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu >
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu >
+  <MenuGroup>
+    <MenuList>
+      ...menu items placed here
+    </MenuList>
+  </MenuGroup>
+</Menu>
 ```
 
 ### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
@@ -617,6 +923,30 @@ const toggleBadge = (_event, isOpen) => {};
 
 function toggleDropdown(_event, isOpen) {};
 <DropdownToggle onToggle={toggleDropdown}>
+```
+
+### overflowMenu-warn-updated-dropdownItem [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
+
+OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.
+
+This rule will raise a warning when OverflowMenuDropdownItem is imported, but will not update any code.
+
+### overflowMenuDropdownItem-renamed-prop [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
+
+We've renamed the `index` prop for OverflowMenuDropdownItem to `itemId`, and updated its type to `string | number`.
+
+#### Examples
+
+In:
+
+```jsx
+<OverflowMenuDropdownItem index={0}>
+```
+
+Out:
+
+```jsx
+<OverflowMenuDropdownItem itemId={0}>
 ```
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
@@ -776,6 +1106,10 @@ Out:
   }}
 />
 ```
+
+### popover-warn-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
+
+The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
 
 ### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
 
@@ -1039,6 +1373,26 @@ Out:
 
 ```jsx
 <Tooltip     />
+```
+
+### various-rename-reference [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
+
+We've renamed the `reference` property to `triggerRef` in Popover and Tooltip components.
+
+#### Examples
+
+In:
+
+```jsx
+<Popover reference={componentRef} />
+<Tooltip reference={componentRef} />
+```
+
+Out:
+
+```jsx
+<Popover triggerRef={componentRef} />
+<Tooltip triggerRef={componentRef} />
 ```
 
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
