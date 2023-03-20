@@ -4,17 +4,17 @@ const { getPackageImports } = require("../../helpers");
 module.exports = {
   meta: {},
   create: function (context) {
-    const packageImport = getPackageImports(
+    const emptyStateIconImport = getPackageImports(
       context,
       "@patternfly/react-core"
     ).find((specifier) => "EmptyStateIcon" === specifier.imported.name);
 
-    return packageImport === undefined
+    return emptyStateIconImport === undefined
       ? {}
       : {
           JSXOpeningElement(node) {
             if (
-              packageImport.local.name === node.name.name &&
+              emptyStateIconImport.local.name === node.name.name &&
               !node.attributes.some((attr) =>
                 ["icon", "component"].includes(attr.name?.name)
               )
