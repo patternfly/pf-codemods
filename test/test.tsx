@@ -34,9 +34,12 @@ import {
   Nav,
   NotificationBadge,
   NumberInput,
+  PageGroup,
+  PageNavigation,
   Pagination,
   Popper,
   Popover,
+  ProgressStep,
   Select,
   SelectToggle,
   Spinner,
@@ -46,7 +49,7 @@ import {
   TreeView,
   Wizard,
 } from "@patternfly/react-core";
-import { SelectOption, WizardFooter } from "@patternfly/react-core/next";
+import { SelectOption, WizardBody, WizardFooter } from "@patternfly/react-core/next";
 
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from Bar;
@@ -78,7 +81,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Label isTruncated />
   <Label />
   <Menu aria-label='tester' />
-  <MenuItem hasCheck />
+  <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
@@ -86,6 +89,8 @@ const newTheme = getCustomTheme("1", "2", "3");
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
   <NumberInput allowEmptyInput />
+  <PageGroup aria-label="tester" />
+  <PageNavigation aria-label="tester" />
   <Pagination defaultToFullPage perPageComponent="div" titles={{
     currPage: "test",
     paginationTitle: "test",
@@ -97,6 +102,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   }} />
   <Popover reference />
   <Popper popperMatchesTriggerWidth={false}/>
+  <ProgressStep />
   <Select onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
@@ -104,4 +110,10 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Toggle isPrimary onToggle={} />
   <Tooltip reference />
   <TreeView hasCheck />
+  <Wizard />
+  <Wizard mainAriaLabel />
+  <Wizard mainAriaLabelledBy />
+  <WizardBody />
+  <WizardBody aria-label />
+  <WizardBody aria-labelledby />
 </>;

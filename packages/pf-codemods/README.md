@@ -418,6 +418,24 @@ Out:
 <ClipboardCopyButton position="bottom" />
 ```
 
+### clipboardCopy-remove-switchDelay [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
+
+We've removed the switchDelay prop from the `ClipBoardCopy` component.
+
+#### Examples
+
+In:
+
+```jsx
+<ClipboardCopy switchDelay="500" />
+```
+
+Out:
+
+```jsx
+<ClipboardCopy  />
+```
+
 ### codeeditor-remove-deprecated-props [(#8624)](https://github.com/patternfly/patternfly-react/pull/8624)
 
 We've removed the deprecated `entryDelay`, `exitDelay`, `maxWidth`, `position`, and `toolTipText` props. This rule will remove them from your code and suggest that you use the tooltipProps prop instead.
@@ -436,23 +454,20 @@ Out:
 <CodeEditor      />
 ```
 
-### clipboardCopy-remove-switchDelay [(#8619)](https://github.com/patternfly/patternfly-react/pull/8619)
+### conditional-aria [(#8649)](https://github.com/patternfly/patternfly-react/pull/8649)
 
-We've removed the switchDelay prop from the `ClipBoardCopy` component.
+We've updated several ARIA related props so that they will now only be conditionally applied when passed in for the following components:
 
-#### Examples
+| Component | Prop | Condition |
+| -- | -- | -- |
+| `Wizard` | `mainAriaLabel`, `mainAriaLabelledBy` | Only when the Wizard's body contents overflows and causes a scrollbar. A tabindex of "0" will also be applied when the contents oveflows. |
+| `WizardBody` (Next implementation) | `aria-label`, `aria-labelledby` | Only when the WizardBody contents overflows and causes a scrollbar. A tabindex of "0" will also be applied when the contents oveflows. |
+| `MenuItem` | `aria-label` | When `hasCheckbox` is also passed, the prop is applied to the internal `<li>` element. Otherwise it is applied to the element passed into the `component` prop. |
+| `PageGroup`, `PageNavigation` | `aria-label` | Only when `hasOverflowScroll` is true. |
 
-In:
+Additionally, the internal `aria-labelledby` for ProgressStep will only be applied when the `popoverRender` prop is also passed.
 
-```jsx
-<ClipboardCopy switchDelay="500" />
-```
-
-Out:
-
-```jsx
-<ClipboardCopy  />
-```
+This rule will raise a warning, but will not make any code changes.
 
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
