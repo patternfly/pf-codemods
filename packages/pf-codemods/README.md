@@ -338,7 +338,7 @@ return (
 );
 ```
 
-### charts-tooltip-warning [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
+### charts-warn-tooltip [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
 
 When using the `react-core` Tooltip component inside of a `react-charts` component, the Tooltip should be wrapped inside a `foreignObject`. The Tooltip may not render properly otherwise due to it outputting a `<div>` element inside an `<svg>` element.
 
@@ -710,7 +710,7 @@ Out:
 <MenuItem hasCheckbox />
 ```
 
-### horizontalSubnav-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
+### horizontalSubnav-warn-ariaLabel [(#8213)](https://github.com/patternfly/patternfly-react/pull/8213)
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
@@ -898,6 +898,30 @@ function toggleDropdown(_event, isOpen) {};
 <DropdownToggle onToggle={toggleDropdown}>
 ```
 
+### overflowMenu-warn-updated-dropdownItem [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
+
+OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.
+
+This rule will raise a warning when OverflowMenuDropdownItem is imported, but will not update any code.
+
+### overflowMenuDropdownItem-renamed-prop [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
+
+We've renamed the `index` prop for OverflowMenuDropdownItem to `itemId`, and updated its type to `string | number`.
+
+#### Examples
+
+In:
+
+```jsx
+<OverflowMenuDropdownItem index={0}>
+```
+
+Out:
+
+```jsx
+<OverflowMenuDropdownItem itemId={0}>
+```
+
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
@@ -1051,6 +1075,10 @@ Out:
   }}
 />
 ```
+
+### popover-warn-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
+
+The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
 
 ### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
 
