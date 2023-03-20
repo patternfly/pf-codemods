@@ -13,6 +13,7 @@ import {
   Alert,
   ApplicationLauncher,
   BadgeToggle,
+  Banner,
   Button,
   CalendarMonth,
   Card,
@@ -65,6 +66,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Alert titleHeadingLevel={"h4"}/>
   <ApplicationLauncher onToggle={} onFavorite={(id, isFavorite) => handler(id, isFavorite)} onSearch={text => handleText(text)}/>
   <BadgeToggle onToggle={} />
+  <Banner variant="danger" />
   <Button isLarge />
   <Button isSmall />
   <CalendarMonth onChange={date => handleChange(date)} onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)} />

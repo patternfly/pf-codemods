@@ -147,6 +147,31 @@ function searchHandler2(_event, text) {};
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
 
+### banner-update-variant [(#8204)](https://github.com/patternfly/patternfly-react/issues/8204)
+
+We've updated the `variant` prop type for Banner. `"default"` is still a valid value, but the following status values have been replaced with color values:
+
+| Old status value | New color value |
+| - | - |
+| info | blue |
+| danger | red |
+| success | green |
+| warning | gold |
+
+#### Examples
+
+In:
+
+```jsx
+<Banner variant="danger" />
+```
+
+Out:
+
+```jsx
+<Banner variant="red" />
+```
+
 ### button-remove-isSmallisLarge [(#8144)](https://github.com/patternfly/patternfly-react/pull/8144)
 
 We've removed the `isSmall` and `isLarge` props for Button and replaced them with the `size` prop using the values `"sm"` and `"lg"`, respectively.
