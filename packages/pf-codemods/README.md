@@ -743,6 +743,66 @@ Out:
 <MastheadBrand component="div" />
 ```
 
+### menu-moved-ariaLabel [(#8649)](https://github.com/patternfly/patternfly-react/pull/8649)
+
+We've removed the `aria-label` prop on Menu as it should be passed to MenuList instead. If you are also using MenuGroup with a `label` prop passed to it, an `aria-label` on MenuList is not necessary.
+
+#### Examples
+
+In:
+
+```jsx
+<Menu aria-label="tester">
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu aria-label="tester">
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu aria-label="tester">
+  <MenuGroup>
+    <MenuList>
+      ...menu items placed here
+    </MenuList>
+  </MenuGroup>
+</Menu>
+```
+
+Out:
+
+```jsx
+<Menu >
+  <MenuList aria-label="tester">
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu >
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+  <MenuList>
+    ...menu items placed here
+  </MenuList>
+</Menu>
+
+<Menu >
+  <MenuGroup>
+    <MenuList>
+      ...menu items placed here
+    </MenuList>
+  </MenuGroup>
+</Menu>
+```
+
 ### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.

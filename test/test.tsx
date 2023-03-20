@@ -77,6 +77,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <KebabToggle onToggle={} />
   <Label isTruncated />
   <Label />
+  <Menu aria-label='tester' />
   <MenuItem hasCheck />
   <MenuItemAction />
   <Nav flyout={"menu"} />
