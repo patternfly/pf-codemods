@@ -75,6 +75,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DrawerPanelContent onResize={(id, width) => {}} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
+  <EmptyStateIcon />
   <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
   <KebabToggle onToggle={} />
