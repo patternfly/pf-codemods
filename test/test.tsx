@@ -40,6 +40,7 @@ import {
   PageGroup,
   PageNavigation,
   Pagination,
+  ToggleTemplateProps,
   Popper,
   Popover,
   ProgressStep,
@@ -107,7 +108,9 @@ const newTheme = getCustomTheme("1", "2", "3");
     toNextPage: "test",
     toPreviousPage: "test",
     optionsToggle: "test"
-  }} />
+  }} 
+    toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
+  />
   <Popover reference />
   <Popper popperMatchesTriggerWidth={false}/>
   <ProgressStep />

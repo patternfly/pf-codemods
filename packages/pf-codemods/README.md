@@ -998,24 +998,6 @@ Out:
 
 We've removed the `OptionsToggle` used by `Pagination` and replaced it with `Menu` and `MenuToggle`.
 
-### pagination-remove-ToggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
-
-We've removed the deprecated `ToggleTemplateProps` prop and replaced it with `PaginationToggleTemplateProps`.
-
-#### Examples
-
-In:
-
-```jsx
-<Pagination ToggleTemplateProps />
-```
-
-Out:
-
-```jsx
-<Pagination PaginationToggleTemplateProps />
-```
-
 ### pagination-rename-props [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
 
 We've renamed and/or removed several props for Pagination:
@@ -1070,6 +1052,27 @@ Out:
   }}
 />
 ```
+
+### pagination-rename-toggleTemplateProps [(#8134)](https://github.com/patternfly/patternfly-react/pull/8134)
+
+We've renamed `ToggleTemplateProps` to `PaginationToggleTemplateProps`.
+
+#### Examples
+
+In:
+
+```jsx
+import { Pagination, ToggleTemplateProps } from '@patternfly/react-core';
+<Pagination toggleTemplate={({firstIndex, lastIndex} : ToggleTemplateProps) => <div />} />
+```
+
+Out:
+
+```jsx
+import { Pagination, PaginationToggleTemplateProps } from '@patternfly/react-core';
+<Pagination toggleTemplate={({firstIndex, lastIndex} : PaginationToggleTemplateProps) => <div />} />
+```
+
 ### popper-remove-popperMatchesTriggerWidth [(#8724)](https://github.com/patternfly/patternfly-react/pull/8724)
 
 We've removed the `popperMatchesTriggerWidth` prop from Popper. `minWidth`, `maxWidth`, and `width` props can instead be used to modify the Popper width.
@@ -1087,6 +1090,7 @@ Out:
 ```jsx
 <Popper  />
 ```
+
 ### popover-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
 
 The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
