@@ -23,6 +23,7 @@ import {
   DataListCheck,
   DatePicker,
   DrawerPanelContent,
+  Dropdown,
   DropdownItem,
   DropdownToggle,
   EmptyStateIcon,
@@ -80,6 +81,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />
+  <Dropdown />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <EmptyStateIcon />
