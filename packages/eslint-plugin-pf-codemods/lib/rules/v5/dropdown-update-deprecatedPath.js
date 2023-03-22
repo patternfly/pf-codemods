@@ -36,7 +36,10 @@ module.exports = {
             const validSpecifiers = node.specifiers.filter((specifier) =>
               dropdownImportNames.includes(specifier?.imported?.name)
             );
-            if (validSpecifiers.length) {
+            if (
+              validSpecifiers.length &&
+              node.source.value === "@patternfly/react-core"
+            ) {
               context.report({
                 node,
                 message: `${validSpecifiers
@@ -51,7 +54,7 @@ module.exports = {
                   })
                   .join(", ")} ${
                   validSpecifiers.length > 1 ? "have" : "has"
-                } been deprecated. In order to continue using the deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased.`,
+                } been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
                 fix(fixer) {
                   const otherImports = node.specifiers.filter(
                     (specifier) =>
@@ -76,26 +79,26 @@ module.exports = {
                     dropdownImports,
                     "Deprecated"
                   ).join(", ");
-                  const dropdownImportsLine = `import { ${dropdownSpecifiers} } from '@patternfly/react-core/deprecated';`;
+                  const deprecatedImportsLine = `import { ${dropdownSpecifiers} } from '@patternfly/react-core/deprecated';`;
 
                   if (!otherImports.length) {
-                    return fixer.replaceText(node, dropdownImportsLine);
+                    return fixer.replaceText(node, deprecatedImportsLine);
                   } else {
                     const otherSpecifiers =
                       createNewImportSpecifiers(otherImports).join(", ");
 
                     return fixer.replaceText(
                       node,
-                      `import { ${otherSpecifiers} } from '@patternfly/react-core';\n${dropdownImportsLine}`
+                      `import { ${otherSpecifiers} } from '@patternfly/react-core';\n${deprecatedImportsLine}`
                     );
                   }
                 },
               });
             }
           },
-          JSXOpeningElement(node) {
+          JSXElement(node) {
             const dropdownComponent = dropdownImports.find(
-              (imp) => imp.local.name === node.name.name
+              (imp) => imp.local.name === node.openingElement.name.name
             );
 
             if (
@@ -104,12 +107,24 @@ module.exports = {
             ) {
               context.report({
                 node,
-                message: `${node.name.name} has been deprecated. In order to continue using the deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased.`,
+                message: `${node.openingElement.name.name} has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.`,
                 fix(fixer) {
-                  return fixer.replaceText(
-                    node.name,
-                    `${node.name.name}Deprecated`
-                  );
+                  const fixes = [
+                    fixer.replaceText(
+                      node.openingElement.name,
+                      `${node.openingElement.name.name}Deprecated`
+                    ),
+                  ];
+
+                  if (!node.openingElement.selfClosing) {
+                    fixes.push(
+                      fixer.replaceText(
+                        node.closingElement.name,
+                        `${node.openingElement.name.name}Deprecated`
+                      )
+                    );
+                  }
+                  return fixes;
                 },
               });
             }
