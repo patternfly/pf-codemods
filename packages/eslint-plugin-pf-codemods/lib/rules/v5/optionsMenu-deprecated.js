@@ -22,39 +22,31 @@ module.exports = {
           fix(fixer) {
             return [
               deprecatedImportDeclaration
-              ? {}
+              ? fixer.insertTextAfter(
+                  deprecatedImportDeclaration.specifiers.pop(),
+                  `, ${optionsMenuImportsString}`
+                )
               : fixer.insertTextAfter(
                   lastImportDeclaration,
                   `\nimport { ${optionsMenuImportsString} } from '@patternfly/react-core/deprecated';`
                 ),
               ...optionsMenuImports.map( node => {
                 const before = context.getTokenBefore(node);
-                const isImportBeforeFixed = optionsMenuImports.map(n => n.imported?.name).includes(context.getTokenBefore(before)?.value);
+                // checking against local as coming from the right, alias will show up first if exists and we want to recognize that
+                const isImportBeforeFixed = optionsMenuImports.map(n => n.local?.name).includes(context.getTokenBefore(before)?.value);
                 const after = context.getTokenAfter(node);
                 let isRemainingImportsFixed = true;
                 for(let n = after; n.value !== "}"; n = context.getTokenAfter(n)) {
-                  console.log( {
-                    'node': node.imported.name,
-                    'ntype': n.type,
-                    'nval': n.value
-                  })
                   if( n.type !== "Punctuator" && !optionsMenuImportNameList.includes(n.value) ) {
-                    console.log("FALSE");
                     isRemainingImportsFixed = false;
                     break;
                   }
                 }
                 let range = node.range;
-                console.log({
-                  'node': node.imported.name, after, before, isImportBeforeFixed, isRemainingImportsFixed
-                })
                 if (after.value === ',') {
-                  console.log('also remove token after');
                   range[1] = context.getTokenAfter(after).range[0];
-
                 } 
                 if (isRemainingImportsFixed && before.value === ',' && !isImportBeforeFixed) {
-                  console.log('also remove token before');
                   range[0] = context.getTokenBefore(before).range[1];
                 }
                 return fixer.replaceTextRange(range, '');

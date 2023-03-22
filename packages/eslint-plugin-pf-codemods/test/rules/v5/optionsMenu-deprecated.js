@@ -28,16 +28,26 @@ import { OptionsMenu, OptionsMenuGroup } from '@patternfly/react-core/deprecated
             type: "ImportDeclaration",
         }]
     },
-//     {
-//         code: `import { Foo, OptionsMenu, OptionsMenuGroup } from '@patternfly/react-core';
-// import { FooDeprecated } from '@patternfly/react-core/deprecated';`,
-//         output: `import { Foo } from '@patternfly/react-core';
-// import { FooDeprecated, OptionsMenu, OptionsMenuGroup } from '@patternfly/react-core/deprecated';`,
-//         errors: [
-//         {
-//             message: `OptionsMenu has been deprecated. Your import has been updated, but we suggest replacing it with the Select component.`,
-//             type: "ImportDeclaration",
-//         }]
-//     },
+    {
+        code: `import { Foo, OptionsMenu as OM, OptionsMenuGroup } from '@patternfly/react-core';`,
+        output: `import { Foo } from '@patternfly/react-core';
+import { OptionsMenu as OM, OptionsMenuGroup } from '@patternfly/react-core/deprecated';`,
+        errors: [
+        {
+            message: `OptionsMenu has been deprecated. Your import has been updated, but we suggest replacing it with the Select component.`,
+            type: "ImportDeclaration",
+        }]
+    },
+    {
+        code: `import { Foo, OptionsMenu, OptionsMenuGroup } from '@patternfly/react-core';
+import { Bar } from '@patternfly/react-core/deprecated';`,
+        output: `import { Foo } from '@patternfly/react-core';
+import { Bar, OptionsMenu, OptionsMenuGroup } from '@patternfly/react-core/deprecated';`,
+        errors: [
+        {
+            message: `OptionsMenu has been deprecated. Your import has been updated, but we suggest replacing it with the Select component.`,
+            type: "ImportDeclaration",
+        }]
+    },
   ]
 });
