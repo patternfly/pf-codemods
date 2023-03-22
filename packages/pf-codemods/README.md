@@ -961,6 +961,24 @@ Out:
 <NumberInput  />
 ```
 
+### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
+
+We've deprecated the `OptionsMenu` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+
+#### Examples
+
+In:
+
+```jsx
+import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
+```
+
+Out:
+
+```jsx
+import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core/deprecated';
+```
+
 ### onToggle-updated-parameters [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
