@@ -4,7 +4,7 @@ const { getPackageImports } = require("../../helpers");
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const dropdownExports = [
+    const componentExports = [
       "BadgeToggle",
       "Dropdown",
       "DropdownPosition",
@@ -21,20 +21,20 @@ module.exports = {
       "DropdownWithContext",
       "KebabToggle",
     ];
-    const dropdownImports = getPackageImports(
+    const componentImports = getPackageImports(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => dropdownExports.includes(specifier.imported.name));
+    ).filter((specifier) => componentExports.includes(specifier.imported.name));
 
-    return !dropdownImports.length
+    return !componentImports.length
       ? {}
       : {
           ImportDeclaration(node) {
-            const dropdownImportNames = dropdownImports.map(
+            const componentImportNames = componentImports.map(
               (imp) => imp.imported.name
             );
             const validSpecifiers = node.specifiers.filter((specifier) =>
-              dropdownImportNames.includes(specifier?.imported?.name)
+              componentImportNames.includes(specifier?.imported?.name)
             );
             if (
               validSpecifiers.length &&
@@ -56,10 +56,6 @@ module.exports = {
                   validSpecifiers.length > 1 ? "have" : "has"
                 } been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
                 fix(fixer) {
-                  const otherImports = node.specifiers.filter(
-                    (specifier) =>
-                      !dropdownImportNames.includes(specifier?.imported?.name)
-                  );
                   const createNewImportSpecifiers = (imports, aliasSuffix) =>
                     imports.map((imp) => {
                       const { imported, local } = imp;
@@ -74,36 +70,82 @@ module.exports = {
 
                       return `${imported.name} as ${local.name}`;
                     });
-
-                  const dropdownSpecifiers = createNewImportSpecifiers(
-                    dropdownImports,
+                  const allImportDeclarations = context
+                    .getSourceCode()
+                    .ast.body.filter(
+                      (node) => node.type === "ImportDeclaration"
+                    );
+                  const existingDeprecatedImportDeclaration =
+                    allImportDeclarations.find(
+                      (node) =>
+                        node.source.value ===
+                        "@patternfly/react-core/deprecated"
+                    );
+                  const existingDeprecatedSpecifiers =
+                    existingDeprecatedImportDeclaration
+                      ? existingDeprecatedImportDeclaration.specifiers.map(
+                          (specifier) =>
+                            context.getSourceCode().getText(specifier)
+                        )
+                      : [];
+                  const otherImports = node.specifiers.filter(
+                    (specifier) =>
+                      !componentImportNames.includes(specifier?.imported?.name)
+                  );
+                  const newComponentSpecifiers = createNewImportSpecifiers(
+                    componentImports,
                     "Deprecated"
-                  ).join(", ");
-                  const deprecatedImportsLine = `import { ${dropdownSpecifiers} } from '@patternfly/react-core/deprecated';`;
+                  );
+                  const newDeprecatedImportDeclaration = `import { ${[
+                    ...existingDeprecatedSpecifiers,
+                    ...newComponentSpecifiers,
+                  ].join(`,\n`)} } from '@patternfly/react-core/deprecated';`;
 
                   if (!otherImports.length) {
-                    return fixer.replaceText(node, deprecatedImportsLine);
+                    return existingDeprecatedImportDeclaration
+                      ? [
+                          fixer.remove(node),
+                          fixer.replaceText(
+                            existingDeprecatedImportDeclaration,
+                            newDeprecatedImportDeclaration
+                          ),
+                        ]
+                      : fixer.replaceText(node, newDeprecatedImportDeclaration);
                   } else {
-                    const otherSpecifiers =
-                      createNewImportSpecifiers(otherImports).join(", ");
+                    const otherSpecifiers = otherImports
+                      .map((otherImport) =>
+                        context.getSourceCode().getText(otherImport)
+                      )
+                      .join(", ");
 
-                    return fixer.replaceText(
-                      node,
-                      `import { ${otherSpecifiers} } from '@patternfly/react-core';\n${deprecatedImportsLine}`
-                    );
+                    return [
+                      fixer.replaceText(
+                        node,
+                        `import { ${otherSpecifiers} } from '@patternfly/react-core';`
+                      ),
+                      existingDeprecatedImportDeclaration
+                        ? fixer.replaceText(
+                            existingDeprecatedImportDeclaration,
+                            newDeprecatedImportDeclaration
+                          )
+                        : fixer.insertTextAfter(
+                            node,
+                            `\n${newDeprecatedImportDeclaration}`
+                          ),
+                    ];
                   }
                 },
               });
             }
           },
           JSXElement(node) {
-            const dropdownComponent = dropdownImports.find(
+            const validComponent = componentImports.find(
               (imp) => imp.local.name === node.openingElement.name.name
             );
 
             if (
-              dropdownComponent &&
-              dropdownComponent.imported.name === dropdownComponent.local.name
+              validComponent &&
+              validComponent.imported.name === validComponent.local.name
             ) {
               context.report({
                 node,

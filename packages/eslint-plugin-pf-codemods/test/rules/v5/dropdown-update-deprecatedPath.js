@@ -85,5 +85,19 @@ ruleTester.run("dropdown-update-deprecatedPath", rule, {
         },
       ],
     })),
+    ...dropdownExports.map((dropdownExport) => ({
+      code: `import { ${dropdownExport} } from '@patternfly/react-core'; import { Foo } from '@patternfly/react-core/deprecated'; <${dropdownExport} />`,
+      output: ` import { Foo,\n${dropdownExport} as ${dropdownExport}Deprecated } from '@patternfly/react-core/deprecated'; <${dropdownExport}Deprecated />`,
+      errors: [
+        {
+          message: `${dropdownExport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `${dropdownExport} has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.`,
+          type: "JSXElement",
+        },
+      ],
+    })),
   ],
 });
