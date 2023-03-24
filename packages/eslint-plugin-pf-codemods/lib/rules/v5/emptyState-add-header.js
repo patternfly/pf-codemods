@@ -2,9 +2,7 @@ const { getPackageImports, ensureImports } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
 module.exports = {
-  meta: {
-    fixable: "code",
-  },
+  meta: { fixable: "code" },
   create: function (context) {
     const package = "@patternfly/react-core";
     const imports = getPackageImports(context, package);
@@ -24,72 +22,85 @@ module.exports = {
             ensureImports(context, node, package, ["EmptyStateHeader"]);
           },
           JSXElement(node) {
-            if (node.openingElement.name.name === "EmptyState") {
-              const getChildElementByName = (node, name) =>
-                node.children.find(
-                  (child) =>
-                    child.type === "JSXElement" &&
-                    child.openingElement.name?.name === name
-                );
+            if (node.openingElement.name.name !== "EmptyState") {
+              return {};
+            }
 
-              const emptyStateIcon = getChildElementByName(
-                node,
-                "EmptyStateIcon"
+            const getChildElementByName = (name) =>
+              node.children.find(
+                (child) =>
+                  child.type === "JSXElement" &&
+                  child.openingElement.name?.name === name
               );
-              const title = getChildElementByName(node, "Title");
 
-              if (!emptyStateIcon && !title) {
-                return {};
+            const emptyStateIcon = getChildElementByName("EmptyStateIcon");
+            const title = getChildElementByName("Title");
+
+            if (!emptyStateIcon && !title) {
+              return {};
+            }
+
+            const headingLevelAttribute = title
+              ? title.openingElement.attributes.find(
+                  (attr) => attr.name?.name === "headingLevel"
+                )
+              : undefined;
+
+            const getTitleText = () => {
+              if (
+                title.children.length === 1 &&
+                title.children.at(0).type === "JSXText"
+              ) {
+                return `"${title.children.at(0).value.trim()}"`;
               }
 
-              const headingLevelAttribute = title
-                ? title.openingElement.attributes.find(
-                    (attr) => attr.name?.name === "headingLevel"
-                  )
-                : undefined;
+              const titleChildren = title.children
+                .map((child) => context.getSourceCode().getText(child).trim())
+                .join("");
 
-              const getTitleText = () => {
-                if (
-                  title.children.length === 1 &&
-                  title.children[0].type === "JSXText"
-                ) {
-                  return `"${title.children[0].value.trim()}"`;
-                }
+              return `{<>${titleChildren}</>}`;
+            };
 
-                const titleChildren = title.children
-                  .map((child) => context.getSourceCode().getText(child).trim())
-                  .join("");
+            const getHeaderText = () => {
+              const icon = emptyStateIcon
+                ? `icon={${context.getSourceCode().getText(emptyStateIcon)}} `
+                : "";
 
-                return `{<>${titleChildren}</>}`;
-              };
+              const titleText = title ? `titleText=${getTitleText()} ` : "";
 
-              const getHeaderText = () => {
-                const icon = emptyStateIcon
-                  ? `icon={${context.getSourceCode().getText(emptyStateIcon)}} `
-                  : "";
+              const headingLevel = headingLevelAttribute
+                ? `${context.getSourceCode().getText(headingLevelAttribute)} `
+                : "";
 
-                const titleText = title ? `titleText=${getTitleText()} ` : "";
+              return `<EmptyStateHeader ${titleText}${icon}${headingLevel}/>`;
+            };
 
-                const headingLevel = headingLevelAttribute
-                  ? context.getSourceCode().getText(headingLevelAttribute)
-                  : "";
+            context.report({
+              node,
+              message:
+                "EmptyStateHeader component should be added instead of Title and EmptyStateIcon",
+              fix(fixer) {
+                const removeEmptyLine = () => {
+                  if (!emptyStateIcon) {
+                    return [];
+                  }
+                  const token = context
+                    .getSourceCode()
+                    .getTokenAfter(emptyStateIcon);
 
-                return `<EmptyStateHeader ${titleText}${icon}${headingLevel}/>`;
-              };
+                  return token.type === "JSXText" && token.value.trim() === ""
+                    ? [fixer.remove(token)]
+                    : [];
+                };
 
-              context.report({
-                node,
-                message:
-                  "EmptyStateHeader component should be added instead of Title and EmptyStateIcon",
-                fix(fixer) {
-                  return [
-                    fixer.insertTextAfter(node.children[0], getHeaderText()),
-                    ...(emptyStateIcon ? [fixer.remove(emptyStateIcon)] : []),
-                    ...(title ? [fixer.remove(title)] : []),
-                  ];
-                },
-              });
-            }
+                return [
+                  fixer.insertTextAfter(node.children.at(0), getHeaderText()),
+                  ...(emptyStateIcon ? [fixer.remove(emptyStateIcon)] : []),
+                  ...(title ? [fixer.remove(title)] : []),
+                  ...removeEmptyLine(),
+                ];
+              },
+            });
           },
         };
   },
