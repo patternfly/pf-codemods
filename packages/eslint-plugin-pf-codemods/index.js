@@ -23,6 +23,7 @@ const warningRules = [
   "charts-warn-tooltip",
   "conditional-aria",
   "datePicker-warn-appendTo-default-value-changed",
+  "datepicker-warn-helperText",
   "horizontalSubnav-warn-ariaLabel",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
