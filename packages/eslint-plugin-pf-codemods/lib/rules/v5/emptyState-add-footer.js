@@ -11,7 +11,12 @@ module.exports = {
       (specifier) => specifier.imported.name === "EmptyState"
     );
 
-    const preFooterNames = ["EmptyStateBody", "EmptyStateHeader", "EmptyStateIcon", "Title"];
+    const preFooterNames = [
+      "EmptyStateBody",
+      "EmptyStateHeader",
+      "EmptyStateIcon",
+      "Title",
+    ];
 
     const includesEmptyStateContent = imports.some((specifier) =>
       preFooterNames.includes(specifier.imported.name)
@@ -64,8 +69,8 @@ module.exports = {
               return (
                 numOfElementsToWrap === 0 ||
                 (numOfElementsToWrap === 1 &&
-                  node.children.at(-1).type === "JSXText" &&
-                  node.children.at(-1).value.trim() === "")
+                  node.children[node.children.length - 1].type === "JSXText" &&
+                  node.children[node.children.length - 1].value.trim() === "")
               );
             };
 
@@ -84,7 +89,7 @@ module.exports = {
                     "<EmptyStateFooter>"
                   ),
                   fixer.insertTextAfter(
-                    node.children.at(-1),
+                    node.children[node.children.length - 1],
                     "</EmptyStateFooter>"
                   ),
                 ];

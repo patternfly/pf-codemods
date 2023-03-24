@@ -49,9 +49,9 @@ module.exports = {
             const getTitleText = () => {
               if (
                 title.children.length === 1 &&
-                title.children.at(0).type === "JSXText"
+                title.children[0].type === "JSXText"
               ) {
-                return `"${title.children.at(0).value.trim()}"`;
+                return `"${title.children[0].value.trim()}"`;
               }
 
               const titleChildren = title.children
@@ -94,7 +94,7 @@ module.exports = {
                 };
 
                 return [
-                  fixer.insertTextAfter(node.children.at(0), getHeaderText()),
+                  fixer.insertTextAfter(node.children[0], getHeaderText()),
                   ...(emptyStateIcon ? [fixer.remove(emptyStateIcon)] : []),
                   ...(title ? [fixer.remove(title)] : []),
                   ...removeEmptyLine(),
