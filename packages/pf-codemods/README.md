@@ -947,6 +947,26 @@ Out:
 <EmptyStateIcon icon={Spinner} />
 ```
 
+### emptyStateVariant-rename-values [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've renamed the EmptyStateVariant enum values 'small' to 'sm' and 'large' to 'lg'.
+
+#### Examples
+
+In:
+
+```jsx
+const myVariant = EmptyStateVariant.small;
+<EmptyState variant={EmptyStateVariant.large} />
+```
+
+Out:
+
+```jsx
+const myVariant = EmptyStateVariant.sm;
+<EmptyState variant={EmptyStateVariant.lg} />
+```
+
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've renamed the `large` prop value of `displaySize` to `lg`.

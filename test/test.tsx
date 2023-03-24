@@ -38,6 +38,7 @@ import {
   EmptyStateIcon,
   EmptyStatePrimary,
   EmptyStateSecondaryActions,
+  EmptyStateVariant,
   FileUpload,
   KebabToggle,
   KEY_CODES,
@@ -78,6 +79,7 @@ import foo from Bar;
 
 const isRead = true;
 const newTheme = getCustomTheme("1", "2", "3");
+const myVariant = EmptyStateVariant.small;
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
@@ -108,6 +110,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <EmptyStateIcon />
   <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <EmptyState variant={EmptyStateVariant.large} />
   <EmptyState>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel="h5" size="4xl">
