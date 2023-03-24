@@ -874,6 +874,22 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
+### menu-search-rename [(#8820)](https://github.com/patternfly/patternfly-react/pull/8820)
+
+`MenuInput` has been renamed to `MenuSearchInput` and `MenuSearch` has been added as a wrapper.
+
+In:
+
+```jsx
+  <MenuInput><SearchInput /></MenuInput>
+```
+
+Out:
+
+```jsx
+    <MenuSearch><MenuSearchInput><SearchInput /></MenuSearchInput></MenuSearch>
+```
+
 ### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
 
 The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
