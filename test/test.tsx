@@ -113,6 +113,12 @@ const newTheme = getCustomTheme("1", "2", "3");
     <Title headingLevel="h5" size="4xl">
       Empty state
     </Title>
+    <EmptyStateSecondaryActions>
+      Some actions ...
+    </EmptyStateSecondaryActions>
+    <EmptyStateSecondaryActions>
+      ... should be wrapped in footer
+    </EmptyStateSecondaryActions>
   </EmptyState>
   <EmptyStatePrimary>Primary action</EmptyStatePrimary>
   <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>

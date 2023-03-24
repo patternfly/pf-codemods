@@ -11,10 +11,10 @@ module.exports = {
       (specifier) => specifier.imported.name === "EmptyState"
     );
 
+    const preFooterNames = ["EmptyStateBody", "EmptyStateHeader", "EmptyStateIcon", "Title"];
+
     const includesEmptyStateContent = imports.some((specifier) =>
-      ["EmptyStateBody", "EmptyStateIcon", "Title"].includes(
-        specifier.imported.name
-      )
+      preFooterNames.includes(specifier.imported.name)
     );
 
     return !includesEmptyState || !includesEmptyStateContent
@@ -27,7 +27,7 @@ module.exports = {
             if (node.openingElement.name?.name !== "EmptyState") {
               return {};
             }
-            
+
             const getChildElementByName = (name) =>
               node.children?.find(
                 (child) =>
@@ -40,11 +40,7 @@ module.exports = {
             }
 
             const getLastElementBeforeFooter = () => {
-              for (const name of [
-                "EmptyStateBody",
-                "Title",
-                "EmptyStateIcon",
-              ]) {
+              for (const name of preFooterNames) {
                 const element = getChildElementByName(name);
                 if (element) {
                   return element;
