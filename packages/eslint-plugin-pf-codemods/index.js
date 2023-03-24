@@ -24,6 +24,7 @@ const warningRules = [
   "conditional-aria",
   "datePicker-warn-appendTo-default-value-changed",
   "datepicker-warn-helperText",
+  "emptyState-add-footer",
   "emptyState-add-header",
   "horizontalSubnav-warn-ariaLabel",
   "label-warn-truncated-default",

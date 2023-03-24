@@ -828,6 +828,50 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
+### emptyState-add-footer [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've added the `EmptyStateFooter` component. It should wrap the content which follows after EmptyStateBody inside EmptyState.
+
+This rule produces only warnings, but suggested changes are fixable via --fix option.
+
+#### Examples
+
+In:
+
+```jsx
+<EmptyState>
+  <EmptyStateBody>
+    Some content
+  </EmptyStateBody>
+  <EmptyStateActions>
+    <Button variant="primary">Primary action</Button>
+  </EmptyStateActions>
+  <EmptyStateActions>
+    <Button variant="link">Multiple</Button>
+    <Button variant="link">Action Buttons</Button>
+    <Button variant="link">Here</Button>
+  </EmptyStateActions>
+</EmptyState>
+```
+
+Out:
+
+```jsx
+<EmptyState>
+  <EmptyStateBody>
+    Some content
+  </EmptyStateBody><EmptyStateFooter>
+  <EmptyStateActions>
+    <Button variant="primary">Primary action</Button>
+  </EmptyStateActions>
+  <EmptyStateActions>
+    <Button variant="link">Multiple</Button>
+    <Button variant="link">Action Buttons</Button>
+    <Button variant="link">Here</Button>
+  </EmptyStateActions>
+</EmptyStateFooter></EmptyState>
+```
+
 ### emptyState-add-header [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've added the `EmptyStateHeader` component, which should include EmptyStateIcon and text of the title.
@@ -852,7 +896,6 @@ Out:
 ```jsx
 <EmptyState variant={EmptyStateVariant.xl}>
   <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5"/>
-
 </EmptyState>
 ```
 
