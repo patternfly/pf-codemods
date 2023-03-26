@@ -1,10 +1,174 @@
-function getPackageImports(context, packageName) {
-  return context
-    .getSourceCode()
-    .ast.body.filter((node) => node.type === "ImportDeclaration")
-    .filter((node) => node.source.value === packageName)
-    .map((node) => node.specifiers)
-    .reduce((acc, val) => acc.concat(val), []);
+function moveSpecifiers(
+  importNamesToMove,
+  fromPackage,
+  toPackage,
+  messageAfterImportNameList,
+  aliasSuffix,
+  messageAfterElementNameChange) {
+  return function (context) {
+    const importSpecifiersToMove = getPackageImports(context, fromPackage, importNamesToMove);
+    if (!importSpecifiersToMove.length) return {};
+
+    const src = context.getSourceCode();
+    const existingToPackageImportDeclaration = src.ast.body.find(
+      (node) =>
+        node.type === "ImportDeclaration" && node.source.value === toPackage
+    );
+    const existingToPackageSpecifiers =
+      existingToPackageImportDeclaration?.specifiers?.map((specifier) =>
+        src.getText(specifier)
+      ) || [];
+
+    return {
+      ImportDeclaration(node) {
+        const [newToPackageSpecifiers, fromPackageSpecifiers] = splitImportSpecifiers(
+          node,
+          importNamesToMove
+        );
+        if (!newToPackageSpecifiers.length || node.source.value !== fromPackage)
+          return {};
+
+        const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
+          newToPackageSpecifiers,
+          aliasSuffix
+        );
+        const newToPackageImportDeclaration = `import {\n\t${[
+          ...existingToPackageSpecifiers,
+          ...newAliasToPackageSpecifiers,
+        ].join(`,\n\t`)}\n} from '${toPackage}';`;
+
+        context.report({
+          node,
+          message:
+            `${newToPackageSpecifiers
+              .map((s) => s.imported.name)
+              .join(", ")
+              .replace(/, ([^,]+)$/, ", and $1")}` +
+            `${
+              newToPackageSpecifiers.length > 1 ? " have " : " has "
+            }${messageAfterImportNameList || "been moved. Running the fix flag will update your imports."}`,
+          fix(fixer) {
+            //no other imports left, replace the fromPackage
+            if (!fromPackageSpecifiers.length && !existingToPackageImportDeclaration) {
+              return fixer.replaceText(
+                node,
+                newToPackageImportDeclaration
+              )
+            }
+            const fixes = [];
+            if (existingToPackageImportDeclaration) {
+              fixes.push(
+                fixer.replaceText(
+                  existingToPackageImportDeclaration,
+                  newToPackageImportDeclaration
+                )
+              );
+            } else {
+              fixes.push(
+                fixer.insertTextAfter(
+                  node,
+                  `\n${newToPackageImportDeclaration}`
+                )
+              );
+            }
+            if (!fromPackageSpecifiers.length) {
+              fixes.push(fixer.remove(node));
+            } else {
+              fixes.push(
+                fixer.replaceText(
+                  node,
+                  `import {\n\t${fromPackageSpecifiers
+                    .map((specifier) => src.getText(specifier))
+                    .join(",\n\t")}\n} from '${fromPackage}';`
+                )
+              );
+            }
+            return fixes;
+          },
+        });
+      },
+      JSXElement(node) {
+        if(aliasSuffix && importSpecifiersToMove.some(
+          (imp) => imp.local.name === node.openingElement.name.name &&
+            imp.imported.name === imp.local.name
+        )) {
+          context.report({
+            node,
+            message: `${node.openingElement.name.name} ${
+              messageAfterElementNameChange ||
+              "will need to be renamed to match the import alias. The fix flag will do this."
+            }`,
+            fix(fixer) {
+              const fixes = [
+                fixer.replaceText(
+                  node.openingElement.name,
+                  `${node.openingElement.name.name}${aliasSuffix}`
+                ),
+              ];
+              if (!node.openingElement.selfClosing) {
+                fixes.push(
+                  fixer.replaceText(
+                    node.closingElement.name,
+                    `${node.openingElement.name.name}${aliasSuffix}`
+                  )
+                );
+              }
+              return fixes;
+            },
+          });
+        }
+      },
+    };
+  };
+}
+
+/**
+ * 
+ * @param context 
+ * @param {string} packageName 
+ * @param {string[]} importNames 
+ * @returns {ImportSpecifier[]} an array of imports
+ */
+function getPackageImports(context, packageName, importNames = []) {
+  const specifiers = context
+  .getSourceCode()
+  .ast.body.filter((node) => node.type === "ImportDeclaration")
+  .filter((node) => node.source.value === packageName)
+  .map((node) => node.specifiers)
+  .reduce((acc, val) => acc.concat(val), []);
+  return !importNames.length
+    ? specifiers
+    : specifiers.filter(s => importNames.includes(s.imported?.name))
+}
+
+function splitImportSpecifiers(importDeclaration, importsToSplit) {
+  let keepImports = [];
+  const takeImports = importDeclaration.specifiers.filter((specifier) =>
+    importsToSplit.includes(specifier?.imported?.name) ||
+      (keepImports.push(specifier) && false)
+  );
+  return [takeImports, keepImports];
+}
+
+/**
+ * 
+ * @param {*} specifier 
+ * @param {*} aliasSuffix 
+ * @returns {String[]} an array of alias imports
+ */
+function createAliasImportSpecifiers(specifiers, aliasSuffix) {
+  return specifiers.map((imp) => {
+    const { imported, local } = imp;
+
+    if (imported.name !== local.name) {
+      return `${imported.name} as ${local.name}`;
+    }
+    return `${imported.name}${
+      aliasSuffix
+        ? ` as ${imported.name}${aliasSuffix}`
+        : ""
+    }`;
+  });
 }
 
 function renameProps0(context, imports, node, renames) {
@@ -379,11 +543,14 @@ function addCallbackParam(componentsArray, propMap) {
 }
 
 module.exports = {
+  createAliasImportSpecifiers,
   ensureImports,
   getPackageImports,
+  moveSpecifiers,
   renameProp,
   renameProps0,
   renameProps,
   renameComponents,
+  splitImportSpecifiers,
   addCallbackParam,
 };
