@@ -18,10 +18,12 @@ const importNamesToMove = [
   "KebabToggle",
 ];
 const fromPackage = "@patternfly/react-core";
-const toPackage = "@patternfly/react-core/deprecated"
+const toPackage = "@patternfly/react-core/deprecated";
 const aliasSuffix = "Deprecated";
-const messageAfterImportNameList = "been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.";
-const messageAfterElementNameChange = "has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.";
+const messageAfterImportNameList =
+  "been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.";
+const messageAfterElementNameChange =
+  "has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.";
 
 // https://github.com/patternfly/patternfly-react/pull/8835
 module.exports = {
@@ -31,7 +33,7 @@ module.exports = {
     fromPackage,
     toPackage,
     messageAfterImportNameList,
-    aliasSuffix,
-    messageAfterElementNameChange
+    messageAfterElementNameChange,
+    aliasSuffix
   ),
 };

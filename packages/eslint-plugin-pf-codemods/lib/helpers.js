@@ -3,8 +3,9 @@ function moveSpecifiers(
   fromPackage,
   toPackage,
   messageAfterImportNameList,
-  aliasSuffix,
-  messageAfterElementNameChange) {
+  messageAfterElementNameChange,
+  aliasSuffix
+) {
   return function (context) {
     const importSpecifiersToMove = getPackageImports(context, fromPackage, importNamesToMove);
     if (!importSpecifiersToMove.length) return {};
@@ -44,16 +45,17 @@ function moveSpecifiers(
               .map((s) => s.imported.name)
               .join(", ")
               .replace(/, ([^,]+)$/, ", and $1")}` +
-            `${
-              newToPackageSpecifiers.length > 1 ? " have " : " has "
-            }${messageAfterImportNameList || "been moved. Running the fix flag will update your imports."}`,
+            `${newToPackageSpecifiers.length > 1 ? " have " : " has "}${
+              messageAfterImportNameList ||
+              "been moved. Running the fix flag will update your imports."
+            }`,
           fix(fixer) {
             //no other imports left, replace the fromPackage
-            if (!fromPackageSpecifiers.length && !existingToPackageImportDeclaration) {
-              return fixer.replaceText(
-                node,
-                newToPackageImportDeclaration
-              )
+            if (
+              !fromPackageSpecifiers.length &&
+              !existingToPackageImportDeclaration
+            ) {
+              return fixer.replaceText(node, newToPackageImportDeclaration);
             }
             const fixes = [];
             if (existingToPackageImportDeclaration) {
@@ -88,15 +90,19 @@ function moveSpecifiers(
         });
       },
       JSXElement(node) {
-        if(aliasSuffix && importSpecifiersToMove.some(
-          (imp) => imp.local.name === node.openingElement.name.name &&
-            imp.imported.name === imp.local.name
-        )) {
+        if (
+          aliasSuffix &&
+          importSpecifiersToMove.some(
+            (imp) =>
+              imp.local.name === node.openingElement.name.name &&
+              imp.imported.name === imp.local.name
+          )
+        ) {
           context.report({
             node,
             message: `${node.openingElement.name.name} ${
               messageAfterElementNameChange ||
-              "will need to be renamed to match the import alias. The fix flag will do this."
+              "has been moved to a new package. Running the fix flag will update the name."
             }`,
             fix(fixer) {
               const fixes = [
@@ -123,37 +129,38 @@ function moveSpecifiers(
 }
 
 /**
- * 
- * @param context 
- * @param {string} packageName 
- * @param {string[]} importNames 
+ *
+ * @param context
+ * @param {string} packageName
+ * @param {string[]} importNames
  * @returns {ImportSpecifier[]} an array of imports
  */
 function getPackageImports(context, packageName, importNames = []) {
   const specifiers = context
-  .getSourceCode()
-  .ast.body.filter((node) => node.type === "ImportDeclaration")
-  .filter((node) => node.source.value === packageName)
-  .map((node) => node.specifiers)
-  .reduce((acc, val) => acc.concat(val), []);
+    .getSourceCode()
+    .ast.body.filter((node) => node.type === "ImportDeclaration")
+    .filter((node) => node.source.value === packageName)
+    .map((node) => node.specifiers)
+    .reduce((acc, val) => acc.concat(val), []);
   return !importNames.length
     ? specifiers
-    : specifiers.filter(s => importNames.includes(s.imported?.name))
+    : specifiers.filter((s) => importNames.includes(s.imported?.name));
 }
 
 function splitImportSpecifiers(importDeclaration, importsToSplit) {
   let keepImports = [];
-  const takeImports = importDeclaration.specifiers.filter((specifier) =>
-    importsToSplit.includes(specifier?.imported?.name) ||
+  const takeImports = importDeclaration.specifiers.filter(
+    (specifier) =>
+      importsToSplit.includes(specifier?.imported?.name) ||
       (keepImports.push(specifier) && false)
   );
   return [takeImports, keepImports];
 }
 
 /**
- * 
- * @param {*} specifier 
- * @param {*} aliasSuffix 
+ *
+ * @param {*} specifiers
+ * @param {string} aliasSuffix
  * @returns {String[]} an array of alias imports
  */
 function createAliasImportSpecifiers(specifiers, aliasSuffix) {
@@ -164,9 +171,7 @@ function createAliasImportSpecifiers(specifiers, aliasSuffix) {
       return `${imported.name} as ${local.name}`;
     }
     return `${imported.name}${
-      aliasSuffix
-        ? ` as ${imported.name}${aliasSuffix}`
-        : ""
+      aliasSuffix ? ` as ${imported.name}${aliasSuffix}` : ""
     }`;
   });
 }
