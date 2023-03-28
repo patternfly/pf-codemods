@@ -24,6 +24,7 @@ import {
   DatePicker,
   DrawerPanelContent,
   Dropdown,
+  DropdownDirection,
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
@@ -82,7 +83,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />
-  <Dropdown position={DropdownPosition.right} />
+  <Dropdown position={DropdownPosition.right} direction={DropdownDirection.up} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <EmptyStateIcon />

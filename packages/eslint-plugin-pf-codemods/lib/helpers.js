@@ -13,6 +13,9 @@ function moveSpecifiers(
       fromPackage,
       importNames
     );
+
+    if (!importSpecifiersToMove.length) return {};
+
     const propValuesToUpdate = [];
     const componentsToUpdate = importsToMove
       .filter(
@@ -21,8 +24,6 @@ function moveSpecifiers(
           (propValuesToUpdate.push(importToMove.name) && false)
       )
       .map((importToMove) => importToMove.name);
-
-    if (!importSpecifiersToMove.length) return {};
 
     const src = context.getSourceCode();
     const existingToPackageImportDeclaration = src.ast.body.find(
@@ -139,7 +140,7 @@ function moveSpecifiers(
         }
 
         // Fixer for importsToMove objects with non-"component" type
-        const existingPropToUpdate = node.openingElement.attributes.find(
+        const existingPropsToUpdate = node.openingElement.attributes.filter(
           (attr) => {
             if (attr.value) {
               const propValue =
@@ -149,23 +150,25 @@ function moveSpecifiers(
             }
           }
         );
-        if (aliasSuffix && existingPropToUpdate) {
-          const existingPropObject =
-            existingPropToUpdate?.value?.expression?.object ||
-            existingPropToUpdate.value.expression;
+        if (aliasSuffix && existingPropsToUpdate.length) {
+          existingPropsToUpdate.forEach((propToUpdate) => {
+            const currentPropToUpdate =
+              propToUpdate.value?.expression?.object ||
+              propToUpdate.value?.expression;
 
-          context.report({
-            node,
-            message: `${existingPropObject?.name} ${
-              messageAfterElementNameChange ||
-              "has been moved to a new package. Running the fix flag will update the name."
-            }`,
-            fix(fixer) {
-              return fixer.replaceTextRange(
-                existingPropObject.range,
-                `${existingPropObject?.name}${aliasSuffix}`
-              );
-            },
+            context.report({
+              node,
+              message: `${currentPropToUpdate?.name} ${
+                messageAfterElementNameChange ||
+                "has been moved to a new package. Running the fix flag will update the name."
+              }`,
+              fix(fixer) {
+                return fixer.replaceTextRange(
+                  currentPropToUpdate.range,
+                  `${currentPropToUpdate?.name}${aliasSuffix}`
+                );
+              },
+            });
           });
         }
       },
