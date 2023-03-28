@@ -976,7 +976,7 @@ import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
 Out:
 
 ```jsx
-import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core/deprecated';
+import { OptionsMenu as OptionsMenuDeprecated, OptionsMenuToggle as OptionsMenuToggleDeprecated } from '@patternfly/react-core/deprecated';
 ```
 
 ### onToggle-updated-parameters [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
