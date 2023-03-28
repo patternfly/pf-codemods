@@ -25,6 +25,7 @@ import {
   DrawerPanelContent,
   Dropdown,
   DropdownItem,
+  DropdownPosition,
   DropdownToggle,
   EmptyStateIcon,
   FileUpload,
@@ -81,7 +82,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />
-  <Dropdown />
+  <Dropdown position={DropdownPosition.right} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <EmptyStateIcon />

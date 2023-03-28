@@ -1,13 +1,27 @@
 function moveSpecifiers(
-  importNamesToMove,
+  importsToMove,
   fromPackage,
   toPackage,
-  messageAfterImportNameList,
+  messageAfterImportNameChange,
   messageAfterElementNameChange,
   aliasSuffix
 ) {
   return function (context) {
-    const importSpecifiersToMove = getPackageImports(context, fromPackage, importNamesToMove);
+    const importNames = importsToMove.map((nameToMove) => nameToMove.name);
+    const importSpecifiersToMove = getPackageImports(
+      context,
+      fromPackage,
+      importNames
+    );
+    const propValuesToUpdate = [];
+    const componentsToUpdate = importsToMove
+      .filter(
+        (importToMove) =>
+          importToMove.type === "component" ||
+          (propValuesToUpdate.push(importToMove.name) && false)
+      )
+      .map((importToMove) => importToMove.name);
+
     if (!importSpecifiersToMove.length) return {};
 
     const src = context.getSourceCode();
@@ -22,10 +36,8 @@ function moveSpecifiers(
 
     return {
       ImportDeclaration(node) {
-        const [newToPackageSpecifiers, fromPackageSpecifiers] = splitImportSpecifiers(
-          node,
-          importNamesToMove
-        );
+        const [newToPackageSpecifiers, fromPackageSpecifiers] =
+          splitImportSpecifiers(node, importNames);
         if (!newToPackageSpecifiers.length || node.source.value !== fromPackage)
           return {};
 
@@ -46,7 +58,7 @@ function moveSpecifiers(
               .join(", ")
               .replace(/, ([^,]+)$/, ", and $1")}` +
             `${newToPackageSpecifiers.length > 1 ? " have " : " has "}${
-              messageAfterImportNameList ||
+              messageAfterImportNameChange ||
               "been moved. Running the fix flag will update your imports."
             }`,
           fix(fixer) {
@@ -90,12 +102,14 @@ function moveSpecifiers(
         });
       },
       JSXElement(node) {
+        // Fixer for importsToMove objects with "component" type
         if (
           aliasSuffix &&
           importSpecifiersToMove.some(
             (imp) =>
               imp.local.name === node.openingElement.name.name &&
-              imp.imported.name === imp.local.name
+              imp.imported.name === imp.local.name &&
+              componentsToUpdate.includes(imp.imported.name)
           )
         ) {
           context.report({
@@ -120,6 +134,37 @@ function moveSpecifiers(
                 );
               }
               return fixes;
+            },
+          });
+        }
+
+        // Fixer for importsToMove objects with non-"component" type
+        const existingPropToUpdate = node.openingElement.attributes.find(
+          (attr) => {
+            if (attr.value) {
+              const propValue =
+                attr.value.expression?.object?.name ||
+                attr.value.expression?.name;
+              return propValuesToUpdate.includes(propValue);
+            }
+          }
+        );
+        if (aliasSuffix && existingPropToUpdate) {
+          const existingPropObject =
+            existingPropToUpdate?.value?.expression?.object ||
+            existingPropToUpdate.value.expression;
+
+          context.report({
+            node,
+            message: `${existingPropObject?.name} ${
+              messageAfterElementNameChange ||
+              "has been moved to a new package. Running the fix flag will update the name."
+            }`,
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                existingPropObject.range,
+                `${existingPropObject?.name}${aliasSuffix}`
+              );
             },
           });
         }

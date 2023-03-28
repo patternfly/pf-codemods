@@ -627,7 +627,7 @@ function onResize2(_event, width, id) {};
 
 ### dropdown-update-deprecatedPath [(#8835)](https://github.com/patternfly/patternfly-react/pull/8835)
 
-We've deprecated the current implementation of Dropdown. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased.
+We've deprecated the current implementation of Dropdown. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our newer implementation of Dropdown.
 
 The following imports will be affected by this deprecation:
 
@@ -652,18 +652,18 @@ The following imports will be affected by this deprecation:
 In:
 
 ```jsx
-import { Dropdown, Button } from '@patternfly/react-core';
+import { Dropdown, DropdownPosition Button } from '@patternfly/react-core';
 
-<Dropdown />
+<Dropdown position={DropdownPosition.right} />
 ```
 
 Out:
 
 ```jsx
 import { Button } from '@patternfly/react-core';
-import { Dropdown as DropdownDeprecated } from '@patternfly/react-core/deprecated';
+import { Dropdown as DropdownDeprecated, DropdownPosition as DropdownPositionDeprecated } from '@patternfly/react-core/deprecated';
 
-<DropdownDeprecated />
+<DropdownDeprecated position={DropdownPositionDeprecated.right}  />
 ```
 
 ### dropdownItem-remove-isHovered [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)

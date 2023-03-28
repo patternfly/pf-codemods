@@ -1,106 +1,20 @@
-const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/dropdown-update-deprecatedPath");
-const dropdownExports = [
-  "BadgeToggle",
-  "Dropdown",
-  "DropdownPosition",
-  "DropdownDirection",
-  "DropdownContext",
-  "DropdownArrowContext",
-  "DropdownGroup",
-  "DropdownItem",
-  "DropdownMenu",
-  "DropdownSeparator",
-  "DropdownToggle",
-  "DropdownToggleAction",
-  "DropdownToggleCheckbox",
-  "DropdownWithContext",
-  "KebabToggle",
+const { createMoveSpecifiersTester } = require("../../testHelpers");
+const importsToMove = [
+  { name: "BadgeToggle", type: "component" },
+  { name: "Dropdown", type: "component" },
+  { name: "DropdownPosition", type: "enum" },
+  { name: "DropdownDirection", type: "enum" },
+  { name: "DropdownContext", type: "component" },
+  { name: "DropdownArrowContext", type: "component" },
+  { name: "DropdownGroup", type: "component" },
+  { name: "DropdownItem", type: "component" },
+  { name: "DropdownMenu", type: "component" },
+  { name: "DropdownSeparator", type: "component" },
+  { name: "DropdownToggle", type: "component" },
+  { name: "DropdownToggleAction", type: "component" },
+  { name: "DropdownToggleCheckbox", type: "component" },
+  { name: "DropdownWithContext", type: "component" },
+  { name: "KebabToggle", type: "component" },
 ];
 
-ruleTester.run("dropdown-update-deprecatedPath", rule, {
-  valid: [
-    {
-      code: `import { Dropdown } from '@patternfly/react-core/next'; <Dropdown />`,
-    },
-    {
-      code: `import { Dropdown } from '@patternfly/react-core/deprecated'; <Dropdown />`
-    },
-    {
-      // No @patternfly/react-core import
-      code: `<Dropdown />`,
-    },
-    {
-      // No @patternfly/react-core import
-      code: `import { Dropdown } from 'foo'`,
-    },
-  ],
-  invalid: [
-    ...dropdownExports.map((dropdownExport) => ({
-      code: `import {${dropdownExport} } from '@patternfly/react-core'; <${dropdownExport} />`,
-      output: `import {\n\t${dropdownExport} as ${dropdownExport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${dropdownExport}Deprecated />`,
-      errors: [
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
-    })),
-    ...dropdownExports.map((dropdownExport) => ({
-      code: `import { ${dropdownExport} as PF${dropdownExport} } from '@patternfly/react-core'; <PF${dropdownExport} />`,
-      output: `import {\n\t${dropdownExport} as PF${dropdownExport}\n} from '@patternfly/react-core/deprecated'; <PF${dropdownExport} />`,
-      errors: [
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-      ],
-    })),
-    ...dropdownExports.map((dropdownExport) => ({
-      code: `import {${dropdownExport}, Foo } from '@patternfly/react-core'; <${dropdownExport} />`,
-      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${dropdownExport} as ${dropdownExport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${dropdownExport}Deprecated />`,
-      errors: [
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
-    })),
-    ...dropdownExports.map((dropdownExport) => ({
-      code: `import { ${dropdownExport}, Foo } from '@patternfly/react-core'; <${dropdownExport}></${dropdownExport}>`,
-      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${dropdownExport} as ${dropdownExport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${dropdownExport}Deprecated></${dropdownExport}Deprecated>`,
-      errors: [
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
-    })),
-    ...dropdownExports.map((dropdownExport) => ({
-      code: `import { ${dropdownExport} } from '@patternfly/react-core';\nimport { Foo } from '@patternfly/react-core/deprecated'; <${dropdownExport} />`,
-      output: `\nimport {\n\tFoo,\n\t${dropdownExport} as ${dropdownExport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${dropdownExport}Deprecated />`,
-      errors: [
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${dropdownExport} has been deprecated. Running the fix flag will update component names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
-    })),
-  ],
-});
+createMoveSpecifiersTester("dropdown-update-deprecatedPath", importsToMove);
