@@ -17,4 +17,8 @@ const importsToMove = [
   { name: "KebabToggle", type: "component" },
 ];
 
-createMoveSpecifiersTester("dropdown-update-deprecatedPath", importsToMove);
+createMoveSpecifiersTester(
+  "dropdown-update-deprecatedPath",
+  importsToMove,
+  "Dropdown"
+);

@@ -397,74 +397,51 @@ function getMoveSpecifiersValidtests(importsToMoveArray) {
   return tests;
 }
 
-function getMoveSpecifiersInvalidtests(importsToMoveArray) {
+function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
   const tests = [];
   const [componentImports, otherImports] = splitImports(importsToMoveArray);
+  const endOfMessage = newImplementation
+    ? `, but we suggest using our new ${newImplementation} implementation.`
+    : ".";
+  const createErrors = (specifierName) => [
+    {
+      message: `${specifierName} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+      type: "ImportDeclaration",
+    },
+    {
+      message: `${specifierName} has been deprecated. Running the fix flag will update names${endOfMessage}`,
+      type: "JSXElement",
+    },
+  ];
 
   componentImports.forEach((componentImport) => {
     tests.push({
       code: `import {${componentImport} } from '@patternfly/react-core'; <${componentImport} />`,
       output: `import {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
-      errors: [
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import {${componentImport}, Foo } from '@patternfly/react-core'; <${componentImport} />`,
+      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import { ${componentImport}, Foo } from '@patternfly/react-core'; <${componentImport}></${componentImport}>`,
+      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated></${componentImport}Deprecated>`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import { ${componentImport} } from '@patternfly/react-core';\nimport { Foo } from '@patternfly/react-core/deprecated'; <${componentImport} />`,
+      output: `\nimport {\n\tFoo,\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
+      errors: createErrors(componentImport),
     });
     tests.push({
       code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core'; <PF${componentImport} />`,
       output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/deprecated'; <PF${componentImport} />`,
       errors: [
         {
-          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
+          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
           type: "ImportDeclaration",
-        },
-      ],
-    });
-    tests.push({
-      code: `import {${componentImport}, Foo } from '@patternfly/react-core'; <${componentImport} />`,
-      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
-      errors: [
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
-    });
-    tests.push({
-      code: `import { ${componentImport}, Foo } from '@patternfly/react-core'; <${componentImport}></${componentImport}>`,
-      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated></${componentImport}Deprecated>`,
-      errors: [
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
-    });
-    tests.push({
-      code: `import { ${componentImport} } from '@patternfly/react-core';\nimport { Foo } from '@patternfly/react-core/deprecated'; <${componentImport} />`,
-      output: `\nimport {\n\tFoo,\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
-      errors: [
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
         },
       ],
     });
@@ -474,27 +451,25 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray) {
     tests.push({
       code: `import {${otherImport} } from '@patternfly/react-core'; <Foo bar={${otherImport}} />`,
       output: `import {\n\t${otherImport} as ${otherImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <Foo bar={${otherImport}Deprecated} />`,
-      errors: [
-        {
-          message: `${otherImport} has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `${otherImport} has been deprecated. Running the fix flag will update names, but we suggest using our new Dropdown implementation.`,
-          type: "JSXElement",
-        },
-      ],
+      errors: createErrors(otherImport),
     });
   });
   return tests;
 }
 
-function createMoveSpecifiersTester(ruleName, importsToMoveArray) {
+function createMoveSpecifiersTester(
+  ruleName,
+  importsToMoveArray,
+  newImplementation
+) {
   const rule = require(`../lib/rules/v5/${ruleName}`);
 
   ruleTester.run(ruleName, rule, {
     valid: getMoveSpecifiersValidtests(importsToMoveArray),
-    invalid: getMoveSpecifiersInvalidtests(importsToMoveArray),
+    invalid: getMoveSpecifiersInvalidtests(
+      importsToMoveArray,
+      newImplementation
+    ),
   });
 }
 
