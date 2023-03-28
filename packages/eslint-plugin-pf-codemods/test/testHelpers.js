@@ -351,7 +351,130 @@ function swapCallbackParamTester(
   });
 }
 
+function splitImports(importsToSplit) {
+  const otherImports = [];
+  const componentImports = importsToSplit
+    .filter(
+      (importToMove) =>
+        importToMove.type === "component" ||
+        (otherImports.push(importToMove.name) && false)
+    )
+    .map((importToMove) => importToMove.name);
+
+  return [componentImports, otherImports];
+}
+
+function getMoveSpecifiersValidtests(importsToMoveArray) {
+  const tests = [];
+  const [componentImports, otherImports] = splitImports(importsToMoveArray);
+
+  componentImports.forEach((componentImport) => {
+    tests.push({
+      code: `import { ${componentImport} } from '@patternfly/react-core/next'; <${componentImport} />;`,
+    });
+    tests.push({
+      code: `import { ${componentImport} } from '@patternfly/react-core/deprecated'; <${componentImport} />;`,
+    });
+    tests.push({
+      code: `<${componentImport} />;`,
+    });
+    tests.push({
+      code: `import { ${componentImport} } from 'foo'; <${componentImport} />;`,
+    });
+  });
+
+  otherImports.forEach((otherImport) => {
+    tests.push({
+      code: `import { ${otherImport} } from '@patternfly/react-core/deprecated'; <Bar prop={${otherImport}} />;`,
+    });
+    tests.push({
+      code: `<Bar prop={${otherImport}} />;`,
+    });
+    tests.push({
+      code: `import { ${otherImport} } from 'foo'; <Bar prop={${otherImport}} />;`,
+    });
+  });
+  return tests;
+}
+
+function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
+  const tests = [];
+  const [componentImports, otherImports] = splitImports(importsToMoveArray);
+  const endOfMessage = newImplementation
+    ? `, but we suggest using our new ${newImplementation} implementation.`
+    : ".";
+  const createErrors = (specifierName) => [
+    {
+      message: `${specifierName} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+      type: "ImportDeclaration",
+    },
+    {
+      message: `${specifierName} has been deprecated. Running the fix flag will update names${endOfMessage}`,
+      type: "JSXElement",
+    },
+  ];
+
+  componentImports.forEach((componentImport) => {
+    tests.push({
+      code: `import {${componentImport} } from '@patternfly/react-core'; <${componentImport} />`,
+      output: `import {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import {${componentImport}, Foo } from '@patternfly/react-core'; <${componentImport} />`,
+      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import { ${componentImport}, Foo } from '@patternfly/react-core'; <${componentImport}></${componentImport}>`,
+      output: `import {\n\tFoo\n} from '@patternfly/react-core';\nimport {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated></${componentImport}Deprecated>`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import { ${componentImport} } from '@patternfly/react-core';\nimport { Foo } from '@patternfly/react-core/deprecated'; <${componentImport} />`,
+      output: `\nimport {\n\tFoo,\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <${componentImport}Deprecated />`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core'; <PF${componentImport} />`,
+      output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/deprecated'; <PF${componentImport} />`,
+      errors: [
+        {
+          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+          type: "ImportDeclaration",
+        },
+      ],
+    });
+  });
+
+  otherImports.forEach((otherImport) => {
+    tests.push({
+      code: `import {${otherImport} } from '@patternfly/react-core'; <Foo bar={${otherImport}} />`,
+      output: `import {\n\t${otherImport} as ${otherImport}Deprecated\n} from '@patternfly/react-core/deprecated'; <Foo bar={${otherImport}Deprecated} />`,
+      errors: createErrors(otherImport),
+    });
+  });
+  return tests;
+}
+
+function createMoveSpecifiersTester(
+  ruleName,
+  importsToMoveArray,
+  newImplementation
+) {
+  const rule = require(`../lib/rules/v5/${ruleName}`);
+
+  ruleTester.run(ruleName, rule, {
+    valid: getMoveSpecifiersValidtests(importsToMoveArray),
+    invalid: getMoveSpecifiersInvalidtests(
+      importsToMoveArray,
+      newImplementation
+    ),
+  });
+}
+
 module.exports = {
   addCallbackParamTester,
   swapCallbackParamTester,
+  createMoveSpecifiersTester,
 };
