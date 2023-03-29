@@ -1,5 +1,6 @@
 const { getPackageImports } = require("../../helpers");
 
+// https://github.com/patternfly/patternfly-react/issues/8204
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
