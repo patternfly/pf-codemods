@@ -828,7 +828,7 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
-### emptyState-add-footer [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+### emptyState-warn-add-footer [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've added the `EmptyStateFooter` component. It should wrap the content which follows after EmptyStateBody inside EmptyState.
 
@@ -872,9 +872,11 @@ Out:
 </EmptyStateFooter></EmptyState>
 ```
 
-### emptyState-add-header [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+### emptyState-warn-add-header [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
-We've added the `EmptyStateHeader` component, which should include EmptyStateIcon and text of the title.
+We've added the `EmptyStateHeader` component, which should now be passed an `EmptyStateIcon` to the `icon` prop
+and the main title should be passed to `titleText` prop. You can also explicitly specify title's heading level 
+with `headingLevel` prop.
 
 This rule produces only warnings, but suggested changes are fixable via --fix option.
 
@@ -901,8 +903,7 @@ Out:
 
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
-We've renamed the `EmptyStatePrimary` component to `EmptyStateActions`.
-We've renamed the `EmptyStateSecondaryActions` component to `EmptyStateActions`.
+We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.
 
 #### Examples
 
