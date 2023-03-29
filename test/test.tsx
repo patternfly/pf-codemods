@@ -39,6 +39,9 @@ import {
   Nav,
   NotificationBadge,
   NumberInput,
+  OptionsMenu,
+  OptionsMenuGroup,
+  OptionsMenuToggle,
   OverflowMenuDropdownItem,
   PageGroup,
   PageNavigation,
@@ -100,6 +103,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
+  <OptionsMenu></OptionsMenu>
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
   <PageGroup aria-label="tester" />
