@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/emptyState-add-header");
+const rule = require("../../../lib/rules/v5/emptyState-warn-add-header");
 
-ruleTester.run("emptyState-add-header", rule, {
+ruleTester.run("emptyState-warn-add-header", rule, {
   valid: [
     {
       code: `import { EmptyState, EmptyStateIcon, Title, EmptyStateBody, EmptyStateHeader } from '@patternfly/react-core'; 

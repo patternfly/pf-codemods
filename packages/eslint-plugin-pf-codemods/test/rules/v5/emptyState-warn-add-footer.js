@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/emptyState-add-footer");
+const rule = require("../../../lib/rules/v5/emptyState-warn-add-footer");
 
-ruleTester.run("emptyState-add-footer", rule, {
+ruleTester.run("emptyState-warn-add-footer", rule, {
   valid: [
     {
       code: `import { Button, EmptyState, EmptyStateBody, EmptyStateActions, EmptyStateFooter } from '@patternfly/react-core';
