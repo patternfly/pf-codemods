@@ -579,9 +579,9 @@ function onChange2(_event, checked) {};
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
 
-### datepicker-warn-helperText [(#8833)](https://github.com/patternfly/patternfly-react/pull/8833)
+### datetimepicker-warn-helperText [(#8833)](https://github.com/patternfly/patternfly-react/pull/8833)
 
-The helperText property now accepts the <HelperText> component.
+The helperText property of `DatePicker` now accepts the <HelperText> component, and `TimePicker` now uses a <HelperText> component internally.
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
 
