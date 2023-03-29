@@ -9,7 +9,22 @@ module.exports = {
 
     return imports.length === 0 || !menuInputImport ? {} : { 
       ImportDeclaration(node) {
-        ensureImports(context, node, '@patternfly/react-core', ['MenuSearch', 'MenuSearchInput']);
+        if(menuInputImport) {
+          context.report({
+            node,
+            message: 'add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core',
+            fix(fixer) {
+              const fixes = [];
+              
+              fixes.push(
+                fixer.replaceText(menuInputImport, 'MenuSearch'),
+                fixer.insertTextAfter(node.specifiers[node.specifiers.length - 1], `, MenuSearchInput`)
+              );
+              
+              return fixes;
+            }
+          })
+        }
       },
       JSXOpeningElement(node) {
         if (node.name.name === menuInputImport.local.name) {

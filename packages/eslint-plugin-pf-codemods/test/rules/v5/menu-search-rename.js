@@ -12,7 +12,7 @@ ruleTester.run("menu-search-rename", rule, {
   invalid: [
     {
       code: `import { MenuInput } from '@patternfly/react-core'; <MenuInput><div /></MenuInput>`,
-      output: `import { MenuInput, MenuSearch, MenuSearchInput } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput><div /></MenuSearchInput></MenuSearch>`,
+      output: `import { MenuSearch, MenuSearchInput } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput><div /></MenuSearchInput></MenuSearch>`,
       errors: [
         {
           message: 'add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core',
@@ -26,7 +26,7 @@ ruleTester.run("menu-search-rename", rule, {
     },
     {
       code: `import { MenuInput } from '@patternfly/react-core'; <MenuInput />`,
-      output: `import { MenuInput, MenuSearch, MenuSearchInput } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput /></MenuSearch>`,
+      output: `import { MenuSearch, MenuSearchInput } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput /></MenuSearch>`,
       errors: [
         {
           message: 'add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core',
