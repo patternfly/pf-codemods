@@ -21,39 +21,73 @@ ruleTester.run("emptyState-rename-components", rule, {
   invalid: [
     {
       code: `import { EmptyStateSecondaryActions } from '@patternfly/react-core'; <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>`,
-      output: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Other actions</EmptyStateActions>`,
+      output: `import { EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Other actions</EmptyStateActions>`,
       errors: [
         {
-          message: `add missing imports EmptyStateActions from @patternfly/react-core`,
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
           type: "ImportDeclaration",
         },
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "JSXIdentifier",
-        },
-        {
-          message:
-            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "JSXIdentifier",
+          type: "JSXElement",
         },
       ],
     },
     {
       code: `import { EmptyStatePrimary } from '@patternfly/react-core'; <EmptyStatePrimary>Primary action</EmptyStatePrimary>`,
-      output: `import { EmptyStatePrimary, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
+      output: `import { EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
       errors: [
         {
-          message: `add missing imports EmptyStateActions from @patternfly/react-core`,
+          message: "EmptyStatePrimary has been replaced with EmptyStateActions",
           type: "ImportDeclaration",
         },
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "JSXIdentifier",
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyStatePrimary as Primary } from '@patternfly/react-core'; <Primary>Primary action</Primary>`,
+      output: `import { EmptyStateActions as Primary } from '@patternfly/react-core'; <Primary>Primary action</Primary>`,
+      errors: [
+        {
+          message: "EmptyStatePrimary has been replaced with EmptyStateActions",
+          type: "ImportDeclaration",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyStatePrimary, EmptyStateSecondaryActions } from '@patternfly/react-core';
+      <>
+        <EmptyStatePrimary>Primary action</EmptyStatePrimary>
+        <EmptyStateSecondaryActions>Secondary</EmptyStateSecondaryActions>
+      </>`,
+      output: `import {  EmptyStateActions } from '@patternfly/react-core';
+      <>
+        <EmptyStateActions>Primary action</EmptyStateActions>
+        <EmptyStateActions>Secondary</EmptyStateActions>
+      </>`,
+      errors: [
+        {
+          message: "EmptyStatePrimary has been replaced with EmptyStateActions",
+          type: "ImportDeclaration",
+        },
+        {
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
+          type: "ImportDeclaration",
         },
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "JSXIdentifier",
+          type: "JSXElement",
+        },
+        {
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
+          type: "JSXElement",
         },
       ],
     },
