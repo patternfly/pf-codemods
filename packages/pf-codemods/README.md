@@ -744,27 +744,6 @@ Out:
 
 We've removed the helper text related props from `FormGroup`. This rule will remove the `helperText`, `helperTextInvalid`, `validated`, `helperTextIcon`, `helperTextInvalidIcon`, and `isHelperTextBeforeField` props if present. The `FormHelperText`, `HelperText`, and `HelperTextItem` components should now be used directly as part of `children` instead of these props.
 
-#### Examples
-
-In:
-
-```jsx
-<FormGroup 
-  helperText="Upload a CSV file" 
-  helperTextInvalid="Must be a CSV file no larger than 1 KB"
-  validated={isRejected ? 'error' : 'default'} 
-  helperTextIcon={<Icon />} 
-  helperTextInvalidIcon={<Icon2 />} 
-  isHelperTextBeforeField={false} 
-/>
-```
-
-Out:
-
-```jsx
-<FormGroup       />
-```
-
 ### formhelpertext-remove-props [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
 We've removed functionality from `FormHelperText` as now the logic will be covered by `HelperText` and `HelperTextItem`. This rule will remove the `isError`, `isHidden`, `icon`, and `component` props if present. The `HelperText` and `HelperTextItem` components should now be used directly as part of `children` instead of these props.

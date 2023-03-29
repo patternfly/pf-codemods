@@ -19,7 +19,7 @@ ruleTester.run("formgroup-remove-helpertextProps", rule, {
   invalid: [
     {
       code: `import { FormGroup } from '@patternfly/react-core'; <FormGroup helperText="Upload a CSV file" helperTextInvalid="Must be a CSV file no larger than 1 KB" validated={isRejected ? 'error' : 'default'} helperTextIcon={<Icon />} helperTextInvalidIcon={<Icon2 />} isHelperTextBeforeField={false} />`,
-      output: `import { FormGroup } from '@patternfly/react-core'; <FormGroup       />`,
+      output: `import { FormGroup } from '@patternfly/react-core'; <FormGroup helperText="Upload a CSV file" helperTextInvalid="Must be a CSV file no larger than 1 KB" validated={isRejected ? 'error' : 'default'} helperTextIcon={<Icon />} helperTextInvalidIcon={<Icon2 />} isHelperTextBeforeField={false} />`,
       errors: [
         {
           message: `helperText prop for FormGroup has been removed. Use FormHelperText, HelperText, and HelperTextItem directly inside children.`,
