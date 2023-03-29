@@ -4,7 +4,7 @@ const { getPackageImports } = require('../../helpers');
 module.exports = {
   create: function (context) {
     return {
-      Program(node) {
+      ImportDeclaration(node) {
         const coreImports = getPackageImports(context, '@patternfly/react-core');
         const tableImports = getPackageImports(context, '@patternfly/react-table');
         const imports = [...coreImports, ...tableImports];
