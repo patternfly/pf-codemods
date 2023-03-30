@@ -20,5 +20,5 @@ const importsToMove = [
 createMoveSpecifiersTester(
   "dropdown-update-deprecatedPath",
   importsToMove,
-  "Dropdown"
+  "new Dropdown"
 );
