@@ -7,6 +7,8 @@ function baseTestSingle(componentName, componentUsage) {
     "test/test.tsx"
   );
   const testFile = fs.readFileSync(testPath, "utf8");
+
+  // Update imports
   const splitByImport = testFile.split("import {");
   const pfCoreImportsIndex = splitByImport.findIndex((split) =>
     split.includes(`from "@patternfly/react-core"`)
@@ -14,23 +16,25 @@ function baseTestSingle(componentName, componentUsage) {
   const pfCoreImports = splitByImport[pfCoreImportsIndex];
   const splitByClosingCurlyBrace = pfCoreImports.split("}");
   const importedComponents = splitByClosingCurlyBrace[0].split(",");
+  const trimmedImportedComponents = importedComponents.map((component) =>
+    component.trim().replace("\n", "")
+  );
 
   if (
-    importedComponents.find(
-      (importedComponent) => importedComponent.split(" ")[2] === componentName
+    trimmedImportedComponents.find(
+      (importedComponent) => importedComponent === componentName
     )
   ) {
     console.log("component already imported");
   } else {
-    importedComponents.push(`\n  ${componentName}`);
-    importedComponents.sort().push(importedComponents.shift());
+    trimmedImportedComponents.push(componentName);
+    trimmedImportedComponents.sort();
   }
 
-  const formattedUpdatedImports = importedComponents
-    .filter((component) => component.match(/[A-Z]/))
-    .join(", ");
+  const formattedUpdatedImports = trimmedImportedComponents.filter(component => component.match(/\w/)).join(",\n  ");
 
   const newCoreImport = [
+    "\n  ",
     formattedUpdatedImports,
     "\n}",
     splitByClosingCurlyBrace[splitByClosingCurlyBrace.length - 1],
@@ -47,7 +51,7 @@ function baseTestSingle(componentName, componentUsage) {
     afterCoreImport,
   ].join("import {");
 
-  // Update test.tsx examples
+  // Update usage examples
   const splitByFragment = contentAfterAddingImport.split("\n<>");
   const fragmentSection = splitByFragment[1];
   const components = fragmentSection.split(/\/>;?\n/);
