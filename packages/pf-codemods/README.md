@@ -272,6 +272,30 @@ function handler2(_event, id) {};
 <Card onSelectableInputChange={handler2}>
 ```
 
+### cardHeader-update-api [(#8759)](https://github.com/patternfly/patternfly-react/pull/8759)
+
+CardHeaderMain and CardActions are no longer exported from PatternFly, and are instead rendered internally within the CardHeader sub-component. Any CardHeaderMain content and CardActions content or props should be passed directly to CardHeader instead.
+
+#### Examples
+
+In:
+
+```jsx
+<CardHeader>
+  <CardHeaderMain>Header content</CardHeaderMain>
+  <CardActions className="test" hasNoOffset><Button>Card action</Button></CardActions>
+</CardHeader>
+```
+
+Out:
+
+```jsx
+<CardHeader actions={{ actions: <><Button>Card action</Button></>, hasNoOffset: true, className: "test"}} >
+  Header content
+  
+</CardHeader>
+```
+
 ### chart-getResizeObserver [(#8533)](https://github.com/patternfly/patternfly-react/pull/8533)
 
 We've removed the `getResizeObserver` function from react-charts in favor of react-core's `getResizeObserver`. This helper function now has a third parameter, `useRequestAnimationFrame`, and allows a single function to be maintained going forward.

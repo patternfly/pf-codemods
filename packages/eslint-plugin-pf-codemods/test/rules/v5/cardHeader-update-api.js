@@ -21,21 +21,39 @@ ruleTester.run("cardHeader-update-api", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `CardHeaderMain is now rendered internally within CardHeader. Any CardHeaderMain content should instead be passed as children to CardHeader.`,
+          message: `CardHeaderMain is now rendered internally within CardHeader and should be passed to CardHeader instead.`,
           type: "JSXElement",
         },
       ],
     },
     {
       code: `import { CardHeader, CardActions } from '@patternfly/react-core'; <CardHeader><CardActions hasNoOffset className="test"><Action /></CardActions></CardHeader>`,
-      output: `import { CardHeader,  } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test" }}></CardHeader>`,
+      output: `import { CardHeader,  } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} ></CardHeader>`,
       errors: [
         {
           message: `CardActions is no longer exported.`,
           type: "ImportDeclaration",
         },
         {
-          message: `CardActions is now rendered internally within CardHeader. Any CardActions props should instead be passed as a CardHeaderActionsObject to CardHeader's "actions" prop.`,
+          message: `CardActions is now rendered internally within CardHeader and should be passed to CardHeader instead.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      code: `import { CardHeader, CardHeaderMain, CardActions } from '@patternfly/react-core'; <CardHeader><CardHeaderMain>Header content</CardHeaderMain><CardActions hasNoOffset className="test"><Action /></CardActions></CardHeader>`,
+      output: `import { CardHeader,   } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} >Header content</CardHeader>`,
+      errors: [
+        {
+          message: `CardHeaderMain is no longer exported.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `CardActions is no longer exported.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `CardHeaderMain and CardActions are now rendered internally within CardHeader and should be passed to CardHeader instead.`,
           type: "JSXElement",
         },
       ],
