@@ -80,59 +80,59 @@ module.exports = {
             const cardHeaderMain = findChildComponent("CardHeaderMain");
             const cardActions = findChildComponent("CardActions");
 
-            if (cardHeaderMain || cardActions) {
-              let messagePrefix = [
-                cardHeaderMain?.openingElement?.name?.name,
-                cardActions?.openingElement?.name?.name,
-              ]
-                .filter((componentName) => componentName)
-                .join(" and ");
-
-              context.report({
-                node,
-                message: `${messagePrefix} ${
-                  messagePrefix.includes("and") ? "are" : "is"
-                } now rendered internally within CardHeader and should be passed to CardHeader instead.`,
-                fix(fixer) {
-                  const fixes = [];
-
-                  if (cardHeaderMain) {
-                    const cardHeaderMainContent =
-                      getChildComponentContent(cardHeaderMain);
-
-                    fixes.push(
-                      fixer.replaceText(cardHeaderMain, cardHeaderMainContent)
-                    );
-                  }
-
-                  if (cardActions) {
-                    const cardActionProps =
-                      cardActions.openingElement.attributes;
-                    const existingClassProp = cardActionProps.find(
-                      (prop) => prop.name.name === "className"
-                    );
-                    const cardActionsContent =
-                      getChildComponentContent(cardActions).trim();
-                    const newActionsPropValue = `{ actions: <>${cardActionsContent}</>, hasNoOffset: ${cardActionProps.some(
-                      (prop) => prop.name.name === "hasNoOffset"
-                    )}, className: ${
-                      existingClassProp
-                        ? `"${existingClassProp.value.value}"`
-                        : undefined
-                    }}`;
-
-                    fixes.push(
-                      fixer.insertTextAfter(
-                        node.openingElement.name,
-                        ` actions={${newActionsPropValue}} `
-                      ),
-                      fixer.remove(cardActions)
-                    );
-                  }
-                  return fixes;
-                },
-              });
+            if (!cardHeaderMain && !cardActions) {
+              return;
             }
+            let messagePrefix = [
+              cardHeaderMain?.openingElement?.name?.name,
+              cardActions?.openingElement?.name?.name,
+            ]
+              .filter((componentName) => componentName)
+              .join(" and ");
+
+            context.report({
+              node,
+              message: `${messagePrefix} ${
+                messagePrefix.includes("and") ? "are" : "is"
+              } now rendered internally within CardHeader and should be passed to CardHeader instead.`,
+              fix(fixer) {
+                const fixes = [];
+
+                if (cardHeaderMain) {
+                  const cardHeaderMainContent =
+                    getChildComponentContent(cardHeaderMain);
+
+                  fixes.push(
+                    fixer.replaceText(cardHeaderMain, cardHeaderMainContent)
+                  );
+                }
+
+                if (cardActions) {
+                  const cardActionProps = cardActions.openingElement.attributes;
+                  const existingClassProp = cardActionProps.find(
+                    (prop) => prop.name.name === "className"
+                  );
+                  const cardActionsContent =
+                    getChildComponentContent(cardActions).trim();
+                  const newActionsPropValue = `{ actions: <>${cardActionsContent}</>, hasNoOffset: ${cardActionProps.some(
+                    (prop) => prop.name.name === "hasNoOffset"
+                  )}, className: ${
+                    existingClassProp
+                      ? `"${existingClassProp.value.value}"`
+                      : undefined
+                  }}`;
+
+                  fixes.push(
+                    fixer.insertTextAfter(
+                      node.openingElement.name,
+                      ` actions={${newActionsPropValue}} `
+                    ),
+                    fixer.remove(cardActions)
+                  );
+                }
+                return fixes;
+              },
+            });
           },
         };
   },
