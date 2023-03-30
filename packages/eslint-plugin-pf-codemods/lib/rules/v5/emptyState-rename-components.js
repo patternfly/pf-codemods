@@ -4,13 +4,19 @@ const { getPackageImports } = require("../../helpers");
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const oldNames = ["EmptyStatePrimary", "EmptyStateSecondaryActions"];
-    const newName = "EmptyStateActions";
-
     const package = "@patternfly/react-core";
     const imports = getPackageImports(context, package).filter((specifier) =>
-      oldNames.includes(specifier.imported.name)
+      ["EmptyStatePrimary", "EmptyStateSecondaryActions"].includes(
+        specifier.imported.name
+      )
     );
+
+    const importNames = Object.assign(
+      {},
+      ...imports.map((imp) => ({ [imp.local.name]: imp.imported.name }))
+    );
+
+    const newName = "EmptyStateActions";
 
     return imports.length == 0
       ? {}
@@ -20,35 +26,23 @@ module.exports = {
               return;
             }
 
-            const hasAlias = (imp) => imp.imported.name !== imp.local.name;
-
-            const redundantImports =
-              imports.length === 2 && imports.every((imp) => !hasAlias(imp));
-
-            const newImportText = (imp) => {
-              const aliasText = hasAlias(imp) ? ` as ${imp.local.name}` : "";
-              return `${newName}${aliasText}`;
-            };
-
             imports.forEach((imp) => {
               const getEndRange = () => {
-                const nextComma = context
-                  .getSourceCode()
-                  .getTokenAfter(imp);
+                const nextComma = context.getSourceCode().getTokenAfter(imp);
 
                 return context.getSourceCode().getText(nextComma) === ","
-                  ? nextComma.range[1]
+                  ? context.getSourceCode().getTokenAfter(nextComma).range[0]
                   : imp.range[1];
               };
-              
+
               context.report({
                 node,
                 message: `${imp.imported.name} has been replaced with ${newName}`,
                 fix(fixer) {
-                  return redundantImports &&
+                  return imports.length === 2 &&
                     imp.imported.name === "EmptyStatePrimary" // remove one of the imports completely
                     ? fixer.replaceTextRange([imp.range[0], getEndRange()], "")
-                    : fixer.replaceText(imp, newImportText(imp));
+                    : fixer.replaceText(imp, newName);
                 },
               });
             });
@@ -56,10 +50,12 @@ module.exports = {
           JSXElement(node) {
             const openingIdentifier = node.openingElement.name;
 
-            if (oldNames.includes(openingIdentifier?.name)) {
+            if (openingIdentifier?.name in importNames) {
               context.report({
                 node,
-                message: `${openingIdentifier.name} has been replaced with ${newName}`,
+                message: `${
+                  importNames[openingIdentifier.name]
+                } has been replaced with ${newName}`,
                 fix(fixer) {
                   return [
                     fixer.replaceText(openingIdentifier, newName),

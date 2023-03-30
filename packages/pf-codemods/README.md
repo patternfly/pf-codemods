@@ -910,15 +910,21 @@ We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` componen
 In:
 
 ```jsx
-<EmptyStatePrimary>Primary action</EmptyStatePrimary>
-<EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
+import { EmptyStatePrimary as Primary, EmptyStateSecondaryActions } from '@patternfly/react-core';
+<>
+  <Primary>Primary action</Primary>
+  <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
+</>
 ```
 
 Out:
 
 ```jsx
-<EmptyStateActions>Primary action</EmptyStateActions>
-<EmptyStateActions>Other actions</EmptyStateActions>
+import { EmptyStateActions } from '@patternfly/react-core';
+<>
+  <EmptyStateActions>Primary action</EmptyStateActions>
+  <EmptyStateActions>Other actions</EmptyStateActions>
+</>
 ```
 
 ### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
