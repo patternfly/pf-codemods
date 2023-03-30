@@ -11,5 +11,5 @@ const importsToMove = [
 createMoveSpecifiersTester(
   "optionsMenu-deprecated",
   importsToMove,
-  "Dropdown or Select"
+  "new Dropdown or Select"
 );

@@ -401,7 +401,7 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
   const tests = [];
   const [componentImports, otherImports] = splitImports(importsToMoveArray);
   const endOfMessage = newImplementation
-    ? `, but we suggest using our new ${newImplementation} implementation.`
+    ? `, but we suggest using our ${newImplementation} implementation.`
     : ".";
   const createErrors = (specifierName) => [
     {
