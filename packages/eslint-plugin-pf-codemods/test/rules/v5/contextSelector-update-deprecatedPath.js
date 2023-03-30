@@ -8,5 +8,5 @@ const importsToMove = [
 createMoveSpecifiersTester(
   "contextSelector-update-deprecatedPath",
   importsToMove,
-  "ContextSelector"
+  "composable Menu"
 );
