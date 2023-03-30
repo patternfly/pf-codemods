@@ -528,12 +528,16 @@ In:
 
 ```jsx
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
+
+<ContextSelector />
 ```
 
 Out:
 
 ```jsx
 import { ContextSelector as ContextSelectorDeprecated, ContextSelectorItem as ContextSelectorItemDeprecated } from '@patternfly/react-core/deprecated';
+
+<ContextSelectorDeprecated />
 ```
 
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
