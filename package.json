@@ -12,7 +12,7 @@
     "test:koku": "pf-codemods --no-cache test/koku-ui",
     "test:console": "pf-codemods --no-cache test/console/frontend",
     "test:integreatly": "pf-codemods --no-cache test/tutorial-web-app",
-    "plop": "plop"
+    "generate": "plop"
   },
   "repository": {
     "type": "git",
