@@ -36,31 +36,28 @@ module.exports = {
               )
               .reduce((acc, val) => acc.concat(val), []);
 
-            if (/@patternfly\/react/.test(node.source.value)) {
-              node.specifiers
-                .filter((spec) => !allTokens.includes(spec.local.name))
-                .forEach((spec) =>
-                  context.report({
-                    node,
-                    message: `unused patternfly import ${spec.local.name}`,
-                    fix(fixer) {
-                      const getEndRange = () => {
-                        const nextComma = context
-                          .getSourceCode()
-                          .getTokenAfter(spec);
+            imports
+              .filter((spec) => !allTokens.includes(spec.local.name))
+              .forEach((spec) =>
+                context.report({
+                  node,
+                  message: `unused patternfly import ${spec.local.name}`,
+                  fix(fixer) {
+                    const getEndRange = () => {
+                      const nextComma = context
+                        .getSourceCode()
+                        .getTokenAfter(spec);
 
-                        return context.getSourceCode().getText(nextComma) ===
-                          ","
-                          ? context.getSourceCode().getTokenAfter(nextComma)
-                              .range[0]
-                          : spec.range[1];
-                      };
+                      return context.getSourceCode().getText(nextComma) === ","
+                        ? context.getSourceCode().getTokenAfter(nextComma)
+                            .range[0]
+                        : spec.range[1];
+                    };
 
-                      return fixer.removeRange([spec.range[0], getEndRange()]);
-                    },
-                  })
-                );
-            }
+                    return fixer.removeRange([spec.range[0], getEndRange()]);
+                  },
+                })
+              );
 
             ensureImports(context, node, pfPackage, [newName]);
           },

@@ -37,7 +37,7 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
+  EmptyStatePrimary as ESP,
   EmptyStateSecondaryActions,
   EmptyStateVariant,
   FileUpload,
@@ -119,9 +119,9 @@ const myVariant = EmptyStateVariant.small;
     <EmptyStateBody>
       Some other content.
     </EmptyStateBody>
-    <EmptyStatePrimary>
+    <ESP>
       Primary action
-    </EmptyStatePrimary>
+    </ESP>
     <EmptyStateSecondaryActions>
       Secondary Actions
     </EmptyStateSecondaryActions>
