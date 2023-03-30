@@ -1,7 +1,7 @@
 const ruleTester = require('../../ruletester');
 const rule = require('../../../lib/rules/v5/dataList-remove-selectableRow');
 
-ruleTester.run("DataList-remove-selectableRow", rule, {
+ruleTester.run("dataList-remove-selectableRow", rule, {
   valid: [
     {
       code: `import { DataList } from '@patternfly/react-core'; <DataList onSelectableRowChange />`,
