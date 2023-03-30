@@ -1,19 +1,18 @@
-const { getPackageImports } = require("../../helpers");
+const { ensureImports, getPackageImports } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const package = "@patternfly/react-core";
-    const imports = getPackageImports(context, package).filter((specifier) =>
-      ["EmptyStatePrimary", "EmptyStateSecondaryActions"].includes(
-        specifier.imported.name
-      )
+    const pfPackage = "@patternfly/react-core";
+    const oldNames = ["EmptyStatePrimary", "EmptyStateSecondaryActions"];
+
+    const imports = getPackageImports(context, pfPackage).filter((specifier) =>
+      oldNames.includes(specifier.imported.name)
     );
 
-    const importNames = Object.assign(
-      {},
-      ...imports.map((imp) => ({ [imp.local.name]: imp.imported.name }))
+    const importNames = Object.fromEntries(
+      imports.map((imp) => [imp.local.name, imp.imported.name])
     );
 
     const newName = "EmptyStateActions";
@@ -22,30 +21,48 @@ module.exports = {
       ? {}
       : {
           ImportDeclaration(node) {
-            if (node.source.value != package) {
+            if (node.source.value != pfPackage) {
               return;
             }
 
-            imports.forEach((imp) => {
-              const getEndRange = () => {
-                const nextComma = context.getSourceCode().getTokenAfter(imp);
+            const allTokens = context
+              .getSourceCode()
+              .ast.body.filter((node) => node.type !== "ImportDeclaration")
+              .map((node) =>
+                context
+                  .getSourceCode()
+                  .getTokens(node)
+                  .map((token) => token.value)
+              )
+              .reduce((acc, val) => acc.concat(val), []);
 
-                return context.getSourceCode().getText(nextComma) === ","
-                  ? context.getSourceCode().getTokenAfter(nextComma).range[0]
-                  : imp.range[1];
-              };
+            if (/@patternfly\/react/.test(node.source.value)) {
+              node.specifiers
+                .filter((spec) => !allTokens.includes(spec.local.name))
+                .forEach((spec) =>
+                  context.report({
+                    node,
+                    message: `unused patternfly import ${spec.local.name}`,
+                    fix(fixer) {
+                      const getEndRange = () => {
+                        const nextComma = context
+                          .getSourceCode()
+                          .getTokenAfter(spec);
 
-              context.report({
-                node,
-                message: `${imp.imported.name} has been replaced with ${newName}`,
-                fix(fixer) {
-                  return imports.length === 2 &&
-                    imp.imported.name === "EmptyStatePrimary" // remove one of the imports completely
-                    ? fixer.replaceTextRange([imp.range[0], getEndRange()], "")
-                    : fixer.replaceText(imp, newName);
-                },
-              });
-            });
+                        return context.getSourceCode().getText(nextComma) ===
+                          ","
+                          ? context.getSourceCode().getTokenAfter(nextComma)
+                              .range[0]
+                          : spec.range[1];
+                      };
+
+                      return fixer.removeRange([spec.range[0], getEndRange()]);
+                    },
+                  })
+                );
+            }
+
+            ensureImports(context, node, pfPackage, [newName]);
           },
           JSXElement(node) {
             const openingIdentifier = node.openingElement.name;
@@ -54,7 +71,7 @@ module.exports = {
               context.report({
                 node,
                 message: `${
-                  importNames[openingIdentifier.name]
+                  importNames[openingIdentifier?.name]
                 } has been replaced with ${newName}`,
                 fix(fixer) {
                   return [
