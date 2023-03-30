@@ -35,6 +35,7 @@ import {
   DropdownPosition,
   DropdownToggle,
   EmptyState,
+  EmptyStateBody,
   EmptyStateIcon,
   EmptyStatePrimary,
   EmptyStateSecondaryActions,
@@ -110,21 +111,21 @@ const myVariant = EmptyStateVariant.small;
   <EmptyStateIcon />
   <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
-  <EmptyState variant={EmptyStateVariant.large} />
-  <EmptyState>
+  <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel="h5" size="4xl">
       Empty state
     </Title>
+    <EmptyStateBody>
+      Some other content.
+    </EmptyStateBody>
+    <EmptyStatePrimary>
+      Primary action
+    </EmptyStatePrimary>
     <EmptyStateSecondaryActions>
-      Some actions ...
-    </EmptyStateSecondaryActions>
-    <EmptyStateSecondaryActions>
-      ... should be wrapped in footer
+      Secondary Actions
     </EmptyStateSecondaryActions>
   </EmptyState>
-  <EmptyStatePrimary>Primary action</EmptyStatePrimary>
-  <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
   <KebabToggle onToggle={} />
   <Label isTruncated />
   <Label />

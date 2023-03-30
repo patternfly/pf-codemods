@@ -828,55 +828,13 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
-### emptyState-warn-add-footer [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
-
-We've added the `EmptyStateFooter` component. It should wrap the content which follows after EmptyStateBody inside EmptyState.
-
-This rule produces only warnings, but suggested changes are fixable via --fix option.
-
-#### Examples
-
-In:
-
-```jsx
-<EmptyState>
-  <EmptyStateBody>
-    Some content
-  </EmptyStateBody>
-  <EmptyStateActions>
-    <Button variant="primary">Primary action</Button>
-  </EmptyStateActions>
-  <EmptyStateActions>
-    <Button variant="link">Multiple</Button>
-    <Button variant="link">Action Buttons</Button>
-    <Button variant="link">Here</Button>
-  </EmptyStateActions>
-</EmptyState>
-```
-
-Out:
-
-```jsx
-<EmptyState>
-  <EmptyStateBody>
-    Some content
-  </EmptyStateBody><EmptyStateFooter>
-  <EmptyStateActions>
-    <Button variant="primary">Primary action</Button>
-  </EmptyStateActions>
-  <EmptyStateActions>
-    <Button variant="link">Multiple</Button>
-    <Button variant="link">Action Buttons</Button>
-    <Button variant="link">Here</Button>
-  </EmptyStateActions>
-</EmptyStateFooter></EmptyState>
-```
-
-### emptyState-warn-add-header [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+### emptyState-warn-change-structure [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've added the `EmptyStateHeader` component, which should now be passed an `EmptyStateIcon` to the `icon` prop
 and the main title should be passed to `titleText` prop. You can also explicitly specify title's heading level 
 with `headingLevel` prop.
+
+We've added the `EmptyStateFooter` component. It should wrap the content which follows after EmptyStateBody inside EmptyState.
 
 This rule produces only warnings, but suggested changes are fixable via --fix option.
 
@@ -890,6 +848,15 @@ In:
   <Title headingLevel="h5" size="4xl">
     Empty state
   </Title>
+  <EmptyStateBody>
+    Some content
+  </EmptyStateBody>
+  <EmptyStateActions>
+    Primary action
+  </EmptyStateActions>
+  <EmptyStateActions>
+    Other actions
+  </EmptyStateActions>
 </EmptyState>
 ```
 
@@ -897,8 +864,17 @@ Out:
 
 ```jsx
 <EmptyState variant={EmptyStateVariant.xl}>
-  <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5"/>
-</EmptyState>
+  <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5" />
+  <EmptyStateBody>
+    Some content
+  </EmptyStateBody><EmptyStateFooter>
+  <EmptyStateActions>
+    Primary action
+  </EmptyStateActions>
+  <EmptyStateActions>
+    Other actions
+  </EmptyStateActions>
+</EmptyStateFooter></EmptyState>
 ```
 
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
