@@ -109,7 +109,6 @@ const myVariant = EmptyStateVariant.small;
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <EmptyStateIcon />
-  <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
@@ -127,8 +126,8 @@ const myVariant = EmptyStateVariant.small;
     </EmptyStateSecondaryActions>
   </EmptyState>
   <KebabToggle onToggle={} />
-  <Label isTruncated />
   <Label />
+  <Label isTruncated />
   <Menu aria-label='tester' />
   <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
@@ -169,4 +168,4 @@ const myVariant = EmptyStateVariant.small;
   <WizardBody />
   <WizardBody aria-label />
   <WizardBody aria-labelledby />
-</>;
+</>
