@@ -39,5 +39,33 @@ ruleTester.run("table-warn-actionsColumn", rule, {
         type: "ImportDeclaration",
         }]
     },
+    {
+      code:   `import { Table } from '@patternfly/react-table'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
+      output: `import { Table } from '@patternfly/react-table'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
+      errors: [
+        {
+        message: `The ActionsColumn now uses the Next version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+        type: "ImportDeclaration",
+        },
+        {
+        message: `The ActionsColumn now uses the Next version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+        type: "ImportDeclaration",
+        }
+      ]
+    },
+    {
+      code:   `import { Table as TableDeprecated } from '@patternfly/react-table/deprecated'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
+      output: `import { Table as TableDeprecated } from '@patternfly/react-table/deprecated'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
+      errors: [
+        {
+        message: `The ActionsColumn now uses the Next version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+        type: "ImportDeclaration",
+        },
+        {
+        message: `The ActionsColumn now uses the Next version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+        type: "ImportDeclaration",
+        }
+      ]
+    },
   ]
 });
