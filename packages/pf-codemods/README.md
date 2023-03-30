@@ -581,7 +581,9 @@ The default value of the `appendTo` prop on DatePicker has been updated, which m
 
 ### datetimepicker-warn-helperText [(#8833)](https://github.com/patternfly/patternfly-react/pull/8833)
 
-The helperText property of `DatePicker` now accepts the <HelperText> component, and `TimePicker` now uses a <HelperText> component internally.
+The helperText property of `DatePicker` now expects the <HelperText> component, and `TimePicker` now uses a <HelperText> component internally.
+
+This rule will raise a warning, but will not make any code changes
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
 
