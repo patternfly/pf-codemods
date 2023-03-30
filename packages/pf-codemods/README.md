@@ -112,6 +112,24 @@ Out:
 <Alert component="h4" />
 ```
 
+### applicationLauncher-deprecate [(8836)](https://github.com/patternfly/patternfly-react/pull/8836)
+
+We've deprecated the `ApplicationLauncher` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+
+#### Examples
+
+In:
+
+```jsx
+import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
+```
+
+Out:
+
+```jsx
+import { OptionsMenu as OptionsMenuDeprecated, OptionsMenuToggle as OptionsMenuToggleDeprecated } from '@patternfly/react-core/deprecated';
+```
+
 ### applicationLauncher-updated-params [(#8756)](https://github.com/patternfly/patternfly-react/pull/8756)
 
 We've updated the `onFavorite` and `onSearch` props for ApplicationLauncher to include the `event` as their first parameter. Handlers may require an update.
