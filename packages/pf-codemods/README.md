@@ -121,13 +121,13 @@ We've deprecated the `ApplicationLauncher` compoenents. A fix will update code t
 In:
 
 ```jsx
-import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
+import { ApplicationLauncher } from '@patternfly/react-core';
 ```
 
 Out:
 
 ```jsx
-import { OptionsMenu as OptionsMenuDeprecated, OptionsMenuToggle as OptionsMenuToggleDeprecated } from '@patternfly/react-core/deprecated';
+import { ApplicationLauncher } from '@patternfly/react-core/deprecated';
 ```
 
 ### applicationLauncher-updated-params [(#8756)](https://github.com/patternfly/patternfly-react/pull/8756)
