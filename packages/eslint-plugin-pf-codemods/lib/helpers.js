@@ -552,8 +552,9 @@ function addCallbackParam(componentsArray, propMap) {
                       const createRemoveCurrentParamUseFix = (
                         currentUseOfNewParam
                       ) => {
+                        let tokenBeforeCurrentUse = context.getTokenBefore(currentUseOfNewParam)
                         const targetRange = [
-                          currentUseOfNewParam.range[0] - 2,
+                          tokenBeforeCurrentUse.value === "," ? tokenBeforeCurrentUse.range[0] : tokenBeforeCurrentUse.range[1] + 1,
                           currentUseOfNewParam.range[1],
                         ];
 
