@@ -34,8 +34,12 @@ import {
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
+<<<<<<< HEAD
   EmptyState,
   EmptyStateBody,
+=======
+  DropdownToggleCheckbox,
+>>>>>>> 17e402b (feat(DropdownToggleCheckbox): change param order for onChange so event is first)
   EmptyStateIcon,
   EmptyStatePrimary as ESP,
   EmptyStateSecondaryActions,
@@ -108,6 +112,7 @@ const myVariant = EmptyStateVariant.small;
   <Dropdown position={DropdownPosition.right} direction={DropdownDirection.up} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
+  <DropdownToggleCheckbox onChange={(change,evt) => handleChange(change,evt)}/>
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel="h5" size="4xl">

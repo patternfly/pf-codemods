@@ -531,10 +531,10 @@ function addCallbackParam(componentsArray, propMap) {
                     message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${newParam}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
                     fix(fixer) {
                       const fixes = [];
-
+                      
                       const createParamAdditionFix = (params) => {
                         const firstParam = params[0];
-
+                        
                         const replacementParams = `${newParam}, ${context
                           .getSourceCode()
                           .getText(firstParam)}`;
@@ -553,10 +553,16 @@ function addCallbackParam(componentsArray, propMap) {
                       const createRemoveCurrentParamUseFix = (
                         currentUseOfNewParam
                       ) => {
+<<<<<<< HEAD
                         const tokenBeforeCurrentUse =
                           context.getTokenBefore(currentUseOfNewParam);
                         const targetRange = [
                           tokenBeforeCurrentUse.range[0],
+=======
+                        let tokenBeforeCurrentUse = context.getTokenBefore(currentUseOfNewParam)
+                        const targetRange = [
+                          tokenBeforeCurrentUse.value === "," ? tokenBeforeCurrentUse.range[0] : tokenBeforeCurrentUse.range[1] + 1,
+>>>>>>> 17e402b (feat(DropdownToggleCheckbox): change param order for onChange so event is first)
                           currentUseOfNewParam.range[1],
                         ];
 
