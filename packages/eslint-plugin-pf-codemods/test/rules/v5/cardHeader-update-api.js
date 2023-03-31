@@ -14,7 +14,7 @@ ruleTester.run("cardHeader-update-api", rule, {
   invalid: [
     {
       code: `import { CardHeader, CardHeaderMain } from '@patternfly/react-core'; <CardHeader><CardHeaderMain>Header content</CardHeaderMain></CardHeader>`,
-      output: `import { CardHeader,  } from '@patternfly/react-core'; <CardHeader>Header content</CardHeader>`,
+      output: `import { CardHeader } from '@patternfly/react-core'; <CardHeader>Header content</CardHeader>`,
       errors: [
         {
           message: `CardHeaderMain is no longer exported.`,
@@ -28,7 +28,7 @@ ruleTester.run("cardHeader-update-api", rule, {
     },
     {
       code: `import { CardHeader, CardActions } from '@patternfly/react-core'; <CardHeader><CardActions hasNoOffset className="test"><Action /></CardActions></CardHeader>`,
-      output: `import { CardHeader,  } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} ></CardHeader>`,
+      output: `import { CardHeader } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} ></CardHeader>`,
       errors: [
         {
           message: `CardActions is no longer exported.`,
@@ -42,14 +42,10 @@ ruleTester.run("cardHeader-update-api", rule, {
     },
     {
       code: `import { CardHeader, CardHeaderMain, CardActions } from '@patternfly/react-core'; <CardHeader><CardHeaderMain>Header content</CardHeaderMain><CardActions hasNoOffset className="test"><Action /></CardActions></CardHeader>`,
-      output: `import { CardHeader,   } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} >Header content</CardHeader>`,
+      output: `import { CardHeader } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} >Header content</CardHeader>`,
       errors: [
         {
-          message: `CardHeaderMain is no longer exported.`,
-          type: "ImportDeclaration",
-        },
-        {
-          message: `CardActions is no longer exported.`,
+          message: `CardHeaderMain and CardActions are no longer exported.`,
           type: "ImportDeclaration",
         },
         {

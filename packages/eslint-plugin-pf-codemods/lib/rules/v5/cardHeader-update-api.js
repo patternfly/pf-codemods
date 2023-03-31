@@ -4,23 +4,25 @@ const { getPackageImports } = require("../../helpers");
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const cardImports = getPackageImports(
+    const removedCardImports = getPackageImports(
       context,
       "@patternfly/react-core"
     ).filter((specifier) =>
-      ["CardHeaderMain", "CardActions", "CardHeader"].includes(
-        specifier.imported.name
-      )
+      ["CardHeaderMain", "CardActions"].includes(specifier.imported.name)
     );
+    const cardHeaderImport = getPackageImports(
+      context,
+      "@patternfly/react-core"
+    ).find((specifier) => specifier.imported.name === "CardHeader");
 
-    return !cardImports.length
+    return ![...removedCardImports, cardHeaderImport].length
       ? {}
       : {
           ImportDeclaration(node) {
             if (
               node.source.value !== "@patternfly/react-core" ||
               !node.specifiers.filter((specifier) =>
-                cardImports
+                removedCardImports
                   .map((imp) => imp.imported.name)
                   .includes(specifier?.imported?.name)
               ).length
@@ -28,33 +30,50 @@ module.exports = {
               return;
             }
 
-            node.specifiers
-              .filter((specifier) =>
-                ["CardHeaderMain", "CardActions"].includes(
+            const validImports = node.specifiers.filter(
+              (specifier) =>
+                !["CardHeaderMain", "CardActions"].includes(
                   specifier.imported.name
                 )
-              )
-              .forEach((specifier) => {
-                const hasCommaAfter =
-                  context.getSourceCode().getTokenAfter(specifier).value ===
-                  ",";
+            );
 
-                context.report({
-                  node,
-                  message: `${specifier.imported.name} is no longer exported.`,
-                  fix(fixer) {
-                    return hasCommaAfter
-                      ? fixer.removeRange([
-                          specifier.range[0],
-                          specifier.range[1] + 1,
-                        ])
-                      : fixer.remove(specifier);
-                  },
-                });
-              });
+            const existingCardHeaderMain = node.specifiers.find(
+              (specifier) => specifier.imported.name === "CardHeaderMain"
+            );
+            const existingCardActions = node.specifiers.find(
+              (specifier) => specifier.imported.name === "CardActions"
+            );
+
+            const newImportDeclaration = `import { ${validImports
+              .map((imp) => context.getSourceCode().getText(imp))
+              .join(", ")} } from '@patternfly/react-core';`;
+
+            const importMessagePrefix = [
+              existingCardHeaderMain?.imported?.name,
+              existingCardActions?.imported?.name,
+            ]
+              .filter((specifierName) => specifierName)
+              .join(" and ");
+
+            context.report({
+              node,
+              message: `${importMessagePrefix} ${
+                importMessagePrefix.includes(" and ") ? "are" : "is"
+              } no longer exported.`,
+              fix(fixer) {
+                return validImports.length
+                  ? fixer.replaceText(node, newImportDeclaration)
+                  : fixer.remove(node);
+              },
+            });
           },
           JSXElement(node) {
-            if (node.openingElement.name.name !== "CardHeader") {
+            if (
+              ![
+                cardHeaderImport?.imported?.name,
+                cardHeaderImport?.local?.name,
+              ].includes(node.openingElement.name.name)
+            ) {
               return;
             }
 
@@ -83,7 +102,7 @@ module.exports = {
             if (!cardHeaderMain && !cardActions) {
               return;
             }
-            let messagePrefix = [
+            const messagePrefix = [
               cardHeaderMain?.openingElement?.name?.name,
               cardActions?.openingElement?.name?.name,
             ]
@@ -93,7 +112,7 @@ module.exports = {
             context.report({
               node,
               message: `${messagePrefix} ${
-                messagePrefix.includes("and") ? "are" : "is"
+                messagePrefix.includes(" and ") ? "are" : "is"
               } now rendered internally within CardHeader and should be passed to CardHeader instead.`,
               fix(fixer) {
                 const fixes = [];
