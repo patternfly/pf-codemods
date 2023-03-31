@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.49.2...@patternfly/pf-codemods@1.50.0) (2023-03-31)
+
+
+### Features
+
+* **ApplicationLauncher:** update to deprecated path ([#364](https://github.com/patternfly/pf-codemods/issues/364)) ([f8a7a3d](https://github.com/patternfly/pf-codemods/commit/f8a7a3d09a3acd065f085dc37616d4d6ea3f940c))
+
+
+
+
+
 ## [1.49.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.49.1...@patternfly/pf-codemods@1.49.2) (2023-03-30)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
