@@ -10,10 +10,8 @@ module.exports = {
     return formGroupImport.length === 0 ? {} : {
       JSXOpeningElement(node) {
         if (formGroupImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const helperProps = node.attributes.filter(a => {
-            const attr = a.name?.name;
-            return attr === 'helperText' || attr === 'helperTextInvalid' || attr === 'validated' || attr === 'helperTextIcon' || attr === 'helperTextInvalidIcon' || attr === 'isHelperTextBeforeField'
-          });
+          const helperPropNames = ['helperText', 'helperTextInvalid', 'validated', 'helperTextIcon', 'helperTextInvalidIcon', 'isHelperTextBeforeField'];
+          const helperProps = node.attributes.filter(a => helperPropNames.includes(a.name.name));
           if (helperProps.length > 0) {
             helperProps.forEach((attribute) => {
               context.report({
