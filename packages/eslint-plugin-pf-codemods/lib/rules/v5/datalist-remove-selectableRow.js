@@ -14,7 +14,7 @@ module.exports = {
           if (selectableRow) {
             context.report({
               node,
-              message: `DataList's selectableRow.onChange property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
+              message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
             });
           }
         }

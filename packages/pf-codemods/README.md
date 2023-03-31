@@ -517,7 +517,7 @@ Out:
 ### datalist-remove-selectableRow [(#8827)](https://github.com/patternfly/patternfly-react/pull/8827)
 
 We've removed the selectableRow property and replaced it with onSelectableRowChange. The value of the selectableRow's onChange field
-was a callback, which can now be directly passed to the onSelectableRowChange prop. However, it's worth nothing that the order of the params 
+was a callback, which can now be directly passed to the onSelectableRowChange prop. However, it's worth noting that the order of the params 
 in the callback has been updated so that the event param is first.
 
 #### Example of manual change needed
