@@ -17,6 +17,9 @@ import {
   Button,
   CalendarMonth,
   Card,
+  CardActions,
+  CardHeader,
+  CardHeaderMain,
   Checkbox,
   ClipboardCopy,
   DataList,
@@ -78,6 +81,10 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Button isSmall />
   <CalendarMonth onChange={date => handleChange(date)} onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)} />
   <Card onSelectableInputChange={(label, _ev) => handler(label)} />
+  <CardHeader>
+    <CardHeaderMain>Header content</CardHeaderMain>
+    <CardActions className="test" hasNoOffset><Button>Card action</Button></CardActions>
+  </CardHeader>
   <Chart themeVariant />
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
