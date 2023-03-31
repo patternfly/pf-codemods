@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.50.0...@patternfly/eslint-plugin-pf-codemods@1.51.0) (2023-03-31)
+
+
+### Features
+
+* **Card:** updated CardHeader API ([#358](https://github.com/patternfly/pf-codemods/issues/358)) ([1b016de](https://github.com/patternfly/pf-codemods/commit/1b016decd0f3fde82ff07316232769e6d8ec9f6e))
+
+
+
+
+
 # [1.50.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.49.2...@patternfly/eslint-plugin-pf-codemods@1.50.0) (2023-03-31)
 
 
