@@ -552,10 +552,10 @@ function addCallbackParam(componentsArray, propMap) {
                       const createRemoveCurrentParamUseFix = (
                         currentUseOfNewParam
                       ) => {
-                        let tokenBeforeCurrentUse = context.getTokenBefore(currentUseOfNewParam)
+                        const tokenBeforeCurrentUse = context.getTokenBefore(currentUseOfNewParam)
                         const targetRange = [
-                          tokenBeforeCurrentUse.value === "," ? tokenBeforeCurrentUse.range[0] : tokenBeforeCurrentUse.range[1] + 1,
-                          currentUseOfNewParam.range[1],
+                          tokenBeforeCurrentUse.range[0],
+                          currentUseOfNewParam.range[1]
                         ];
 
                         return fixer.replaceTextRange(targetRange, "");
