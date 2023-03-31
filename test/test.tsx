@@ -22,6 +22,9 @@ import {
   CardHeaderMain,
   Checkbox,
   ClipboardCopy,
+  ContextSelector,
+  ContextSelectorItem,
+  ContextSelectorFooter,
   DataList,
   DataListCheck,
   DatePicker,
@@ -91,6 +94,7 @@ const newTheme = getCustomTheme("1", "2", "3");
   <DataList onDragStart itemOrder={['1', '2', '3']} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
   <DataListCheck onChange={(id) => handler} />
+  <ContextSelector />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />
   <Dropdown position={DropdownPosition.right} direction={DropdownDirection.up} />

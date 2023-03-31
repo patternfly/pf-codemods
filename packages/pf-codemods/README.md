@@ -536,6 +536,34 @@ Additionally, the internal `aria-labelledby` for ProgressStep will only be appli
 
 This rule will raise a warning, but will not make any code changes.
 
+### contextSelector-update-deprecatedPath [(#8840)](https://github.com/patternfly/patternfly-react/pull/8840)
+
+We've deprecated the current implementation of ContextSelector. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Menu implementation.
+
+The following imports will be affected by this deprecation:
+
+- ContextSelector
+- ContextSelectorItem
+- ContextSelectorFooter
+
+#### Examples
+
+In:
+
+```jsx
+import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
+
+<ContextSelector />
+```
+
+Out:
+
+```jsx
+import { ContextSelector as ContextSelectorDeprecated, ContextSelectorItem as ContextSelectorItemDeprecated } from '@patternfly/react-core/deprecated';
+
+<ContextSelectorDeprecated />
+```
+
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
