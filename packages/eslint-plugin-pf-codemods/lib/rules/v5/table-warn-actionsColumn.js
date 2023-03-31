@@ -29,7 +29,7 @@ module.exports = {
         if (tableImport && (dropdownToggleImport || actionsColumnImport)) {
           context.report({
             node,
-            message: "The ActionsColumn now uses the Next version of Dropdown. The action toggle should now pass a MenuToggle rather than a DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.",
+            message: "The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.",
           });
         }
       },

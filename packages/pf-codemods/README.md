@@ -1252,7 +1252,7 @@ Out:
 
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
 
-Table and TableComposable's `ActionsColumn` has been updated to use the newer 'next' version of Dropdown. The toggle passed to the actions column should now be a `MenuToggle` instead of a `DropdownToggle`. The `dropdownPosition`, `dropdownDirection` and `menuAppendTo` properties are removed and `Popper` properties can be passed in using `popperProps` instead (via `direction`, `position`, `appendTo`, etc.).
+Table and TableComposable's `ActionsColumn` has been updated to use our new implementation of Dropdown. The toggle passed to the actions column should now be a `MenuToggle` instead of the deprecated `DropdownToggle`. The `dropdownPosition`, `dropdownDirection` and `menuAppendTo` properties are removed and `Popper` properties can be passed in using `popperProps` instead (via `direction`, `position`, `appendTo`, etc.).
 
 ### table-warn-thExpandType [(#8634)](https://github.com/patternfly/patternfly-react/pull/8634)
 
