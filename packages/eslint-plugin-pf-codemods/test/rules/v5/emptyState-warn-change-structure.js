@@ -82,11 +82,11 @@ ruleTester.run("emptyState-warn-change-structure", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `EmptyStateHeader component should be added instead of Title and EmptyStateIcon`,
+          message: `We've added an EmptyStateHeader sub-component which should be used instead of passing Title and EmptyStateIcon directly as children to EmptyState.`,
           type: "JSXElement",
         },
         {
-          message: `EmptyStateFooter component should be added to wrap content after EmptyStateBody`,
+          message: `We've added the EmptyStateFooter sub-component, which should be added to wrap content after EmptyStateBody.`,
           type: "JSXElement",
         },
       ],

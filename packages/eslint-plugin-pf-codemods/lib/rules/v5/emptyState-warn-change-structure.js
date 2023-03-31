@@ -96,7 +96,7 @@ module.exports = {
           context.report({
             node,
             message:
-              "EmptyStateHeader component should be added instead of Title and EmptyStateIcon",
+              "We've added an EmptyStateHeader sub-component which should be used instead of passing Title and EmptyStateIcon directly as children to EmptyState.",
             fix(fixer) {
               const removeEmptyLine = () => {
                 if (!emptyStateIcon) {
@@ -163,7 +163,7 @@ module.exports = {
           context.report({
             node,
             message:
-              "EmptyStateFooter component should be added to wrap content after EmptyStateBody",
+              "We've added the EmptyStateFooter sub-component, which should be added to wrap content after EmptyStateBody.",
             fix(fixer) {
               return [
                 fixer.insertTextAfter(
