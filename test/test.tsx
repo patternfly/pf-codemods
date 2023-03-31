@@ -92,7 +92,8 @@ const newTheme = getCustomTheme("1", "2", "3");
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
   <DataList onDragStart itemOrder={['1', '2', '3']} />
-  <DataList onSelectDataListItem={(id, text) => handler(id, text)} />;
+  <DataList selectableRow={{onChange=() => {}}} />
+  <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
   <DataListCheck onChange={(id) => handler} />
   <ContextSelector />
   <DatePicker />
@@ -127,7 +128,7 @@ const newTheme = getCustomTheme("1", "2", "3");
     toNextPage: "test",
     toPreviousPage: "test",
     optionsToggle: "test"
-  }} 
+  }}
     toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
   />
   <Popover reference />
