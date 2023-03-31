@@ -30,6 +30,7 @@ const warningRules = [
   "overflowMenu-warn-updated-dropdownItem",
   "popover-warn-appendTo-default",
   "react-dropzone-warn-upgrade",
+  "table-warn-actionsColumn",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
   "wizard-warn-button-order",
