@@ -114,7 +114,7 @@ Out:
 
 ### applicationLauncher-deprecate [(8836)](https://github.com/patternfly/patternfly-react/pull/8836)
 
-We've deprecated the `ApplicationLauncher` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+We've deprecated the `ApplicationLauncher` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
 
 #### Examples
 
