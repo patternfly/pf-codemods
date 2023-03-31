@@ -5,7 +5,7 @@ const {
 
 swapCallbackParamTester(
   "dropdownToggleCheckbox-update-onChange",
-  "DropdowmToggleCheckbox",
+  "DropdownToggleCheckbox",
   "onChange",
   1
 );
