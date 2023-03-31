@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.53.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.52.0...@patternfly/eslint-plugin-pf-codemods@1.53.0) (2023-03-31)
+
+
+### Features
+
+* **DataList:** update selectableRow.onChange to onSelectableRowChange ([#366](https://github.com/patternfly/pf-codemods/issues/366)) ([7fd7c41](https://github.com/patternfly/pf-codemods/commit/7fd7c4190129dbd55bbc29a1e3975d8ff8126252))
+
+
+
+
+
 # [1.52.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.51.2...@patternfly/eslint-plugin-pf-codemods@1.52.0) (2023-03-31)
 
 
