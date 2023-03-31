@@ -34,7 +34,12 @@ import {
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
+  EmptyState,
+  EmptyStateBody,
   EmptyStateIcon,
+  EmptyStatePrimary as ESP,
+  EmptyStateSecondaryActions,
+  EmptyStateVariant,
   FileUpload,
   KebabToggle,
   KEY_CODES,
@@ -60,6 +65,7 @@ import {
   SelectToggle,
   Spinner,
   Tabs,
+  Title,
   Toggle,
   Tooltip,
   TreeView,
@@ -74,6 +80,7 @@ import foo from Bar;
 
 const isRead = true;
 const newTheme = getCustomTheme("1", "2", "3");
+const myVariant = EmptyStateVariant.small;
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
@@ -104,6 +111,21 @@ const newTheme = getCustomTheme("1", "2", "3");
   <EmptyStateIcon />
   <EmptyStateIcon icon={CubesIcon} variant="icon"/>
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <EmptyState variant={EmptyStateVariant.large}>
+    <EmptyStateIcon icon={CubesIcon} />
+    <Title headingLevel="h5" size="4xl">
+      Empty state
+    </Title>
+    <EmptyStateBody>
+      Some other content.
+    </EmptyStateBody>
+    <ESP>
+      Primary action
+    </ESP>
+    <EmptyStateSecondaryActions>
+      Secondary Actions
+    </EmptyStateSecondaryActions>
+  </EmptyState>
   <KebabToggle onToggle={} />
   <Label isTruncated />
   <Label />

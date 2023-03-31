@@ -365,7 +365,7 @@ function renameComponents(
       ? {}
       : {
           ImportDeclaration(node) {
-            ensureImports(context, node, package, Object.values(componentMap));
+            ensureImports(context, node, package, [... new Set(Object.values(componentMap))]);
           },
           JSXIdentifier(node) {
             const nodeName = node.name;

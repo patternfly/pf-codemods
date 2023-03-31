@@ -828,6 +828,81 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
+### emptyState-warn-change-structure [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've added the `EmptyStateHeader` component, which should now be passed an `EmptyStateIcon` to the `icon` prop
+and the main title should be passed to `titleText` prop. You can also explicitly specify title's heading level 
+with `headingLevel` prop.
+
+We've added the `EmptyStateFooter` component. It should wrap the content which follows after EmptyStateBody inside EmptyState.
+
+This rule produces only warnings, but suggested changes are fixable via --fix option.
+
+#### Examples
+
+In:
+
+```jsx
+<EmptyState variant={EmptyStateVariant.xl}>
+  <EmptyStateIcon icon={CubesIcon} />
+  <Title headingLevel="h5" size="4xl">
+    Empty state
+  </Title>
+  <EmptyStateBody>
+    Some content
+  </EmptyStateBody>
+  <EmptyStateActions>
+    Primary action
+  </EmptyStateActions>
+  <EmptyStateActions>
+    Other actions
+  </EmptyStateActions>
+</EmptyState>
+```
+
+Out:
+
+```jsx
+<EmptyState variant={EmptyStateVariant.xl}>
+  <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5" />
+  <EmptyStateBody>
+    Some content
+  </EmptyStateBody><EmptyStateFooter>
+  <EmptyStateActions>
+    Primary action
+  </EmptyStateActions>
+  <EmptyStateActions>
+    Other actions
+  </EmptyStateActions>
+</EmptyStateFooter></EmptyState>
+```
+
+### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.
+
+#### Examples
+
+In:
+
+```jsx
+import { EmptyStatePrimary as Primary, EmptyStateSecondaryActions } from '@patternfly/react-core';
+<>
+  <Primary>Primary action</Primary>
+  <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
+</>
+```
+
+Out:
+
+```jsx
+import { EmptyStateActions } from '@patternfly/react-core';
+<>
+  <EmptyStateActions>Primary action</EmptyStateActions>
+  <EmptyStateActions>Other actions</EmptyStateActions>
+</>
+```
+
 ### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've made the `icon` prop required on EmptyStateIcon.
@@ -853,6 +928,26 @@ Out:
 ```jsx
 <EmptyStateIcon icon={CubesIcon} />
 <EmptyStateIcon icon={Spinner} />
+```
+
+### emptyStateVariant-rename-values [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've renamed the EmptyStateVariant enum values 'small' to 'sm' and 'large' to 'lg'.
+
+#### Examples
+
+In:
+
+```jsx
+const myVariant = EmptyStateVariant.small;
+<EmptyState variant={EmptyStateVariant.large} />
+```
+
+Out:
+
+```jsx
+const myVariant = EmptyStateVariant.sm;
+<EmptyState variant={EmptyStateVariant.lg} />
 ```
 
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
