@@ -34,7 +34,6 @@ function moveSpecifiers(
       existingToPackageImportDeclaration?.specifiers?.map((specifier) =>
         src.getText(specifier)
       ) || [];
-
     return {
       ImportDeclaration(node) {
         const [newToPackageSpecifiers, fromPackageSpecifiers] =
@@ -103,9 +102,9 @@ function moveSpecifiers(
         });
       },
       JSXElement(node) {
+        if (!aliasSuffix) return;
         // Fixer for importsToMove objects with "component" type
         if (
-          aliasSuffix &&
           importSpecifiersToMove.some(
             (imp) =>
               imp.local.name === node.openingElement.name.name &&
@@ -150,7 +149,7 @@ function moveSpecifiers(
             }
           }
         );
-        if (aliasSuffix && existingPropsToUpdate.length) {
+        if (existingPropsToUpdate.length) {
           existingPropsToUpdate.forEach((propToUpdate) => {
             const currentPropToUpdate =
               propToUpdate.value?.expression?.object ||
