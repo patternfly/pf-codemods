@@ -19,7 +19,7 @@ module.exports = {
               };
 
               const existingProps = node.attributes.filter((attribute) =>
-                Object.keys(updatedPropNames).includes(attribute.name.name)
+                Object.keys(updatedPropNames).includes(attribute.name?.name)
               );
 
               if (existingProps.length) {
@@ -45,7 +45,7 @@ module.exports = {
               }
 
               const titlesProp = node.attributes.find(
-                (attribute) => attribute.name.name === "titles"
+                (attribute) => attribute.name?.name === "titles"
               );
 
               if (titlesProp?.value?.expression?.type === "ObjectExpression") {

@@ -22,7 +22,7 @@ module.exports = {
           JSXOpeningElement(node) {
             if (bannerImport.local.name === node.name.name) {
               const variantProp = node.attributes.find(
-                (attribute) => attribute.name.name === "variant"
+                (attribute) => attribute.name?.name === "variant"
               );
 
               if (
