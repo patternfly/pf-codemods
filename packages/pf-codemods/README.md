@@ -674,27 +674,6 @@ function onChange2(_event, checked) {};
 <DataListCheck onChange={onChange2}>
 ```
 
-
-### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
-
-We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
-
-In addition to removing these props, this rule will suggest using the DragDrop component instead of the `onDrag...` props.
-
-#### Examples
-
-In:
-
-```jsx
-<DataList onDragFinish onDragStart onDragMove onDragCancel itemOrder />
-```
-
-Out:
-
-```jsx
-<DataList      />
-```
-
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
