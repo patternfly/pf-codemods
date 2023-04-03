@@ -286,6 +286,11 @@ function handler2(_event, id) {};
 <Card onSelectableInputChange={handler2}>
 ```
 
+### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
+
+We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
+
+
 ### cardHeader-update-api [(#8759)](https://github.com/patternfly/patternfly-react/pull/8759)
 
 CardHeaderMain and CardActions are no longer exported from PatternFly, and are instead rendered internally within the CardHeader sub-component. Any CardHeaderMain content and CardActions content or props should be passed directly to CardHeader instead.
