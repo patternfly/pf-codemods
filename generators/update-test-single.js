@@ -56,30 +56,35 @@ function baseTestSingle(componentName, componentUsage) {
   // Update usage examples
   const splitByFragment = contentAfterAddingImport.split("\n<>");
   const fragmentSection = splitByFragment[1];
-  const components = fragmentSection.split(/\/>;?\n/);
+  const components = fragmentSection.split(/>;?\n/);
 
-  // This identifies child components based on indent level and concatenates those children with their parent so that
-  // children aren't alphabetized independently
-  const componentsConcatChildren = components.reduce((acc, component, i) => {
+  // This identifies child and closing elements and concatenates those elements with their parent/opening element so
+  // that they aren't alphabetized independently
+  const concatenatedComponents = components.reduce((acc, component) => {
+    const previousComponent = acc[acc.length - 1];
     const componentIndentLevel =
       component.split("<")[0].match(/\s/g)?.length / 2;
-    const previousComponent = acc[i - 1];
+    const isChild = componentIndentLevel > 1;
+    const isClosingElement = component.match(/<\/\w*/);
 
-    if (componentIndentLevel < 2 || !previousComponent) {
+    if (previousComponent && (isChild || isClosingElement)) {
+      acc[acc.length - 1] += ">\n" + component;
+    } else if (!!component) {
       acc.push(component);
-    } else if (previousComponent[previousComponent.length - 1] === " ") {
-      acc[i - 1] += "/>\n" + component;
-    } else {
-      acc[i - 1] += component;
     }
 
     return acc;
   }, []);
 
-  componentsConcatChildren.push(componentUsage);
-  componentsConcatChildren.sort().push(componentsConcatChildren.shift());
-  const newFragmentSection = componentsConcatChildren.join("/>\n");
-  const newContent = [splitByFragment[0], newFragmentSection].join("\n<>");
+  concatenatedComponents.push(componentUsage);
+  concatenatedComponents.sort();
+  const newFragmentSection = concatenatedComponents.join(">\n");
+  const newContent = [
+    splitByFragment[0],
+    "\n<>",
+    newFragmentSection,
+    ">\n",
+  ].join("");
 
   fs.writeFileSync(testPath, newContent);
 }

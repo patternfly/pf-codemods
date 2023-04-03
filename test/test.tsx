@@ -123,9 +123,9 @@ const myVariant = EmptyStateVariant.small;
       Secondary Actions
     </EmptyStateSecondaryActions>
   </EmptyState>
-  <KebabToggle onToggle={} />
   <EmptyStateIcon />
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
   <Menu aria-label='tester' />
