@@ -20,7 +20,7 @@ module.exports = {
       },
       JSXOpeningElement(node) {
         if (node.name.name === paginationImport.local.name) {
-          const templateAttr = node.attributes.find(a => a.name.name === 'toggleTemplate');
+          const templateAttr = node.attributes.find(a => a.name?.name === 'toggleTemplate');
           if(templateAttr.value?.expression?.type === "ArrowFunctionExpression"){ // If toggleTemplate is a function
             const typeAnnotation = templateAttr.value?.expression?.params[0]?.typeAnnotation;
             if(typeAnnotation) {

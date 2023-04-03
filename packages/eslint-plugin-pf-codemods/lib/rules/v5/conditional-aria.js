@@ -29,7 +29,7 @@ module.exports = {
             ) {
               const getValidAria = (attributesToFind) =>
                 node.attributes.find((attribute) =>
-                  attributesToFind.includes(attribute.name.name)
+                  attributesToFind.includes(attribute.name?.name)
                 );
 
               let validAria;

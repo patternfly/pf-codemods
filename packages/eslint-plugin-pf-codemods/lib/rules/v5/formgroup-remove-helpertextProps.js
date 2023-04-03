@@ -11,7 +11,7 @@ module.exports = {
       JSXOpeningElement(node) {
         if (formGroupImport.map(imp => imp.local.name).includes(node.name.name)) {
           const helperPropNames = ['helperText', 'helperTextInvalid', 'validated', 'helperTextIcon', 'helperTextInvalidIcon', 'isHelperTextBeforeField'];
-          const helperProps = node.attributes.filter(a => helperPropNames.includes(a.name.name));
+          const helperProps = node.attributes.filter(a => helperPropNames.includes(a.name?.name));
           if (helperProps.length > 0) {
             helperProps.forEach((attribute) => {
               context.report({

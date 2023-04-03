@@ -23,7 +23,7 @@ const { getPackageImports } = require("../../helpers");
               if (
                 dateImport &&
                 dateImport.imported.name === node.name.name && 
-                node.attributes.find(a => a.name.name === 'helperText')
+                node.attributes.find(a => a.name?.name === 'helperText')
               ) {
                 context.report({
                   node,
