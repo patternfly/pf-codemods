@@ -242,10 +242,6 @@ function handler2(_event, newDate) {};
 <CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
 ```
 
-### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
-
-We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
-
 ### card-remove-isHoverable [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
 
 We've removed the deprecated `isHoverable` prop from Card.
@@ -289,6 +285,11 @@ const handler1 = (_event, id) => {};
 function handler2(_event, id) {};
 <Card onSelectableInputChange={handler2}>
 ```
+
+### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
+
+We've updated the internal default value of the `component` prop within Card; it has been changed from 'article' to 'div'. Any related references, such as in unit tests, may need to be updated.
+
 
 ### cardHeader-update-api [(#8759)](https://github.com/patternfly/patternfly-react/pull/8759)
 
@@ -338,23 +339,6 @@ We've renamed all light theme objects to remove `Light` from their name. Additio
 
 This rule will throw an error, but will not make any changes.
 
-### charts-remove-darkThemeObjects [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
-
-We've removed all dark theme objects from react-charts.
-
-#### Examples
-
-In:
-```jsx
-import { DarkBlueColorTheme, DarkCyanColorTheme, DarkGoldColorTheme, DarkGrayColorTheme, DarkGreenColorTheme, DarkMultiColorOrderedTheme, DarkMultiColorUnorderedTheme,
-DarkOrangeColorTheme, DarkPurpleColorTheme, ChartLegend } from '@patternfly/react-charts'
-```
-
-Out:
-```jsx
-import { ChartLegend } from '@patternfly/react-charts'
-```
-
 ### charts-remove-ChartThemeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
 
 We've removed `ChartThemeVariant` from react-charts.
@@ -371,6 +355,23 @@ Out:
 
 ```jsx
 import { Chart } from '@patternfly/react-charts';
+```
+
+### charts-remove-darkThemeObjects [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
+
+We've removed all dark theme objects from react-charts.
+
+#### Examples
+
+In:
+```jsx
+import { DarkBlueColorTheme, DarkCyanColorTheme, DarkGoldColorTheme, DarkGrayColorTheme, DarkGreenColorTheme, DarkMultiColorOrderedTheme, DarkMultiColorUnorderedTheme,
+DarkOrangeColorTheme, DarkPurpleColorTheme, ChartLegend } from '@patternfly/react-charts'
+```
+
+Out:
+```jsx
+import { ChartLegend } from '@patternfly/react-charts'
 ```
 
 ### charts-remove-themeVariant [(#8590)](https://github.com/patternfly/patternfly-react/pull/8590)
@@ -678,7 +679,6 @@ function onChange2(_event, checked) {};
 <DataListCheck onChange={onChange2}>
 ```
 
-
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
 
 The default value of the `appendTo` prop on DatePicker has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
@@ -828,6 +828,32 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
+### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
+
+We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.
+
+#### Examples
+
+In:
+
+```jsx
+import { EmptyStatePrimary as Primary, EmptyStateSecondaryActions } from '@patternfly/react-core';
+<>
+  <Primary>Primary action</Primary>
+  <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
+</>
+```
+
+Out:
+
+```jsx
+import { EmptyStateActions } from '@patternfly/react-core';
+<>
+  <EmptyStateActions>Primary action</EmptyStateActions>
+  <EmptyStateActions>Other actions</EmptyStateActions>
+</>
+```
+
 ### emptyState-warn-change-structure [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've added the `EmptyStateHeader` component, which should now be passed an `EmptyStateIcon` to the `icon` prop
@@ -875,32 +901,6 @@ Out:
     Other actions
   </EmptyStateActions>
 </EmptyStateFooter></EmptyState>
-```
-
-### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
-
-We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.
-
-#### Examples
-
-In:
-
-```jsx
-import { EmptyStatePrimary as Primary, EmptyStateSecondaryActions } from '@patternfly/react-core';
-<>
-  <Primary>Primary action</Primary>
-  <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>
-</>
-```
-
-Out:
-
-```jsx
-import { EmptyStateActions } from '@patternfly/react-core';
-<>
-  <EmptyStateActions>Primary action</EmptyStateActions>
-  <EmptyStateActions>Other actions</EmptyStateActions>
-</>
 ```
 
 ### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
@@ -1138,10 +1138,6 @@ Out:
 </Menu>
 ```
 
-### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
-
-We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
-
 ### menu-search-rename [(#8820)](https://github.com/patternfly/patternfly-react/pull/8820)
 
 `MenuInput` has been renamed to `MenuSearchInput` and `MenuSearch` has been added as a wrapper.
@@ -1157,6 +1153,10 @@ Out:
 ```jsx
     <MenuSearch><MenuSearchInput><SearchInput /></MenuSearchInput></MenuSearch>
 ```
+
+### menuItemAction-ariaLabel-required [(#8617)](https://github.com/patternfly/patternfly-react/pull/8617)
+
+We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
 ### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
 
@@ -1204,24 +1204,6 @@ Out:
 <NumberInput  />
 ```
 
-### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
-
-We've deprecated the `OptionsMenu` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
-
-#### Examples
-
-In:
-
-```jsx
-import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
-```
-
-Out:
-
-```jsx
-import { OptionsMenu as OptionsMenuDeprecated, OptionsMenuToggle as OptionsMenuToggleDeprecated } from '@patternfly/react-core/deprecated';
-```
-
 ### onToggle-updated-parameters [(#8667)](https://github.com/patternfly/patternfly-react/pull/8667)
 
 We've updated the `onToggle` function to include the `event` as its first parameter for the following components: `ApplicationLauncher`, `BadgeToggle`, `DropdownToggle`, `KebabToggle`, `Toggle`, `Select`, and `SelectToggle`. Handlers for these components may require an update.
@@ -1250,6 +1232,24 @@ const toggleBadge = (_event, isOpen) => {};
 
 function toggleDropdown(_event, isOpen) {};
 <DropdownToggle onToggle={toggleDropdown}>
+```
+
+### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
+
+We've deprecated the `OptionsMenu` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+
+#### Examples
+
+In:
+
+```jsx
+import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
+```
+
+Out:
+
+```jsx
+import { OptionsMenu as OptionsMenuDeprecated, OptionsMenuToggle as OptionsMenuToggleDeprecated } from '@patternfly/react-core/deprecated';
 ```
 
 ### overflowMenu-warn-updated-dropdownItem [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
@@ -1375,24 +1375,6 @@ import { Pagination, PaginationToggleTemplateProps } from '@patternfly/react-cor
 <Pagination toggleTemplate={({firstIndex, lastIndex} : PaginationToggleTemplateProps) => <div />} />
 ```
 
-### popper-remove-popperMatchesTriggerWidth [(#8724)](https://github.com/patternfly/patternfly-react/pull/8724)
-
-We've removed the `popperMatchesTriggerWidth` prop from Popper. `minWidth`, `maxWidth`, and `width` props can instead be used to modify the Popper width.
-
-#### Examples
-
-In:
-
-```jsx
-<Popper popperMatchesTriggerWidth />
-```
-
-Out:
-
-```jsx
-<Popper  />
-```
-
 ### popover-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
 
 The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
@@ -1437,6 +1419,24 @@ Out:
 ### popover-warn-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
 
 The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
+
+### popper-remove-popperMatchesTriggerWidth [(#8724)](https://github.com/patternfly/patternfly-react/pull/8724)
+
+We've removed the `popperMatchesTriggerWidth` prop from Popper. `minWidth`, `maxWidth`, and `width` props can instead be used to modify the Popper width.
+
+#### Examples
+
+In:
+
+```jsx
+<Popper popperMatchesTriggerWidth />
+```
+
+Out:
+
+```jsx
+<Popper  />
+```
 
 ### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
 
@@ -1644,6 +1644,24 @@ Out:
 <Toggle toggleVariant="primary" />
 ```
 
+### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
+
+We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<ToolbarContent visiblity={{ default: "hidden" }} />
+```
+
+Out:
+
+```jsx
+<ToolbarContent visibility={{ default: "hidden" }} />
+```
+
 ### toolbarVarious-remove-alignment [(#8563)](https://github.com/patternfly/patternfly-react/pull/8563)
 
 We've removed the `alignment` prop from `ToolbarContent`, `ToolbarGroup`, and `ToolbarItem`. For `ToolbarGroup` and `ToolbarItem` it has been replaced with `align`.
@@ -1664,24 +1682,6 @@ Out:
 <ToolbarContent  />
 <ToolbarGroup align={{ default: 'alignLeft' }} />
 <ToolbarItem align={{ default: 'alignLeft' }} />
-```
-
-### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
-
-We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
-
-#### Examples
-
-In:
-
-```jsx
-<ToolbarContent visiblity={{ default: "hidden" }} />
-```
-
-Out:
-
-```jsx
-<ToolbarContent visibility={{ default: "hidden" }} />
 ```
 
 ### tooltip-remove-props [(#8231)](https://github.com/patternfly/patternfly-react/pull/8231)

@@ -23,8 +23,8 @@ import {
   Checkbox,
   ClipboardCopy,
   ContextSelector,
-  ContextSelectorItem,
   ContextSelectorFooter,
+  ContextSelectorItem,
   DataList,
   DataListCheck,
   DatePicker,
@@ -57,9 +57,8 @@ import {
   PageGroup,
   PageNavigation,
   Pagination,
-  ToggleTemplateProps,
-  Popper,
   Popover,
+  Popper,
   ProgressStep,
   Select,
   SelectToggle,
@@ -67,9 +66,10 @@ import {
   Tabs,
   Title,
   Toggle,
+  ToggleTemplateProps,
   Tooltip,
   TreeView,
-  Wizard,
+  Wizard
 } from "@patternfly/react-core";
 import { SelectOption, WizardBody, WizardFooter } from "@patternfly/react-core/next";
 
@@ -98,19 +98,16 @@ const myVariant = EmptyStateVariant.small;
   <Chart themeVariant />
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
-  <DataList onDragStart itemOrder={['1', '2', '3']} />
-  <DataList selectableRow={{onChange=() => {}}} />
-  <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
-  <DataListCheck onChange={(id) => handler} />
   <ContextSelector />
+  <DataList onDragStart itemOrder={['1', '2', '3']} />
+  <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
+  <DataList selectableRow={{onChange=() => {}}} />
+  <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />
   <Dropdown position={DropdownPosition.right} direction={DropdownDirection.up} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
-  <EmptyStateIcon />
-  <EmptyStateIcon icon={CubesIcon} variant="icon"/>
-  <EmptyStateIcon component={Spinner} variant="container"/>
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel="h5" size="4xl">
@@ -126,9 +123,11 @@ const myVariant = EmptyStateVariant.small;
       Secondary Actions
     </EmptyStateSecondaryActions>
   </EmptyState>
+  <EmptyStateIcon />
+  <EmptyStateIcon component={Spinner} variant="container"/>
   <KebabToggle onToggle={} />
-  <Label isTruncated />
   <Label />
+  <Label isTruncated />
   <Menu aria-label='tester' />
   <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
@@ -169,4 +168,4 @@ const myVariant = EmptyStateVariant.small;
   <WizardBody />
   <WizardBody aria-label />
   <WizardBody aria-labelledby />
-</>;
+</>
