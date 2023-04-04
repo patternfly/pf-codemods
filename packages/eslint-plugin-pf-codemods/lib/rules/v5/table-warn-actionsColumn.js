@@ -5,10 +5,11 @@ module.exports = {
   create: function (context) {
     return {
       ImportDeclaration(node) {
-        const coreImports = getPackageImports(context, '@patternfly/react-core');
-        const deprecatedImports = getPackageImports(context, '@patternfly/react-core/deprecated');
+        if (!/@patternfly\/react-table(\/deprecated)?/.test(node.source.value)) return {};
         const tableImports = getPackageImports(context, '@patternfly/react-table');
         const deprecatedTableImports = getPackageImports(context, '@patternfly/react-table/deprecated');
+        const coreImports = getPackageImports(context, '@patternfly/react-core');
+        const deprecatedImports = getPackageImports(context, '@patternfly/react-core/deprecated');
         const imports = [...coreImports, ...tableImports, ...deprecatedImports, ...deprecatedTableImports];
 
         const tableImport = imports.find(

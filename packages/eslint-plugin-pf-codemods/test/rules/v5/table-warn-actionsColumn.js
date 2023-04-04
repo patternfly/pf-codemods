@@ -25,10 +25,6 @@ ruleTester.run("table-warn-actionsColumn", rule, {
         message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
         type: "ImportDeclaration",
         },
-        {
-        message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
-        type: "ImportDeclaration",
-        }
       ]
     },
     {
@@ -47,10 +43,6 @@ ruleTester.run("table-warn-actionsColumn", rule, {
         message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
         type: "ImportDeclaration",
         },
-        {
-        message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
-        type: "ImportDeclaration",
-        }
       ]
     },
     {
@@ -61,10 +53,6 @@ ruleTester.run("table-warn-actionsColumn", rule, {
         message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
         type: "ImportDeclaration",
         },
-        {
-        message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
-        type: "ImportDeclaration",
-        }
       ]
     },
   ]
