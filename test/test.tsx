@@ -34,12 +34,9 @@ import {
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
-<<<<<<< HEAD
+  DropdownToggleCheckbox,
   EmptyState,
   EmptyStateBody,
-=======
-  DropdownToggleCheckbox,
->>>>>>> 17e402b (feat(DropdownToggleCheckbox): change param order for onChange so event is first)
   EmptyStateIcon,
   EmptyStatePrimary as ESP,
   EmptyStateSecondaryActions,
