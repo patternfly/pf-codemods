@@ -365,7 +365,9 @@ function renameComponents(
       ? {}
       : {
           ImportDeclaration(node) {
-            ensureImports(context, node, package, [... new Set(Object.values(componentMap))]);
+            ensureImports(context, node, package, [
+              ...new Set(Object.values(componentMap)),
+            ]);
           },
           JSXIdentifier(node) {
             const nodeName = node.name;
@@ -475,14 +477,14 @@ function addCallbackParam(componentsArray, propMap) {
                   const matchingVariable = currentScope.variables.find(
                     (variable) => variable.name === propProperties.name
                   );
-                  const matchingDefinition = matchingVariable.defs.find(
-                    (def) => def.name.name === propProperties.name
+                  const matchingDefinition = matchingVariable?.defs.find(
+                    (def) => def.name?.name === propProperties.name
                   );
 
                   propProperties.params =
-                    matchingDefinition.type === "FunctionName"
-                      ? matchingDefinition.node.params
-                      : matchingDefinition.node.init.params;
+                    matchingDefinition?.type === "FunctionName"
+                      ? matchingDefinition?.node?.params
+                      : matchingDefinition?.node?.init?.params;
                 }
                 const { type, params } = propProperties;
 
@@ -497,7 +499,7 @@ function addCallbackParam(componentsArray, propMap) {
                   } = propMap[attribute.name.name];
 
                   const paramNameAtGivenIndex =
-                    params && params[previousParamIndex]?.name;
+                    params?.length && params[previousParamIndex]?.name;
 
                   // if the expected index of the newParam exceeds the number of current params just set treat it like a param addition with the default param value
                   if (previousParamIndex >= params?.length) {
@@ -551,10 +553,11 @@ function addCallbackParam(componentsArray, propMap) {
                       const createRemoveCurrentParamUseFix = (
                         currentUseOfNewParam
                       ) => {
-                        const tokenBeforeCurrentUse = context.getTokenBefore(currentUseOfNewParam)
+                        const tokenBeforeCurrentUse =
+                          context.getTokenBefore(currentUseOfNewParam);
                         const targetRange = [
                           tokenBeforeCurrentUse.range[0],
-                          currentUseOfNewParam.range[1]
+                          currentUseOfNewParam.range[1],
                         ];
 
                         return fixer.replaceTextRange(targetRange, "");
