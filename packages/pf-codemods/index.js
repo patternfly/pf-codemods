@@ -69,10 +69,12 @@ function runCodemods(path, otherPaths, options) {
         return acc;
       }, {});
   }
-  if (options.exclude) {
-    options.exclude.split(',').forEach(rule =>  delete configs.recommended.rules[rule]);
-  }  
+
   const prefix = "@patternfly/pf-codemods/";
+
+  if (options.exclude) {
+    options.exclude.split(',').forEach(rule =>  delete configs.recommended.rules[prefix + rule]);
+  }  
   ruleVersionMapping[options.v4 ? "v5" : "v4"].forEach(rule => delete configs.recommended.rules[prefix + rule]);
 
   const engine = new CLIEngine({
