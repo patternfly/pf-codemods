@@ -565,6 +565,60 @@ import { ContextSelector as ContextSelectorDeprecated, ContextSelectorItem as Co
 <ContextSelectorDeprecated />
 ```
 
+### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
+
+We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
+
+In addition to removing these props, this rule will suggest using the DragDrop component instead of the `onDrag...` props.
+
+#### Examples
+
+In:
+
+```jsx
+<DataList onDragFinish onDragStart onDragMove onDragCancel itemOrder />
+```
+
+Out:
+
+```jsx
+<DataList      />
+```
+
+### datalist-remove-selectableRow [(#8827)](https://github.com/patternfly/patternfly-react/pull/8827)
+
+We've removed the selectableRow property and replaced it with onSelectableRowChange. The value of the selectableRow's onChange field
+was a callback, which can now be directly passed to the onSelectableRowChange prop. However, it's worth noting that the order of the params 
+in the callback has been updated so that the event param is first.
+
+#### Example of manual change needed
+
+In:
+
+```jsx
+<DataList selectableRow={{ onChange: (id, event) => {} }} />
+
+const selectableRowObject = { onChange: (id, event) => {}};
+<DataList selectableRow={selectableRowObject} />
+
+const onChange = (id, event) => {};
+const selectableRowObject = { onChange: onChange};
+<DataList selectableRow={selectableRowObject} />
+```
+
+Out:
+
+```jsx
+<DataList onSelectableRowChange={ (event, id) => {} } />
+
+const onSelectableRowChange = (event, id) => {};
+<DataList onSelectableRowChange={onSelectableRowChange} />
+
+const onChange = (event, id) => {};
+<DataList onSelectableRowChange={onChange} />
+
+```
+
 ### dataList-updated-callback [(#8723)](https://github.com/patternfly/patternfly-react/pull/8723)
 
 We've updated the `onSelectDataListItem` prop for DataList to include the `event` as its first parameter. Handlers may require an update.
@@ -623,60 +677,6 @@ const onChange1 = (_event, checked) => {};
 
 function onChange2(_event, checked) {};
 <DataListCheck onChange={onChange2}>
-```
-
-### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
-
-We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
-
-In addition to removing these props, this rule will suggest using the DragDrop component instead of the `onDrag...` props.
-
-#### Examples
-
-In:
-
-```jsx
-<DataList onDragFinish onDragStart onDragMove onDragCancel itemOrder />
-```
-
-Out:
-
-```jsx
-<DataList      />
-```
-
-### datalist-remove-selectableRow [(#8827)](https://github.com/patternfly/patternfly-react/pull/8827)
-
-We've removed the selectableRow property and replaced it with onSelectableRowChange. The value of the selectableRow's onChange field
-was a callback, which can now be directly passed to the onSelectableRowChange prop. However, it's worth noting that the order of the params 
-in the callback has been updated so that the event param is first.
-
-#### Example of manual change needed
-
-In:
-
-```jsx
-<DataList selectableRow={{ onChange: (id, event) => {} }} />
-
-const selectableRowObject = { onChange: (id, event) => {}};
-<DataList selectableRow={selectableRowObject} />
-
-const onChange = (id, event) => {};
-const selectableRowObject = { onChange: onChange};
-<DataList selectableRow={selectableRowObject} />
-```
-
-Out:
-
-```jsx
-<DataList onSelectableRowChange={ (event, id) => {} } />
-
-const onSelectableRowChange = (event, id) => {};
-<DataList onSelectableRowChange={onSelectableRowChange} />
-
-const onChange = (event, id) => {};
-<DataList onSelectableRowChange={onChange} />
-
 ```
 
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)

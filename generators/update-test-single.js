@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { betterStringSort } = require('./helpers')
 
 function baseTestSingle(componentName, componentUsage) {
   const testPath = path.join(
@@ -28,7 +29,7 @@ function baseTestSingle(componentName, componentUsage) {
     console.log("component already imported");
   } else {
     trimmedImportedComponents.push(componentName);
-    trimmedImportedComponents.sort();
+    trimmedImportedComponents.sort(betterStringSort);
   }
 
   const formattedUpdatedImports = trimmedImportedComponents
@@ -77,7 +78,7 @@ function baseTestSingle(componentName, componentUsage) {
   }, []);
 
   concatenatedComponents.push(componentUsage);
-  concatenatedComponents.sort();
+  concatenatedComponents.sort(betterStringSort);
   const newFragmentSection = concatenatedComponents.join(">\n");
   const newContent = [
     splitByFragment[0],

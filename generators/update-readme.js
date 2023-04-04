@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { betterStringSort } = require("./helpers");
 
 function baseReadme(
   { componentName, propName, ruleName, referencePR, message },
@@ -35,7 +36,7 @@ ${outputExamples}
 `;
 
   splitRules.push(readMeAddition);
-  const newRules = splitRules.sort().join("\n### ");
+  const newRules = splitRules.sort(betterStringSort).join("\n### ");
 
   const newReadMe = [splitReadMe[0], newRules].join("## Rules");
   fs.writeFileSync(readMePath, newReadMe);
