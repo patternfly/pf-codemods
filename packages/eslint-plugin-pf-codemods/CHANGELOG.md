@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.53.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.4...@patternfly/eslint-plugin-pf-codemods@1.53.5) (2023-04-04)
+
+
+### Bug Fixes
+
+* **callback helper:** added optional chaining to prevent typeerror ([#373](https://github.com/patternfly/pf-codemods/issues/373)) ([952196b](https://github.com/patternfly/pf-codemods/commit/952196bd56ff7de934e0fbb92ef6bb667b1002ae))
+
+
+
+
+
 ## [1.53.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.3...@patternfly/eslint-plugin-pf-codemods@1.53.4) (2023-04-03)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
