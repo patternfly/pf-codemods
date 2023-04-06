@@ -90,20 +90,20 @@ function baseTestSingle(componentName, componentUsage) {
   fs.writeFileSync(testPath, newContent);
 }
 function genericTestSingle({ componentName, propName }) {
-  baseTestSingle(componentName, `  <${componentName} ${propName} `);
+  baseTestSingle(componentName, `  <${componentName} ${propName} /`);
 }
 
 function addEventCBTestSingle({ componentName, propName }) {
   baseTestSingle(
     componentName,
-    `  <${componentName} ${propName}={foo => handler(foo)} `
+    `  <${componentName} ${propName}={foo => handler(foo)} /`
   );
 }
 
 function swapCBTestSingle({ componentName, propName }) {
   baseTestSingle(
     componentName,
-    `  <${componentName} ${propName}={(foo, event) => handler(foo, event)} `
+    `  <${componentName} ${propName}={(foo, event) => handler(foo, event)} /`
   );
 }
 

@@ -56,15 +56,15 @@ function addEventCBReadme(answers) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
   const inputs = `<${componentName} ${propName}={(id) => handler(id)} />
 const handler1 = (id) => {};
-<${componentName} ${propName}={handler1}>
+<${componentName} ${propName}={handler1} />
 function handler2(id) {};
-<${componentName} ${propName}={handler2}>`;
+<${componentName} ${propName}={handler2} />`;
 
   const outputs = `<${componentName} ${propName}={(_event, id) => handler(id)} />
 const handler1 = (_event, id) => {};
-<${componentName} ${propName}={handler1}>
+<${componentName} ${propName}={handler1} />
 function handler2(_event, id) {};
-<${componentName} ${propName}={handler2}>`;
+<${componentName} ${propName}={handler2} />`;
 
   const message = `We've updated the \`${propName}\` prop for ${componentName} so that the \`event\` parameter is the first parameter. Handlers may require an update.`;
 
@@ -77,16 +77,16 @@ function swapCBReadme(answers) {
   const inputs = `<${componentName} ${propName}={(id) => handler(id)} />
 <${componentName} ${propName}={(id, event) => handler(id, event)} />
 const handler1 = (id, event) => {};
-<${componentName} ${propName}={handler1}>
+<${componentName} ${propName}={handler1} />
 function handler2(id, event) {};
-<${componentName} ${propName}={handler2}>`;
+<${componentName} ${propName}={handler2} />`;
 
   const outputs = `<${componentName} ${propName}={(_event, id) => handler(id)} />
 <${componentName} ${propName}={(event, id) => handler(id, event)} />
 const handler1 = (_event, id) => {};
-<${componentName} ${propName}={handler1}>
+<${componentName} ${propName}={handler1} />
 function handler2(_event, id) {};
-<${componentName} ${propName}={handler2}>`;
+<${componentName} ${propName}={handler2} />`;
 
   const message = `We've updated the \`${propName}\` prop for ${componentName} so that the \`event\` parameter is the first parameter. Handlers may require an update.`;
 
