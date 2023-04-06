@@ -80,12 +80,12 @@ function getInvalidAddCallbackParamTests(
         ],
       });
       tests.push({
-        code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id) => {}; <${componentName} ${propName}={handler} />;`,
-        output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id) => {}; <${componentName} ${propName}={handler} />;`,
+        code: `import { ${componentName} as ${componentName}Deprecated } from '@patternfly/react-core/deprecated'; const handler = (id) => {}; <${componentName}Deprecated ${propName}={handler} />;`,
+        output: `import { ${componentName} as ${componentName}Deprecated } from '@patternfly/react-core/deprecated'; const handler = (${newParamName}, id) => {}; <${componentName}Deprecated ${propName}={handler} />;`,
         errors: [
           {
             message: getAddCallbackParamMessage(
-              componentName,
+              componentName + "Deprecated",
               propName,
               newParamName
             ),

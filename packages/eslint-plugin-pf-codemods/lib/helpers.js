@@ -449,7 +449,10 @@ function ensureImports(context, node, package, imports) {
 // example:           { onClick: { defaultParamName: '_event', previousParamIndex: 1, otherMatchers?: /^_?(ev\w*|e$)/ } }
 function addCallbackParam(componentsArray, propMap) {
   return function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-core").filter(
+    const imports = [
+      ...getPackageImports(context, "@patternfly/react-core"),
+      ...getPackageImports(context, "@patternfly/react-core/deprecated")
+    ].filter(
       (specifier) => componentsArray.includes(specifier.imported.name)
     );
 
