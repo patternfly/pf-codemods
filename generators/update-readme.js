@@ -62,7 +62,7 @@ function handler2(id) {};
 
   const outputs = `<${componentName} ${propName}={(_event, id) => handler(id)} />
 const handler1 = (_event, id) => {};
-<${componentName} ${propName}={handler1 />
+<${componentName} ${propName}={handler1} />
 function handler2(_event, id) {};
 <${componentName} ${propName}={handler2} />`;
 
