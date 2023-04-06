@@ -25,6 +25,8 @@ An eslint plugin (with an extra CLI utility) to help ease products transitioning
 1. Run `yarn test:v5:single` to run the `pf-codemods` command against the `test.tsx` file and to check what error/warning messages a consumer would see when running our codemods
     - You can also run `yarn test:v5:single --fix` to see what the `test.tsx` file looks like after fixes are applied, allowing you to check whether fixes are applied as expected. Make sure to not save the `test.tsx` file after applying fixes.
 
+## Troubleshooting
+
 If you're having trouble writing a rule, you can:
 1. Put code into [AST explorer](https://astexplorer.net/) to inspect all the AST nodes of the input code. You should choose "JavaScript" as the language and "acorn" as the parser
     - This will provide a realtime view of what output your codemod will produce during development
