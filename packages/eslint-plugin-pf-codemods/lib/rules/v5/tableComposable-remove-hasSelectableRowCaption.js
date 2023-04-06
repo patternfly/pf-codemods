@@ -9,5 +9,5 @@ const renames = {
 
 module.exports = {
   meta: { fixable: 'code' },
-  create: renameProps(renames)
+  create: renameProps(renames, '@patternfly/react-table')
 };
