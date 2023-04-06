@@ -26,7 +26,8 @@ An eslint plugin (with an extra CLI utility) to help ease products transitioning
     - You can also run `yarn test:v5:single --fix` to see what the `test.tsx` file looks like after fixes are applied, allowing you to check whether fixes are applied as expected. Make sure to not save the `test.tsx` file after applying fixes.
 
 If you're having trouble writing a rule, you can:
-1. Put code into an AST explorer like https://astexplorer.net/ to inspect all the AST nodes
+1. Put code into [AST explorer](https://astexplorer.net/) to inspect all the AST nodes of the input code. You should choose "JavaScript" as the language and "acorn" as the parser
+    - This will provide a realtime view of what output your codemod will produce during development
 1. `console.dir(node, { depth: 5 })` to better inspect a `node` you're dealing with
 1. Write rule targeting an AST node that has all the information you need. Confirm AST node exists in `lib/rules/ast-node-types.d.ts`.
 1. Ask in PF slack channels
