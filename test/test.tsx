@@ -41,6 +41,7 @@ import {
   EmptyStateSecondaryActions,
   EmptyStateVariant,
   FileUpload,
+  FileUploadField,
   KebabToggle,
   KEY_CODES,
   Label,
@@ -125,6 +126,7 @@ const myVariant = EmptyStateVariant.small;
   </EmptyState>
   <EmptyStateIcon />
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <FileUploadField onChange={(foo, _bar, event) => handler(foo, event)} onTextChange={bar => textHandler(bar)} />
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
