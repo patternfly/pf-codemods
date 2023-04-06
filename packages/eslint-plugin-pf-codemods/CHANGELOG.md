@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.53.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.5...@patternfly/eslint-plugin-pf-codemods@1.53.6) (2023-04-06)
+
+
+### Bug Fixes
+
+* **TableComposable:** rule was looking in wrong import src ([#382](https://github.com/patternfly/pf-codemods/issues/382)) ([8392712](https://github.com/patternfly/pf-codemods/commit/83927121598e20147b3c3c8d85f72af2d0d317f7))
+
+
+
+
+
 ## [1.53.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.4...@patternfly/eslint-plugin-pf-codemods@1.53.5) (2023-04-04)
 
 
