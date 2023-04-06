@@ -19,7 +19,9 @@ An eslint plugin (with an extra CLI utility) to help ease products transitioning
 1. Run `yarn generate` to start the interactive CLI for the generator
     - It will create the rule/test files and update the README/test.tsx files as needed
     - Select the `generic` generator if you don't see a more applicable one, it creates updates demonstrating prop removal to serve as a basic canvas for you to modify
-1. Run `yarn test:v5` to run tests
+1. Run `yarn test:v5` to run tests for upgrading from v4 to v5
+    - This will simply output which tests pass or fail
+    - You can also replace `v5` with another version directory within the repo
 1. You can also run `yarn test:v5:single` to see what a consumer would see if they were to run our codemods
 
 If you're having trouble writing a rule, you can:
