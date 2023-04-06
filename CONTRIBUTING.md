@@ -22,7 +22,8 @@ An eslint plugin (with an extra CLI utility) to help ease products transitioning
 1. Run `yarn test:v5` to run tests for upgrading from v4 to v5
     - This will simply output which tests pass or fail
     - You can also replace `v5` with another version directory within the repo
-1. You can also run `yarn test:v5:single` to see what a consumer would see if they were to run our codemods
+1. Run `yarn test:v5:single` to run the `pf-codemods` command against the `test.tsx` file and to check what error/warning messages a consumer would see when running our codemods
+    - You can also run `yarn test:v5:single --fix` to see what the `test.tsx` file looks like after fixes are applied, allowing you to check whether fixes are applied as expected. Make sure to not save the `test.tsx` file after applying fixes.
 
 If you're having trouble writing a rule, you can:
 1. Put code into an AST explorer like https://astexplorer.net/ to inspect all the AST nodes
