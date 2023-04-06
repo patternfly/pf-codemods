@@ -33,7 +33,7 @@ If you're having trouble writing a rule, you can:
 1. `console.dir(node, { depth: 5 })` to better inspect a `node` you're dealing with
 1. Write rule targeting an AST node that has all the information you need. Confirm AST node exists in `lib/rules/ast-node-types.d.ts`.
 1. Ask in PF slack channels
-1. See eslint rule docs https://eslint.org/docs/latest/developer-guide/working-with-rules
+1. See [eslint rule docs](https://eslint.org/docs/latest/developer-guide/working-with-rules) 
 1. Look at similar existing rules as examples
 
 If the rule you're adding should have a severity of `warning` rather than `error`, add the rule name to the `warningRules` array in `eslint-plugin-pf-codemods/index.js`.
