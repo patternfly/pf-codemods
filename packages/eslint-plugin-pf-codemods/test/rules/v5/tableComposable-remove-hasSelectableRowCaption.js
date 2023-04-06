@@ -4,7 +4,7 @@ const rule = require('../../../lib/rules/v5/tableComposable-remove-hasSelectable
 ruleTester.run("tableComposable-remove-hasSelectableRowCaption", rule, {
   valid: [
     {
-      code: `import { TableComposable } from '@patternfly/react-core'; <TableComposable />`,
+      code: `import { TableComposable } from '@patternfly/react-table'; <TableComposable />`,
     },
     {
       // No @patternfly/react-core import
@@ -13,8 +13,8 @@ ruleTester.run("tableComposable-remove-hasSelectableRowCaption", rule, {
   ],
   invalid: [
     {
-      code:   `import { TableComposable } from '@patternfly/react-core'; <TableComposable hasSelectableRowCaption />`,
-      output: `import { TableComposable } from '@patternfly/react-core'; <TableComposable  />`,
+      code:   `import { TableComposable } from '@patternfly/react-table'; <TableComposable hasSelectableRowCaption />`,
+      output: `import { TableComposable } from '@patternfly/react-table'; <TableComposable  />`,
       errors: [{
         message: `hasSelectableRowCaption prop for TableComposable has been removed`,
         type: "JSXOpeningElement",
