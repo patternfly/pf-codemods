@@ -24,6 +24,7 @@ An eslint plugin (with an extra CLI utility) to help ease products transitioning
     - You can also replace `v5` with another version directory within the repo
 1. Run `yarn test:v5:single` to run the `pf-codemods` command against the `test.tsx` file and to check what error/warning messages a consumer would see when running our codemods
     - You can also run `yarn test:v5:single --fix` to see what the `test.tsx` file looks like after fixes are applied, allowing you to check whether fixes are applied as expected. Make sure to not save the `test.tsx` file after applying fixes.
+1. If the rule you're adding should have a severity of `warning` rather than `error`, add the rule name to the `warningRules` array in `eslint-plugin-pf-codemods/index.js`.
 
 ## Troubleshooting
 
@@ -35,5 +36,3 @@ If you're having trouble writing a rule, you can:
 1. Ask in PF slack channels
 1. See [eslint rule docs](https://eslint.org/docs/latest/developer-guide/working-with-rules) 
 1. Look at similar existing rules as examples
-
-If the rule you're adding should have a severity of `warning` rather than `error`, add the rule name to the `warningRules` array in `eslint-plugin-pf-codemods/index.js`.
