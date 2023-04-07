@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.53.7](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.6...@patternfly/eslint-plugin-pf-codemods@1.53.7) (2023-04-07)
+
+
+### Bug Fixes
+
+* **addCallBackParam:** helper will now also check deprecated import src ([#383](https://github.com/patternfly/pf-codemods/issues/383)) ([4807566](https://github.com/patternfly/pf-codemods/commit/480756600b8ffbb422c580f08485b6331a576568))
+
+
+
+
+
 ## [1.53.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.5...@patternfly/eslint-plugin-pf-codemods@1.53.6) (2023-04-06)
 
 
