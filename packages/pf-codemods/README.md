@@ -2089,6 +2089,22 @@ import {
 } from '@patternfly/react-table/deprecated';
 ```
 
+### table-rename-TableComposable [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
+
+TableComposable has been renamed to Table.
+
+In:
+
+```jsx
+<TableComposable />
+```
+
+Out:
+
+```jsx
+<Table />
+```
+
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
 
 Table and TableComposable's `ActionsColumn` has been updated to use our new implementation of Dropdown. The toggle passed to the actions column should now be a `MenuToggle` instead of the deprecated `DropdownToggle`. The `dropdownPosition`, `dropdownDirection` and `menuAppendTo` properties are removed and `Popper` properties can be passed in using `popperProps` instead (via `direction`, `position`, `appendTo`, etc.).

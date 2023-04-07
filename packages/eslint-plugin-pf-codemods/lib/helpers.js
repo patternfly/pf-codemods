@@ -10,11 +10,23 @@ function moveSpecifiers(
 ) {
   return function (context) {
     const importNames = importsToMove.map((nameToMove) => nameToMove.name);
-    const importSpecifiersToMove = getPackageImports(
+    const fromPackageImports = getPackageImports(
       context,
       fromPackage,
       importNames
     );
+    const allElements = getAllJSXElements(context);
+    const importSpecifiersToMove = fromPackageImports.filter((fromImport) => {
+      const foundElement = allElements.find(
+        (el) => el?.openingElement?.name?.name === fromImport.local?.name
+      );
+      const hasDataAttr = foundElement?.openingElement.attributes?.find(
+        (attr) => attr.name?.name === "data-codemods"
+      );
+
+      return (foundElement && !hasDataAttr) || !foundElement;
+    });
+
     if (!importSpecifiersToMove.length) return {};
 
     let modifiedToPackage = "";
