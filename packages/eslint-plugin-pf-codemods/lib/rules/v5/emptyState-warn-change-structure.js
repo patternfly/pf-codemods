@@ -17,8 +17,8 @@ module.exports = {
     const preFooterNames = [
       "EmptyStateBody",
       "EmptyStateHeader",
-      "EmptyStateIcon",
       "Title",
+      "EmptyStateIcon",
     ];
 
     const includesEmptyStateContent = imports.some((specifier) =>
@@ -29,12 +29,23 @@ module.exports = {
       return {};
     }
 
+    let doImportFooter = true;
+
     return {
-      ImportDeclaration(node) {
-        if (includesEmptyState(node.specifiers)) {
-          ensureImports(context, node, package, [
-            "EmptyStateHeader",
-            "EmptyStateFooter",
+      "Program:exit"() {
+        const importDeclaration = context
+          .getSourceCode()
+          .ast.body.find(
+            (node) =>
+              node.type === "ImportDeclaration" &&
+              node.source.value === package &&
+              includesEmptyState(node.specifiers)
+          );
+
+        if (importDeclaration && (includesIconOrTitle || doImportFooter)) {
+          ensureImports(context, importDeclaration, package, [
+            ...(includesIconOrTitle ? ["EmptyStateHeader"] : []),
+            ...(doImportFooter ? ["EmptyStateFooter"] : []),
           ]);
         }
       },
@@ -157,6 +168,7 @@ module.exports = {
           };
 
           if (nothingToWrap()) {
+            doImportFooter = false;
             return;
           }
 
