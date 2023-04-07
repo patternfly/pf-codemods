@@ -112,7 +112,7 @@ module.exports = {
               };
 
               return [
-                fixer.insertTextAfter(node.children[0], getHeaderText()),
+                fixer.insertTextAfter(emptyStateIcon ?? title, getHeaderText()),
                 ...(emptyStateIcon ? [fixer.remove(emptyStateIcon)] : []),
                 ...(title ? [fixer.remove(title)] : []),
                 ...removeEmptyLine(),
