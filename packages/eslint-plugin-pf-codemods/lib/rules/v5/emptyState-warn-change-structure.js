@@ -14,6 +14,10 @@ module.exports = {
       ["EmptyStateIcon", "Title"].includes(specifier.imported.name)
     );
 
+    const titleImport = imports.find(
+      (specifier) => specifier.imported.name === "Title"
+    );
+
     const preFooterNames = [
       "EmptyStateBody",
       "EmptyStateHeader",
@@ -29,7 +33,7 @@ module.exports = {
       return {};
     }
 
-    let doImportFooter = true;
+    let doImportFooter = false;
 
     return {
       "Program:exit"() {
@@ -48,6 +52,41 @@ module.exports = {
             ...(doImportFooter ? ["EmptyStateFooter"] : []),
           ]);
         }
+
+        if (!titleImport) {
+          return;
+        }
+
+        const allTokens = context
+          .getSourceCode()
+          .ast.body.filter((node) => node.type !== "ImportDeclaration")
+          .map((node) =>
+            context
+              .getSourceCode()
+              .getTokens(node)
+              .map((token) => token.value)
+          )
+          .reduce((acc, val) => acc.concat(val), []);
+
+        if (allTokens.includes(titleImport.local.name)) {
+          return;
+        }
+
+        context.report({
+          node: titleImport,
+          message: `unused patternfly import ${titleImport.local.name}`,
+          fix(fixer) {
+            const getEndRange = () => {
+              const nextComma = context.getSourceCode().getTokenAfter(titleImport);
+
+              return context.getSourceCode().getText(nextComma) === ","
+                ? context.getSourceCode().getTokenAfter(nextComma).range[0]
+                : titleImport.range[1];
+            };
+
+            return fixer.removeRange([titleImport.range[0], getEndRange()]);
+          },
+        });
       },
       JSXElement(node) {
         if (node.openingElement.name?.name !== "EmptyState") {
@@ -168,9 +207,10 @@ module.exports = {
           };
 
           if (nothingToWrap()) {
-            doImportFooter = false;
             return;
           }
+
+          doImportFooter = true;
 
           context.report({
             node,

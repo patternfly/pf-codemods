@@ -4,7 +4,7 @@ const rule = require("../../../lib/rules/v5/emptyState-warn-change-structure");
 ruleTester.run("emptyState-warn-change-structure", rule, {
   valid: [
     {
-      code: `import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateIcon, Title, EmptyStateHeader, EmptyStateFooter } from '@patternfly/react-core'; 
+      code: `import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateIcon, EmptyStateHeader, EmptyStateFooter } from '@patternfly/react-core'; 
       <EmptyState>
         <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5" />
         <EmptyStateBody>
