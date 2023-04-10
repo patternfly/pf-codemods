@@ -6,7 +6,7 @@ const renames = {
   noVerticalAlign: "",
 };
 
-// https://github.com/patternfly/patternfly-react/pull/YOURNUMBERHERE
+// https://github.com/patternfly/patternfly-react/pull/5275
 module.exports = {
   meta: {fixable: "code"},
   create: function (context) {
