@@ -7,6 +7,7 @@ import {
   LightBlueColorTheme,
 } from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
+import { FrogIcon } from "@patternfly/react-icons";
 
 import {
   AboutModal,
@@ -152,6 +153,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
     onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
   />
   <FileUploadField onTextChange={bar => textHandler(bar)} />
+  <FrogIcon size="sm" color="green" noVerticalAlign />
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />

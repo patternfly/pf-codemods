@@ -252,7 +252,7 @@ function splitImportSpecifiers(importDeclaration, importsToSplit) {
  */
 function createAliasImportSpecifiers(specifiers, aliasSuffix) {
   return specifiers.map((imp) => {
-    const { imported, local } = imp;
+    const {imported, local} = imp;
 
     if (imported.name !== local.name) {
       return `${imported.name} as ${local.name}`;
