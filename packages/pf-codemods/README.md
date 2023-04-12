@@ -990,34 +990,28 @@ Out:
 
 **Not yet included in pf-react**
 
-We've updated the `onChange` and `onTextChange` props for FileUploadField so that the `event` parameter is the first parameter. Handlers may require an update.
+We've updated the `onTextChange` prop for FileUploadField so that the `event` parameter is the first parameter. Handlers may require an update.
 
 #### Examples
 
 In:
 
 ```jsx
-<FileUploadField onChange={(value) => handler(value)} onTextChange={text => textHandler(text)} />
-<FileUploadField onChange={(value, _filename, event) => handler(value, event)} />
-const handler1 = (value, filename, event) => {};
+<FileUploadField onTextChange={text => textHandler(text)} />
 const textHandler1 = (text) => {};
-<FileUploadField onChange={handler1} onTextChange={textHandler1} />
-function handler2(value, filename, event) {};
+<FileUploadField onTextChange={textHandler1} />
 function textHandler2(text) {};
-<FileUploadField onChange={handler2} onTextChange={textHandler2} />
+<FileUploadField onTextChange={textHandler2} />
 ```
 
 Out:
 
 ```jsx
-<FileUploadField onChange={(_event, value) => handler(value)} onTextChange={(_event, text) => textHandler(text)} />
-<FileUploadField onChange={(event, value, _filename) => handler(value, event)} />
-const handler1 = (_event, value, filename) => {};
+<FileUploadField onTextChange={(_event, text) => textHandler(text)} />
 const textHandler1 = (_event, text) => {};
-<FileUploadField onChange={handler1} onTextChange={textHandler1} />
-function handler2(_event, value, filename) {};
+<FileUploadField onTextChange={textHandler1} />
 function textHandler2(_event, text) {};
-<FileUploadField onChange={handler2} onTextChange={textHandler2} />
+<FileUploadField onTextChange={textHandler2} />
 ```
 
 
