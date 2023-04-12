@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const fspath = require('path');
-const { CLIEngine } = require('eslint/lib/cli-engine');
+const { ESLint } = require('eslint');
 const { configs, ruleVersionMapping } = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
 const program = new Command();
@@ -19,20 +19,20 @@ program
 
 /**
  * Outputs the results of the linting.
- * @param {CLIEngine} engine The CLIEngine to use.
+ * @param {Eslint} The Eslint to use.
  * @param {LintResult[]} results The results to print.
  * @param {string} format The name of the formatter to use or the path to the formatter.
  * @returns {boolean} True if the printing succeeds, false if not.
  * @private
  */
-function printResults(engine, results, format) {
+async function printResults(eslint, results, format) {
   let formatter;
   let rulesMeta;
 
   try {
-    formatter = engine.getFormatter(format);
+    formatter = await eslint.loadFormatter(format);
   } catch (e) {
-    log.error(e.message);
+    console.error(e.message);
     return false;
   }
 
@@ -43,13 +43,10 @@ function printResults(engine, results, format) {
     result.warningCount -= numFiltered;
   });
 
-  const output = formatter(results, {
+  const output = formatter.format(results, {
     get rulesMeta() {
       if (!rulesMeta) {
-        rulesMeta = {};
-        for (const [ruleId, rule] of engine.getRules()) {
-          rulesMeta[ruleId] = rule.meta;
-        }
+        return eslint.getRulesMetaForResults(results);
       }
       return rulesMeta;
     }
@@ -59,7 +56,7 @@ function printResults(engine, results, format) {
   return true;
 }
 
-function runCodemods(path, otherPaths, options) {
+async function runCodemods(path, otherPaths, options) {
   if (options.only) {
     // Set rules to error like eslint likes
     configs.recommended.rules = options.only
@@ -77,29 +74,27 @@ function runCodemods(path, otherPaths, options) {
   }  
   ruleVersionMapping[options.v4 ? "v5" : "v4"].forEach(rule => delete configs.recommended.rules[prefix + rule]);
 
-  const engine = new CLIEngine({
+  const eslint = new ESLint({
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
     baseConfig: configs.recommended,
     ignore: true,
-    ignorePattern: '**/node_modules/**',
-    configFile: fspath.resolve(__dirname, '.eslintrc'),
+    overrideConfig: { ignorePatterns: ['**/node_modules/**'] },
+    overrideConfigFile: fspath.resolve(__dirname, '.eslintrc'),
     rulePaths: [],
     useEslintrc: false,
     cache: options.cache,
-    cacheFile: '.eslintcache',
+    cacheLocation: '.eslintcache',
     cacheLocation: process.cwd(),
     fix: options.fix,
     // Allow `npx` to work its magic
     resolvePluginsRelativeTo: __dirname
   });
   
-  const report = engine.executeOnFiles(otherPaths.concat(path));
-  
+  const results = await eslint.lintFiles(otherPaths.concat(path));
   if (options.fix) {
-    CLIEngine.outputFixes(report);
+    ESLint.outputFixes(results);
   }
-  
-  printResults(engine, report.results, options.format);
+  await printResults(eslint, results, options.format);
 }
 
 program.parse(process.argv);
