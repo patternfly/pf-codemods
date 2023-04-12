@@ -186,7 +186,7 @@ function getPackageImports(context, packageName, importNames = []) {
   const specifiers = context
     .getSourceCode()
     .ast.body.filter((node) => node.type === "ImportDeclaration")
-    .filter((node) => node.source.value === packageName)
+    .filter((node) => node.source.value.startsWith(packageName))
     .map((node) => node.specifiers)
     .reduce((acc, val) => acc.concat(val), []);
   return !importNames.length
