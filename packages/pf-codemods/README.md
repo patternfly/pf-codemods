@@ -1768,6 +1768,30 @@ We've restricted the type of elements that can be passed to the `Tabs` component
 
 This rule will raise a warning when `Tabs` is imported in a file, even if the children passed to it are already of the appropriate type. It will not make any code changes.
 
+### td-TdSelectType-TdActionsType-rename-disable [(#8861,](https://github.com/patternfly/patternfly-react/pull/8861) [#8904)](https://github.com/patternfly/patternfly-react/pull/8904)
+
+We've renamed `disable` prop to `isDisabled` inside `TdSelectType` and `TdActionsType` interfaces. These interfaces are used as types of `Td` component's props `select` (`TdSelectType`) and `actions` (`TdActionsType`).
+
+#### Examples
+
+In:
+
+```jsx
+const tdSelectTypeObject = {disable: true};
+
+<Td select={{ disable: true }} actions={{ "disable": false }} ></Td>
+<Td select={tdSelectTypeObject} actions={{ disable: false }} ></Td>
+```
+
+Out:
+
+```jsx
+const tdSelectTypeObject = {isDisabled: true};
+
+<Td select={{ isDisabled: true }} actions={{ isDisabled: false }} ></Td>
+<Td select={tdSelectTypeObject} actions={{ isDisabled: false }} ></Td>
+```
+
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
