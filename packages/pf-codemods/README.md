@@ -171,6 +171,12 @@ function searchHandler2(_event, text) {};
 
 We've updated the internal input in ApplicationLauncher to the PatternFly SearchInput. Any relative selectors, such as in unit tests, may need to be updated.
 
+### backgroundImage-update-props [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
+
+We've removed the `filter` prop from BackgroundImage.
+
+Additionally, we've updated the type of the `src` prop to just a string, and the prop will no longer accept a `BackgroundImageSrcMap` object.
+
 ### banner-update-variant [(#8204)](https://github.com/patternfly/patternfly-react/issues/8204)
 
 We've updated the `variant` prop type for Banner. `"default"` is still a valid value, but the following status values have been replaced with color values:
