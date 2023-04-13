@@ -4,18 +4,57 @@ const { getPackageImports, ensureImports } = require("../../helpers");
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const package = "@patternfly/react-core";
-    const imports = getPackageImports(context, package);
+    const pkg = "@patternfly/react-core";
+    const imports = getPackageImports(context, pkg);
 
     const includesEmptyState = (arr) =>
       arr.some((specifier) => specifier.imported?.name === "EmptyState");
 
-    const includesIconOrTitle = imports.some((specifier) =>
-      ["EmptyStateIcon", "Title"].includes(specifier.imported.name)
-    );
-
     const titleImport = imports.find(
       (specifier) => specifier.imported.name === "Title"
+    );
+
+    const getElements = (baseElement, nameToGet) => {
+      const elementsArray = [];
+
+      const searchForElements = (elementToSearch, elementName) => {
+        const elementObject = elementToSearch.expression ?? elementToSearch;
+        if (elementObject?.openingElement?.name?.name === elementName) {
+          elementsArray.push(elementObject);
+        } else {
+          elementObject?.children?.forEach((child) =>
+            searchForElements(child, elementName)
+          );
+        }
+      };
+
+      searchForElements(baseElement, nameToGet);
+
+      return elementsArray;
+    };
+    const allElements = context
+      .getSourceCode()
+      .ast.body.filter((node) => node.expression?.openingElement);
+
+    const emptyStateElements = allElements
+      .map((node) => {
+        return getElements(node, "EmptyState");
+      })
+      .flat();
+
+    const titleElements = allElements
+      .map((node) => {
+        return getElements(node, "Title");
+      })
+      .flat();
+
+    const emptyStatesWithTitleOrHeader = emptyStateElements?.filter(
+      (emptyState) =>
+        emptyState.children?.find((child) =>
+          ["Title", "EmptyStateHeader", "EmptyStateIcon"].includes(
+            child.openingElement?.name?.name
+          )
+        )
     );
 
     const preFooterNames = [
@@ -33,42 +72,26 @@ module.exports = {
       return {};
     }
 
-    let doImportFooter = false;
-
     return {
+      importDeclaration(node) {},
       "Program:exit"() {
         const importDeclaration = context
           .getSourceCode()
           .ast.body.find(
             (node) =>
               node.type === "ImportDeclaration" &&
-              node.source.value === package &&
+              node.source.value === pkg &&
               includesEmptyState(node.specifiers)
           );
 
-        if (importDeclaration && (includesIconOrTitle || doImportFooter)) {
-          ensureImports(context, importDeclaration, package, [
-            ...(includesIconOrTitle ? ["EmptyStateHeader"] : []),
-            ...(doImportFooter ? ["EmptyStateFooter"] : []),
+        if (importDeclaration) {
+          ensureImports(context, importDeclaration, pkg, [
+            "EmptyStateHeader",
+            "EmptyStateFooter",
           ]);
         }
 
-        if (!titleImport) {
-          return;
-        }
-
-        const allTokens = context
-          .getSourceCode()
-          .ast.body.filter((node) => node.type !== "ImportDeclaration")
-          .map((node) =>
-            context
-              .getSourceCode()
-              .getTokens(node)
-              .map((token) => token.value)
-          )
-          .reduce((acc, val) => acc.concat(val), []);
-
-        if (allTokens.includes(titleImport.local.name)) {
+        if (!titleImport || titleElements.length) {
           return;
         }
 
@@ -77,7 +100,9 @@ module.exports = {
           message: `unused patternfly import ${titleImport.local.name}`,
           fix(fixer) {
             const getEndRange = () => {
-              const nextComma = context.getSourceCode().getTokenAfter(titleImport);
+              const nextComma = context
+                .getSourceCode()
+                .getTokenAfter(titleImport);
 
               return context.getSourceCode().getText(nextComma) === ","
                 ? context.getSourceCode().getTokenAfter(nextComma).range[0]
@@ -210,8 +235,6 @@ module.exports = {
             return;
           }
 
-          doImportFooter = true;
-
           context.report({
             node,
             message:
@@ -231,7 +254,7 @@ module.exports = {
           });
         };
 
-        includesIconOrTitle && addHeader();
+        emptyStatesWithTitleOrHeader.length && addHeader();
         includesEmptyStateContent && addFooter();
       },
     };
