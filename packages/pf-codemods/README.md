@@ -42,6 +42,12 @@ Options:
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
+### aboutModalBoxHero-remove-subcomponent [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
+
+The AboutModalBoxHero sub-component has been removed from AboutModal. Selectors in tests may need to be updated. 
+
+This rule will raise a warning, but will not make any code changes.
+
 ### accordion-rename-AccordionExpandedContentBody[(#8525)](https://github.com/patternfly/patternfly-react/pull/8525)
 
 We've renamed the `AccordionExpandedContentBody` component to `AccordionExpandableContentBody`.

@@ -25,6 +25,7 @@ function genericRule({
   
 // https://github.com/patternfly/patternfly-react/pull/${referencePR}
 module.exports = {
+  meta: { fixable: 'code' },
   create: function(context) {
     const imports = getPackageImports(context, '@patternfly/react-core')
       .filter(specifier => specifier.imported.name === '${componentName}');
