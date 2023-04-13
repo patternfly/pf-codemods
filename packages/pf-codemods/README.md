@@ -199,6 +199,24 @@ const srcPath = {xs: 'file/path'};
 <BackgroundImage src={srcPath} />
 ```
 
+### backgroundImageSrcMap-remove-interface [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
+
+We've removed the `BackgroundImageSrcMap` interface.
+
+#### Examples
+
+In:
+
+```jsx
+const backgroundImgSrcObj: BackgroundImageSrcMap = {};
+```
+
+Out:
+
+```jsx
+const backgroundImgSrcObj = {};
+```
+
 ### banner-update-variant [(#8204)](https://github.com/patternfly/patternfly-react/issues/8204)
 
 We've updated the `variant` prop type for Banner. `"default"` is still a valid value, but the following status values have been replaced with color values:

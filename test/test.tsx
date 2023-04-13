@@ -14,6 +14,7 @@ import {
   Alert,
   ApplicationLauncher,
   BackgroundImage,
+  BackgroundImageSrcMap,
   BadgeToggle,
   Banner,
   Button,
@@ -84,8 +85,9 @@ import foo from Bar;
 //eslint-disable-next-line @typescript/foo
 
 const isRead = true;
-const newTheme = getCustomTheme("1", "2", "3");
 const myVariant = EmptyStateVariant.small;
+const newTheme = getCustomTheme("1", "2", "3");
+const backgroundImgSrcObj: BackgroundImageSrcMap = {};
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
