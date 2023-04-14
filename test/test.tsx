@@ -40,6 +40,7 @@ import {
   EmptyStatePrimary as ESP,
   EmptyStateSecondaryActions,
   EmptyStateVariant,
+  ExpandableSection,
   FileUpload,
   FileUploadField,
   KebabToggle,
@@ -126,6 +127,7 @@ const myVariant = EmptyStateVariant.small;
   </EmptyState>
   <EmptyStateIcon />
   <EmptyStateIcon component={Spinner} variant="container"/>
+  <ExpandableSection onToggle={foo => handler(foo)} />
   <FileUploadField onTextChange={bar => textHandler(bar)} />
   <KebabToggle onToggle={} />
   <Label />

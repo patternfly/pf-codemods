@@ -968,6 +968,35 @@ Out:
 <ExpandableSection displaySize="lg" />
 ```
 
+### expandableSection-onToggle-event-added [(#8880)](https://github.com/patternfly/patternfly-react/pull/8880)
+
+**Not yet included in pf-react**
+
+We've updated the `onToggle` prop for ExpandableSection so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<ExpandableSection onToggle={(id) => handler(id)} />
+const handler1 = (id) => {};
+<ExpandableSection onToggle={handler1} />
+function handler2(id) {};
+<ExpandableSection onToggle={handler2} />
+```
+
+Out:
+
+```jsx
+<ExpandableSection onToggle={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<ExpandableSection onToggle={handler1} />
+function handler2(_event, id) {};
+<ExpandableSection onToggle={handler2} />
+```
+
+
 ### fileUpload-remove-onChange [(#8155)](https://github.com/patternfly/patternfly-react/pull/8155)
 
 We've removed the deprecated `onChange` prop. This rule will remove the prop from the FileUpload component and suggest replacing it with the `onFileInputChange`, `onTextChange`, `onDataChange`, and `onClearClick` props as needed.
