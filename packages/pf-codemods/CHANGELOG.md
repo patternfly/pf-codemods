@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.53.10...@patternfly/pf-codemods@1.54.0) (2023-04-13)
+
+
+### Features
+
+* **FileUploadField:** Add cb param change mods ([#384](https://github.com/patternfly/pf-codemods/issues/384)) ([508f81c](https://github.com/patternfly/pf-codemods/commit/508f81c31abb6834de261254f6d5a941970ead93))
+
+
+
+
+
 ## [1.53.10](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.53.9...@patternfly/pf-codemods@1.53.10) (2023-04-12)
 
 **Note:** Version bump only for package @patternfly/pf-codemods

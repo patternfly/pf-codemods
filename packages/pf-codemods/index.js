@@ -57,21 +57,22 @@ async function printResults(eslint, results, format) {
 }
 
 async function runCodemods(path, otherPaths, options) {
+  const prefix = "@patternfly/pf-codemods/";
+
   if (options.only) {
     // Set rules to error like eslint likes
     configs.recommended.rules = options.only
       .split(',')
       .reduce((acc, rule) => {
-        acc[rule] = 'error';
+        acc[prefix + rule] = 'error';
         return acc;
       }, {});
   }
 
-  const prefix = "@patternfly/pf-codemods/";
-
   if (options.exclude) {
     options.exclude.split(',').forEach(rule =>  delete configs.recommended.rules[prefix + rule]);
-  }  
+  }
+
   ruleVersionMapping[options.v4 ? "v5" : "v4"].forEach(rule => delete configs.recommended.rules[prefix + rule]);
 
   const eslint = new ESLint({

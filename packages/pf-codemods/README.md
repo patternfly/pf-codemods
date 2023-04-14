@@ -986,6 +986,35 @@ Out:
 <FileUpload  />
 ```
 
+### fileUploadField-cb-param-updates [(#8882)](https://github.com/patternfly/patternfly-react/pull/8882)
+
+**Not yet included in pf-react**
+
+We've updated the `onTextChange` prop for FileUploadField so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<FileUploadField onTextChange={text => textHandler(text)} />
+const textHandler1 = (text) => {};
+<FileUploadField onTextChange={textHandler1} />
+function textHandler2(text) {};
+<FileUploadField onTextChange={textHandler2} />
+```
+
+Out:
+
+```jsx
+<FileUploadField onTextChange={(_event, text) => textHandler(text)} />
+const textHandler1 = (_event, text) => {};
+<FileUploadField onTextChange={textHandler1} />
+function textHandler2(_event, text) {};
+<FileUploadField onTextChange={textHandler2} />
+```
+
+
 ### formgroup-remove-helpertextProps [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
 We've removed the helper text related props from `FormGroup`: `helperText`, `helperTextInvalid`, `validated`, `helperTextIcon`, `helperTextInvalidIcon`, and `isHelperTextBeforeField`. The `FormHelperText`, `HelperText`, and `HelperTextItem` components should now be used directly as part of `children` instead of these props. This rule will throw an error but not make any changes. 

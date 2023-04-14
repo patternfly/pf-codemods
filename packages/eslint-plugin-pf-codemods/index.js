@@ -1,4 +1,7 @@
-const createListOfRules = (version) => {
+// if you want your rule to only run when explicitly called for using the --only flag, add the rule name to the below array
+const betaRuleNames = ["fileUploadField-cb-param-updates"];
+
+const createListOfRules = (version, includeBeta = false) => {
   const rules = {};
   require("glob")
     .sync(
@@ -8,13 +11,18 @@ const createListOfRules = (version) => {
     )
     .forEach(function (file) {
       const ruleName = /.*\/([^.]+)/.exec(file)[1];
-      rules[ruleName] = require(`./lib/rules/v${version}/${ruleName}`);
+      const isBeta = betaRuleNames.includes(ruleName);
+
+      if (includeBeta === isBeta) {
+        rules[ruleName] = require(`./lib/rules/v${version}/${ruleName}`);
+      }
     });
   return rules;
 };
 
 const v5rules = createListOfRules("5");
 const v4rules = createListOfRules("4");
+const betaV5Rules = createListOfRules("5", true);
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
 const warningRules = [
@@ -68,6 +76,6 @@ module.exports = {
       rules: mappedRules,
     },
   },
-  rules: { ...v5rules, ...v4rules },
+  rules: { ...v5rules, ...v4rules, ...betaV5Rules },
   ruleVersionMapping: { v4: Object.keys(v4rules), v5: Object.keys(v5rules) },
 };
