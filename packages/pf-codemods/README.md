@@ -1437,7 +1437,6 @@ import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-i
 </Button>;
 ```
 
-
 ### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
