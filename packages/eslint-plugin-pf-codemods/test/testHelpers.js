@@ -11,6 +11,9 @@ function getValidAddCallbackParamTests(componentNameArray, propNameArray) {
     tests.push({
       code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} />;`,
     });
+    tests.push({
+      code: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; <${componentName} />;`,
+    });
     propNameArray.forEach((propName) => {
       tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={() => handler()} />;`,
@@ -40,6 +43,20 @@ function getInvalidAddCallbackParamTests(
       tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(id) => handler(id)} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
+        errors: [
+          {
+            message: getAddCallbackParamMessage(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; <${componentName} ${propName}={(id) => handler(id)} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
             message: getAddCallbackParamMessage(
