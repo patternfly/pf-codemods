@@ -407,6 +407,9 @@ function getMoveSpecifiersValidtests(importsToMoveArray) {
       code: `import { ${componentImport} } from '@patternfly/react-core/deprecated'; <${componentImport} />;`,
     });
     tests.push({
+      code: `import { ${componentImport} } from '@patternfly/react-core/dist/esm/deprecated/components/${componentImport}/index.js'; <${componentImport} />;`,
+    });
+    tests.push({
       code: `<${componentImport} />;`,
     });
     tests.push({
@@ -417,6 +420,9 @@ function getMoveSpecifiersValidtests(importsToMoveArray) {
   otherImports.forEach((otherImport) => {
     tests.push({
       code: `import { ${otherImport} } from '@patternfly/react-core/deprecated'; <Bar prop={${otherImport}} />;`,
+    });
+    tests.push({
+      code: `import { ${otherImport} } from '@patternfly/react-core/dist/esm/deprecated/components/${otherImport}/index.js'; <Bar prop={${otherImport}} />;`,
     });
     tests.push({
       code: `<Bar prop={${otherImport}} />;`,
@@ -469,6 +475,16 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
     tests.push({
       code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core'; <PF${componentImport} />`,
       output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/deprecated'; <PF${componentImport} />`,
+      errors: [
+        {
+          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+          type: "ImportDeclaration",
+        },
+      ],
+    });
+    0 && tests.push({
+      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core/dist/esm/components/Foo/index.js'; <PF${componentImport} />`,
+      output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/dist/esm/deprecated/components/Foo/index.js'; <PF${componentImport} />`,
       errors: [
         {
           message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,

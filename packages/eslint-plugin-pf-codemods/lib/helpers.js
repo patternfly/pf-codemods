@@ -29,6 +29,7 @@ function moveSpecifiers(
       if (toParts[0] === "@patternfly" && toParts.length === 3) {
         fromParts.splice(4, 0, toParts[2])
         toPackage = fromParts.join("/");
+        console.log("TOOOPACKAGEEEEEE\nXXXX", toPackage);
       }
     }
 

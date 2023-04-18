@@ -15,6 +15,9 @@ ruleTester.run("conditional-aria", rule, {
       code: `import { MenuItem } from '@patternfly/react-core'; <MenuItem />`,
     },
     {
+      code: `import { MenuItem } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <MenuItem />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<MenuItem aria-label />`,
     },
@@ -125,6 +128,16 @@ ruleTester.run("conditional-aria", rule, {
     {
       code: `import { PageGroup } from '@patternfly/react-core'; <PageGroup aria-label />`,
       output: `import { PageGroup } from '@patternfly/react-core'; <PageGroup aria-label />`,
+      errors: [
+        {
+          message: `The "aria-label" prop will now only be applied to PageGroup if the "hasOverflowScroll" prop is true.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { PageGroup } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <PageGroup aria-label />`,
+      output: `import { PageGroup } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <PageGroup aria-label />`,
       errors: [
         {
           message: `The "aria-label" prop will now only be applied to PageGroup if the "hasOverflowScroll" prop is true.`,
