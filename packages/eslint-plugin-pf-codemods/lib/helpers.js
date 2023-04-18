@@ -17,9 +17,6 @@ function moveSpecifiers(
     );
     if (!importSpecifiersToMove.length) return {};
 
-    // console.log({fromPackage, 'specs': importSpecifiersToMove.map(i => i.local)});
-    // console.log({'import': importSpecifiersToMove[0].parent.source.value})
-
     if (importSpecifiersToMove[0].parent.source.value.includes("dist/esm")) {
       //expecting @patternfly/{package}/{designator} where designator is next/deprecated
       const toParts = toPackage.split("/");
@@ -29,7 +26,6 @@ function moveSpecifiers(
       if (toParts[0] === "@patternfly" && toParts.length === 3) {
         fromParts.splice(4, 0, toParts[2])
         toPackage = fromParts.join("/");
-        console.log("TOOOPACKAGEEEEEE\nXXXX", toPackage);
       }
     }
 
@@ -460,7 +456,6 @@ function ensureImports(context, node, package, imports) {
     return;
   }
   const patternflyImports = getPackageImports(context, package);
-  console.log({patternflyImports});
   const patternflyImportNames = patternflyImports.map(
     (imp) => imp.imported.name
   );
