@@ -32,5 +32,23 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
         },
       ],
     },
+    {
+      code: `import { AccordionExpandedContentBody } from '@patternfly/react-core/dist/esm/components/Accordion/index.js'; <AccordionExpandedContentBody>Body</AccordionExpandedContentBody>`,
+      output: `import { AccordionExpandedContentBody, AccordionExpandableContentBody } from '@patternfly/react-core/dist/esm/components/Accordion/index.js'; <AccordionExpandableContentBody>Body</AccordionExpandableContentBody>`,
+      errors: [
+        {
+          message: `add missing imports AccordionExpandableContentBody from @patternfly/react-core/dist/esm/components/Accordion/index.js`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          type: "JSXIdentifier",
+        },
+        {
+          message: "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          type: "JSXIdentifier",
+        },
+      ],
+    },
   ],
 });

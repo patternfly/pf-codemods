@@ -55,6 +55,16 @@ ruleTester.run("pagination-rename-props", rule, {
         },
       ],
     },
+    {
+      code: `import { Pagination } from '@patternfly/react-core/dist/esm/components/Pagination/index.js'; <Pagination perPageComponent="div" />`,
+      output: `import { Pagination } from '@patternfly/react-core/dist/esm/components/Pagination/index.js'; <Pagination  />`,
+      errors: [
+        {
+          message: `The "perPageComponent" prop for Pagination has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
     ...Object.keys(updatedTitlesPropNames).map((titlesPropName) => ({
       code: `import { Pagination } from '@patternfly/react-core'; <Pagination titles={{${titlesPropName}: "test"}} />`,
       output: `import { Pagination } from '@patternfly/react-core'; <Pagination titles={{${updatedTitlesPropNames[titlesPropName]}: "test"}} />`,

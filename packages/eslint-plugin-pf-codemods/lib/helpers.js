@@ -177,6 +177,17 @@ function moveSpecifiers(
   };
 }
 
+function pfPackageMatches(packageName, nodeSrc) {
+  const parts = packageName.split("/");
+  const regex = new RegExp('^' +
+    parts[0] + '\/' + parts[1] +
+    '(\/dist\/esm)?' +
+    (parts[2] ? ('\/' + parts[2]) : '') +
+    '(\/components\/.*)?$'
+  );
+  return regex.test(nodeSrc)
+}
+
 /**
  *
  * @param context
@@ -188,7 +199,12 @@ function getPackageImports(context, packageName, importNames = []) {
   const specifiers = context
     .getSourceCode()
     .ast.body.filter((node) => node.type === "ImportDeclaration")
-    .filter((node) => node.source.value === packageName)
+    .filter((node) => {
+      if(packageName.startsWith("@patternfly")) {
+        return pfPackageMatches(packageName, node.source.value);
+      }
+      return node.source.value === packageName
+    })
     .map((node) => node.specifiers)
     .reduce((acc, val) => acc.concat(val), []);
   return !importNames.length
@@ -423,10 +439,11 @@ function renameComponents(
 }
 
 function ensureImports(context, node, package, imports) {
-  if (node.source.value !== package) {
+  if (!pfPackageMatches(package, node.source.value)) {
     return;
   }
   const patternflyImports = getPackageImports(context, package);
+  console.log({patternflyImports});
   const patternflyImportNames = patternflyImports.map(
     (imp) => imp.imported.name
   );
