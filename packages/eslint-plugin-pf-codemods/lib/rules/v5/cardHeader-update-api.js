@@ -1,4 +1,4 @@
-const { getPackageImports } = require("../../helpers");
+const { getPackageImports, pfPackageMatches } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8759
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
       : {
           ImportDeclaration(node) {
             if (
-              node.source.value !== "@patternfly/react-core" ||
+              !pfPackageMatches("@patternfly/react-core", node.source.value) ||
               !node.specifiers.filter((specifier) =>
                 removedCardImports
                   .map((imp) => imp.imported.name)
@@ -46,7 +46,7 @@ module.exports = {
 
             const newImportDeclaration = `import { ${validImports
               .map((imp) => context.getSourceCode().getText(imp))
-              .join(", ")} } from '@patternfly/react-core';`;
+              .join(", ")} } from '${node.source.value}';`;
 
             const importMessagePrefix = [
               existingCardHeaderMain?.imported?.name,

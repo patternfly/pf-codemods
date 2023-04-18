@@ -670,6 +670,7 @@ module.exports = {
   ensureImports,
   getPackageImports,
   moveSpecifiers,
+  pfPackageMatches,
   renameProp,
   renameProps0,
   renameProps,

@@ -316,6 +316,20 @@ function getInvalidSwapCallbackParamTests(
               },
             ],
           });
+          tests.push({
+            code: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${initialArgs}) {}; <${componentName} ${propName}={handler} />;`,
+            output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
+            errors: [
+              {
+                message: getAddCallbackParamMessage(
+                  componentName,
+                  propName,
+                  variation
+                ),
+                type: "JSXOpeningElement",
+              },
+            ],
+          });
         });
       });
     });
