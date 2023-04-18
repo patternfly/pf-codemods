@@ -78,6 +78,7 @@ import {
   Wizard
 } from "@patternfly/react-core";
 import { SelectOption, WizardBody as WizardBodyNext, WizardFooter } from "@patternfly/react-core/next";
+import { Select as SelectDeprecated } from "@patternfly/react-core/deprecated";
 
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from Bar;
@@ -166,7 +167,10 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Popover reference />
   <Popper popperMatchesTriggerWidth={false}/>
   <ProgressStep />
+  <Select onFavorite={foo => handler(foo)} />
   <Select onToggle={} />
+  <SelectDeprecated onFavorite={foo => handler(foo)} />
+  <SelectDeprecated onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
   <Spinner isSVG />

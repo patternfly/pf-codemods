@@ -1658,6 +1658,33 @@ We've removed the deprecated `ToggleMenuBaseProps` interface.
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
 
+### selectDeprecated-updated-callbackParams [(#8967)](https://github.com/patternfly/patternfly-react/pull/8967)
+
+We've updated the `onFavorite`, `onCreateOption`, and `onTypeaheadInputChanged` props for our deprecated implementation of Select so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Select onFavorite={(id) => handler(id)} />
+const handler1 = (id) => {};
+<Select onFavorite={handler1} />
+function handler2(id) {};
+<Select onFavorite={handler2} />
+```
+
+Out:
+
+```jsx
+<Select onFavorite={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<Select onFavorite={handler1} />
+function handler2(_event, id) {};
+<Select onFavorite={handler2} />
+```
+
+
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
 
 We've removed the deprecated the `isCurrent` prop. This rule wil replace it with `isActive`.
