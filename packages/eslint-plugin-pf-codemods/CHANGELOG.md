@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.54.0...@patternfly/eslint-plugin-pf-codemods@1.55.0) (2023-04-18)
+
+
+### Features
+
+* **expandableSection:** Add event to onToggle ([#404](https://github.com/patternfly/pf-codemods/issues/404)) ([791bffa](https://github.com/patternfly/pf-codemods/commit/791bffab20b69805b8a8ac21da46c7b0c380f618))
+
+
+
+
+
 # [1.54.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.53.8...@patternfly/eslint-plugin-pf-codemods@1.54.0) (2023-04-13)
 
 
