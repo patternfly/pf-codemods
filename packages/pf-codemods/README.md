@@ -1669,11 +1669,29 @@ We've updated the `onFavorite`, `onCreateOption`, and `onTypeaheadInputChanged` 
 In:
 
 ```jsx
-<Select onFavorite={(id) => handler(id)} />
-const handler1 = (id) => {};
-<Select onFavorite={handler1} />
-function handler2(id) {};
-<Select onFavorite={handler2} />
+<Select 
+  onFavorite={(id) => handler(id)} 
+  onCreateOption={(value) => handler(value)}
+  onTypeaheadInputChanged={(value) => handler(value)}
+/>
+
+const onFavoriteHandler1 = (id) => {};
+const onCreateHandler1 = (value) => {};
+const onInputChangeHandler1 = (value) => {};
+<Select 
+  onFavorite={onFavoriteHandler1} 
+  onCreateOption={onCreateHandler1}
+  onTypeaheadInputChanged={onInputChangeHandler1}
+/>
+
+function onFavoriteHandler2(id) {};
+function onCreateHandler2(value) {};
+function onInputChangeHandler2(value) {};
+<Select 
+  onFavorite={onFavoriteHandler2} 
+  onCreateOption={onCreateHandler2}
+  onTypeaheadInputChanged={onInputChangeHandler2}
+/>
 ```
 
 Out:
@@ -1684,6 +1702,30 @@ const handler1 = (_event, id) => {};
 <Select onFavorite={handler1} />
 function handler2(_event, id) {};
 <Select onFavorite={handler2} />
+
+<Select 
+  onFavorite={(_event, id) => handler(id)} 
+  onCreateOption={(_event, value) => handler(value)}
+  onTypeaheadInputChanged={(_event, value) => handler(value)}
+/>
+
+const onFavoriteHandler1 = (_event, id) => {};
+const onCreateHandler1 = (_event, value) => {};
+const onInputChangeHandler1 = (_event, value) => {};
+<Select 
+  onFavorite={onFavoriteHandler1} 
+  onCreateOption={onCreateHandler1}
+  onTypeaheadInputChanged={onInputChangeHandler1}
+/>
+
+function onFavoriteHandler2(_event, id) {};
+function onCreateHandler2(_event, value) {};
+function onInputChangeHandler2(_event, value) {};
+<Select 
+  onFavorite={onFavoriteHandler2} 
+  onCreateOption={onCreateHandler2}
+  onTypeaheadInputChanged={onInputChangeHandler2}
+/>
 ```
 
 
