@@ -1709,6 +1709,8 @@ Out:
 
 ### slider-update-onChangeParams [(#8970)](https://github.com/patternfly/patternfly-react/pull/8970)
 
+**Not yet included in pf-react**
+
 We've updated the `onChange` prop for Slider so that the `event` parameter is the first parameter. Handlers may require an update.
 
 #### Examples

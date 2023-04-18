@@ -3,6 +3,7 @@ const betaRuleNames = [
   "expandableSection-onToggle-event-added",
   "fileUploadField-cb-param-updates",
   "radio-update-onChange-params",
+  "slider-update-onChangeParams",
 ];
 
 const createListOfRules = (version, includeBeta = false) => {
