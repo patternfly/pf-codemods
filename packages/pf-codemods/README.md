@@ -1660,6 +1660,8 @@ We've updated the default value of the `getResizeObserver` helper function's thi
 
 ### selectDeprecated-updated-callbackParams [(#8967)](https://github.com/patternfly/patternfly-react/pull/8967)
 
+**Not yet included in pf-react**
+
 We've updated the `onFavorite`, `onCreateOption`, and `onTypeaheadInputChanged` props for our deprecated implementation of Select so that the `event` parameter is the first parameter. Handlers may require an update.
 
 #### Examples
