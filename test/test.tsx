@@ -66,6 +66,7 @@ import {
   Popover,
   Popper,
   ProgressStep,
+  Radio,
   Select,
   SelectToggle,
   Spinner,
@@ -166,6 +167,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Popover reference />
   <Popper popperMatchesTriggerWidth={false}/>
   <ProgressStep />
+  <Radio onChange={(foo, event) => handler(foo, event)} />
   <Select onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
