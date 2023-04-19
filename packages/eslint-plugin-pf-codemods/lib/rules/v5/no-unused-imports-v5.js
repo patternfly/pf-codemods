@@ -43,22 +43,14 @@ module.exports = {
           }'`,
           fix(fixer) {
             const getEndRange = (spec) => {
-              const nextComma = sourceCode.getTokenAfter(spec);
-              return nextComma.value === ","
-                ? sourceCode.getTokenAfter(nextComma).range[0]
+              const tokenAfter = sourceCode.getTokenAfter(spec);
+              return tokenAfter.value === ","
+                ? sourceCode.getTokenAfter(tokenAfter).range[0]
                 : spec.range[1];
             };
 
-            const removeWholeImport = () => {
-              const tokenAfter = sourceCode.getTokenAfter(node);
-              return [
-                fixer.remove(node),
-                ...(tokenAfter === ";" ? [fixer.remove(tokenAfter)] : []),
-              ];
-            };
-
             return unusedImports.length === node.specifiers.length
-              ? removeWholeImport()
+              ? fixer.remove(node)
               : unusedImports.map((spec) =>
                   fixer.removeRange([spec.range[0], getEndRange(spec)])
                 );
