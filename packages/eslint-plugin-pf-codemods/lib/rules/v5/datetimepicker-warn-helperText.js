@@ -7,12 +7,11 @@ const { getPackageImports } = require("../../helpers");
       const imports = getPackageImports(context, "@patternfly/react-core");
       const dateImport = imports.find((specifier) => specifier.imported.name === "DatePicker");
       const timeImport = imports.find((specifier) => specifier.imported.name === "TimePicker");
-
       return imports.length === 0 || !(dateImport || timeImport)
         ? {}
         : {
             ImportDeclaration(node) {
-              if(timeImport) {
+              if(timeImport && node.specifiers.find( s => s.imported.name === "TimePicker")) {
                 context.report({
                   node,
                   message: 'TimePicker now uses a <HelperText> component for its helper text.'
