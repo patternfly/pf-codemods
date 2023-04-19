@@ -197,7 +197,7 @@ function pfPackageMatches(packageName, nodeSrc) {
     parts[0] + '\/' + parts[1] +
     '(\/dist\/esm)?' +
     (parts[2] ? ('\/' + parts[2]) : '') +
-    '(\/components\/.*)?$'
+    '(\/(components|helpers)\/.*)?$'
   );
   return regex.test(nodeSrc)
 }
