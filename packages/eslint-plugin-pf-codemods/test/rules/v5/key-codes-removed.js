@@ -19,5 +19,15 @@ ruleTester.run("key-codes-removed", rule, {
         },
       ],
     },
+    {
+      code: `import { KEY_CODES } from '@patternfly/react-core/dist/esm/helpers/constants.js';`,
+      output: `import { KEY_CODES } from '@patternfly/react-core/dist/esm/helpers/constants.js';`,
+      errors: [
+        {
+          message: `The KEY_CODES constant has been removed. We suggest refactoring to use the KeyTypes constant instead.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });

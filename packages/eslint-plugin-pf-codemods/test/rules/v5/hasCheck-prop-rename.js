@@ -7,6 +7,9 @@ ruleTester.run("hasCheck-prop-rename", rule, {
       code: `import { SelectOption } from '@patternfly/react-core'; <SelectOption hasCheck />`,
     },
     {
+      code: `import { SelectOption } from '@patternfly/react-core/dist/esm/components/Select/index.js'; <SelectOption hasCheck />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<SelectOption hasCheck />`,
     },
@@ -43,6 +46,16 @@ ruleTester.run("hasCheck-prop-rename", rule, {
     {
       code: `import { TreeView } from '@patternfly/react-core'; <TreeView hasCheck />`,
       output: `import { TreeView } from '@patternfly/react-core'; <TreeView hasCheckbox />`,
+      errors: [
+        {
+          message: `The 'hasCheck' prop for TreeView has been renamed to 'hasCheckbox'.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { TreeView } from '@patternfly/react-core/dist/esm/components/TreeView/index.js'; <TreeView hasCheck />`,
+      output: `import { TreeView } from '@patternfly/react-core/dist/esm/components/TreeView/index.js'; <TreeView hasCheckbox />`,
       errors: [
         {
           message: `The 'hasCheck' prop for TreeView has been renamed to 'hasCheckbox'.`,
