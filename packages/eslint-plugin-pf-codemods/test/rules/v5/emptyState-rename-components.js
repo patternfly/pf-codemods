@@ -11,6 +11,13 @@ ruleTester.run("emptyState-rename-components", rule, {
       </>`,
     },
     {
+      code: `import { EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
+      <>
+        <EmptyStateActions>Primary action</EmptyStateActions>
+        <EmptyStateActions>Other actions</EmptyStateActions>
+      </>`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<>
         <EmptyStatePrimary>Primary action</EmptyStatePrimary>
@@ -19,6 +26,22 @@ ruleTester.run("emptyState-rename-components", rule, {
     },
   ],
   invalid: [
+    {
+      code: `import { EmptyStateSecondaryActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>`,
+      output: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <EmptyStateActions>Other actions</EmptyStateActions>`,
+      errors: [
+        {
+          message:
+            "add missing imports EmptyStateActions from @patternfly/react-core/dist/esm/components/EmptyState/index.js",
+          type: "ImportDeclaration",
+        },
+        {
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
+          type: "JSXElement",
+        },
+      ],
+    },
     {
       code: `import { EmptyStateSecondaryActions } from '@patternfly/react-core'; <EmptyStateSecondaryActions>Other actions</EmptyStateSecondaryActions>`,
       output: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Other actions</EmptyStateActions>`,
@@ -123,6 +146,33 @@ ruleTester.run("emptyState-rename-components", rule, {
         },
       ],
     },
+    {
+      code: `import { EmptyStatePrimary, EmptyStateSecondaryActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
+      <>
+        <EmptyStatePrimary>Primary action</EmptyStatePrimary>
+        <EmptyStateSecondaryActions>Secondary</EmptyStateSecondaryActions>
+      </>`,
+      output: `import { EmptyStatePrimary, EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
+      <>
+        <EmptyStateActions>Primary action</EmptyStateActions>
+        <EmptyStateActions>Secondary</EmptyStateActions>
+      </>`,
+      errors: [
+        {
+          message: "add missing imports EmptyStateActions from @patternfly/react-core/dist/esm/components/EmptyState/index.js",
+          type: "ImportDeclaration",
+        },
+        {
+          message: "EmptyStatePrimary has been replaced with EmptyStateActions",
+          type: "JSXElement",
+        },
+        {
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
+          type: "JSXElement",
+        },
+      ],
+    },
     { // after second run of the rule
       code: `import { EmptyStatePrimary, EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core';
       <>
@@ -152,6 +202,24 @@ ruleTester.run("emptyState-rename-components", rule, {
         <EmptyStateActions>Secondary</EmptyStateActions>
       </>`,
       output: `import { EmptyStateActions } from '@patternfly/react-core';
+      <>
+        <EmptyStateActions>Primary action</EmptyStateActions>
+        <EmptyStateActions>Secondary</EmptyStateActions>
+      </>`,
+      errors: [
+        {
+          message: "unused patternfly import EmptyStateSecondaryActions",
+          type: "ImportDeclaration",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
+      <>
+        <EmptyStateActions>Primary action</EmptyStateActions>
+        <EmptyStateActions>Secondary</EmptyStateActions>
+      </>`,
+      output: `import { EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
       <>
         <EmptyStateActions>Primary action</EmptyStateActions>
         <EmptyStateActions>Secondary</EmptyStateActions>
