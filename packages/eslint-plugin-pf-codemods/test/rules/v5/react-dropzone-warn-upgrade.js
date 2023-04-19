@@ -47,5 +47,15 @@ ruleTester.run("react-dropzone-warn-upgrade", rule, {
         },
       ],
     },
+    {
+      code: `import { CodeEditor } from '@patternfly/react-code-editor';`,
+      output: `import { CodeEditor } from '@patternfly/react-code-editor';`,
+      errors: [
+        {
+          message: `The react-dropzone dependency used within CodeEditor has been updated from version 9 to version 14.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });

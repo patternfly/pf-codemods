@@ -29,5 +29,15 @@ ruleTester.run("popover-warn-appendTo-default", rule, {
         },
       ],
     },
+    {
+      code: `import { Popover as PfPopover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <PfPopover />`,
+      output: `import { Popover as PfPopover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <PfPopover />`,
+      errors: [
+        {
+          message: `The default value of the Popover prop 'appendTo' has been updated to a value of "inline" and may cause markup changes that require updating selectors used in tests.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
   ],
 });

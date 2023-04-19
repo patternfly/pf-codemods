@@ -7,6 +7,9 @@ ruleTester.run("menuItemAction-ariaLabel-required", rule, {
       code: `import { MenuItemAction } from '@patternfly/react-core'; <MenuItemAction aria-label="Test" />`,
     },
     {
+      code: `import { MenuItemAction } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <MenuItemAction aria-label="Test" />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<MenuItemAction />`,
     },
@@ -14,6 +17,15 @@ ruleTester.run("menuItemAction-ariaLabel-required", rule, {
   invalid: [
     {
       code: `import { MenuItemAction } from '@patternfly/react-core'; <MenuItemAction />`,
+      errors: [
+        {
+          message: `The aria-label prop for MenuItemAction is now required.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { MenuItemAction } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <MenuItemAction />`,
       errors: [
         {
           message: `The aria-label prop for MenuItemAction is now required.`,
