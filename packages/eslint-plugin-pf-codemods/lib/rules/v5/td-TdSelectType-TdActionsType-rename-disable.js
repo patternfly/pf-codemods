@@ -20,7 +20,7 @@ module.exports = {
               return;
             }
 
-            const attributes = node.attributes.filter(
+            const attributesToUpdate = node.attributes.filter(
               (attr) =>
                 attr.type === "JSXAttribute" &&
                 attr.value.type === "JSXExpressionContainer" &&
@@ -32,7 +32,7 @@ module.exports = {
               actions: "TdActionsType",
             };
 
-            for (const attr of attributes) {
+            for (const attr of attributesToUpdate) {
               const expr = attr.value.expression;
 
               const getObjectProp = (expr, propName) =>
@@ -62,12 +62,10 @@ module.exports = {
               }
 
               if (expr.type === "Identifier") {
-                console.log(expr.loc);
-
                 let scope = context.getScope();
                 while (scope !== null) {
                   const variable = scope.variables.find(
-                    (v) => v.name === expr.name
+                    (variable) => variable.name === expr.name
                   );
                   if (!variable) {
                     scope = scope.upper;
@@ -75,7 +73,7 @@ module.exports = {
                   }
                   if (
                     variable.references.some(
-                      (r) => r.identifier.loc === expr.loc
+                      (ref) => ref.identifier.loc === expr.loc
                     )
                   ) {
                     variable.defs.forEach((def) => {
