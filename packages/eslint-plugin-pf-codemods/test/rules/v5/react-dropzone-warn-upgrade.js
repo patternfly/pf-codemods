@@ -48,11 +48,19 @@ ruleTester.run("react-dropzone-warn-upgrade", rule, {
       ],
     },
     {
-      code: `import { CodeEditor } from '@patternfly/react-code-editor';`,
-      output: `import { CodeEditor } from '@patternfly/react-code-editor';`,
+      code: `import { CodeEditor } from '@patternfly/react-code-editor/dist/esm/components/Popover/index.js'; import { MultipleFileUpload } from '@patternfly/react-core/dist/esm/components/MultipleFileUpload/index.js'; import { FileUpload } from '@patternfly/react-core/dist/esm/components/FileUpload/index.js';`,
+      output: `import { CodeEditor } from '@patternfly/react-code-editor/dist/esm/components/Popover/index.js'; import { MultipleFileUpload } from '@patternfly/react-core/dist/esm/components/MultipleFileUpload/index.js'; import { FileUpload } from '@patternfly/react-core/dist/esm/components/FileUpload/index.js';`,
       errors: [
         {
           message: `The react-dropzone dependency used within CodeEditor has been updated from version 9 to version 14.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `The react-dropzone dependency used within MultipleFileUpload has been updated from version 9 to version 14. Among the changes from this update, the 'dropzoneProps' prop type is now react-dropzone's DropzoneOptions, and react-dropzone's 'accept' prop type is now an array of strings.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `The react-dropzone dependency used within FileUpload has been updated from version 9 to version 14. Among the changes from this update, the 'dropzoneProps' prop type is now react-dropzone's DropzoneOptions, and react-dropzone's 'accept' prop type is now an array of strings. Additionally, the 'onFileInputChange' prop has had its event parameter typing updated to react-dropzone's DropEvent.`,
           type: "ImportDeclaration",
         },
       ],
