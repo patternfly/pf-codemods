@@ -21,6 +21,27 @@ ruleTester.run("emptyState-warn-change-structure", rule, {
       </EmptyStateFooter></EmptyState>`,
     },
     {
+      code: `import { EmptyState, EmptyStateBody, Title } from '@patternfly/react-core';
+      <>
+        <EmptyState>
+          <EmptyStateBody>
+            Some other content.
+          </EmptyStateBody>
+        </EmptyState>
+        <Title>No need for EmptyStateHeader</Title>
+      </>`,
+    },
+    {
+      code: `import { EmptyState, EmptyStateBody, Title } from '@patternfly/react-core';
+      <>
+        <EmptyState>
+          <EmptyStateBody>
+            <Title>Should not import EmptyStateHeader, because this Title is not on the top level of EmptyState</Title>
+          </EmptyStateBody>
+        </EmptyState>
+      </>`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<EmptyState>
         <EmptyStateIcon icon={CubesIcon} />
@@ -91,7 +112,8 @@ ruleTester.run("emptyState-warn-change-structure", rule, {
         },
       ],
     },
-    { // EmptyStateHeader and EmptyStateFooter imports are added in the second rule run
+    {
+      // EmptyStateHeader and EmptyStateFooter imports are added in the second rule run
       code: `import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateIcon } from '@patternfly/react-core'; 
       <EmptyState>
         <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5" />
