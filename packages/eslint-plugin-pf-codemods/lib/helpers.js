@@ -17,6 +17,7 @@ function moveSpecifiers(
     );
     if (!importSpecifiersToMove.length) return {};
 
+    let modifiedToPackage = "";
     if (importSpecifiersToMove[0].parent.source.value.includes("dist/esm")) {
       //expecting @patternfly/{package}/{designator} where designator is next/deprecated
       const toParts = toPackage.split("/");
@@ -25,7 +26,7 @@ function moveSpecifiers(
       const fromParts = importSpecifiersToMove[0].parent.source.value.split("/");
       if (toParts[0] === "@patternfly" && toParts.length === 3) {
         fromParts.splice(4, 0, toParts[2])
-        toPackage = fromParts.join("/");
+        modifiedToPackage = fromParts.join("/");
       }
     }
 
@@ -41,7 +42,7 @@ function moveSpecifiers(
     const src = context.getSourceCode();
     const existingToPackageImportDeclaration = src.ast.body.find(
       (node) =>
-        node.type === "ImportDeclaration" && node.source.value === toPackage
+        node.type === "ImportDeclaration" && [modifiedToPackage, toPackage].includes(node.source.value)
     );
     const existingToPackageSpecifiers =
       existingToPackageImportDeclaration?.specifiers?.map((specifier) =>
@@ -63,7 +64,7 @@ function moveSpecifiers(
         const newToPackageImportDeclaration = `import {\n\t${[
           ...existingToPackageSpecifiers,
           ...newAliasToPackageSpecifiers,
-        ].join(`,\n\t`)}\n} from '${toPackage}';`;
+        ].join(`,\n\t`)}\n} from '${modifiedToPackage || toPackage}';`;
 
         context.report({
           node,
