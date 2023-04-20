@@ -9,6 +9,7 @@ import {
 import { CodeEditor } from "@patternfly/react-code-editor";
 
 import {
+  AboutModal,
   AccordionExpandableContent,
   Alert,
   ApplicationLauncher,

@@ -26,6 +26,7 @@ const betaV5Rules = createListOfRules("5", true);
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
 const warningRules = [
+  "aboutModalBoxHero-remove-subcomponent",
   "applicationLauncher-warn-input",
   "card-warn-component",
   "charts-warn-tooltip",
