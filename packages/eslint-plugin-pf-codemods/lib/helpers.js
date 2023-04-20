@@ -1,3 +1,5 @@
+const evk = require("eslint-visitor-keys");
+
 function moveSpecifiers(
   importsToMove,
   fromPackage,
@@ -601,6 +603,35 @@ function addCallbackParam(componentsArray, propMap) {
   };
 }
 
+/**
+ *
+ * @param context
+ * @returns {JSXElement[]} an array of all JSXElements in the file
+ */
+function getAllJSXElements(context) {
+  const jsxElements = [];
+
+  const traverse = (node) => {
+    if (node.type === "JSXElement") {
+      jsxElements.push(node);
+    }
+
+    for (const childKey of evk.KEYS[node.type] || []) {
+      const child = node[childKey];
+
+      if (Array.isArray(child)) {
+        child.forEach((c) => traverse(c));
+      } else if (child && typeof child === "object") {
+        traverse(child);
+      }
+    }
+  };
+
+  traverse(context.getSourceCode().ast);
+
+  return jsxElements;
+}
+
 module.exports = {
   createAliasImportSpecifiers,
   ensureImports,
@@ -612,4 +643,5 @@ module.exports = {
   renameComponents,
   splitImportSpecifiers,
   addCallbackParam,
+  getAllJSXElements,
 };

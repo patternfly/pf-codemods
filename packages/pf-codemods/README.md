@@ -869,7 +869,9 @@ This rule produces only warnings, but suggested changes are fixable via --fix op
 In:
 
 ```jsx
-<EmptyState variant={EmptyStateVariant.xl}>
+import { EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateIcon, Title } from '@patternfly/react-core';
+
+<EmptyState>
   <EmptyStateIcon icon={CubesIcon} />
   <Title headingLevel="h5" size="4xl">
     Empty state
@@ -889,7 +891,9 @@ In:
 Out:
 
 ```jsx
-<EmptyState variant={EmptyStateVariant.xl}>
+import { EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateIcon, EmptyStateHeader, EmptyStateFooter,  } from '@patternfly/react-core';
+
+<EmptyState>
   <EmptyStateHeader titleText="Empty state" icon={<EmptyStateIcon icon={CubesIcon} />} headingLevel="h5" />
   <EmptyStateBody>
     Some content

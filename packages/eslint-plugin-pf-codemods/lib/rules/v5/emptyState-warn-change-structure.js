@@ -1,29 +1,103 @@
-const { getPackageImports, ensureImports } = require("../../helpers");
+const {
+  getPackageImports,
+  ensureImports,
+  getAllJSXElements,
+} = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const package = "@patternfly/react-core";
-    const imports = getPackageImports(context, package);
+    const pkg = "@patternfly/react-core";
+    const imports = getPackageImports(context, pkg);
 
     const includesEmptyState = (arr) =>
       arr.some((specifier) => specifier.imported?.name === "EmptyState");
 
-    const includesIconOrTitle = imports.some((specifier) =>
-      ["EmptyStateIcon", "Title"].includes(specifier.imported.name)
+    const titleImport = imports.find(
+      (specifier) => specifier.imported.name === "Title"
+    );
+
+    const getChildElementByName = (name, node) =>
+      node.children.find(
+        (child) =>
+          child.type === "JSXElement" &&
+          child.openingElement.name?.name === name
+      );
+
+    const allElements = getAllJSXElements(context);
+
+    const emptyStateElements = allElements.filter(
+      (elem) => elem.openingElement?.name?.name === "EmptyState"
+    );
+
+    const includesHeader = allElements.some(
+      (elem) => elem.openingElement?.name?.name === "EmptyStateHeader"
+    );
+
+    const includesFooter = allElements.some(
+      (elem) => elem.openingElement?.name?.name === "EmptyStateFooter"
+    );
+
+    const emptyStatesThatShouldAddHeader = emptyStateElements.filter(
+      (emptyState) =>
+        emptyState.children?.some((child) =>
+          ["Title", "EmptyStateIcon"].includes(child.openingElement?.name?.name)
+        )
     );
 
     const preFooterNames = [
       "EmptyStateBody",
       "EmptyStateHeader",
-      "EmptyStateIcon",
       "Title",
+      "EmptyStateIcon",
     ];
 
-    const includesEmptyStateContent = imports.some((specifier) =>
-      preFooterNames.includes(specifier.imported.name)
-    );
+    const getLastElementBeforeFooter = (node) => {
+      for (const name of preFooterNames) {
+        const element = getChildElementByName(name, node);
+        if (element) {
+          return element;
+        }
+      }
+      return undefined;
+    };
+
+    const hasContentToWrapInFooter = (node, lastElementBeforeFooter) => {
+      const numOfElementsToWrap =
+        node.children.length -
+        node.children.indexOf(lastElementBeforeFooter) -
+        1;
+
+      const lastChild = node.children[node.children.length - 1];
+
+      return (
+        numOfElementsToWrap > 1 ||
+        (numOfElementsToWrap === 1 &&
+          (lastChild.type !== "JSXText" || lastChild.value.trim() !== ""))
+      );
+    };
+
+    const emptyStatesThatShouldAddFooter = emptyStateElements
+      .filter((node) => !getChildElementByName("EmptyStateFooter", node))
+      .map((node) => ({
+        node,
+        lastElementBeforeFooter: getLastElementBeforeFooter(node),
+      }))
+      .filter(
+        ({ node, lastElementBeforeFooter }) =>
+          lastElementBeforeFooter &&
+          hasContentToWrapInFooter(node, lastElementBeforeFooter)
+      );
+
+    const allTitlesWillBeReplaced = () =>
+      allElements
+        .filter((elem) => elem.openingElement?.name?.name === "Title")
+        .every(
+          (elem) =>
+            elem.parent.type === "JSXElement" &&
+            elem.parent.openingElement?.name?.name === "EmptyState"
+        );
 
     if (!includesEmptyState(imports)) {
       return {};
@@ -31,28 +105,27 @@ module.exports = {
 
     return {
       ImportDeclaration(node) {
-        if (includesEmptyState(node.specifiers)) {
-          ensureImports(context, node, package, [
-            "EmptyStateHeader",
-            "EmptyStateFooter",
-          ]);
+        if (node.source.value != pkg || !includesEmptyState(node.specifiers)) {
+          return;
         }
+
+        ensureImports(context, node, pkg, [
+          ...(emptyStatesThatShouldAddHeader.length || includesHeader
+            ? ["EmptyStateHeader"]
+            : []),
+          ...(emptyStatesThatShouldAddFooter.length || includesFooter
+            ? ["EmptyStateFooter"]
+            : []),
+        ]);
       },
       JSXElement(node) {
         if (node.openingElement.name?.name !== "EmptyState") {
           return;
         }
 
-        const getChildElementByName = (name) =>
-          node.children.find(
-            (child) =>
-              child.type === "JSXElement" &&
-              child.openingElement.name?.name === name
-          );
-
         const addHeader = () => {
-          const emptyStateIcon = getChildElementByName("EmptyStateIcon");
-          const title = getChildElementByName("Title");
+          const emptyStateIcon = getChildElementByName("EmptyStateIcon", node);
+          const title = getChildElementByName("Title", node);
 
           if (!emptyStateIcon && !title) {
             return;
@@ -111,55 +184,33 @@ module.exports = {
                   : [];
               };
 
+              const getImportEndRange = (imp) => {
+                const nextComma = context.getSourceCode().getTokenAfter(imp);
+
+                return context.getSourceCode().getText(nextComma) === ","
+                  ? context.getSourceCode().getTokenAfter(nextComma).range[0]
+                  : imp.range[1];
+              };
+
               return [
-                fixer.insertTextAfter(node.children[0], getHeaderText()),
+                fixer.insertTextAfter(emptyStateIcon ?? title, getHeaderText()),
                 ...(emptyStateIcon ? [fixer.remove(emptyStateIcon)] : []),
                 ...(title ? [fixer.remove(title)] : []),
                 ...removeEmptyLine(),
+                ...(titleImport && allTitlesWillBeReplaced()
+                  ? [
+                      fixer.removeRange([
+                        titleImport.range[0],
+                        getImportEndRange(titleImport),
+                      ]),
+                    ]
+                  : []),
               ];
             },
           });
         };
 
-        const addFooter = () => {
-          if (getChildElementByName("EmptyStateFooter")) {
-            return;
-          }
-
-          const getLastElementBeforeFooter = () => {
-            for (const name of preFooterNames) {
-              const element = getChildElementByName(name);
-              if (element) {
-                return element;
-              }
-            }
-            return undefined;
-          };
-
-          const lastElementBeforeFooter = getLastElementBeforeFooter();
-
-          if (!lastElementBeforeFooter) {
-            return;
-          }
-
-          const nothingToWrap = () => {
-            const numOfElementsToWrap =
-              node.children.length -
-              node.children.indexOf(lastElementBeforeFooter) -
-              1;
-
-            return (
-              numOfElementsToWrap === 0 ||
-              (numOfElementsToWrap === 1 &&
-                node.children[node.children.length - 1].type === "JSXText" &&
-                node.children[node.children.length - 1].value.trim() === "")
-            );
-          };
-
-          if (nothingToWrap()) {
-            return;
-          }
-
+        const addFooter = (lastElementBeforeFooter) => {
           context.report({
             node,
             message:
@@ -179,8 +230,11 @@ module.exports = {
           });
         };
 
-        includesIconOrTitle && addHeader();
-        includesEmptyStateContent && addFooter();
+        emptyStatesThatShouldAddHeader.includes(node) && addHeader();
+        const value = emptyStatesThatShouldAddFooter.find(
+          (value) => value.node === node
+        );
+        value && addFooter(value.lastElementBeforeFooter);
       },
     };
   },
