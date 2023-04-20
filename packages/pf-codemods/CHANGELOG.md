@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.55.0...@patternfly/pf-codemods@1.55.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **EmptyState:** codemod issues ([#387](https://github.com/patternfly/pf-codemods/issues/387)) ([f0bf705](https://github.com/patternfly/pf-codemods/commit/f0bf705cd2ca0176ebfd805f5152ea3c8215b896))
+
+
+
+
+
 # [1.55.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.54.1...@patternfly/pf-codemods@1.55.0) (2023-04-18)
 
 
