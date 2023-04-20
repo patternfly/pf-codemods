@@ -10,6 +10,12 @@ ruleTester.run("table-warn-actionsColumn", rule, {
       code: `import { TableComposable } from '@patternfly/react-table'; <TableComposable />`,
     },
     {
+      code: `import { Table } from '@patternfly/react-table/dist/esm/components/Table/index.js'; <Table />`,
+    },
+    {
+      code: `import { TableComposable } from '@patternfly/react-table/dist/esm/components/TableComposable/index.js'; <TableComposable />`,
+    },
+    {
       code: `<Table />`,
     },
     {
@@ -19,35 +25,53 @@ ruleTester.run("table-warn-actionsColumn", rule, {
   invalid: [
     {
       code:   `import { Table } from '@patternfly/react-table'; import { DropdownToggle } from '@patternfly/react-core';`,
-      output: `import { Table } from '@patternfly/react-table'; import { DropdownToggle } from '@patternfly/react-core';`,
       errors: [
         {
-        message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
-        type: "ImportDeclaration",
+          message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+          type: "ImportDeclaration",
+        },
+      ]
+    },
+    {
+      code:   `import { Table } from '@patternfly/react-table/dist/esm/components/Table/index.js'; import { DropdownToggle } from '@patternfly/react-core/dist/esm/components/DropDown/index.js';`,
+      errors: [
+        {
+          message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+          type: "ImportDeclaration",
+        },
+      ]
+    },
+    {
+      code:   `import { TableComposable} from '@patternfly/react-table/dist/esm/components/TableComposable/index.js'; import { ActionsColumn } from '@patternfly/react-table/dist/esm/components/Table/index.js';`,
+      errors: [
+        {
+          message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+          type: "ImportDeclaration",
         },
       ]
     },
     {
       code:   `import { TableComposable, ActionsColumn } from '@patternfly/react-table';`,
-      output: `import { TableComposable, ActionsColumn } from '@patternfly/react-table';`,
       errors: [{
         message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
         type: "ImportDeclaration",
-        }]
+      }]
     },
     {
       code:   `import { Table } from '@patternfly/react-table'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
-      output: `import { Table } from '@patternfly/react-table'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
       errors: [
         {
-        message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
-        type: "ImportDeclaration",
+          message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,
+          type: "ImportDeclaration",
         },
       ]
     },
     {
       code:   `import { Table as TableDeprecated } from '@patternfly/react-table/deprecated'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
-      output: `import { Table as TableDeprecated } from '@patternfly/react-table/deprecated'; import { DropdownToggle as DropdownToggleDeprecated } from '@patternfly/react-core/deprecated';`,
       errors: [
         {
         message: `The ActionsColumn within Table now uses our new implementation of Dropdown. The action toggle should now pass a MenuToggle rather than the deprecated DropdownToggle, and direction and position properties are now passed under the ActionsColumn new popperProps property.`,

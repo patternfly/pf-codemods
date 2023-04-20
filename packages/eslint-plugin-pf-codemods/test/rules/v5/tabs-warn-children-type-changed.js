@@ -10,7 +10,13 @@ ruleTester.run("tabs-warn-children-type-changed", rule, {
   invalid: [
     {
       code:   `import { Tabs } from '@patternfly/react-core';`,
-      output: `import { Tabs } from '@patternfly/react-core';`,
+      errors: [{
+        message: `The children of the 'Tabs' component must now be passed a 'Tab' component or a falsy value.`,
+        type: "ImportDeclaration",
+      }]
+    },
+    {
+      code:   `import { Tabs } from '@patternfly/react-core/dist/esm/components/Tabs/index.js';`,
       errors: [{
         message: `The children of the 'Tabs' component must now be passed a 'Tab' component or a falsy value.`,
         type: "ImportDeclaration",

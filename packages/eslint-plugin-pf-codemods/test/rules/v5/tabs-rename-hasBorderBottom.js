@@ -7,6 +7,9 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
       code: `import { Tabs } from '@patternfly/react-core'; <Tabs hasNoBorderBottom />`,
     },
     {
+      code: `import { Tabs } from '@patternfly/react-core/dist/esm/components/Tabs/index.js'; <Tabs hasNoBorderBottom />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<Tabs hasBorderBottom />`,
     },
@@ -45,6 +48,16 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
     {
       code: `import { Tabs } from '@patternfly/react-core'; <Tabs hasBorderBottom={foo && bar} />`,
       output: `import { Tabs } from '@patternfly/react-core'; <Tabs hasNoBorderBottom={!(foo && bar)} />`,
+      errors: [
+        {
+          message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { Tabs } from '@patternfly/react-core/dist/esm/components/Tabs/index.js'; <Tabs hasBorderBottom={foo && bar} />`,
+      output: `import { Tabs } from '@patternfly/react-core/dist/esm/components/Tabs/index.js'; <Tabs hasNoBorderBottom={!(foo && bar)} />`,
       errors: [
         {
           message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
