@@ -28,7 +28,7 @@ module.exports = {
             });
 
             const backgroundImgSrcProp = node.attributes.find(
-              (attribute) => attribute.name.name === "backgroundImgSrc"
+              (attribute) => attribute.name?.name === "backgroundImgSrc"
             );
             const getIdentifierType = (identifier) => {
               const currentScope = context.getScope();

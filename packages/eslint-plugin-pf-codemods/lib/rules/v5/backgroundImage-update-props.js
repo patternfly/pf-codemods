@@ -28,7 +28,7 @@ module.exports = {
             });
 
             const srcProp = node.attributes.find(
-              (attribute) => attribute.name.name === "src"
+              (attribute) => attribute.name?.name === "src"
             );
             const getIdentifierType = (identifier) => {
               const currentScope = context.getScope();

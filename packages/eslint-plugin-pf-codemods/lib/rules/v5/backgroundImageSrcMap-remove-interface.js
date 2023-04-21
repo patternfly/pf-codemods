@@ -26,13 +26,15 @@ module.exports = {
                 fix(fixer) {
                   const tokenAfter = context
                     .getSourceCode()
-                    .getTokenAfter(backgroundImgSrcMapSpecifier).value;
+                    .getTokenAfter(backgroundImgSrcMapSpecifier);
 
                   const { range } = backgroundImgSrcMapSpecifier;
                   return node.specifiers.length > 1
                     ? fixer.removeRange([
                         range[0],
-                        tokenAfter === "," ? range[1] + 1 : range[1],
+                        tokenAfter.value === ","
+                          ? tokenAfter.range[1]
+                          : range[1],
                       ])
                     : fixer.remove(node);
                 },
