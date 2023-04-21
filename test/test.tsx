@@ -13,6 +13,8 @@ import {
   AccordionExpandableContent,
   Alert,
   ApplicationLauncher,
+  BackgroundImage,
+  BackgroundImageSrcMap,
   BadgeToggle,
   Banner,
   Button,
@@ -47,6 +49,7 @@ import {
   KebabToggle,
   KEY_CODES,
   Label,
+  LoginPage,
   MenuItem,
   MenuItemAction,
   MultipleFileUpload,
@@ -82,12 +85,14 @@ import foo from Bar;
 //eslint-disable-next-line @typescript/foo
 
 const isRead = true;
-const newTheme = getCustomTheme("1", "2", "3");
 const myVariant = EmptyStateVariant.small;
+const newTheme = getCustomTheme("1", "2", "3");
+const backgroundImgSrcObj: BackgroundImageSrcMap = {};
 <>
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"}/>
   <ApplicationLauncher onToggle={} onFavorite={(id, isFavorite) => handler(id, isFavorite)} onSearch={text => handleText(text)}/>
+  <BackgroundImage filter={<CustomFilter />} src={{a: 1}} />
   <BadgeToggle onToggle={} />
   <Banner variant="danger" />
   <Button isLarge />
@@ -133,6 +138,7 @@ const myVariant = EmptyStateVariant.small;
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
+  <LoginPage backgroundImgAlt="tester" backgroundImgSrc={{a: 1}} />
   <Menu aria-label='tester' />
   <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
