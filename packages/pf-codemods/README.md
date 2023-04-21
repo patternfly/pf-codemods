@@ -1790,6 +1790,40 @@ Out:
 <Tooltip triggerRef={componentRef} />
 ```
 
+### wizard-update-deprecatedPath [(#8821)](https://github.com/patternfly/patternfly-react/pull/8821)
+
+We've deprecated the current implementation of Wizard. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our newer implementation of Wizard.
+
+The following imports will be affected by this deprecation:
+
+- Wizard
+- WizardContext
+- WizardNav
+- WizardNavItem
+- WizardHeader
+- WizardBody
+- WizardFooter
+- WizardToggle
+
+#### Examples
+
+In:
+
+```jsx
+import { Wizard, Button } from '@patternfly/react-core';
+
+<Wizard />
+```
+
+Out:
+
+```jsx
+import { Button } from '@patternfly/react-core';
+import { Wizard as WizardDeprecated } from '@patternfly/react-core/deprecated';
+
+<WizardDeprecated />
+```
+
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
 
 The order of the "next" and "back" buttons in the Wizard has been updated, with the "next" button now coming after the "back" button. This update has also been made in the Next implementation of the WizardFooter. We recommend updating any tests that may rely on relative selectors and updating any composable implementations to match this new button order.

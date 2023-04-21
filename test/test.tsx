@@ -74,7 +74,7 @@ import {
   TreeView,
   Wizard
 } from "@patternfly/react-core";
-import { SelectOption, WizardBody, WizardFooter } from "@patternfly/react-core/next";
+import { SelectOption, WizardBody as WizardBodyNext, WizardFooter } from "@patternfly/react-core/next";
 
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from Bar;
@@ -170,7 +170,7 @@ const myVariant = EmptyStateVariant.small;
   <Wizard />
   <Wizard mainAriaLabel />
   <Wizard mainAriaLabelledBy />
-  <WizardBody />
-  <WizardBody aria-label />
-  <WizardBody aria-labelledby />
+  <WizardBodyNext />
+  <WizardBodyNext aria-label />
+  <WizardBodyNext aria-labelledby />
 </>
