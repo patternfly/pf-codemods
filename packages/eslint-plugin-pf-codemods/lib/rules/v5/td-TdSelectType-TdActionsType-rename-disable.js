@@ -10,13 +10,11 @@ module.exports = {
       "@patternfly/react-table"
     ).find((specifier) => "Td" === specifier.imported.name);
 
-    const tdName = tableTdImport?.local.name;
-
     return !tableTdImport
       ? {}
       : {
           JSXOpeningElement(node) {
-            if (tdName !== node.name?.name) {
+            if (tableTdImport.local.name !== node.name.name) {
               return;
             }
 
@@ -32,45 +30,48 @@ module.exports = {
               actions: "TdActionsType",
             };
 
+            const getObjectProp = (expr, propName) =>
+              expr.properties.find(
+                (prop) =>
+                  (prop.key.type === "Identifier" &&
+                    prop.key.name === propName) ||
+                  (prop.key.type === "Literal" && prop.key.value === propName)
+              );
+
+            const doReport = (disableProp, attr) => {
+              if (disableProp) {
+                context.report({
+                  message: `'disable' prop of interface ${
+                    interfaceMap[attr.name.name]
+                  } has been renamed to 'isDisabled'`,
+                  node,
+                  fix: function (fixer) {
+                    return fixer.replaceText(disableProp.key, "isDisabled");
+                  },
+                });
+              }
+            };
+
             for (const attr of attributesToUpdate) {
               const expr = attr.value.expression;
 
-              const getObjectProp = (expr, propName) =>
-                expr.properties.find(
-                  (prop) =>
-                    (prop.key.type === "Identifier" &&
-                      prop.key.name === propName) ||
-                    (prop.key.type === "Literal" && prop.key.value === propName)
-                );
-
-              const doReport = (disableProp) => {
-                if (disableProp) {
-                  context.report({
-                    message: `'disable' prop of interface ${
-                      interfaceMap[attr.name.name]
-                    } has been renamed to 'isDisabled'`,
-                    node,
-                    fix: function (fixer) {
-                      return fixer.replaceText(disableProp.key, "isDisabled");
-                    },
-                  });
-                }
-              };
-
               if (expr.type === "ObjectExpression") {
-                doReport(getObjectProp(expr, "disable"));
+                doReport(getObjectProp(expr, "disable"), attr);
               }
 
               if (expr.type === "Identifier") {
-                let scope = context.getScope();
+                let scope = context.getSourceCode().getScope(node);
+                
                 while (scope !== null) {
                   const variable = scope.variables.find(
-                    (variable) => variable.name === expr.name
+                    (v) => v.name === expr.name
                   );
+
                   if (!variable) {
                     scope = scope.upper;
                     continue;
                   }
+                  
                   if (
                     variable.references.some(
                       (ref) => ref.identifier.loc === expr.loc
@@ -78,7 +79,7 @@ module.exports = {
                   ) {
                     variable.defs.forEach((def) => {
                       if (def.node.init?.type === "ObjectExpression") {
-                        doReport(getObjectProp(def.node.init, "disable"));
+                        doReport(getObjectProp(def.node.init, "disable"), attr);
                       }
                     });
                     break;
