@@ -1777,19 +1777,37 @@ We've renamed `disable` prop to `isDisabled` inside `TdSelectType` and `TdAction
 In:
 
 ```jsx
-const tdSelectTypeObject = {disable: true};
+let myObj = { disable: true };
+myObj["disable"] = false;
+myObj.disable = true;
+myObj = { disable: false };
 
-<Td select={{ disable: true }} actions={{ "disable": false }} ></Td>
-<Td select={tdSelectTypeObject} actions={{ disable: false }} ></Td>
+<Td select={myObj} actions={{ disable: false }}></Td>;
+
+const disable = true;
+const obj = { disable };
+<>
+  <Td select={obj} actions={{ "disable": true }}></Td>
+  <Td select={{disable}}></Td>
+</>;
 ```
 
 Out:
 
 ```jsx
-const tdSelectTypeObject = {isDisabled: true};
+let myObj = { isDisabled: true };
+myObj["isDisabled"] = false;
+myObj.isDisabled = true;
+myObj = { isDisabled: false };
 
-<Td select={{ isDisabled: true }} actions={{ isDisabled: false }} ></Td>
-<Td select={tdSelectTypeObject} actions={{ isDisabled: false }} ></Td>
+<Td select={myObj} actions={{ isDisabled: false }}></Td>;
+
+const isDisabled = true;
+const obj = { isDisabled };
+<>
+  <Td select={obj} actions={{ "isDisabled": true }}></Td>
+  <Td select={{isDisabled}}></Td>
+</>;
 ```
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
