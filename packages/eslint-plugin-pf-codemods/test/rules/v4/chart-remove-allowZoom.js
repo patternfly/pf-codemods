@@ -18,6 +18,38 @@ import { ChartGroup } from '@patternfly/react-charts';
   ],
   invalid: [
     {
+      code: `import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts/dist/js/components/EmptyState/index.js';
+import { Button } from '@patternfly/react-core';
+<Chart allowZoom>
+    <ChartAxis/>
+        <ChartGroup allowZoom offset={11} horizontal>
+            "some-chart"
+        </ChartGroup>
+</Chart>`,
+      output: `import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts/dist/js/components/EmptyState/index.js';
+import { Button } from '@patternfly/react-core';
+import { VictoryZoomContainer } from 'victory-zoom-container';
+<Chart containerComponent={<VictoryZoomContainer />}>
+    <ChartAxis/>
+        <ChartGroup  offset={11} horizontal>
+            "some-chart"
+        </ChartGroup>
+</Chart>`,
+      errors: [
+        {
+          message: `add missing import { VictoryZoomContainer } from 'victory-zoom-container';`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `allowZoom prop for Chart has been renamed to containerComponent={<VictoryZoomContainer />}`,
+          type: "JSXOpeningElement",
+        },
+        {
+          message: `allowZoom prop for ChartGroup has been removed`,
+          type: "JSXOpeningElement",
+        }]
+    },
+    {
       code: `import { Chart, ChartAxis, ChartGroup } from '@patternfly/react-charts';
 import { Button } from '@patternfly/react-core';
 <Chart allowZoom>
