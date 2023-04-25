@@ -1580,6 +1580,37 @@ Out:
 <Popper  />
 ```
 
+### radio-update-onChange-params [(#8965)](https://github.com/patternfly/patternfly-react/pull/8965)
+
+**Not yet included in pf-react**
+
+We've updated the `onChange` prop for Radio so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Radio onChange={(checked) => handler(checked)} />
+<Radio onChange={(checked, event) => handler(checked, event)} />
+const handler1 = (checked, event) => {};
+<Radio onChange={handler1} />
+function handler2(checked, event) {};
+<Radio onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<Radio onChange={(_event, checked) => handler(checked)} />
+<Radio onChange={(event, checked) => handler(checked, event)} />
+const handler1 = (_event, checked) => {};
+<Radio onChange={handler1} />
+function handler2(_event, checked) {};
+<Radio onChange={handler2} />
+```
+
+
 ### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
 
 The `react-dropzone` dependency used with FileUpload, MultipleFileUpload, and CodeEditor has been updated from version 9 to version 14. As part of this upgrade, FileUpload has had type changes to its `onFileInputChange` and `dropzoneProps` props, and MultipleFileUpload has had a type change to its `dropzoneProps` prop.
