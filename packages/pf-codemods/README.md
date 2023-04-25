@@ -1707,6 +1707,35 @@ Out:
 <SimpleList isActive />
 ```
 
+### slider-update-onChangeParams [(#8970)](https://github.com/patternfly/patternfly-react/pull/8970)
+
+**Not yet included in pf-react**
+
+We've updated the `onChange` prop for Slider so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Slider onChange={(value) => handler(value)} />
+const handler1 = (value) => {};
+<Slider onChange={handler1} />
+function handler2(value) {};
+<Slider onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<Slider onChange={(_event, value) => handler(value)} />
+const handler1 = (_event, value) => {};
+<Slider onChange={handler1} />
+function handler2(_event, value) {};
+<Slider onChange={handler2} />
+```
+
+
 ### spinner-remove-isSvg [(#8616)](https://github.com/patternfly/patternfly-react/pull/8616)
 
 We've updated the Spinner to exclusively use an SVG, and have removed the isSVG prop.

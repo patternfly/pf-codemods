@@ -69,6 +69,7 @@ import {
   Radio,
   Select,
   SelectToggle,
+  Slider,
   Spinner,
   Tabs,
   Title,
@@ -175,6 +176,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Select onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
+  <Slider onChange={foo => handler(foo)} />
   <Spinner isSVG />
   <Toggle isPrimary onToggle={} />
   <Tooltip reference />
