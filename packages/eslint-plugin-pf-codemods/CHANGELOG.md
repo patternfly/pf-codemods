@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.7](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.6...@patternfly/eslint-plugin-pf-codemods@1.55.7) (2023-04-25)
+
+
+### Bug Fixes
+
+* **Slider:** added event param to onChange ([#412](https://github.com/patternfly/pf-codemods/issues/412)) ([02d15fd](https://github.com/patternfly/pf-codemods/commit/02d15fdf864361c2ec97b3ce936728ff3b7eda49))
+
+
+
+
+
 ## [1.55.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.5...@patternfly/eslint-plugin-pf-codemods@1.55.6) (2023-04-25)
 
 
