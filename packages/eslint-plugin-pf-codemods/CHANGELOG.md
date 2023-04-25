@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.5...@patternfly/eslint-plugin-pf-codemods@1.55.6) (2023-04-25)
+
+
+### Bug Fixes
+
+* **Radio:** updated onChange param order ([#410](https://github.com/patternfly/pf-codemods/issues/410)) ([567664e](https://github.com/patternfly/pf-codemods/commit/567664e240a030a74e8de29e6f05384c5b441492))
+
+
+
+
+
 ## [1.55.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.4...@patternfly/eslint-plugin-pf-codemods@1.55.5) (2023-04-24)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
