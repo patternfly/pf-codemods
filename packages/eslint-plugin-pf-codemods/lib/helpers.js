@@ -493,15 +493,26 @@ function addCallbackParam(componentsArray, propMap) {
                 }
                 const { type, params } = propProperties;
 
+                const parameterConfig = propMap[attribute.name.name];
+
+                const isParamAdditionOnly = typeof parameterConfig === "string";
+                const newOrDefaultParamName = isParamAdditionOnly ? parameterConfig : parameterConfig.defaultParamName;
+                const firstParamName = params && params[0]?.name;
+
+                // if the first parameter is already the expected "fixed" result, early return with no error
+                if (firstParamName === newOrDefaultParamName || !isParamAdditionOnly && firstParamName?.match(parameterConfig.otherMatchers)) {
+                  return;
+                }
+
                 // if a simple string is passed for the parameter just assign it to newParam like we used to and skip everything else
-                if (typeof propMap[attribute.name.name] === "string") {
-                  newParam = propMap[attribute.name.name];
+                if (isParamAdditionOnly) {
+                  newParam = parameterConfig;
                 } else {
                   const {
                     defaultParamName,
                     previousParamIndex,
                     otherMatchers,
-                  } = propMap[attribute.name.name];
+                  } = parameterConfig;
 
                   const paramNameAtGivenIndex =
                     params?.length && params[previousParamIndex]?.name;
