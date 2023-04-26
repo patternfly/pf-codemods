@@ -512,7 +512,10 @@ function addCallbackParam(componentsArray, propMap) {
                 const firstParamName = params && params[0]?.name;
 
                 // if the first parameter is already the expected "fixed" result, early return with no error
-                if (firstParamName?.match(new RegExp(potentialParamMatchers))) {
+                if (
+                  firstParamName &&
+                  new RegExp(potentialParamMatchers).test(firstParamName)
+                ) {
                   return;
                 }
 
