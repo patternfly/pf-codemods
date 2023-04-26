@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.7...@patternfly/eslint-plugin-pf-codemods@1.56.0) (2023-04-26)
+
+
+### Features
+
+* **general:** handle esm imports ([#414](https://github.com/patternfly/pf-codemods/issues/414)) ([ecc7b43](https://github.com/patternfly/pf-codemods/commit/ecc7b435283e5b192cf82bf7c0c6a4e97ff59781))
+
+
+
+
+
 ## [1.55.7](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.6...@patternfly/eslint-plugin-pf-codemods@1.55.7) (2023-04-25)
 
 
