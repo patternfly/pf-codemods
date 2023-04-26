@@ -1,5 +1,13 @@
 const evk = require("eslint-visitor-keys");
 
+function stripLeadingUnderscore(paramName) {
+  if (paramName[0] === '_') {
+    return paramName.slice(1)
+  } else {
+    return paramName
+  }
+}
+
 function moveSpecifiers(
   importsToMove,
   fromPackage,
@@ -494,13 +502,20 @@ function addCallbackParam(componentsArray, propMap) {
                 const { type, params } = propProperties;
 
                 const parameterConfig = propMap[attribute.name.name];
-
                 const isParamAdditionOnly = typeof parameterConfig === "string";
-                const newOrDefaultParamName = isParamAdditionOnly ? parameterConfig : parameterConfig.defaultParamName;
+                const newOrDefaultParamName = isParamAdditionOnly ? parameterConfig : parameterConfig.defaultParamName
+
+                let potentialParamMatchers = `(_?${stripLeadingUnderscore(newOrDefaultParamName)})`
+                const otherMatchersString = parameterConfig.otherMatchers?.toString().slice(1, -1)
+
+                if (otherMatchersString) {
+                  potentialParamMatchers += `|(${otherMatchersString})`
+                }
+
                 const firstParamName = params && params[0]?.name;
 
                 // if the first parameter is already the expected "fixed" result, early return with no error
-                if (firstParamName === newOrDefaultParamName || !isParamAdditionOnly && firstParamName?.match(parameterConfig.otherMatchers)) {
+                if (firstParamName?.match(new RegExp(potentialParamMatchers))) {
                   return;
                 }
 
