@@ -21,7 +21,7 @@ module.exports = {
             const attributesToUpdate = node.attributes.filter(
               (attr) =>
                 attr.type === "JSXAttribute" &&
-                attr.value.type === "JSXExpressionContainer" &&
+                attr.value?.type === "JSXExpressionContainer" &&
                 ["select", "actions"].includes(attr.name?.name)
             );
 
