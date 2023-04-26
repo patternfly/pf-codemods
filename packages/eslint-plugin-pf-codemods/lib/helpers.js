@@ -497,10 +497,10 @@ function addCallbackParam(componentsArray, propMap) {
                   ? parameterConfig
                   : parameterConfig.defaultParamName;
 
-                let potentialParamMatchers = `(_?${newOrDefaultParamName.replace(
+                let potentialParamMatchers = `(^_?${newOrDefaultParamName.replace(
                   /^_+/,
                   ""
-                )})`;
+                )}$)`;
                 const otherMatchersString = parameterConfig.otherMatchers
                   ?.toString()
                   .slice(1, -1);
