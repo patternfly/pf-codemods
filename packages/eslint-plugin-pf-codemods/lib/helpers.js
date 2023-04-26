@@ -592,10 +592,10 @@ function addCallbackParam(componentsArray, propMap) {
                     message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${newParam}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
                     fix(fixer) {
                       const fixes = [];
-
+                      
                       const createParamAdditionFix = (params) => {
                         const firstParam = params[0];
-
+                        
                         const replacementParams = `${newParam}, ${context
                           .getSourceCode()
                           .getText(firstParam)}`;

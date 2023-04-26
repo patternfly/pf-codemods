@@ -37,6 +37,7 @@ import {
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
+  DropdownToggleCheckbox,
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
@@ -122,6 +123,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Dropdown position={DropdownPosition.right} direction={DropdownDirection.up} />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
+  <DropdownToggleCheckbox onChange={(change,evt) => handleChange(change,evt)}/>
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel="h5" size="4xl">

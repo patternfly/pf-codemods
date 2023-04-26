@@ -880,11 +880,38 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
+### dropdownToggleCheckbox-update-onChange [(#8784)](https://github.com/patternfly/patternfly-react/issues/8784)
+
+We've updated the `onChange` prop for DropdownToggleCheckbox to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+
+In:
+
+```jsx
+<DropdownToggleCheckbox onChange={(id) => handler(id)} />
+<DropdownToggleCheckbox onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<DropdownToggleCheckbox onChange={handler1}>
+```
+
+
+Out:
+
+```jsx
+<DropdownToggleCheckbox onChange={(_event, id) => handler(id)} />
+<DropdownToggleCheckboxDeprecated onChange={(event, id) => handler(id, event)} />
+const handler1 = (event, id) => {};
+<DropdownToggleCheckbox onChange={handler1}>
+```
+
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.
 
 #### Examples
+
 
 In:
 
@@ -958,6 +985,7 @@ import { EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateIcon, EmptySta
   </EmptyStateActions>
 </EmptyStateFooter></EmptyState>
 ```
+
 
 ### emptyStateIcon-icon-required [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
