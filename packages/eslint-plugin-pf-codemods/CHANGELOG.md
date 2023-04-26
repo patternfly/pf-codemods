@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.57.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.56.0...@patternfly/eslint-plugin-pf-codemods@1.57.0) (2023-04-26)
+
+
+### Features
+
+* **helpers:** Stop reporting errors after a param add/swap is fixed ([#422](https://github.com/patternfly/pf-codemods/issues/422)) ([fd1e350](https://github.com/patternfly/pf-codemods/commit/fd1e3502e2b70e51b43e7a02a784195577d1bcb9))
+
+
+
+
+
 # [1.56.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.55.7...@patternfly/eslint-plugin-pf-codemods@1.56.0) (2023-04-26)
 
 
