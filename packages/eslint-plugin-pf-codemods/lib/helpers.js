@@ -483,10 +483,8 @@ function addCallbackParam(componentsArray, propMap) {
   return function (context) {
     const imports = [
       ...getPackageImports(context, "@patternfly/react-core"),
-      ...getPackageImports(context, "@patternfly/react-core/deprecated")
-    ].filter(
-      (specifier) => componentsArray.includes(specifier.imported.name)
-    );
+      ...getPackageImports(context, "@patternfly/react-core/deprecated"),
+    ].filter((specifier) => componentsArray.includes(specifier.imported.name));
 
     return !imports.length
       ? {}
@@ -523,15 +521,43 @@ function addCallbackParam(componentsArray, propMap) {
                 }
                 const { type, params } = propProperties;
 
+                const parameterConfig = propMap[attribute.name.name];
+                const isParamAdditionOnly = typeof parameterConfig === "string";
+                const newOrDefaultParamName = isParamAdditionOnly
+                  ? parameterConfig
+                  : parameterConfig.defaultParamName;
+
+                let potentialParamMatchers = `(^_?${newOrDefaultParamName.replace(
+                  /^_+/,
+                  ""
+                )}$)`;
+                const otherMatchersString = parameterConfig.otherMatchers
+                  ?.toString()
+                  .slice(1, -1);
+
+                if (otherMatchersString) {
+                  potentialParamMatchers += `|(${otherMatchersString})`;
+                }
+
+                const firstParamName = params && params[0]?.name;
+
+                // if the first parameter is already the expected "fixed" result, early return with no error
+                if (
+                  firstParamName &&
+                  new RegExp(potentialParamMatchers).test(firstParamName)
+                ) {
+                  return;
+                }
+
                 // if a simple string is passed for the parameter just assign it to newParam like we used to and skip everything else
-                if (typeof propMap[attribute.name.name] === "string") {
-                  newParam = propMap[attribute.name.name];
+                if (isParamAdditionOnly) {
+                  newParam = parameterConfig;
                 } else {
                   const {
                     defaultParamName,
                     previousParamIndex,
                     otherMatchers,
-                  } = propMap[attribute.name.name];
+                  } = parameterConfig;
 
                   const paramNameAtGivenIndex =
                     params?.length && params[previousParamIndex]?.name;

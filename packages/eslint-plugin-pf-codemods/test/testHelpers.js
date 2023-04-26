@@ -4,7 +4,7 @@ function getAddCallbackParamMessage(componentName, propName, newParamName) {
   return `The "${propName}" prop for ${componentName} has been updated so that the "${newParamName}" parameter is the first parameter. "${propName}" handlers may require an update.`;
 }
 
-function getValidAddCallbackParamTests(componentNameArray, propNameArray) {
+function getValidAddCallbackParamTests(componentNameArray, propNameArray, newParamName) {
   let tests = [];
 
   componentNameArray.forEach((componentName) => {
@@ -19,10 +19,19 @@ function getValidAddCallbackParamTests(componentNameArray, propNameArray) {
         code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={() => handler()} />;`,
       });
       tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}) => handler()} />;`,
+      });
+      tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; const handler = () => {}; <${componentName} ${propName}={handler} />;`,
       });
       tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}) => {}; <${componentName} ${propName}={handler} />;`,
+      });
+      tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; function handler() {}; <${componentName} ${propName}={handler} />;`,
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}) {}; <${componentName} ${propName}={handler} />;`,
       });
       tests.push({ code: `<${componentName} ${propName} />;` });
     });
@@ -350,7 +359,7 @@ function addCallbackParamTester(
   const propNameArray = typeof propNames === "string" ? [propNames] : propNames;
 
   ruleTester.run(ruleName, rule, {
-    valid: getValidAddCallbackParamTests(componentNameArray, propNameArray),
+    valid: getValidAddCallbackParamTests(componentNameArray, propNameArray, newParamName),
     invalid: getInvalidAddCallbackParamTests(
       componentNameArray,
       propNameArray,
@@ -372,7 +381,7 @@ function swapCallbackParamTester(
   const propNameArray = typeof propNames === "string" ? [propNames] : propNames;
 
   ruleTester.run(ruleName, rule, {
-    valid: getValidAddCallbackParamTests(componentNameArray, propNameArray),
+    valid: getValidAddCallbackParamTests(componentNameArray, propNameArray, newParamName),
     invalid: getInvalidSwapCallbackParamTests(
       componentNameArray,
       propNameArray,
