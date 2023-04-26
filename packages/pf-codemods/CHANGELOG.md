@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.55.10...@patternfly/pf-codemods@1.56.0) (2023-04-26)
+
+
+### Features
+
+* **DropdownToggleCheckbox:** change param order for onChange ([#360](https://github.com/patternfly/pf-codemods/issues/360)) ([1971546](https://github.com/patternfly/pf-codemods/commit/1971546cc5d2de6696783e36620428bf8ae23ee2))
+
+
+
+
+
 ## [1.55.10](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.55.9...@patternfly/pf-codemods@1.55.10) (2023-04-26)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
