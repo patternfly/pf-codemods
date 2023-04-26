@@ -1,13 +1,5 @@
 const evk = require("eslint-visitor-keys");
 
-function stripLeadingUnderscore(paramName) {
-  if (paramName[0] === "_") {
-    return paramName.slice(1);
-  } else {
-    return paramName;
-  }
-}
-
 function moveSpecifiers(
   importsToMove,
   fromPackage,
@@ -505,8 +497,9 @@ function addCallbackParam(componentsArray, propMap) {
                   ? parameterConfig
                   : parameterConfig.defaultParamName;
 
-                let potentialParamMatchers = `(_?${stripLeadingUnderscore(
-                  newOrDefaultParamName
+                let potentialParamMatchers = `(_?${newOrDefaultParamName.replace(
+                  /^_+/,
+                  ""
                 )})`;
                 const otherMatchersString = parameterConfig.otherMatchers
                   ?.toString()
