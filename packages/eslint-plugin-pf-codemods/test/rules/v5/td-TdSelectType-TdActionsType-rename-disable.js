@@ -11,7 +11,7 @@ ruleTester.run("td-TdSelectType-TdActionsType-rename-disable", rule, {
       myObj.isDisabled = true;
       myObj = { isDisabled: false };
       
-      <Td select={myObj} actions={{ isDisabled: false }}></Td>;
+      <Td hasRightBorder select={myObj} actions={{ isDisabled: false }}></Td>;
       
       const isDisabled = true;
       const obj = { isDisabled };
