@@ -1,3 +1,5 @@
+const { pfPackageMatches } = require("../../helpers");
+
 // https://github.com/patternfly/patternfly-react/pull/8601
 module.exports = {
   create: function (context) {
@@ -5,7 +7,7 @@ module.exports = {
       ImportDeclaration(node) {
         const cardImport = node.specifiers.find(
           (specifier) =>
-            (node.source.value === "@patternfly/react-core" &&
+            (pfPackageMatches("@patternfly/react-core", node.source.value) &&
               specifier.imported?.name === "Card")
         );
 

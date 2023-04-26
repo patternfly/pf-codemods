@@ -7,6 +7,9 @@ ruleTester.run("overflowMenuDropdownItem-renamed-prop", rule, {
       code: `import { OverflowMenuDropdownItem } from '@patternfly/react-core'; <OverflowMenuDropdownItem />`,
     },
     {
+      code: `import { OverflowMenuDropdownItem } from '@patternfly/react-core/dist/esm/components/OverflowMenu/index.js'; <OverflowMenuDropdownItem />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<OverflowMenuDropdownItem index={0} />`,
     },
@@ -25,6 +28,16 @@ ruleTester.run("overflowMenuDropdownItem-renamed-prop", rule, {
     {
       code: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core'; <OMDropdownItem index={0} />`,
       output: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core'; <OMDropdownItem itemId={0} />`,
+      errors: [
+        {
+          message: `The "index" prop for OMDropdownItem has been renamed to "itemId", and its type has been updated to either a number or string.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core/dist/esm/components/OverflowMenu/index.js'; <OMDropdownItem index={0} />`,
+      output: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core/dist/esm/components/OverflowMenu/index.js'; <OMDropdownItem itemId={0} />`,
       errors: [
         {
           message: `The "index" prop for OMDropdownItem has been renamed to "itemId", and its type has been updated to either a number or string.`,

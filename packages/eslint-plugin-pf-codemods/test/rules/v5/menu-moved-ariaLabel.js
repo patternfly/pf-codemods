@@ -10,6 +10,12 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       code: `import { Menu } from '@patternfly/react-core'; <Menu />`,
     },
     {
+      code: `import { Menu, MenuList } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <Menu><MenuList aria-label="tester" /></Menu>`,
+    },
+    {
+      code: `import { Menu } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <Menu />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<Menu aria-label="tester"><MenuList /></Menu>`,
     },
@@ -83,6 +89,16 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
     {
       code: `import { Menu, MenuGroup, MenuList } from '@patternfly/react-core'; <Menu aria-label="tester"><MenuGroup><MenuList /></MenuGroup></Menu>`,
       output: `import { Menu, MenuGroup, MenuList } from '@patternfly/react-core'; <Menu ><MenuGroup><MenuList /></MenuGroup></Menu>`,
+      errors: [
+        {
+          message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      code: `import { Menu, MenuGroup, MenuList } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <Menu aria-label="tester"><MenuGroup><MenuList /></MenuGroup></Menu>`,
+      output: `import { Menu, MenuGroup, MenuList } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <Menu ><MenuGroup><MenuList /></MenuGroup></Menu>`,
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,

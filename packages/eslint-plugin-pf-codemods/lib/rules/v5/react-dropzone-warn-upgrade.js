@@ -1,3 +1,5 @@
+const { pfPackageMatches } = require("../../helpers");
+
 // https://github.com/patternfly/patternfly-react/pull/7926
 module.exports = {
   meta: {},
@@ -7,9 +9,9 @@ module.exports = {
         const reactCoreImports = ["FileUpload", "MultipleFileUpload"];
         const importsWithDropzone = node.specifiers.find(
           (specifier) =>
-            (node.source.value === "@patternfly/react-core" &&
+            (pfPackageMatches("@patternfly/react-core", node.source.value) &&
               reactCoreImports.includes(specifier.imported?.name)) ||
-            (node.source.value === "@patternfly/react-code-editor" &&
+            (pfPackageMatches("@patternfly/react-code-editor", node.source.value) &&
               specifier.imported?.name === "CodeEditor")
         );
 

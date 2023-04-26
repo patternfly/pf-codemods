@@ -7,6 +7,9 @@ ruleTester.run("emptyStateIcon-remove-props", rule, {
       code: `import { EmptyStateIcon } from '@patternfly/react-core'; <><EmptyStateIcon icon={Spinner} /><EmptyStateIcon icon={CubesIcon} /></>`,
     },
     {
+      code: `import { EmptyStateIcon } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <><EmptyStateIcon icon={Spinner} /><EmptyStateIcon icon={CubesIcon} /></>`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<><EmptyStateIcon component={Spinner} variant="container"/><EmptyStateIcon icon={CubesIcon} variant="icon"/></>`,
     },
@@ -25,6 +28,20 @@ ruleTester.run("emptyStateIcon-remove-props", rule, {
     {
       code: `import { EmptyStateIcon } from '@patternfly/react-core'; <EmptyStateIcon component={Spinner} variant="container"/>`,
       output: `import { EmptyStateIcon } from '@patternfly/react-core'; <EmptyStateIcon icon={Spinner} />`,
+      errors: [
+        {
+          message: `component prop for EmptyStateIcon has been renamed to icon`,
+          type: "JSXOpeningElement",
+        },
+        {
+          message: `variant prop for EmptyStateIcon has been removed`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyStateIcon } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <EmptyStateIcon component={Spinner} variant="container"/>`,
+      output: `import { EmptyStateIcon } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <EmptyStateIcon icon={Spinner} />`,
       errors: [
         {
           message: `component prop for EmptyStateIcon has been renamed to icon`,

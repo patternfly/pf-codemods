@@ -15,8 +15,20 @@ function moveSpecifiers(
       fromPackage,
       importNames
     );
-
     if (!importSpecifiersToMove.length) return {};
+
+    let modifiedToPackage = "";
+    if (importSpecifiersToMove[0].parent.source.value.includes("dist/esm")) {
+      //expecting @patternfly/{package}/{designator} where designator is next/deprecated
+      const toParts = toPackage.split("/");
+      //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
+      //needing toPath to look like fromPath with the designator before /components
+      const fromParts = importSpecifiersToMove[0].parent.source.value.split("/");
+      if (toParts[0] === "@patternfly" && toParts.length === 3) {
+        fromParts.splice(4, 0, toParts[2])
+        modifiedToPackage = fromParts.join("/");
+      }
+    }
 
     const propValuesToUpdate = [];
     const componentsToUpdate = importsToMove
@@ -30,17 +42,19 @@ function moveSpecifiers(
     const src = context.getSourceCode();
     const existingToPackageImportDeclaration = src.ast.body.find(
       (node) =>
-        node.type === "ImportDeclaration" && node.source.value === toPackage
+        node.type === "ImportDeclaration" && [modifiedToPackage, toPackage].includes(node.source.value)
     );
     const existingToPackageSpecifiers =
       existingToPackageImportDeclaration?.specifiers?.map((specifier) =>
         src.getText(specifier)
       ) || [];
+
     return {
       ImportDeclaration(node) {
         const [newToPackageSpecifiers, fromPackageSpecifiers] =
           splitImportSpecifiers(node, importNames);
-        if (!newToPackageSpecifiers.length || node.source.value !== fromPackage)
+
+        if (!newToPackageSpecifiers.length || !pfPackageMatches(fromPackage, node.source.value))
           return {};
 
         const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
@@ -50,7 +64,7 @@ function moveSpecifiers(
         const newToPackageImportDeclaration = `import {\n\t${[
           ...existingToPackageSpecifiers,
           ...newAliasToPackageSpecifiers,
-        ].join(`,\n\t`)}\n} from '${toPackage}';`;
+        ].join(`,\n\t`)}\n} from '${modifiedToPackage || toPackage}';`;
 
         context.report({
           node,
@@ -95,7 +109,7 @@ function moveSpecifiers(
                   node,
                   `import {\n\t${fromPackageSpecifiers
                     .map((specifier) => src.getText(specifier))
-                    .join(",\n\t")}\n} from '${fromPackage}';`
+                    .join(",\n\t")}\n} from '${node.source.value}';`
                 )
               );
             }
@@ -177,6 +191,17 @@ function moveSpecifiers(
   };
 }
 
+function pfPackageMatches(packageName, nodeSrc) {
+  const parts = packageName.split("/");
+  const regex = new RegExp('^' +
+    parts[0] + '\/' + parts[1] +
+    '(\/dist\/(esm|js))?' +
+    (parts[2] ? ('\/' + parts[2]) : '') +
+    '(\/(components|helpers)\/.*)?$'
+  );
+  return regex.test(nodeSrc)
+}
+
 /**
  *
  * @param context
@@ -188,7 +213,12 @@ function getPackageImports(context, packageName, importNames = []) {
   const specifiers = context
     .getSourceCode()
     .ast.body.filter((node) => node.type === "ImportDeclaration")
-    .filter((node) => node.source.value === packageName)
+    .filter((node) => {
+      if(packageName.startsWith("@patternfly")) {
+        return pfPackageMatches(packageName, node.source.value);
+      }
+      return node.source.value === packageName
+    })
     .map((node) => node.specifiers)
     .reduce((acc, val) => acc.concat(val), []);
   return !importNames.length
@@ -423,7 +453,7 @@ function renameComponents(
 }
 
 function ensureImports(context, node, package, imports) {
-  if (node.source.value !== package) {
+  if (!pfPackageMatches(package, node.source.value)) {
     return;
   }
   const patternflyImports = getPackageImports(context, package);
@@ -637,6 +667,7 @@ module.exports = {
   ensureImports,
   getPackageImports,
   moveSpecifiers,
+  pfPackageMatches,
   renameProp,
   renameProps0,
   renameProps,

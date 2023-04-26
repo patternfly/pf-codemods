@@ -208,5 +208,13 @@ ruleTester.run("remove-removeFindDomNode", rule, {
         type: "JSXOpeningElement",
       }]
     },
+    {
+      code:   `import { Truncate } from '@patternfly/react-core/dist/esm/components/Truncate/index.js'; <Truncate removeFindDomNode />`,
+      output: `import { Truncate } from '@patternfly/react-core/dist/esm/components/Truncate/index.js'; <Truncate  />`,
+      errors: [{
+        message: `removeFindDomNode prop for Truncate has been removed`,
+        type: "JSXOpeningElement",
+      }]
+    },
   ]
 });

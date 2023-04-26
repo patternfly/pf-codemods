@@ -6,7 +6,6 @@ const { getPackageImports } = require('../../helpers');
     create: function(context) {
       const propsImport = getPackageImports(context, '@patternfly/react-core')
         .filter(specifier => specifier.imported.name == 'ToggleMenuBaseProps');
-  
       return propsImport.length === 0 ? {} : {
         JSXOpeningElement(node) {
           if (propsImport.map(imp => imp.local.name).includes(node.name.name)) {

@@ -29,5 +29,15 @@ ruleTester.run("overflowMenu-warn-updated-dropdownItem", rule, {
         },
       ],
     },
+    {
+      code: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <OMDropdownItem />`,
+      output: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <OMDropdownItem />`,
+      errors: [
+        {
+          message: `OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });

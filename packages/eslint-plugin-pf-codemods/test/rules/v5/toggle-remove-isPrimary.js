@@ -7,6 +7,9 @@ ruleTester.run("toggle-remove-isPrimary", rule, {
       code: `import { Toggle } from '@patternfly/react-core'; <Toggle toggleVariant />`,
     },
     {
+      code: `import { Toggle } from '@patternfly/react-core/dist/esm/components/Toggle/index.js'; <Toggle toggleVariant />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<Toggle isPrimary />`,
     },
@@ -15,6 +18,16 @@ ruleTester.run("toggle-remove-isPrimary", rule, {
     {
       code: `import { Toggle } from '@patternfly/react-core'; <Toggle isPrimary />`,
       output: `import { Toggle } from '@patternfly/react-core'; <Toggle toggleVariant="primary" />`,
+      errors: [
+        {
+          message: `isPrimary prop has been removed for Toggle and replaced by using 'primary' value on the toggleVariant prop.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { Toggle } from '@patternfly/react-core/dist/esm/components/Toggle/index.js'; <Toggle isPrimary />`,
+      output: `import { Toggle } from '@patternfly/react-core/dist/esm/components/Toggle/index.js'; <Toggle toggleVariant="primary" />`,
       errors: [
         {
           message: `isPrimary prop has been removed for Toggle and replaced by using 'primary' value on the toggleVariant prop.`,

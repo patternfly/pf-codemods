@@ -7,6 +7,9 @@ ruleTester.run("cardHeader-update-api", rule, {
       code: `import { CardHeader } from '@patternfly/react-core'; <CardHeader actions={}>Header content</CardHeader>`,
     },
     {
+      code: `import { CardHeader } from '@patternfly/react-core/dist/esm/components/Card/index.js'; <CardHeader actions={}>Header content</CardHeader>`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<CardHeader><CardHeaderMain /><CardActions /></CardHeader>`,
     },
@@ -43,6 +46,20 @@ ruleTester.run("cardHeader-update-api", rule, {
     {
       code: `import { CardHeader, CardHeaderMain, CardActions } from '@patternfly/react-core'; <CardHeader><CardHeaderMain>Header content</CardHeaderMain><CardActions hasNoOffset className="test"><Action /></CardActions></CardHeader>`,
       output: `import { CardHeader } from '@patternfly/react-core'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} >Header content</CardHeader>`,
+      errors: [
+        {
+          message: `CardHeaderMain and CardActions are no longer exported.`,
+          type: "ImportDeclaration",
+        },
+        {
+          message: `CardHeaderMain and CardActions are now rendered internally within CardHeader and should be passed to CardHeader instead.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      code: `import { CardHeader, CardHeaderMain, CardActions } from '@patternfly/react-core/dist/esm/components/Card/index.js'; <CardHeader><CardHeaderMain>Header content</CardHeaderMain><CardActions hasNoOffset className="test"><Action /></CardActions></CardHeader>`,
+      output: `import { CardHeader } from '@patternfly/react-core/dist/esm/components/Card/index.js'; <CardHeader actions={{ actions: <><Action /></>, hasNoOffset: true, className: "test"}} >Header content</CardHeader>`,
       errors: [
         {
           message: `CardHeaderMain and CardActions are no longer exported.`,

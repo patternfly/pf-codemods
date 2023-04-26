@@ -7,6 +7,9 @@ ruleTester.run("popover-remove-props", rule, {
       code: `import { Popover } from '@patternfly/react-core'; <Popover />`,
     },
     {
+      code: `import { Popover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <Popover />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<Popover />`,
     }
@@ -73,6 +76,31 @@ ruleTester.run("popover-remove-props", rule, {
     {
       code:   `import { Popover } from '@patternfly/react-core'; <Popover onHidden={(tip) => {}} onHide={(tip) => {}} onMount={(tip) => {}} onShow={(tip) => {}} onShown={(tip) => {}} />`,
       output: `import { Popover } from '@patternfly/react-core'; <Popover onHidden={() => {}} onHide={() => {}} onMount={() => {}} onShow={() => {}} onShown={() => {}} />`,
+      errors: [
+      {
+        message: "Popover onHidden function's parameter has been removed.",
+        type: "JSXElement",
+      },
+      {
+        message: "Popover onHide function's parameter has been removed.",
+        type: "JSXElement",
+      },
+      {
+        message: "Popover onMount function's parameter has been removed.",
+        type: "JSXElement",
+      },
+      {
+        message: "Popover onShow function's parameter has been removed.",
+        type: "JSXElement",
+      },
+      {
+        message: "Popover onShown function's parameter has been removed.",
+        type: "JSXElement",
+      }],
+    },
+    {
+      code:   `import { Popover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <Popover onHidden={(tip) => {}} onHide={(tip) => {}} onMount={(tip) => {}} onShow={(tip) => {}} onShown={(tip) => {}} />`,
+      output: `import { Popover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <Popover onHidden={() => {}} onHide={() => {}} onMount={() => {}} onShow={() => {}} onShown={() => {}} />`,
       errors: [
       {
         message: "Popover onHidden function's parameter has been removed.",

@@ -16,6 +16,14 @@ ruleTester.run("pagination-optionsToggle", rule, {
         message: `OptionsToggle has been removed and MenuToggle should be used instead. PaginationOptionsMenu has been refactored to use MenuToggle.`,
         type: "JSXOpeningElement",
       }]
+    },
+    {
+      code:   `import { OptionsToggle } from '@patternfly/react-core/dist/esm/components/OptionsToggle/index.js'; <OptionsToggle />`,
+      output: `import { OptionsToggle } from '@patternfly/react-core/dist/esm/components/OptionsToggle/index.js'; <OptionsToggle />`,
+      errors: [{
+        message: `OptionsToggle has been removed and MenuToggle should be used instead. PaginationOptionsMenu has been refactored to use MenuToggle.`,
+        type: "JSXOpeningElement",
+      }]
     }
   ]
 });

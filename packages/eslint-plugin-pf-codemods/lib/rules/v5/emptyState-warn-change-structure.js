@@ -2,6 +2,7 @@ const {
   getPackageImports,
   ensureImports,
   getAllJSXElements,
+  pfPackageMatches,
 } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
@@ -105,7 +106,7 @@ module.exports = {
 
     return {
       ImportDeclaration(node) {
-        if (node.source.value != pkg || !includesEmptyState(node.specifiers)) {
+        if (!pfPackageMatches(pkg, node.source.value) || !includesEmptyState(node.specifiers)) {
           return;
         }
 

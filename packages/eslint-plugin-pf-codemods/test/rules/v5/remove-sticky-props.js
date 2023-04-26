@@ -113,5 +113,23 @@ ruleTester.run("remove-sticky-props", rule, {
           type: "JSXOpeningElement",
         }]
       },
+      {
+        code:   `import { PageBreadcrumb, PageSection, PageGroup } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <><PageSection sticky="bottom" /><PageGroup sticky="bottom" /><PageBreadcrumb sticky="bottom" /></>`,
+        output: `import { PageBreadcrumb, PageSection, PageGroup } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <><PageSection  /><PageGroup  /><PageBreadcrumb  /></>`,
+        errors: [
+          {
+            message: `sticky prop for PageSection has been removed`,
+            type: "JSXOpeningElement",
+          },
+          {
+            message: `sticky prop for PageGroup has been removed`,
+            type: "JSXOpeningElement",
+          },
+          {
+            message: `sticky prop for PageBreadcrumb has been removed`,
+            type: "JSXOpeningElement",
+          },
+        ]
+      },
   ]
 });

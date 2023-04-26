@@ -25,7 +25,10 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
       code: `<ApplicationLauncher />`,
     },
     {
-      code: `import { ApplicationLauncher } from '@patternfly/deprecated';`
+      code: `import { ApplicationLauncher } from '@patternfly/react-core/deprecated';`
+    },
+    {
+      code: `import { ApplicationLauncher } from '@patternfly/react-core/dist/esm/deprecated/components/Accordion/index.js'`
     }
   ],
   invalid: [
@@ -52,6 +55,16 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
     {
       code: `import { Foo, ${importsToMove.join(', ')}, Bar } from '@patternfly/react-core';`,
       output: `import {\n\tFoo,\n\tBar\n} from '@patternfly/react-core';\nimport {\n\t${importsToMove.join(',\n\t')}\n} from '@patternfly/react-core/deprecated';`,
+      errors: [
+        {
+          message: `${importsToMove.join(', ').replace(/, (\w+)$/, ', and $1')} have been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
+    {
+      code: `import { Foo, ${importsToMove.join(', ')}, Bar } from '@patternfly/react-core/dist/esm/components/ApplicationLauncher/index.js';`,
+      output: `import {\n\tFoo,\n\tBar\n} from '@patternfly/react-core/dist/esm/components/ApplicationLauncher/index.js';\nimport {\n\t${importsToMove.join(',\n\t')}\n} from '@patternfly/react-core/dist/esm/deprecated/components/ApplicationLauncher/index.js';`,
       errors: [
         {
           message: `${importsToMove.join(', ').replace(/, (\w+)$/, ', and $1')} have been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,

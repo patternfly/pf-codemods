@@ -16,6 +16,14 @@ ruleTester.run("datePicker-warn-appendTo-default-value-changed", rule, {
         message: 'The default value of the DatePicker prop "appendTo" has been updated to a value of "inline" and may cause markup changes that require updating selectors used in tests.',
         type: "JSXOpeningElement",
       }]
+    },
+    {
+      code:   `import { DatePicker } from '@patternfly/react-core/dist/esm/components/DatePicker/index.js'; <DatePicker />`,
+      output: `import { DatePicker } from '@patternfly/react-core/dist/esm/components/DatePicker/index.js'; <DatePicker />`,
+      errors: [{
+        message: 'The default value of the DatePicker prop "appendTo" has been updated to a value of "inline" and may cause markup changes that require updating selectors used in tests.',
+        type: "JSXOpeningElement",
+      }]
     }
   ]
 });

@@ -9,6 +9,11 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
       <EmptyState variant={EmptyStateVariant.lg} />`,
     },
     {
+      code: `import { EmptyState, EmptyStateVariant } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; 
+      const myVariant = EmptyStateVariant.sm; 
+      <EmptyState variant={EmptyStateVariant.lg} />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `const myVariant = EmptyStateVariant.small; 
       <EmptyState variant={EmptyStateVariant.large} />`,
@@ -20,6 +25,24 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
       const myVariant = EmptyStateVariant.small; 
       <EmptyState variant={EmptyStateVariant.large} />`,
       output: `import { EmptyState, EmptyStateVariant } from '@patternfly/react-core'; 
+      const myVariant = EmptyStateVariant.sm; 
+      <EmptyState variant={EmptyStateVariant.lg} />`,
+      errors: [
+        {
+          message: `EmptyStateVariant enum value 'small' was renamed to 'sm'`,
+          type: "MemberExpression",
+        },
+        {
+          message: `EmptyStateVariant enum value 'large' was renamed to 'lg'`,
+          type: "MemberExpression",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyState, EmptyStateVariant } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; 
+      const myVariant = EmptyStateVariant.small; 
+      <EmptyState variant={EmptyStateVariant.large} />`,
+      output: `import { EmptyState, EmptyStateVariant } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; 
       const myVariant = EmptyStateVariant.sm; 
       <EmptyState variant={EmptyStateVariant.lg} />`,
       errors: [

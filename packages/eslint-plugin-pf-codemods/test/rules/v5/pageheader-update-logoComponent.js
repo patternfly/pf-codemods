@@ -7,6 +7,9 @@ ruleTester.run("pageheader-update-logoComponent", rule, {
       code: `import { PageHeader } from '@patternfly/react-core'; <PageHeader logoComponent="div" />`,
     },
     {
+      code: `import { PageHeader } from '@patternfly/react-core/dist/esm/components/PageHeader/index.js'; <PageHeader logoComponent="div" />`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<PageHeader />`,
     }
@@ -15,6 +18,14 @@ ruleTester.run("pageheader-update-logoComponent", rule, {
     {
       code:   `import { PageHeader } from '@patternfly/react-core'; <PageHeader />`,
       output: `import { PageHeader } from '@patternfly/react-core'; <PageHeader logoComponent="a" />`,
+      errors: [{
+        message: 'The default PageHeader logoComponent type has be updated to switch between an anchor, button, and span based on whether a href, onClick or neither are present. It is also recommended to use Masthead in place of PageHeader.',
+        type: "JSXOpeningElement",
+      }]
+    },
+    {
+      code:   `import { PageHeader } from '@patternfly/react-core/dist/esm/components/PageHeader/index.js'; <PageHeader />`,
+      output: `import { PageHeader } from '@patternfly/react-core/dist/esm/components/PageHeader/index.js'; <PageHeader logoComponent="a" />`,
       errors: [{
         message: 'The default PageHeader logoComponent type has be updated to switch between an anchor, button, and span based on whether a href, onClick or neither are present. It is also recommended to use Masthead in place of PageHeader.',
         type: "JSXOpeningElement",
