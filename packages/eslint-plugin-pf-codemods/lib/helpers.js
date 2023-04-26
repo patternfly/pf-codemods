@@ -1,10 +1,10 @@
 const evk = require("eslint-visitor-keys");
 
 function stripLeadingUnderscore(paramName) {
-  if (paramName[0] === '_') {
-    return paramName.slice(1)
+  if (paramName[0] === "_") {
+    return paramName.slice(1);
   } else {
-    return paramName
+    return paramName;
   }
 }
 
@@ -461,10 +461,8 @@ function addCallbackParam(componentsArray, propMap) {
   return function (context) {
     const imports = [
       ...getPackageImports(context, "@patternfly/react-core"),
-      ...getPackageImports(context, "@patternfly/react-core/deprecated")
-    ].filter(
-      (specifier) => componentsArray.includes(specifier.imported.name)
-    );
+      ...getPackageImports(context, "@patternfly/react-core/deprecated"),
+    ].filter((specifier) => componentsArray.includes(specifier.imported.name));
 
     return !imports.length
       ? {}
@@ -503,13 +501,19 @@ function addCallbackParam(componentsArray, propMap) {
 
                 const parameterConfig = propMap[attribute.name.name];
                 const isParamAdditionOnly = typeof parameterConfig === "string";
-                const newOrDefaultParamName = isParamAdditionOnly ? parameterConfig : parameterConfig.defaultParamName
+                const newOrDefaultParamName = isParamAdditionOnly
+                  ? parameterConfig
+                  : parameterConfig.defaultParamName;
 
-                let potentialParamMatchers = `(_?${stripLeadingUnderscore(newOrDefaultParamName)})`
-                const otherMatchersString = parameterConfig.otherMatchers?.toString().slice(1, -1)
+                let potentialParamMatchers = `(_?${stripLeadingUnderscore(
+                  newOrDefaultParamName
+                )})`;
+                const otherMatchersString = parameterConfig.otherMatchers
+                  ?.toString()
+                  .slice(1, -1);
 
                 if (otherMatchersString) {
-                  potentialParamMatchers += `|(${otherMatchersString})`
+                  potentialParamMatchers += `|(${otherMatchersString})`;
                 }
 
                 const firstParamName = params && params[0]?.name;
