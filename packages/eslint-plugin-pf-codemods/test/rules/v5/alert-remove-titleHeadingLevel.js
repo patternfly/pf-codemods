@@ -24,7 +24,7 @@ ruleTester.run("alert-remove-titleHeadingLevel", rule, {
       code:   `import { Alert } from '@patternfly/react-core/dist/esm/components/Accordion/index.js'; <Alert titleHeadingLevel />`,
       output: `import { Alert } from '@patternfly/react-core/dist/esm/components/Accordion/index.js'; <Alert component />`,
       errors: [{
-        message: `titleHeadingLevel prop has been removed for Alert and replaced with the component prop.`,
+        message: `titleHeadingLevel prop for Alert has been renamed to component`,
         type: "JSXOpeningElement",
       }]
     }

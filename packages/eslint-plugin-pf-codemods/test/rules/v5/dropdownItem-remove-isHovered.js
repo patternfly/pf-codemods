@@ -27,7 +27,7 @@ ruleTester.run("dropdownItem-remove-isHovered", rule, {
       code:   `import { DropdownItem } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <DropdownItem isHovered />`,
       output: `import { DropdownItem } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <DropdownItem  />`,
       errors: [{
-        message: `isHovered prop has been removed for DropdownItem.`,
+        message: `isHovered prop for DropdownItem has been removed`,
         type: "JSXOpeningElement",
       }]
     }

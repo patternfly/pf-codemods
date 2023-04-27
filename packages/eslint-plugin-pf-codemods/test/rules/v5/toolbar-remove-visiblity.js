@@ -27,7 +27,7 @@ ruleTester.run("toolbar-remove-visiblity", rule, {
       code:   `import { ToolbarContent } from '@patternfly/react-core/dist/esm/components/ToolbarContent/index.js'; <ToolbarContent visiblity={{ default: 'hidden'}} />`,
       output: `import { ToolbarContent } from '@patternfly/react-core/dist/esm/components/ToolbarContent/index.js'; <ToolbarContent visibility={{ default: 'hidden'}} />`,
       errors: [{
-        message: `visiblity prop for ToolbarContent has been removed and replaced with the visibility prop.`,
+        message: `visiblity prop for ToolbarContent has been renamed to visibility`,
         type: "JSXOpeningElement",
       }]
     }
