@@ -668,6 +668,9 @@ function getAllJSXElements(context) {
   const jsxElements = [];
 
   const traverse = (node) => {
+    if (!node) {
+      return;
+    }
     if (node.type === "JSXElement") {
       jsxElements.push(node);
     }
