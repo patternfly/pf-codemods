@@ -314,6 +314,34 @@ function renamePropsOnNode(context, imports, node, renames) {
   }
 }
 
+/**
+ * 
+ * @param {*} renames 
+ * structure of the renames object:
+ * {
+ *    ComponentOne: {
+        propA: {
+          newName: "newPropA",
+          message: (node) => `propA prop has been renamed to newPropA for ${node.name.name}, some custom message`, // message is optional, default message will always be provided
+        },
+        isSmall: {
+          newName: 'size="sm"',
+          replace // when replace is present, it will replace the entire prop, including its value (e.g. isSmall={true} will be replaced with size="sm")
+        }
+      },
+      ComponentTwo: {
+        propToDelete: {
+          newName: "" // removing a prop is done by an empty string newName
+          message: "propToDelete has been deleted on ComponentTwo" // message can also be a string, but function is preferable to keep the node name, when using aliased import of a component
+        },
+        propToDeleteShort: "", // shorter way to remove a prop
+        propToRenameShort: "someNewPropName", // shorter way to rename a prop
+        propToDeleteAlternativeWay: {}, // this will also work for removing a prop
+      }
+ * }
+ * @param {string} packageName
+ * @returns 
+ */
 function renameProps(renames, packageName = "@patternfly/react-core") {
   return function (context) {
     const imports = getPackageImports(context, packageName).filter(
@@ -337,76 +365,6 @@ function renameProps(renames, packageName = "@patternfly/react-core") {
         renamePropsOnNode(context, imports, node, renames);
       },
     };
-  };
-}
-
-function renameProp(
-  components,
-  propMap,
-  message,
-  replaceAttribute,
-  leaveComment = true
-) {
-  if (typeof components === "string") {
-    components = [components];
-  }
-  return function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-core").filter(
-      (specifier) => components.includes(specifier.imported.name)
-    );
-    return imports.length === 0
-      ? {}
-      : {
-          JSXOpeningElement(node) {
-            if (imports.find((imp) => imp.local.name === node.name.name)) {
-              const namedAttributes = node.attributes.filter(
-                (attr) => attr.name
-              );
-
-              namedAttributes
-                .filter((attr) => Object.keys(propMap).includes(attr.name.name))
-                .forEach((attribute) => {
-                  const newName = propMap[attribute.name.name];
-                  context.report({
-                    node,
-                    message: message(node, attribute, newName),
-                    fix(fixer) {
-                      // Delete entire prop if newName is empty
-                      if (!newName || replaceAttribute) {
-                        /**
-                         * (dallas)
-                         * TODO: remove extra space? the following works but issues arise when attempting to remove multiple props.
-                         * i assume the ranges become invalid in the forEach loop? even though it seems to track attr correctly
-                         * (see datalist-remove-ondrags for example)
-                         *
-                         * const tokenBefore = context.getSourceCode().getTokenBefore(attribute);
-                         * return fixer.replaceTextRange([tokenBefore.range[1], attribute.range[1]], '');
-                         *
-                         * or
-                         *
-                         * return fixer.replaceTextRange([attribute.range[0] - 1, attribute.range[1]], '');
-                         */
-                        return fixer.replaceText(attribute, newName);
-                      }
-                      const newNameAttrName = newName.split("=")[0];
-                      // Leave a comment if there's an existing prop with this name
-                      if (
-                        namedAttributes.find(
-                          (attr) => attr.name.name === newNameAttrName
-                        )
-                      ) {
-                        return fixer.replaceText(
-                          attribute,
-                          leaveComment ? `/* ${newName} */` : ""
-                        );
-                      }
-                      return fixer.replaceText(attribute.name, newName);
-                    },
-                  });
-                });
-            }
-          },
-        };
   };
 }
 
@@ -723,7 +681,6 @@ module.exports = {
   getPackageImports,
   moveSpecifiers,
   pfPackageMatches,
-  renameProp,
   renamePropsOnNode,
   renameProps,
   renameComponents,
