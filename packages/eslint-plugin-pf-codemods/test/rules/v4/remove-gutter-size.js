@@ -16,7 +16,7 @@ ruleTester.run("remove-gutter-size", rule, {
       code:   `import { Gallery } from '@patternfly/react-core'; <Gallery gutter="sm" />`,
       output: `import { Gallery } from '@patternfly/react-core'; <Gallery hasGutter />`,
       errors: [{
-        message: "gutter prop has been removed for Gallery. Use hasGutter instead",
+        message: "gutter prop for Gallery has been replaced with hasGutter",
         type: "JSXOpeningElement",
       }]
     }

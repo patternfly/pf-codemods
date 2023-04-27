@@ -39,7 +39,7 @@ ruleTester.run("datalist-remove-props", rule, {
       code:   `import { DataList } from '@patternfly/react-core'; <DataList itemOrder />`,
       output: `import { DataList } from '@patternfly/react-core'; <DataList  />`,
       errors: [{
-        message: `itemOrder prop for DataList has been removed.`,
+        message: `itemOrder prop for DataList has been removed`,
         type: "JSXOpeningElement",
       }]
     }

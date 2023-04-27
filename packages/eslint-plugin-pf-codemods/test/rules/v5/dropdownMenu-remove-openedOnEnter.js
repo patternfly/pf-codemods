@@ -27,7 +27,7 @@ ruleTester.run("dropdownMenu-remove-openedOnEnter", rule, {
       code:   `import { DropdownMenu } from '@patternfly/react-core'; <DropdownMenu openedOnEnter={false} />`,
       output: `import { DropdownMenu } from '@patternfly/react-core'; <DropdownMenu  />`,
       errors: [{
-        message: `openedOnEnter prop for DropdownMenu has been removed.`,
+        message: `openedOnEnter prop for DropdownMenu has been removed`,
         type: "JSXOpeningElement",
       }]
     }

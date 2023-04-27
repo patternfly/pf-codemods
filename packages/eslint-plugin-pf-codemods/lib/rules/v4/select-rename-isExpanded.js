@@ -1,11 +1,11 @@
-const { renameProp } = require('../../helpers');
+const { renameProps } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/3945
 module.exports = {
-  meta: { fixable: 'code' },
-  create: renameProp(
-    'Select',
-    { 'isExpanded': 'isOpen' },
-    node => `isExpanded has been renamed to isOpen for ${node.name.name}`
-  )
+  meta: { fixable: "code" },
+  create: renameProps({
+    Select: {
+      isExpanded: "isOpen",
+    },
+  }),
 };

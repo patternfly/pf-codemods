@@ -268,6 +268,13 @@ function renamePropsOnNode(context, imports, node, renames) {
         const newPropObject = renamedProps[attribute.name.name];
 
         if (
+          newPropObject.message &&
+          newPropObject.message instanceof Function
+        ) {
+          newPropObject.message = newPropObject.message(node);
+        }
+
+        if (
           newPropObject.newName === undefined ||
           newPropObject.newName === ""
         ) {
@@ -285,9 +292,14 @@ function renamePropsOnNode(context, imports, node, renames) {
             node,
             message:
               newPropObject.message ||
-              `${attribute.name.name} prop for ${node.name.name} has been renamed to ${newPropObject.newName}`,
+              `${attribute.name.name} prop for ${node.name.name} has been ${
+                newPropObject.replace ? "replaced with" : "renamed to"
+              } ${newPropObject.newName}`,
             fix(fixer) {
-              return fixer.replaceText(attribute.name, newPropObject.newName);
+              return fixer.replaceText(
+                newPropObject.replace ? attribute : attribute.name,
+                newPropObject.newName
+              );
             },
           });
         }

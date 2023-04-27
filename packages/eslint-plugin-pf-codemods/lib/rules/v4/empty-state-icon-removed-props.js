@@ -1,11 +1,20 @@
-const { renameProp } = require('../../helpers');
+const { renameProps } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/4065
 module.exports = {
-  meta: { fixable: 'code' },
-  create: renameProp(
-    'EmptyStateIcon',
-    { size: '', title: '' },
-    (node, attribute) => `Removed prop ${attribute.name.name} from ${node.name.name}. Use the icon prop instead.`
-  )
+  meta: { fixable: "code" },
+  create: renameProps({
+    EmptyStateIcon: {
+      size: {
+        newName: "",
+        message: (node) =>
+          `Removed prop size from ${node.name.name}. Use the icon prop instead.`,
+      },
+      title: {
+        newName: "",
+        message: (node) =>
+          `Removed prop title from ${node.name.name}. Use the icon prop instead.`,
+      },
+    },
+  }),
 };

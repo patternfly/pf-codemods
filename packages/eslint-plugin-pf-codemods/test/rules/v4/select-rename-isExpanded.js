@@ -19,7 +19,7 @@ ruleTester.run("select-rename-isExpanded", rule, {
       code:   `import { Select } from '@patternfly/react-core'; <Select isExpanded />`,
       output: `import { Select } from '@patternfly/react-core'; <Select isOpen />`,
       errors: [{
-        message: "isExpanded has been renamed to isOpen for Select",
+        message: "isExpanded prop for Select has been renamed to isOpen",
         type: "JSXOpeningElement",
       }]
     },
@@ -28,7 +28,7 @@ ruleTester.run("select-rename-isExpanded", rule, {
       code:   `import { Select } from '@patternfly/react-core'; <Select isExpanded={myVar} />`,
       output: `import { Select } from '@patternfly/react-core'; <Select isOpen={myVar} />`,
       errors: [{
-        message: "isExpanded has been renamed to isOpen for Select",
+        message: "isExpanded prop for Select has been renamed to isOpen",
         type: "JSXOpeningElement",
       }]
     }
