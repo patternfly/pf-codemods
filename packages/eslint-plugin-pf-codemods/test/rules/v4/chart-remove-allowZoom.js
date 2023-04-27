@@ -73,7 +73,7 @@ import { VictoryZoomContainer } from 'victory-zoom-container';
           type: "ImportDeclaration",
         },
         {
-          message: `allowZoom prop for Chart has been renamed to containerComponent={<VictoryZoomContainer />}`,
+          message: `allowZoom prop for Chart has been replaced with containerComponent={<VictoryZoomContainer />}`,
           type: "JSXOpeningElement",
         },
         {

@@ -255,7 +255,7 @@ function createAliasImportSpecifiers(specifiers, aliasSuffix) {
   });
 }
 
-function renameProps0(context, imports, node, renames) {
+function renamePropsOnNode(context, imports, node, renames) {
   const componentName = imports.find((imp) => imp.local.name === node.name.name)
     ?.imported.name;
 
@@ -263,10 +263,7 @@ function renameProps0(context, imports, node, renames) {
     const renamedProps = renames[componentName];
 
     node.attributes
-      .filter(
-        (attribute) =>
-          attribute.name && renamedProps.hasOwnProperty(attribute.name.name)
-      )
+      .filter((attribute) => renamedProps.hasOwnProperty(attribute.name.name))
       .forEach((attribute) => {
         const newPropObject = renamedProps[attribute.name.name];
 
@@ -318,7 +315,7 @@ function renameProps(renames, packageName = "@patternfly/react-core") {
 
     return {
       JSXOpeningElement(node) {
-        renameProps0(context, imports, node, renames);
+        renamePropsOnNode(context, imports, node, renames);
       },
     };
   };
@@ -708,7 +705,7 @@ module.exports = {
   moveSpecifiers,
   pfPackageMatches,
   renameProp,
-  renameProps0,
+  renamePropsOnNode,
   renameProps,
   renameComponents,
   splitImportSpecifiers,

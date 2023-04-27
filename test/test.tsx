@@ -87,7 +87,11 @@ import { Td } from "@patternfly/react-table";
 const tdSelectTypeObj = {"disable": true};
 
 //following type of import was causing errors for rules that checked specifiers before import package
+<<<<<<< HEAD
 import foo from 'Bar';
+=======
+import foo from "Bar";
+>>>>>>> a38c86f (fix(renameProps): fix potentially wrong usages of renameProps)
 
 //eslint-disable-next-line @typescript/foo
 
