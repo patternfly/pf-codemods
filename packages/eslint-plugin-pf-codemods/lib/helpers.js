@@ -256,23 +256,29 @@ function createAliasImportSpecifiers(specifiers, aliasSuffix) {
 }
 
 function renameProps0(context, imports, node, renames) {
-  if (imports.map((imp) => imp.local.name).includes(node.name.name)) {
-    const renamedProps =
-      renames[node.name.name] ||
-      renames[
-        imports.find((imp) => imp.local?.name === node.name.name)?.imported
-          ?.name
-      ];
+  const componentName = imports.find((imp) => imp.local.name === node.name.name)
+    ?.imported.name;
+
+  if (componentName) {
+    const renamedProps = renames[componentName];
+
     node.attributes
       .filter(
         (attribute) =>
           attribute.name && renamedProps.hasOwnProperty(attribute.name.name)
       )
       .forEach((attribute) => {
-        if (renamedProps[attribute.name.name] === "") {
+        const newPropObject = renamedProps[attribute.name.name];
+
+        if (
+          newPropObject.newName === undefined ||
+          newPropObject.newName === ""
+        ) {
           context.report({
             node,
-            message: `${attribute.name.name} prop for ${node.name.name} has been removed`,
+            message:
+              newPropObject.message ||
+              `${attribute.name.name} prop for ${node.name.name} has been removed`,
             fix(fixer) {
               return fixer.replaceText(attribute, "");
             },
@@ -280,14 +286,11 @@ function renameProps0(context, imports, node, renames) {
         } else {
           context.report({
             node,
-            message: `${attribute.name.name} prop for ${
-              node.name.name
-            } has been renamed to ${renamedProps[attribute.name.name]}`,
+            message:
+              newPropObject.message ||
+              `${attribute.name.name} prop for ${node.name.name} has been renamed to ${newPropObject.newName}`,
             fix(fixer) {
-              return fixer.replaceText(
-                attribute.name,
-                renamedProps[attribute.name.name]
-              );
+              return fixer.replaceText(attribute.name, newPropObject.newName);
             },
           });
         }
@@ -301,13 +304,23 @@ function renameProps(renames, packageName = "@patternfly/react-core") {
       (specifier) => Object.keys(renames).includes(specifier.imported.name)
     );
 
-    return imports.length === 0
-      ? {}
-      : {
-          JSXOpeningElement(node) {
-            renameProps0(context, imports, node, renames);
-          },
-        };
+    if (imports.length === 0) {
+      return {};
+    }
+
+    Object.keys(renames).forEach((component) => {
+      Object.entries(renames[component]).forEach(([oldName, value]) => {
+        if (typeof value === "string") {
+          renames[component][oldName] = { newName: value };
+        }
+      });
+    });
+
+    return {
+      JSXOpeningElement(node) {
+        renameProps0(context, imports, node, renames);
+      },
+    };
   };
 }
 
