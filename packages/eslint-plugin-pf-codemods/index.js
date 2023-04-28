@@ -6,6 +6,34 @@ const betaRuleNames = [
   "slider-update-onChangeParams",
 ];
 
+// if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
+const warningRules = [
+  "aboutModalBoxHero-remove-subcomponent",
+  "applicationLauncher-warn-input",
+  "card-warn-component",
+  "charts-warn-tooltip",
+  "conditional-aria",
+  "datePicker-warn-appendTo-default-value-changed",
+  "datepicker-warn-helperText",
+  "emptyState-warn-change-structure",
+  "horizontalSubnav-warn-ariaLabel",
+  "label-warn-truncated-default",
+  "nav-warn-flyouts-now-inline",
+  "overflowMenu-warn-updated-dropdownItem",
+  "popover-warn-appendTo-default",
+  "react-dropzone-warn-upgrade",
+  "table-warn-actionsColumn",
+  "table-warn-thExpandType",
+  "tabs-warn-children-type-changed",
+  "wizard-warn-button-order",
+];
+
+// rules that will run before other rules (move to deprecated?)
+const setupRules = [];
+
+// rules that will run after other rules (cleanup imports?)
+const cleanupRules = [];
+
 const createListOfRules = (version, includeBeta = false) => {
   const rules = {};
   require("glob")
@@ -28,28 +56,6 @@ const createListOfRules = (version, includeBeta = false) => {
 const v5rules = createListOfRules("5");
 const v4rules = createListOfRules("4");
 const betaV5Rules = createListOfRules("5", true);
-
-// if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
-const warningRules = [
-  "aboutModalBoxHero-remove-subcomponent",
-  "applicationLauncher-warn-input",
-  "card-warn-component",
-  "charts-warn-tooltip",
-  "conditional-aria",
-  "datePicker-warn-appendTo-default-value-changed",
-  "datepicker-warn-helperText",
-  "emptyState-warn-change-structure",
-  "horizontalSubnav-warn-ariaLabel",
-  "label-warn-truncated-default",
-  "nav-warn-flyouts-now-inline",
-  "overflowMenu-warn-updated-dropdownItem",
-  "popover-warn-appendTo-default",
-  "react-dropzone-warn-upgrade",
-  "table-warn-actionsColumn",
-  "table-warn-thExpandType",
-  "tabs-warn-children-type-changed",
-  "wizard-warn-button-order",
-];
 
 const createRules = (rules) => {
   return Object.keys(rules).reduce((acc, rule) => {
@@ -84,4 +90,6 @@ module.exports = {
   },
   rules: { ...v5rules, ...v4rules, ...betaV5Rules },
   ruleVersionMapping: { v4: Object.keys(v4rules), v5: Object.keys(v5rules) },
+  setupRules,
+  cleanupRules,
 };

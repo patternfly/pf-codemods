@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 const fspath = require('path');
 const { ESLint } = require('eslint');
-const { configs, ruleVersionMapping } = require('@patternfly/eslint-plugin-pf-codemods');
+const {
+  configs,
+  ruleVersionMapping,
+  setupRules,
+  cleanupRules
+} = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
 const program = new Command();
 
@@ -74,8 +79,7 @@ async function runCodemods(path, otherPaths, options) {
   }
 
   ruleVersionMapping[options.v4 ? "v5" : "v4"].forEach(rule => delete configs.recommended.rules[prefix + rule]);
-
-  const eslint = new ESLint({
+  const eslintBaseConfig = {
     extensions: [ '.js', '.jsx', '.ts', '.tsx' ],
     baseConfig: configs.recommended,
     ignore: true,
@@ -89,13 +93,62 @@ async function runCodemods(path, otherPaths, options) {
     fix: options.fix,
     // Allow `npx` to work its magic
     resolvePluginsRelativeTo: __dirname
-  });
-  
-  const results = await eslint.lintFiles(otherPaths.concat(path));
-  if (options.fix) {
-    ESLint.outputFixes(results);
+  };
+
+  // runFirstRules = setupRules.map(r => prefix + r);
+  // runLastRules = cleanupRules.map(r => cleanupRules + r);
+  rulesArr = Object.keys(configs.recommended.rules).map( k => {
+    return {
+      name: k,
+      rule: { [k]: configs.recommended.rules[k]}
+    }
+  })
+  const eslints = [
+    r => setupRules.map(r => prefix + r).includes(r.name),
+    r => ![...setupRules, ...cleanupRules].map(r => prefix + r).includes(r.name),
+    r => cleanupRules.map(r => prefix + r).includes(r.name)
+  ].map(filterFunc => {
+    return new ESLint({...eslintBaseConfig, baseConfig: {
+      ...configs.recommended,
+      rules: Object.assign({}, ...rulesArr.filter(
+        filterFunc
+      ).map(r => r.rule))
+    }})
+  })
+
+  const results = [];
+  for await (const eslint of eslints) {
+    const result = await eslint.lintFiles(otherPaths.concat(path));
+    if (options.fix) {
+      await ESLint.outputFixes(result);
+    }
+    results.push(result);
   }
-  await printResults(eslint, results, options.format);
+
+  function mergeResults(resultLists) {
+    const mergedResults = [];
+    const seenFilePaths = new Set();
+    resultLists.forEach((results) => {
+      results.forEach((result) => {
+        if (!seenFilePaths.has(result.filePath)) {
+          seenFilePaths.add(result.filePath);
+          mergedResults.push(result);
+        } else {
+          const matchingResult = mergedResults.find((r) => r.filePath === result.filePath);
+          matchingResult.messages.push(...result.messages);
+          matchingResult.suppressedMessages.push(...result.suppressedMessages);
+          matchingResult.errorCount += result.errorCount;
+          matchingResult.fatalErrorCount += result.fatalErrorCount;
+          matchingResult.warningCount += result.warningCount;
+          matchingResult.fixableErrorCount += result.fixableErrorCount;
+          matchingResult.fixableWarningCount += result.fixableWarningCount;
+        }
+      });
+    });
+    return mergedResults;
+  }
+
+  await printResults(eslints[0], mergeResults(results), options.format);
 }
 
 program.parse(process.argv);
