@@ -29,10 +29,10 @@ const warningRules = [
 ];
 
 // rules that will run before other rules (move to deprecated?)
-const setupRules = [];
+const setupRules = ["table-update-deprecatedPath"];
 
 // rules that will run after other rules (cleanup imports?)
-const cleanupRules = [];
+const cleanupRules = ["table-rename-TableComposable"];
 
 const createListOfRules = (version, includeBeta = false) => {
   const rules = {};

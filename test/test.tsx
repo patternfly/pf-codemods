@@ -83,6 +83,8 @@ import {
 import { SelectOption, WizardBody as WizardBodyNext, WizardFooter } from "@patternfly/react-core/next";
 
 import { Td } from "@patternfly/react-table";
+import { TableComposable } from "@patternfly/react-table";
+import { Table, TableBody, TableHeader, TableProps } from "@patternfly/react-table";
 
 const tdSelectTypeObj = {"disable": true};
 
@@ -182,6 +184,10 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Spinner isSVG />
   <Toggle isPrimary onToggle={} />
   <Tooltip reference />
+  <TableComposable>Body</TableComposable>
+  <Table />
+  <TableHeader />
+  <TableBody />
   <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <TreeView hasCheck />
   <Wizard />
