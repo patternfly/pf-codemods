@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.58.1...@patternfly/eslint-plugin-pf-codemods@1.59.0) (2023-05-02)
+
+
+### Features
+
+* **FileUpload:** Added events params to callbacks ([#420](https://github.com/patternfly/pf-codemods/issues/420)) ([ee6dcc8](https://github.com/patternfly/pf-codemods/commit/ee6dcc84881c4319f9f1e72e59b47c4e5ce1f1b9))
+
+
+
+
+
 ## [1.58.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.58.0...@patternfly/eslint-plugin-pf-codemods@1.58.1) (2023-04-27)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
