@@ -1081,6 +1081,79 @@ function handler2(_event, id) {};
 ```
 
 
+### fileUpload-event-params-added-to-callbacks [(#8960)](https://github.com/patternfly/patternfly-react/pull/8960)
+
+We've updated the `onDataChange`, `onReadFailed`, `onReadFinished`, and `onReadStarted` props for FileUpload so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<FileUpload
+  onDataChange={(data) => changeHandler(data)}
+  onReadFailed={(error, fileHandle) => readFailedHandler(error, fileHandle)}
+  onReadFinished={(fileHandle) => readFinishedHandler(fileHandle)}
+  onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
+/>;
+
+const changeHandler1 = (data) => {};
+const readFailedHandler1 = (error, fileHandle) => {};
+const readFinishedHandler1 = (fileHandle) => {};
+const readStartedHandler1 = (fileHandle) => {};
+<FileUpload
+  onDataChange={changeHandler1}
+  onReadFailed={readFailedHandler1}
+  onReadFinished={readFinishedHandler1}
+  onReadStarted={readStartedHandler1}
+/>
+
+function changeHandler2(data) {};
+function readFailedHandler2(error, fileHandle) {};
+function readFinishedHandler2(fileHandle) {};
+function readStartedHandler2(fileHandle) {};
+<FileUpload
+  onDataChange={changeHandler2}
+  onReadFailed={readFailedHandler2}
+  onReadFinished={readFinishedHandler2}
+  onReadStarted={readStartedHandler2}
+/>;
+```
+
+Out:
+
+```jsx
+<FileUpload
+  onDataChange={(_event, data) => changeHandler(data)}
+  onReadFailed={(_event, error, fileHandle) => readFailedHandler(error, fileHandle)}
+  onReadFinished={(_event, fileHandle) => readFinishedHandler(fileHandle)}
+  onReadStarted={(_event, fileHandle) => readStartedHandler(fileHandle)}
+/>;
+
+const changeHandler1 = (_event, data) => {};
+const readFailedHandler1 = (_event, error, fileHandle) => {};
+const readFinishedHandler1 = (_event, fileHandle) => {};
+const readStartedHandler1 = (_event, fileHandle) => {};
+<FileUpload
+  onDataChange={changeHandler1}
+  onReadFailed={readFailedHandler1}
+  onReadFinished={readFinishedHandler1}
+  onReadStarted={readStartedHandler1}
+/>;
+
+function changeHandler2(_event, data) {};
+function readFailedHandler2(_event, error, fileHandle) {};
+function readFinishedHandler2(_event, fileHandled) {};
+function readStartedHandler2(_event, fileHandle) {};
+<FileUpload
+  onDataChange={changeHandler2}
+  onReadFailed={readFailedHandler2}
+  onReadFinished={readFinishedHandler2}
+  onReadStarted={readStartedHandler2}
+/>;
+```
+
+
 ### fileUpload-remove-onChange [(#8155)](https://github.com/patternfly/patternfly-react/pull/8155)
 
 We've removed the deprecated `onChange` prop. This rule will remove the prop from the FileUpload component and suggest replacing it with the `onFileInputChange`, `onTextChange`, `onDataChange`, and `onClearClick` props as needed.

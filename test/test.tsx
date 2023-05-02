@@ -142,6 +142,12 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <EmptyStateIcon />
   <EmptyStateIcon component={Spinner} variant="container"/>
   <ExpandableSection onToggle={foo => handler(foo)} />
+  <FileUpload
+    onDataChange={(data) => changeHandler(data)}
+    onReadFailed={(error, fileHandle) => readFailedHandler(error, fileHandle)}
+    onReadFinished={(fileHandle) => readFinishedHandler(fileHandle)}
+    onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
+  />;
   <FileUploadField onTextChange={bar => textHandler(bar)} />
   <KebabToggle onToggle={} />
   <Label />
@@ -180,9 +186,9 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <SelectToggle onToggle={} />
   <Slider onChange={foo => handler(foo)} />
   <Spinner isSVG />
+  <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <Toggle isPrimary onToggle={} />
   <Tooltip reference />
-  <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <TreeView hasCheck />
   <Wizard />
   <Wizard mainAriaLabel />
