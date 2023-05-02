@@ -488,7 +488,12 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
     tests.push({
       code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core'; <PF${componentImport} />`,
       output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/deprecated'; <PF${componentImport} />`,
-
+      errors: [
+        {
+          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+          type: "ImportDeclaration",
+        },
+      ],
     });
     tests.push({
       code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-${package}'; <PF${componentImport} />`,
