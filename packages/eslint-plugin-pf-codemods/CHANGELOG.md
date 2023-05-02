@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.60.1...@patternfly/eslint-plugin-pf-codemods@1.60.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* **Popover:** Fix error thrown when no params are found ([defb646](https://github.com/patternfly/pf-codemods/commit/defb6467886da6ca362c941615d087bfe913651b))
+
+
+
+
+
 ## [1.60.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.60.0...@patternfly/eslint-plugin-pf-codemods@1.60.1) (2023-05-02)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
