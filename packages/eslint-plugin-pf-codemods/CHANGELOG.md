@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.60.2...@patternfly/eslint-plugin-pf-codemods@1.60.3) (2023-05-02)
+
+
+### Bug Fixes
+
+* **datetimepicker:** Fix error thrown when no matching imports are found ([6d0d529](https://github.com/patternfly/pf-codemods/commit/6d0d529e281361a253ba0ab234836dc6d07cfd06))
+
+
+
+
+
 ## [1.60.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.60.1...@patternfly/eslint-plugin-pf-codemods@1.60.2) (2023-05-02)
 
 
