@@ -30,7 +30,10 @@ function getValidAddCallbackParamTests(componentNameArray, propNameArray, newPar
       tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; function handler() {}; <${componentName} ${propName}={handler} />;`,
       });
-      tests.push({code: `<${componentName} ${propName} />;`});
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}) {}; <${componentName} ${propName}={handler} />;`,
+      });
+      tests.push({ code: `<${componentName} ${propName} />;` });
     });
   });
   return tests;
@@ -481,19 +484,9 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
       errors: createErrors(componentImport),
     });
     tests.push({
-      code: `import { ${componentImport} } from '@patternfly/react-core/dist/esm/components/${componentImport}/index.js';\nimport { Foo } from '@patternfly/react-core/dist/esm/deprecated/components/${componentImport}/index.js'; <${componentImport} />`,
-      output: `\nimport {\n\tFoo,\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-core/dist/esm/deprecated/components/${componentImport}/index.js'; <${componentImport}Deprecated />`,
+      code: `import { ${componentImport} } from '@patternfly/react-${package}/dist/esm/components/${componentImport}/index.js';\nimport { Foo } from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentImport}/index.js'; <${componentImport} />`,
+      output: `\nimport {\n\tFoo,\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentImport}/index.js'; <${componentImport}Deprecated />`,
       errors: createErrors(componentImport),
-    });
-    tests.push({
-      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core'; <PF${componentImport} />`,
-      output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/deprecated'; <PF${componentImport} />`,
-      errors: [
-        {
-          message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
-          type: "ImportDeclaration",
-        },
-      ],
     });
     tests.push({
       code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-${package}'; <PF${componentImport} />`,
@@ -506,8 +499,8 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
       ],
     });
     tests.push({
-      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core/dist/esm/components/${componentImport}/index.js'; import { Foo } from '@patternfly/react-core/dist/esm/deprecated/components/${componentImport}/index.js'; <PF${componentImport} />`,
-      output: ` import {\n\tFoo,\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/dist/esm/deprecated/components/${componentImport}/index.js'; <PF${componentImport} />`,
+      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-${package}/dist/esm/components/${componentImport}/index.js'; import { Foo } from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentImport}/index.js'; <PF${componentImport} />`,
+      output: ` import {\n\tFoo,\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentImport}/index.js'; <PF${componentImport} />`,
       errors: [
         {
           message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
@@ -516,8 +509,8 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
       ],
     });
     tests.push({
-      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-core/dist/esm/components/${componentImport}/index.js'; <PF${componentImport} />`,
-      output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-core/dist/esm/deprecated/components/${componentImport}/index.js'; <PF${componentImport} />`,
+      code: `import { ${componentImport} as PF${componentImport} } from '@patternfly/react-${package}/dist/esm/components/${componentImport}/index.js'; <PF${componentImport} />`,
+      output: `import {\n\t${componentImport} as PF${componentImport}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentImport}/index.js'; <PF${componentImport} />`,
       errors: [
         {
           message: `${componentImport} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
@@ -535,8 +528,8 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
       errors: createErrors(otherImport),
     });
     tests.push({
-      code: `import {${otherImport} } from '@patternfly/react-core/dist/esm/components/${otherImport}/index.js'; <Foo bar={${otherImport}} />`,
-      output: `import {\n\t${otherImport} as ${otherImport}Deprecated\n} from '@patternfly/react-core/dist/esm/deprecated/components/${otherImport}/index.js'; <Foo bar={${otherImport}Deprecated} />`,
+      code: `import {${otherImport} } from '@patternfly/react-${package}/dist/esm/components/${otherImport}/index.js'; <Foo bar={${otherImport}} />`,
+      output: `import {\n\t${otherImport} as ${otherImport}Deprecated\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${otherImport}/index.js'; <Foo bar={${otherImport}Deprecated} />`,
       errors: createErrors(otherImport),
     });
   });
