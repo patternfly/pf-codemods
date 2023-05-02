@@ -32,7 +32,7 @@ module.exports = {
           });
           if(shouldCloseAttr) {
             const params = shouldCloseAttr.value.expression.params;
-            if(params.length === 2) { // only attempt to remove first param if 2 are passed
+            if(params?.length === 2) { // only attempt to remove first param if 2 are passed
               const firstParam = params[0];
               const secondParam = params[1];
               context.report({
