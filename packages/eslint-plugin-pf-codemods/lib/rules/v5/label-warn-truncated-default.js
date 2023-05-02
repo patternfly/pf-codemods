@@ -14,7 +14,7 @@ module.exports = {
           JSXOpeningElement(node) {
             if ( (labelImport.local.name === node.name.name) &&
               !node.attributes.find(
-                (attr) => attr.name.name === "isTruncated"
+                (attr) => attr.name?.name === "isTruncated"
               )
             ) {
               context.report({
