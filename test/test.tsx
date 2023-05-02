@@ -148,7 +148,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
     onReadFailed={(error, fileHandle) => readFailedHandler(error, fileHandle)}
     onReadFinished={(fileHandle) => readFinishedHandler(fileHandle)}
     onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
-  />;
+  />
   <FileUploadField onTextChange={bar => textHandler(bar)} />
   <KebabToggle onToggle={} />
   <Label />
@@ -179,6 +179,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
     toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
   />
   <Popover reference />
+  <Popover shouldClose={(foo, event) => handler(foo, event)} shouldOpen={(fn) => openHandler(fn)} />
   <Popper popperMatchesTriggerWidth={false}/>
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
@@ -187,10 +188,10 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <SelectToggle onToggle={} />
   <Slider onChange={foo => handler(foo)} />
   <Spinner isSVG />
-  <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <Table />
-  <TableHeader />
   <TableBody />
+  <TableHeader />
+  <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <Toggle isPrimary onToggle={} />
   <Tooltip reference />
   <TreeView hasCheck />

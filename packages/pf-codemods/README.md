@@ -1659,6 +1659,39 @@ Out:
 />
 ```
 
+### popover-swap-shouldClose-shouldOpen-params [(#9025)](https://github.com/patternfly/patternfly-react/pull/9025)
+
+We've updated the `shouldClose` and `shouldOpen` props for Popover so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Popover shouldOpen={(fn) => openHandler(fn)} shouldClose={(fn2) => closeHandler(fn2)} />
+<Popover shouldOpen={(fn, event) => openHandler(fn, event)} shouldClose={(fn, event) => closeHandler(fn, event)}/>
+const openHandler1 = (fn, event) => {};
+const closeHandler1 = (fn, event) => {};
+<Popover shouldOpen={openHandler1} shouldClose={closeHandler1} />
+function openHandler2(fn, event) {};
+function closeHandler2(fn, event) {};
+<Popover shouldOpen={openHandler2} shouldClose={closeHandler2} />
+```
+
+Out:
+
+```jsx
+<Popover shouldOpen={(_event, fn) => openHandler(fn)} shouldClose={(_event, fn2) => closeHandler(fn2)} />
+<Popover shouldOpen={(event, fn) => openHandler(fn, event)} shouldClose={(event, fn) => closeHandler(fn, event)}/>
+const openHandler1 = (event, id) => {};
+const closeHandler1 = (event, id) => {};
+<Popover shouldOpen={openHandler1} shouldClose={closeHandler1} />
+function openHandler2(event, id) {};
+function closeHandler2(event, id) {};
+<Popover shouldOpen={openHandler2} shouldClose={closeHandler2} />
+```
+
+
 ### popover-warn-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
 
 The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
