@@ -1882,7 +1882,8 @@ import {
  TableBody as TableBodyDeprecated,
  TableHeader as TableHeaderDeprecated,
  TableProps as TablePropsDeprecated
-} from '@patternfly/react-table/deprecated';```
+} from '@patternfly/react-table/deprecated';
+```
 
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
 
