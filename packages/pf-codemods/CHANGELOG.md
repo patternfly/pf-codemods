@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.58.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.57.0...@patternfly/pf-codemods@1.58.0) (2023-05-02)
+
+
+### Features
+
+* **Popover:** Swap param order for shouldClose and shouldOpen ([#436](https://github.com/patternfly/pf-codemods/issues/436)) ([af6a5b9](https://github.com/patternfly/pf-codemods/commit/af6a5b9742315458c8d0cc4184a43357f8855090))
+* **Table:** update paths to reference deprecated directory ([#386](https://github.com/patternfly/pf-codemods/issues/386)) ([08aca60](https://github.com/patternfly/pf-codemods/commit/08aca6070973ef6b1f7814608d4ba05c28cc341b))
+
+
+
+
+
 # [1.57.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.56.1...@patternfly/pf-codemods@1.57.0) (2023-05-02)
 
 
