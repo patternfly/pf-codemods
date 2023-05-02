@@ -1855,6 +1855,36 @@ Out:
 <Spinner  />
 ```
 
+### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
+
+We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.
+
+The following imports will be affected by this deprecation:
+
+- Table
+- TableBody
+- TableHeader
+- TableProps
+
+#### Examples
+
+In:
+
+```jsx
+import { Table, TableBody, TableHeader, TableProps } from "@patternfly/react-table";
+```
+
+Out:
+
+```jsx
+import {
+ Table as TableDeprecated,
+ TableBody as TableBodyDeprecated,
+ TableHeader as TableHeaderDeprecated,
+ TableProps as TablePropsDeprecated
+} from '@patternfly/react-table/deprecated';
+```
+
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
 
 Table and TableComposable's `ActionsColumn` has been updated to use our new implementation of Dropdown. The toggle passed to the actions column should now be a `MenuToggle` instead of the deprecated `DropdownToggle`. The `dropdownPosition`, `dropdownDirection` and `menuAppendTo` properties are removed and `Popper` properties can be passed in using `popperProps` instead (via `direction`, `position`, `appendTo`, etc.).
