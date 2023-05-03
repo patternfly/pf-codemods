@@ -271,7 +271,7 @@ function renamePropsOnNode(context, imports, node, renames) {
     const renamedProps = renames[componentName];
 
     node.attributes
-      .filter((attribute) => renamedProps.hasOwnProperty(attribute.name.name))
+      .filter((attribute) => renamedProps.hasOwnProperty(attribute.name?.name))
       .forEach((attribute) => {
         const newPropObject = renamedProps[attribute.name.name];
 
