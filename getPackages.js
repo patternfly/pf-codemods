@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const { readdir, rm, rmdir } = require("fs").promises;
+const { mkdir, readdir, rm, rmdir } = require("fs").promises;
 const path = require("path");
 
 const packagesPath = path.join(process.cwd(), "test", "packages");
@@ -40,10 +40,10 @@ async function purge(targetPath) {
 }
 
 async function getPackages() {
+  await mkdir(packagesPath, { recursive: true });
   const packagesAlreadyDownloaded = await hasPackages();
   if (packagesAlreadyDownloaded) {
     console.log("packages already downloaded");
-    purge(packagesPath);
   } else {
     console.log("downloading test packages");
     exec(
