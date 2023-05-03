@@ -1539,6 +1539,54 @@ Out:
 <PageHeader logoComponent="div" />
 ```
 
+### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
+
+The following props have been updated for the specified Page sub-components:
+
+| Sub-component | Old prop name | New prop name |
+|--|--|--|
+| `PageSidebar` | `isNavOpen` | `isSidebarOpen` |
+| `PageToggleButton` | `isNavOpen` | `isSidebarOpen` |
+| `PageToggleButton` | `onNavToggle` | `onSidebarToggle` |
+
+#### Examples
+
+In:
+
+```jsx
+<PageSidebar isNavOpen={true} />
+<PageToggleButton isNavOpen={true} onNavToggle={() => {}} />
+```
+
+Out:
+
+```jsx
+<PageSidebar isSidebarOpen={true} />
+<PageToggleButton isSidebarOpen={true} onSidebarToggle={() => {}} />
+```
+
+### pageSidebar-update-api [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
+
+The PageSidebar API has been updated. The `nav` prop has been renamed to `children`, and any content passed to the prop should be wrapped in our new PageSidebarBody sub-component.
+
+#### Examples
+
+In:
+
+```jsx
+<PageSidebar theme="light" nav="Content">
+```
+
+Out:
+
+```jsx
+<PageSidebar theme="light">
+<PageSidebarBody>
+Content
+</PageSidebarBody>
+</PageSidebar>
+```
+
 ### pagination-optionsToggle [(#8319)](https://github.com/patternfly/patternfly-react/pull/8319)
 
 We've removed the `OptionsToggle` used by `Pagination` and replaced it with `Menu` and `MenuToggle`.

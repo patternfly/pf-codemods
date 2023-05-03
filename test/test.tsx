@@ -63,6 +63,8 @@ import {
   OverflowMenuDropdownItem,
   PageGroup,
   PageNavigation,
+  PageSidebar,
+  PageToggleButton,
   Pagination,
   Popover,
   Popper,
@@ -167,6 +169,9 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <OverflowMenuDropdownItem index={0} />
   <PageGroup aria-label="tester" />
   <PageNavigation aria-label="tester" />
+  <PageSidebar nav="Content" />
+  <PageSidebar isNavOpen />
+  <PageToggleButton isNavOpen onNavToggle />
   <Pagination defaultToFullPage perPageComponent="div" titles={{
     currPage: "test",
     paginationTitle: "test",
