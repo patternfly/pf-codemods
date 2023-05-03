@@ -25,7 +25,7 @@ module.exports = {
         }
 
         node.attributes
-          .filter((attribute) => propMap.hasOwnProperty(attribute.name.name))
+          .filter((attribute) => propMap.hasOwnProperty(attribute.name?.name))
           .forEach((attribute) => {
             const newProp = propMap[attribute.name.name];
             context.report({
