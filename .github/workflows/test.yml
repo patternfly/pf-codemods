@@ -1,8 +1,8 @@
-name: test
+name: tests
 on:
   workflow_call:
 jobs:
-  test:
+  unit-tests:
     runs-on: ubuntu-latest
     env:
       GH_PR_NUM: ${{ github.event.number }}
@@ -31,3 +31,37 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
       - name: Run tests
         run: yarn test --maxWorkers=2
+  error-tests:
+    runs-on: ubuntu-latest
+    env:
+      GH_PR_NUM: ${{ github.event.number }}
+    steps:
+      - uses: actions/checkout@v2
+      # Yes, we really want to checkout the PR
+      - run: |
+          if [[ ! -z "${GH_PR_NUM}" ]]; then 
+            echo "Checking out PR"
+            git fetch origin pull/$GH_PR_NUM/head:tmp
+            git checkout tmp
+          fi
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - uses: actions/cache@v2
+        id: yarn-cache
+        name: Cache npm deps
+        with:
+          path: |
+           node_modules
+           **/node_modules
+          key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
+      - run: yarn install --frozen-lockfile
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - uses: actions/cache@v2
+        id: packages-cache
+        name: Cache downloaded packages
+        with:
+          path: test/packages/**
+          key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('getPackages.js', 'test/packages/*/package.json') }}
+      - name: Test packages
+        run: yarn test:packages
