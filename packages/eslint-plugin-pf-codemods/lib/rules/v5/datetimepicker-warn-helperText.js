@@ -11,7 +11,7 @@ const { getPackageImports } = require("../../helpers");
         ? {}
         : {
             ImportDeclaration(node) {
-              if(timeImport && node.specifiers.find( s => s.imported?.name === "TimePicker")) {
+              if(timeImport && node.specifiers.find( s => s.imported.name === "TimePicker")) {
                 context.report({
                   node,
                   message: 'TimePicker now uses a <HelperText> component for its helper text.'
