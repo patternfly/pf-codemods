@@ -6,15 +6,17 @@ module.exports = {
   create: function (context) {
     const imports = getPackageImports(context, "@patternfly/react-icons");
 
-    const iconImport = imports.filter((specifier) =>
+    const iconImport = imports.find((specifier) =>
       specifier.imported.name.includes("Icon")
     );
-    return imports.length === 0
+
+    return !iconImport
       ? {}
       : {
           JSXOpeningElement(node) {
             if (
               iconImport &&
+              node.name.name === iconImport.local.name &&
               node.attributes.find(
                 (a) =>
                   a.name?.name === "size" ||
