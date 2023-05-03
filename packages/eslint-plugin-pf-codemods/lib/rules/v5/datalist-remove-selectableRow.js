@@ -1,4 +1,4 @@
-const { renameProp, getPackageImports} = require('../../helpers');
+const { getPackageImports} = require('../../helpers');
 
 //https://github.com/patternfly/patternfly-react/pull/8827
 module.exports = {

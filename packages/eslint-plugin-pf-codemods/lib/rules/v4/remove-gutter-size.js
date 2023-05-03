@@ -1,12 +1,17 @@
-const { renameProp } = require('../../helpers');
+const { renameProps } = require("../../helpers");
+
+let renames = {};
+["Gallery", "Grid", "Level", "Split", "Stack"].forEach((component) => {
+  renames[component] = {
+    gutter: {
+      newName: "hasGutter",
+      replace: true,
+    },
+  };
+});
 
 // https://github.com/patternfly/patternfly-react/pull/4014
 module.exports = {
-  meta: { fixable: 'code' },
-  create: renameProp(
-    ['Gallery', 'Grid', 'Level', 'Split', 'Stack'],
-    { 'gutter': 'hasGutter' },
-    node => `gutter prop has been removed for ${node.name.name}. Use hasGutter instead`,
-    true
-  )
+  meta: { fixable: "code" },
+  create: renameProps(renames),
 };

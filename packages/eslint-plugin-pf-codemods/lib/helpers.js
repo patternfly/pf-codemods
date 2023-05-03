@@ -23,9 +23,10 @@ function moveSpecifiers(
       const toParts = toPackage.split("/");
       //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
       //needing toPath to look like fromPath with the designator before /components
-      const fromParts = importSpecifiersToMove[0].parent.source.value.split("/");
+      const fromParts =
+        importSpecifiersToMove[0].parent.source.value.split("/");
       if (toParts[0] === "@patternfly" && toParts.length === 3) {
-        fromParts.splice(4, 0, toParts[2])
+        fromParts.splice(4, 0, toParts[2]);
         modifiedToPackage = fromParts.join("/");
       }
     }
@@ -42,7 +43,8 @@ function moveSpecifiers(
     const src = context.getSourceCode();
     const existingToPackageImportDeclaration = src.ast.body.find(
       (node) =>
-        node.type === "ImportDeclaration" && [modifiedToPackage, toPackage].includes(node.source.value)
+        node.type === "ImportDeclaration" &&
+        [modifiedToPackage, toPackage].includes(node.source.value)
     );
     const existingToPackageSpecifiers =
       existingToPackageImportDeclaration?.specifiers?.map((specifier) =>
@@ -54,7 +56,10 @@ function moveSpecifiers(
         const [newToPackageSpecifiers, fromPackageSpecifiers] =
           splitImportSpecifiers(node, importNames);
 
-        if (!newToPackageSpecifiers.length || !pfPackageMatches(fromPackage, node.source.value))
+        if (
+          !newToPackageSpecifiers.length ||
+          !pfPackageMatches(fromPackage, node.source.value)
+        )
           return {};
 
         const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
@@ -193,13 +198,16 @@ function moveSpecifiers(
 
 function pfPackageMatches(packageName, nodeSrc) {
   const parts = packageName.split("/");
-  const regex = new RegExp('^' +
-    parts[0] + '\/' + parts[1] +
-    '(\/dist\/(esm|js))?' +
-    (parts[2] ? ('\/' + parts[2]) : '') +
-    '(\/(components|helpers)\/.*)?$'
+  const regex = new RegExp(
+    "^" +
+      parts[0] +
+      "/" +
+      parts[1] +
+      "(/dist/(esm|js))?" +
+      (parts[2] ? "/" + parts[2] : "") +
+      "(/(components|helpers)/.*)?$"
   );
-  return regex.test(nodeSrc)
+  return regex.test(nodeSrc);
 }
 
 /**
@@ -214,10 +222,10 @@ function getPackageImports(context, packageName, importNames = []) {
     .getSourceCode()
     .ast.body.filter((node) => node.type === "ImportDeclaration")
     .filter((node) => {
-      if(packageName.startsWith("@patternfly")) {
+      if (packageName.startsWith("@patternfly")) {
         return pfPackageMatches(packageName, node.source.value);
       }
-      return node.source.value === packageName
+      return node.source.value === packageName;
     })
     .map((node) => node.specifiers)
     .reduce((acc, val) => acc.concat(val), []);
@@ -255,24 +263,33 @@ function createAliasImportSpecifiers(specifiers, aliasSuffix) {
   });
 }
 
-function renameProps0(context, imports, node, renames) {
-  if (imports.map((imp) => imp.local.name).includes(node.name.name)) {
-    const renamedProps =
-      renames[node.name.name] ||
-      renames[
-        imports.find((imp) => imp.local?.name === node.name.name)?.imported
-          ?.name
-      ];
+function renamePropsOnNode(context, imports, node, renames) {
+  const componentName = imports.find((imp) => imp.local.name === node.name.name)
+    ?.imported.name;
+
+  if (componentName) {
+    const renamedProps = renames[componentName];
+
     node.attributes
-      .filter(
-        (attribute) =>
-          attribute.name && renamedProps.hasOwnProperty(attribute.name.name)
-      )
+      .filter((attribute) => renamedProps.hasOwnProperty(attribute.name.name))
       .forEach((attribute) => {
-        if (renamedProps[attribute.name.name] === "") {
+        const newPropObject = renamedProps[attribute.name.name];
+
+        const message = newPropObject.message
+          ? newPropObject.message instanceof Function
+            ? newPropObject.message(node)
+            : newPropObject.message
+          : undefined;
+
+        if (
+          newPropObject.newName === undefined ||
+          newPropObject.newName === ""
+        ) {
           context.report({
             node,
-            message: `${attribute.name.name} prop for ${node.name.name} has been removed`,
+            message:
+              message ||
+              `${attribute.name.name} prop for ${node.name.name} has been removed`,
             fix(fixer) {
               return fixer.replaceText(attribute, "");
             },
@@ -280,13 +297,15 @@ function renameProps0(context, imports, node, renames) {
         } else {
           context.report({
             node,
-            message: `${attribute.name.name} prop for ${
-              node.name.name
-            } has been renamed to ${renamedProps[attribute.name.name]}`,
+            message:
+              message ||
+              `${attribute.name.name} prop for ${node.name.name} has been ${
+                newPropObject.replace ? "replaced with" : "renamed to"
+              } ${newPropObject.newName}`,
             fix(fixer) {
               return fixer.replaceText(
-                attribute.name,
-                renamedProps[attribute.name.name]
+                newPropObject.replace ? attribute : attribute.name,
+                newPropObject.newName
               );
             },
           });
@@ -295,89 +314,57 @@ function renameProps0(context, imports, node, renames) {
   }
 }
 
+/**
+ * 
+ * @param {*} renames 
+ * structure of the renames object:
+ * {
+ *    ComponentOne: {
+        propA: {
+          newName: "newPropA",
+          message: (node) => `propA prop has been renamed to newPropA for ${node.name.name}, some custom message`, // message is optional, default message will always be provided
+        },
+        isSmall: {
+          newName: 'size="sm"',
+          replace // when replace is present, it will replace the entire prop, including its value (e.g. isSmall={true} will be replaced with size="sm")
+        }
+      },
+      ComponentTwo: {
+        propToDelete: {
+          newName: "" // removing a prop is done by an empty string newName
+          message: "propToDelete has been deleted on ComponentTwo" // message can also be a string, but function is preferable to keep the node name, when using aliased import of a component
+        },
+        propToDeleteShort: "", // shorter way to remove a prop
+        propToRenameShort: "someNewPropName", // shorter way to rename a prop
+        propToDeleteAlternativeWay: {}, // this will also work for removing a prop
+      }
+ * }
+ * @param {string} packageName
+ * @returns 
+ */
 function renameProps(renames, packageName = "@patternfly/react-core") {
   return function (context) {
     const imports = getPackageImports(context, packageName).filter(
       (specifier) => Object.keys(renames).includes(specifier.imported.name)
     );
 
-    return imports.length === 0
-      ? {}
-      : {
-          JSXOpeningElement(node) {
-            renameProps0(context, imports, node, renames);
-          },
-        };
-  };
-}
+    if (imports.length === 0) {
+      return {};
+    }
 
-function renameProp(
-  components,
-  propMap,
-  message,
-  replaceAttribute,
-  leaveComment = true
-) {
-  if (typeof components === "string") {
-    components = [components];
-  }
-  return function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-core").filter(
-      (specifier) => components.includes(specifier.imported.name)
-    );
-    return imports.length === 0
-      ? {}
-      : {
-          JSXOpeningElement(node) {
-            if (imports.find((imp) => imp.local.name === node.name.name)) {
-              const namedAttributes = node.attributes.filter(
-                (attr) => attr.name
-              );
+    Object.keys(renames).forEach((component) => {
+      Object.entries(renames[component]).forEach(([oldName, value]) => {
+        if (typeof value === "string") {
+          renames[component][oldName] = { newName: value };
+        }
+      });
+    });
 
-              namedAttributes
-                .filter((attr) => Object.keys(propMap).includes(attr.name.name))
-                .forEach((attribute) => {
-                  const newName = propMap[attribute.name.name];
-                  context.report({
-                    node,
-                    message: message(node, attribute, newName),
-                    fix(fixer) {
-                      // Delete entire prop if newName is empty
-                      if (!newName || replaceAttribute) {
-                        /**
-                         * (dallas)
-                         * TODO: remove extra space? the following works but issues arise when attempting to remove multiple props.
-                         * i assume the ranges become invalid in the forEach loop? even though it seems to track attr correctly
-                         * (see datalist-remove-ondrags for example)
-                         *
-                         * const tokenBefore = context.getSourceCode().getTokenBefore(attribute);
-                         * return fixer.replaceTextRange([tokenBefore.range[1], attribute.range[1]], '');
-                         *
-                         * or
-                         *
-                         * return fixer.replaceTextRange([attribute.range[0] - 1, attribute.range[1]], '');
-                         */
-                        return fixer.replaceText(attribute, newName);
-                      }
-                      const newNameAttrName = newName.split("=")[0];
-                      // Leave a comment if there's an existing prop with this name
-                      if (
-                        namedAttributes.find(
-                          (attr) => attr.name.name === newNameAttrName
-                        )
-                      ) {
-                        return fixer.replaceText(
-                          attribute,
-                          leaveComment ? `/* ${newName} */` : ""
-                        );
-                      }
-                      return fixer.replaceText(attribute.name, newName);
-                    },
-                  });
-                });
-            }
-          },
-        };
+    return {
+      JSXOpeningElement(node) {
+        renamePropsOnNode(context, imports, node, renames);
+      },
+    };
   };
 }
 
@@ -592,10 +579,10 @@ function addCallbackParam(componentsArray, propMap) {
                     message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${newParam}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
                     fix(fixer) {
                       const fixes = [];
-                      
+
                       const createParamAdditionFix = (params) => {
                         const firstParam = params[0];
-                        
+
                         const replacementParams = `${newParam}, ${context
                           .getSourceCode()
                           .getText(firstParam)}`;
@@ -697,8 +684,7 @@ module.exports = {
   getPackageImports,
   moveSpecifiers,
   pfPackageMatches,
-  renameProp,
-  renameProps0,
+  renamePropsOnNode,
   renameProps,
   renameComponents,
   splitImportSpecifiers,

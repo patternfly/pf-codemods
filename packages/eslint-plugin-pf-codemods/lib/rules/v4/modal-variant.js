@@ -1,11 +1,18 @@
-const { renameProp } = require('../../helpers');
+const { renameProps } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/3920
 module.exports = {
-  meta: { fixable: 'code' },
-  create: renameProp(
-    'Modal',
-    {'isSmall': 'variant="small"', 'isLarge': 'variant="large"'},
-    (node, attribute, replacement) => `${node.name.name} has replaced ${attribute.name.name} prop with ${replacement}`
-  )
+  meta: { fixable: "code" },
+  create: renameProps({
+    Modal: {
+      isSmall: {
+        newName: 'variant="small"',
+        replace: true,
+      },
+      isLarge: {
+        newName: 'variant="large"',
+        replace: true,
+      },
+    },
+  }),
 };

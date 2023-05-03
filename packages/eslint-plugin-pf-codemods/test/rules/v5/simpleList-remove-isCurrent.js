@@ -19,7 +19,7 @@ ruleTester.run("simpleList-remove-isCurrent", rule, {
       code:   `import { SimpleList } from '@patternfly/react-core'; <SimpleList isCurrent />`,
       output: `import { SimpleList } from '@patternfly/react-core'; <SimpleList isActive />`,
       errors: [{
-        message: `isCurrent prop has been removed for SimpleList and replaced with the isActive prop.`,
+        message: `isCurrent prop for SimpleList has been renamed to isActive`,
         type: "JSXOpeningElement",
       }]
     },
@@ -27,7 +27,7 @@ ruleTester.run("simpleList-remove-isCurrent", rule, {
       code:   `import { SimpleList } from '@patternfly/react-core/dist/esm/components/SimpleList/index.js'; <SimpleList isCurrent />`,
       output: `import { SimpleList } from '@patternfly/react-core/dist/esm/components/SimpleList/index.js'; <SimpleList isActive />`,
       errors: [{
-        message: `isCurrent prop has been removed for SimpleList and replaced with the isActive prop.`,
+        message: `isCurrent prop for SimpleList has been renamed to isActive`,
         type: "JSXOpeningElement",
       }]
     },

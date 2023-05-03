@@ -16,10 +16,10 @@ ruleTester.run("button-remove-isSmallisLarge", rule, {
   ],
   invalid: [
     {
-      code:   `import { Button } from '@patternfly/react-core'; <Button isSmall />`,
+      code:   `import { Button } from '@patternfly/react-core'; <Button isSmall={true} />`,
       output: `import { Button } from '@patternfly/react-core'; <Button size="sm" />`,
       errors: [{
-        message: `isSmall prop for Button has been renamed to size="sm"`,
+        message: `use size="sm" instead of isSmall prop for Button`,
         type: "JSXOpeningElement",
       }]
     },
@@ -27,7 +27,7 @@ ruleTester.run("button-remove-isSmallisLarge", rule, {
       code:   `import { Button } from '@patternfly/react-core'; <Button isLarge />`,
       output: `import { Button } from '@patternfly/react-core'; <Button size="lg" />`,
       errors: [{
-        message: `isLarge prop for Button has been renamed to size="lg"`,
+        message: `use size="lg" instead of isLarge prop for Button`,
         type: "JSXOpeningElement",
       }]
     },
@@ -35,7 +35,7 @@ ruleTester.run("button-remove-isSmallisLarge", rule, {
       code:   `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button isSmall />`,
       output: `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button size="sm" />`,
       errors: [{
-        message: `isSmall prop for Button has been renamed to size="sm"`,
+        message: `use size="sm" instead of isSmall prop for Button`,
         type: "JSXOpeningElement",
       }]
     },
@@ -43,7 +43,7 @@ ruleTester.run("button-remove-isSmallisLarge", rule, {
       code:   `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button isLarge />`,
       output: `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button size="lg" />`,
       errors: [{
-        message: `isLarge prop for Button has been renamed to size="lg"`,
+        message: `use size="lg" instead of isLarge prop for Button`,
         type: "JSXOpeningElement",
       }]
     }

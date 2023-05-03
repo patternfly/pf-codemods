@@ -1,12 +1,15 @@
-const { renameProp } = require("../../helpers");
+const { renameProps } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8155
 module.exports = {
   meta: { fixable: "code" },
-  create: renameProp(
-    "FileUpload",
-    { onChange: "" },
-    (node, attribute) =>
-      `${attribute.name.name} prop for ${node.name.name} has been removed and should be replaced with onFileInputChange, onTextChange, onDataChange, and onClearClick as needed.`
-  ),
+  create: renameProps({
+    FileUpload: {
+      onChange: {
+        newName: "",
+        message: (node) =>
+          `onChange prop for ${node.name.name} has been removed and should be replaced with onFileInputChange, onTextChange, onDataChange, and onClearClick as needed.`,
+      },
+    },
+  }),
 };

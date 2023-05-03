@@ -1,13 +1,11 @@
-const { renameProp } = require('../../helpers');
+const { renameProps } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/4246
 module.exports = {
-  meta: { fixable: 'code' },
-  create: renameProp(
-    'PageHeader',
-    {
-      'toolbar': 'headerTools'
+  meta: { fixable: "code" },
+  create: renameProps({
+    PageHeader: {
+      toolbar: { newName: "headerTools" },
     },
-    node => `toolbar prop has been removed from ${node.name.name}. Use headerTools instead`
-  ),
+  }),
 };

@@ -20,7 +20,7 @@ ruleTester.run("tabs-remove-hasSecondaryBorderBottom", rule, {
       output: `import { Tabs } from '@patternfly/react-core'; <Tabs  />`,
       errors: [
         {
-          message: `hasSecondaryBorderBottom prop has been removed for Tabs.`,
+          message: `hasSecondaryBorderBottom prop for Tabs has been removed`,
           type: "JSXOpeningElement",
         },
       ],
@@ -30,7 +30,7 @@ ruleTester.run("tabs-remove-hasSecondaryBorderBottom", rule, {
       output: `import { Tabs } from '@patternfly/react-core/dist/esm/components/Tabs/index.js'; <Tabs  />`,
       errors: [
         {
-          message: `hasSecondaryBorderBottom prop has been removed for Tabs.`,
+          message: `hasSecondaryBorderBottom prop for Tabs has been removed`,
           type: "JSXOpeningElement",
         },
       ],

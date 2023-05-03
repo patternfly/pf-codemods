@@ -1,17 +1,19 @@
-const { renameProp } = require('../../helpers');
+const { renameProps } = require("../../helpers");
+
+const propRemovals = {};
+
+["isError", "isHidden", "icon", "component"].forEach((prop) => {
+  propRemovals[prop] = {
+    newName: "",
+    message: (node) =>
+      `${prop} prop for ${node.name.name} has been removed. Use HelperText and HelperTextItem directly in children.`,
+  };
+});
 
 // https://github.com/patternfly/patternfly-react/pull/8810
 module.exports = {
-  meta: { fixable: 'code' },
-  create: renameProp(
-    'FormHelperText',
-    { 
-      isError: '',
-      isHidden: '',
-      icon: '',
-      component: ''
-    },
-    (node, attribute) =>
-      `${attribute.name.name} prop for ${node.name.name} has been removed. Use HelperText and HelperTextItem directly in children.`
-  ),
+  meta: { fixable: "code" },
+  create: renameProps({
+    FormHelperText: propRemovals,
+  }),
 };

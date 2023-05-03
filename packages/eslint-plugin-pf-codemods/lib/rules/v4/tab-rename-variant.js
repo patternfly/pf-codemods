@@ -1,4 +1,4 @@
-const { getPackageImports, renameProps0 } = require('../../helpers');
+const { getPackageImports, renamePropsOnNode } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4146
 module.exports = {
@@ -35,9 +35,9 @@ module.exports = {
         }
       },
       JSXOpeningElement(node) {
-        renameProps0(context, tabImports, node, {
+        renamePropsOnNode(context, tabImports, node, {
           'Tabs' : {
-            'variant': 'component'
+            'variant': { newName: 'component' }
           }
         });
       }
