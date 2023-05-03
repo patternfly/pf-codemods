@@ -15,7 +15,6 @@ module.exports = {
       : {
           JSXOpeningElement(node) {
             if (
-              iconImport &&
               node.name.name === iconImport.local.name &&
               node.attributes.find(
                 (a) =>

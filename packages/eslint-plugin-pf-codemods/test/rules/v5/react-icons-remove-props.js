@@ -1,5 +1,5 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/react-icons-warn-remove-props");
+const rule = require("../../../lib/rules/v5/react-icons-remove-props");
 
 ruleTester.run("react-icons-remove-props", rule, {
   valid: [

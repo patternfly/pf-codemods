@@ -1799,7 +1799,7 @@ The `react-dropzone` dependency used with FileUpload, MultipleFileUpload, and Co
 
 This rule will raise a warning when any of these three components are imported, but will not make any code changes.
 
-### react-icons-warn-remove-props [(#5275)](// https://github.com/patternfly/patternfly-react/pull/5275)
+### react-icons-remove-props [(#5275)](// https://github.com/patternfly/patternfly-react/pull/5275)
 
 We've removed the `size`, `color`, and `noVerticalAlign` properties from icons which are imported from @patternfly/react-icons. Wrap your react-icon with the <Icon> component to customize its size and color.
 
