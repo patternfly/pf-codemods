@@ -12,7 +12,7 @@
     "test:koku": "pf-codemods --no-cache test/koku-ui",
     "test:console": "pf-codemods --no-cache test/console/frontend",
     "test:integreatly": "pf-codemods --no-cache test/tutorial-web-app",
-    "test:packages": "yarn get:packages && pf-codemods --no-cache test/packages",
+    "test:packages": "yarn get:packages && node --unhandled-rejections=strict packages/pf-codemods/index.js --no-cache test/packages",
     "get:packages": "node getPackages.js",
     "generate": "plop"
   },
