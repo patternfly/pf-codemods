@@ -1407,7 +1407,7 @@ The placement Nav flyouts in the DOM has been changed, if you have Nav elements 
 
 ### no-unused-imports-v5
 
-This rule removes all unused imports from `patternfly/react` packages. It is a special rule which will not run by default. It should be run after all the other rules as a final cleanup using the option `--only no-unused-imports-v5 --fix`.
+This rule, when run with `--fix` option, removes all unused imports from `patternfly/react` packages. It is a cleanup rule which will run after all the rules.
 
 #### Examples
 
