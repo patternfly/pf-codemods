@@ -1648,7 +1648,7 @@ Out:
 
 ### pageHeader-deprecated [(#8854)](https://github.com/patternfly/patternfly-react/pull/8854)
 
-We've deprecated the `PageHeader` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Masthead` and its related components.
+We've deprecated the `PageHeader`, `PageHeaderTools`, `PageHeaderToolsGroup`, and `PageHeaderToolsItem` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Masthead` and its related components.
 
 #### Examples
 
