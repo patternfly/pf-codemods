@@ -56,8 +56,9 @@ module.exports = {
                     : findVariableDeclaration(
                         node.property.name,
                         context.getSourceCode().getScope(node)
-                      ).defs[0].node.init;
+                      )?.defs[0].node.init;
                 if (
+                  nodeToReplace &&
                   nodeToReplace.type === "Literal" &&
                   nodeToReplace.value === "default"
                 ) {
@@ -118,7 +119,7 @@ module.exports = {
                 nodeToReplace = findVariableDeclaration(
                   expr.name,
                   context.getSourceCode().getScope(expr)
-                ).defs[0].node.init;
+                )?.defs[0].node.init;
               }
             }
 
