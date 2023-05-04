@@ -1873,7 +1873,7 @@ We've updated the default value of the `getResizeObserver` helper function's thi
 
 ### select-deprecated [(#8073)](https://github.com/patternfly/patternfly-react/pull/8073)
 
-We've deprecated the `Select` components. A fix will update code to point to the new deprecated import.
+We've deprecated the `Select` components. A fix will update code to point to the new deprecated import, but we suggest using our new `Select` implementation.
 
 #### Examples
 

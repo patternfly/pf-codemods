@@ -24,4 +24,4 @@ const importsToMove = [
   { name: "SelectFooterTabbableItems", type: "" },
 ];
 
-createMoveSpecifiersTester("select-deprecated", importsToMove, null);
+createMoveSpecifiersTester("select-deprecated", importsToMove, "new Select");
