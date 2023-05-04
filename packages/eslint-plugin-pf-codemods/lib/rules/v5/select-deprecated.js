@@ -32,7 +32,7 @@ const messageAfterImportNameChange =
 const messageAfterElementNameChange =
   "has been deprecated. Running the fix flag will update names, but we suggest using our new Select implementation.";
 
-// https://github.com/patternfly/patternfly-react/pull/8073
+// https://github.com/patternfly/patternfly-react/pull/8825
 module.exports = {
   meta: { fixable: "code" },
   create: moveSpecifiers(

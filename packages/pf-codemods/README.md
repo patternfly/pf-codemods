@@ -1871,7 +1871,7 @@ We've removed the deprecated `ToggleMenuBaseProps` interface.
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
 
-### select-deprecated [(#8073)](https://github.com/patternfly/patternfly-react/pull/8073)
+### select-deprecated [(#8825)](https://github.com/patternfly/patternfly-react/pull/8825)
 
 We've deprecated the `Select` components. A fix will update code to point to the new deprecated import, but we suggest using our new `Select` implementation.
 
