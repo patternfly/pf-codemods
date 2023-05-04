@@ -1799,6 +1799,12 @@ The `react-dropzone` dependency used with FileUpload, MultipleFileUpload, and Co
 
 This rule will raise a warning when any of these three components are imported, but will not make any code changes.
 
+### react-icons-remove-props [(#5275)](// https://github.com/patternfly/patternfly-react/pull/5275)
+
+We've removed the `size`, `color`, and `noVerticalAlign` properties from icons which are imported from @patternfly/react-icons. Wrap your react-icon with the <Icon> component to customize its size and color.
+
+This rule will raise a warning when any of these three props are used, but will not make any code changes.
+
 ### remove-removeFindDomNode [(#8371)](https://github.com/patternfly/patternfly-react/pull/8371) [(#8316)](https://github.com/patternfly/patternfly-react/pull/8316)
 
 We've removed the `removeFindDomNode` property as it is now the default behavior. The affected components are as follows: ApplicationLauncher, ClipboardCopy, ContextSelector, Dropdown, NavItem, OptionsMenu, Popover, SearchInput, Select, OverflowTab, Timepicker, Tooltip, Truncate.
