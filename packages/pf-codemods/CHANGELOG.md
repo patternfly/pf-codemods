@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.61.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.60.0...@patternfly/pf-codemods@1.61.0) (2023-05-04)
+
+
+### Features
+
+* No unused imports rule ([#405](https://github.com/patternfly/pf-codemods/issues/405)) ([e998b8a](https://github.com/patternfly/pf-codemods/commit/e998b8ab11807856d1626d18f5ce84a35865897e))
+
+
+
+
+
 # [1.60.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.59.1...@patternfly/pf-codemods@1.60.0) (2023-05-04)
 
 
