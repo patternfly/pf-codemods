@@ -1646,6 +1646,72 @@ Out:
 <OverflowMenuDropdownItem itemId={0}>
 ```
 
+### pageHeader-deprecated [(#8854)](https://github.com/patternfly/patternfly-react/pull/8854)
+
+We've deprecated the `PageHeader` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Masthead` and its related components.
+
+#### Examples
+
+In:
+
+```jsx
+import {
+	Button,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
+} from "@patternfly/react-core";
+
+<>
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
+</>;
+```
+
+Out:
+
+```jsx
+import {
+	Button
+} from '@patternfly/react-core';
+import {
+	PageHeader as PageHeaderDeprecated,
+	PageHeaderTools as PageHeaderToolsDeprecated,
+	PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
+	PageHeaderToolsItem as PageHeaderToolsItemDeprecated
+} from '@patternfly/react-core/deprecated';
+
+<>
+  <PageHeaderDeprecated />
+  <PageHeaderToolsDeprecated />
+  <PageHeaderToolsGroupDeprecated />
+  <PageHeaderToolsItemDeprecated />
+</>;
+```
+
+### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
+
+We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
+
+#### Examples
+
+In:
+
+```jsx
+<PageHeader />
+<PageHeader logoComponent="div" />
+```
+
+Out:
+
+```jsx
+<PageHeader logoComponent="a" />
+<PageHeader logoComponent="div" />
+```
+
 ### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
 
 The following props have been updated for the specified Page sub-components:
