@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.61.1...@patternfly/eslint-plugin-pf-codemods@1.62.0) (2023-05-04)
+
+
+### Features
+
+* **misc icons:** warn remove size, color, and noVerticalAlign props ([#389](https://github.com/patternfly/pf-codemods/issues/389)) ([2d952ba](https://github.com/patternfly/pf-codemods/commit/2d952ba51b0095b7a2002a9bca4738e35bea092c))
+
+
+
+
+
 ## [1.61.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.61.0...@patternfly/eslint-plugin-pf-codemods@1.61.1) (2023-05-03)
 
 
