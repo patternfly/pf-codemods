@@ -33,7 +33,7 @@ const warningRules = [
 const setupRules = [];
 
 // rules that will run after other rules (cleanup imports?)
-const cleanupRules = [];
+const cleanupRules = ["no-unused-imports-v5"];
 
 const createListOfRules = (version, includeBeta = false) => {
   const rules = {};

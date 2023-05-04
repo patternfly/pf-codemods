@@ -1405,6 +1405,38 @@ We've update the `aria-label` prop on MenuItemAction, making it required instead
 
 The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
 
+### no-unused-imports-v5
+
+This rule, when run with `--fix` option, removes all unused imports from `patternfly/react` packages. It is a cleanup rule which will run after all the rules.
+
+#### Examples
+
+In:
+
+```jsx
+import React from "react";
+import { Alert, Button, Title } from "@patternfly/react-core";
+import CubesIcon from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
+import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
+
+<Button variant="link" icon={<PlusCircleIcon />}>
+  Link
+</Button>;
+```
+
+Out:
+
+```jsx
+import React from "react";
+import { Button,  } from "@patternfly/react-core";
+
+import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
+
+<Button variant="link" icon={<PlusCircleIcon />}>
+  Link
+</Button>;
+```
+
 ### notificationBadge-remove-isRead [(#8626)](https://github.com/patternfly/patternfly-react/pull/8626)
 
 We've removed the `isRead` prop from NotificationBadge, use "read" or "unread" on the `variant` prop instead.
