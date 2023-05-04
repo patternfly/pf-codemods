@@ -12,6 +12,8 @@ import {
   AboutModal,
   AccordionExpandableContent,
   Alert,
+  AlertIcon,
+  AlertVariant,
   ApplicationLauncher,
   BackgroundImage,
   BackgroundImageSrcMap,
@@ -53,9 +55,13 @@ import {
   LoginPage,
   MenuItem,
   MenuItemAction,
+  Modal,
+  ModalBoxTitle,
+  ModalContent,
   MultipleFileUpload,
   Nav,
   NotificationBadge,
+  NotificationDrawerListItemHeader,
   NumberInput,
   OptionsMenu,
   OptionsMenuGroup,
@@ -67,6 +73,7 @@ import {
   PageToggleButton,
   Pagination,
   Popover,
+  PopoverHeader,
   Popper,
   ProgressStep,
   Radio,
@@ -98,9 +105,13 @@ const isRead = true;
 const myVariant = EmptyStateVariant.small;
 const newTheme = getCustomTheme("1", "2", "3");
 const backgroundImgSrcObj: BackgroundImageSrcMap = {};
+
+const variantOption = "default";
+const alertVariantOption = AlertVariant.default;
 <>
   <Alert aria-label='tester' />
-  <Alert titleHeadingLevel={"h4"}/>
+  <Alert titleHeadingLevel={"h4"} variant={AlertVariant.default} />
+  <AlertIcon variant={"default"}></AlertIcon>
   <ApplicationLauncher onToggle={} onFavorite={(id, isFavorite) => handler(id, isFavorite)} onSearch={text => handleText(text)}/>
   <BackgroundImage filter={<CustomFilter />} src={{a: 1}} />
   <BadgeToggle onToggle={} />
@@ -159,11 +170,15 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Menu aria-label='tester' />
   <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
+  <Modal titleIconVariant={variantOption}></Modal>
+  <ModalBoxTitle titleIconVariant="default"></ModalBoxTitle>
+  <ModalContent titleIconVariant="default"></ModalContent>
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
+  <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
   <OptionsMenu></OptionsMenu>
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
@@ -183,8 +198,9 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   }}
     toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
   />
-  <Popover reference />
+  <Popover reference alertSeverityVariant="default" />
   <Popover shouldClose={(foo, event) => handler(foo, event)} shouldOpen={(fn) => openHandler(fn)} />
+  <PopoverHeader alertSeverityVariant="default"></PopoverHeader>
   <Popper popperMatchesTriggerWidth={false}/>
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
