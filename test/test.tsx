@@ -206,6 +206,7 @@ const alertVariantOption = AlertVariant.default;
     onReadFinished={(fileHandle) => readFinishedHandler(fileHandle)}
     onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
   />
+  <FileUpload onTextChange={bar => textHandler(bar)} />
   <FileUploadField onTextChange={(bar) => textHandler(bar)} />
   <FormSelect onChange={(foo, event) => handler(foo, event)} />
   <FrogIcon size='sm' color='green' noVerticalAlign />

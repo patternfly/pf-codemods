@@ -1258,32 +1258,40 @@ Out:
 <FileUpload  />
 ```
 
-### fileUploadField-cb-param-updates [(#8882)](https://github.com/patternfly/patternfly-react/pull/8882)
+### fileUploadField-cb-param-updates [(#8955)](https://github.com/patternfly/patternfly-react/pull/8955)
 
-**Not yet included in pf-react**
-
-We've updated the `onTextChange` prop for FileUploadField so that the `event` parameter is the first parameter. Handlers may require an update.
+We've updated the `onTextChange` prop for FileUploadField and FileUpload so that the `event` parameter is the first parameter. Handlers may require an update.
 
 #### Examples
 
 In:
 
 ```jsx
-<FileUploadField onTextChange={text => textHandler(text)} />
-const textHandler1 = (text) => {};
-<FileUploadField onTextChange={textHandler1} />
-function textHandler2(text) {};
-<FileUploadField onTextChange={textHandler2} />
+<FileUpload onTextChange={text => textHandler(text)} />
+<FileUploadField onTextChange={text => textHandler1(text)} />
+const textHandler2 = (text) => {};
+const textHandler3 = (text) => {};
+<FileUpload onTextChange={textHandler2} />
+<FileUploadField onTextChange={textHandler3} />
+function textHandler4(text) {};
+function textHandler5(text) {};
+<FileUpload onTextChange={textHandler4} />
+<FileUploadField onTextChange={textHandler5} />
 ```
 
 Out:
 
 ```jsx
-<FileUploadField onTextChange={(_event, text) => textHandler(text)} />
-const textHandler1 = (_event, text) => {};
-<FileUploadField onTextChange={textHandler1} />
-function textHandler2(_event, text) {};
-<FileUploadField onTextChange={textHandler2} />
+<FileUpload onTextChange={(_event, text) => textHandler(text)} />
+<FileUploadField onTextChange={(_event, text) => textHandler1(text)} />
+const textHandler2 = (_event, text) => {};
+const textHandler3 = (_event, text) => {};
+<FileUpload onTextChange={textHandler2} />
+<FileUploadField onTextChange={textHandler3} />
+function textHandler4(_event, text) {};
+function textHandler5(_event, text) {};
+<FileUpload onTextChange={textHandler4} />
+<FileUploadField onTextChange={textHandler5} />
 ```
 
 
