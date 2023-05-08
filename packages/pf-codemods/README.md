@@ -1401,6 +1401,32 @@ Out:
 
 We've update the `aria-label` prop on MenuItemAction, making it required instead of optional.
 
+### multipleFileUpload-add-event-param-to-callback [(#8995)](https://github.com/patternfly/patternfly-react/pull/8995)
+
+We've updated the `onFileDrop` prop for MultipleFileUpload so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<MultipleFileUpload onFileDrop={(id) => handler(id)} />
+const handler1 = (id) => {};
+<MultipleFileUpload onFileDrop={handler1} />
+function handler2(id) {};
+<MultipleFileUpload onFileDrop={handler2} />
+```
+
+Out:
+
+```jsx
+<MultipleFileUpload onFileDrop={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<MultipleFileUpload onFileDrop={handler1} />
+function handler2(_event, id) {};
+<MultipleFileUpload onFileDrop={handler2} />
+```
+
 ### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
 
 The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
@@ -1551,26 +1577,6 @@ Out:
 <OverflowMenuDropdownItem itemId={0}>
 ```
 
-### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
-
-We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
-
-#### Examples
-
-In:
-
-```jsx
-<PageHeader />
-<PageHeader logoComponent="div" />
-```
-
-Out:
-
-```jsx
-<PageHeader logoComponent="a" />
-<PageHeader logoComponent="div" />
-```
-
 ### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
 
 The following props have been updated for the specified Page sub-components:
@@ -1595,6 +1601,26 @@ Out:
 ```jsx
 <PageSidebar isSidebarOpen={true} />
 <PageToggleButton isSidebarOpen={true} onSidebarToggle={() => {}} />
+```
+
+### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
+
+We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
+
+#### Examples
+
+In:
+
+```jsx
+<PageHeader />
+<PageHeader logoComponent="div" />
+```
+
+Out:
+
+```jsx
+<PageHeader logoComponent="a" />
+<PageHeader logoComponent="div" />
 ```
 
 ### pageSidebar-update-api [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)

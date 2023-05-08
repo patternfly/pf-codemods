@@ -161,6 +161,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <Menu aria-label='tester' />
   <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
+  <MultipleFileUpload onFileDrop={foo => handler(foo)} />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
@@ -171,8 +172,8 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
   <OverflowMenuDropdownItem index={0} />
   <PageGroup aria-label="tester" />
   <PageNavigation aria-label="tester" />
-  <PageSidebar nav="Content" />
   <PageSidebar isNavOpen />
+  <PageSidebar nav="Content" />
   <PageToggleButton isNavOpen onNavToggle />
   <Pagination defaultToFullPage perPageComponent="div" titles={{
     currPage: "test",
