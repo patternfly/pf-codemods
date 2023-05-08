@@ -9,10 +9,8 @@ module.exports = {
       AlertIcon: "variant",
       NotificationDrawerListItemHeader: "variant",
       Modal: "titleIconVariant",
-      ModalBoxTitle: "titleIconVariant",
       ModalContent: "titleIconVariant",
       Popover: "alertSeverityVariant",
-      PopoverHeader: "alertSeverityVariant",
     };
 
     const allImports = getPackageImports(context, "@patternfly/react-core");

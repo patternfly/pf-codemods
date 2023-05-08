@@ -8,11 +8,9 @@ const componentsAttributes = {
   Alert: "variant",
   AlertIcon: "variant",
   Modal: "titleIconVariant",
-  ModalBoxTitle: "titleIconVariant",
   ModalContent: "titleIconVariant",
   NotificationDrawerListItemHeader: "variant",
   Popover: "alertSeverityVariant",
-  PopoverHeader: "alertSeverityVariant",
 };
 
 const errors = Object.keys(componentsAttributes).map((key) => ({
@@ -28,11 +26,9 @@ ruleTester.run("various-rename-default", rule, {
         AlertIcon,
         AlertVariant,
         Modal,
-        ModalBoxTitle,
         ModalContent,
         NotificationDrawerListItemHeader,
         Popover,
-        PopoverHeader,
       } from "@patternfly/react-core";
       
       const variantOption = "custom";
@@ -43,11 +39,9 @@ ruleTester.run("various-rename-default", rule, {
         <Alert variant="custom"></Alert>
         <AlertIcon variant={"custom"}></AlertIcon>
         <Modal titleIconVariant={variantOption}></Modal>
-        <ModalBoxTitle titleIconVariant="custom"></ModalBoxTitle>
         <ModalContent titleIconVariant="custom"></ModalContent>
         <NotificationDrawerListItemHeader variant="custom"></NotificationDrawerListItemHeader>
         <Popover alertSeverityVariant="custom"></Popover>
-        <PopoverHeader alertSeverityVariant="custom"></PopoverHeader>
       </>;`,
     },
     // without import from @patternfly/react-core do not change anything
@@ -60,11 +54,9 @@ ruleTester.run("various-rename-default", rule, {
         <Alert variant="default"></Alert>
         <AlertIcon variant={"default"}></AlertIcon>
         <Modal titleIconVariant={variantOption}></Modal>
-        <ModalBoxTitle titleIconVariant="default"></ModalBoxTitle>
         <ModalContent titleIconVariant="default"></ModalContent>
         <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
         <Popover alertSeverityVariant="default"></Popover>
-        <PopoverHeader alertSeverityVariant="default"></PopoverHeader>
       </>;`
     }
   ],
@@ -75,11 +67,9 @@ ruleTester.run("various-rename-default", rule, {
         AlertIcon,
         AlertVariant,
         Modal,
-        ModalBoxTitle,
         ModalContent,
         NotificationDrawerListItemHeader,
         Popover,
-        PopoverHeader,
       } from "@patternfly/react-core";
       
       const variantOption = "default";
@@ -90,22 +80,18 @@ ruleTester.run("various-rename-default", rule, {
         <Alert variant="default"></Alert>
         <AlertIcon variant={"default"}></AlertIcon>
         <Modal titleIconVariant={variantOption}></Modal>
-        <ModalBoxTitle titleIconVariant="default"></ModalBoxTitle>
         <ModalContent titleIconVariant="default"></ModalContent>
         <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
         <Popover alertSeverityVariant="default"></Popover>
-        <PopoverHeader alertSeverityVariant="default"></PopoverHeader>
       </>;`,
       output: `import {
         Alert,
         AlertIcon,
         AlertVariant,
         Modal,
-        ModalBoxTitle,
         ModalContent,
         NotificationDrawerListItemHeader,
         Popover,
-        PopoverHeader,
       } from "@patternfly/react-core";
       
       const variantOption = "custom";
@@ -116,11 +102,9 @@ ruleTester.run("various-rename-default", rule, {
         <Alert variant="custom"></Alert>
         <AlertIcon variant={"custom"}></AlertIcon>
         <Modal titleIconVariant={variantOption}></Modal>
-        <ModalBoxTitle titleIconVariant="custom"></ModalBoxTitle>
         <ModalContent titleIconVariant="custom"></ModalContent>
         <NotificationDrawerListItemHeader variant="custom"></NotificationDrawerListItemHeader>
         <Popover alertSeverityVariant="custom"></Popover>
-        <PopoverHeader alertSeverityVariant="custom"></PopoverHeader>
       </>;`,
       errors: [
         {

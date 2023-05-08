@@ -56,7 +56,6 @@ import {
   MenuItem,
   MenuItemAction,
   Modal,
-  ModalBoxTitle,
   ModalContent,
   MultipleFileUpload,
   Nav,
@@ -73,7 +72,6 @@ import {
   PageToggleButton,
   Pagination,
   Popover,
-  PopoverHeader,
   Popper,
   ProgressStep,
   Radio,
@@ -171,7 +169,6 @@ const alertVariantOption = AlertVariant.default;
   <MenuItem hasCheck aria-label="tester" />
   <MenuItemAction />
   <Modal titleIconVariant={variantOption}></Modal>
-  <ModalBoxTitle titleIconVariant="default"></ModalBoxTitle>
   <ModalContent titleIconVariant="default"></ModalContent>
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
@@ -200,7 +197,6 @@ const alertVariantOption = AlertVariant.default;
   />
   <Popover reference alertSeverityVariant="default" />
   <Popover shouldClose={(foo, event) => handler(foo, event)} shouldOpen={(fn) => openHandler(fn)} />
-  <PopoverHeader alertSeverityVariant="default"></PopoverHeader>
   <Popper popperMatchesTriggerWidth={false}/>
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />

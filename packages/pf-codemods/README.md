@@ -2163,8 +2163,8 @@ Out:
 We have renamed option `'default'` to `'custom'` in:
 - `AlertVariant` enum
 - `variant` prop of `Alert`, `AlertIcon` and `NotificationDrawerListItemHeader` components
-- `titleIconVariant` prop of `Modal`, `ModalBoxTitle` and `ModalContent` components
-- `alertSeverityVariant` prop of `Popover` and `PopoverHeader` components
+- `titleIconVariant` prop of `Modal` and `ModalContent` components
+- `alertSeverityVariant` prop of `Popover` component
 
 #### Examples
 
@@ -2179,11 +2179,9 @@ const alertVariantOption = AlertVariant.default;
   <Alert variant="default"></Alert>
   <AlertIcon variant={"default"}></AlertIcon>
   <Modal titleIconVariant={variantOption}></Modal>
-  <ModalBoxTitle titleIconVariant="default"></ModalBoxTitle>
   <ModalContent titleIconVariant="default"></ModalContent>
   <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
   <Popover alertSeverityVariant="default"></Popover>
-  <PopoverHeader alertSeverityVariant="default"></PopoverHeader>
 </>;
 ```
 
@@ -2198,11 +2196,9 @@ const alertVariantOption = AlertVariant.custom;
   <Alert variant="custom"></Alert>
   <AlertIcon variant={"custom"}></AlertIcon>
   <Modal titleIconVariant={variantOption}></Modal>
-  <ModalBoxTitle titleIconVariant="custom"></ModalBoxTitle>
   <ModalContent titleIconVariant="custom"></ModalContent>
   <NotificationDrawerListItemHeader variant="custom"></NotificationDrawerListItemHeader>
   <Popover alertSeverityVariant="custom"></Popover>
-  <PopoverHeader alertSeverityVariant="custom"></PopoverHeader>
 </>;
 ```
 
