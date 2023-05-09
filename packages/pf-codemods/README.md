@@ -1551,26 +1551,6 @@ Out:
 <OverflowMenuDropdownItem itemId={0}>
 ```
 
-### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
-
-We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
-
-#### Examples
-
-In:
-
-```jsx
-<PageHeader />
-<PageHeader logoComponent="div" />
-```
-
-Out:
-
-```jsx
-<PageHeader logoComponent="a" />
-<PageHeader logoComponent="div" />
-```
-
 ### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
 
 The following props have been updated for the specified Page sub-components:
@@ -1595,6 +1575,26 @@ Out:
 ```jsx
 <PageSidebar isSidebarOpen={true} />
 <PageToggleButton isSidebarOpen={true} onSidebarToggle={() => {}} />
+```
+
+### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
+
+We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
+
+#### Examples
+
+In:
+
+```jsx
+<PageHeader />
+<PageHeader logoComponent="div" />
+```
+
+Out:
+
+```jsx
+<PageHeader logoComponent="a" />
+<PageHeader logoComponent="div" />
 ```
 
 ### pageSidebar-update-api [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
@@ -2194,6 +2194,50 @@ Out:
 
 ```jsx
 <Tooltip     />
+```
+
+### various-rename-default [(#8924)](https://github.com/patternfly/patternfly-react/pull/8924)
+
+We have renamed option `'default'` to `'custom'` in:
+- `AlertVariant` enum
+- `variant` prop of `Alert`, `AlertIcon` and `NotificationDrawerListItemHeader` components
+- `titleIconVariant` prop of `Modal` and `ModalContent` components
+- `alertSeverityVariant` prop of `Popover` component
+
+#### Examples
+
+In:
+
+```jsx
+const variantOption = "default";
+const alertVariantOption = AlertVariant.default;
+
+<>
+  <Alert variant={AlertVariant["default"]}></Alert>
+  <Alert variant="default"></Alert>
+  <AlertIcon variant={"default"}></AlertIcon>
+  <Modal titleIconVariant={variantOption}></Modal>
+  <ModalContent titleIconVariant="default"></ModalContent>
+  <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
+  <Popover alertSeverityVariant="default"></Popover>
+</>;
+```
+
+Out:
+
+```jsx
+const variantOption = "custom";
+const alertVariantOption = AlertVariant.custom;
+
+<>
+  <Alert variant={AlertVariant["custom"]}></Alert>
+  <Alert variant="custom"></Alert>
+  <AlertIcon variant={"custom"}></AlertIcon>
+  <Modal titleIconVariant={variantOption}></Modal>
+  <ModalContent titleIconVariant="custom"></ModalContent>
+  <NotificationDrawerListItemHeader variant="custom"></NotificationDrawerListItemHeader>
+  <Popover alertSeverityVariant="custom"></Popover>
+</>;
 ```
 
 ### various-rename-reference [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
