@@ -1,3 +1,3 @@
 const { addCallbackParamTester } = require("../../testHelpers");
 
-addCallbackParamTester("pageg-updated-callback", "Page", "onPageResize");
+addCallbackParamTester("page-updated-callback", "Page", "onPageResize");
