@@ -50,6 +50,7 @@ import {
   ExpandableSection,
   FileUpload,
   FileUploadField,
+  FormSelect,
   KebabToggle,
   KEY_CODES,
   Label,
@@ -162,6 +163,7 @@ const alertVariantOption = AlertVariant.default;
     onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
   />
   <FileUploadField onTextChange={bar => textHandler(bar)} />
+  <FormSelect onChange={(foo, event) => handler(foo, event)} />
   <FrogIcon size="sm" color="green" noVerticalAlign />
   <KebabToggle onToggle={} />
   <Label />
