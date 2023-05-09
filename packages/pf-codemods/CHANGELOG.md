@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.61.0...@patternfly/pf-codemods@1.62.0) (2023-05-09)
+
+
+### Features
+
+* **MultipleFileUpload:** add event param to onFileDrop callback ([#450](https://github.com/patternfly/pf-codemods/issues/450)) ([179c7f9](https://github.com/patternfly/pf-codemods/commit/179c7f9cbb032fd399fca6c11b17910f047c93f4))
+* **various:** rename 'default' option to 'custom' ([#442](https://github.com/patternfly/pf-codemods/issues/442)) ([25e0483](https://github.com/patternfly/pf-codemods/commit/25e04838c2e85e5069f286d2bfa67fe763ab5322))
+
+
+
+
+
 # [1.61.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.60.0...@patternfly/pf-codemods@1.61.0) (2023-05-04)
 
 
