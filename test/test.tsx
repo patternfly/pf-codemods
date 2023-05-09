@@ -61,6 +61,7 @@ import {
   MultipleFileUpload,
   Nav,
   NotificationBadge,
+  NotificationDrawerHeader,
   NotificationDrawerListItemHeader,
   NumberInput,
   OptionsMenu,
@@ -178,6 +179,7 @@ const alertVariantOption = AlertVariant.default;
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
+  <NotificationDrawerHeader onClose={() => handler(foo)} />
   <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
   <OptionsMenu></OptionsMenu>
   <NumberInput allowEmptyInput />

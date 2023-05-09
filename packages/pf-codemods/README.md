@@ -1487,6 +1487,32 @@ Out:
   <NotificationBadge variant={(isRead || markedRead) ? "read" : "unread"} />
 ```
 
+### notificationDrawerHeader-updated-callback [(#9010)](https://github.com/patternfly/patternfly-react/pull/9010)
+
+We've updated the `onClose` prop for NotificationDrawerHeader to include `event` as a parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<NotificationDrawerHeader onClose={() => {}}>
+const onClose1 = () => {};
+<NotificationDrawerHeader onClose={onClose1}>
+function onClose2(width, id) {};
+<NotificationDrawerHeader onClose={onClose2}>
+```
+
+Out:
+
+```jsx
+<NotificationDrawerHeader onResize={(_event, width, id) => onChange(checked)} />
+const onClose1 = (_event) => {};
+<NotificationDrawerHeader onResize={onClose1}>
+function onClose2(_event) {};
+<NotificationDrawerHeader onResize={onClose2}>
+```
+
 ### numberInput-remove-allowEmptyInput [(#8715)](https://github.com/patternfly/patternfly-react/pull/8715)
 
 We've removed the `allowEmptyInput` prop from NumberInput.
