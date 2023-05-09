@@ -172,6 +172,7 @@ const alertVariantOption = AlertVariant.default;
   <MenuItemAction />
   <Modal titleIconVariant={variantOption}></Modal>
   <ModalContent titleIconVariant="default"></ModalContent>
+  <MultipleFileUpload onFileDrop={foo => handler(foo)} />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
@@ -183,8 +184,8 @@ const alertVariantOption = AlertVariant.default;
   <OverflowMenuDropdownItem index={0} />
   <PageGroup aria-label="tester" />
   <PageNavigation aria-label="tester" />
-  <PageSidebar nav="Content" />
   <PageSidebar isNavOpen />
+  <PageSidebar nav="Content" />
   <PageToggleButton isNavOpen onNavToggle />
   <Pagination defaultToFullPage perPageComponent="div" titles={{
     currPage: "test",
