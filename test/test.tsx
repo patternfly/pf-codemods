@@ -57,6 +57,7 @@ import {
   KebabToggle,
   KEY_CODES,
   Label,
+  LoginForm,
   LoginPage,
   MenuItem,
   MenuItemAction,
@@ -119,7 +120,6 @@ import {
 import { TableComposable } from "@patternfly/react-table";
 import { TableComposable as PFTable } from "@patternfly/react-table";
 
-
 const tdSelectTypeObj = { disable: true };
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from "Bar";
@@ -178,9 +178,13 @@ const alertVariantOption = AlertVariant.default;
   <DropdownToggleCheckbox
     onChange={(change, evt) => handleChange(change, evt)}
   />
-  <DualListSelector onAvailableOptionsSearchInputChanged={(foo, event) => handler(foo, event)} />
-  <DualListSelector onChosenOptionsSearchInputChanged={(foo, event) => handler(foo, event)} />
-  <DualListSelector onListChange={foo => handler(foo)} />
+  <DualListSelector
+    onAvailableOptionsSearchInputChanged={(foo, event) => handler(foo, event)}
+  />
+  <DualListSelector
+    onChosenOptionsSearchInputChanged={(foo, event) => handler(foo, event)}
+  />
+  <DualListSelector onListChange={(foo) => handler(foo)} />
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel='h5' size='4xl'>
@@ -213,6 +217,11 @@ const alertVariantOption = AlertVariant.default;
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
+  <LoginForm
+    onChangeUsername={(foo, event) => handler(foo, event)}
+    onChangePassword={(foo, event) => handler(foo, event)}
+    onChangeRememberMe={(foo, event) => handler(foo, event)}
+  />
   <LoginPage backgroundImgAlt='tester' backgroundImgSrc={{ a: 1 }} />
   <Menu aria-label='tester' />
   <MenuItem hasCheck aria-label='tester' />
@@ -231,14 +240,14 @@ const alertVariantOption = AlertVariant.default;
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
   <Page onPageResize={({ obj }) => handler({ obj })} />
-  <PageGroup aria-label="tester" />
+  <PageGroup aria-label='tester' />
   <PageHeader />
   <PageHeaderTools />
   <PageHeaderToolsGroup />
   <PageHeaderToolsItem />
-  <PageNavigation aria-label="tester" />
+  <PageNavigation aria-label='tester' />
   <PageSidebar isNavOpen />
-  <PageSidebar nav="Content" />
+  <PageSidebar nav='Content' />
   <PageToggleButton isNavOpen onNavToggle />
   <Pagination
     defaultToFullPage

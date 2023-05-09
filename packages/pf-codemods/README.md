@@ -1388,6 +1388,62 @@ Out:
 <Label  />
 ```
 
+### loginForm-update-callback-params [(#8996)](https://github.com/patternfly/patternfly-react/pull/8996)
+
+We've updated the `onChangeUsername`, `onChangePassword`, and `onChangeRememberMe` props for LoginForm so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<LoginForm onChangeUsername={(id) => handler(id)} />
+<LoginForm onChangeUsername={(id, event) => handler(id, event)} />
+const usernameHandler1 = (id, event) => {};
+<LoginForm onChangeUsername={usernameHandler1} />
+function usernameHandler2(id, event) {};
+<LoginForm onChangeUsername={usernameHandler2} />
+
+<LoginForm onChangePassword={(id) => handler(id)} />
+<LoginForm onChangePassword={(id, event) => handler(id, event)} />
+const passwordHandler1 = (id, event) => {};
+<LoginForm onChangePassword={passwordHandler1} />
+function passwordHandler2(id, event) {};
+<LoginForm onChangePassword={passwordHandler2} />
+
+<LoginForm onChangeRememberMe={(id) => handler(id)} />
+<LoginForm onChangeRememberMe={(id, event) => handler(id, event)} />
+const rememberMeHandler1 = (id, event) => {};
+<LoginForm onChangeRememberMe={rememberMeHandler1} />
+function rememberMeHandler2(id, event) {};
+<LoginForm onChangeRememberMe={rememberMeHandler2} />
+```
+
+Out:
+
+```jsx
+<LoginForm onChangeUsername={(_event, id) => handler(id)} />
+<LoginForm onChangeUsername={(event, id) => handler(id, event)} />
+const usernameHandler1 = (_event, id) => {};
+<LoginForm onChangeUsername={usernameHandler1} />
+function usernameHandler2(_event, id) {};
+<LoginForm onChangeUsername={usernameHandler2} />
+
+<LoginForm onChangePassword={(_event, id) => handler(id)} />
+<LoginForm onChangePassword={(event, id) => handler(id, event)} />
+const passwordHandler1 = (_event, id) => {};
+<LoginForm onChangePassword={passwordHandler1} />
+function passwordHandler2(_event, id) {};
+<LoginForm onChangePassword={passwordHandler2} />
+
+<LoginForm onChangeRememberMe={(_event, id) => handler(id)} />
+<LoginForm onChangeRememberMe={(event, id) => handler(id, event)} />
+const rememberMeHandler1 = (_event, id) => {};
+<LoginForm onChangeRememberMe={rememberMeHandler1} />
+function rememberMeHandler2(_event, id) {};
+<LoginForm onChangeRememberMe={rememberMeHandler2} />
+```
+
 ### loginPage-update-props [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
 
 We've removed the `backgroundImgAlt` prop from LoginPage.
