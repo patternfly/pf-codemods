@@ -1456,9 +1456,49 @@ function handler2(_event, id) {};
 <MultipleFileUpload onFileDrop={handler2} />
 ```
 
+### nav-update-callbackParams [(#8997)](https://github.com/patternfly/patternfly-react/pull/8997)
+
+We've updated the `onSelect` and `onToggle` props for Nav so that the `event` parameter is the first parameter, and have removed the event property from the `selectedItem` and `toggledItem` object parameters respectively. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Navigation onSelect={(id) => handler(id)} />
+const handler1 = (id) => {};
+<Navigation onSelect={handler1} />
+function handler2(id) {};
+<Navigation onSelect={handler2} />
+
+<Navigation onToggle={(id) => handler(id)} />
+const toggleHandler1 = (id) => {};
+<Navigation onToggle={toggleHandler1} />
+function toggleHandler2(id) {};
+<Navigation onToggle={toggleHandler2} />
+```
+
+Out:
+
+```jsx
+<Navigation onSelect={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<Navigation onSelect={handler1} />
+function handler2(_event, id) {};
+<Navigation onSelect={handler2} />
+
+<Navigation onToggle={(_event, id) => handler(id)} />
+const toggleHandler1 = (_event, id) => {};
+<Navigation onToggle={toggleHandler1} />
+function toggleHandler2(_event, id) {};
+<Navigation onToggle={toggleHandler2} />
+```
+
 ### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
 
 The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
+
+
 
 ### no-unused-imports-v5
 
