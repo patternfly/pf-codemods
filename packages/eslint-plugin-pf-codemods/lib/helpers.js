@@ -124,26 +124,33 @@ function moveSpecifiers(
       },
       JSXElement(node) {
         if (!aliasSuffix) return;
+
+        const openingElement = node.openingElement?.name;
+
         // Fixer for importsToMove objects with "component" type
         if (
           importSpecifiersToMove.some(
             (imp) =>
-              imp.local.name === node.openingElement.name.name &&
+              [openingElement?.name, openingElement?.object?.name].includes(
+                imp.local.name
+              ) &&
               imp.imported.name === imp.local.name &&
               componentsToUpdate.includes(imp.imported.name)
           )
         ) {
+          const elementName =
+            openingElement.object?.name || openingElement.name;
           context.report({
             node,
-            message: `${node.openingElement.name.name} ${
+            message: `${elementName} ${
               messageAfterElementNameChange ||
               "has been moved to a new package. Running the fix flag will update the name."
             }`,
             fix(fixer) {
               const fixes = [
                 fixer.replaceText(
-                  node.openingElement.name,
-                  `${node.openingElement.name.name}${aliasSuffix}`
+                  openingElement.object || openingElement,
+                  `${elementName}${aliasSuffix}`
                 ),
               ];
               if (!node.openingElement.selfClosing) {

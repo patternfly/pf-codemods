@@ -36,6 +36,7 @@ import {
   DatePicker,
   DrawerPanelContent,
   Dropdown,
+  DropdownContext,
   DropdownDirection,
   DropdownItem,
   DropdownPosition,
@@ -89,17 +90,26 @@ import {
   ToggleTemplateProps,
   Tooltip,
   TreeView,
-  Wizard
+  Wizard,
 } from "@patternfly/react-core";
-import { SelectOption, WizardBody as WizardBodyNext, WizardFooter } from "@patternfly/react-core/next";
+import {
+  SelectOption,
+  WizardBody as WizardBodyNext,
+  WizardFooter,
+} from "@patternfly/react-core/next";
 
 import { Td } from "@patternfly/react-table";
 
-const tdSelectTypeObj = {"disable": true};
-import { Table, TableBody, TableHeader, TableProps } from "@patternfly/react-table";
+const tdSelectTypeObj = { disable: true };
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableProps,
+} from "@patternfly/react-table";
 
 //following type of import was causing errors for rules that checked specifiers before import package
-import foo from 'Bar';
+import foo from "Bar";
 
 //eslint-disable-next-line @typescript/foo
 
@@ -114,50 +124,59 @@ const alertVariantOption = AlertVariant.default;
   <Alert aria-label='tester' />
   <Alert titleHeadingLevel={"h4"} variant={AlertVariant.default} />
   <AlertIcon variant={"default"}></AlertIcon>
-  <ApplicationLauncher onToggle={} onFavorite={(id, isFavorite) => handler(id, isFavorite)} onSearch={text => handleText(text)}/>
-  <BackgroundImage filter={<CustomFilter />} src={{a: 1}} />
+  <ApplicationLauncher
+    onToggle={}
+    onFavorite={(id, isFavorite) => handler(id, isFavorite)}
+    onSearch={(text) => handleText(text)}
+  />
+  <BackgroundImage filter={<CustomFilter />} src={{ a: 1 }} />
   <BadgeToggle onToggle={} />
-  <Banner variant="danger" />
+  <Banner variant='danger' />
   <Button isLarge />
   <Button isSmall />
-  <CalendarMonth onChange={date => handleChange(date)} onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)} />
+  <CalendarMonth
+    onChange={(date) => handleChange(date)}
+    onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)}
+  />
   <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <CardHeader>
     <CardHeaderMain>Header content</CardHeaderMain>
-    <CardActions className="test" hasNoOffset><Button>Card action</Button></CardActions>
+    <CardActions className='test' hasNoOffset>
+      <Button>Card action</Button>
+    </CardActions>
   </CardHeader>
   <Chart themeVariant />
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
   <ContextSelector />
-  <DataList onDragStart itemOrder={['1', '2', '3']} />
+  <DataList onDragStart itemOrder={["1", "2", "3"]} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
-  <DataList selectableRow={{onChange=() => {}}} />
+  <DataList selectableRow={{ onChange = () => {} }} />
   <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />
-  <Dropdown position={DropdownPosition.right} direction={DropdownDirection.up} />
+  <Dropdown
+    position={DropdownPosition.right}
+    direction={DropdownDirection.up}
+  />
+  <DropdownContext.Provider />
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
-  <DropdownToggleCheckbox onChange={(change,evt) => handleChange(change,evt)}/>
+  <DropdownToggleCheckbox
+    onChange={(change, evt) => handleChange(change, evt)}
+  />
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
-    <Title headingLevel="h5" size="4xl">
+    <Title headingLevel='h5' size='4xl'>
       Empty state
     </Title>
-    <EmptyStateBody>
-      Some other content.
-    </EmptyStateBody>
-    <ESP>
-      Primary action
-    </ESP>
-    <EmptyStateSecondaryActions>
-      Secondary Actions
-    </EmptyStateSecondaryActions>
+    <EmptyStateBody>Some other content.</EmptyStateBody>
+    <ESP>Primary action</ESP>
+    <EmptyStateSecondaryActions>Secondary Actions</EmptyStateSecondaryActions>
   </EmptyState>
   <EmptyStateIcon />
-  <EmptyStateIcon component={Spinner} variant="container"/>
-  <ExpandableSection onToggle={foo => handler(foo)} />
+  <EmptyStateIcon component={Spinner} variant='container' />
+  <ExpandableSection onToggle={(foo) => handler(foo)} />
   <FileUpload
     onDataChange={(data) => changeHandler(data)}
     onReadFailed={(error, fileHandle) => readFailedHandler(error, fileHandle)}
@@ -170,19 +189,19 @@ const alertVariantOption = AlertVariant.default;
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
-  <LoginPage backgroundImgAlt="tester" backgroundImgSrc={{a: 1}} />
+  <LoginPage backgroundImgAlt='tester' backgroundImgSrc={{ a: 1 }} />
   <Menu aria-label='tester' />
-  <MenuItem hasCheck aria-label="tester" />
+  <MenuItem hasCheck aria-label='tester' />
   <MenuItemAction />
   <Modal titleIconVariant={variantOption}></Modal>
-  <ModalContent titleIconVariant="default"></ModalContent>
-  <MultipleFileUpload onFileDrop={foo => handler(foo)} />
+  <ModalContent titleIconVariant='default'></ModalContent>
+  <MultipleFileUpload onFileDrop={(foo) => handler(foo)} />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
-  <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
+  <NotificationDrawerListItemHeader variant='default'></NotificationDrawerListItemHeader>
   <OptionsMenu></OptionsMenu>
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
@@ -190,33 +209,39 @@ const alertVariantOption = AlertVariant.default;
   <PageGroup aria-label="tester" />
   <PageNavigation aria-label="tester" />
   <PageSidebar isNavOpen />
-  <PageSidebar nav="Content" />
+  <PageSidebar nav='Content' />
   <PageToggleButton isNavOpen onNavToggle />
-  <Pagination defaultToFullPage perPageComponent="div" titles={{
-    currPage: "test",
-    paginationTitle: "test",
-    toFirstPage: "test",
-    toLastPage: "test",
-    toNextPage: "test",
-    toPreviousPage: "test",
-    optionsToggle: "test"
-  }}
-    toggleTemplate={({first, second} : ToggleTemplateProps) => <></>}
+  <Pagination
+    defaultToFullPage
+    perPageComponent='div'
+    titles={{
+      currPage: "test",
+      paginationTitle: "test",
+      toFirstPage: "test",
+      toLastPage: "test",
+      toNextPage: "test",
+      toPreviousPage: "test",
+      optionsToggle: "test",
+    }}
+    toggleTemplate={({ first, second }: ToggleTemplateProps) => <></>}
   />
-  <Popover reference alertSeverityVariant="default" />
-  <Popover shouldClose={(foo, event) => handler(foo, event)} shouldOpen={(fn) => openHandler(fn)} />
-  <Popper popperMatchesTriggerWidth={false}/>
+  <Popover reference alertSeverityVariant='default' />
+  <Popover
+    shouldClose={(foo, event) => handler(foo, event)}
+    shouldOpen={(fn) => openHandler(fn)}
+  />
+  <Popper popperMatchesTriggerWidth={false} />
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
   <Select onToggle={} />
   <SelectOption hasCheck />
   <SelectToggle onToggle={} />
-  <Slider onChange={foo => handler(foo)} />
+  <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
   <Table />
   <TableBody />
   <TableHeader />
-  <Td select={tdSelectTypeObj} actions={{disable: false}} />
+  <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
   <Tooltip reference />
@@ -227,4 +252,4 @@ const alertVariantOption = AlertVariant.default;
   <WizardBodyNext />
   <WizardBodyNext aria-label />
   <WizardBodyNext aria-labelledby />
-</>
+</>;
