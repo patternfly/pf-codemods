@@ -2222,6 +2222,50 @@ Out:
 <Tooltip     />
 ```
 
+### various-rename-default [(#8924)](https://github.com/patternfly/patternfly-react/pull/8924)
+
+We have renamed option `'default'` to `'custom'` in:
+- `AlertVariant` enum
+- `variant` prop of `Alert`, `AlertIcon` and `NotificationDrawerListItemHeader` components
+- `titleIconVariant` prop of `Modal` and `ModalContent` components
+- `alertSeverityVariant` prop of `Popover` component
+
+#### Examples
+
+In:
+
+```jsx
+const variantOption = "default";
+const alertVariantOption = AlertVariant.default;
+
+<>
+  <Alert variant={AlertVariant["default"]}></Alert>
+  <Alert variant="default"></Alert>
+  <AlertIcon variant={"default"}></AlertIcon>
+  <Modal titleIconVariant={variantOption}></Modal>
+  <ModalContent titleIconVariant="default"></ModalContent>
+  <NotificationDrawerListItemHeader variant="default"></NotificationDrawerListItemHeader>
+  <Popover alertSeverityVariant="default"></Popover>
+</>;
+```
+
+Out:
+
+```jsx
+const variantOption = "custom";
+const alertVariantOption = AlertVariant.custom;
+
+<>
+  <Alert variant={AlertVariant["custom"]}></Alert>
+  <Alert variant="custom"></Alert>
+  <AlertIcon variant={"custom"}></AlertIcon>
+  <Modal titleIconVariant={variantOption}></Modal>
+  <ModalContent titleIconVariant="custom"></ModalContent>
+  <NotificationDrawerListItemHeader variant="custom"></NotificationDrawerListItemHeader>
+  <Popover alertSeverityVariant="custom"></Popover>
+</>;
+```
+
 ### various-rename-reference [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
 
 We've renamed the `reference` property to `triggerRef` in Popover and Tooltip components.
