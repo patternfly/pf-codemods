@@ -1603,6 +1603,36 @@ Out:
 <PageToggleButton isSidebarOpen={true} onSidebarToggle={() => {}} />
 ```
 
+### page-updated-callback [(#9011)](https://github.com/patternfly/patternfly-react/pull/9011)
+
+We've updated the `onPageResize` prop for Page to include the `event` as its first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Page onPageResize={({obj}) => onChange({obj})} />
+
+const resize1 = ({obj}) => {};
+<Page onPageResize={resize1}>
+
+function resize2({obj}) {};
+<Page onPageResize={resize2}>
+```
+
+Out:
+
+```jsx
+<Page onPageResize={(_event, {obj}) => onChange({obj})} />
+
+const resize1 = (_event, {obj}) => {};
+<Page onPageResize={resize1}>
+
+function resize2(_event, {obj}) {};
+<Page onPageResize={resize2}>
+```
+
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
 
 We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
