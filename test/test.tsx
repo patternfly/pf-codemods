@@ -83,6 +83,7 @@ import {
   Tabs,
   Title,
   Toggle,
+  ToggleGroupItem,
   ToggleTemplateProps,
   Tooltip,
   TreeView,
@@ -213,6 +214,7 @@ const alertVariantOption = AlertVariant.default;
   <TableHeader />
   <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <Toggle isPrimary onToggle={} />
+  <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
   <Tooltip reference />
   <TreeView hasCheck />
   <Wizard />
