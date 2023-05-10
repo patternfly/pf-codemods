@@ -1,6 +1,6 @@
 const { addCallbackParam } = require("../../helpers");
 
-// https://github.com/patternfly/patternfly-react/pull/9025
+// https://github.com/patternfly/patternfly-react/pull/9054
 module.exports = {
   meta: { fixable: "code" },
   create: addCallbackParam(["Popover"], {

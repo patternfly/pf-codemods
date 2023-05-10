@@ -2,7 +2,6 @@
 const betaRuleNames = [
   "expandableSection-onToggle-event-added",
   "fileUploadField-cb-param-updates",
-  "popover-swap-shouldClose-shouldOpen-params",
   "radio-update-onChange-params",
   "slider-update-onChangeParams",
 ];
