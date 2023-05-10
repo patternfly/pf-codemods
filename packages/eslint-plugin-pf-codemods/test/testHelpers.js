@@ -277,14 +277,15 @@ function getInvalidSwapCallbackParamTests(
   componentNameArray,
   propNameArray,
   previousParamIndex,
-  newParamName
+  newParamName,
+  createMessageCallback
 ) {
   let tests = getInvalidAddCallbackParamTests(
     componentNameArray,
     propNameArray,
     newParamName,
     previousParamIndex,
-    getAddCallbackParamMessage
+    createMessageCallback
   );
 
   const formattedNewParamName =
@@ -386,7 +387,8 @@ function swapCallbackParamTester(
   componentNames,
   propNames,
   previousParamIndex,
-  newParamName = "_event"
+  newParamName = "_event",
+  createMessageCallback = getAddCallbackParamMessage
 ) {
   const rule = require(`../lib/rules/v5/${ruleName}`);
   const componentNameArray =
@@ -403,7 +405,8 @@ function swapCallbackParamTester(
       componentNameArray,
       propNameArray,
       previousParamIndex,
-      newParamName
+      newParamName,
+      createMessageCallback
     ),
   });
 }
