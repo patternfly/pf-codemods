@@ -2205,6 +2205,35 @@ const obj = { isDisabled };
 </>;
 ```
 
+### textInput-swap-onChange-params [(#9064)](https://github.com/patternfly/patternfly-react/pull/9064)
+
+We've updated the `onChange` prop for TextInput so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<TextInput onChange={(id) => handler(id)} />
+<TextInput onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<TextInput onChange={handler1} />
+function handler2(id, event) {};
+<TextInput onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<TextInput onChange={(_event, id) => handler(id)} />
+<TextInput onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<TextInput onChange={handler1} />
+function handler2(_event, id) {};
+<TextInput onChange={handler2} />
+```
+
+
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
 We've removed the deprecated `isPrimary` prop. This rule wil replace it with the "primary" value on the `toggleVariant` prop.
