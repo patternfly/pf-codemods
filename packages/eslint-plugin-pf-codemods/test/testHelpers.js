@@ -323,7 +323,7 @@ function getInvalidSwapCallbackParamTests(
             output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
             errors: [
               {
-                message: getAddCallbackParamMessage(
+                message: createMessageCallback(
                   componentName,
                   propName,
                   variation
@@ -337,7 +337,7 @@ function getInvalidSwapCallbackParamTests(
             output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
             errors: [
               {
-                message: getAddCallbackParamMessage(
+                message: createMessageCallback(
                   componentName,
                   propName,
                   variation
