@@ -183,9 +183,9 @@ const alertVariantOption = AlertVariant.default;
     onReadFinished={(fileHandle) => readFinishedHandler(fileHandle)}
     onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
   />
-  <FileUploadField onTextChange={bar => textHandler(bar)} />
+  <FileUploadField onTextChange={(bar) => textHandler(bar)} />
   <FormSelect onChange={(foo, event) => handler(foo, event)} />
-  <FrogIcon size="sm" color="green" noVerticalAlign />
+  <FrogIcon size='sm' color='green' noVerticalAlign />
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
@@ -198,6 +198,7 @@ const alertVariantOption = AlertVariant.default;
   <MultipleFileUpload onFileDrop={(foo) => handler(foo)} />
   <Nav flyout={"menu"} />
   <Nav variant='horizontal-subnav' />
+  <Nav onSelect={(foo) => handler(foo)} onToggle={(foo) => handler(foo)} />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
@@ -205,9 +206,9 @@ const alertVariantOption = AlertVariant.default;
   <OptionsMenu></OptionsMenu>
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
-  <Page onPageResize={({obj}) => handler({obj})} />
-  <PageGroup aria-label="tester" />
-  <PageNavigation aria-label="tester" />
+  <Page onPageResize={({ obj }) => handler({ obj })} />
+  <PageGroup aria-label='tester' />
+  <PageNavigation aria-label='tester' />
   <PageSidebar isNavOpen />
   <PageSidebar nav='Content' />
   <PageToggleButton isNavOpen onNavToggle />

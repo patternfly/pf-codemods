@@ -47,7 +47,8 @@ function getInvalidAddCallbackParamTests(
   componentNameArray,
   propNameArray,
   newParamName,
-  previousParamIndex
+  previousParamIndex,
+  createMessageCallback
 ) {
   let tests = [];
 
@@ -58,7 +59,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -72,7 +73,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -86,7 +87,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id: bar) => handler(id)} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -100,7 +101,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -114,7 +115,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} as ${componentName}Deprecated } from '@patternfly/react-core/deprecated'; const handler = (${newParamName}, id) => {}; <${componentName}Deprecated ${propName}={handler} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName + "Deprecated",
               propName,
               newParamName
@@ -128,7 +129,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id: bar) => {}; <${componentName} ${propName}={handler} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -142,7 +143,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id) {}; <${componentName} ${propName}={handler} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -156,7 +157,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id: bar) {}; <${componentName} ${propName}={handler} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -170,7 +171,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={this.handler} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               componentName,
               propName,
               newParamName
@@ -184,7 +185,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} as PF${componentName} } from '@patternfly/react-core'; <PF${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               `PF${componentName}`,
               propName,
               newParamName
@@ -198,7 +199,7 @@ function getInvalidAddCallbackParamTests(
         output: `import { ${componentName} as PF${componentName} } from '@patternfly/react-core'; <PF${componentName} ${propName}={(${newParamName}, id: bar) => handler(id)} />;`,
         errors: [
           {
-            message: getAddCallbackParamMessage(
+            message: createMessageCallback(
               `PF${componentName}`,
               propName,
               newParamName
@@ -215,7 +216,7 @@ function getInvalidAddCallbackParamTests(
           output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id, text) => handler(id)} />;`,
           errors: [
             {
-              message: getAddCallbackParamMessage(
+              message: createMessageCallback(
                 componentName,
                 propName,
                 newParamName
@@ -229,7 +230,7 @@ function getInvalidAddCallbackParamTests(
           output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id, text) => {}; <${componentName} ${propName}={handler} />;`,
           errors: [
             {
-              message: getAddCallbackParamMessage(
+              message: createMessageCallback(
                 componentName,
                 propName,
                 newParamName
@@ -243,7 +244,7 @@ function getInvalidAddCallbackParamTests(
           output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id, text) {}; <${componentName} ${propName}={handler} />;`,
           errors: [
             {
-              message: getAddCallbackParamMessage(
+              message: createMessageCallback(
                 componentName,
                 propName,
                 newParamName
@@ -257,7 +258,7 @@ function getInvalidAddCallbackParamTests(
           output: `import { ${componentName} as PF${componentName} } from '@patternfly/react-core'; <PF${componentName} ${propName}={(${newParamName}, id, text) => handler(id)} />;`,
           errors: [
             {
-              message: getAddCallbackParamMessage(
+              message: createMessageCallback(
                 `PF${componentName}`,
                 propName,
                 newParamName
@@ -276,13 +277,15 @@ function getInvalidSwapCallbackParamTests(
   componentNameArray,
   propNameArray,
   previousParamIndex,
-  newParamName
+  newParamName,
+  createMessageCallback
 ) {
   let tests = getInvalidAddCallbackParamTests(
     componentNameArray,
     propNameArray,
     newParamName,
-    previousParamIndex
+    previousParamIndex,
+    createMessageCallback
   );
 
   const formattedNewParamName =
@@ -320,7 +323,7 @@ function getInvalidSwapCallbackParamTests(
             output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
             errors: [
               {
-                message: getAddCallbackParamMessage(
+                message: createMessageCallback(
                   componentName,
                   propName,
                   variation
@@ -334,7 +337,7 @@ function getInvalidSwapCallbackParamTests(
             output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
             errors: [
               {
-                message: getAddCallbackParamMessage(
+                message: createMessageCallback(
                   componentName,
                   propName,
                   variation
@@ -355,7 +358,8 @@ function addCallbackParamTester(
   ruleName,
   componentNames,
   propNames,
-  newParamName = "_event"
+  newParamName = "_event",
+  createMessageCallback = getAddCallbackParamMessage
 ) {
   const rule = require(`../lib/rules/v5/${ruleName}`);
   const componentNameArray =
@@ -371,7 +375,9 @@ function addCallbackParamTester(
     invalid: getInvalidAddCallbackParamTests(
       componentNameArray,
       propNameArray,
-      newParamName
+      newParamName,
+      undefined,
+      createMessageCallback
     ),
   });
 }
@@ -381,7 +387,8 @@ function swapCallbackParamTester(
   componentNames,
   propNames,
   previousParamIndex,
-  newParamName = "_event"
+  newParamName = "_event",
+  createMessageCallback = getAddCallbackParamMessage
 ) {
   const rule = require(`../lib/rules/v5/${ruleName}`);
   const componentNameArray =
@@ -398,7 +405,8 @@ function swapCallbackParamTester(
       componentNameArray,
       propNameArray,
       previousParamIndex,
-      newParamName
+      newParamName,
+      createMessageCallback
     ),
   });
 }
