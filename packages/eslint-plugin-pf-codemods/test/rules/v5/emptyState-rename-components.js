@@ -58,16 +58,6 @@ ruleTester.run("emptyState-rename-components", rule, {
         },
       ],
     },
-    { // after second run of the rule
-      code: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Other actions</EmptyStateActions>`,
-      output: `import { EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Other actions</EmptyStateActions>`,
-      errors: [
-        {
-          message: "unused patternfly import EmptyStateSecondaryActions",
-          type: "ImportDeclaration",
-        },
-      ],
-    },
     {
       code: `import { EmptyStatePrimary } from '@patternfly/react-core'; <EmptyStatePrimary>Primary action</EmptyStatePrimary>`,
       output: `import { EmptyStatePrimary, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
@@ -80,16 +70,6 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
           type: "JSXElement",
-        },
-      ],
-    },
-    { // after second run of the rule
-      code: `import { EmptyStatePrimary, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
-      output: `import { EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
-      errors: [
-        {
-          message: "unused patternfly import EmptyStatePrimary",
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -108,17 +88,6 @@ ruleTester.run("emptyState-rename-components", rule, {
         },
       ],
     },
-    { // after second run of the rule
-      code: `import { EmptyStatePrimary as Primary, EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
-      output: `import { EmptyStateActions } from '@patternfly/react-core'; <EmptyStateActions>Primary action</EmptyStateActions>`,
-      errors: [
-        {
-          message:
-            "unused patternfly import Primary",
-          type: "ImportDeclaration",
-        },
-      ],
-    },
     {
       code: `import { EmptyStatePrimary, EmptyStateSecondaryActions } from '@patternfly/react-core';
       <>
@@ -132,7 +101,8 @@ ruleTester.run("emptyState-rename-components", rule, {
       </>`,
       errors: [
         {
-          message: "add missing imports EmptyStateActions from @patternfly/react-core",
+          message:
+            "add missing imports EmptyStateActions from @patternfly/react-core",
           type: "ImportDeclaration",
         },
         {
@@ -159,7 +129,8 @@ ruleTester.run("emptyState-rename-components", rule, {
       </>`,
       errors: [
         {
-          message: "add missing imports EmptyStateActions from @patternfly/react-core/dist/esm/components/EmptyState/index.js",
+          message:
+            "add missing imports EmptyStateActions from @patternfly/react-core/dist/esm/components/EmptyState/index.js",
           type: "ImportDeclaration",
         },
         {
@@ -170,64 +141,6 @@ ruleTester.run("emptyState-rename-components", rule, {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
           type: "JSXElement",
-        },
-      ],
-    },
-    { // after second run of the rule
-      code: `import { EmptyStatePrimary, EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core';
-      <>
-        <EmptyStateActions>Primary action</EmptyStateActions>
-        <EmptyStateActions>Secondary</EmptyStateActions>
-      </>`,
-      output: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core';
-      <>
-        <EmptyStateActions>Primary action</EmptyStateActions>
-        <EmptyStateActions>Secondary</EmptyStateActions>
-      </>`,
-      errors: [
-        {
-          message: "unused patternfly import EmptyStatePrimary",
-          type: "ImportDeclaration",
-        },
-        {
-          message: "unused patternfly import EmptyStateSecondaryActions",
-          type: "ImportDeclaration",
-        },
-      ],
-    },
-    { // after third run of the rule
-      code: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core';
-      <>
-        <EmptyStateActions>Primary action</EmptyStateActions>
-        <EmptyStateActions>Secondary</EmptyStateActions>
-      </>`,
-      output: `import { EmptyStateActions } from '@patternfly/react-core';
-      <>
-        <EmptyStateActions>Primary action</EmptyStateActions>
-        <EmptyStateActions>Secondary</EmptyStateActions>
-      </>`,
-      errors: [
-        {
-          message: "unused patternfly import EmptyStateSecondaryActions",
-          type: "ImportDeclaration",
-        },
-      ],
-    },
-    {
-      code: `import { EmptyStateSecondaryActions, EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
-      <>
-        <EmptyStateActions>Primary action</EmptyStateActions>
-        <EmptyStateActions>Secondary</EmptyStateActions>
-      </>`,
-      output: `import { EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
-      <>
-        <EmptyStateActions>Primary action</EmptyStateActions>
-        <EmptyStateActions>Secondary</EmptyStateActions>
-      </>`,
-      errors: [
-        {
-          message: "unused patternfly import EmptyStateSecondaryActions",
-          type: "ImportDeclaration",
         },
       ],
     },

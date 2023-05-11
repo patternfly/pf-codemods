@@ -1,4 +1,8 @@
-const { ensureImports, getPackageImports, pfPackageMatches } = require("../../helpers");
+const {
+  ensureImports,
+  getPackageImports,
+  pfPackageMatches,
+} = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
 module.exports = {
@@ -24,40 +28,6 @@ module.exports = {
             if (!pfPackageMatches(pfPackage, node.source.value)) {
               return;
             }
-
-            const allTokens = context
-              .getSourceCode()
-              .ast.body.filter((node) => node.type !== "ImportDeclaration")
-              .map((node) =>
-                context
-                  .getSourceCode()
-                  .getTokens(node)
-                  .map((token) => token.value)
-              )
-              .reduce((acc, val) => acc.concat(val), []);
-
-            imports
-              .filter((spec) => !allTokens.includes(spec.local.name))
-              .forEach((spec) =>
-                context.report({
-                  node,
-                  message: `unused patternfly import ${spec.local.name}`,
-                  fix(fixer) {
-                    const getEndRange = () => {
-                      const nextComma = context
-                        .getSourceCode()
-                        .getTokenAfter(spec);
-
-                      return context.getSourceCode().getText(nextComma) === ","
-                        ? context.getSourceCode().getTokenAfter(nextComma)
-                            .range[0]
-                        : spec.range[1];
-                    };
-
-                    return fixer.removeRange([spec.range[0], getEndRange()]);
-                  },
-                })
-              );
 
             ensureImports(context, node, pfPackage, [newName]);
           },
