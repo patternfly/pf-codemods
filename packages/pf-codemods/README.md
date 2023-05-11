@@ -2164,6 +2164,35 @@ Out:
 <Toggle toggleVariant="primary" />
 ```
 
+### toggleGroupItem-swap-onChange-params [(#9067)](https://github.com/patternfly/patternfly-react/pull/9067)
+
+We've updated the `onChange` prop for ToggleGroupItem so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<ToggleGroupItem onChange={(id) => handler(id)} />
+<ToggleGroupItem onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<ToggleGroupItem onChange={handler1} />
+function handler2(id, event) {};
+<ToggleGroupItem onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<ToggleGroupItem onChange={(_event, id) => handler(id)} />
+<ToggleGroupItem onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<ToggleGroupItem onChange={handler1} />
+function handler2(_event, id) {};
+<ToggleGroupItem onChange={handler2} />
+```
+
+
 ### toolbar-remove-visiblity [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
 
 We've removed the deprecated `visiblity` prop. This rule will replace it with the correctly spelled `visibility` prop.
