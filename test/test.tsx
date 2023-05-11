@@ -68,6 +68,7 @@ import {
   OptionsMenuGroup,
   OptionsMenuToggle,
   OverflowMenuDropdownItem,
+  Page,
   PageGroup,
   PageNavigation,
   PageSidebar,
@@ -185,6 +186,7 @@ const alertVariantOption = AlertVariant.default;
   <OptionsMenu></OptionsMenu>
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
+  <Page onPageResize={({obj}) => handler({obj})} />
   <PageGroup aria-label="tester" />
   <PageNavigation aria-label="tester" />
   <PageSidebar isNavOpen />
