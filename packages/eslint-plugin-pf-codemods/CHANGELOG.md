@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.65.2...@patternfly/eslint-plugin-pf-codemods@1.65.3) (2023-05-11)
+
+
+### Bug Fixes
+
+* **moveSpecifier helper:** updated logic to account for Context ([#454](https://github.com/patternfly/pf-codemods/issues/454)) ([aa63447](https://github.com/patternfly/pf-codemods/commit/aa63447d3fcf82af338c7db2f3b886629d1fb96f))
+
+
+
+
+
 ## [1.65.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.65.1...@patternfly/eslint-plugin-pf-codemods@1.65.2) (2023-05-11)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
