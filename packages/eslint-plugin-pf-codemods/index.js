@@ -24,6 +24,7 @@ const warningRules = [
   "table-warn-actionsColumn",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
+  "tooltip-triggerRef-may-be-required",
   "wizard-warn-button-order",
 ];
 

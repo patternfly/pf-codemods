@@ -2735,6 +2735,12 @@ Out:
 <Tooltip     />
 ```
 
+### tooltip-triggerRef-may-be-required [(#8733)](https://github.com/patternfly/patternfly-react/pull/8733)
+
+Tooltips without a `triggerRef` will now have a wrapping div which may cause issues. Snapshots may need to be updated, or to avoid the wrapping div add a `triggerRef` with a ref which is attached to the trigger element.
+
+This rule will raise a warning when a Tooltip is imported without a `triggerRef` or `reference` prop, but will not make any code changes.
+
 ### various-rename-default [(#8924)](https://github.com/patternfly/patternfly-react/pull/8924)
 
 We have renamed option `'default'` to `'custom'` in:

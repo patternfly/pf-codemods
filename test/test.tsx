@@ -104,7 +104,7 @@ import {
   ToggleTemplateProps,
   Tooltip,
   TreeView,
-  Wizard,
+  Wizard
 } from "@patternfly/react-core";
 import {
   SelectOption,
@@ -291,7 +291,9 @@ const alertVariantOption = AlertVariant.default;
   <TextInput onChange={(foo, event) => handler(foo, event)} />
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
+  <Tooltip />
   <Tooltip reference />
+  <Tooltip triggerRef={ref} />
   <Tr isHoverable />
   <TreeView hasCheck />
   <Wizard />
