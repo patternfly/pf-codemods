@@ -1223,6 +1223,35 @@ Out:
 <FormHelperText     />
 ```
 
+### formSelect-update-onChange-params [(#8998)](https://github.com/patternfly/patternfly-react/pull/8998)
+
+We've updated the `onChange` prop for FormSelect so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<FormSelect onChange={(id) => handler(id)} />
+<FormSelect onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<FormSelect onChange={handler1} />
+function handler2(id, event) {};
+<FormSelect onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<FormSelect onChange={(_event, id) => handler(id)} />
+<FormSelect onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<FormSelect onChange={handler1} />
+function handler2(_event, id) {};
+<FormSelect onChange={handler2} />
+```
+
+
 ### hasCheck-prop-rename [(#8403)](https://github.com/patternfly/patternfly-react/pull/8403)
 
 We've renamed the `hasCheck` prop for TreeView, MenuItem, and the Next implementation of SelectOption to `hasCheckbox`.
