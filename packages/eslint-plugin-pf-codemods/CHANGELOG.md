@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.65.4...@patternfly/eslint-plugin-pf-codemods@1.65.5) (2023-05-11)
+
+
+### Bug Fixes
+
+* **Nav:** added event param as first param ([#459](https://github.com/patternfly/pf-codemods/issues/459)) ([04a208f](https://github.com/patternfly/pf-codemods/commit/04a208fecfef7377a7b27c363521d8a0736db77e))
+
+
+
+
+
 ## [1.65.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.65.3...@patternfly/eslint-plugin-pf-codemods@1.65.4) (2023-05-11)
 
 
