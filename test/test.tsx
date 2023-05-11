@@ -43,6 +43,7 @@ import {
   DropdownToggle,
   DropdownToggleCheckbox,
   DualListSelector,
+  EditableSelectInputCell,
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
@@ -186,6 +187,7 @@ const alertVariantOption = AlertVariant.default;
     onChosenOptionsSearchInputChanged={(foo, event) => handler(foo, event)}
   />
   <DualListSelector onListChange={(foo) => handler(foo)} />
+  <EditableSelectInputCell onSelect={(foo, event) => onSelectHandler(foo, event)} clearSelection={foo => clearSelectionHandler(foo, event)} />
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel='h5' size='4xl'>

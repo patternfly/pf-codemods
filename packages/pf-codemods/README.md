@@ -960,6 +960,38 @@ function handler2(_event, id) {};
 <DualListSelector onListChange={handler2}>
 ```
 
+### editableSelectInputCell-onSelect-clearSelection-swap-params [(#9057)](https://github.com/patternfly/patternfly-react/pull/9057)
+
+We've updated the `onSelect` and `onSelect` props for EditableSelectInputCell so that the `event` parameter is their first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<EditableSelectInputCell onSelect={(value) => onSelectHandler(value)} clearSelection={(row, cell) => clearSelectionHandler(row, cell)} />
+<EditableSelectInputCell onSelect={(value, event) => onSelectHandler(value, event)} />
+const onSelectHandler1 = (value, event) => {};
+const clearSelectionHandler1 = (row, cell) => {};
+<EditableSelectInputCell onSelect={onSelectHandler1} clearSelection={clearSelectionHandler1} />
+function onSelectHandler2(value) {};
+function clearSelectionHandler2(row, cell) {};
+<EditableSelectInputCell onSelect={onSelectHandler2} clearSelection={clearSelectionHandler2} />
+```
+
+Out:
+
+```jsx
+<EditableSelectInputCell onSelect={(_event, value) => onSelectHandler(value)} clearSelection={(_event, row, cell) => clearSelectionHandler(row, cell)} />
+<EditableSelectInputCell onSelect={(event, value) => onSelectHandler(value, event)} />
+const onSelectHandler1 = (event, value) => {};
+const clearSelectionHandler1 = (event, row, cell) => {};
+<EditableSelectInputCell onSelect={onSelectHandler1} clearSelection={clearSelectionHandler1} />
+function onSelectHandler2(_event, value) {};
+function clearSelectionHandler2(_event, row, cell) {};
+<EditableSelectInputCell onSelect={onSelectHandler2} clearSelection={clearSelectionHandler2} />
+```
+
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.
