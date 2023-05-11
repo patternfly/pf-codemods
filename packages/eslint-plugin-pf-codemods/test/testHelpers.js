@@ -4,7 +4,11 @@ function getAddCallbackParamMessage(componentName, propName, newParamName) {
   return `The "${propName}" prop for ${componentName} has been updated so that the "${newParamName}" parameter is the first parameter. "${propName}" handlers may require an update.`;
 }
 
-function getValidAddCallbackParamTests(componentNameArray, propNameArray, newParamName) {
+function getValidAddCallbackParamTests(
+  componentNameArray,
+  propNameArray,
+  newParamName
+) {
   let tests = [];
 
   componentNameArray.forEach((componentName) => {
@@ -359,7 +363,11 @@ function addCallbackParamTester(
   const propNameArray = typeof propNames === "string" ? [propNames] : propNames;
 
   ruleTester.run(ruleName, rule, {
-    valid: getValidAddCallbackParamTests(componentNameArray, propNameArray, newParamName),
+    valid: getValidAddCallbackParamTests(
+      componentNameArray,
+      propNameArray,
+      newParamName
+    ),
     invalid: getInvalidAddCallbackParamTests(
       componentNameArray,
       propNameArray,
@@ -381,7 +389,11 @@ function swapCallbackParamTester(
   const propNameArray = typeof propNames === "string" ? [propNames] : propNames;
 
   ruleTester.run(ruleName, rule, {
-    valid: getValidAddCallbackParamTests(componentNameArray, propNameArray, newParamName),
+    valid: getValidAddCallbackParamTests(
+      componentNameArray,
+      propNameArray,
+      newParamName
+    ),
     invalid: getInvalidSwapCallbackParamTests(
       componentNameArray,
       propNameArray,
@@ -466,6 +478,11 @@ function getMoveSpecifiersInvalidtests(importsToMoveArray, newImplementation) {
     tests.push({
       code: `import {${componentImport} } from '@patternfly/react-${package}'; <${componentImport} />`,
       output: `import {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-${package}/deprecated'; <${componentImport}Deprecated />`,
+      errors: createErrors(componentImport),
+    });
+    tests.push({
+      code: `import {${componentImport} } from '@patternfly/react-${package}'; <${componentImport}.Provider />`,
+      output: `import {\n\t${componentImport} as ${componentImport}Deprecated\n} from '@patternfly/react-${package}/deprecated'; <${componentImport}Deprecated.Provider />`,
       errors: createErrors(componentImport),
     });
     tests.push({
