@@ -177,7 +177,7 @@ const alertVariantOption = AlertVariant.default;
   </ContextSelector>
   <DataList onDragStart itemOrder={["1", "2", "3"]} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
-  <DataList selectableRow={{ onChange = () => {} }} />
+  <DataList selectableRow={{onChange: (id, event) => {}}} />
   <DataListCheck onChange={(id) => handler} />
   <DatePicker />
   <DrawerPanelContent onResize={(id, width) => {}} />

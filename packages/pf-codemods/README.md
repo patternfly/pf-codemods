@@ -672,7 +672,7 @@ We've removed the selectableRow property and replaced it with onSelectableRowCha
 was a callback, which can now be directly passed to the onSelectableRowChange prop. However, it's worth noting that the order of the params 
 in the callback has been updated so that the event param is first.
 
-#### Example of manual change needed
+#### Examples
 
 In:
 
@@ -690,14 +690,14 @@ const selectableRowObject = { onChange: onChange};
 Out:
 
 ```jsx
-<DataList onSelectableRowChange={ (event, id) => {} } />
+<DataList onSelectableRowChange={(event, id) => {}} />
 
-const onSelectableRowChange = (event, id) => {};
-<DataList onSelectableRowChange={onSelectableRowChange} />
+const selectableRowObject = (event, id) => {};
+<DataList onSelectableRowChange={selectableRowObject} />
 
 const onChange = (event, id) => {};
-<DataList onSelectableRowChange={onChange} />
-
+const selectableRowObject2 = onChange;
+<DataList onSelectableRowChange={selectableRowObject2} />
 ```
 
 ### dataList-updated-callback [(#8723)](https://github.com/patternfly/patternfly-react/pull/8723)
