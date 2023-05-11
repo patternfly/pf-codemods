@@ -126,20 +126,17 @@ function moveSpecifiers(
         if (!aliasSuffix) return;
 
         const openingElement = node.openingElement?.name;
+        const elementName = openingElement.object?.name || openingElement.name;
 
         // Fixer for importsToMove objects with "component" type
         if (
           importSpecifiersToMove.some(
             (imp) =>
-              [openingElement?.name, openingElement?.object?.name].includes(
-                imp.local.name
-              ) &&
+              imp.local.name === elementName &&
               imp.imported.name === imp.local.name &&
               componentsToUpdate.includes(imp.imported.name)
           )
         ) {
-          const elementName =
-            openingElement.object?.name || openingElement.name;
           context.report({
             node,
             message: `${elementName} ${
