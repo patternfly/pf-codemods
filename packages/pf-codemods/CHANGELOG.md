@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.64.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.63.5...@patternfly/pf-codemods@1.64.0) (2023-05-12)
+
+
+### Features
+
+* **TextInput:** Swap onChange params ([#463](https://github.com/patternfly/pf-codemods/issues/463)) ([b7044f5](https://github.com/patternfly/pf-codemods/commit/b7044f5e0d6229ec83099e9413854ac861e874bb))
+
+
+
+
+
 ## [1.63.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.63.4...@patternfly/pf-codemods@1.63.5) (2023-05-11)
 
 
