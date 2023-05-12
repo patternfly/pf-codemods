@@ -84,6 +84,7 @@ import {
   Slider,
   Spinner,
   Tabs,
+  TextInput,
   Title,
   Toggle,
   ToggleGroupItem,
@@ -243,6 +244,7 @@ const alertVariantOption = AlertVariant.default;
   <TableBody />
   <TableHeader />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
+  <TextInput onChange={(foo, event) => handler(foo, event)} />
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
   <Tooltip reference />
