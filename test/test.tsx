@@ -111,6 +111,9 @@ import {
   TableHeader,
   TableProps,
 } from "@patternfly/react-table";
+import { TableComposable } from "@patternfly/react-table";
+import { TableComposable as PFTable } from "@patternfly/react-table";
+
 
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from "Bar";
@@ -230,6 +233,7 @@ const alertVariantOption = AlertVariant.default;
     }}
     toggleTemplate={({ first, second }: ToggleTemplateProps) => <></>}
   />
+  <PFTable>Body</PFTable>
   <Popover reference alertSeverityVariant='default' />
   <Popover
     shouldClose={(foo, event) => handler(foo, event)}
@@ -245,6 +249,7 @@ const alertVariantOption = AlertVariant.default;
   <Spinner isSVG />
   <Table />
   <TableBody />
+  <TableComposable />
   <TableHeader />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
