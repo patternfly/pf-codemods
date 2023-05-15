@@ -52,6 +52,7 @@ import {
   FileUpload,
   FileUploadField,
   FormSelect,
+  InputGroup,
   KebabToggle,
   KEY_CODES,
   Label,
@@ -187,6 +188,14 @@ const alertVariantOption = AlertVariant.default;
   <FileUploadField onTextChange={(bar) => textHandler(bar)} />
   <FormSelect onChange={(foo, event) => handler(foo, event)} />
   <FrogIcon size='sm' color='green' noVerticalAlign />
+  <InputGroup>
+    <input />
+    <textarea />
+    <TextArea />
+    <TextInput />
+    <InputGroupText />
+    <button />
+  </InputGroup>
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
