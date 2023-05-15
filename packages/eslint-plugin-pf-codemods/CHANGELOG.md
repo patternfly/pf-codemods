@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.68.0...@patternfly/eslint-plugin-pf-codemods@1.69.0) (2023-05-15)
+
+
+### Features
+
+* **PageHeader:** deprecate PageHeader - update imports ([#441](https://github.com/patternfly/pf-codemods/issues/441)) ([d0f0ce4](https://github.com/patternfly/pf-codemods/commit/d0f0ce4cb9e7082034a5e07a6725b0ae075fc956))
+
+
+
+
+
 # [1.68.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.67.0...@patternfly/eslint-plugin-pf-codemods@1.68.0) (2023-05-15)
 
 
