@@ -1646,6 +1646,52 @@ Out:
 <OverflowMenuDropdownItem itemId={0}>
 ```
 
+### pageHeader-deprecated [(#8854)](https://github.com/patternfly/patternfly-react/pull/8854)
+
+We've deprecated the `PageHeader`, `PageHeaderTools`, `PageHeaderToolsGroup`, and `PageHeaderToolsItem` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Masthead` and its related components.
+
+#### Examples
+
+In:
+
+```jsx
+import {
+	Button,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
+} from "@patternfly/react-core";
+
+<>
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
+</>;
+```
+
+Out:
+
+```jsx
+import {
+	Button
+} from '@patternfly/react-core';
+import {
+	PageHeader as PageHeaderDeprecated,
+	PageHeaderTools as PageHeaderToolsDeprecated,
+	PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
+	PageHeaderToolsItem as PageHeaderToolsItemDeprecated
+} from '@patternfly/react-core/deprecated';
+
+<>
+  <PageHeaderDeprecated />
+  <PageHeaderToolsDeprecated />
+  <PageHeaderToolsGroupDeprecated />
+  <PageHeaderToolsItemDeprecated />
+</>;
+```
+
 ### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
 
 The following props have been updated for the specified Page sub-components:

@@ -71,6 +71,10 @@ import {
   OverflowMenuDropdownItem,
   Page,
   PageGroup,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
   PageNavigation,
   PageSidebar,
   PageToggleButton,
@@ -214,10 +218,14 @@ const alertVariantOption = AlertVariant.default;
   <NumberInput allowEmptyInput />
   <OverflowMenuDropdownItem index={0} />
   <Page onPageResize={({ obj }) => handler({ obj })} />
-  <PageGroup aria-label='tester' />
-  <PageNavigation aria-label='tester' />
+  <PageGroup aria-label="tester" />
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
+  <PageNavigation aria-label="tester" />
   <PageSidebar isNavOpen />
-  <PageSidebar nav='Content' />
+  <PageSidebar nav="Content" />
   <PageToggleButton isNavOpen onNavToggle />
   <Pagination
     defaultToFullPage
