@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.66.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.65.0...@patternfly/pf-codemods@1.66.0) (2023-05-15)
+
+
+### Features
+
+* **Table:** rename TableComposable to Table ([#388](https://github.com/patternfly/pf-codemods/issues/388)) ([56f7856](https://github.com/patternfly/pf-codemods/commit/56f78568fb8df518b88bf998dcce9a923668e41e))
+
+
+
+
+
 # [1.65.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.64.0...@patternfly/pf-codemods@1.65.0) (2023-05-15)
 
 
