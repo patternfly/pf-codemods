@@ -2099,6 +2099,26 @@ Out:
 <Spinner  />
 ```
 
+### table-rename-isHoverable [((#9083))](https://github.com/patternfly/patternfly-react/pull/9083)
+
+We've renamed the `isHoverable` prop for Table components to `isClickable`. This rule provides a fix for the `Tr` component when using our new default, composable implementation of Table.
+
+If using our now deprecated implementation of Table with the `rows` prop passed in, only an error message will be thrown and any usage of `isHoverable` will need to be updated manually.
+
+#### Examples
+
+In:
+
+```jsx
+<Tr isHoverable />
+```
+
+Out:
+
+```jsx
+<Tr isClickable />
+```
+
 ### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
 
 We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.

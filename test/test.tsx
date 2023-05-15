@@ -98,17 +98,16 @@ import {
   WizardBody as WizardBodyNext,
   WizardFooter,
 } from "@patternfly/react-core/next";
-
-import { Td } from "@patternfly/react-table";
-
-const tdSelectTypeObj = { disable: true };
 import {
   Table,
   TableBody,
   TableHeader,
   TableProps,
+  Td,
+  Tr,
 } from "@patternfly/react-table";
 
+const tdSelectTypeObj = { disable: true };
 //following type of import was causing errors for rules that checked specifiers before import package
 import foo from "Bar";
 
@@ -241,6 +240,7 @@ const alertVariantOption = AlertVariant.default;
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
   <Table />
+  <Table rows={[]} />
   <TableBody />
   <TableHeader />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
@@ -248,6 +248,7 @@ const alertVariantOption = AlertVariant.default;
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
   <Tooltip reference />
+  <Tr isHoverable />
   <TreeView hasCheck />
   <Wizard />
   <Wizard mainAriaLabel />
