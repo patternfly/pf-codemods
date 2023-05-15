@@ -1456,9 +1456,49 @@ function handler2(_event, id) {};
 <MultipleFileUpload onFileDrop={handler2} />
 ```
 
+### nav-update-callbackParams [(#8997)](https://github.com/patternfly/patternfly-react/pull/8997)
+
+We've updated the `onSelect` and `onToggle` props for Nav so that the `event` parameter is the first parameter, and have removed the event property from the `selectedItem` and `toggledItem` object parameters respectively. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Navigation onSelect={(id) => handler(id)} />
+const handler1 = (id) => {};
+<Navigation onSelect={handler1} />
+function handler2(id) {};
+<Navigation onSelect={handler2} />
+
+<Navigation onToggle={(id) => handler(id)} />
+const toggleHandler1 = (id) => {};
+<Navigation onToggle={toggleHandler1} />
+function toggleHandler2(id) {};
+<Navigation onToggle={toggleHandler2} />
+```
+
+Out:
+
+```jsx
+<Navigation onSelect={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<Navigation onSelect={handler1} />
+function handler2(_event, id) {};
+<Navigation onSelect={handler2} />
+
+<Navigation onToggle={(_event, id) => handler(id)} />
+const toggleHandler1 = (_event, id) => {};
+<Navigation onToggle={toggleHandler1} />
+function toggleHandler2(_event, id) {};
+<Navigation onToggle={toggleHandler2} />
+```
+
 ### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
 
 The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
+
+
 
 ### no-unused-imports-v5
 
@@ -1566,7 +1606,7 @@ function toggleDropdown(_event, isOpen) {};
 
 ### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
 
-We've deprecated the `OptionsMenu` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+We've deprecated the `OptionsMenu` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
 
 #### Examples
 
@@ -1994,6 +2034,45 @@ We've removed the deprecated `ToggleMenuBaseProps` interface.
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
 
+### select-deprecated [(#8825)](https://github.com/patternfly/patternfly-react/pull/8825)
+
+We've deprecated the `Select` components. A fix will update code to point to the new deprecated import, but we suggest using our new `Select` implementation.
+
+#### Examples
+
+In:
+
+```jsx
+import { Button, Select, SelectOption, SelectVariant, SelectDirection, SelectGroup } from "@patternfly/react-core";
+      
+<>
+  <Select></Select>
+  <SelectOption></SelectOption>
+  <SelectGroup></SelectGroup>
+</>;
+```
+
+Out:
+
+```jsx
+import {
+	Button
+} from '@patternfly/react-core';
+import {
+	Select as SelectDeprecated,
+	SelectOption as SelectOptionDeprecated,
+	SelectVariant as SelectVariantDeprecated,
+	SelectDirection as SelectDirectionDeprecated,
+	SelectGroup as SelectGroupDeprecated
+} from '@patternfly/react-core/deprecated';
+      
+<>
+  <SelectDeprecated></SelectDeprecated>
+  <SelectOptionDeprecated></SelectOptionDeprecated>
+  <SelectGroupDeprecated></SelectGroupDeprecated>
+</>;
+```
+
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
 
 We've removed the deprecated the `isCurrent` prop. This rule wil replace it with `isActive`.
@@ -2220,6 +2299,35 @@ const obj = { isDisabled };
   <Td select={{isDisabled}}></Td>
 </>;
 ```
+
+### textInput-swap-onChange-params [(#9064)](https://github.com/patternfly/patternfly-react/pull/9064)
+
+We've updated the `onChange` prop for TextInput so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<TextInput onChange={(id) => handler(id)} />
+<TextInput onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<TextInput onChange={handler1} />
+function handler2(id, event) {};
+<TextInput onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<TextInput onChange={(_event, id) => handler(id)} />
+<TextInput onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<TextInput onChange={handler1} />
+function handler2(_event, id) {};
+<TextInput onChange={handler2} />
+```
+
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 

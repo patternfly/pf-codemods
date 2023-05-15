@@ -482,7 +482,12 @@ function ensureImports(context, node, package, imports) {
 
 // propMap structure: { propName: { defaultParamName: string, previousParamIndex?: number, otherMatchers?: /regex/ } | string }
 // example:           { onClick: { defaultParamName: '_event', previousParamIndex: 1, otherMatchers?: /^_?(ev\w*|e$)/ } }
-function addCallbackParam(componentsArray, propMap) {
+function addCallbackParam(
+  componentsArray,
+  propMap,
+  message = (propName, componentName, paramName) =>
+    `The "${propName}" prop for ${componentName} has been updated so that the "${paramName}" parameter is the first parameter. "${propName}" handlers may require an update.`
+) {
   return function (context) {
     const imports = [
       ...getPackageImports(context, "@patternfly/react-core"),
@@ -579,7 +584,11 @@ function addCallbackParam(componentsArray, propMap) {
                   else {
                     context.report({
                       node,
-                      message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${defaultParamName}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
+                      message: message(
+                        attribute.name.name,
+                        node.name.name,
+                        defaultParamName
+                      ),
                     });
                     return;
                   }
@@ -592,7 +601,11 @@ function addCallbackParam(componentsArray, propMap) {
                 ) {
                   context.report({
                     node,
-                    message: `The "${attribute.name.name}" prop for ${node.name.name} has been updated so that the "${newParam}" parameter is the first parameter. "${attribute.name.name}" handlers may require an update.`,
+                    message: message(
+                      attribute.name.name,
+                      node.name.name,
+                      newParam
+                    ),
                     fix(fixer) {
                       const fixes = [];
 
