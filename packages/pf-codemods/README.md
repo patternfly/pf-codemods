@@ -906,6 +906,60 @@ const handler1 = (event, id) => {};
 <DropdownToggleCheckbox onChange={handler1}>
 ```
 
+### dualListSelector-update-paramCallbacks [(#8793)](https://github.com/patternfly/patternfly-react/pull/8793)
+
+We've updated the `onAvailableOptionsSearchInputChanged`, `onChosenOptionsSearchInputChanged` and `onListChange` props for DualListSelector so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DualListSelector onAvailableOptionsSearchInputChanged={(id) => handler(id)} />
+<DualListSelector onAvailableOptionsSearchInputChanged={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<DualListSelector onAvailableOptionsSearchInputChanged={handler1}>
+function handler2(id, event) {};
+<DualListSelector onAvailableOptionsSearchInputChanged={handler2}>
+
+<DualListSelector onChosenOptionsSearchInputChanged={(id) => handler(id)} />
+<DualListSelector onChosenOptionsSearchInputChanged={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<DualListSelector onChosenOptionsSearchInputChanged={handler1}>
+function handler2(id, event) {};
+<DualListSelector onChosenOptionsSearchInputChanged={handler2}>
+
+<DualListSelector onListChange={(id) => handler(id)} />
+const handler1 = (id) => {};
+<DualListSelector onListChange={handler1}>
+function handler2(id) {};
+<DualListSelector onListChange={handler2}>
+```
+
+Out:
+
+```jsx
+<DualListSelector onAvailableOptionsSearchInputChanged={(_event, id) => handler(id)} />
+<DualListSelector onAvailableOptionsSearchInputChanged={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<DualListSelector onAvailableOptionsSearchInputChanged={handler1}>
+function handler2(_event, id) {};
+<DualListSelector onAvailableOptionsSearchInputChanged={handler2}>
+
+<DualListSelector onChosenOptionsSearchInputChanged={(_event, id) => handler(id)} />
+<DualListSelector onChosenOptionsSearchInputChanged={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<DualListSelector onChosenOptionsSearchInputChanged={handler1}>
+function handler2(_event, id) {};
+<DualListSelector onChosenOptionsSearchInputChanged={handler2}>
+
+<DualListSelector onListChange={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<DualListSelector onListChange={handler1}>
+function handler2(_event, id) {};
+<DualListSelector onListChange={handler2}>
+```
+
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
 We've replaced the `EmptyStatePrimary` and `EmptyStateSecondaryActions` components with `EmptyStateActions`.

@@ -42,6 +42,7 @@ import {
   DropdownPosition,
   DropdownToggle,
   DropdownToggleCheckbox,
+  DualListSelector,
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
@@ -176,6 +177,9 @@ const alertVariantOption = AlertVariant.default;
   <DropdownToggleCheckbox
     onChange={(change, evt) => handleChange(change, evt)}
   />
+  <DualListSelector onAvailableOptionsSearchInputChanged={(foo, event) => handler(foo, event)} />
+  <DualListSelector onChosenOptionsSearchInputChanged={(foo, event) => handler(foo, event)} />
+  <DualListSelector onListChange={foo => handler(foo)} />
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel='h5' size='4xl'>
