@@ -1692,26 +1692,6 @@ import {
 </>;
 ```
 
-### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
-
-We've updated `PageHeader`'s logo to only be an anchor if an `href` is specified, otherwise it will be a `span`. Explicitly declared `logoComponent` properties will remain unchanged, but if it is not specified a default will be added.
-
-#### Examples
-
-In:
-
-```jsx
-<PageHeader />
-<PageHeader logoComponent="div" />
-```
-
-Out:
-
-```jsx
-<PageHeader logoComponent="a" />
-<PageHeader logoComponent="div" />
-```
-
 ### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
 
 The following props have been updated for the specified Page sub-components:
