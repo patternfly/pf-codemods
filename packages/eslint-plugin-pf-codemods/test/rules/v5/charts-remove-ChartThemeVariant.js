@@ -61,5 +61,15 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
         },
       ],
     },
+    {
+      code: `import { ChartThemeVariant } from '@patternfly/react-charts/dist/js/components/ChartTheme/ChartTheme';`,
+      output: ``,
+      errors: [
+        {
+          message: `ChartThemeVariant has been removed from react-charts.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });
