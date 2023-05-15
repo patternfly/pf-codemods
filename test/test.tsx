@@ -10,100 +10,97 @@ import { CodeEditor } from "@patternfly/react-code-editor";
 import { FrogIcon } from "@patternfly/react-icons";
 
 import {
-	AboutModal,
-	AccordionExpandableContent,
-	Alert,
-	AlertIcon,
-	AlertVariant,
-	ApplicationLauncher,
-	BackgroundImage,
-	BackgroundImageSrcMap,
-	BadgeToggle,
-	Banner,
-	Button,
-	CalendarMonth,
-	Card,
-	CardActions,
-	CardHeader,
-	CardHeaderMain,
-	Checkbox,
-	ClipboardCopy,
-	ContextSelector,
-	ContextSelectorFooter,
-	ContextSelectorItem,
-	DataList,
-	DataListCheck,
-	DatePicker,
-	DrawerPanelContent,
-	Dropdown,
-	DropdownContext,
-	DropdownDirection,
-	DropdownItem,
-	DropdownPosition,
-	DropdownToggle,
-	DropdownToggleCheckbox,
-	DualListSelector,
-	EmptyState,
-	EmptyStateBody,
-	EmptyStateIcon,
-	EmptyStatePrimary as ESP,
-	EmptyStateSecondaryActions,
-	EmptyStateVariant,
-	ExpandableSection,
-	FileUpload,
-	FileUploadField,
-	FormSelect,
-	KebabToggle,
-	KEY_CODES,
-	Label,
-	LoginPage,
-	MenuItem,
-	MenuItemAction,
-	Modal,
-	ModalContent,
-	MultipleFileUpload,
-	Nav,
-	NotificationBadge,
-	NotificationDrawerListItemHeader,
-	NumberInput,
-	OptionsMenu,
-	OptionsMenuGroup,
-	OptionsMenuToggle,
-	OverflowMenuDropdownItem,
-	Page,
-	PageGroup,
-	PageNavigation,
-	PageSidebar,
-	PageToggleButton,
-	Pagination,
-	Popover,
-	Popper,
-	ProgressStep,
-	Radio,
-	Slider,
-	Spinner,
-	Switch,
-	Tabs,
-	TextInput,
-	Title,
-	Toggle,
-	ToggleGroupItem,
-	ToggleTemplateProps,
-	Tooltip,
-	TreeView,
-	Wizard
-} from '@patternfly/react-core';
-import {
-	PageHeader as PageHeaderDeprecated,
-	PageHeaderTools as PageHeaderToolsDeprecated,
-	PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
-	PageHeaderToolsItem as PageHeaderToolsItemDeprecated,
-	Select as SelectDeprecated,
-	SelectOption as SelectOpt,
-	SelectMenu as SelectMenuDeprecated,
-	SelectGroup as SelectGroupDeprecated,
-	SelectToggle as SelectToggleDeprecated
-} from '@patternfly/react-core/deprecated';
+  AboutModal,
+  AccordionExpandableContent,
+  Alert,
+  AlertIcon,
+  AlertVariant,
+  ApplicationLauncher,
+  BackgroundImage,
+  BackgroundImageSrcMap,
+  BadgeToggle,
+  Banner,
+  Button,
+  CalendarMonth,
+  Card,
+  CardActions,
+  CardHeader,
+  CardHeaderMain,
+  Checkbox,
+  ClipboardCopy,
+  ContextSelector,
+  ContextSelectorFooter,
+  ContextSelectorItem,
+  DataList,
+  DataListCheck,
+  DatePicker,
+  DrawerPanelContent,
+  Dropdown,
+  DropdownContext,
+  DropdownDirection,
+  DropdownItem,
+  DropdownPosition,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+  DualListSelector,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStatePrimary as ESP,
+  EmptyStateSecondaryActions,
+  EmptyStateVariant,
+  ExpandableSection,
+  FileUpload,
+  FileUploadField,
+  FormSelect,
+  KebabToggle,
+  KEY_CODES,
+  Label,
+  LoginPage,
+  MenuItem,
+  MenuItemAction,
+  Modal,
+  ModalContent,
+  MultipleFileUpload,
+  Nav,
+  NotificationBadge,
+  NotificationDrawerListItemHeader,
+  NumberInput,
+  OptionsMenu,
+  OptionsMenuGroup,
+  OptionsMenuToggle,
+  OverflowMenuDropdownItem,
+  Page,
+  PageGroup,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
+  PageNavigation,
+  PageSidebar,
+  PageToggleButton,
+  Pagination,
+  Popover,
+  Popper,
+  ProgressStep,
+  Radio,
+  Select,
+  SelectOption as SelectOpt,
+  SelectMenu,
+  SelectGroup,
+  SelectToggle,
+  Slider,
+  Spinner,
+  Tabs,
+  TextInput,
+  Title,
+  Toggle,
+  ToggleGroupItem,
+  ToggleTemplateProps,
+  Tooltip,
+  TreeView,
+  Wizard,
+} from "@patternfly/react-core";
 import {
   SelectOption,
   WizardBody as WizardBodyNext,
@@ -114,11 +111,11 @@ import { Td } from "@patternfly/react-table";
 
 const tdSelectTypeObj = { disable: true };
 import {
-	Table as TableDeprecated,
-	TableBody as TableBodyDeprecated,
-	TableHeader as TableHeaderDeprecated,
-	TableProps as TablePropsDeprecated
-} from '@patternfly/react-table/deprecated';
+  Table,
+  TableBody,
+  TableHeader,
+  TableProps,
+} from "@patternfly/react-table";
 import { TableComposable } from "@patternfly/react-table";
 import { TableComposable as PFTable } from "@patternfly/react-table";
 
@@ -226,10 +223,10 @@ const alertVariantOption = AlertVariant.default;
   <OverflowMenuDropdownItem index={0} />
   <Page onPageResize={({ obj }) => handler({ obj })} />
   <PageGroup aria-label="tester" />
-  <PageHeaderDeprecated />
-  <PageHeaderToolsDeprecated />
-  <PageHeaderToolsGroupDeprecated />
-  <PageHeaderToolsItemDeprecated />
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
   <PageNavigation aria-label="tester" />
   <PageSidebar isNavOpen />
   <PageSidebar nav="Content" />
@@ -257,16 +254,15 @@ const alertVariantOption = AlertVariant.default;
   <Popper popperMatchesTriggerWidth={false} />
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
-  <SelectDeprecated onToggle={} />
+  <Select onToggle={} />
   <SelectOption hasCheck />
-  <SelectToggleDeprecated onToggle={} />
+  <SelectToggle onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
-  <Switch onChange={(foo) => handler(foo)} />
-  <TableDeprecated />
-  <TableBodyDeprecated />
+  <Table />
+  <TableBody />
   <TableComposable />
-  <TableHeaderDeprecated />
+  <TableHeader />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
   <Toggle isPrimary onToggle={} />
