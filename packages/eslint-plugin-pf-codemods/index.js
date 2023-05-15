@@ -30,7 +30,7 @@ const warningRules = [
 ];
 
 // rules that will run before other rules (move to deprecated?)
-const setupRules = [];
+const setupRules = ["select-deprecated"];
 
 // rules that will run after other rules (cleanup imports?)
 const cleanupRules = ["no-unused-imports-v5"];

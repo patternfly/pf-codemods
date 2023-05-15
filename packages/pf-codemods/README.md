@@ -1606,7 +1606,7 @@ function toggleDropdown(_event, isOpen) {};
 
 ### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
 
-We've deprecated the `OptionsMenu` compoenents. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+We've deprecated the `OptionsMenu` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
 
 #### Examples
 
@@ -2033,6 +2033,45 @@ We've removed the deprecated `ToggleMenuBaseProps` interface.
 ### resizeObserver-function-param [(#8324)](https://github.com/patternfly/patternfly-react/pull/8324)
 
 We've updated the default value of the `getResizeObserver` helper function's third parameter, `useRequestAnimationFrame`. This rule will only provide two suggestions detailing when to pass which boolean into this parameter.
+
+### select-deprecated [(#8825)](https://github.com/patternfly/patternfly-react/pull/8825)
+
+We've deprecated the `Select` components. A fix will update code to point to the new deprecated import, but we suggest using our new `Select` implementation.
+
+#### Examples
+
+In:
+
+```jsx
+import { Button, Select, SelectOption, SelectVariant, SelectDirection, SelectGroup } from "@patternfly/react-core";
+      
+<>
+  <Select></Select>
+  <SelectOption></SelectOption>
+  <SelectGroup></SelectGroup>
+</>;
+```
+
+Out:
+
+```jsx
+import {
+	Button
+} from '@patternfly/react-core';
+import {
+	Select as SelectDeprecated,
+	SelectOption as SelectOptionDeprecated,
+	SelectVariant as SelectVariantDeprecated,
+	SelectDirection as SelectDirectionDeprecated,
+	SelectGroup as SelectGroupDeprecated
+} from '@patternfly/react-core/deprecated';
+      
+<>
+  <SelectDeprecated></SelectDeprecated>
+  <SelectOptionDeprecated></SelectOptionDeprecated>
+  <SelectGroupDeprecated></SelectGroupDeprecated>
+</>;
+```
 
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
 
