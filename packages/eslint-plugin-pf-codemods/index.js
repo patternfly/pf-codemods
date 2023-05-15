@@ -30,7 +30,7 @@ const warningRules = [
 ];
 
 // rules that will run before other rules (move to deprecated?)
-const setupRules = ["select-deprecated", "table-update-deprecatedPath"];
+const setupRules = ["pageHeader-deprecated", "select-deprecated", "table-update-deprecatedPath"];
 
 // rules that will run after other rules (cleanup imports?)
 const cleanupRules = ["no-unused-imports-v5"];
