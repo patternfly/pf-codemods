@@ -30,10 +30,7 @@ module.exports = {
               ).length;
             const isAliased =
               importedNode?.local?.name !== importedNode?.imported?.name;
-            if (importedNode?.imported?.name === "Table" && hasDataAttr) {
-              // if data-codemods attribute, do nothing
-              return;
-            } else if (importedNode?.imported?.name === "TableComposable") {
+            if (importedNode?.imported?.name === "TableComposable") {
               const addDataAttr = (jsxStr) =>
                 jsxStr.replace(/(\s*\/?>)$/, ' data-codemods="true"$1');
               const updateTagName = (node) => {
