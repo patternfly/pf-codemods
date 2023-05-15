@@ -51,5 +51,15 @@ ruleTester.run("charts-resizeObserver-import", rule, {
         },
       ],
     },
+    {
+      code: `import { getResizeObserver } from '@patternfly/react-charts/dist/js/components/ChartUtils/chart-resize';`,
+      output: `import { getResizeObserver } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
   ],
 });

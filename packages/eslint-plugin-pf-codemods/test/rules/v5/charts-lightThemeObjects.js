@@ -32,11 +32,11 @@ ruleTester.run("charts-lightThemeObjects", rule, {
         ],
       };
     }),
-    // Take into account importing from a deeper nested directory within react-charts
+    // Import from dist
     ...oldLightThemeObjects.map((themeObj) => {
       return {
-        code: `import { ${themeObj} } from '@patternfly/react-charts/another/path'`,
-        output: `import { ${themeObj} } from '@patternfly/react-charts/another/path'`,
+        code: `import { ${themeObj} } from '@patternfly/react-charts/dist/js/components/ChartTheme/themes/colors/multi-ordered-theme'`,
+        output: `import { ${themeObj} } from '@patternfly/react-charts/dist/js/components/ChartTheme/themes/colors/multi-ordered-theme'`,
         errors: [
           {
             message: `The light theme objects from react-charts have been renamed to omit "Light" in the name. Rather than importing these objects directly, you must use the getTheme function from react-charts instead.`,
