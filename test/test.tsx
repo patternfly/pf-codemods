@@ -91,6 +91,7 @@ import {
   SelectToggle,
   Slider,
   Spinner,
+  Switch,
   Tabs,
   TextInput,
   Title,
@@ -259,6 +260,7 @@ const alertVariantOption = AlertVariant.default;
   <SelectToggle onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
+  <Switch onChange={(foo) => handler(foo)} />
   <Table />
   <TableBody />
   <TableComposable />

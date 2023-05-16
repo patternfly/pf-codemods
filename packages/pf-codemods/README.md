@@ -2238,7 +2238,7 @@ Out:
 <Spinner  />
 ```
 
-### switch-onChange-swap-params [(#434)](https://github.com/patternfly/patternfly-react/pull/434)
+### switch-onChange-swap-params [(#9037)](https://github.com/patternfly/patternfly-react/pull/9037)
 
 We've updated the `onChange` prop for Switch so that the `event` parameter is the first parameter. Handlers may require an update.
 
