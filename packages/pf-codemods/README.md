@@ -1700,52 +1700,6 @@ Out:
 <OverflowMenuDropdownItem itemId={0}>
 ```
 
-### pageHeader-deprecated [(#8854)](https://github.com/patternfly/patternfly-react/pull/8854)
-
-We've deprecated the `PageHeader`, `PageHeaderTools`, `PageHeaderToolsGroup`, and `PageHeaderToolsItem` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Masthead` and its related components.
-
-#### Examples
-
-In:
-
-```jsx
-import {
-	Button,
-  PageHeader,
-  PageHeaderTools,
-  PageHeaderToolsGroup,
-  PageHeaderToolsItem,
-} from "@patternfly/react-core";
-
-<>
-  <PageHeader />
-  <PageHeaderTools />
-  <PageHeaderToolsGroup />
-  <PageHeaderToolsItem />
-</>;
-```
-
-Out:
-
-```jsx
-import {
-	Button
-} from '@patternfly/react-core';
-import {
-	PageHeader as PageHeaderDeprecated,
-	PageHeaderTools as PageHeaderToolsDeprecated,
-	PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
-	PageHeaderToolsItem as PageHeaderToolsItemDeprecated
-} from '@patternfly/react-core/deprecated';
-
-<>
-  <PageHeaderDeprecated />
-  <PageHeaderToolsDeprecated />
-  <PageHeaderToolsGroupDeprecated />
-  <PageHeaderToolsItemDeprecated />
-</>;
-```
-
 ### page-rename-props [(#8942)](https://github.com/patternfly/patternfly-react/pull/8942)
 
 The following props have been updated for the specified Page sub-components:
@@ -1800,6 +1754,52 @@ const resize1 = (_event, {obj}) => {};
 
 function resize2(_event, {obj}) {};
 <Page onPageResize={resize2}>
+```
+
+### pageHeader-deprecated [(#8854)](https://github.com/patternfly/patternfly-react/pull/8854)
+
+We've deprecated the `PageHeader`, `PageHeaderTools`, `PageHeaderToolsGroup`, and `PageHeaderToolsItem` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Masthead` and its related components.
+
+#### Examples
+
+In:
+
+```jsx
+import {
+	Button,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
+} from "@patternfly/react-core";
+
+<>
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
+</>;
+```
+
+Out:
+
+```jsx
+import {
+	Button
+} from '@patternfly/react-core';
+import {
+	PageHeader as PageHeaderDeprecated,
+	PageHeaderTools as PageHeaderToolsDeprecated,
+	PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
+	PageHeaderToolsItem as PageHeaderToolsItemDeprecated
+} from '@patternfly/react-core/deprecated';
+
+<>
+  <PageHeaderDeprecated />
+  <PageHeaderToolsDeprecated />
+  <PageHeaderToolsGroupDeprecated />
+  <PageHeaderToolsItemDeprecated />
+</>;
 ```
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
@@ -2261,6 +2261,55 @@ Out:
 ### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
 
 We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.
+  
+### switch-onChange-swap-params [(#9037)](https://github.com/patternfly/patternfly-react/pull/9037)
+
+We've updated the `onChange` prop for Switch so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Switch onChange={(id) => handler(id)} />
+<Switch onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<Switch onChange={handler1} />
+function handler2(id, event) {};
+<Switch onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<Switch onChange={(_event, id) => handler(id)} />
+<Switch onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<Switch onChange={handler1} />
+function handler2(_event, id) {};
+<Switch onChange={handler2} />
+```
+
+
+### table-rename-TableComposable [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
+
+TableComposable has been renamed to Table.
+
+In:
+
+```jsx
+<TableComposable />
+```
+
+Out:
+
+```jsx
+<Table />
+```
+
+### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
+
+We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.
 
 The following imports will be affected by this deprecation:
 
@@ -2286,22 +2335,6 @@ import {
  TableHeader as TableHeaderDeprecated,
  TableProps as TablePropsDeprecated
 } from '@patternfly/react-table/deprecated';
-```
-
-### table-rename-TableComposable [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
-
-TableComposable has been renamed to Table.
-
-In:
-
-```jsx
-<TableComposable />
-```
-
-Out:
-
-```jsx
-<Table />
 ```
 
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
