@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.68.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.67.2...@patternfly/pf-codemods@1.68.0) (2023-05-16)
+
+
+### Features
+
+* **Switch:** swap-onchange-params ([#474](https://github.com/patternfly/pf-codemods/issues/474)) ([79e1fec](https://github.com/patternfly/pf-codemods/commit/79e1fec93bfa46d1dbc27a767131303c212c4f0c))
+
+
+
+
+
 ## [1.67.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.67.1...@patternfly/pf-codemods@1.67.2) (2023-05-16)
 
 
