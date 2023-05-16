@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.67.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.67.1...@patternfly/pf-codemods@1.67.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* **Table:** updated isHoverable to isClickable ([#470](https://github.com/patternfly/pf-codemods/issues/470)) ([76a1c79](https://github.com/patternfly/pf-codemods/commit/76a1c79e62d1403a883354bb9c77bf64c65e0275))
+
+
+
+
+
 ## [1.67.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.67.0...@patternfly/pf-codemods@1.67.1) (2023-05-15)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
