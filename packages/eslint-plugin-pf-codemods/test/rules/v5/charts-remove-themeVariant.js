@@ -39,5 +39,16 @@ ruleTester.run("charts-remove-themeVariant", rule, {
         },
       ],
     },
+    // Import from dist
+    {
+      code: `import { Chart } from '@patternfly/react-charts/dist/esm/components/index.js'; <Chart themeVariant />`,
+      output: `import { Chart } from '@patternfly/react-charts/dist/esm/components/index.js'; <Chart />`,
+      errors: [
+        {
+          message: `The themeVariant prop has been removed for all react-charts components.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
   ],
 });
