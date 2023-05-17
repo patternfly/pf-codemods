@@ -1167,6 +1167,43 @@ function handler2(_event, id) {};
 ```
 
 
+### fileUpload-cb-param-updates [(#8955)](https://github.com/patternfly/patternfly-react/pull/8955)
+
+We've updated the `onTextChange` prop for FileUploadField and FileUpload so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<FileUpload onTextChange={text => textHandler(text)} />
+<FileUploadField onTextChange={text => textHandler1(text)} />
+const textHandler2 = (text) => {};
+const textHandler3 = (text) => {};
+<FileUpload onTextChange={textHandler2} />
+<FileUploadField onTextChange={textHandler3} />
+function textHandler4(text) {};
+function textHandler5(text) {};
+<FileUpload onTextChange={textHandler4} />
+<FileUploadField onTextChange={textHandler5} />
+```
+
+Out:
+
+```jsx
+<FileUpload onTextChange={(_event, text) => textHandler(text)} />
+<FileUploadField onTextChange={(_event, text) => textHandler1(text)} />
+const textHandler2 = (_event, text) => {};
+const textHandler3 = (_event, text) => {};
+<FileUpload onTextChange={textHandler2} />
+<FileUploadField onTextChange={textHandler3} />
+function textHandler4(_event, text) {};
+function textHandler5(_event, text) {};
+<FileUpload onTextChange={textHandler4} />
+<FileUploadField onTextChange={textHandler5} />
+```
+
+
 ### fileUpload-event-params-added-to-callbacks [(#8960)](https://github.com/patternfly/patternfly-react/pull/8960)
 
 We've updated the `onDataChange`, `onReadFailed`, `onReadFinished`, and `onReadStarted` props for FileUpload so that the `event` parameter is the first parameter. Handlers may require an update.
@@ -1257,43 +1294,6 @@ Out:
 ```jsx
 <FileUpload  />
 ```
-
-### fileUploadField-cb-param-updates [(#8955)](https://github.com/patternfly/patternfly-react/pull/8955)
-
-We've updated the `onTextChange` prop for FileUploadField and FileUpload so that the `event` parameter is the first parameter. Handlers may require an update.
-
-#### Examples
-
-In:
-
-```jsx
-<FileUpload onTextChange={text => textHandler(text)} />
-<FileUploadField onTextChange={text => textHandler1(text)} />
-const textHandler2 = (text) => {};
-const textHandler3 = (text) => {};
-<FileUpload onTextChange={textHandler2} />
-<FileUploadField onTextChange={textHandler3} />
-function textHandler4(text) {};
-function textHandler5(text) {};
-<FileUpload onTextChange={textHandler4} />
-<FileUploadField onTextChange={textHandler5} />
-```
-
-Out:
-
-```jsx
-<FileUpload onTextChange={(_event, text) => textHandler(text)} />
-<FileUploadField onTextChange={(_event, text) => textHandler1(text)} />
-const textHandler2 = (_event, text) => {};
-const textHandler3 = (_event, text) => {};
-<FileUpload onTextChange={textHandler2} />
-<FileUploadField onTextChange={textHandler3} />
-function textHandler4(_event, text) {};
-function textHandler5(_event, text) {};
-<FileUpload onTextChange={textHandler4} />
-<FileUploadField onTextChange={textHandler5} />
-```
-
 
 ### formgroup-remove-helpertextProps [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
