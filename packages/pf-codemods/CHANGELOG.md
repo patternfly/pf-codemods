@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.73.0...@patternfly/pf-codemods@1.74.0) (2023-05-17)
+
+
+### Features
+
+* **Tabs:** Add event param to onToggle ([#465](https://github.com/patternfly/pf-codemods/issues/465)) ([35825fc](https://github.com/patternfly/pf-codemods/commit/35825fc0ba7ed75820de5d065004cc7fecf2c227))
+
+
+
+
+
 # [1.73.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.72.0...@patternfly/pf-codemods@1.73.0) (2023-05-17)
 
 
