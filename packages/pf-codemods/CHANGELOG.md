@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.68.0...@patternfly/pf-codemods@1.69.0) (2023-05-17)
+
+
+### Features
+
+* **InputGroup:** added InputGroupItem ([#472](https://github.com/patternfly/pf-codemods/issues/472)) ([cf322c6](https://github.com/patternfly/pf-codemods/commit/cf322c6a1bb3e215f5d9d717c59dddcdf0865020))
+
+
+
+
+
 # [1.68.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.67.2...@patternfly/pf-codemods@1.68.0) (2023-05-16)
 
 
