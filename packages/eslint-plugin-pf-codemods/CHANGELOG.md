@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.73.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.72.0...@patternfly/eslint-plugin-pf-codemods@1.73.0) (2023-05-17)
+
+
+### Features
+
+* **EditableSelectInputCell:** Add params for onSelect, clearSelection ([#468](https://github.com/patternfly/pf-codemods/issues/468)) ([2b04df6](https://github.com/patternfly/pf-codemods/commit/2b04df6d5dcd6ec908d3f8315873a2ca509da188))
+
+
+
+
+
 # [1.72.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.71.2...@patternfly/eslint-plugin-pf-codemods@1.72.0) (2023-05-17)
 
 
