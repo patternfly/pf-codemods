@@ -1332,6 +1332,38 @@ Out:
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
+### inputGroup-add-inputGroupItem [(#9074)](https://github.com/patternfly/patternfly-react/pull/9074)
+
+We've added the InputGroupItem component, which must wrap each child passed to an InputGroup. Additionally, the InputGroupItem component may need to have the `isFill`, `isBox`, and/or `isPlain` props passed in.
+
+#### Examples
+
+In:
+
+```jsx
+<InputGroup>
+  <input />
+  <textarea />
+  <TextArea />
+  <TextInput />
+  <InputGroupText />
+  <button />
+</InputGroup>
+```
+
+Out:
+
+```jsx
+<InputGroup>
+  <InputGroupItem isFill><input /></InputGroupItem>
+  <InputGroupItem isFill><textarea /></InputGroupItem>
+  <InputGroupItem isFill><TextArea /></InputGroupItem>
+  <InputGroupItem isFill><TextInput /></InputGroupItem>
+  <InputGroupItem isBox><InputGroupText /></InputGroupItem>
+  <InputGroupItem><button /></InputGroupItem>
+</InputGroup>
+```
+
 ### key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
 
 We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
