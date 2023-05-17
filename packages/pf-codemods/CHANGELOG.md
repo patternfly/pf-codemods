@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.69.2...@patternfly/pf-codemods@1.70.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* **LoginForm:** updated callback param order ([#457](https://github.com/patternfly/pf-codemods/issues/457)) ([4443d7c](https://github.com/patternfly/pf-codemods/commit/4443d7c7012f7684b94acab6591971882af6bb97))
+
+
+### Features
+
+* **TextArea:** Swap onChange params ([#464](https://github.com/patternfly/pf-codemods/issues/464)) ([75cb65d](https://github.com/patternfly/pf-codemods/commit/75cb65d9c8f8353a542fe556071e21c56ae84892))
+
+
+
+
+
 ## [1.69.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.69.1...@patternfly/pf-codemods@1.69.2) (2023-05-17)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
