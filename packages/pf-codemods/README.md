@@ -2541,6 +2541,34 @@ const obj = { isDisabled };
 </>;
 ```
 
+### textArea-swap-onChange-params [(#9061)](https://github.com/patternfly/patternfly-react/pull/9061)
+
+We've updated the `onChange` prop for TextArea so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<TextArea onChange={(id) => handler(id)} />
+<TextArea onChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<TextArea onChange={handler1} />
+function handler2(id, event) {};
+<TextArea onChange={handler2} />
+```
+
+Out:
+
+```jsx
+<TextArea onChange={(_event, id) => handler(id)} />
+<TextArea onChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<TextArea onChange={handler1} />
+function handler2(_event, id) {};
+<TextArea onChange={handler2} />
+```
+
 ### textInput-swap-onChange-params [(#9064)](https://github.com/patternfly/patternfly-react/pull/9064)
 
 We've updated the `onChange` prop for TextInput so that the `event` parameter is the first parameter. Handlers may require an update.

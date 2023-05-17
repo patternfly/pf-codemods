@@ -95,6 +95,7 @@ import {
   Spinner,
   Switch,
   Tabs,
+  TextArea,
   TextInput,
   Title,
   Toggle,
@@ -284,6 +285,7 @@ const alertVariantOption = AlertVariant.default;
   <TableComposable />
   <TableHeader />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
+  <TextArea onChange={(foo, event) => handler(foo, event)} />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
