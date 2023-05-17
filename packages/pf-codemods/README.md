@@ -2491,6 +2491,33 @@ Out:
 <TableComposable  />
 ```
 
+### tabs-onToggle-add-event-param [(#9059)](https://github.com/patternfly/patternfly-react/pull/9059)
+
+We've updated the `onToggle` prop for Tabs so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<Tabs onToggle={(id) => handler(id)} />
+const handler1 = (id) => {};
+<Tabs onToggle={handler1} />
+function handler2(id) {};
+<Tabs onToggle={handler2} />
+```
+
+Out:
+
+```jsx
+<Tabs onToggle={(_event, id) => handler(id)} />
+const handler1 = (_event, id) => {};
+<Tabs onToggle={handler1} />
+function handler2(_event, id) {};
+<Tabs onToggle={handler2} />
+```
+
+
 ### tabs-rename-hasBorderBottom [(#8517)](https://github.com/patternfly/patternfly-react/pull/8517)
 
 We've renamed the `hasBorderBottom` prop to `hasNoBorderBottom`.
