@@ -8,6 +8,7 @@ const betaRuleNames = [
 const warningRules = [
   "aboutModalBoxHero-remove-subcomponent",
   "applicationLauncher-warn-input",
+  "card-deprecate-props",
   "card-warn-component",
   "charts-warn-tooltip",
   "conditional-aria",
@@ -28,7 +29,11 @@ const warningRules = [
 ];
 
 // rules that will run before other rules (move to deprecated?)
-const setupRules = ["pageHeader-deprecated", "select-deprecated", "table-update-deprecatedPath"];
+const setupRules = [
+  "pageHeader-deprecated",
+  "select-deprecated",
+  "table-update-deprecatedPath",
+];
 
 // rules that will run after other rules (cleanup imports?)
 const cleanupRules = ["no-unused-imports-v5"];

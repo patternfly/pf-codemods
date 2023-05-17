@@ -294,6 +294,35 @@ function handler2(_event, newDate) {};
 <CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
 ```
 
+### card-deprecate-props [(#9092)](https://github.com/patternfly/patternfly-react/pull/9092)
+
+The following props have been deprecated on Card:
+
+- isSelectableRaised
+- isDisabledRaised
+- hasSelectableInput
+- selectableInputAriaLabel
+- onSelectableInputChange
+
+We recommend using our new implementation of clickable and selectable cards instead. This rule will raise a warning, but can provide fixes when using the `isSelectableRaised` or `isDisabledRaised` props.
+
+#### Examples
+
+In:
+
+```jsx
+<Card isSelectableRaised isDisabledRaised />
+<Card isSelectableRaised hasSelectableInput />
+```
+
+Out:
+
+```jsx
+<Card isSelectable isDisabled />
+<Card isSelectable hasSelectableInput tabIndex={0} />
+```
+
+
 ### card-remove-isHoverable [(#8196)](https://github.com/patternfly/patternfly-react/pull/8196)
 
 We've removed the deprecated `isHoverable` prop from Card.
@@ -2366,30 +2395,6 @@ Out:
 <Spinner  />
 ```
 
-### table-rename-isHoverable [((#9083))](https://github.com/patternfly/patternfly-react/pull/9083)
-
-We've renamed the `isHoverable` prop for Table components to `isClickable`. This rule provides a fix for the `Tr` component when using our new default, composable implementation of Table.
-
-If using our now deprecated implementation of Table with the `rows` prop passed in, only an error message will be thrown and any usage of `isHoverable` will need to be updated manually.
-
-#### Examples
-
-In:
-
-```jsx
-<Tr isHoverable />
-```
-
-Out:
-
-```jsx
-<Tr isClickable />
-```
-
-### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
-
-We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.
-  
 ### switch-onChange-swap-params [(#9037)](https://github.com/patternfly/patternfly-react/pull/9037)
 
 We've updated the `onChange` prop for Switch so that the `event` parameter is the first parameter. Handlers may require an update.
@@ -2418,6 +2423,26 @@ function handler2(_event, id) {};
 <Switch onChange={handler2} />
 ```
 
+
+### table-rename-isHoverable [((#9083))](https://github.com/patternfly/patternfly-react/pull/9083)
+
+We've renamed the `isHoverable` prop for Table components to `isClickable`. This rule provides a fix for the `Tr` component when using our new default, composable implementation of Table.
+
+If using our now deprecated implementation of Table with the `rows` prop passed in, only an error message will be thrown and any usage of `isHoverable` will need to be updated manually.
+
+#### Examples
+
+In:
+
+```jsx
+<Tr isHoverable />
+```
+
+Out:
+
+```jsx
+<Tr isClickable />
+```
 
 ### table-rename-TableComposable [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
 
@@ -2465,6 +2490,10 @@ import {
 } from '@patternfly/react-table/deprecated';
 ```
 
+### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
+
+We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.
+  
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
 
 Table and TableComposable's `ActionsColumn` has been updated to use our new implementation of Dropdown. The toggle passed to the actions column should now be a `MenuToggle` instead of the deprecated `DropdownToggle`. The `dropdownPosition`, `dropdownDirection` and `menuAppendTo` properties are removed and `Popper` properties can be passed in using `popperProps` instead (via `direction`, `position`, `appendTo`, etc.).
