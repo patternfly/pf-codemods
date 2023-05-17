@@ -41,7 +41,6 @@ module.exports = {
 
             node.children?.forEach((child) => {
               const childName = child.openingElement?.name?.name;
-              console.log(child);
               if (
                 childName === "InputGroupItem" ||
                 ["JSXText", "Literal"].includes(child.type)
