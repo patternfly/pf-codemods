@@ -276,7 +276,6 @@ const alertVariantOption = AlertVariant.default;
   <TableComposable />
   <TableHeader />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
-  <Td select={tdSelectTypeObj} actions={{disable: false}} />
   <TextArea onChange={(foo, event) => handler(foo, event)} />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
   <Toggle isPrimary onToggle={} />
