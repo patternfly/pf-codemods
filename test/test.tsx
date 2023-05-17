@@ -104,7 +104,7 @@ import {
   ToggleTemplateProps,
   Tooltip,
   TreeView,
-  Wizard
+  Wizard,
 } from "@patternfly/react-core";
 import {
   SelectOption,
@@ -153,6 +153,12 @@ const alertVariantOption = AlertVariant.default;
     onChange={(date) => handleChange(date)}
     onMonthChange={(newDate, evt) => handleMonthChange(newDate, evt)}
   />
+  <Card
+    isSelectableRaised
+    isDisabledRaised
+    hasSelectableInput
+    selectableInputAriaLabel
+  />
   <Card onSelectableInputChange={(label, _ev) => handler(label)} />
   <CardHeader>
     <CardHeaderMain>Header content</CardHeaderMain>
@@ -187,7 +193,10 @@ const alertVariantOption = AlertVariant.default;
     onChosenOptionsSearchInputChanged={(foo, event) => handler(foo, event)}
   />
   <DualListSelector onListChange={(foo) => handler(foo)} />
-  <EditableSelectInputCell onSelect={(foo, event) => onSelectHandler(foo, event)} clearSelection={foo => clearSelectionHandler(foo, event)} />
+  <EditableSelectInputCell
+    onSelect={(foo, event) => onSelectHandler(foo, event)}
+    clearSelection={(foo) => clearSelectionHandler(foo, event)}
+  />
   <EmptyState variant={EmptyStateVariant.large}>
     <EmptyStateIcon icon={CubesIcon} />
     <Title headingLevel='h5' size='4xl'>
@@ -206,7 +215,7 @@ const alertVariantOption = AlertVariant.default;
     onReadFinished={(fileHandle) => readFinishedHandler(fileHandle)}
     onReadStarted={(fileHandle) => readStartedHandler(fileHandle)}
   />
-  <FileUpload onTextChange={bar => textHandler(bar)} />
+  <FileUpload onTextChange={(bar) => textHandler(bar)} />
   <FileUploadField onTextChange={(bar) => textHandler(bar)} />
   <FormSelect onChange={(foo, event) => handler(foo, event)} />
   <FrogIcon size='sm' color='green' noVerticalAlign />
@@ -234,8 +243,8 @@ const alertVariantOption = AlertVariant.default;
   <ModalContent titleIconVariant='default'></ModalContent>
   <MultipleFileUpload onFileDrop={(foo) => handler(foo)} />
   <Nav flyout={"menu"} />
-  <Nav variant='horizontal-subnav' />
   <Nav onSelect={(foo) => handler(foo)} onToggle={(foo) => handler(foo)} />
+  <Nav variant='horizontal-subnav' />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
@@ -268,11 +277,11 @@ const alertVariantOption = AlertVariant.default;
     toggleTemplate={({ first, second }: ToggleTemplateProps) => <></>}
   />
   <PFTable>Body</PFTable>
-  <Popover reference alertSeverityVariant='default' />
   <Popover
     shouldClose={(foo, event) => handler(foo, event)}
     shouldOpen={(fn) => openHandler(fn)}
   />
+  <Popover reference alertSeverityVariant='default' />
   <Popper popperMatchesTriggerWidth={false} />
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
@@ -287,7 +296,7 @@ const alertVariantOption = AlertVariant.default;
   <TableBody />
   <TableComposable />
   <TableHeader />
-  <Tabs onToggle={foo => handler(foo)} />
+  <Tabs onToggle={(foo) => handler(foo)} />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextArea onChange={(foo, event) => handler(foo, event)} />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
