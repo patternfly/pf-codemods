@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/tooltip-triggerRef-may-be-required");
+const rule = require("../../../lib/rules/v5/tooltip-warn-triggerRef-may-be-required");
 
-ruleTester.run("tooltip-triggerRef-may-be-required", rule, {
+ruleTester.run("tooltip-warn-triggerRef-may-be-required", rule, {
   valid: [
     {
       code: `import { Tooltip } from '@patternfly/react-core'; <Tooltip triggerRef={ref} />`,
