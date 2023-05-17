@@ -2521,7 +2521,7 @@ We've updated the `onChange` prop for TextInput so that the `event` parameter is
 
 In:
 
-```js
+```jsx
 <TextInput onChange={(id) => handler(id)} />
 <TextInput onChange={(id, event) => handler(id, event)} />
 const handler1 = (id, event) => {};
@@ -2532,7 +2532,7 @@ function handler2(id, event) {};
 
 Out:
 
-```js
+```jsx
 <TextInput onChange={(_event, id) => handler(id)} />
 <TextInput onChange={(event, id) => handler(id, event)} />
 const handler1 = (_event, id) => {};
@@ -2540,6 +2540,7 @@ const handler1 = (_event, id) => {};
 function handler2(_event, id) {};
 <TextInput onChange={handler2} />
 ```
+
 
 ### toggle-remove-isprimary [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
 
