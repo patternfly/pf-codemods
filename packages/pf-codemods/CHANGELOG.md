@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.71.0...@patternfly/pf-codemods@1.72.0) (2023-05-17)
+
+
+### Features
+
+* **Tooltip:** Add warning for Tooltips without a triggerRef ([#469](https://github.com/patternfly/pf-codemods/issues/469)) ([40ed2e2](https://github.com/patternfly/pf-codemods/commit/40ed2e2aaf6736a69470960336e5657b837ee6d3))
+
+
+
+
+
 # [1.71.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.70.0...@patternfly/pf-codemods@1.71.0) (2023-05-17)
 
 
