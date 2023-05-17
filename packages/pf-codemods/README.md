@@ -1996,7 +1996,7 @@ Out:
 />
 ```
 
-### popover-swap-shouldClose-shouldOpen-params [(#9025)](https://github.com/patternfly/patternfly-react/pull/9025)
+### popover-swap-shouldClose-shouldOpen-params [(#9054)](https://github.com/patternfly/patternfly-react/pull/9054)
 
 We've updated the `shouldClose` and `shouldOpen` props for Popover so that the `event` parameter is the first parameter. Handlers may require an update.
 
