@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.75.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.74.0...@patternfly/eslint-plugin-pf-codemods@1.75.0) (2023-05-17)
+
+
+### Features
+
+* **FileUploadField:** Remove from beta rules list ([#448](https://github.com/patternfly/pf-codemods/issues/448)) ([0506106](https://github.com/patternfly/pf-codemods/commit/05061067d3e9c5bb11c027dc8fac66dd8514cc06))
+
+
+
+
+
 # [1.74.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.73.0...@patternfly/eslint-plugin-pf-codemods@1.74.0) (2023-05-17)
 
 
