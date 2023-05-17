@@ -1,6 +1,5 @@
 // if you want your rule to only run when explicitly called for using the --only flag, add the rule name to the below array
 const betaRuleNames = [
-  "expandableSection-onToggle-event-added",
   "fileUploadField-cb-param-updates",
   "popover-swap-shouldClose-shouldOpen-params",
   "radio-update-onChange-params",
