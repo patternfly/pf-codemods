@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.77.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.76.1...@patternfly/eslint-plugin-pf-codemods@1.77.0) (2023-05-18)
+
+
+### Features
+
+* **FormControls:** updated props and markup ([#478](https://github.com/patternfly/pf-codemods/issues/478)) ([3aeba2e](https://github.com/patternfly/pf-codemods/commit/3aeba2e604399c223b4ae7670a2bfa6a9ff5842e))
+
+
+
+
+
 ## [1.76.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.76.0...@patternfly/eslint-plugin-pf-codemods@1.76.1) (2023-05-17)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
