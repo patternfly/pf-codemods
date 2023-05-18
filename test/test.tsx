@@ -55,6 +55,7 @@ import {
   FileUploadField,
   FormSelect,
   InputGroup,
+  InputGroupText,
   KebabToggle,
   KEY_CODES,
   Label,
@@ -88,9 +89,9 @@ import {
   ProgressStep,
   Radio,
   Select,
-  SelectOption as SelectOpt,
-  SelectMenu,
   SelectGroup,
+  SelectMenu,
+  SelectOption as SelectOpt,
   SelectToggle,
   Slider,
   Spinner,
@@ -104,7 +105,7 @@ import {
   ToggleTemplateProps,
   Tooltip,
   TreeView,
-  Wizard,
+  Wizard
 } from "@patternfly/react-core";
 import {
   SelectOption,
@@ -228,6 +229,7 @@ const alertVariantOption = AlertVariant.default;
     <InputGroupText />
     <button />
   </InputGroup>
+  <InputGroupText variant />
   <KebabToggle onToggle={} />
   <Label />
   <Label isTruncated />
@@ -322,4 +324,4 @@ const alertVariantOption = AlertVariant.default;
   <WizardBodyNext />
   <WizardBodyNext aria-label />
   <WizardBodyNext aria-labelledby />
-</>;
+</>

@@ -1489,6 +1489,25 @@ Out:
 </InputGroup>
 ```
 
+### inputGroupText-remove-variant [(#9147)](https://github.com/patternfly/patternfly-react/pull/9147)
+
+We've removed the `variant` prop for InputGroupText.
+
+#### Examples
+
+In:
+
+```jsx
+<InputGroupText variant={InputGroupTextVariant.plain} />
+```
+
+Out:
+
+```jsx
+<InputGroupText  />
+```
+
+
 ### key-codes-removed [(#8174)](https://github.com/patternfly/patternfly-react/pull/8174)
 
 We've removed the `KEY_CODES` constant from our constants file. If your code relies on it we suggest that you refactor to use `KeyTypes` as `KeyboardEvent.keyCode` is deprecated.
