@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.78.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.77.0...@patternfly/eslint-plugin-pf-codemods@1.78.0) (2023-05-18)
+
+
+### Features
+
+* **inputGroupText:** Remove variant prop ([#480](https://github.com/patternfly/pf-codemods/issues/480)) ([77b28e7](https://github.com/patternfly/pf-codemods/commit/77b28e706a89496b82022ebfbabdb70476b33c62))
+
+
+
+
+
 # [1.77.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.76.1...@patternfly/eslint-plugin-pf-codemods@1.77.0) (2023-05-18)
 
 
