@@ -15,6 +15,7 @@ const warningRules = [
   "datePicker-warn-appendTo-default-value-changed",
   "datepicker-warn-helperText",
   "emptyState-warn-change-structure",
+  "formControls-updated-markup",
   "horizontalSubnav-warn-ariaLabel",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",

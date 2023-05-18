@@ -1362,7 +1362,23 @@ Out:
 
 ### formControls-updated-markup [(#9132)](https://github.com/patternfly/patternfly-react/pull/9132)
 
-Some stuff happened
+The markup for the following components has been changed. Selectors may need to be updated.
+
+- FormSelect
+- TextArea
+- TextInput
+- TimePicker
+- ClipboardCopy
+- DatePicker
+- FileUpload
+- LoginPage
+- NumberInput
+- SearchInput
+- Slider - only when the `isInputVisible` prop is passed in
+- TreeViewSearch
+- Select - only the deprecated implementation with the `hasInlineFilter` prop passed in
+
+This rule will raise a warning, but will not make any changes.
 
 ### formgroup-remove-helpertextProps [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
