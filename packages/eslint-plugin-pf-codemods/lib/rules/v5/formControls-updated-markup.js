@@ -39,10 +39,6 @@ module.exports = {
       ...formControlImports,
     ];
     const localImportNames = imports.map((imp) => imp.local?.name);
-    const localToImportedMap = imports.reduce(
-      (prev, curr) => ({ ...prev, [curr.local?.name]: curr.imported?.name }),
-      {}
-    );
 
     return !imports.length
       ? {}
