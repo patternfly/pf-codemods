@@ -217,6 +217,7 @@ const alertVariantOption = AlertVariant.default;
   />
   <FileUpload onTextChange={(bar) => textHandler(bar)} />
   <FileUploadField onTextChange={(bar) => textHandler(bar)} />
+  <FormSelect isIconSprite />
   <FormSelect onChange={(foo, event) => handler(foo, event)} />
   <FrogIcon size='sm' color='green' noVerticalAlign />
   <InputGroup>
@@ -298,7 +299,15 @@ const alertVariantOption = AlertVariant.default;
   <TableHeader />
   <Tabs onToggle={(foo) => handler(foo)} />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
+  <TextArea isReadOnly isIconSprite />
   <TextArea onChange={(foo, event) => handler(foo, event)} />
+  <TextInput
+    isReadOnly
+    isIconSprite
+    iconVariant
+    customIconUrl
+    customIconDimensions
+  />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />

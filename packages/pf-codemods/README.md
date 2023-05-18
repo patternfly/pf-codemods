@@ -1324,6 +1324,62 @@ Out:
 <FileUpload  />
 ```
 
+### formControls-removed-props [(#9132)](https://github.com/patternfly/patternfly-react/pull/9132)
+
+The following props have been removed from their respective components:
+
+| Component | Prop |
+|--|--|
+| `FormSelect` | `isIconSprite` |
+| `TextArea` | `isIconSprite` and `isReadOnly` |
+| `TextInput` | `isIconSprite`, `isReadOnly`, `iconVariant`, `customIconUrl`, and `customIconDimensions` |
+
+The `isReadOnly` prop should be replaced with the `readOnlyVariant` prop, and the `iconVariant` & `customIconUrl` props should be replaced with the `customIcon` prop.
+
+#### Examples
+
+In:
+
+```jsx
+<FormSelect isIconSprite />
+<TextArea isIconSprite isReadOnly />
+<TextInput isIconSprite iconVariant customIconUrl customIconDimensions isReadOnly />
+
+// With an existing readOnlyVariant prop
+<TextArea isReadOnly readOnlyVariant="plain" >
+```
+
+Out:
+
+```jsx
+<FormSelect  />
+<TextArea  readOnlyVariant="default" />
+<TextInput     readOnlyVariant="default" />
+
+// With an existing readOnlyVariant prop
+<TextArea  readOnlyVariant="plain" >
+```
+
+### formControls-updated-markup [(#9132)](https://github.com/patternfly/patternfly-react/pull/9132)
+
+The markup for the following components has been changed. Selectors may need to be updated.
+
+- FormSelect
+- TextArea
+- TextInput
+- TimePicker
+- ClipboardCopy
+- DatePicker
+- FileUpload
+- LoginPage
+- NumberInput
+- SearchInput
+- Slider - only when the `isInputVisible` prop is passed in
+- TreeViewSearch
+- Select - only the deprecated implementation with the `hasInlineFilter` prop passed in
+
+This rule will raise a warning, but will not make any changes.
+
 ### formgroup-remove-helpertextProps [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
 We've removed the helper text related props from `FormGroup`: `helperText`, `helperTextInvalid`, `validated`, `helperTextIcon`, `helperTextInvalidIcon`, and `isHelperTextBeforeField`. The `FormHelperText`, `HelperText`, and `HelperTextItem` components should now be used directly as part of `children` instead of these props. This rule will throw an error but not make any changes. 
