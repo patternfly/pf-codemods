@@ -335,4 +335,15 @@ export {
   KEY_CODES as CustomKeyCodes,
   MenuInput as CustomMenuInput,
   ApplicationLauncher as CustomAppLauncher,
+  ContextSelector as CustomContext,
+  Dropdown as CustomDropdown,
+  OptionsMenu as CustomOptionsMenu,
+  PageHeader as CustomPageHeader,
+  Select as CustomSelect,
+  Wizard as CustomWizard,
 } from "@patternfly/react-core";
+
+export {
+  Table as CustomTable,
+  TableComposable as CustomComposableTable,
+} from "@patternfly/react-table";

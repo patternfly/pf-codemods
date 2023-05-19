@@ -4,12 +4,18 @@ const { getFromPackage } = require("../../helpers");
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const { imports } = getFromPackage(context, "@patternfly/react-table");
+    const { imports, exports } = getFromPackage(
+      context,
+      "@patternfly/react-table"
+    );
     const tableComposableImport = imports.find(
       (imp) => imp.imported.name === "TableComposable"
     );
+    const tableComposableExport = exports.find(
+      (imp) => imp.local.name === "TableComposable"
+    );
 
-    return imports.length === 0 || !tableComposableImport
+    return !tableComposableImport && !tableComposableExport
       ? {}
       : {
           // update opening/closing elements
@@ -69,6 +75,29 @@ module.exports = {
                 message: `${importedName} has been replaced with ${tableName}`,
                 fix(fixer) {
                   return fixer.replaceText(node, newName);
+                },
+              });
+            }
+          },
+          ExportNamedDeclaration(node) {
+            if (!tableComposableExport) {
+              return;
+            }
+
+            const tableComposableSpecifier = node.specifiers.find(
+              (specifier) =>
+                specifier?.local?.name === tableComposableExport.local?.name
+            );
+
+            if (tableComposableSpecifier) {
+              context.report({
+                node,
+                message: "TableComposable has been replaced with Table",
+                fix(fixer) {
+                  return fixer.replaceText(
+                    tableComposableSpecifier,
+                    `Table as ${tableComposableSpecifier.exported?.name} /* data-codemods */`
+                  );
                 },
               });
             }

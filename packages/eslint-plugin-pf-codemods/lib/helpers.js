@@ -30,7 +30,9 @@ function moveSpecifiers(
 
       return (
         !exportComments.length ||
-        !exportComments.find((comment) => comment.value === "data-codemods")
+        !exportComments.find((comment) =>
+          comment.value.includes("data-codemods")
+        )
       );
     });
 
@@ -301,7 +303,16 @@ function moveSpecifiers(
                 fixer.replaceText(
                   node,
                   `export {\n\t${fromPackageSpecifiers
-                    .map((specifier) => src.getText(specifier))
+                    .map((specifier) => {
+                      const specifierText = src.getText(specifier);
+                      const specifierComments = src
+                        .getCommentsAfter(specifier)
+                        .map((comment) => comment.value)
+                        .join("");
+                      return specifierComments
+                        ? `${specifierText} /* ${specifierComments} */`
+                        : specifierText;
+                    })
                     .join(",\n\t")}\n} from '${node.source.value}';`
                 )
               );
