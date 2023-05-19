@@ -67,17 +67,17 @@ function moveSpecifiers(
     const propValuesToUpdate = [];
     const componentsToUpdate = specifiersToMove
       .filter(
-        (importToMove) =>
-          importToMove.type === "component" ||
-          (propValuesToUpdate.push(importToMove.name) && false)
+        (specifierToMove) =>
+          specifierToMove?.type === "component" ||
+          (propValuesToUpdate.push(specifierToMove?.name) && false)
       )
-      .map((importToMove) => importToMove.name);
+      .map((specifierToMove) => specifierToMove?.name);
 
     const getExistingDeclaration = (nodeType, modifiedPackage) =>
       src.ast.body.find(
         (node) =>
-          node.type === nodeType &&
-          [modifiedPackage, toPackage].includes(node.source.value)
+          node?.type === nodeType &&
+          [modifiedPackage, toPackage].includes(node?.source?.value)
       );
     const existingToPackageImportDeclaration = getExistingDeclaration(
       "ImportDeclaration",
@@ -251,7 +251,7 @@ function moveSpecifiers(
 
         if (
           !newToPackageSpecifiers.length ||
-          !pfPackageMatches(fromPackage, node.source.value)
+          !pfPackageMatches(fromPackage, node?.source?.value)
         ) {
           return;
         }
@@ -305,15 +305,15 @@ function moveSpecifiers(
                   `export {\n\t${fromPackageSpecifiers
                     .map((specifier) => {
                       const specifierText = src.getText(specifier);
-                      const specifierComments = src
-                        .getCommentsAfter(specifier)
-                        .map((comment) => comment.value)
-                        .join("");
-                      return specifierComments
-                        ? `${specifierText} /* ${specifierComments} */`
+                      const specifierComments =
+                        src
+                          .getCommentsAfter(specifier)
+                          .map((comment) => comment?.value) || [];
+                      return specifierComments.length
+                        ? `${specifierText} /* ${specifierComments.join("")} */`
                         : specifierText;
                     })
-                    .join(",\n\t")}\n} from '${node.source.value}';`
+                    .join(",\n\t")}\n} from '${node?.source?.value}';`
                 )
               );
             }
@@ -367,9 +367,11 @@ function getFromPackage(context, packageName, specifierNames = []) {
     ? { imports, exports }
     : {
         imports: imports.filter((s) =>
-          specifierNames.includes(s.imported?.name)
+          specifierNames?.includes(s?.imported?.name)
         ),
-        exports: exports.filter((s) => specifierNames.includes(s.local?.name)),
+        exports: exports.filter((s) =>
+          specifierNames?.includes(s?.local?.name)
+        ),
       };
 }
 
@@ -524,10 +526,10 @@ function renameComponents(
     const { imports, exports } = getFromPackage(context, package);
 
     const filteredImports = imports.filter((specifier) =>
-      Object.keys(componentMap).includes(specifier.imported?.name)
+      Object.keys(componentMap).includes(specifier?.imported?.name)
     );
     const filteredExports = exports.filter((specifier) =>
-      Object.keys(componentMap).includes(specifier.local?.name)
+      Object.keys(componentMap).includes(specifier?.local?.name)
     );
     const renameComponentFunctions = {};
 
@@ -545,20 +547,20 @@ function renameComponents(
         ]);
       };
       renameComponentFunctions["JSXIdentifier"] = function (node) {
-        const nodeName = node.name;
+        const nodeName = node?.name;
         const importedNode = filteredImports.find(
-          (imp) => imp.local.name === nodeName
+          (imp) => imp?.local?.name === nodeName
         );
         if (
-          filteredImports.find((imp) => imp.imported.name === nodeName) &&
-          importedNode.imported.name === importedNode.local.name // don't rename an aliased component
+          filteredImports.find((imp) => imp?.imported?.name === nodeName) &&
+          importedNode?.imported?.name === importedNode?.local?.name // don't rename an aliased component
         ) {
           // if data-codemods attribute, do nothing
-          const parentNode = node.parent;
-          const isOpeningTag = parentNode.type === "JSXOpeningElement";
+          const parentNode = node?.parent;
+          const isOpeningTag = parentNode?.type === "JSXOpeningElement";
           const openingTagAttributes = isOpeningTag
-            ? parentNode.attributes
-            : parentNode.parent.openingElement.attributes;
+            ? parentNode?.attributes
+            : parentNode?.parent?.openingElement?.attributes;
           const hasDataAttr =
             openingTagAttributes &&
             openingTagAttributes.filter(
@@ -592,14 +594,14 @@ function renameComponents(
 
     if (filteredExports.length) {
       renameComponentFunctions["ExportNamedDeclaration"] = function (node) {
-        const exportedNode = node.specifiers.find((specifier) =>
+        const exportedNode = node?.specifiers?.find((specifier) =>
           filteredExports
-            .map((exp) => exp.local?.name)
-            .includes(specifier.local?.name)
+            .map((exp) => exp?.local?.name)
+            .includes(specifier?.local?.name)
         );
 
         if (exportedNode) {
-          const nodeName = exportedNode.local?.name;
+          const nodeName = exportedNode?.local?.name;
           const newName = componentMap[nodeName];
           context.report({
             node,
@@ -659,7 +661,7 @@ function addCallbackParam(
       "@patternfly/react-core/deprecated"
     );
     const imports = [...reactCoreImports, ...deprecatedImports].filter(
-      (specifier) => componentsArray.includes(specifier.imported.name)
+      (specifier) => componentsArray.includes(specifier?.imported?.name)
     );
 
     return !imports.length
