@@ -1,5 +1,5 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
-const importsToMove = [
+const specifiersToMove = [
   { name: "BadgeToggle", type: "component" },
   { name: "Dropdown", type: "component" },
   { name: "DropdownPosition", type: "enum" },
@@ -19,6 +19,6 @@ const importsToMove = [
 
 createMoveSpecifiersTester(
   "dropdown-update-deprecatedPath",
-  importsToMove,
+  specifiersToMove,
   "new Dropdown"
 );

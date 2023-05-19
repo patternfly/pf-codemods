@@ -1,20 +1,18 @@
 const evk = require("eslint-visitor-keys");
 
 function moveSpecifiers(
-  importsToMove,
+  specifiersToMove,
   fromPackage,
   toPackage,
-  messageAfterImportNameChange,
+  messageAfterSpecifierPathChange,
   messageAfterElementNameChange,
   aliasSuffix
 ) {
   return function (context) {
-    const importNames = importsToMove.map((nameToMove) => nameToMove.name);
-    const { imports: fromPackageImports } = getFromPackage(
-      context,
-      fromPackage,
-      importNames
-    );
+    const src = context.getSourceCode();
+    const importNames = specifiersToMove.map((nameToMove) => nameToMove.name);
+    const { imports: fromPackageImports, exports: fromPackageExports } =
+      getFromPackage(context, fromPackage, importNames);
     const allElements = getAllJSXElements(context);
     const importSpecifiersToMove = fromPackageImports.filter((fromImport) => {
       const foundElement = allElements.find(
@@ -27,24 +25,45 @@ function moveSpecifiers(
       return (foundElement && !hasDataAttr) || !foundElement;
     });
 
-    if (!importSpecifiersToMove.length) return {};
+    const exportSpecifiersToMove = fromPackageExports.filter((fromExport) => {
+      const exportComments = src.getCommentsAfter(fromExport);
 
-    let modifiedToPackage = "";
-    if (importSpecifiersToMove[0].parent.source.value.includes("dist/esm")) {
-      //expecting @patternfly/{package}/{designator} where designator is next/deprecated
-      const toParts = toPackage.split("/");
-      //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
-      //needing toPath to look like fromPath with the designator before /components
-      const fromParts =
-        importSpecifiersToMove[0].parent.source.value.split("/");
-      if (toParts[0] === "@patternfly" && toParts.length === 3) {
-        fromParts.splice(4, 0, toParts[2]);
-        modifiedToPackage = fromParts.join("/");
-      }
+      return (
+        !exportComments.length ||
+        !exportComments.find((comment) => comment.value === "data-codemods")
+      );
+    });
+
+    if (!importSpecifiersToMove.length && !exportSpecifiersToMove.length) {
+      return {};
     }
 
+    const getModifiedToPackage = (firstSpecifier) => {
+      let modifiedToPackage = "";
+
+      if (firstSpecifier?.parent?.source?.value?.includes("dist/esm")) {
+        //expecting @patternfly/{package}/{designator} where designator is next/deprecated
+        const toParts = toPackage.split("/");
+        //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
+        //needing toPath to look like fromPath with the designator before /components
+        const fromParts = firstSpecifier.parent.source.value.split("/");
+        if (toParts[0] === "@patternfly" && toParts.length === 3) {
+          fromParts.splice(4, 0, toParts[2]);
+          modifiedToPackage = fromParts.join("/");
+        }
+      }
+
+      return modifiedToPackage;
+    };
+    const modifiedToPackageImport = getModifiedToPackage(
+      importSpecifiersToMove[0]
+    );
+    const modifiedToPackageExport = getModifiedToPackage(
+      exportSpecifiersToMove[0]
+    );
+
     const propValuesToUpdate = [];
-    const componentsToUpdate = importsToMove
+    const componentsToUpdate = specifiersToMove
       .filter(
         (importToMove) =>
           importToMove.type === "component" ||
@@ -52,36 +71,50 @@ function moveSpecifiers(
       )
       .map((importToMove) => importToMove.name);
 
-    const src = context.getSourceCode();
-    const existingToPackageImportDeclaration = src.ast.body.find(
-      (node) =>
-        node.type === "ImportDeclaration" &&
-        [modifiedToPackage, toPackage].includes(node.source.value)
+    const getExistingDeclaration = (nodeType, modifiedPackage) =>
+      src.ast.body.find(
+        (node) =>
+          node.type === nodeType &&
+          [modifiedPackage, toPackage].includes(node.source.value)
+      );
+    const existingToPackageImportDeclaration = getExistingDeclaration(
+      "ImportDeclaration",
+      modifiedToPackageImport
     );
-    const existingToPackageSpecifiers =
-      existingToPackageImportDeclaration?.specifiers?.map((specifier) =>
-        src.getText(specifier)
-      ) || [];
+    const existingToPackageExportDeclaration = getExistingDeclaration(
+      "ExportNamedDeclaration",
+      modifiedToPackageExport
+    );
+
+    const getExistingSpecifiersFromDeclaration = (declaration) =>
+      declaration?.specifiers?.map((specifier) => src.getText(specifier)) || [];
+    const existingToPackageImportSpecifiers =
+      getExistingSpecifiersFromDeclaration(existingToPackageImportDeclaration);
+    const existingToPackageExportSpecifiers =
+      getExistingSpecifiersFromDeclaration(existingToPackageExportDeclaration);
 
     return {
       ImportDeclaration(node) {
-        const [newToPackageSpecifiers, fromPackageSpecifiers] =
-          splitImportSpecifiers(node, importNames);
+        const [newToPackageSpecifiers, fromPackageSpecifiers] = splitSpecifiers(
+          node,
+          importNames
+        );
 
         if (
           !newToPackageSpecifiers.length ||
           !pfPackageMatches(fromPackage, node.source.value)
-        )
-          return {};
+        ) {
+          return;
+        }
 
         const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
           newToPackageSpecifiers,
           aliasSuffix
         );
         const newToPackageImportDeclaration = `import {\n\t${[
-          ...existingToPackageSpecifiers,
+          ...existingToPackageImportSpecifiers,
           ...newAliasToPackageSpecifiers,
-        ].join(`,\n\t`)}\n} from '${modifiedToPackage || toPackage}';`;
+        ].join(`,\n\t`)}\n} from '${modifiedToPackageImport || toPackage}';`;
 
         context.report({
           node,
@@ -91,7 +124,7 @@ function moveSpecifiers(
               .join(", ")
               .replace(/, ([^,]+)$/, ", and $1")}` +
             `${newToPackageSpecifiers.length > 1 ? " have " : " has "}${
-              messageAfterImportNameChange ||
+              messageAfterSpecifierPathChange ||
               "been moved. Running the fix flag will update your imports."
             }`,
           fix(fixer) {
@@ -140,7 +173,7 @@ function moveSpecifiers(
         const openingElement = node.openingElement?.name;
         const elementName = openingElement.object?.name || openingElement.name;
 
-        // Fixer for importsToMove objects with "component" type
+        // Fixer for specifiersToMove objects with "component" type
         if (
           importSpecifiersToMove.some(
             (imp) =>
@@ -175,7 +208,7 @@ function moveSpecifiers(
           });
         }
 
-        // Fixer for importsToMove objects with non-"component" type
+        // Fixer for specifiersToMove objects with non-"component" type
         const existingPropsToUpdate = node.openingElement.attributes.filter(
           (attr) => {
             if (attr.value) {
@@ -207,6 +240,75 @@ function moveSpecifiers(
             });
           });
         }
+      },
+      ExportNamedDeclaration(node) {
+        const [newToPackageSpecifiers, fromPackageSpecifiers] = splitSpecifiers(
+          node,
+          importNames
+        );
+
+        if (
+          !newToPackageSpecifiers.length ||
+          !pfPackageMatches(fromPackage, node.source.value)
+        ) {
+          return;
+        }
+
+        const newToPackageExportDeclaration = `export {\n\t${[
+          ...existingToPackageExportSpecifiers,
+          ...newToPackageSpecifiers.map((specifier) => src.getText(specifier)),
+        ].join(`,\n\t`)}\n} from '${modifiedToPackageExport || toPackage}';`;
+
+        context.report({
+          node,
+          message:
+            `${newToPackageSpecifiers
+              .map((s) => s.local.name)
+              .join(", ")
+              .replace(/, ([^,]+)$/, ", and $1")}` +
+            `${newToPackageSpecifiers.length > 1 ? " have " : " has "}${
+              messageAfterSpecifierPathChange ||
+              "been moved. Running the fix flag will update your exports."
+            }`,
+          fix(fixer) {
+            //no other exports left, replace the fromPackage
+            if (
+              !fromPackageSpecifiers.length &&
+              !existingToPackageExportDeclaration
+            ) {
+              return fixer.replaceText(node, newToPackageExportDeclaration);
+            }
+            const fixes = [];
+            if (existingToPackageExportDeclaration) {
+              fixes.push(
+                fixer.replaceText(
+                  existingToPackageExportDeclaration,
+                  newToPackageExportDeclaration
+                )
+              );
+            } else {
+              fixes.push(
+                fixer.insertTextAfter(
+                  node,
+                  `\n${newToPackageExportDeclaration}`
+                )
+              );
+            }
+            if (!fromPackageSpecifiers.length) {
+              fixes.push(fixer.remove(node));
+            } else {
+              fixes.push(
+                fixer.replaceText(
+                  node,
+                  `export {\n\t${fromPackageSpecifiers
+                    .map((specifier) => src.getText(specifier))
+                    .join(",\n\t")}\n} from '${node.source.value}';`
+                )
+              );
+            }
+            return fixes;
+          },
+        });
       },
     };
   };
@@ -260,14 +362,20 @@ function getFromPackage(context, packageName, specifierNames = []) {
       };
 }
 
-function splitImportSpecifiers(importDeclaration, importsToSplit) {
-  let keepImports = [];
-  const takeImports = importDeclaration.specifiers.filter(
-    (specifier) =>
-      importsToSplit.includes(specifier?.imported?.name) ||
-      (keepImports.push(specifier) && false)
-  );
-  return [takeImports, keepImports];
+function splitSpecifiers(declaration, specifiersToSplit) {
+  let keepSpecifiers = [];
+
+  const takeSpecifiers = declaration.specifiers.filter((specifier) => {
+    const specifierName = specifier?.exported
+      ? specifier.local?.name
+      : specifier?.imported?.name;
+
+    return (
+      specifiersToSplit.includes(specifierName) ||
+      (keepSpecifiers.push(specifier) && false)
+    );
+  });
+  return [takeSpecifiers, keepSpecifiers];
 }
 
 /**
@@ -765,7 +873,7 @@ module.exports = {
   renamePropsOnNode,
   renameProps,
   renameComponents,
-  splitImportSpecifiers,
+  splitSpecifiers,
   addCallbackParam,
   getAllJSXElements,
 };

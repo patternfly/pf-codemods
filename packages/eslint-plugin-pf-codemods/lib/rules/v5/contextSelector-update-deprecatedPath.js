@@ -1,6 +1,6 @@
 const { moveSpecifiers } = require("../../helpers");
 
-const importsToMove = [
+const specifiersToMove = [
   { name: "ContextSelector", type: "component" },
   { name: "ContextSelectorItem", type: "component" },
   { name: "ContextSelectorFooter", type: "component" },
@@ -8,8 +8,8 @@ const importsToMove = [
 const fromPackage = "@patternfly/react-core";
 const toPackage = "@patternfly/react-core/deprecated";
 const aliasSuffix = "Deprecated";
-const messageAfterImportNameChange =
-  "been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our composable Menu implementation.";
+const messageAfterSpecifierPathChange =
+  "been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our composable Menu implementation.";
 const messageAfterElementNameChange =
   "has been deprecated. Running the fix flag will update names, but we suggest using our composable Menu implementation.";
 
@@ -17,10 +17,10 @@ const messageAfterElementNameChange =
 module.exports = {
   meta: { fixable: "code" },
   create: moveSpecifiers(
-    importsToMove,
+    specifiersToMove,
     fromPackage,
     toPackage,
-    messageAfterImportNameChange,
+    messageAfterSpecifierPathChange,
     messageAfterElementNameChange,
     aliasSuffix
   ),

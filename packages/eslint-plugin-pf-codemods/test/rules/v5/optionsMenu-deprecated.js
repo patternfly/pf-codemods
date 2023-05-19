@@ -1,5 +1,5 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
-const importsToMove = [
+const specifiersToMove = [
   { name: "OptionsMenu", type: "component" },
   { name: "OptionsMenuToggle", type: "component" },
   { name: "OptionsMenuItemGroup", type: "component" },
@@ -10,6 +10,6 @@ const importsToMove = [
 
 createMoveSpecifiersTester(
   "optionsMenu-deprecated",
-  importsToMove,
+  specifiersToMove,
   "new Dropdown or Select"
 );
