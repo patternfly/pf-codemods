@@ -325,3 +325,12 @@ const alertVariantOption = AlertVariant.default;
   <WizardBodyNext aria-label />
   <WizardBodyNext aria-labelledby />
 </>
+
+export {
+  AccordionExpandedContentBody as CustomAccordion,
+  BackgroundImageSrcMap as CustomBackgroundImageSrcMap,
+  EmptyStatePrimary as CustomESPrimary,
+  EmptyStateSecondaryActions as CustomESSecondaryActions,
+  KEY_CODES as CustomKeyCodes,
+  MenuInput as CustomMenuInput,
+} from "@patternfly/react-core";

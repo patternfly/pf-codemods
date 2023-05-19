@@ -402,66 +402,98 @@ function renameComponents(
   package = "@patternfly/react-core"
 ) {
   return function (context) {
-    const imports = getFromPackage(context, package).imports.filter((specifier) =>
-      Object.keys(componentMap).includes(specifier.imported.name)
-    );
+    const { imports, exports } = getFromPackage(context, package);
 
-    return imports.length === 0 || !condition(context, package)
-      ? {}
-      : {
-          ImportDeclaration(node) {
-            ensureImports(context, node, package, [
-              ...new Set(Object.values(componentMap)),
-            ]);
-          },
-          JSXIdentifier(node) {
-            const nodeName = node.name;
-            const importedNode = imports.find(
-              (imp) => imp.local.name === nodeName
-            );
-            if (
-              imports.find((imp) => imp.imported.name === nodeName) &&
-              importedNode.imported.name === importedNode.local.name // don't rename an aliased component
-            ) {
-              // if data-codemods attribute, do nothing
-              const parentNode = node.parent;
-              const isOpeningTag = parentNode.type === "JSXOpeningElement";
-              const openingTagAttributes = isOpeningTag
-                ? parentNode.attributes
-                : parentNode.parent.openingElement.attributes;
-              const hasDataAttr =
-                openingTagAttributes &&
-                openingTagAttributes.filter(
-                  (attr) => attr.name?.name === "data-codemods"
-                ).length;
-              if (hasDataAttr) {
-                return;
-              }
-              // if no data-codemods && opening tag, add attribute & rename
-              // if no data-codemods && closing tag, rename
-              const newName = componentMap[nodeName];
-              const updateTagName = (node) =>
-                context
-                  .getSourceCode()
-                  .getText(node)
-                  .replace(nodeName, newName);
-              const addDataAttr = (jsxStr) =>
-                `${jsxStr.slice(0, -1)} data-codemods="true">`;
-              const newOpeningParentTag = newName.includes("Toolbar")
-                ? addDataAttr(updateTagName(parentNode))
-                : updateTagName(parentNode);
-              context.report({
-                node,
-                message: message(nodeName, newName),
-                fix(fixer) {
-                  return isOpeningTag
-                    ? fixer.replaceText(parentNode, newOpeningParentTag)
-                    : fixer.replaceText(node, updateTagName(node));
-                },
-              });
-            }
-          },
-        };
+    const filteredImports = imports.filter((specifier) =>
+      Object.keys(componentMap).includes(specifier.imported?.name)
+    );
+    const filteredExports = exports.filter((specifier) =>
+      Object.keys(componentMap).includes(specifier.local?.name)
+    );
+    const renameComponentFunctions = {};
+
+    if (
+      (!filteredImports.length && !filteredExports.length) ||
+      !condition(context, package)
+    ) {
+      return renameComponentFunctions;
+    }
+
+    if (filteredImports.length) {
+      renameComponentFunctions["ImportDeclaration"] = function (node) {
+        ensureImports(context, node, package, [
+          ...new Set(Object.values(componentMap)),
+        ]);
+      };
+      renameComponentFunctions["JSXIdentifier"] = function (node) {
+        const nodeName = node.name;
+        const importedNode = filteredImports.find(
+          (imp) => imp.local.name === nodeName
+        );
+        if (
+          filteredImports.find((imp) => imp.imported.name === nodeName) &&
+          importedNode.imported.name === importedNode.local.name // don't rename an aliased component
+        ) {
+          // if data-codemods attribute, do nothing
+          const parentNode = node.parent;
+          const isOpeningTag = parentNode.type === "JSXOpeningElement";
+          const openingTagAttributes = isOpeningTag
+            ? parentNode.attributes
+            : parentNode.parent.openingElement.attributes;
+          const hasDataAttr =
+            openingTagAttributes &&
+            openingTagAttributes.filter(
+              (attr) => attr.name?.name === "data-codemods"
+            ).length;
+          if (hasDataAttr) {
+            return;
+          }
+          // if no data-codemods && opening tag, add attribute & rename
+          // if no data-codemods && closing tag, rename
+          const newName = componentMap[nodeName];
+          const updateTagName = (node) =>
+            context.getSourceCode().getText(node).replace(nodeName, newName);
+          const addDataAttr = (jsxStr) =>
+            `${jsxStr.slice(0, -1)} data-codemods="true">`;
+          const newOpeningParentTag = newName.includes("Toolbar")
+            ? addDataAttr(updateTagName(parentNode))
+            : updateTagName(parentNode);
+          context.report({
+            node,
+            message: message(nodeName, newName),
+            fix(fixer) {
+              return isOpeningTag
+                ? fixer.replaceText(parentNode, newOpeningParentTag)
+                : fixer.replaceText(node, updateTagName(node));
+            },
+          });
+        }
+      };
+    }
+
+    if (filteredExports.length) {
+      renameComponentFunctions["ExportNamedDeclaration"] = function (node) {
+        const exportedNode = node.specifiers.find((specifier) =>
+          filteredExports
+            .map((exp) => exp.local?.name)
+            .includes(specifier.local?.name)
+        );
+
+        if (exportedNode) {
+          const nodeName = exportedNode.local?.name;
+          const newName = componentMap[nodeName];
+          context.report({
+            node,
+            message: message(nodeName, newName),
+            fix(fixer) {
+              return fixer.replaceText(exportedNode.local, newName);
+            },
+          });
+        }
+      };
+    }
+
+    return renameComponentFunctions;
   };
 }
 
@@ -470,7 +502,9 @@ function ensureImports(context, node, package, imports) {
     return;
   }
   const { imports: patternflyImports } = getFromPackage(context, package);
-  const patternflyImportNames = patternflyImports.map((imp) => imp.imported.name);
+  const patternflyImportNames = patternflyImports.map(
+    (imp) => imp.imported.name
+  );
   const myImports = node.specifiers.map((imp) => imp.imported.name);
   const missingImports = imports
     .filter((imp) => !patternflyImportNames.includes(imp)) // not added by consumer

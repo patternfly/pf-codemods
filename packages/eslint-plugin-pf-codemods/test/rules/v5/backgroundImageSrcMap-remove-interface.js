@@ -27,6 +27,26 @@ ruleTester.run("backgroundImageSrcMap-remove-interface", rule, {
       ],
     },
     {
+      code: `export { BackgroundImageSrcMap as CustomMap } from '@patternfly/react-core';`,
+      output: ``,
+      errors: [
+        {
+          message: `The BackgroundImageSrcMap interface has been removed.`,
+          type: "ExportNamedDeclaration",
+        },
+      ],
+    },
+    {
+      code: `export { BackgroundImageSrcMap as CustomMap, Foo as Bar } from '@patternfly/react-core';`,
+      output: `export {  Foo as Bar } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: `The BackgroundImageSrcMap interface has been removed.`,
+          type: "ExportNamedDeclaration",
+        },
+      ],
+    },
+    {
       code: `import { BackgroundImageSrcMap, Foo } from '@patternfly/react-core'; const srcObj: BackgroundImageSrcMap = {};`,
       output: `import {  Foo } from '@patternfly/react-core'; const srcObj = {};`,
       errors: [

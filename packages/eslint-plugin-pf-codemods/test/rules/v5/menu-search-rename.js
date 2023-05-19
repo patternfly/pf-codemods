@@ -7,6 +7,9 @@ ruleTester.run("menu-search-rename", rule, {
       code: `import { MenuSearchInput, MenuSearch } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput /></MenuSearch>`,
     },
     {
+      code: `export { MenuSearchInput as CustomMenuSearch } from '@patternfly/react-core';`,
+    },
+    {
       code: `import { MenuSearchInput, MenuSearch } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <MenuSearch><MenuSearchInput /></MenuSearch>`,
     },
     // No @patternfly/react-core import
@@ -18,13 +21,36 @@ ruleTester.run("menu-search-rename", rule, {
       output: `import { MenuSearch, MenuSearchInput } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput><div /></MenuSearchInput></MenuSearch>`,
       errors: [
         {
-          message: 'add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core',
-          type: "ImportDeclaration"
+          message:
+            "add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core",
+          type: "ImportDeclaration",
         },
         {
           message: `MenuInput has been renamed to MenuSearchInput and MenuSearch has been added as a wrapper.`,
           type: "JSXOpeningElement",
-        }
+        },
+      ],
+    },
+    {
+      code: `export { MenuInput as CustomMenuInput } from '@patternfly/react-core';`,
+      output: `export { MenuSearchInput as CustomMenuInput } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message:
+            "MenuInput has been renamed to MenuSearchInput, and should be wrapped inside MenuSearch.",
+          type: "ExportNamedDeclaration",
+        },
+      ],
+    },
+    {
+      code: `export { MenuInput as CustomMenuInput } from '@patternfly/react-core/dist/esm/components/Menu/index.js';`,
+      output: `export { MenuSearchInput as CustomMenuInput } from '@patternfly/react-core/dist/esm/components/Menu/index.js';`,
+      errors: [
+        {
+          message:
+            "MenuInput has been renamed to MenuSearchInput, and should be wrapped inside MenuSearch.",
+          type: "ExportNamedDeclaration",
+        },
       ],
     },
     {
@@ -32,13 +58,14 @@ ruleTester.run("menu-search-rename", rule, {
       output: `import { MenuSearch, MenuSearchInput } from '@patternfly/react-core/dist/esm/components/Menu/index.js'; <MenuSearch><MenuSearchInput><div /></MenuSearchInput></MenuSearch>`,
       errors: [
         {
-          message: 'add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core',
-          type: "ImportDeclaration"
+          message:
+            "add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core",
+          type: "ImportDeclaration",
         },
         {
           message: `MenuInput has been renamed to MenuSearchInput and MenuSearch has been added as a wrapper.`,
           type: "JSXOpeningElement",
-        }
+        },
       ],
     },
     {
@@ -46,13 +73,14 @@ ruleTester.run("menu-search-rename", rule, {
       output: `import { MenuSearch, MenuSearchInput } from '@patternfly/react-core'; <MenuSearch><MenuSearchInput /></MenuSearch>`,
       errors: [
         {
-          message: 'add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core',
-          type: "ImportDeclaration"
+          message:
+            "add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core",
+          type: "ImportDeclaration",
         },
         {
           message: `MenuInput has been renamed to MenuSearchInput and MenuSearch has been added as a wrapper.`,
           type: "JSXOpeningElement",
-        }
+        },
       ],
     },
   ],

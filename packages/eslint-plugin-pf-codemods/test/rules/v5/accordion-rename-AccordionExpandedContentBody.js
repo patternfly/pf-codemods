@@ -1,5 +1,5 @@
-const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/accordion-rename-AccordionExpandedContentBody');
+const ruleTester = require("../../ruletester");
+const rule = require("../../../lib/rules/v5/accordion-rename-AccordionExpandedContentBody");
 
 ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
   valid: [
@@ -7,6 +7,9 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
       code: `import { AccordionExpandableContentBody } from '@patternfly/react-core';
       <AccordionExpandableContentBody>Body</AccordionExpandableContentBody>
       `,
+    },
+    {
+      code: `export { AccordionExpandableContentBody } from '@patternfly/react-core';`,
     },
     {
       // No @patternfly/react-core import
@@ -23,12 +26,25 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          message:
+            "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
           type: "JSXIdentifier",
         },
         {
-          message: "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          message:
+            "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
           type: "JSXIdentifier",
+        },
+      ],
+    },
+    {
+      code: `export { AccordionExpandedContentBody as CustomAccordion } from '@patternfly/react-core';`,
+      output: `export { AccordionExpandableContentBody as CustomAccordion } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message:
+            "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -41,11 +57,13 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          message:
+            "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
           type: "JSXIdentifier",
         },
         {
-          message: "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
+          message:
+            "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
           type: "JSXIdentifier",
         },
       ],
