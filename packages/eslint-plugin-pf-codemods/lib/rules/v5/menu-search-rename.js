@@ -1,10 +1,10 @@
-const { getPackageImports, ensureImports } = require('../../helpers');
+const { getFromPackage, ensureImports } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/8820
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) { 
-    const imports = getPackageImports(context, '@patternfly/react-core');
+    const { imports } = getFromPackage(context, '@patternfly/react-core');
     const menuInputImport = imports.find(imp => imp.imported.name === 'MenuInput');
 
     return imports.length === 0 || !menuInputImport ? {} : { 

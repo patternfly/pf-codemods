@@ -1,14 +1,14 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8861
 // https://github.com/patternfly/patternfly-react/pull/8904
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const tableTdImport = getPackageImports(
+    const tableTdImport = getFromPackage(
       context,
       "@patternfly/react-table"
-    ).find((specifier) => "Td" === specifier.imported.name);
+    ).imports.find((specifier) => "Td" === specifier.imported.name);
 
     return !tableTdImport
       ? {}

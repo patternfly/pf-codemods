@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4225
 module.exports = {
@@ -11,8 +11,12 @@ module.exports = {
     schema: []
   },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-        .filter(specifier => ['NavList', 'Nav'].includes(specifier.imported.name));
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) =>
+      ["NavList", "Nav"].includes(specifier.imported.name)
+    );
     const navImport = imports.find(imp => imp.imported.name === 'Nav');
     const navListImport = imports.find(imp => imp.imported.name === 'NavList');
 

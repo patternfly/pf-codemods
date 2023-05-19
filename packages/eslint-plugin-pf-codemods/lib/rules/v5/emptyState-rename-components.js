@@ -1,6 +1,6 @@
 const {
   ensureImports,
-  getPackageImports,
+  getFromPackage,
   pfPackageMatches,
 } = require("../../helpers");
 
@@ -11,7 +11,7 @@ module.exports = {
     const pfPackage = "@patternfly/react-core";
     const oldNames = ["EmptyStatePrimary", "EmptyStateSecondaryActions"];
 
-    const imports = getPackageImports(context, pfPackage).filter((specifier) =>
+    const imports = getFromPackage(context, pfPackage).imports.filter((specifier) =>
       oldNames.includes(specifier.imported.name)
     );
 

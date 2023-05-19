@@ -1,19 +1,14 @@
-const { getPackageImports, pfPackageMatches } = require("../../helpers");
+const { getFromPackage, pfPackageMatches } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8759
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const removedCardImports = getPackageImports(
-      context,
-      "@patternfly/react-core"
-    ).filter((specifier) =>
+    const { imports } = getFromPackage(context, "@patternfly/react-core");
+    const removedCardImports = imports.filter((specifier) =>
       ["CardHeaderMain", "CardActions"].includes(specifier.imported.name)
     );
-    const cardHeaderImport = getPackageImports(
-      context,
-      "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name === "CardHeader");
+    const cardHeaderImport = imports.find((specifier) => specifier.imported.name === "CardHeader");
 
     return ![...removedCardImports, cardHeaderImport].length
       ? {}

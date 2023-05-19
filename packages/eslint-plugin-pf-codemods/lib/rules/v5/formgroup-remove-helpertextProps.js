@@ -1,11 +1,11 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8810
 module.exports = {
   meta: {},
   create: function (context) {
-    const formGroupImport =  getPackageImports(context, '@patternfly/react-core')
-    .filter(specifier => specifier.imported.name == 'FormGroup');
+    const formGroupImport =  getFromPackage(context, '@patternfly/react-core')
+    .imports.filter(specifier => specifier.imported.name == 'FormGroup');
 
     return formGroupImport.length === 0 ? {} : {
       JSXOpeningElement(node) {

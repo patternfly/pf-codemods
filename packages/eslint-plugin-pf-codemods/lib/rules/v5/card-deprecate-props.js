@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/9092
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const cardImport = getPackageImports(
+    const cardImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name === "Card");
+    ).imports.find((specifier) => specifier.imported.name === "Card");
 
     return !cardImport
       ? {}

@@ -1,10 +1,10 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/8134
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core');
+    const { imports } = getFromPackage(context, '@patternfly/react-core');
     const paginationImport = imports.find(imp => imp.imported.name === 'Pagination');
     const toggleTemplatePropsImport = imports.find(imp => imp.imported.name === 'ToggleTemplateProps');
 

@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8533
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const chartResizeImport = getPackageImports(
+    const chartResizeImport = getFromPackage(
       context,
       "@patternfly/react-charts"
-    ).filter((specifier) => specifier.imported.name == "getResizeObserver");
+    ).imports.filter((specifier) => specifier.imported.name == "getResizeObserver");
 
     return chartResizeImport.length === 0
       ? {}

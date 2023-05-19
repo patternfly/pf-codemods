@@ -1,10 +1,10 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4170
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const tableImports = getPackageImports(context, '@patternfly/react-table');
+    const {imports: tableImports} = getFromPackage(context, '@patternfly/react-table');
     const cellWidthImport = tableImports.filter(specifier => specifier.imported.name === 'cellWidth');
     const cellHeightAutoImport = tableImports.filter(specifier => specifier.imported.name === 'cellHeightAuto');
     

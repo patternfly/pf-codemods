@@ -1,4 +1,4 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8924
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
       Popover: "alertSeverityVariant",
     };
 
-    const allImports = getPackageImports(context, "@patternfly/react-core");
+    const { imports: allImports } = getFromPackage(context, "@patternfly/react-core");
 
     const componentImports = allImports.filter((specifier) =>
       Object.keys(componentsAttributes).includes(specifier.imported.name)

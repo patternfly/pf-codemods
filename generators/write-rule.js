@@ -21,18 +21,20 @@ function genericRule({
   message,
 }) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
-  content = `const { getPackageImports } = require('../../helpers');
+  content = `const { getFromPackage } = require('../../helpers');
   
 // https://github.com/patternfly/patternfly-react/pull/${referencePR}
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === '${componentName}');
+    const {imports, exports} = getFromPackage(context, '@patternfly/react-core')
       
-    return imports.length == 0 ? {} : {
+    componentImports = imports.filter(specifier => specifier.imported.name === '${componentName}');
+    componentExports = exports.filter(specifier => specifier.imported.name === '${componentName}');
+
+    return !componentImports.length && !componentExports.length ? {} : {
       JSXOpeningElement(node) {
-        if (imports.map(imp => imp.local.name).includes(node.name.name)) {
+        if (componentImports.map(imp => imp.local.name).includes(node.name.name)) {
           const attribute = node.attributes.find(attr => attr.name?.name === '${propName}');
           if (attribute) {
             context.report({

@@ -1,20 +1,15 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/9132
 module.exports = {
   meta: {},
   create: function (context) {
-    const formControlImports = getPackageImports(
-      context,
-      "@patternfly/react-core"
-    ).filter((specifier) =>
+    const { imports: reactCoreImports } = getFromPackage(context, '@patternfly/react-core');
+    const formControlImports = reactCoreImports.filter((specifier) =>
       ["FormSelect", "TextArea", "TextInput"].includes(specifier.imported.name)
     );
 
-    const importsUsingTextInput = getPackageImports(
-      context,
-      "@patternfly/react-core"
-    ).filter((specifier) =>
+    const importsUsingTextInput = reactCoreImports.filter((specifier) =>
       [
         "TimePicker",
         "ClipboardCopy",
@@ -28,10 +23,10 @@ module.exports = {
       ].includes(specifier.imported.name)
     );
 
-    const deprecatedSelectImport = getPackageImports(
+    const deprecatedSelectImport = getFromPackage(
       context,
       "@patternfly/react-core/deprecated"
-    ).filter((specifier) => specifier.imported.name === "Select");
+    ).imports.filter((specifier) => specifier.imported.name === "Select");
 
     const imports = [
       ...deprecatedSelectImport,

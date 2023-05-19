@@ -1,13 +1,13 @@
-const { getPackageImports, renamePropsOnNode } = require("../../helpers");
+const { getFromPackage, renamePropsOnNode } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8931
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const loginPageImports = getPackageImports(
+    const loginPageImports = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => specifier.imported.name == "LoginPage");
+    ).imports.filter((specifier) => specifier.imported.name == "LoginPage");
 
     return !loginPageImports.length
       ? {}

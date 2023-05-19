@@ -1,11 +1,11 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8634
 module.exports = {
   meta: {},
   create: function (context) {
-    const tableImport =  getPackageImports(context, '@patternfly/react-table')
-    .filter(specifier => specifier.imported.name == 'Table' || specifier.imported.name === 'Th');
+    const tableImport =  getFromPackage(context, '@patternfly/react-table')
+    .imports.filter(specifier => specifier.imported.name == 'Table' || specifier.imported.name === 'Th');
 
     return tableImport.length === 0 ? {} : {
       JSXOpeningElement(node) {

@@ -1,11 +1,13 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4190
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === 'Alert');
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) => specifier.imported.name === "Alert");
       
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {

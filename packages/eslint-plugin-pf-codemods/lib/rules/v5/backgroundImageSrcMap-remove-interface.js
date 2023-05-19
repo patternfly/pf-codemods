@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8931
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const backgroundImgSrcMapImport = getPackageImports(
+    const backgroundImgSrcMapImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name == "BackgroundImageSrcMap");
+    ).imports.find((specifier) => specifier.imported.name == "BackgroundImageSrcMap");
 
     return !backgroundImgSrcMapImport
       ? {}

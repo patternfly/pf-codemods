@@ -1,13 +1,12 @@
-const { getPackageImports, renamePropsOnNode } = require('../../helpers');
+const { getFromPackage, renamePropsOnNode } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4146
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const tabImports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === 'Tabs');
-    const variantEnumImports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === 'TabsVariant');
+    const { imports } = getFromPackage(context, '@patternfly/react-core');
+    const tabImports = imports.filter(specifier => specifier.imported.name === 'Tabs');
+    const variantEnumImports = imports.filter(specifier => specifier.imported.name === 'TabsVariant');
     
     return tabImports.length === 0 && variantEnumImports.length === 0 ? {} : {
       ImportSpecifier(node) {

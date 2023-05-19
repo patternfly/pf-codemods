@@ -1,15 +1,15 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8403
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
     const importsWithHasCheck = [
-      ...getPackageImports(context, "@patternfly/react-core").filter(
+      ...getFromPackage(context, "@patternfly/react-core").imports.filter(
         (specifier) =>
           ["MenuItem", "TreeView"].includes(specifier.imported.name)
       ),
-      ...getPackageImports(context, "@patternfly/react-core/next").filter(
+      ...getFromPackage(context, "@patternfly/react-core/next").imports.filter(
         (specifier) => specifier.imported.name === "SelectOption"
       ),
     ];

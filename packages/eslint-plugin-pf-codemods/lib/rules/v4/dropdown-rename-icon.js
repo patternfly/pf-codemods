@@ -1,11 +1,15 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4112
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => ['DropdownItem', 'DropdownItemIcon'].includes(specifier.imported.name));
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) =>
+      ["DropdownItem", "DropdownItemIcon"].includes(specifier.imported.name)
+    );
     const dropdownItemImport = imports.find(imp => imp.imported.name === 'DropdownItem');
     const dropdownItemIconImport = imports.find(imp => imp.imported.name === 'DropdownItemIcon');
   

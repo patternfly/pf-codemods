@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8733
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const tooltipImport = getPackageImports(
+    const tooltipImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name === "Tooltip");
+    ).imports.find((specifier) => specifier.imported.name === "Tooltip");
 
     return !tooltipImport
       ? {}

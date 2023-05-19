@@ -10,7 +10,7 @@ function moveSpecifiers(
 ) {
   return function (context) {
     const importNames = importsToMove.map((nameToMove) => nameToMove.name);
-    const fromPackageImports = getPackageImports(
+    const { imports: fromPackageImports } = getFromPackage(
       context,
       fromPackage,
       importNames
@@ -230,24 +230,34 @@ function pfPackageMatches(packageName, nodeSrc) {
  *
  * @param context
  * @param {string} packageName
- * @param {string[]} importNames
- * @returns {ImportSpecifier[]} an array of imports
+ * @param {string[]} specifierNames
+ * @returns {Object} an object containing an array of imports and array of named exports
  */
-function getPackageImports(context, packageName, importNames = []) {
-  const specifiers = context
-    .getSourceCode()
-    .ast.body.filter((node) => node.type === "ImportDeclaration")
-    .filter((node) => {
-      if (packageName.startsWith("@patternfly")) {
-        return pfPackageMatches(packageName, node.source.value);
-      }
-      return node.source.value === packageName;
-    })
-    .map((node) => node.specifiers)
-    .reduce((acc, val) => acc.concat(val), []);
-  return !importNames.length
-    ? specifiers
-    : specifiers.filter((s) => importNames.includes(s.imported?.name));
+function getFromPackage(context, packageName, specifierNames = []) {
+  const astBody = context.getSourceCode().ast.body;
+  const getSpecifiers = (nodeType) =>
+    astBody
+      .filter((node) => node.type === nodeType)
+      .filter((node) => {
+        if (packageName.startsWith("@patternfly")) {
+          return pfPackageMatches(packageName, node.source.value);
+        }
+        return node.source.value === packageName;
+      })
+      .map((node) => node.specifiers)
+      .reduce((acc, val) => acc.concat(val), []);
+
+  const imports = getSpecifiers("ImportDeclaration");
+  const exports = getSpecifiers("ExportNamedDeclaration");
+
+  return !specifierNames.length
+    ? { imports, exports }
+    : {
+        imports: imports.filter((s) =>
+          specifierNames.includes(s.imported?.name)
+        ),
+        exports: exports.filter((s) => specifierNames.includes(s.local?.name)),
+      };
 }
 
 function splitImportSpecifiers(importDeclaration, importsToSplit) {
@@ -360,7 +370,7 @@ function renamePropsOnNode(context, imports, node, renames) {
  */
 function renameProps(renames, packageName = "@patternfly/react-core") {
   return function (context) {
-    const imports = getPackageImports(context, packageName).filter(
+    const imports = getFromPackage(context, packageName).imports.filter(
       (specifier) => Object.keys(renames).includes(specifier.imported.name)
     );
 
@@ -392,7 +402,7 @@ function renameComponents(
   package = "@patternfly/react-core"
 ) {
   return function (context) {
-    const imports = getPackageImports(context, package).filter((specifier) =>
+    const imports = getFromPackage(context, package).imports.filter((specifier) =>
       Object.keys(componentMap).includes(specifier.imported.name)
     );
 
@@ -459,10 +469,8 @@ function ensureImports(context, node, package, imports) {
   if (!pfPackageMatches(package, node.source.value)) {
     return;
   }
-  const patternflyImports = getPackageImports(context, package);
-  const patternflyImportNames = patternflyImports.map(
-    (imp) => imp.imported.name
-  );
+  const { imports: patternflyImports } = getFromPackage(context, package);
+  const patternflyImportNames = patternflyImports.map((imp) => imp.imported.name);
   const myImports = node.specifiers.map((imp) => imp.imported.name);
   const missingImports = imports
     .filter((imp) => !patternflyImportNames.includes(imp)) // not added by consumer
@@ -489,10 +497,17 @@ function addCallbackParam(
     `The "${propName}" prop for ${componentName} has been updated so that the "${paramName}" parameter is the first parameter. "${propName}" handlers may require an update.`
 ) {
   return function (context) {
-    const imports = [
-      ...getPackageImports(context, "@patternfly/react-core"),
-      ...getPackageImports(context, "@patternfly/react-core/deprecated"),
-    ].filter((specifier) => componentsArray.includes(specifier.imported.name));
+    const { imports: reactCoreImports } = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    );
+    const { imports: deprecatedImports } = getFromPackage(
+      context,
+      "@patternfly/react-core/deprecated"
+    );
+    const imports = [...reactCoreImports, ...deprecatedImports].filter(
+      (specifier) => componentsArray.includes(specifier.imported.name)
+    );
 
     return !imports.length
       ? {}
@@ -710,7 +725,7 @@ function getAllJSXElements(context) {
 module.exports = {
   createAliasImportSpecifiers,
   ensureImports,
-  getPackageImports,
+  getFromPackage,
   moveSpecifiers,
   pfPackageMatches,
   renamePropsOnNode,

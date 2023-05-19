@@ -1,12 +1,12 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8213
 module.exports = {
   create: function (context) {
-    const navImport = getPackageImports(
+    const navImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => specifier.imported.name == "Nav");
+    ).imports.filter((specifier) => specifier.imported.name == "Nav");
 
     return navImport.length === 0
       ? {}

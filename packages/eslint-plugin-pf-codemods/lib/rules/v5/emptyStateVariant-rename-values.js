@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const includesEmptyStateVariant = getPackageImports(
+    const includesEmptyStateVariant = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).some((specifier) => specifier.imported.name === "EmptyStateVariant");
+    ).imports.some((specifier) => specifier.imported.name === "EmptyStateVariant");
 
     return !includesEmptyStateVariant
       ? {}

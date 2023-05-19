@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8737
 module.exports = {
   meta: {},
   create: function (context) {
-    const emptyStateIconImport = getPackageImports(
+    const emptyStateIconImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => "EmptyStateIcon" === specifier.imported.name);
+    ).imports.find((specifier) => "EmptyStateIcon" === specifier.imported.name);
 
     return emptyStateIconImport === undefined
       ? {}

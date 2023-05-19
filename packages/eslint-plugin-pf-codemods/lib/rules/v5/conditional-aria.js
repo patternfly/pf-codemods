@@ -1,11 +1,11 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8649
 module.exports = {
   meta: {},
   create: function (context) {
     const applicableImports = [
-      ...getPackageImports(context, "@patternfly/react-core").filter(
+      ...getFromPackage(context, "@patternfly/react-core").imports.filter(
         (specifier) =>
           [
             "Wizard",
@@ -15,7 +15,7 @@ module.exports = {
             "ProgressStep",
           ].includes(specifier.imported.name)
       ),
-      ...getPackageImports(context, "@patternfly/react-core/next").filter(
+      ...getFromPackage(context, "@patternfly/react-core/next").imports.filter(
         (specifier) => specifier.imported.name === "WizardBody"
       ),
     ];

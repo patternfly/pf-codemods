@@ -1,12 +1,12 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/8206
 
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const expandableSectionImports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name == 'ExpandableSection');
+    const expandableSectionImports = getFromPackage(context, '@patternfly/react-core')
+      .imports.filter(specifier => specifier.imported.name == 'ExpandableSection');
       
     return expandableSectionImports.length === 0 ? {} : {
       JSXOpeningElement(node) {

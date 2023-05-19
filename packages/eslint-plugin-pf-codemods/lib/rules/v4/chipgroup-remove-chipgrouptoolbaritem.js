@@ -1,11 +1,15 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4246
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => ['ChipGroupToolbarItem', 'ChipGroup'].includes(specifier.imported.name));
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) =>
+      ["ChipGroupToolbarItem", "ChipGroup"].includes(specifier.imported.name)
+    );
     const chipGroupImport = imports.find(imp => imp.imported.name === 'ChipGroup');
     const chipGroupToolbarItemImport = imports.find(imp => imp.imported.name === 'ChipGroupToolbarItem');
 

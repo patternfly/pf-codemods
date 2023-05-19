@@ -1,11 +1,11 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8942
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
     const pkg = "@patternfly/react-core";
-    const pageSidebarImport = getPackageImports(context, pkg).find(
+    const pageSidebarImport = getFromPackage(context, pkg).imports.find(
       (specifier) => specifier.imported.name === "PageSidebar"
     );
 

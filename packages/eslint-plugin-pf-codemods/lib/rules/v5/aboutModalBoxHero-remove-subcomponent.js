@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8931
 module.exports = {
   meta: {},
   create: function (context) {
-    const aboutModalImport = getPackageImports(
+    const aboutModalImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name === "AboutModal");
+    ).imports.find((specifier) => specifier.imported.name === "AboutModal");
 
     return !aboutModalImport
       ? {}

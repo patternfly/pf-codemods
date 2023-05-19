@@ -1,14 +1,14 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8533
 module.exports = {
   meta: {},
   create: function (context) {
-    const chartImports = getPackageImports(context, "@patternfly/react-charts");
-    const tooltipImport = getPackageImports(
+    const {imports: chartImports} = getFromPackage(context, "@patternfly/react-charts");
+    const tooltipImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => specifier.imported.name == "Tooltip");
+    ).imports.filter((specifier) => specifier.imported.name == "Tooltip");
 
     return !chartImports.length || !tooltipImport.length
       ? {}

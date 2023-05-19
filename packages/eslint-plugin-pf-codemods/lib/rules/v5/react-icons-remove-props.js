@@ -1,10 +1,10 @@
-const {getPackageImports} = require("../../helpers");
+const {getFromPackage} = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/5275
 module.exports = {
   meta: {fixable: "code"},
   create: function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-icons");
+    const { imports } = getFromPackage(context, "@patternfly/react-icons");
 
     const iconImport = imports.find((specifier) =>
       specifier.imported.name.includes("Icon")

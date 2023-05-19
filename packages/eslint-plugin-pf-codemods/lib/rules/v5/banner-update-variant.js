@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/issues/8204
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const bannerImport = getPackageImports(
+    const bannerImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name == "Banner");
+    ).imports.find((specifier) => specifier.imported.name == "Banner");
 
     const variantMap = {
       info: "blue",
