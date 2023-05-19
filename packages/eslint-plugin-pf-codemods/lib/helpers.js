@@ -29,9 +29,9 @@ function moveSpecifiers(
       const exportComments = src.getCommentsAfter(fromExport);
 
       return (
-        !exportComments.length ||
-        !exportComments.find((comment) =>
-          comment.value.includes("data-codemods")
+        !exportComments?.length ||
+        !exportComments?.find((comment) =>
+          comment?.value?.includes("data-codemods")
         )
       );
     });
@@ -350,14 +350,14 @@ function getFromPackage(context, packageName, specifierNames = []) {
   const astBody = context.getSourceCode().ast.body;
   const getSpecifiers = (nodeType) =>
     astBody
-      .filter((node) => node.type === nodeType)
+      .filter((node) => node?.type === nodeType)
       .filter((node) => {
         if (packageName.startsWith("@patternfly")) {
-          return pfPackageMatches(packageName, node.source.value);
+          return pfPackageMatches(packageName, node?.source?.value);
         }
-        return node.source.value === packageName;
+        return node?.source?.value === packageName;
       })
-      .map((node) => node.specifiers)
+      .map((node) => node?.specifiers)
       .reduce((acc, val) => acc.concat(val), []);
 
   const imports = getSpecifiers("ImportDeclaration");
