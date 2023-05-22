@@ -84,6 +84,12 @@ import {
   Popper,
   ProgressStep,
   Radio,
+  Select,
+  SelectGroup,
+  SelectMenu,
+  SelectOption as SelectOpt,
+  SelectToggle,
+  SelectVariant,
   Slider,
   Spinner,
   Switch,
@@ -171,7 +177,9 @@ const alertVariantOption = AlertVariant.default;
   <Chart themeVariant />
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
-  <ContextSelector />
+  <ContextSelector>
+    <ContextSelectorItem />
+  </ContextSelector>
   <DataList onDragStart itemOrder={["1", "2", "3"]} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
   <DataList selectableRow={{ onChange = () => {} }} />
@@ -289,7 +297,10 @@ const alertVariantOption = AlertVariant.default;
   <Popper popperMatchesTriggerWidth={false} />
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
-  <SelectDeprecated onToggle={} />
+  <Select onToggle={} />
+  <Select variant={SelectVariant.single}>
+    <SelectOpt />
+  </Select>
   <SelectOption hasCheck />
   <SelectToggleDeprecated onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
