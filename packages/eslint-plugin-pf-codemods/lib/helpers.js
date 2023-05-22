@@ -169,10 +169,15 @@ function moveSpecifiers(
           },
         });
       },
-      JSXElement(node) {
-        if (!aliasSuffix) return;
+      JSXIdentifier(node) {
+        node = node.parent;
+        if (
+          !aliasSuffix ||
+          !["JSXOpeningElement", "JSXClosingElement"].includes(node.type)
+        )
+          return;
 
-        const openingElement = node.openingElement?.name;
+        const openingElement = node.name;
         const elementName = openingElement.object?.name || openingElement.name;
 
         // Fixer for specifiersToMove objects with "component" type
@@ -197,31 +202,30 @@ function moveSpecifiers(
                   `${elementName}${aliasSuffix}`
                 ),
               ];
-              if (!node.openingElement.selfClosing) {
-                fixes.push(
-                  fixer.replaceText(
-                    node.closingElement.name,
-                    `${node.openingElement.name.name}${aliasSuffix}`
-                  )
-                );
-              }
+              // if (!node.selfClosing) {
+              //   fixes.push(
+              //     fixer.replaceText(
+              //       node.parent.closingElement.name,
+              //       `${node.name.name}${aliasSuffix}`
+              //     )
+              //   );
+              // }
+              console.log(fixes);
               return fixes;
             },
           });
         }
 
-        // Fixer for specifiersToMove objects with non-"component" type
-        const existingPropsToUpdate = node.openingElement.attributes.filter(
-          (attr) => {
-            if (attr.value) {
-              const propValue =
-                attr.value.expression?.object?.name ||
-                attr.value.expression?.name;
-              return propValuesToUpdate.includes(propValue);
-            }
+        // Fixer for importsToMove objects with non-"component" type
+        const existingPropsToUpdate = node.attributes?.filter((attr) => {
+          if (attr.value) {
+            const propValue =
+              attr.value.expression?.object?.name ||
+              attr.value.expression?.name;
+            return propValuesToUpdate.includes(propValue);
           }
-        );
-        if (existingPropsToUpdate.length) {
+        });
+        if (existingPropsToUpdate?.length) {
           existingPropsToUpdate.forEach((propToUpdate) => {
             const currentPropToUpdate =
               propToUpdate.value?.expression?.object ||
