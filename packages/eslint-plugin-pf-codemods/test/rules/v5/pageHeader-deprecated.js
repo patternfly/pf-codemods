@@ -1,6 +1,6 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
 
-const importsToMove = [
+const specifiersToMove = [
   { name: "PageHeader", type: "component" },
   { name: "PageHeaderTools", type: "component" },
   { name: "PageHeaderToolsGroup", type: "component" },
@@ -11,4 +11,8 @@ const importsToMove = [
   { name: "PageHeaderToolsItemProps", type: "interface" },
 ];
 
-createMoveSpecifiersTester("pageHeader-deprecated", importsToMove, "Masthead");
+createMoveSpecifiersTester(
+  "pageHeader-deprecated",
+  specifiersToMove,
+  "Masthead"
+);

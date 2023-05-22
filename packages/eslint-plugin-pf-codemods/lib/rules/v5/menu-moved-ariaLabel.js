@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8649
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const menuImports = getPackageImports(
+    const menuImports = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => specifier.imported.name == "Menu");
+    ).imports.filter((specifier) => specifier.imported.name == "Menu");
     const getAriaLabel = (node) =>
       node.openingElement.attributes.find(
         (attr) => attr?.name?.name === "aria-label"
@@ -39,7 +39,7 @@ module.exports = {
                   if (
                     menuLists.length === 1 &&
                     !getAriaLabel(menuLists[0]) &&
-                    getPackageImports(context, "@patternfly/react-core").filter(
+                    getFromPackage(context, "@patternfly/react-core").imports.filter(
                       (specifier) => specifier.imported.name == "MenuList"
                     ).length
                   ) {

@@ -1,6 +1,6 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
 
-const importsToMove = [
+const specifiersToMove = [
   { name: "Select", type: "component" },
   { name: "SelectOption", type: "component" },
   { name: "SelectToggle", type: "component" },
@@ -24,4 +24,4 @@ const importsToMove = [
   { name: "SelectFooterTabbableItems", type: "" },
 ];
 
-createMoveSpecifiersTester("select-deprecated", importsToMove, "new Select");
+createMoveSpecifiersTester("select-deprecated", specifiersToMove, "new Select");

@@ -1,10 +1,10 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8324
 module.exports = {
   meta: { hasSuggestions: true },
   create: function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-core").filter(
+    const imports = getFromPackage(context, "@patternfly/react-core").imports.filter(
       (specifier) => specifier.imported.name === "getResizeObserver"
     );
 

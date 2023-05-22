@@ -1,5 +1,5 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
-const importsToMove = [
+const specifiersToMove = [
   { name: "ContextSelector", type: "component" },
   { name: "ContextSelectorItem", type: "component" },
   { name: "ContextSelectorFooter", type: "component" },
@@ -7,6 +7,6 @@ const importsToMove = [
 
 createMoveSpecifiersTester(
   "contextSelector-update-deprecatedPath",
-  importsToMove,
+  specifiersToMove,
   "composable Menu"
 );

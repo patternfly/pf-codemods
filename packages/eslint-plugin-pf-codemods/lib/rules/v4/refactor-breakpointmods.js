@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 const componentsToUpdate = [
   'Flex',
   'FlexItem',
@@ -40,8 +40,8 @@ module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
     
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => componentsToUpdate.includes(specifier.imported.name));
+    const imports = getFromPackage(context, '@patternfly/react-core')
+      .imports.filter(specifier => componentsToUpdate.includes(specifier.imported.name));
       
     return imports.length == 0 ? {} : {
       JSXOpeningElement(node) {

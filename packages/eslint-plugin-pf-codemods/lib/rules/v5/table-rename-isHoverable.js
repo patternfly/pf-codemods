@@ -1,17 +1,17 @@
-const { getPackageImports, renamePropsOnNode } = require("../../helpers");
+const { getFromPackage, renamePropsOnNode } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/9083
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const tableImports = getPackageImports(
+    const tableImports = getFromPackage(
       context,
       "@patternfly/react-table"
-    ).filter((specifier) => ["Table", "Tr"].includes(specifier.imported.name));
-    const deprecatedTableImports = getPackageImports(
+    ).imports.filter((specifier) => ["Table", "Tr"].includes(specifier.imported.name));
+    const deprecatedTableImports = getFromPackage(
       context,
       "@patternfly/react-table/deprecated"
-    ).filter((specifier) => specifier.imported.name === "Table");
+    ).imports.filter((specifier) => specifier.imported.name === "Table");
 
     const allTableImports = [...tableImports, ...deprecatedTableImports];
 

@@ -1,12 +1,12 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8617
 module.exports = {
   create: function (context) {
-    const menuItemActionImport = getPackageImports(
+    const menuItemActionImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => specifier.imported.name == "MenuItemAction");
+    ).imports.filter((specifier) => specifier.imported.name == "MenuItemAction");
 
     return menuItemActionImport.length === 0
       ? {}

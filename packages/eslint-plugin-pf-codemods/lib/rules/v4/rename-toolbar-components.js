@@ -1,7 +1,7 @@
-const { renameComponents, getPackageImports } = require('../../helpers');
+const { renameComponents, getFromPackage } = require('../../helpers');
 
 function hasPageHeaderImport(context, package) {
-  const imports = getPackageImports(context, package).map(imp => imp.imported.name);
+  const imports = getFromPackage(context, package).imports.map(imp => imp.imported.name);
   return imports.find(imp => imp === 'PageHeader') // ToolbarLayout is being used as PageHeader
     && !imports.find(imp => imp === 'PageHeaderTools'); // Codemod hasn't already been run
 }

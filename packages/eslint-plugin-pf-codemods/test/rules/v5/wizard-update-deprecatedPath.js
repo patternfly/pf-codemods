@@ -1,5 +1,5 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
-const importsToMove = [
+const specifiersToMove = [
   { name: "Wizard", type: "component" },
   { name: "WizardContext", type: "context" },
   { name: "WizardNav", type: "component" },
@@ -12,6 +12,6 @@ const importsToMove = [
 
 createMoveSpecifiersTester(
   "wizard-update-deprecatedPath",
-  importsToMove,
+  specifiersToMove,
   "new Wizard"
 );

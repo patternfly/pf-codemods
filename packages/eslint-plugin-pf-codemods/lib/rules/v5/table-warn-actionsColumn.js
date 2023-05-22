@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/8629
 module.exports = {
@@ -6,10 +6,10 @@ module.exports = {
     return {
       ImportDeclaration(node) {
         if (!/@patternfly\/react-table(\/deprecated)?/.test(node.source.value)) return {};
-        const tableImports = getPackageImports(context, '@patternfly/react-table');
-        const deprecatedTableImports = getPackageImports(context, '@patternfly/react-table/deprecated');
-        const coreImports = getPackageImports(context, '@patternfly/react-core');
-        const deprecatedImports = getPackageImports(context, '@patternfly/react-core/deprecated');
+        const { imports: tableImports }  = getFromPackage(context, '@patternfly/react-table');
+        const { imports: deprecatedTableImports } = getFromPackage(context, '@patternfly/react-table/deprecated');
+        const { imports: coreImports } = getFromPackage(context, '@patternfly/react-core');
+        const { imports: deprecatedImports } = getFromPackage(context, '@patternfly/react-core/deprecated');
         const imports = [...coreImports, ...tableImports, ...deprecatedImports, ...deprecatedTableImports];
 
         const tableImport = imports.find(

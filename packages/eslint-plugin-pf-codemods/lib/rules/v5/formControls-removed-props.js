@@ -1,13 +1,13 @@
-const { getPackageImports, renamePropsOnNode } = require("../../helpers");
+const { getFromPackage, renamePropsOnNode } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/9132
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const formControlImports = getPackageImports(
+    const formControlImports = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) =>
+    ).imports.filter((specifier) =>
       ["FormSelect", "TextArea", "TextInput"].includes(specifier.imported.name)
     );
 

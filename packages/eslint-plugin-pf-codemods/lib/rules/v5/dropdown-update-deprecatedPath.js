@@ -1,6 +1,6 @@
 const { moveSpecifiers } = require("../../helpers");
 
-const importsToMove = [
+const specifiersToMove = [
   { name: "BadgeToggle", type: "component" },
   { name: "Dropdown", type: "component" },
   { name: "DropdownPosition", type: "enum" },
@@ -20,8 +20,8 @@ const importsToMove = [
 const fromPackage = "@patternfly/react-core";
 const toPackage = "@patternfly/react-core/deprecated";
 const aliasSuffix = "Deprecated";
-const messageAfterImportNameChange =
-  "been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new Dropdown implementation.";
+const messageAfterSpecifierPathChange =
+  "been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our new Dropdown implementation.";
 const messageAfterElementNameChange =
   "has been deprecated. Running the fix flag will update names, but we suggest using our new Dropdown implementation.";
 
@@ -29,10 +29,10 @@ const messageAfterElementNameChange =
 module.exports = {
   meta: { fixable: "code" },
   create: moveSpecifiers(
-    importsToMove,
+    specifiersToMove,
     fromPackage,
     toPackage,
-    messageAfterImportNameChange,
+    messageAfterSpecifierPathChange,
     messageAfterElementNameChange,
     aliasSuffix
   ),

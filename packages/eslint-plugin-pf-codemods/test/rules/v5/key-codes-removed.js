@@ -29,5 +29,25 @@ ruleTester.run("key-codes-removed", rule, {
         },
       ],
     },
+    {
+      code: `export { KEY_CODES as CustomKeyCodes } from '@patternfly/react-core';`,
+      output: `export { KEY_CODES as CustomKeyCodes } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: `The KEY_CODES constant has been removed. We suggest refactoring to use the KeyTypes constant instead.`,
+          type: "ExportNamedDeclaration",
+        },
+      ],
+    },
+    {
+      code: `export { KEY_CODES as CustomKeyCodes } from '@patternfly/react-core/dist/esm/helpers/constants.js';`,
+      output: `export { KEY_CODES as CustomKeyCodes } from '@patternfly/react-core/dist/esm/helpers/constants.js';`,
+      errors: [
+        {
+          message: `The KEY_CODES constant has been removed. We suggest refactoring to use the KeyTypes constant instead.`,
+          type: "ExportNamedDeclaration",
+        },
+      ],
+    },
   ],
 });

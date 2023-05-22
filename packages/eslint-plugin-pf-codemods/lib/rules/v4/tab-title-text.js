@@ -1,11 +1,11 @@
-const { getPackageImports, ensureImports } = require('../../helpers');
+const { getFromPackage, ensureImports } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/4146
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const tabImport = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === 'Tab');
+    const tabImport = getFromPackage(context, '@patternfly/react-core')
+      .imports.filter(specifier => specifier.imported.name === 'Tab');
     
     return tabImport.length === 0 ? {} : {
       ImportDeclaration(node) {

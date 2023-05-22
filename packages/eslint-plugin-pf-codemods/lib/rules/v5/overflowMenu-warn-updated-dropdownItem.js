@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8359
 module.exports = {
   meta: {},
   create: function (context) {
-    const overflowDropdownItemImport = getPackageImports(
+    const overflowDropdownItemImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter(
+    ).imports.filter(
       (specifier) => specifier.imported.name == "OverflowMenuDropdownItem"
     );
 

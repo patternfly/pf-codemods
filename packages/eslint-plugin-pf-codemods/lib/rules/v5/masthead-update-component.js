@@ -1,11 +1,11 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/8655
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const mastheadBrandImport = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name == 'MastheadBrand');
+    const mastheadBrandImport = getFromPackage(context, '@patternfly/react-core')
+      .imports.filter(specifier => specifier.imported.name == 'MastheadBrand');
       
     return mastheadBrandImport.length === 0 ? {} : {
       JSXOpeningElement(node) {

@@ -76,10 +76,6 @@ import {
   OverflowMenuDropdownItem,
   Page,
   PageGroup,
-  PageHeader,
-  PageHeaderTools,
-  PageHeaderToolsGroup,
-  PageHeaderToolsItem,
   PageNavigation,
   PageSidebar,
   PageToggleButton,
@@ -88,11 +84,6 @@ import {
   Popper,
   ProgressStep,
   Radio,
-  Select,
-  SelectGroup,
-  SelectMenu,
-  SelectOption as SelectOpt,
-  SelectToggle,
   Slider,
   Spinner,
   Switch,
@@ -105,21 +96,31 @@ import {
   ToggleTemplateProps,
   Tooltip,
   TreeView,
-  Wizard
+  Wizard,
 } from "@patternfly/react-core";
+import {
+  PageHeader as PageHeaderDeprecated,
+  PageHeaderTools as PageHeaderToolsDeprecated,
+  PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
+  PageHeaderToolsItem as PageHeaderToolsItemDeprecated,
+  Select as SelectDeprecated,
+  SelectGroup as SelectGroupDeprecated,
+  SelectMenu as SelectMenuDeprecated,
+  SelectOption as SelectOpt,
+  SelectToggle as SelectToggleDeprecated,
+} from "@patternfly/react-core/deprecated";
 import {
   SelectOption,
   WizardBody as WizardBodyNext,
   WizardFooter,
 } from "@patternfly/react-core/next";
+import { Td, Tr } from "@patternfly/react-table";
 import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableProps,
-  Td,
-  Tr,
-} from "@patternfly/react-table";
+  Table as TableDeprecated,
+  TableBody as TableBodyDeprecated,
+  TableHeader as TableHeaderDeprecated,
+  TableProps as TablePropsDeprecated,
+} from "@patternfly/react-table/deprecated";
 import { TableComposable } from "@patternfly/react-table";
 import { TableComposable as PFTable } from "@patternfly/react-table";
 
@@ -257,10 +258,10 @@ const alertVariantOption = AlertVariant.default;
   <OverflowMenuDropdownItem index={0} />
   <Page onPageResize={({ obj }) => handler({ obj })} />
   <PageGroup aria-label='tester' />
-  <PageHeader />
-  <PageHeaderTools />
-  <PageHeaderToolsGroup />
-  <PageHeaderToolsItem />
+  <PageHeaderDeprecated />
+  <PageHeaderToolsDeprecated />
+  <PageHeaderToolsGroupDeprecated />
+  <PageHeaderToolsItemDeprecated />
   <PageNavigation aria-label='tester' />
   <PageSidebar isNavOpen />
   <PageSidebar nav='Content' />
@@ -288,17 +289,17 @@ const alertVariantOption = AlertVariant.default;
   <Popper popperMatchesTriggerWidth={false} />
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
-  <Select onToggle={} />
+  <SelectDeprecated onToggle={} />
   <SelectOption hasCheck />
-  <SelectToggle onToggle={} />
+  <SelectToggleDeprecated onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
   <Switch onChange={(foo) => handler(foo)} />
-  <Table />
-  <Table rows={[]} />
-  <TableBody />
+  <TableDeprecated />
+  <TableDeprecated rows={[]} />
+  <TableBodyDeprecated />
   <TableComposable />
-  <TableHeader />
+  <TableHeaderDeprecated />
   <Tabs onToggle={(foo) => handler(foo)} />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextArea isReadOnly isIconSprite />
@@ -324,4 +325,25 @@ const alertVariantOption = AlertVariant.default;
   <WizardBodyNext />
   <WizardBodyNext aria-label />
   <WizardBodyNext aria-labelledby />
-</>
+</>;
+
+export {
+  AccordionExpandedContentBody as CustomAccordion,
+  BackgroundImageSrcMap as CustomBackgroundImageSrcMap,
+  EmptyStatePrimary as CustomESPrimary,
+  EmptyStateSecondaryActions as CustomESSecondaryActions,
+  KEY_CODES as CustomKeyCodes,
+  MenuInput as CustomMenuInput,
+  ApplicationLauncher as CustomAppLauncher,
+  ContextSelector as CustomContext,
+  Dropdown as CustomDropdown,
+  OptionsMenu as CustomOptionsMenu,
+  PageHeader as CustomPageHeader,
+  Select as CustomSelect,
+  Wizard as CustomWizard,
+} from "@patternfly/react-core";
+
+export {
+  Table as CustomTable,
+  TableComposable as CustomComposableTable,
+} from "@patternfly/react-table";

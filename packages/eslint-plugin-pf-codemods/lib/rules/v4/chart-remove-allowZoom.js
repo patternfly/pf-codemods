@@ -1,11 +1,11 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/4278
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const imports = getPackageImports(context, "@patternfly/react-charts");
-    const victoryCoreImports = getPackageImports(
+    const {imports} = getFromPackage(context, "@patternfly/react-charts");
+    const {imports: victoryCoreImports} = getFromPackage(
       context,
       "victory-zoom-container"
     );

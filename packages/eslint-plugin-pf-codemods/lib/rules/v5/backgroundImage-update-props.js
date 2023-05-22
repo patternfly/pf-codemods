@@ -1,13 +1,13 @@
-const { getPackageImports, renamePropsOnNode } = require("../../helpers");
+const { getFromPackage, renamePropsOnNode } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8931
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const backgroundImageImports = getPackageImports(
+    const backgroundImageImports = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) => specifier.imported.name == "BackgroundImage");
+    ).imports.filter((specifier) => specifier.imported.name == "BackgroundImage");
 
     return !backgroundImageImports.length
       ? {}

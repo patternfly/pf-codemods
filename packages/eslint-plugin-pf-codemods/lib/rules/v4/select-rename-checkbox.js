@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/3945
 // CheckboxSelectOption -> SelectOption
@@ -6,8 +6,8 @@ const { getPackageImports } = require('../../helpers');
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => ['CheckboxSelect', 'CheckboxSelectOption'].includes(specifier.imported.name));
+    const imports = getFromPackage(context, '@patternfly/react-core')
+      .imports.filter(specifier => ['CheckboxSelect', 'CheckboxSelectOption'].includes(specifier.imported.name));
       
     return imports.length === 0 ? {} : {
       JSXIdentifier(node) {

@@ -1,5 +1,5 @@
 const {
-  getPackageImports,
+  getFromPackage,
   ensureImports,
   getAllJSXElements,
   pfPackageMatches,
@@ -10,7 +10,7 @@ module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
     const pkg = "@patternfly/react-core";
-    const imports = getPackageImports(context, pkg);
+    const { imports } = getFromPackage(context, pkg);
 
     const includesEmptyState = (arr) =>
       arr.some((specifier) => specifier.imported?.name === "EmptyState");

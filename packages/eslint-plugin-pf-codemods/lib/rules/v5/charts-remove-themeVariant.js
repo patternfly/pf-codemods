@@ -1,10 +1,10 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8590
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const chartsImports = getPackageImports(
+    const {imports: chartsImports} = getFromPackage(
       context,
       "@patternfly/react-charts"
     );

@@ -1,11 +1,11 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
   // https://github.com/patternfly/patternfly-react/pull/8179
   module.exports = {
     meta: { fixable: 'code' },
     create: function(context) {
-      const packageImport = getPackageImports(context, '@patternfly/react-core')
-        .filter(specifier => specifier.imported.name == 'DropdownToggle');
+      const packageImport = getFromPackage(context, '@patternfly/react-core')
+        .imports.filter(specifier => specifier.imported.name == 'DropdownToggle');
   
       return packageImport.length === 0 ? {} : {
         JSXOpeningElement(node) {

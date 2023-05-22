@@ -1,12 +1,12 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const paginationImport = getPackageImports(
+    const paginationImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name === "Pagination");
+    ).imports.find((specifier) => specifier.imported.name === "Pagination");
 
     return !paginationImport
       ? {}

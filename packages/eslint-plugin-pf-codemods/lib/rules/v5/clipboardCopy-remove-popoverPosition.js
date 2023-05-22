@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8226
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const clipboardImports = getPackageImports(
+    const clipboardImports = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).filter((specifier) =>
+    ).imports.filter((specifier) =>
       ["ClipboardCopy", "ClipboardCopyButton"].includes(specifier.imported.name)
     );
 

@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/8201
 module.exports = {
@@ -6,8 +6,8 @@ module.exports = {
     fixable: "code"
   },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-        .filter(specifier => ['Popover'].includes(specifier.imported.name));
+    const imports = getFromPackage(context, '@patternfly/react-core')
+        .imports.filter(specifier => ['Popover'].includes(specifier.imported.name));
     const popoverImport = imports.find(imp => imp.imported.name === 'Popover');
 
     return !popoverImport ? {} : {

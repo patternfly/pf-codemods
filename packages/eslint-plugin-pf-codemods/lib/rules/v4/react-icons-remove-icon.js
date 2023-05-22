@@ -1,13 +1,13 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/YOURNUMBERHERE
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-icons')
-      .filter(specifier => specifier.imported.name === 'OutlinedFontAwesomeLogoFullIcon');
+    const imports = getFromPackage(context, '@patternfly/react-icons')
+      .imports.filter(specifier => specifier.imported.name === 'OutlinedFontAwesomeLogoFullIcon');
 
-    const fortAwesomeImports = getPackageImports(context, '@fortawesome/free-regular-svg-icons');
+    const {imports: fortAwesomeImports} = getFromPackage(context, '@fortawesome/free-regular-svg-icons');
     const importStatement = `import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`
     if (imports.length) {
       if (fortAwesomeImports.length === 0) {

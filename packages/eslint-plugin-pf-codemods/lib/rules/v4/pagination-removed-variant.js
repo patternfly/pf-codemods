@@ -1,11 +1,13 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // https://github.com/patternfly/patternfly-react/pull/YOURNUMBERHERE
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name === 'Pagination');
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) => specifier.imported.name === "Pagination");
       
     return imports.length === 0 ? {} : {
       JSXOpeningElement(node) {

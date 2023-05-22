@@ -1,4 +1,4 @@
-const { getPackageImports, ensureImports } = require('../../helpers');
+const { getFromPackage, ensureImports } = require('../../helpers');
 
 const renames = {
   'CardHeader': 'CardTitle',
@@ -10,8 +10,14 @@ const renames = {
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => Object.keys(renames).concat(Object.values(renames)).includes(specifier.imported.name));
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) =>
+      Object.keys(renames)
+        .concat(Object.values(renames))
+        .includes(specifier.imported.name)
+    );
     const cardHeadImport = imports.find(imp => imp.imported.name === 'CardHead');
     const cardTitleImport = imports.find(imp => imp.imported.name === 'CardTitle');
     const cardHeaderMainImport = imports.find(imp => imp.imported.name === 'CardHeaderMain');

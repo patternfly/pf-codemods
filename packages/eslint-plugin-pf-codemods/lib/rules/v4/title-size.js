@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 // #1 and #2 from https://github.com/patternfly/patternfly-react/pull/3922
 // At first I wanted to fix #1 by renaming the import TitleSize -> TitleSizes, but that won't work
@@ -9,8 +9,8 @@ const validSizes = ['md', 'lg', 'xl', '2xl', '3xl', '4xl'];
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const titleImports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => specifier.imported.name == 'Title');
+    const titleImports = getFromPackage(context, '@patternfly/react-core')
+      .imports.filter(specifier => specifier.imported.name == 'Title');
       
     return titleImports.length === 0 ? {} : {
       JSXOpeningElement(node) {

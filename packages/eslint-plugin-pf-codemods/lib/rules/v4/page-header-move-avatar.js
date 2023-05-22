@@ -1,4 +1,4 @@
-const { getPackageImports } = require('../../helpers');
+const { getFromPackage } = require('../../helpers');
 
 const components = [
   'PageHeader',
@@ -9,8 +9,12 @@ const components = [
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const imports = getPackageImports(context, '@patternfly/react-core')
-      .filter(specifier => components.includes(specifier.imported.name));
+    const imports = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.filter((specifier) =>
+      components.includes(specifier.imported.name)
+    );
 
     return imports.length === 0 ? {} : {
       JSXElement(node) {

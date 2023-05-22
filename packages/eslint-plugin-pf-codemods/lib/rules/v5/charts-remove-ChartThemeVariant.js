@@ -1,13 +1,13 @@
-const { getPackageImports } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8590
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const chartThemeVariantImport = getPackageImports(
+    const chartThemeVariantImport = getFromPackage(
       context,
       "@patternfly/react-charts"
-    ).filter((specifier) => specifier.imported.name == "ChartThemeVariant");
+    ).imports.filter((specifier) => specifier.imported.name == "ChartThemeVariant");
 
     return !chartThemeVariantImport.length
       ? {}

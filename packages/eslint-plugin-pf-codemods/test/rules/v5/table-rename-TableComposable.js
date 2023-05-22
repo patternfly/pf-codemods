@@ -7,6 +7,9 @@ ruleTester.run("table-rename-TableComposable", rule, {
       code: `import { Table } from '@patternfly/react-table'; <Table data-codemods="true">Body</Table>`,
     },
     {
+      code: `export { Table as CustomTable } from '@patternfly/react-table';`,
+    },
+    {
       // No @patternfly/react-core import
       code: `<Table data-codemods="true">Body</Table>`,
     },
@@ -27,6 +30,16 @@ ruleTester.run("table-rename-TableComposable", rule, {
         {
           message: "TableComposable has been replaced with Table",
           type: "JSXIdentifier",
+        },
+      ],
+    },
+    {
+      code: `export { TableComposable as CustomTable } from '@patternfly/react-table';`,
+      output: `export { Table as CustomTable /* data-codemods */ } from '@patternfly/react-table';`,
+      errors: [
+        {
+          message: "TableComposable has been replaced with Table",
+          type: "ExportNamedDeclaration",
         },
       ],
     },

@@ -11,11 +11,17 @@ ruleTester.run("emptyState-rename-components", rule, {
       </>`,
     },
     {
+      code: `export { EmptyStateActions as CustomESActions } from '@patternfly/react-core';`,
+    },
+    {
       code: `import { EmptyStateActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';
       <>
         <EmptyStateActions>Primary action</EmptyStateActions>
         <EmptyStateActions>Other actions</EmptyStateActions>
       </>`,
+    },
+    {
+      code: `export { EmptyStateActions as CustomESActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';`,
     },
     {
       // No @patternfly/react-core import
@@ -39,6 +45,32 @@ ruleTester.run("emptyState-rename-components", rule, {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
           type: "JSXElement",
+        },
+      ],
+    },
+    {
+      code: `export { EmptyStateSecondaryActions as CustomESSecondaryActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';`,
+      output: `export { EmptyStateActions as CustomESSecondaryActions } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js';`,
+      errors: [
+        {
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
+          type: "ExportNamedDeclaration",
+        },
+      ],
+    },
+    {
+      code: `export { EmptyStatePrimary as CustomESPrimary, EmptyStateSecondaryActions as CustomESSecondaryActions } from '@patternfly/react-core';`,
+      output: `export { EmptyStateActions as CustomESPrimary, EmptyStateActions as CustomESSecondaryActions } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: "EmptyStatePrimary has been replaced with EmptyStateActions",
+          type: "ExportNamedDeclaration",
+        },
+        {
+          message:
+            "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
+          type: "ExportNamedDeclaration",
         },
       ],
     },
