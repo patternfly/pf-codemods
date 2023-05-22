@@ -170,19 +170,27 @@ function moveSpecifiers(
         });
       },
       JSXIdentifier(node) {
-        node = node.parent;
+        const parentNode =
+          node.parent.type === "JSXMemberExpression"
+            ? node.parent.parent
+            : node.parent;
+
         if (
           !aliasSuffix ||
-          !["JSXOpeningElement", "JSXClosingElement"].includes(node.type)
-        )
+          !["JSXOpeningElement", "JSXClosingElement"].includes(
+            parentNode.type
+          ) ||
+          parentNode.name?.property === node
+        ) {
           return;
+        }
 
-        const openingElement = node.name;
-        const elementName = openingElement.object?.name || openingElement.name;
+        const elementName =
+          parentNode.name?.object?.name || parentNode.name?.name;
 
-        // Fixer for specifiersToMove objects with "component" type
+        // Fixer for importsToMove objects with "component" type
         if (
-          importSpecifiersToMove.some(
+          importSpecifiersToMove.find(
             (imp) =>
               imp.local.name === elementName &&
               imp.imported.name === imp.local.name &&
@@ -198,26 +206,18 @@ function moveSpecifiers(
             fix(fixer) {
               const fixes = [
                 fixer.replaceText(
-                  openingElement.object || openingElement,
+                  parentNode.name?.object || parentNode.name,
                   `${elementName}${aliasSuffix}`
                 ),
               ];
-              // if (!node.selfClosing) {
-              //   fixes.push(
-              //     fixer.replaceText(
-              //       node.parent.closingElement.name,
-              //       `${node.name.name}${aliasSuffix}`
-              //     )
-              //   );
-              // }
-              console.log(fixes);
+
               return fixes;
             },
           });
         }
 
         // Fixer for importsToMove objects with non-"component" type
-        const existingPropsToUpdate = node.attributes?.filter((attr) => {
+        const existingPropsToUpdate = parentNode.attributes?.filter((attr) => {
           if (attr.value) {
             const propValue =
               attr.value.expression?.object?.name ||

@@ -295,11 +295,12 @@ const alertVariantOption = AlertVariant.default;
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
   <Switch onChange={(foo) => handler(foo)} />
-  <TableDeprecated />
-  <TableDeprecated rows={[]} />
-  <TableBodyDeprecated />
+  <Table rows={[]} />
+  <Table>
+    <TableHeader />
+    <TableBody />
+  </Table>
   <TableComposable />
-  <TableHeaderDeprecated />
   <Tabs onToggle={(foo) => handler(foo)} />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextArea isReadOnly isIconSprite />
