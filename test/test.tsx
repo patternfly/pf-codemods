@@ -210,7 +210,7 @@ const alertVariantOption = AlertVariant.default;
     <ESP>Primary action</ESP>
     <EmptyStateSecondaryActions>Secondary Actions</EmptyStateSecondaryActions>
   </EmptyState>
-  <EmptyState variant="small" />
+  <EmptyState variant='small' />
   <EmptyStateIcon />
   <EmptyStateIcon component={Spinner} variant='container' />
   <ExpandableSection onToggle={(foo) => handler(foo)} />
@@ -297,6 +297,7 @@ const alertVariantOption = AlertVariant.default;
   <Select variant={SelectVariant.single}>
     <SelectOpt />
   </Select>
+  <Select variant='typeahead' />
   <SelectOption hasCheck itemId='test' />
   <SelectToggle onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />

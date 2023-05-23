@@ -14,6 +14,7 @@ const warningRules = [
   "conditional-aria",
   "datePicker-warn-appendTo-default-value-changed",
   "datepicker-warn-helperText",
+  "deprecatedSelect-warn-markupUpdated",
   "emptyState-warn-change-structure",
   "formControls-updated-markup",
   "horizontalSubnav-warn-ariaLabel",

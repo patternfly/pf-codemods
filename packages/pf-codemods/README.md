@@ -786,6 +786,10 @@ Out:
 <Divider orientation={{ default: "vertical" }} />
 ```
 
+### deprecatedSelect-warn-markupUpdated [(#9172)](https://github.com/patternfly/patternfly-react/pull/9172)
+
+Our deprecated implementation of Select has had its markup changed. Selectors may require updating. This rule will raise a warning, but will not make any changes.
+
 ### drawerPanelContent-warn-updated-callback [(#8736)](https://github.com/patternfly/patternfly-react/pull/8736)
 
 We've updated the `onResize` prop for DrawerPanelContent to include the `event` as its first parameter. Handlers may require an update.
