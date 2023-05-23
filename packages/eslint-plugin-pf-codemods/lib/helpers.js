@@ -169,15 +169,28 @@ function moveSpecifiers(
           },
         });
       },
-      JSXElement(node) {
-        if (!aliasSuffix) return;
+      JSXIdentifier(node) {
+        const parentNode =
+          node.parent.type === "JSXMemberExpression"
+            ? node.parent.parent
+            : node.parent;
 
-        const openingElement = node.openingElement?.name;
-        const elementName = openingElement.object?.name || openingElement.name;
-
-        // Fixer for specifiersToMove objects with "component" type
         if (
-          importSpecifiersToMove.some(
+          !aliasSuffix ||
+          !["JSXOpeningElement", "JSXClosingElement"].includes(
+            parentNode.type
+          ) ||
+          parentNode.name?.property === node
+        ) {
+          return;
+        }
+
+        const elementName =
+          parentNode.name?.object?.name || parentNode.name?.name;
+
+        // Fixer for importsToMove objects with "component" type
+        if (
+          importSpecifiersToMove.find(
             (imp) =>
               imp.local.name === elementName &&
               imp.imported.name === imp.local.name &&
@@ -193,35 +206,26 @@ function moveSpecifiers(
             fix(fixer) {
               const fixes = [
                 fixer.replaceText(
-                  openingElement.object || openingElement,
+                  parentNode.name?.object || parentNode.name,
                   `${elementName}${aliasSuffix}`
                 ),
               ];
-              if (!node.openingElement.selfClosing) {
-                fixes.push(
-                  fixer.replaceText(
-                    node.closingElement.name,
-                    `${node.openingElement.name.name}${aliasSuffix}`
-                  )
-                );
-              }
+
               return fixes;
             },
           });
         }
 
-        // Fixer for specifiersToMove objects with non-"component" type
-        const existingPropsToUpdate = node.openingElement.attributes.filter(
-          (attr) => {
-            if (attr.value) {
-              const propValue =
-                attr.value.expression?.object?.name ||
-                attr.value.expression?.name;
-              return propValuesToUpdate.includes(propValue);
-            }
+        // Fixer for importsToMove objects with non-"component" type
+        const existingPropsToUpdate = parentNode.attributes?.filter((attr) => {
+          if (attr.value) {
+            const propValue =
+              attr.value.expression?.object?.name ||
+              attr.value.expression?.name;
+            return propValuesToUpdate.includes(propValue);
           }
-        );
-        if (existingPropsToUpdate.length) {
+        });
+        if (existingPropsToUpdate?.length) {
           existingPropsToUpdate.forEach((propToUpdate) => {
             const currentPropToUpdate =
               propToUpdate.value?.expression?.object ||

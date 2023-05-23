@@ -76,6 +76,10 @@ import {
   OverflowMenuDropdownItem,
   Page,
   PageGroup,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
   PageNavigation,
   PageSidebar,
   PageToggleButton,
@@ -84,6 +88,11 @@ import {
   Popper,
   ProgressStep,
   Radio,
+  Select,
+  SelectGroup,
+  SelectMenu,
+  SelectOption as SelectOpt,
+  SelectToggle,
   Slider,
   Spinner,
   Switch,
@@ -99,28 +108,18 @@ import {
   Wizard,
 } from "@patternfly/react-core";
 import {
-  PageHeader as PageHeaderDeprecated,
-  PageHeaderTools as PageHeaderToolsDeprecated,
-  PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
-  PageHeaderToolsItem as PageHeaderToolsItemDeprecated,
-  Select as SelectDeprecated,
-  SelectGroup as SelectGroupDeprecated,
-  SelectMenu as SelectMenuDeprecated,
-  SelectOption as SelectOpt,
-  SelectToggle as SelectToggleDeprecated,
-} from "@patternfly/react-core/deprecated";
-import {
   SelectOption,
   WizardBody as WizardBodyNext,
   WizardFooter,
 } from "@patternfly/react-core/next";
-import { Td, Tr } from "@patternfly/react-table";
 import {
-  Table as TableDeprecated,
-  TableBody as TableBodyDeprecated,
-  TableHeader as TableHeaderDeprecated,
-  TableProps as TablePropsDeprecated,
-} from "@patternfly/react-table/deprecated";
+  Table,
+  TableBody,
+  TableHeader,
+  TableProps,
+  Td,
+  Tr,
+} from "@patternfly/react-table";
 import { TableComposable } from "@patternfly/react-table";
 import { TableComposable as PFTable } from "@patternfly/react-table";
 
@@ -171,7 +170,9 @@ const alertVariantOption = AlertVariant.default;
   <Chart themeVariant />
   <Checkbox onChange={(checked, e) => handleCheck(check, e)} />
   <ClipboardCopy onChange={(foo) => handleChange(foo)} />
-  <ContextSelector />
+  <ContextSelector>
+    <ContextSelectorItem />
+  </ContextSelector>
   <DataList onDragStart itemOrder={["1", "2", "3"]} />
   <DataList onSelectDataListItem={(id, text) => handler(id, text)} />
   <DataList selectableRow={{ onChange = () => {} }} />
@@ -258,10 +259,10 @@ const alertVariantOption = AlertVariant.default;
   <OverflowMenuDropdownItem index={0} />
   <Page onPageResize={({ obj }) => handler({ obj })} />
   <PageGroup aria-label='tester' />
-  <PageHeaderDeprecated />
-  <PageHeaderToolsDeprecated />
-  <PageHeaderToolsGroupDeprecated />
-  <PageHeaderToolsItemDeprecated />
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
   <PageNavigation aria-label='tester' />
   <PageSidebar isNavOpen />
   <PageSidebar nav='Content' />
@@ -289,17 +290,21 @@ const alertVariantOption = AlertVariant.default;
   <Popper popperMatchesTriggerWidth={false} />
   <ProgressStep />
   <Radio onChange={(foo, event) => handler(foo, event)} />
-  <SelectDeprecated onToggle={} />
+  <Select onToggle={} />
+  <Select variant={SelectVariant.single}>
+    <SelectOpt />
+  </Select>
   <SelectOption hasCheck />
-  <SelectToggleDeprecated onToggle={} />
+  <SelectToggle onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
   <Switch onChange={(foo) => handler(foo)} />
-  <TableDeprecated />
-  <TableDeprecated rows={[]} />
-  <TableBodyDeprecated />
+  <Table rows={[]} />
+  <Table>
+    <TableHeader />
+    <TableBody />
+  </Table>
   <TableComposable />
-  <TableHeaderDeprecated />
   <Tabs onToggle={(foo) => handler(foo)} />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextArea isReadOnly isIconSprite />
