@@ -209,6 +209,7 @@ const alertVariantOption = AlertVariant.default;
     <ESP>Primary action</ESP>
     <EmptyStateSecondaryActions>Secondary Actions</EmptyStateSecondaryActions>
   </EmptyState>
+  <EmptyState variant="small" />
   <EmptyStateIcon />
   <EmptyStateIcon component={Spinner} variant='container' />
   <ExpandableSection onToggle={(foo) => handler(foo)} />

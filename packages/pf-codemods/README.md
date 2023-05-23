@@ -1131,7 +1131,7 @@ Out:
 
 ### emptyStateVariant-rename-values [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
 
-We've renamed the EmptyStateVariant enum values 'small' to 'sm' and 'large' to 'lg'.
+We've renamed the EmptyStateVariant enum and prop values 'small' to 'sm' and 'large' to 'lg'.
 
 #### Examples
 
@@ -1140,6 +1140,8 @@ In:
 ```jsx
 const myVariant = EmptyStateVariant.small;
 <EmptyState variant={EmptyStateVariant.large} />
+<EmptyState variant="small" />
+<EmptyState variant="large" />
 ```
 
 Out:
@@ -1147,6 +1149,8 @@ Out:
 ```jsx
 const myVariant = EmptyStateVariant.sm;
 <EmptyState variant={EmptyStateVariant.lg} />
+<EmptyState variant="sm" />
+<EmptyState variant="lg" />
 ```
 
 ### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
