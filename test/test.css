@@ -1,0 +1,22 @@
+.pf-c-console {
+    display: grid;
+    grid-template-areas:
+      'actions-main actions-extra'
+      'main main';
+    row-gap: var(--pf-v5-global--spacer--md);
+  }
+  .pf-c-console__actions {
+    grid-area: actions-main;
+    display: flex;
+  }
+  .pf-c-console__actions > div {
+    margin-right: var(--pf-v5-global--spacer--sm);
+  }
+
+  .pf-m-selectable {
+    color: red;
+  }
+
+  .pf-u-screen-reader {
+    color: red;
+  }

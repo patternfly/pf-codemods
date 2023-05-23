@@ -8,6 +8,7 @@ const {
   cleanupRules
 } = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
+const { classNameUpdate } = require('./scripts/classNameUpdate')
 const program = new Command();
 
 program
@@ -20,6 +21,7 @@ program
   .option('--format <format>', 'What eslint report format to use', 'stylish')
   .option('--no-cache', 'Disables eslint caching')
   .option('--v4', 'Run v3 to v4 codemods')
+  .option('--updateClassNames', 'Update hardcoded class names to the new versioned format')
   .action(runCodemods);
 
 /**
@@ -63,6 +65,13 @@ async function printResults(eslint, results, format) {
 
 async function runCodemods(path, otherPaths, options) {
   const prefix = "@patternfly/pf-codemods/";
+
+  if (options.updateClassNames && options.fix) {
+    const paths = otherPaths.concat(path);
+    paths.forEach(async (path) => {
+      await classNameUpdate(path);
+    })
+  }
 
   if (options.only) {
     // Set rules to error like eslint likes
