@@ -491,7 +491,7 @@ function getMoveSpecifiersInvalidtests(
   const createImportErrors = (specifierName, selfClosing = true) => {
     const errorsArray = [
       {
-        message: `${specifierName} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+        message: `${specifierName} has been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package${endOfMessage}`,
         type: "ImportDeclaration",
       },
       {
@@ -534,7 +534,7 @@ function getMoveSpecifiersInvalidtests(
       output: `import {\n\t${componentSpecifier} as ${componentSpecifier}Deprecated\n} from '@patternfly/react-${package}/deprecated'; <${componentSpecifier}Deprecated.Provider />`,
       errors: [
         {
-          message: `${componentSpecifier} has been deprecated. Running the fix flag will update your imports to our deprecated package${endOfMessage}`,
+          message: `${componentSpecifier} has been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package${endOfMessage}`,
           type: "ImportDeclaration",
         },
         {
@@ -551,7 +551,7 @@ function getMoveSpecifiersInvalidtests(
     tests.push({
       code: `import {${componentSpecifier} } from '@patternfly/react-${package}'; <${componentSpecifier}.Provider />`,
       output: `import {\n\t${componentSpecifier} as ${componentSpecifier}Deprecated\n} from '@patternfly/react-${package}/deprecated'; <${componentSpecifier}Deprecated.Provider />`,
-      errors: createImportErrors(componentSpecifier, false),
+      errors: createImportErrors(componentSpecifier),
     });
     tests.push({
       code: `import {${componentSpecifier}, Foo } from '@patternfly/react-${package}'; <${componentSpecifier} />`,
@@ -561,7 +561,7 @@ function getMoveSpecifiersInvalidtests(
     tests.push({
       code: `import { ${componentSpecifier}, Foo } from '@patternfly/react-${package}'; <${componentSpecifier}></${componentSpecifier}>`,
       output: `import {\n\tFoo\n} from '@patternfly/react-${package}';\nimport {\n\t${componentSpecifier} as ${componentSpecifier}Deprecated\n} from '@patternfly/react-${package}/deprecated'; <${componentSpecifier}Deprecated></${componentSpecifier}Deprecated>`,
-      errors: createImportErrors(componentSpecifier),
+      errors: createImportErrors(componentSpecifier, false),
     });
     tests.push({
       code: `import { ${componentSpecifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated'; <${componentSpecifier} />`,
