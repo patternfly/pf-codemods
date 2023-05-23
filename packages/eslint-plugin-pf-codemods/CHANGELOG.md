@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.79.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.79.0...@patternfly/eslint-plugin-pf-codemods@1.79.1) (2023-05-23)
+
+
+### Bug Fixes
+
+* **moveSpecifiers helper:** updated logic for nested elements ([#487](https://github.com/patternfly/pf-codemods/issues/487)) ([72fa6d2](https://github.com/patternfly/pf-codemods/commit/72fa6d2a7afb2f08a6bccc4d09f378de23101b30))
+
+
+
+
+
 # [1.79.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.78.0...@patternfly/eslint-plugin-pf-codemods@1.79.0) (2023-05-22)
 
 
