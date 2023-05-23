@@ -76,6 +76,10 @@ import {
   OverflowMenuDropdownItem,
   Page,
   PageGroup,
+  PageHeader,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
   PageNavigation,
   PageSidebar,
   PageToggleButton,
@@ -89,7 +93,6 @@ import {
   SelectMenu,
   SelectOption as SelectOpt,
   SelectToggle,
-  SelectVariant,
   Slider,
   Spinner,
   Switch,
@@ -105,28 +108,18 @@ import {
   Wizard,
 } from "@patternfly/react-core";
 import {
-  PageHeader as PageHeaderDeprecated,
-  PageHeaderTools as PageHeaderToolsDeprecated,
-  PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
-  PageHeaderToolsItem as PageHeaderToolsItemDeprecated,
-  Select as SelectDeprecated,
-  SelectGroup as SelectGroupDeprecated,
-  SelectMenu as SelectMenuDeprecated,
-  SelectOption as SelectOpt,
-  SelectToggle as SelectToggleDeprecated,
-} from "@patternfly/react-core/deprecated";
-import {
   SelectOption,
   WizardBody as WizardBodyNext,
   WizardFooter,
 } from "@patternfly/react-core/next";
-import { Td, Tr } from "@patternfly/react-table";
 import {
-  Table as TableDeprecated,
-  TableBody as TableBodyDeprecated,
-  TableHeader as TableHeaderDeprecated,
-  TableProps as TablePropsDeprecated,
-} from "@patternfly/react-table/deprecated";
+  Table,
+  TableBody,
+  TableHeader,
+  TableProps,
+  Td,
+  Tr,
+} from "@patternfly/react-table";
 import { TableComposable } from "@patternfly/react-table";
 import { TableComposable as PFTable } from "@patternfly/react-table";
 
@@ -266,10 +259,10 @@ const alertVariantOption = AlertVariant.default;
   <OverflowMenuDropdownItem index={0} />
   <Page onPageResize={({ obj }) => handler({ obj })} />
   <PageGroup aria-label='tester' />
-  <PageHeaderDeprecated />
-  <PageHeaderToolsDeprecated />
-  <PageHeaderToolsGroupDeprecated />
-  <PageHeaderToolsItemDeprecated />
+  <PageHeader />
+  <PageHeaderTools />
+  <PageHeaderToolsGroup />
+  <PageHeaderToolsItem />
   <PageNavigation aria-label='tester' />
   <PageSidebar isNavOpen />
   <PageSidebar nav='Content' />
@@ -302,7 +295,7 @@ const alertVariantOption = AlertVariant.default;
     <SelectOpt />
   </Select>
   <SelectOption hasCheck />
-  <SelectToggleDeprecated onToggle={} />
+  <SelectToggle onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
   <Switch onChange={(foo) => handler(foo)} />
