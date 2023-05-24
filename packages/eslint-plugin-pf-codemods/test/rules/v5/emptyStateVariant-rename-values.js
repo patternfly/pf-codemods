@@ -9,6 +9,10 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
       <EmptyState variant={EmptyStateVariant.lg} />`,
     },
     {
+      code: `import { EmptyState } from '@patternfly/react-core'; 
+      <EmptyState variant="lg" />`,
+    },
+    {
       code: `import { EmptyState, EmptyStateVariant } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; 
       const myVariant = EmptyStateVariant.sm; 
       <EmptyState variant={EmptyStateVariant.lg} />`,
@@ -35,6 +39,18 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
         {
           message: `EmptyStateVariant enum value 'large' was renamed to 'lg'`,
           type: "MemberExpression",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyState } from '@patternfly/react-core'; 
+      <EmptyState variant="large" />`,
+      output: `import { EmptyState } from '@patternfly/react-core'; 
+      <EmptyState variant="lg" />`,
+      errors: [
+        {
+          message: `The "variant" prop type for EmptyState has been updated. The previous values of "small" and "large" have been replaced with values of "sm" and "lg" respectively.`,
+          type: "JSXOpeningElement",
         },
       ],
     },
