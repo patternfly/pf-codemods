@@ -66,11 +66,12 @@ async function printResults(eslint, results, format) {
 async function runCodemods(path, otherPaths, options) {
   const prefix = "@patternfly/pf-codemods/";
 
-  if (options.updateClassNames && options.fix) {
+  if (options.updateClassNames) {
     const paths = otherPaths.concat(path);
     paths.forEach(async (path) => {
-      await classNameUpdate(path);
+      await classNameUpdate(path, options.fix);
     })
+    return
   }
 
   if (options.only) {
