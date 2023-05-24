@@ -2409,6 +2409,26 @@ import {
 </>;
 ```
 
+### selectDropdown-rename-itemId [(#9175)](https://github.com/patternfly/patternfly-react/pull/9175)
+
+The `itemId` prop for our new implementation of SelectOption and DropdownItem has been renamed to `value`.
+
+#### Examples
+
+In:
+
+```jsx
+<SelectOption itemId="Option 1" />
+<DropdownItem itemId="Item 1" />
+```
+
+Out:
+
+```jsx
+<SelectOption value="Option 1" />
+<DropdownItem value="Item 1" />
+```
+
 ### simpleList-remove-isCurrent [(#8132)](https://github.com/patternfly/patternfly-react/pull/8132)
 
 We've removed the deprecated the `isCurrent` prop. This rule wil replace it with `isActive`.

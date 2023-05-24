@@ -111,6 +111,7 @@ import {
   SelectOption,
   WizardBody as WizardBodyNext,
   WizardFooter,
+  DropdownItem as NextDropdownItem,
 } from "@patternfly/react-core/next";
 import {
   Table,
@@ -251,6 +252,7 @@ const alertVariantOption = AlertVariant.default;
   <Nav flyout={"menu"} />
   <Nav onSelect={(foo) => handler(foo)} onToggle={(foo) => handler(foo)} />
   <Nav variant='horizontal-subnav' />
+  <NextDropdownItem itemId='test' />
   <NotificationBadge isRead />
   <NotificationBadge isRead={false} />
   <NotificationBadge isRead={isRead} />
@@ -295,7 +297,7 @@ const alertVariantOption = AlertVariant.default;
   <Select variant={SelectVariant.single}>
     <SelectOpt />
   </Select>
-  <SelectOption hasCheck />
+  <SelectOption hasCheck itemId='test' />
   <SelectToggle onToggle={} />
   <Slider onChange={(foo) => handler(foo)} />
   <Spinner isSVG />
