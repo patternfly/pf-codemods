@@ -8,20 +8,21 @@ module.exports = {
     const emptyStateVariantImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).imports.some((specifier) => specifier.imported.name === "EmptyStateVariant");
+    ).imports.some(
+      (specifier) => specifier.imported.name === "EmptyStateVariant"
+    );
 
     const emptyStateImport = getFromPackage(
       context,
       "@patternfly/react-core"
     ).imports.find((specifier) => specifier.imported.name === "EmptyState");
 
-
     const rename = {
       small: "sm",
       large: "lg",
     };
 
-    return !emptyStateVariantImport|| !emptyStateImport
+    return !emptyStateVariantImport && !emptyStateImport
       ? {}
       : {
           MemberExpression(node) {
@@ -57,11 +58,7 @@ module.exports = {
                 (attribute) => attribute.name?.name === "variant"
               );
 
-              if (
-                variantProp &&
-                (rename[variantProp.value?.value] ||
-                  variantProp.value?.type === "Literal")
-              ) {
+              if (variantProp && rename[variantProp.value?.value]) {
                 context.report({
                   node,
                   message: `The "variant" prop type for EmptyState has been updated. The previous values of "small" and "large" have been replaced with values of "sm" and "lg" respectively.`,
