@@ -31,18 +31,32 @@ module.exports = {
             }
           });
           if(shouldCloseAttr) {
-            const params = shouldCloseAttr.value.expression.params;
-            if(params?.length === 2) { // only attempt to remove first param if 2 are passed
-              const firstParam = params[0];
-              const secondParam = params[1];
+            let params = [];
+            if ( shouldCloseAttr.value.expression.type === 'Identifier') {
+              const propProperties = {
+                type: shouldCloseAttr.value?.expression?.type,
+                name: shouldCloseAttr.value?.expression?.name,
+              };
+              const currentScope = context.getScope();
+              const matchingVariable = currentScope.variables.find(
+                (variable) => variable.name === propProperties.name
+              );
+              const matchingDefinition = matchingVariable?.defs.find(
+                (def) => def.name?.name === propProperties.name
+              );
+              params = 
+                matchingDefinition?.type === "FunctionName"
+                  ? matchingDefinition?.node?.params
+                  : matchingDefinition?.node?.init?.params;
+            } else {
+              params = shouldCloseAttr.value.expression.params;
+            }
+
+            // only report if 3 are passed or one has tip in name
+            if(params?.length === 3 || params.some( (p) => /tip/i.test("" + p.name))) {
               context.report({
                 node,
-                message: "Popover shouldClose function's first parameter has been removed.",
-                fix(fixer) {
-                  const fixes = [];
-                  fixes.push(fixer.removeRange([firstParam.range[0], secondParam.range[0]])); // remove first property
-                  return fixes;
-                }
+                message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
               });
             }
           }
