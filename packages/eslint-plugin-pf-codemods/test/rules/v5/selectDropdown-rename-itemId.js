@@ -4,13 +4,13 @@ const rule = require("../../../lib/rules/v5/selectDropdown-rename-itemId");
 ruleTester.run("selectDropdown-rename-itemId", rule, {
   valid: [
     {
-      code: `import { SelectOption } from '@patternfly/react-core'; <SelectOption someProp />`,
+      code: `import { SelectOption } from '@patternfly/react-core'; <SelectOption />`,
     },
     {
       code: `import { SelectOption } from '@patternfly/react-core'; <SelectOption value />`,
     },
     {
-      code: `import { DropdownItem } from '@patternfly/react-core'; <DropdownItem someProp />`,
+      code: `import { DropdownItem } from '@patternfly/react-core'; <DropdownItem />`,
     },
     {
       code: `import { DropdownItem } from '@patternfly/react-core'; <DropdownItem value />`,
@@ -38,27 +38,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
     {
       code: `import { DropdownItem } from '@patternfly/react-core'; <DropdownItem itemId="test" />`,
       output: `import { DropdownItem } from '@patternfly/react-core'; <DropdownItem value="test" />`,
-      errors: [
-        {
-          message: `itemId prop for DropdownItem has been renamed to value`,
-          type: "JSXOpeningElement",
-        },
-      ],
-    },
-    // React next import
-    {
-      code: `import { SelectOption } from '@patternfly/react-core/next'; <SelectOption itemId="test" />`,
-      output: `import { SelectOption } from '@patternfly/react-core/next'; <SelectOption value="test" />`,
-      errors: [
-        {
-          message: `itemId prop for SelectOption has been renamed to value`,
-          type: "JSXOpeningElement",
-        },
-      ],
-    },
-    {
-      code: `import { DropdownItem } from '@patternfly/react-core/next'; <DropdownItem itemId="test" />`,
-      output: `import { DropdownItem } from '@patternfly/react-core/next'; <DropdownItem value="test" />`,
       errors: [
         {
           message: `itemId prop for DropdownItem has been renamed to value`,

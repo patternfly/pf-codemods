@@ -24,13 +24,8 @@ module.exports = {
       context,
       "@patternfly/react-core"
     );
-    const { imports: nextImports } = getFromPackage(
-      context,
-      "@patternfly/react-core/next"
-    );
-
-    const selectAndDropdownImports = [...coreImports, ...nextImports].filter(
-      (imp) => ["SelectOption", "DropdownItem"].includes(imp.imported?.name)
+    const selectAndDropdownImports = coreImports.filter((imp) =>
+      ["SelectOption", "DropdownItem"].includes(imp.imported?.name)
     );
 
     return !selectAndDropdownImports.length
