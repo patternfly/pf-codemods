@@ -33,7 +33,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
   invalid: [
     {
       code: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant="typeahead" />`,
-      output: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant="typeahead" />`,
       errors: [
         {
           message:
@@ -44,7 +43,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     },
     {
       code: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant={SelectVariant.typeahead} />`,
-      output: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant={SelectVariant.typeahead} />`,
       errors: [
         {
           message:
@@ -55,7 +53,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     },
     {
       code: `import { Select } from '@patternfly/react-core/deprecated'; const variant = "typeahead"; <Select variant={variant} />`,
-      output: `import { Select } from '@patternfly/react-core/deprecated'; const variant = "typeahead"; <Select variant={variant} />`,
       errors: [
         {
           message:
@@ -66,7 +63,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     },
     {
       code: `import { Select } from '@patternfly/react-core/deprecated'; const variant = SelectVariant.typeahead; <Select variant={variant} />`,
-      output: `import { Select } from '@patternfly/react-core/deprecated'; const variant = SelectVariant.typeahead; <Select variant={variant} />`,
       errors: [
         {
           message:
@@ -78,7 +74,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     // Multiple typeahead tests
     {
       code: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant="typeaheadmulti" />`,
-      output: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant="typeaheadmulti" />`,
       errors: [
         {
           message:
@@ -89,7 +84,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     },
     {
       code: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant={SelectVariant.typeaheadMulti} />`,
-      output: `import { Select } from '@patternfly/react-core/deprecated'; <Select variant={SelectVariant.typeaheadMulti} />`,
       errors: [
         {
           message:
@@ -101,7 +95,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     // Import from dist
     {
       code: `import { Select } from '@patternfly/react-core/dist/esm/deprecated/components/Select/index.js'; <Select variant="typeahead" />`,
-      output: `import { Select } from '@patternfly/react-core/dist/esm/deprecated/components/Select/index.js'; <Select variant="typeahead" />`,
       errors: [
         {
           message:
@@ -113,7 +106,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
     // Aliased import
     {
       code: `import { Select as DeprecatedSelect } from '@patternfly/react-core/deprecated'; <DeprecatedSelect variant="typeahead" />`,
-      output: `import { Select as DeprecatedSelect } from '@patternfly/react-core/deprecated'; <DeprecatedSelect variant="typeahead" />`,
       errors: [
         {
           message:
