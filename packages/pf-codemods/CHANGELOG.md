@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.77.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.77.0...@patternfly/pf-codemods@1.77.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* **select deprecated:** updated markup ([#491](https://github.com/patternfly/pf-codemods/issues/491)) ([181d4ae](https://github.com/patternfly/pf-codemods/commit/181d4ae7e182fbc15aa4bbd64ae34397b20a5602))
+
+
+
+
+
 # [1.77.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.76.3...@patternfly/pf-codemods@1.77.0) (2023-05-25)
 
 
