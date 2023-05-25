@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.77.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.76.3...@patternfly/pf-codemods@1.77.0) (2023-05-25)
+
+
+### Features
+
+* **Select,Dropdown:** renamed itemId prop ([#493](https://github.com/patternfly/pf-codemods/issues/493)) ([8d2da9f](https://github.com/patternfly/pf-codemods/commit/8d2da9fb296bd176ba280721bf09ce653bd54f42))
+
+
+
+
+
 ## [1.76.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.76.2...@patternfly/pf-codemods@1.76.3) (2023-05-25)
 
 
