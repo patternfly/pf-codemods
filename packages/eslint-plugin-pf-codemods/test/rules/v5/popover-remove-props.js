@@ -9,6 +9,9 @@ ruleTester.run("popover-remove-props", rule, {
     {
       code: `import { Popover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <Popover />`,
     },
+    { //2 params on shouldClose but nothing matching 'tip'
+      code: `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(event, hideFunct) => {}} />`
+    },
     {
       //handler doesn't have parameter
       code:   `import { Popover } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; const onHideHandler = () => {}; <Popover onHide={onHideHandler} />`,
@@ -45,10 +48,25 @@ ruleTester.run("popover-remove-props", rule, {
     },
     {
       code:   `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(tip, hideFunct) => {}} />`,
-      output: `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(hideFunct) => {}} />`,
       errors: [ 
       {
-        message: "Popover shouldClose function's first parameter has been removed.",
+        message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
+        type: "JSXElement",
+      }],
+    },
+    {
+      code:   `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(event, tip, hideFunct) => {}} />`,
+      errors: [ 
+      {
+        message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
+        type: "JSXElement",
+      }],
+    },
+    { //based on 3 params without a match on 'tip'
+      code:   `import { Popover } from '@patternfly/react-core'; <Popover shouldClose={(event, tiiip, hideFunct) => {}} />`,
+      errors: [ 
+      {
+        message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
         type: "JSXElement",
       }],
     },

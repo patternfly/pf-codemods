@@ -6,7 +6,7 @@ module.exports = {
   create: addCallbackParam(["Popover"], {
     shouldClose: {
       defaultParamName: "_event",
-      previousParamIndex: 1,
+      previousParamIndex: 2,
       otherMatchers: /^_?(ev\w*|e$)/,
     },
     shouldOpen: {
