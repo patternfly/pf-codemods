@@ -1,13 +1,21 @@
 const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/9074
+// https://github.com/patternfly/patternfly-react/pull/9176
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const inputGroupImport = getFromPackage(
-      context,
-      "@patternfly/react-core"
-    ).imports.find((specifier) => specifier.imported?.name == "InputGroup");
+    const { imports } = getFromPackage(context, "@patternfly/react-core");
+
+    const inputGroupImport = imports.find(
+      (specifier) => specifier.imported?.name == "InputGroup"
+    );
+    const inputGroupItemImport = imports.find(
+      (specifier) => specifier.imported?.name == "InputGroupItem"
+    );
+    const inputGroupTextImport = imports.find(
+      (specifier) => specifier.imported?.name == "InputGroupText"
+    );
 
     return !inputGroupImport
       ? {}
@@ -19,7 +27,7 @@ module.exports = {
               );
             if (
               getMatchingSpecifier(inputGroupImport.imported?.name) &&
-              !getMatchingSpecifier("InputGroupItem")
+              !inputGroupItemImport
             ) {
               context.report({
                 node,
@@ -38,11 +46,14 @@ module.exports = {
             if (parentName !== inputGroupImport.local?.name) {
               return;
             }
+            const inputGroupTextName = inputGroupTextImport?.local?.name;
 
             node.children?.forEach((child) => {
               const childName = child.openingElement?.name?.name;
               if (
-                childName === "InputGroupItem" ||
+                ["InputGroupItem", inputGroupItemImport?.local?.name].includes(
+                  childName
+                ) ||
                 ["JSXText", "Literal"].includes(child.type)
               ) {
                 return;
@@ -56,19 +67,29 @@ module.exports = {
                 )
               ) {
                 inputGroupItemProps = " isFill";
-              } else if (childName === "InputGroupText") {
+              } else if (childName === inputGroupTextName) {
                 inputGroupItemProps = " isBox";
               }
 
               context.report({
                 node,
-                message: `Each child passed to ${parentName} must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+                message: `Each child passed to ${parentName} must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.${
+                  childName === inputGroupTextName
+                    ? ' Additionally, InputGroupText is no longer exported and is instead rendered within InputGroupItem when the "isBox" prop is passed.'
+                    : ""
+                }`,
                 fix(fixer) {
+                  const sourceCode = context.getSourceCode();
+                  const newChild =
+                    childName === inputGroupTextName
+                      ? child.children
+                          ?.map((textChild) => sourceCode.getText(textChild))
+                          .join("")
+                      : sourceCode.getText(child);
+
                   return fixer.replaceText(
                     child,
-                    `<InputGroupItem${inputGroupItemProps}>${context
-                      .getSourceCode()
-                      .getText(child)}</InputGroupItem>`
+                    `<InputGroupItem${inputGroupItemProps}>${newChild}</InputGroupItem>`
                   );
                 },
               });

@@ -1465,9 +1465,12 @@ Out:
 
 We've updated the default value of the `aria-label` attribute for Nav with a `horizontal-subnav` variant to "local" (previously the default value was "Global").
 
-### inputGroup-add-inputGroupItem [(#9074)](https://github.com/patternfly/patternfly-react/pull/9074)
+### inputGroup-update-api [(#9074)](https://github.com/patternfly/patternfly-react/pull/9074) and [(#9176)](https://github.com/patternfly/patternfly-react/pull/9176)
 
-We've added the InputGroupItem component, which must wrap each child passed to an InputGroup. Additionally, the InputGroupItem component may need to have the `isFill`, `isBox`, and/or `isPlain` props passed in.
+We've made the following updates to the InputGroup API:
+
+- Added the InputGroupItem component, which must wrap each child passed to an InputGroup. The InputGroupItem component may need to have the `isFill`, `isBox`, and/or `isPlain` props adjusted to retain styling.
+- No longer exporting InputGroupText as it is now rendered within InputGroupItem when the `isBox` prop is passed to it.
 
 #### Examples
 
@@ -1479,7 +1482,7 @@ In:
   <textarea />
   <TextArea />
   <TextInput />
-  <InputGroupText />
+  <InputGroupText>Some text</InputGroupText>
   <button />
 </InputGroup>
 ```
@@ -1492,7 +1495,7 @@ Out:
   <InputGroupItem isFill><textarea /></InputGroupItem>
   <InputGroupItem isFill><TextArea /></InputGroupItem>
   <InputGroupItem isFill><TextInput /></InputGroupItem>
-  <InputGroupItem isBox><InputGroupText /></InputGroupItem>
+  <InputGroupItem isBox>Some text</InputGroupItem>
   <InputGroupItem><button /></InputGroupItem>
 </InputGroup>
 ```

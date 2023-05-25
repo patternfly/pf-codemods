@@ -1,7 +1,7 @@
 const ruleTester = require("../../ruletester");
-const rule = require("../../../lib/rules/v5/inputGroup-add-inputGroupItem");
+const rule = require("../../../lib/rules/v5/inputGroup-update-api");
 
-ruleTester.run("inputGroup-add-inputGroupItem", rule, {
+ruleTester.run("inputGroup-update-api", rule, {
   valid: [
     {
       code: `import { InputGroup, InputGroupItem } from '@patternfly/react-core'; <InputGroup><InputGroupItem></InputGroupItem></InputGroup>`,
@@ -22,7 +22,7 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
@@ -37,7 +37,7 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
@@ -51,7 +51,7 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
@@ -65,7 +65,7 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
@@ -79,22 +79,22 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
     },
     // Child that is InputGroupText
     {
-      code: `import { InputGroup, InputGroupText } from '@patternfly/react-core'; <InputGroup><InputGroupText /></InputGroup>`,
-      output: `import { InputGroup, InputGroupText, InputGroupItem } from '@patternfly/react-core'; <InputGroup><InputGroupItem isBox><InputGroupText /></InputGroupItem></InputGroup>`,
+      code: `import { InputGroup, InputGroupText } from '@patternfly/react-core'; <InputGroup><InputGroupText>Some text</InputGroupText></InputGroup>`,
+      output: `import { InputGroup, InputGroupText, InputGroupItem } from '@patternfly/react-core'; <InputGroup><InputGroupItem isBox>Some text</InputGroupItem></InputGroup>`,
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted. Additionally, InputGroupText is no longer exported and is instead rendered within InputGroupItem when the "isBox" prop is passed.`,
           type: "JSXElement",
         },
       ],
@@ -109,7 +109,7 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
@@ -124,7 +124,7 @@ ruleTester.run("inputGroup-add-inputGroupItem", rule, {
           type: "ImportDeclaration",
         },
         {
-          message: `Each child passed to PFInputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may also need the "isFill", "isPlain", and/or "isBox" props passed in.`,
+          message: `Each child passed to PFInputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
           type: "JSXElement",
         },
       ],
