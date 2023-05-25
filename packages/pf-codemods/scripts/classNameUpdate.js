@@ -6,8 +6,8 @@ require("colors");
 const Diff = require("diff");
 
 const acceptedFileTypesRegex = /\.(s?css|less|(t|j)sx?|md)$/;
+const changeNeededRegex = /\bpf-([cul])-/g;
 const version = "v5";
-const classTypes = ["c", "u", "l"];
 
 function formatLineNumber(lastLineNumber, newLineNumber) {
   if (newLineNumber === lastLineNumber) {
@@ -29,7 +29,7 @@ function formatDiff(diff, part, i) {
   return proceedingPart["grey"] + part.value["green"] + followingPart["grey"];
 }
 
-function printDiff(fileName, oldContent, newContent, changeMatchingRegex) {
+function printDiff(fileName, oldContent, newContent) {
   const fileSplitByLine = oldContent.split("\n");
   const loggedFiles = [];
   let lastPartLineNumber;
@@ -42,11 +42,14 @@ function printDiff(fileName, oldContent, newContent, changeMatchingRegex) {
     }
 
     const lineNumber = fileSplitByLine.findIndex((line) =>
-      changeMatchingRegex.test(line)
+      changeNeededRegex.test(line)
     );
 
     const currentLineValue = fileSplitByLine[lineNumber];
-    const newLineValue = currentLineValue.replace(changeMatchingRegex, "");
+    const newLineValue = currentLineValue.replace(
+      new RegExp(changeNeededRegex, ""),
+      ""
+    );
     fileSplitByLine[lineNumber] = newLineValue;
 
     const formattedLineNumber = formatLineNumber(
@@ -72,18 +75,6 @@ function printDiff(fileName, oldContent, newContent, changeMatchingRegex) {
 }
 
 async function classNameUpdate(globTarget, makeChange) {
-  const joinedClassTypes = classTypes.reduce(
-    (acc, char) => acc + "|" + char,
-    ""
-  );
-  const changeNeededRegex = new RegExp(`\\bpf-(${joinedClassTypes})-`);
-
-  const changeMap = classTypes.reduce((acc, char) => {
-    const key = `\\bpf-${char}-`;
-    const val = `pf-${version}-${char}-`;
-    return { [key]: val, ...acc };
-  }, {});
-
   const files = glob.sync(globTarget, { ignore: "**/node_modules/**" });
 
   files.forEach(async (file) => {
@@ -102,14 +93,12 @@ async function classNameUpdate(globTarget, makeChange) {
       return;
     }
 
-    let newContent = fileContent;
+    const newContent = fileContent.replace(
+      changeNeededRegex,
+      `pf-${version}-$1-`
+    );
 
-    Object.keys(changeMap).forEach((change) => {
-      const changeRegex = new RegExp(change, "g");
-      newContent = newContent.replaceAll(changeRegex, changeMap[change]);
-    });
-
-    printDiff(file, fileContent, newContent, changeNeededRegex);
+    printDiff(file, fileContent, newContent);
 
     if (makeChange) {
       fs.writeFileSync(filePath, newContent);
