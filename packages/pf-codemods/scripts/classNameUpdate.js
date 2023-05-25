@@ -43,7 +43,7 @@ async function classNameUpdate(globTarget, makeChange) {
   files.forEach(async (file) => {
     const filePath = path.join(process.cwd(), file);
     const isDirectory = await isDir(filePath, file);
-    const isUnexpectedFile = !/\.(css|(t|j)sx?|md)$/.test(filePath);
+    const isUnexpectedFile = !/\.(s?css|less|(t|j)sx?|md)$/.test(filePath);
 
     if (isDirectory || isUnexpectedFile) {
       return;
