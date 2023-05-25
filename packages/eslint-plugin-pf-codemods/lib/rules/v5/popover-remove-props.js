@@ -50,20 +50,30 @@ module.exports = {
             const attr = node.openingElement.attributes.find(attribute => attribute.name?.name === name)
             if(attr) {
               const funct = attr.value.expression;
-              if(funct.params.length === 1) {
-                const firstParam = funct.params[0];
+              let params = [];
+              if ( funct.type === 'Identifier') {
+                const propProperties = {
+                  type: attr.value?.expression?.type,
+                  name: attr.value?.expression?.name,
+                };
+                const currentScope = context.getScope();
+                const matchingVariable = currentScope.variables.find(
+                  (variable) => variable.name === propProperties.name
+                );
+                const matchingDefinition = matchingVariable?.defs.find(
+                  (def) => def.name?.name === propProperties.name
+                );
+                params = 
+                  matchingDefinition?.type === "FunctionName"
+                    ? matchingDefinition?.node?.params
+                    : matchingDefinition?.node?.init?.params;
+              } else {
+                params = funct?.params;
+              }
+              if(params?.length) {
                 context.report({
                   node,
-                  message: "Popover " + attr.name.name + " function's parameter has been removed.",
-                  fix(fixer) {
-                    const fixes = [];
-                    if (funct.range[0] === firstParam.range[0]) {
-                      fixes.push(fixer.replaceText(firstParam, '()'));
-                    } else  {
-                      fixes.push(fixer.remove(firstParam));
-                    }
-                    return fixes;
-                  }
+                  message: "Popover " + attr.name.name + " function's parameter has been removed. Please update your code accordingly.",
                 });
               }
             }
