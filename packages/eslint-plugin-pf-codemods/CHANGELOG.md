@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.79.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.79.1...@patternfly/eslint-plugin-pf-codemods@1.79.2) (2023-05-25)
+
+
+### Bug Fixes
+
+* **EmptyState:** account for missing variant case ([#488](https://github.com/patternfly/pf-codemods/issues/488)) ([a4a9985](https://github.com/patternfly/pf-codemods/commit/a4a9985bff528aadea16b9fbcf1b33c1252db2f3)), closes [#484](https://github.com/patternfly/pf-codemods/issues/484) [#487](https://github.com/patternfly/pf-codemods/issues/487)
+* **Popover:** fix issue with identifier handlers, remove fixers ([#496](https://github.com/patternfly/pf-codemods/issues/496)) ([efdf1ee](https://github.com/patternfly/pf-codemods/commit/efdf1eee1ecc9853e1cc806e65829f7fad2b1a88))
+
+
+
+
+
 ## [1.79.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.79.0...@patternfly/eslint-plugin-pf-codemods@1.79.1) (2023-05-23)
 
 
