@@ -5,77 +5,119 @@ const { isDir } = require("./utils");
 require("colors");
 const Diff = require("diff");
 
-function printDiff(
-  loggedFiles,
-  fileName,
-  splitFile,
-  diff,
-  diffValue,
-  diffIndex
-) {
-  const partLine = splitFile.find((line) => /\bpf-(c|u|l)-/.test(line));
-  const partLineNumber = splitFile.indexOf(partLine);
-  splitFile[partLineNumber] = partLine.replace(/\bpf-(c|u|l)-/, "");
+const acceptedFileTypesRegex = /\.(s?css|less|(t|j)sx?|md)$/;
+const version = "v5";
+const classTypes = ["c", "u", "l"];
 
-  const proceedingPartSplit = diff[diffIndex - 1].value.split("\n");
+function formatLineNumber(lastLineNumber, newLineNumber) {
+  if (newLineNumber === lastLineNumber) {
+    return "";
+  }
+
+  const newLine = lastLineNumber || lastLineNumber === 0 ? "\n" : "";
+  return `${newLine}  ${newLineNumber + 1}: `;
+}
+
+function formatDiff(diff, part, i) {
+  const proceedingPartSplit = diff[i - 1].value.split("\n");
   const proceedingPart =
     proceedingPartSplit[proceedingPartSplit.length - 1].trim();
 
-  const followingPartSplit = diff[diffIndex + 1].value.split("\n");
+  const followingPartSplit = diff[i + 1].value.split("\n");
   const followingPart = followingPartSplit[0].trim();
 
-  const formattedDiff =
-    proceedingPart["grey"] + diffValue["green"] + followingPart["grey"];
+  return proceedingPart["grey"] + part.value["green"] + followingPart["grey"];
+}
 
-  const fullContextLine = `    ${partLineNumber + 1}: ${formattedDiff}\n`;
+function printDiff(fileName, oldContent, newContent, changeMatchingRegex) {
+  const fileSplitByLine = oldContent.split("\n");
+  const loggedFiles = [];
+  let lastPartLineNumber;
 
-  if (!loggedFiles.includes(fileName)) {
-    console.log("\n", fileName);
-    loggedFiles.push(fileName);
-  }
+  const diff = Diff.diffChars(oldContent, newContent);
 
-  process.stdout.write(fullContextLine);
+  diff.forEach((part, i) => {
+    if (!part.added) {
+      return;
+    }
+
+    const lineNumber = fileSplitByLine.findIndex((line) =>
+      changeMatchingRegex.test(line)
+    );
+
+    const currentLineValue = fileSplitByLine[lineNumber];
+    const newLineValue = currentLineValue.replace(changeMatchingRegex, "");
+    fileSplitByLine[lineNumber] = newLineValue;
+
+    const formattedLineNumber = formatLineNumber(
+      lastPartLineNumber,
+      lineNumber
+    );
+
+    if (lineNumber !== lastPartLineNumber) {
+      lastPartLineNumber = lineNumber;
+    }
+
+    const formattedDiff = formatDiff(diff, part, i);
+
+    const fullContextLine = `${formattedLineNumber} ${formattedDiff}`;
+
+    if (!loggedFiles.includes(fileName)) {
+      console.log("\n", fileName);
+      loggedFiles.push(fileName);
+    }
+
+    process.stdout.write(fullContextLine);
+  });
 }
 
 async function classNameUpdate(globTarget, makeChange) {
+  const joinedClassTypes = classTypes.reduce(
+    (acc, char) => acc + "|" + char,
+    ""
+  );
+  const changeNeededRegex = new RegExp(`\\bpf-(${joinedClassTypes})-`);
+
+  const changeMap = classTypes.reduce((acc, char) => {
+    const key = `\\bpf-${char}-`;
+    const val = `pf-${version}-${char}-`;
+    return { [key]: val, ...acc };
+  }, {});
+
   const files = glob.sync(globTarget, { ignore: "**/node_modules/**" });
 
   files.forEach(async (file) => {
     const filePath = path.join(process.cwd(), file);
     const isDirectory = await isDir(filePath, file);
-    const isUnexpectedFile = !/\.(s?css|less|(t|j)sx?|md)$/.test(filePath);
+    const isUnexpectedFile = !acceptedFileTypesRegex.test(filePath);
 
     if (isDirectory || isUnexpectedFile) {
       return;
     }
 
     const fileContent = fs.readFileSync(filePath, "utf8");
-    const needsChange = /\bpf-(c|u|l)-/.test(fileContent);
+    const needsChange = changeNeededRegex.test(fileContent);
 
     if (!needsChange) {
       return;
     }
 
-    const newContent = fileContent
-      .replaceAll(/\bpf-c-/g, "pf-v5-c-")
-      .replaceAll(/\bpf-u-/g, "pf-v5-u-")
-      .replaceAll(/\bpf-l-/g, "pf-v5-l-");
+    let newContent = fileContent;
 
-    const fileSplitPerLine = fileContent.split("\n");
-    const loggedFiles = [];
-
-    const diff = Diff.diffChars(fileContent, newContent);
-    diff.forEach((part, i) => {
-      if (part.added) {
-        printDiff(loggedFiles, file, fileSplitPerLine, diff, part.value, i);
-      }
+    Object.keys(changeMap).forEach((change) => {
+      const changeRegex = new RegExp(change, "g");
+      newContent = newContent.replaceAll(changeRegex, changeMap[change]);
     });
+
+    printDiff(file, fileContent, newContent, changeNeededRegex);
 
     if (makeChange) {
       fs.writeFileSync(filePath, newContent);
     }
   });
 }
+
+classNameUpdate("test/*");
 
 module.exports = {
   classNameUpdate,
