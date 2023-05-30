@@ -5,36 +5,27 @@ function moveSpecifiers(
   fromPackage,
   toPackage,
   messageAfterSpecifierPathChange,
-  messageAfterElementNameChange,
-  aliasSuffix
+  messageAfterElementNameChange
 ) {
   return function (context) {
     const src = context.getSourceCode();
     const importNames = specifiersToMove.map((nameToMove) => nameToMove.name);
     const { imports: fromPackageImports, exports: fromPackageExports } =
       getFromPackage(context, fromPackage, importNames);
-    const allElements = getAllJSXElements(context);
-    const importSpecifiersToMove = fromPackageImports.filter((fromImport) => {
-      const foundElement = allElements.find(
-        (el) => el?.openingElement?.name?.name === fromImport.local?.name
-      );
-      const hasDataAttr = foundElement?.openingElement.attributes?.find(
-        (attr) => attr.name?.name === "data-codemods"
-      );
 
-      return (foundElement && !hasDataAttr) || !foundElement;
-    });
+    const getSpecifiersToMove = (specifiers) =>
+      specifiers.filter((specifier) => {
+        const comments = src.getCommentsAfter(specifier);
 
-    const exportSpecifiersToMove = fromPackageExports.filter((fromExport) => {
-      const exportComments = src.getCommentsAfter(fromExport);
-
-      return (
-        !exportComments?.length ||
-        !exportComments?.find((comment) =>
-          comment?.value?.includes("data-codemods")
-        )
-      );
-    });
+        return (
+          !comments?.length ||
+          !comments?.find((comment) =>
+            comment?.value?.includes("data-codemods")
+          )
+        );
+      });
+    const importSpecifiersToMove = getSpecifiersToMove(fromPackageImports);
+    const exportSpecifiersToMove = getSpecifiersToMove(fromPackageExports);
 
     if (!importSpecifiersToMove.length && !exportSpecifiersToMove.length) {
       return {};
@@ -99,7 +90,7 @@ function moveSpecifiers(
       ImportDeclaration(node) {
         const [newToPackageSpecifiers, fromPackageSpecifiers] = splitSpecifiers(
           node,
-          importNames
+          importSpecifiersToMove.map((imp) => imp?.imported?.name)
         );
 
         if (
@@ -110,8 +101,7 @@ function moveSpecifiers(
         }
 
         const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
-          newToPackageSpecifiers,
-          aliasSuffix
+          newToPackageSpecifiers
         );
         const newToPackageImportDeclaration = `import {\n\t${[
           ...existingToPackageImportSpecifiers,
@@ -169,88 +159,11 @@ function moveSpecifiers(
           },
         });
       },
-      JSXIdentifier(node) {
-        const parentNode =
-          node.parent.type === "JSXMemberExpression"
-            ? node.parent.parent
-            : node.parent;
 
-        if (
-          !aliasSuffix ||
-          !["JSXOpeningElement", "JSXClosingElement"].includes(
-            parentNode.type
-          ) ||
-          parentNode.name?.property === node
-        ) {
-          return;
-        }
-
-        const elementName =
-          parentNode.name?.object?.name || parentNode.name?.name;
-
-        // Fixer for importsToMove objects with "component" type
-        if (
-          importSpecifiersToMove.find(
-            (imp) =>
-              imp.local.name === elementName &&
-              imp.imported.name === imp.local.name &&
-              componentsToUpdate.includes(imp.imported.name)
-          )
-        ) {
-          context.report({
-            node,
-            message: `${elementName} ${
-              messageAfterElementNameChange ||
-              "has been moved to a new package. Running the fix flag will update the name."
-            }`,
-            fix(fixer) {
-              const fixes = [
-                fixer.replaceText(
-                  parentNode.name?.object || parentNode.name,
-                  `${elementName}${aliasSuffix}`
-                ),
-              ];
-
-              return fixes;
-            },
-          });
-        }
-
-        // Fixer for importsToMove objects with non-"component" type
-        const existingPropsToUpdate = parentNode.attributes?.filter((attr) => {
-          if (attr.value) {
-            const propValue =
-              attr.value.expression?.object?.name ||
-              attr.value.expression?.name;
-            return propValuesToUpdate.includes(propValue);
-          }
-        });
-        if (existingPropsToUpdate?.length) {
-          existingPropsToUpdate.forEach((propToUpdate) => {
-            const currentPropToUpdate =
-              propToUpdate.value?.expression?.object ||
-              propToUpdate.value?.expression;
-
-            context.report({
-              node,
-              message: `${currentPropToUpdate?.name} ${
-                messageAfterElementNameChange ||
-                "has been moved to a new package. Running the fix flag will update the name."
-              }`,
-              fix(fixer) {
-                return fixer.replaceTextRange(
-                  currentPropToUpdate.range,
-                  `${currentPropToUpdate?.name}${aliasSuffix}`
-                );
-              },
-            });
-          });
-        }
-      },
       ExportNamedDeclaration(node) {
         const [newToPackageSpecifiers, fromPackageSpecifiers] = splitSpecifiers(
           node,
-          importNames
+          exportSpecifiersToMove.map((exp) => exp?.local?.name)
         );
 
         if (

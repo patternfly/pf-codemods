@@ -32,8 +32,6 @@ module.exports = {
             const isAliased =
               importedNode?.local?.name !== importedNode?.imported?.name;
             if (importedNode?.imported?.name === "TableComposable") {
-              const addDataAttr = (jsxStr) =>
-                jsxStr.replace(/(\s*\/?>)$/, ' data-codemods="true"$1');
               const updateTagName = (node) => {
                 const tagName = context.getSourceCode().getText(node);
 
@@ -43,9 +41,7 @@ module.exports = {
                 return tagName.replace("TableComposable", "Table");
               };
               const isOpeningTag = node.parent.type === "JSXOpeningElement";
-              const newOpeningParentTag = addDataAttr(
-                updateTagName(node.parent)
-              );
+              const newOpeningParentTag = updateTagName(node.parent);
               const newClosingTag = updateTagName(node);
               (isOpeningTag || !isAliased) &&
                 context.report({
@@ -69,7 +65,7 @@ module.exports = {
               const localName = node.local.name;
               const isAliased = importedName !== localName;
               const aliasText = isAliased ? ` as ${localName}` : "";
-              const newName = `${tableName}${aliasText}`;
+              const newName = `${tableName}${aliasText} /* data-codemods */`;
               context.report({
                 node,
                 message: `${importedName} has been replaced with ${tableName}`,

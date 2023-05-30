@@ -17,7 +17,7 @@ ruleTester.run("table-rename-TableComposable", rule, {
   invalid: [
     {
       code: `import { TableComposable } from '@patternfly/react-table'; <TableComposable>Body</TableComposable>`,
-      output: `import { Table } from '@patternfly/react-table'; <Table data-codemods="true">Body</Table>`,
+      output: `import { Table /* data-codemods */ } from '@patternfly/react-table'; <Table>Body</Table>`,
       errors: [
         {
           message: "TableComposable has been replaced with Table",
