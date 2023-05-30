@@ -32,9 +32,14 @@ const warningRules = [
 
 // rules that will run before other rules (move to deprecated?)
 const setupRules = [
+  "applicationLauncher-deprecated",
+  "contextSelector-update-deprecatedPath",
+  "dropdown-update-deprecatedPath",
+  "optionsMenu-deprecated",
   "pageHeader-deprecated",
   "select-deprecated",
   "table-update-deprecatedPath",
+  "wizard-update-deprecatedPath",
 ];
 
 // rules that will run after other rules (cleanup imports?)
