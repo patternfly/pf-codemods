@@ -4,14 +4,12 @@ function moveSpecifiers(
   specifiersToMove,
   fromPackage,
   toPackage,
-  messageAfterSpecifierPathChange,
-  messageAfterElementNameChange
+  messageAfterSpecifierPathChange
 ) {
   return function (context) {
     const src = context.getSourceCode();
-    const importNames = specifiersToMove.map((nameToMove) => nameToMove.name);
     const { imports: fromPackageImports, exports: fromPackageExports } =
-      getFromPackage(context, fromPackage, importNames);
+      getFromPackage(context, fromPackage, specifiersToMove);
 
     const getSpecifiersToMove = (specifiers) =>
       specifiers.filter((specifier) => {
@@ -54,15 +52,6 @@ function moveSpecifiers(
     const modifiedToPackageExport = getModifiedToPackage(
       exportSpecifiersToMove[0]
     );
-
-    const propValuesToUpdate = [];
-    const componentsToUpdate = specifiersToMove
-      .filter(
-        (specifierToMove) =>
-          specifierToMove?.type === "component" ||
-          (propValuesToUpdate.push(specifierToMove?.name) && false)
-      )
-      .map((specifierToMove) => specifierToMove?.name);
 
     const getExistingDeclaration = (nodeType, modifiedPackage) =>
       src.ast.body.find(
@@ -311,19 +300,16 @@ function splitSpecifiers(declaration, specifiersToSplit) {
 /**
  *
  * @param {*} specifiers
- * @param {string} aliasSuffix
  * @returns {String[]} an array of alias imports
  */
-function createAliasImportSpecifiers(specifiers, aliasSuffix) {
+function createAliasImportSpecifiers(specifiers) {
   return specifiers.map((imp) => {
     const { imported, local } = imp;
 
     if (imported.name !== local.name) {
       return `${imported.name} as ${local.name}`;
     }
-    return `${imported.name}${
-      aliasSuffix ? ` as ${imported.name}${aliasSuffix}` : ""
-    }`;
+    return imported.name;
   });
 }
 

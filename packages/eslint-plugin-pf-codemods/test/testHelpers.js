@@ -411,51 +411,36 @@ function swapCallbackParamTester(
   });
 }
 
-function splitImports(importsToSplit) {
-  const otherSpecifiers = [];
-  const componentSpecifiers = importsToSplit
-    .filter(
-      (importToMove) =>
-        importToMove.type === "component" ||
-        (otherSpecifiers.push(importToMove.name) && false)
-    )
-    .map((importToMove) => importToMove.name);
-
-  return [componentSpecifiers, otherSpecifiers];
-}
-
 function getMoveSpecifiersValidtests(specifiersToMoveArray) {
   const tests = [];
 
-  specifiersToMoveArray
-    .map((spec) => spec.name)
-    .forEach((specifier) => {
-      tests.push({
-        code: `import { ${specifier} } from '@patternfly/react-core/next';`,
-      });
-      tests.push({
-        code: `import { ${specifier} } from '@patternfly/react-core/deprecated';`,
-      });
-      tests.push({
-        code: `import { ${specifier} } from '@patternfly/react-core/dist/esm/deprecated/components/${specifier}/index.js';`,
-      });
-      // No @patternfly/react-core import
-      tests.push({
-        code: `import { ${specifier} } from 'foo';`,
-      });
-      // Export
-      tests.push({
-        code: `export { ${specifier} as CustomExport } from '@patternfly/react-core/deprecated';`,
-      });
-      // Export from dist
-      tests.push({
-        code: `export { ${specifier} as CustomExport } from '@patternfly/react-core/dist/esm/deprecated/components/${specifier}/index.js';`,
-      });
-      // No @patternfly/react-core export
-      tests.push({
-        code: `export { ${specifier} as CustomExport } from 'foo';`,
-      });
+  specifiersToMoveArray.forEach((specifier) => {
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-core/next';`,
     });
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-core/deprecated';`,
+    });
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-core/dist/esm/deprecated/components/${specifier}/index.js';`,
+    });
+    // No @patternfly/react-core import
+    tests.push({
+      code: `import { ${specifier} } from 'foo';`,
+    });
+    // Export
+    tests.push({
+      code: `export { ${specifier} as CustomExport } from '@patternfly/react-core/deprecated';`,
+    });
+    // Export from dist
+    tests.push({
+      code: `export { ${specifier} as CustomExport } from '@patternfly/react-core/dist/esm/deprecated/components/${specifier}/index.js';`,
+    });
+    // No @patternfly/react-core export
+    tests.push({
+      code: `export { ${specifier} as CustomExport } from 'foo';`,
+    });
+  });
 
   return tests;
 }
@@ -475,87 +460,85 @@ function getMoveSpecifiersInvalidtests(
     },
   ];
 
-  specifiersToMoveArray
-    .map((spec) => spec.name)
-    .forEach((componentSpecifier) => {
-      const package = componentSpecifier.includes("Table") ? "table" : "core";
-      const importErrors = createErrors(componentSpecifier);
-      const exportErrors = createErrors(componentSpecifier, true);
+  specifiersToMoveArray.forEach((specifier) => {
+    const package = specifier.includes("Table") ? "table" : "core";
+    const importErrors = createErrors(specifier);
+    const exportErrors = createErrors(specifier, true);
 
-      // No existing deprecated import + no other core import
-      tests.push({
-        code: `import {${componentSpecifier} } from '@patternfly/react-${package}';`,
-        output: `import {\n\t${componentSpecifier}\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: importErrors,
-      });
-      // No existing deprecated import + another core import
-      tests.push({
-        code: `import {${componentSpecifier}, Foo } from '@patternfly/react-${package}';`,
-        output: `import {\n\tFoo\n} from '@patternfly/react-${package}';\nimport {\n\t${componentSpecifier}\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: importErrors,
-      });
-      // Another existing deprecated import + no other core import
-      tests.push({
-        code: `import { ${componentSpecifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated';`,
-        output: `\nimport {\n\tFoo,\n\t${componentSpecifier}\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: importErrors,
-      });
-      // Import from dist: no existing deprecated import + no other core import
-      tests.push({
-        code: `import { ${componentSpecifier} } from '@patternfly/react-${package}/dist/esm/components/${componentSpecifier}/index.js';`,
-        output: `import {\n\t${componentSpecifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        errors: importErrors,
-      });
-      // Import from dist: another existing deprecated import + no other core import
-      tests.push({
-        code: `import { ${componentSpecifier} } from '@patternfly/react-${package}/dist/esm/components/${componentSpecifier}/index.js';\nimport { Foo } from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        output: `\nimport {\n\tFoo,\n\t${componentSpecifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        errors: importErrors,
-      });
-      // Aliased import
-      tests.push({
-        code: `import { ${componentSpecifier} as PF${componentSpecifier} } from '@patternfly/react-${package}';`,
-        output: `import {\n\t${componentSpecifier} as PF${componentSpecifier}\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: importErrors,
-      });
-      // Aliased import from dist: No existing deprecated import + no other core import
-      tests.push({
-        code: `import { ${componentSpecifier} as PF${componentSpecifier} } from '@patternfly/react-${package}/dist/esm/components/${componentSpecifier}/index.js';`,
-        output: `import {\n\t${componentSpecifier} as PF${componentSpecifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        errors: importErrors,
-      });
-      // Aliased import from dist: Another existing deprecated import + no other core import
-      tests.push({
-        code: `import { ${componentSpecifier} as PF${componentSpecifier} } from '@patternfly/react-${package}/dist/esm/components/${componentSpecifier}/index.js'; import { Foo } from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        output: ` import {\n\tFoo,\n\t${componentSpecifier} as PF${componentSpecifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        errors: importErrors,
-      });
-
-      // No existing deprecated export + no other core export
-      tests.push({
-        code: `export {${componentSpecifier} as CustomExport } from '@patternfly/react-${package}';`,
-        output: `export {\n\t${componentSpecifier} as CustomExport\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: exportErrors,
-      });
-      // No existing deprecated export + another core export
-      tests.push({
-        code: `export {${componentSpecifier} as CustomExport, Foo as Bar } from '@patternfly/react-${package}';`,
-        output: `export {\n\tFoo as Bar\n} from '@patternfly/react-${package}';\nexport {\n\t${componentSpecifier} as CustomExport\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: exportErrors,
-      });
-      // Another existing deprecated export + no other core export
-      tests.push({
-        code: `export {${componentSpecifier} as CustomExport } from '@patternfly/react-${package}';\nexport { Foo as Bar } from '@patternfly/react-${package}/deprecated';`,
-        output: `\nexport {\n\tFoo as Bar,\n\t${componentSpecifier} as CustomExport\n} from '@patternfly/react-${package}/deprecated';`,
-        errors: exportErrors,
-      });
-      // Export from dist
-      tests.push({
-        code: `export {${componentSpecifier} as CustomExport } from '@patternfly/react-${package}/dist/esm/components/${componentSpecifier}/index.js';`,
-        output: `export {\n\t${componentSpecifier} as CustomExport\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${componentSpecifier}/index.js';`,
-        errors: exportErrors,
-      });
+    // No existing deprecated import + no other core import
+    tests.push({
+      code: `import {${specifier} } from '@patternfly/react-${package}';`,
+      output: `import {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: importErrors,
     });
+    // No existing deprecated import + another core import
+    tests.push({
+      code: `import {${specifier}, Foo } from '@patternfly/react-${package}';`,
+      output: `import {\n\tFoo\n} from '@patternfly/react-${package}';\nimport {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: importErrors,
+    });
+    // Another existing deprecated import + no other core import
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated';`,
+      output: `\nimport {\n\tFoo,\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: importErrors,
+    });
+    // Import from dist: no existing deprecated import + no other core import
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js';`,
+      output: `import {\n\t${specifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      errors: importErrors,
+    });
+    // Import from dist: another existing deprecated import + no other core import
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js';\nimport { Foo } from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      output: `\nimport {\n\tFoo,\n\t${specifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      errors: importErrors,
+    });
+    // Aliased import
+    tests.push({
+      code: `import { ${specifier} as PF${specifier} } from '@patternfly/react-${package}';`,
+      output: `import {\n\t${specifier} as PF${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: importErrors,
+    });
+    // Aliased import from dist: No existing deprecated import + no other core import
+    tests.push({
+      code: `import { ${specifier} as PF${specifier} } from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js';`,
+      output: `import {\n\t${specifier} as PF${specifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      errors: importErrors,
+    });
+    // Aliased import from dist: Another existing deprecated import + no other core import
+    tests.push({
+      code: `import { ${specifier} as PF${specifier} } from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js'; import { Foo } from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      output: ` import {\n\tFoo,\n\t${specifier} as PF${specifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      errors: importErrors,
+    });
+
+    // No existing deprecated export + no other core export
+    tests.push({
+      code: `export {${specifier} as CustomExport } from '@patternfly/react-${package}';`,
+      output: `export {\n\t${specifier} as CustomExport\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: exportErrors,
+    });
+    // No existing deprecated export + another core export
+    tests.push({
+      code: `export {${specifier} as CustomExport, Foo as Bar } from '@patternfly/react-${package}';`,
+      output: `export {\n\tFoo as Bar\n} from '@patternfly/react-${package}';\nexport {\n\t${specifier} as CustomExport\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: exportErrors,
+    });
+    // Another existing deprecated export + no other core export
+    tests.push({
+      code: `export {${specifier} as CustomExport } from '@patternfly/react-${package}';\nexport { Foo as Bar } from '@patternfly/react-${package}/deprecated';`,
+      output: `\nexport {\n\tFoo as Bar,\n\t${specifier} as CustomExport\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: exportErrors,
+    });
+    // Export from dist
+    tests.push({
+      code: `export {${specifier} as CustomExport } from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js';`,
+      output: `export {\n\t${specifier} as CustomExport\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+      errors: exportErrors,
+    });
+  });
 
   return tests;
 }

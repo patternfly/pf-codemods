@@ -1,8 +1,8 @@
 const { createMoveSpecifiersTester } = require("../../testHelpers");
 const specifiersToMove = [
-  { name: "ContextSelector", type: "component" },
-  { name: "ContextSelectorItem", type: "component" },
-  { name: "ContextSelectorFooter", type: "component" },
+  "ContextSelector",
+  "ContextSelectorItem",
+  "ContextSelectorFooter",
 ];
 
 createMoveSpecifiersTester(
