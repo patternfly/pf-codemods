@@ -44,7 +44,9 @@ const toPackage = "@patternfly/react-core";
 const messageAfterSpecifierPathChange =
   "been promoted as our default implementation. Running the fix flag will update your imports and/or exports.";
 
-// https://github.com/patternfly/patternfly-react/pull/8854
+// https://github.com/patternfly/patternfly-react/pull/8821
+// https://github.com/patternfly/patternfly-react/pull/8825
+// https://github.com/patternfly/patternfly-react/pull/8835
 module.exports = {
   meta: { fixable: "code" },
   create: moveSpecifiers(
