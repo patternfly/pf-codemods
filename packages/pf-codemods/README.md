@@ -42,6 +42,8 @@ Options:
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
+Some rules will add either a comment (`/* data-codemods */`) or data attribute (`data-codemods="true"`) in order to prevent certain other rules from applying an unnecessary fix.
+
 ### aboutModalBoxHero-remove-subcomponent [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
 
 The AboutModalBoxHero sub-component has been removed from AboutModal. Selectors in tests may need to be updated. 
@@ -634,16 +636,12 @@ In:
 
 ```jsx
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
-
-<ContextSelector />
 ```
 
 Out:
 
 ```jsx
-import { ContextSelector as ContextSelectorDeprecated, ContextSelectorItem as ContextSelectorItemDeprecated } from '@patternfly/react-core/deprecated';
-
-<ContextSelectorDeprecated />
+import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core/deprecated';
 ```
 
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
@@ -847,18 +845,14 @@ The following imports will be affected by this deprecation:
 In:
 
 ```jsx
-import { Dropdown, DropdownPosition Button } from '@patternfly/react-core';
-
-<Dropdown position={DropdownPosition.right} />
+import { Dropdown, DropdownPosition, Button } from '@patternfly/react-core';
 ```
 
 Out:
 
 ```jsx
 import { Button } from '@patternfly/react-core';
-import { Dropdown as DropdownDeprecated, DropdownPosition as DropdownPositionDeprecated } from '@patternfly/react-core/deprecated';
-
-<DropdownDeprecated position={DropdownPositionDeprecated.right}  />
+import { Dropdown, DropdownPosition } from '@patternfly/react-core/deprecated';
 ```
 
 ### dropdownItem-remove-isHovered [(#8179)](https://github.com/patternfly/patternfly-react/pull/8179)
@@ -1900,7 +1894,7 @@ function toggleDropdown(_event, isOpen) {};
 
 ### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
 
-We've deprecated the `OptionsMenu` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`
+We've deprecated the `OptionsMenu` components. A fix will update code to point to the new deprecated import, but we recommend replacing with `Dropdown` or `Select`.
 
 #### Examples
 
@@ -1913,7 +1907,7 @@ import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core';
 Out:
 
 ```jsx
-import { OptionsMenu as OptionsMenuDeprecated, OptionsMenuToggle as OptionsMenuToggleDeprecated } from '@patternfly/react-core/deprecated';
+import { OptionsMenu, OptionsMenuToggle } from '@patternfly/react-core/deprecated';
 ```
 
 ### overflowMenu-warn-updated-dropdownItem [(#8359)](https://github.com/patternfly/patternfly-react/pull/8359)
@@ -2012,13 +2006,6 @@ import {
   PageHeaderToolsGroup,
   PageHeaderToolsItem,
 } from "@patternfly/react-core";
-
-<>
-  <PageHeader />
-  <PageHeaderTools />
-  <PageHeaderToolsGroup />
-  <PageHeaderToolsItem />
-</>;
 ```
 
 Out:
@@ -2028,18 +2015,11 @@ import {
 	Button
 } from '@patternfly/react-core';
 import {
-	PageHeader as PageHeaderDeprecated,
-	PageHeaderTools as PageHeaderToolsDeprecated,
-	PageHeaderToolsGroup as PageHeaderToolsGroupDeprecated,
-	PageHeaderToolsItem as PageHeaderToolsItemDeprecated
+	PageHeader,
+	PageHeaderTools,
+	PageHeaderToolsGroup,
+	PageHeaderToolsItem
 } from '@patternfly/react-core/deprecated';
-
-<>
-  <PageHeaderDeprecated />
-  <PageHeaderToolsDeprecated />
-  <PageHeaderToolsGroupDeprecated />
-  <PageHeaderToolsItemDeprecated />
-</>;
 ```
 
 ### pageheader-update-logoComponent [(#8655)](https://github.com/patternfly/patternfly-react/pull/8655)
@@ -2384,12 +2364,6 @@ In:
 
 ```jsx
 import { Button, Select, SelectOption, SelectVariant, SelectDirection, SelectGroup } from "@patternfly/react-core";
-      
-<>
-  <Select></Select>
-  <SelectOption></SelectOption>
-  <SelectGroup></SelectGroup>
-</>;
 ```
 
 Out:
@@ -2399,18 +2373,12 @@ import {
 	Button
 } from '@patternfly/react-core';
 import {
-	Select as SelectDeprecated,
-	SelectOption as SelectOptionDeprecated,
-	SelectVariant as SelectVariantDeprecated,
-	SelectDirection as SelectDirectionDeprecated,
-	SelectGroup as SelectGroupDeprecated
+	Select,
+	SelectOption,
+	SelectVariant,
+	SelectDirection,
+	SelectGroup
 } from '@patternfly/react-core/deprecated';
-      
-<>
-  <SelectDeprecated></SelectDeprecated>
-  <SelectOptionDeprecated></SelectOptionDeprecated>
-  <SelectGroupDeprecated></SelectGroupDeprecated>
-</>;
 ```
 
 ### selectDropdown-rename-itemId [(#9175)](https://github.com/patternfly/patternfly-react/pull/9175)
@@ -2549,17 +2517,21 @@ Out:
 
 ### table-rename-TableComposable [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
 
-TableComposable has been renamed to Table.
+TableComposable has been renamed to Table. 
 
 In:
 
 ```jsx
+import { TableComposable } from '@patternfly/react-table';
+
 <TableComposable />
 ```
 
 Out:
 
 ```jsx
+import { Table /* data-codemods */ } from '@patternfly/react-table';
+
 <Table />
 ```
 
@@ -2586,10 +2558,10 @@ Out:
 
 ```jsx
 import {
- Table as TableDeprecated,
- TableBody as TableBodyDeprecated,
- TableHeader as TableHeaderDeprecated,
- TableProps as TablePropsDeprecated
+ Table,
+ TableBody,
+ TableHeader,
+ TableProps
 } from '@patternfly/react-table/deprecated';
 ```
 
@@ -2993,17 +2965,13 @@ In:
 
 ```jsx
 import { Wizard, Button } from '@patternfly/react-core';
-
-<Wizard />
 ```
 
 Out:
 
 ```jsx
 import { Button } from '@patternfly/react-core';
-import { Wizard as WizardDeprecated } from '@patternfly/react-core/deprecated';
-
-<WizardDeprecated />
+import { Wizard } from '@patternfly/react-core/deprecated';
 ```
 
 ### wizard-warn-button-order [(#8409)](https://github.com/patternfly/patternfly-react/pull/8409)
