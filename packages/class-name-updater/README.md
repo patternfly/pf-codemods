@@ -7,13 +7,13 @@ This utility automatically identifies Patternfly class names that need to be upd
 Requires Node.js >= 10.
 
 ```sh
-npx @patternfly/pf-codemods ./path-to-src
+npx @patternfly/class-name-updater ./path-to-src
 ```
 
 Giving node more RAM can help for large codebases.
 
 ```sh
-NODE_OPTIONS=--max-old-space-size=4096 npx @patternfly/pf-codemods ./path-to-src
+NODE_OPTIONS=--max-old-space-size=4096 npx @patternfly/class-name-updater ./path-to-src
 ```
 
 These commands will show you places in your code that appear to need class name changes. Add the `--fix` flag to allow us to autofix issues where possible.
