@@ -35,12 +35,22 @@ function moveSpecifiers(
       if (firstSpecifier?.parent?.source?.value?.includes("dist/esm")) {
         //expecting @patternfly/{package}/{designator} where designator is next/deprecated
         const toParts = toPackage.split("/");
-        //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
-        //needing toPath to look like fromPath with the designator before /components
         const fromParts = firstSpecifier.parent.source.value.split("/");
-        if (toParts[0] === "@patternfly" && toParts.length === 3) {
-          fromParts.splice(4, 0, toParts[2]);
-          modifiedToPackage = fromParts.join("/");
+        if (toParts[0] === "@patternfly") {
+          //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
+          //needing toPath to look like fromPath with the designator before /components
+          if (toParts.length === 3) {
+            fromParts.splice(4, 0, toParts[2]);
+            modifiedToPackage = fromParts.join("/");
+          }
+
+          // Expecting @patternfly/{package}/dist/esm/next/components/{Component}/index.js
+          // Needing toPath to look like fromPath *without* the designator before /components
+          if (toParts.length === 2) {
+            modifiedToPackage = fromParts
+              .filter((part) => part !== "next")
+              .join("/");
+          }
         }
       }
 
