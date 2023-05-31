@@ -1,13 +1,5 @@
-const glob = require("glob");
-const fs = require("fs");
-const path = require("path");
-const { isDir } = require("./utils");
 require("colors");
 const Diff = require("diff");
-
-const acceptedFileTypesRegex = /\.(s?css|less|(t|j)sx?|md)$/;
-const changeNeededRegex = /\bpf-([cul])-/g;
-const version = "v5";
 
 function formatLineNumber(lastLineNumber, newLineNumber) {
   if (newLineNumber === lastLineNumber) {
@@ -29,7 +21,7 @@ function formatDiff(diff, part, i) {
   return proceedingPart["grey"] + part.value["green"] + followingPart["grey"];
 }
 
-function printDiff(fileName, oldContent, newContent) {
+function printDiff(fileName, oldContent, newContent, changeNeededRegex) {
   const fileSplitByLine = oldContent.split("\n");
   const loggedFiles = [];
   let lastPartLineNumber;
@@ -74,40 +66,6 @@ function printDiff(fileName, oldContent, newContent) {
   });
 }
 
-async function classNameUpdate(globTarget, makeChange) {
-  const files = glob.sync(globTarget, { ignore: "**/node_modules/**" });
-
-  files.forEach(async (file) => {
-    const filePath = path.join(process.cwd(), file);
-    const isDirectory = await isDir(filePath, file);
-    const isUnexpectedFile = !acceptedFileTypesRegex.test(filePath);
-
-    if (isDirectory || isUnexpectedFile) {
-      return;
-    }
-
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const needsChange = changeNeededRegex.test(fileContent);
-
-    if (!needsChange) {
-      return;
-    }
-
-    const newContent = fileContent.replace(
-      changeNeededRegex,
-      `pf-${version}-$1-`
-    );
-
-    printDiff(file, fileContent, newContent);
-
-    if (makeChange) {
-      fs.writeFileSync(filePath, newContent);
-    }
-  });
-}
-
-classNameUpdate("test/*");
-
 module.exports = {
-  classNameUpdate,
+  printDiff,
 };

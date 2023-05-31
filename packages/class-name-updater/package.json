@@ -1,7 +1,7 @@
 {
-  "name": "@patternfly/pf-codemods",
-  "version": "1.76.2",
-  "description": "Codemods for v4 breaking change release 2020.07",
+  "name": "@patternfly/class-name-updater",
+  "version": "1.0.0",
+  "description": "Utility to update class names with Patternfly version numbers",
   "author": "Red Hat",
   "license": "MIT",
   "bin": {
@@ -18,6 +18,8 @@
     "@typescript-eslint/parser": "^5.58.0",
     "commander": "^5.1.0",
     "eslint": "^7.3.0 || ^8.29.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "diff": "^5.1.0",
+    "colors": "^1.4.0"
   }
 }
