@@ -102,8 +102,16 @@ function moveSpecifiers(
           return;
         }
 
-        const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
-          newToPackageSpecifiers
+        const newAliasToPackageSpecifiers = newToPackageSpecifiers.map(
+          (importSpecifier) => {
+            const importString = src.getText(importSpecifier);
+
+            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+              importSpecifier.parent?.source?.value
+            )
+              ? `${importString} /* data-codemods */`
+              : importString;
+          }
         );
         const newToPackageImportDeclaration = `import {\n\t${[
           ...existingToPackageImportSpecifiers,
@@ -177,7 +185,15 @@ function moveSpecifiers(
 
         const newToPackageExportDeclaration = `export {\n\t${[
           ...existingToPackageExportSpecifiers,
-          ...newToPackageSpecifiers.map((specifier) => src.getText(specifier)),
+          ...newToPackageSpecifiers.map((exportSpecifier) => {
+            const exportString = src.getText(exportSpecifier);
+
+            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+              exportSpecifier.parent?.source?.value
+            )
+              ? `${exportString} /* data-codemods */`
+              : exportString;
+          }),
         ].join(`,\n\t`)}\n} from '${modifiedToPackageExport || toPackage}';`;
 
         context.report({

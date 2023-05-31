@@ -357,3 +357,5 @@ export {
   Table as CustomTable,
   TableComposable as CustomComposableTable,
 } from "@patternfly/react-table";
+
+export { Select as CustomNextSelect } from "@patternfly/react-core/next";

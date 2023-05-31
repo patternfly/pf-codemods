@@ -1789,7 +1789,23 @@ function toggleHandler2(_event, id) {};
 
 The placement Nav flyouts in the DOM has been changed, if you have Nav elements with flyouts you may need to update some selectors or snapshots in your test suites. This rule will raise a warning, but will not make any changes.
 
+### nextComponents-update-path
 
+We've promoted the "Next" implementations of our Dropdown, Select, and Wizard components and they are now our default implementation. This rule will update import and/or export paths.
+
+### Examples
+
+In:
+
+```tsx
+import { Dropdown } from '@patternfly/react-core/next';
+```
+
+Out:
+
+```tsx
+import { Dropdown /* data-codemods */ } from '@patternfly/react-core/next';
+```
 
 ### no-unused-imports-v5
 

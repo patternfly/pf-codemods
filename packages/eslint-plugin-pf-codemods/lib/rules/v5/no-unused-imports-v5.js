@@ -44,9 +44,17 @@ module.exports = {
           fix(fixer) {
             const getEndRange = (spec) => {
               const tokenAfter = sourceCode.getTokenAfter(spec);
-              return tokenAfter.value === ","
-                ? sourceCode.getTokenAfter(tokenAfter).range[0]
-                : spec.range[1];
+              const commentsAfter = sourceCode.getCommentsAfter(spec);
+
+              if (tokenAfter.value === ",") {
+                return sourceCode.getTokenAfter(tokenAfter).range[0];
+              }
+
+              if (commentsAfter?.length) {
+                return commentsAfter[commentsAfter.length - 1].range[1];
+              }
+
+              return spec.range[1];
             };
 
             return unusedImports.length === node.specifiers.length
