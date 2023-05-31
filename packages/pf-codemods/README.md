@@ -42,6 +42,8 @@ Options:
 
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
+Some rules will add either a comment (`/* data-codemods */`) or data attribute (`data-codemods="true"`) in order to prevent certain other rules from applying an unnecessary fix.
+
 ### aboutModalBoxHero-remove-subcomponent [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
 
 The AboutModalBoxHero sub-component has been removed from AboutModal. Selectors in tests may need to be updated. 
@@ -2515,17 +2517,21 @@ Out:
 
 ### table-rename-TableComposable [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
 
-TableComposable has been renamed to Table.
+TableComposable has been renamed to Table. 
 
 In:
 
 ```jsx
+import { TableComposable } from '@patternfly/react-table';
+
 <TableComposable />
 ```
 
 Out:
 
 ```jsx
+import { Table /* data-codemods */ } from '@patternfly/react-table';
+
 <Table />
 ```
 

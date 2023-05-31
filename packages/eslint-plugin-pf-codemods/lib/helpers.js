@@ -68,8 +68,21 @@ function moveSpecifiers(
       modifiedToPackageExport
     );
 
+    const createSpecifierString = (specifier) => {
+      const specifierText = src.getText(specifier);
+      const specifierComments = src.getCommentsAfter(specifier);
+
+      return `${specifierText}${
+        specifierComments.length
+          ? " " +
+            specifierComments.map((comment) => `/*${comment.value}*/`).join("")
+          : ""
+      }`;
+    };
     const getExistingSpecifiersFromDeclaration = (declaration) =>
-      declaration?.specifiers?.map((specifier) => src.getText(specifier)) || [];
+      declaration?.specifiers?.map((specifier) =>
+        createSpecifierString(specifier)
+      ) || [];
     const existingToPackageImportSpecifiers =
       getExistingSpecifiersFromDeclaration(existingToPackageImportDeclaration);
     const existingToPackageExportSpecifiers =
@@ -139,7 +152,7 @@ function moveSpecifiers(
                 fixer.replaceText(
                   node,
                   `import {\n\t${fromPackageSpecifiers
-                    .map((specifier) => src.getText(specifier))
+                    .map((specifier) => createSpecifierString(specifier))
                     .join(",\n\t")}\n} from '${node.source.value}';`
                 )
               );

@@ -415,14 +415,20 @@ function getMoveSpecifiersValidtests(specifiersToMoveArray) {
   const tests = [];
 
   specifiersToMoveArray.forEach((specifier) => {
+    const package = specifier.includes("Table") ? "table" : "core";
+
     tests.push({
-      code: `import { ${specifier} } from '@patternfly/react-core/next';`,
+      code: `import { ${specifier} } from '@patternfly/react-${package}/next';`,
     });
     tests.push({
-      code: `import { ${specifier} } from '@patternfly/react-core/deprecated';`,
+      code: `import { ${specifier} } from '@patternfly/react-${package}/deprecated';`,
     });
     tests.push({
-      code: `import { ${specifier} } from '@patternfly/react-core/dist/esm/deprecated/components/${specifier}/index.js';`,
+      code: `import { ${specifier} } from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+    });
+    // Previously fixed import or pre-existing comment
+    tests.push({
+      code: `import { ${specifier} /* data-codemods */ } from '@patternfly/react-${package}';`,
     });
     // No @patternfly/react-core import
     tests.push({
@@ -430,11 +436,11 @@ function getMoveSpecifiersValidtests(specifiersToMoveArray) {
     });
     // Export
     tests.push({
-      code: `export { ${specifier} as CustomExport } from '@patternfly/react-core/deprecated';`,
+      code: `export { ${specifier} as CustomExport } from '@patternfly/react-${package}/deprecated';`,
     });
     // Export from dist
     tests.push({
-      code: `export { ${specifier} as CustomExport } from '@patternfly/react-core/dist/esm/deprecated/components/${specifier}/index.js';`,
+      code: `export { ${specifier} as CustomExport } from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
     });
     // No @patternfly/react-core export
     tests.push({
@@ -475,6 +481,18 @@ function getMoveSpecifiersInvalidtests(
     tests.push({
       code: `import {${specifier}, Foo } from '@patternfly/react-${package}';`,
       output: `import {\n\tFoo\n} from '@patternfly/react-${package}';\nimport {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: importErrors,
+    });
+    // No existing deprecated import + another core import with comment
+    tests.push({
+      code: `import {${specifier}, Foo /* data-codemods */ } from '@patternfly/react-${package}';`,
+      output: `import {\n\tFoo /* data-codemods */\n} from '@patternfly/react-${package}';\nimport {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+      errors: importErrors,
+    });
+    // Another existing deprecated import with comment + no other core import
+    tests.push({
+      code: `import { ${specifier} } from '@patternfly/react-${package}';\nimport { Foo /* data-codemods */ } from '@patternfly/react-${package}/deprecated';`,
+      output: `\nimport {\n\tFoo /* data-codemods */,\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
       errors: importErrors,
     });
     // Another existing deprecated import + no other core import
