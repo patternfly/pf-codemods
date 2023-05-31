@@ -1,4 +1,4 @@
-const { getFromPackage } = require("../../helpers");
+const { getFromPackage, getAllJSXElements } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/9074
 // https://github.com/patternfly/patternfly-react/pull/9176
@@ -25,9 +25,28 @@ module.exports = {
               node.specifiers.find(
                 (specifier) => specifier.imported?.name === name
               );
+
+            const inputGroupElements = getAllJSXElements(context).filter(
+              (elem) =>
+                elem.openingElement?.name?.name === inputGroupImport.local?.name
+            );
+
+            const needsInputGroupItemImport = inputGroupElements.some(
+              (inputGroup) => {
+                return inputGroup.children?.some(
+                  (inputGroupChild) =>
+                    ![
+                      inputGroupTextImport?.local?.name,
+                      "InputGroupText",
+                    ].includes(inputGroupChild.openingElement?.name?.name)
+                );
+              }
+            );
+
             if (
               getMatchingSpecifier(inputGroupImport.imported?.name) &&
-              !inputGroupItemImport
+              !inputGroupItemImport &&
+              needsInputGroupItemImport
             ) {
               context.report({
                 node,
@@ -51,45 +70,37 @@ module.exports = {
             node.children?.forEach((child) => {
               const childName = child.openingElement?.name?.name;
               if (
-                ["InputGroupItem", inputGroupItemImport?.local?.name].includes(
-                  childName
-                ) ||
+                [
+                  "InputGroupItem",
+                  inputGroupItemImport?.local?.name,
+                  inputGroupTextName,
+                ].includes(childName) ||
                 ["JSXText", "Literal"].includes(child.type)
               ) {
                 return;
               }
 
-              let inputGroupItemProps = "";
-
-              if (
-                ["input", "textarea", "TextArea", "TextInput"].includes(
-                  childName
-                )
-              ) {
-                inputGroupItemProps = " isFill";
-              } else if (childName === inputGroupTextName) {
-                inputGroupItemProps = " isBox";
-              }
+              const matchingChildImport = imports.find(
+                (imp) => imp.local?.name === childName
+              );
+              const shouldFill =
+                ["input", "textarea"].includes(childName) ||
+                ["TextArea", "TextInput"].includes(
+                  matchingChildImport?.imported?.name
+                );
 
               context.report({
                 node,
-                message: `Each child passed to ${parentName} must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.${
-                  childName === inputGroupTextName
-                    ? ' Additionally, InputGroupText is no longer exported and is instead rendered within InputGroupItem when the "isBox" prop is passed.'
-                    : ""
-                }`,
+                message: `Any non-InputGroupText child passed to ${parentName} must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
                 fix(fixer) {
                   const sourceCode = context.getSourceCode();
-                  const newChild =
-                    childName === inputGroupTextName
-                      ? child.children
-                          ?.map((textChild) => sourceCode.getText(textChild))
-                          .join("")
-                      : sourceCode.getText(child);
+                  const newChild = sourceCode.getText(child);
 
                   return fixer.replaceText(
                     child,
-                    `<InputGroupItem${inputGroupItemProps}>${newChild}</InputGroupItem>`
+                    `<InputGroupItem${
+                      shouldFill ? " isFill " : ""
+                    }>${newChild}</InputGroupItem>`
                   );
                 },
               });

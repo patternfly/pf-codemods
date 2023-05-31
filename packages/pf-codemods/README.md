@@ -1467,10 +1467,8 @@ We've updated the default value of the `aria-label` attribute for Nav with a `ho
 
 ### inputGroup-update-api [(#9074)](https://github.com/patternfly/patternfly-react/pull/9074) and [(#9176)](https://github.com/patternfly/patternfly-react/pull/9176)
 
-We've made the following updates to the InputGroup API:
+We've added the InputGroupItem component, which must wrap all non-InputGroupText children passed to an InputGroup. The InputGroupItem component may need to have the `isFill`, `isBox`, and/or `isPlain` props adjusted to retain styling.
 
-- Added the InputGroupItem component, which must wrap each child passed to an InputGroup. The InputGroupItem component may need to have the `isFill`, `isBox`, and/or `isPlain` props adjusted to retain styling.
-- No longer exporting InputGroupText as it is now rendered within InputGroupItem when the `isBox` prop is passed to it.
 
 #### Examples
 
@@ -1495,7 +1493,7 @@ Out:
   <InputGroupItem isFill><textarea /></InputGroupItem>
   <InputGroupItem isFill><TextArea /></InputGroupItem>
   <InputGroupItem isFill><TextInput /></InputGroupItem>
-  <InputGroupItem isBox>Some text</InputGroupItem>
+  <InputGroupText>Some text</InputGroupText>
   <InputGroupItem><button /></InputGroupItem>
 </InputGroup>
 ```
