@@ -1,6 +1,8 @@
+const { join } = require("path");
 const { Command } = require("commander");
 const program = new Command();
 
+const { isDir } = require("./utils");
 const { classNameUpdate } = require("./classNameUpdate");
 
 program
@@ -15,7 +17,17 @@ program
   .action(runClassNameUpdate);
 
 async function runClassNameUpdate(path, otherPaths, options) {
-  const allPaths = [path, ...otherPaths];
+  let allPaths = [path, ...otherPaths];
+
+  // if all paths are resolved to be directories assume that they want to run on all contents of those directories
+  const onlyDirs = await Promise.all(allPaths.map((path) => isDir(path))).then(
+    (responses) => responses.every((isDirResult) => !!isDirResult)
+  );
+
+  if (onlyDirs) {
+    allPaths = allPaths.map((path) => join(path, "**", "*"));
+    console.log(allPaths);
+  }
 
   let fileTypes;
   if (options.extensions) {
