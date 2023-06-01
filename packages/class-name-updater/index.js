@@ -26,7 +26,6 @@ async function runClassNameUpdate(path, otherPaths, options) {
 
   if (onlyDirs) {
     allPaths = allPaths.map((path) => join(path, "**", "*"));
-    console.log(allPaths);
   }
 
   let fileTypes;
