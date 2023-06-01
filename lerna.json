@@ -12,7 +12,8 @@
   },
   "packages": [
     "packages/eslint-plugin-pf-codemods",
-    "packages/pf-codemods"
+    "packages/pf-codemods",
+    "packages/class-name-updater"
   ],
   "version": "independent"
 }

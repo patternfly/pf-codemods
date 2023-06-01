@@ -139,7 +139,7 @@ const backgroundImgSrcObj: BackgroundImageSrcMap = {};
 const variantOption = "default";
 const alertVariantOption = AlertVariant.default;
 <>
-  <Alert aria-label='tester' />
+  <Alert aria-label='tester' className='pf-c-foo' />
   <Alert titleHeadingLevel={"h4"} variant={AlertVariant.default} />
   <AlertIcon variant={"default"}></AlertIcon>
   <ApplicationLauncher

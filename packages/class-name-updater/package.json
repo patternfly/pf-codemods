@@ -1,0 +1,21 @@
+{
+  "name": "@patternfly/class-name-updater",
+  "version": "1.0.0",
+  "description": "Utility to update class names with Patternfly version numbers",
+  "author": "Red Hat",
+  "license": "MIT",
+  "bin": {
+    "class-name-updater": "./index.js"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "commander": "^5.1.0",
+    "diff": "^5.1.0",
+    "colors": "^1.4.0"
+  }
+}
