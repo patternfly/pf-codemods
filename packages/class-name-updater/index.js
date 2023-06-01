@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const { join } = require("path");
 const { Command } = require("commander");
 const program = new Command();
