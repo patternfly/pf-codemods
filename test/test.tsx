@@ -55,6 +55,7 @@ import {
   FileUploadField,
   FormSelect,
   InputGroup,
+  InputGroupItem,
   InputGroupText,
   KebabToggle,
   KEY_CODES,
@@ -230,7 +231,7 @@ const alertVariantOption = AlertVariant.default;
     <textarea />
     <TextArea />
     <TextInput />
-    <InputGroupText />
+    <InputGroupText>Text</InputGroupText>
     <button />
   </InputGroup>
   <InputGroupText variant />
