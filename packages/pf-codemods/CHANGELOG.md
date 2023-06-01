@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.78.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.77.4...@patternfly/pf-codemods@1.78.0) (2023-06-01)
+
+
+### Features
+
+* **InputGroup:** updated api ([#498](https://github.com/patternfly/pf-codemods/issues/498)) ([206951e](https://github.com/patternfly/pf-codemods/commit/206951e1ee1475d5c666e4dd9f05e9b3a63e021f))
+
+
+
+
+
 ## [1.77.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.77.3...@patternfly/pf-codemods@1.77.4) (2023-05-31)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
