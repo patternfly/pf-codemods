@@ -1,0 +1,48 @@
+const { createMoveSpecifiersTester } = require("../../testHelpers");
+
+const specifiersToMove = [
+  "Dropdown",
+  "DropdownProps",
+  "DropdownGroup",
+  "DropdownGroupProps",
+  "DropdownItem",
+  "DropdownItemProps",
+  "DropdownList",
+  "DropdownListProps",
+  "Select",
+  "SelectProps",
+  "SelectGroup",
+  "SelectGroupProps",
+  "SelectList",
+  "SelectListProps",
+  "SelectOption",
+  "SelectOptionProps",
+  "Wizard",
+  "WizardProps",
+  "WizardBody",
+  "WizardBodyProps",
+  "WizardContext",
+  "useWizardContext",
+  "WizardFooter",
+  "WizardFooterProps",
+  "WizardFooterWrapper",
+  "WizardFooterWrapperProps",
+  "useWizardFooter",
+  "WizardHeader",
+  "WizardHeaderProps",
+  "WizardNav",
+  "WizardNavProps",
+  "WizardNavItem",
+  "WizardNavItemProps",
+  "WizardStep",
+  "WizardStepProps",
+  "WizardToggle",
+  "WizardToggleProps",
+];
+
+createMoveSpecifiersTester(
+  "nextComponents-update-path",
+  specifiersToMove,
+  null,
+  "next"
+);

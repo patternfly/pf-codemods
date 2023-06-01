@@ -30,21 +30,29 @@ function moveSpecifiers(
     }
 
     const getModifiedToPackage = (firstSpecifier) => {
-      let modifiedToPackage = "";
+      // expecting @patternfly/{package} or
+      // @patternfly/{package}/{designator} where designator is deprecated
+      const toParts = toPackage.split("/");
 
-      if (firstSpecifier?.parent?.source?.value?.includes("dist/esm")) {
-        //expecting @patternfly/{package}/{designator} where designator is next/deprecated
-        const toParts = toPackage.split("/");
-        //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
-        //needing toPath to look like fromPath with the designator before /components
-        const fromParts = firstSpecifier.parent.source.value.split("/");
-        if (toParts[0] === "@patternfly" && toParts.length === 3) {
-          fromParts.splice(4, 0, toParts[2]);
-          modifiedToPackage = fromParts.join("/");
-        }
+      if (
+        !firstSpecifier?.parent?.source?.value?.includes("dist/esm") ||
+        toParts[0] !== "@patternfly"
+      ) {
+        return;
       }
 
-      return modifiedToPackage;
+      const fromParts = firstSpecifier.parent.source.value.split("/");
+      //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
+      //needing toPath to look like fromPath with the designator before /components
+      if (toParts.length === 3) {
+        fromParts.splice(4, 0, toParts[2]);
+        return fromParts.join("/");
+      }
+      // Expecting @patternfly/{package}/dist/esm/next/components/{Component}/index.js
+      // Needing toPath to look like fromPath *without* the designator before /components
+      if (toParts.length === 2) {
+        return fromParts.filter((part) => part !== "next").join("/");
+      }
     };
     const modifiedToPackageImport = getModifiedToPackage(
       importSpecifiersToMove[0]
@@ -102,8 +110,16 @@ function moveSpecifiers(
           return;
         }
 
-        const newAliasToPackageSpecifiers = createAliasImportSpecifiers(
-          newToPackageSpecifiers
+        const newAliasToPackageSpecifiers = newToPackageSpecifiers.map(
+          (importSpecifier) => {
+            const importString = src.getText(importSpecifier);
+
+            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+              importSpecifier.parent?.source?.value
+            )
+              ? `${importString} /* data-codemods */`
+              : importString;
+          }
         );
         const newToPackageImportDeclaration = `import {\n\t${[
           ...existingToPackageImportSpecifiers,
@@ -177,7 +193,15 @@ function moveSpecifiers(
 
         const newToPackageExportDeclaration = `export {\n\t${[
           ...existingToPackageExportSpecifiers,
-          ...newToPackageSpecifiers.map((specifier) => src.getText(specifier)),
+          ...newToPackageSpecifiers.map((exportSpecifier) => {
+            const exportString = src.getText(exportSpecifier);
+
+            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+              exportSpecifier.parent?.source?.value
+            )
+              ? `${exportString} /* data-codemods */`
+              : exportString;
+          }),
         ].join(`,\n\t`)}\n} from '${modifiedToPackageExport || toPackage}';`;
 
         context.report({
