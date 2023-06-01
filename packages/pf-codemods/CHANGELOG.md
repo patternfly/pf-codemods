@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.80.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.79.1...@patternfly/pf-codemods@1.80.0) (2023-06-01)
+
+
+### Features
+
+* **Next components:** updated import and export paths ([#503](https://github.com/patternfly/pf-codemods/issues/503)) ([b678b94](https://github.com/patternfly/pf-codemods/commit/b678b94ead047284046b553d4c3bf686e20b68a3))
+
+
+
+
+
 ## [1.79.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.79.0...@patternfly/pf-codemods@1.79.1) (2023-06-01)
 
 
