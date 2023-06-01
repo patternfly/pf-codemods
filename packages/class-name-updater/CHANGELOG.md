@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@1.1.1...@patternfly/class-name-updater@1.1.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* **class-name-updater:** Add glob as a dep, try to fix readme link ([#505](https://github.com/patternfly/pf-codemods/issues/505)) ([9b045d6](https://github.com/patternfly/pf-codemods/commit/9b045d6b2112d2b7d098fb280e7f746b6a4bc003))
+
+
+
+
+
 ## [1.1.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@1.1.0...@patternfly/class-name-updater@1.1.1) (2023-06-01)
 
 
