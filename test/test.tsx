@@ -309,7 +309,7 @@ const alertVariantOption = AlertVariant.default;
     <TableHeader />
     <TableBody />
   </Table>
-  <TableComposable />
+  <TableComposable hasSelectableRowCaption />
   <Tabs onToggle={(foo) => handler(foo)} />
   <Td select={tdSelectTypeObj} actions={{ disable: false }} />
   <TextArea isReadOnly isIconSprite />
