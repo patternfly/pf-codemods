@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.82.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.82.0...@patternfly/eslint-plugin-pf-codemods@1.82.1) (2023-06-02)
+
+
+### Bug Fixes
+
+* **TableComposable:** removed hasSelectableRowCaption after rename ([#506](https://github.com/patternfly/pf-codemods/issues/506)) ([983880f](https://github.com/patternfly/pf-codemods/commit/983880f0e3dda0a8f62385add774155666bb8d60))
+
+
+
+
+
 # [1.82.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.81.0...@patternfly/eslint-plugin-pf-codemods@1.82.0) (2023-06-01)
 
 
