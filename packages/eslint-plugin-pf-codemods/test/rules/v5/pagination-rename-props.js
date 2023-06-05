@@ -111,8 +111,7 @@ ruleTester.run("pagination-rename-props", rule, {
       ],
     })),
     ...Object.keys(updatedTitlesPropNames).map((oldName) => ({
-      code: `import * as React from "react";
-      import { Pagination } from "@patternfly/react-core";
+      code: `import { Pagination } from "@patternfly/react-core";
       
       let titlesObject = {
         ${oldName}: "test",
@@ -126,8 +125,7 @@ ruleTester.run("pagination-rename-props", rule, {
       
       <Pagination titles={titlesObject} />;
       `,
-      output: `import * as React from "react";
-      import { Pagination } from "@patternfly/react-core";
+      output: `import { Pagination } from "@patternfly/react-core";
       
       let titlesObject = {
         ${updatedTitlesPropNames[oldName]}: "test",
@@ -149,15 +147,13 @@ ruleTester.run("pagination-rename-props", rule, {
       ],
     })),
     ...Object.keys(updatedTitlesPropNames).map((oldName) => ({
-      code: `import * as React from "react";
-      import { Pagination } from "@patternfly/react-core";
+      code: `import { Pagination } from "@patternfly/react-core";
       
       const ${oldName} = "test";
       const titlesObject2 = {${oldName}};
       
       <Pagination titles={titlesObject2} />;`,
-      output: `import * as React from "react";
-      import { Pagination } from "@patternfly/react-core";
+      output: `import { Pagination } from "@patternfly/react-core";
       
       const ${updatedTitlesPropNames[oldName]} = "test";
       const titlesObject2 = {${updatedTitlesPropNames[oldName]}};
