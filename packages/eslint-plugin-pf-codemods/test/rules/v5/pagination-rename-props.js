@@ -1,10 +1,6 @@
 const ruleTester = require("../../ruletester");
 const rule = require("../../../lib/rules/v5/pagination-rename-props");
 
-const updatedPropNames = {
-  perPageComponent: "",
-  defaultToFullPage: "isLastPageShown",
-};
 const updatedTitlesPropNames = {
   currPage: "currPageAriaLabel",
   paginationTitle: "paginationAriaLabel",
@@ -110,6 +106,66 @@ ruleTester.run("pagination-rename-props", rule, {
         },
         {
           message: `The "${titlesPropName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[titlesPropName]}".`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    })),
+    ...Object.keys(updatedTitlesPropNames).map((oldName) => ({
+      code: `import * as React from "react";
+      import { Pagination } from "@patternfly/react-core";
+      
+      let titlesObject = {
+        ${oldName}: "test",
+      };
+      
+      titlesObject.${oldName} = "test";
+      titlesObject["${oldName}"] = "test";
+      titlesObject = {
+        ${oldName}: "test",
+      };
+      
+      <Pagination titles={titlesObject} />;
+      `,
+      output: `import * as React from "react";
+      import { Pagination } from "@patternfly/react-core";
+      
+      let titlesObject = {
+        ${updatedTitlesPropNames[oldName]}: "test",
+      };
+      
+      titlesObject.${updatedTitlesPropNames[oldName]} = "test";
+      titlesObject["${updatedTitlesPropNames[oldName]}"] = "test";
+      titlesObject = {
+        ${updatedTitlesPropNames[oldName]}: "test",
+      };
+      
+      <Pagination titles={titlesObject} />;
+      `,
+      errors: [
+        {
+          message: `The "${oldName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[oldName]}".`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    })),
+    ...Object.keys(updatedTitlesPropNames).map((oldName) => ({
+      code: `import * as React from "react";
+      import { Pagination } from "@patternfly/react-core";
+      
+      const ${oldName} = "test";
+      const titlesObject2 = {${oldName}};
+      
+      <Pagination titles={titlesObject2} />;`,
+      output: `import * as React from "react";
+      import { Pagination } from "@patternfly/react-core";
+      
+      const ${updatedTitlesPropNames[oldName]} = "test";
+      const titlesObject2 = {${updatedTitlesPropNames[oldName]}};
+      
+      <Pagination titles={titlesObject2} />;`,
+      errors: [
+        {
+          message: `The "${oldName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[oldName]}".`,
           type: "JSXOpeningElement",
         },
       ],
