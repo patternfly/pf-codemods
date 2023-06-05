@@ -11,7 +11,7 @@ module.exports = {
     const dataListImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).find((specifier) => specifier.imported.name == "DataList");
+    ).imports.find((specifier) => specifier.imported.name == "DataList");
 
     if (!dataListImport) {
       return {};
@@ -19,7 +19,7 @@ module.exports = {
 
     let rangeStartsToReplaceConst = [];
 
-    const sc = context.getSourceCode();
+    const sourceCode = context.getSourceCode();
 
     const getObjectProp = (expr, propName) =>
       expr.properties.find(
@@ -30,11 +30,11 @@ module.exports = {
 
     const swapCallbackParam = (params, toReplace) => {
       if (params.length === 1) {
-        toReplace.push([params[0], `event, ${sc.getText(params[0])}`]);
+        toReplace.push([params[0], `event, ${sourceCode.getText(params[0])}`]);
       } else if (params.length === 2) {
         toReplace.push(
-          [params[0], sc.getText(params[1])],
-          [params[1], sc.getText(params[0])]
+          [params[0], sourceCode.getText(params[1])],
+          [params[1], sourceCode.getText(params[0])]
         );
       }
     };
@@ -47,28 +47,28 @@ module.exports = {
       }
 
       if (propVal.type === "Identifier") {
-        toReplace.push([expr, sc.getText(propVal)]);
+        toReplace.push([expr, sourceCode.getText(propVal)]);
         handleIdentifierOfFunction(propVal, toReplace);
       } else if (propVal.type === "ArrowFunctionExpression") {
-        const paramsLen = propVal.params.length;
-        if (1 <= paramsLen <= 2) {
+        const paramsLength = propVal.params.length;
+        if (paramsLength === 1 || paramsLength === 2) {
           toReplace.push([
             expr,
             `(${
-              paramsLen === 1 ? "event" : sc.getText(propVal.params[1])
-            }, ${sc.getText(propVal.params[0])}) => ${sc.getText(
+              paramsLength === 1 ? "event" : sourceCode.getText(propVal.params[1])
+            }, ${sourceCode.getText(propVal.params[0])}) => ${sourceCode.getText(
               propVal.body
             )}`,
           ]);
         }
       } else if (propVal.type === "FunctionExpression") {
-        const paramsLen = propVal.params.length;
-        if (1 <= paramsLen <= 2) {
+        const paramsLength = propVal.params.length;
+        if (paramsLength === 1 || paramsLength === 2) {
           toReplace.push([
             expr,
-            `function ${propVal.id ? sc.getText(propVal.id) : ""}(${
-              paramsLen === 1 ? "event" : sc.getText(propVal.params[1])
-            }, ${sc.getText(propVal.params[0])}) ${sc.getText(propVal.body)}`,
+            `function ${propVal.id ? sourceCode.getText(propVal.id) : ""}(${
+              paramsLength === 1 ? "event" : sourceCode.getText(propVal.params[1])
+            }, ${sourceCode.getText(propVal.params[0])}) ${sourceCode.getText(propVal.body)}`,
           ]);
         }
       }
@@ -85,7 +85,7 @@ module.exports = {
     const handleIdentifierOfObject = (identifier, toReplace) => {
       const variable = findVariableDeclaration(
         identifier.name,
-        sc.getScope(identifier)
+        sourceCode.getScope(identifier)
       );
 
       const nodesUsingVariable = variable?.references.map(
@@ -99,7 +99,7 @@ module.exports = {
           n.parent.type === "AssignmentExpression"
         ) {
           rangeStartsToReplaceConst.push(variable?.defs[0].node.parent.range[0]);
-          toReplace.push([n, sc.getText(n.object)]);
+          toReplace.push([n, sourceCode.getText(n.object)]);
           handleRightAssignmentSide_Function(n.parent.right, toReplace);
         } else if (
           n.type === "AssignmentExpression" &&
@@ -125,7 +125,7 @@ module.exports = {
     const handleIdentifierOfFunction = (identifier, toReplace) => {
       const variable = findVariableDeclaration(
         identifier.name,
-        sc.getScope(identifier)
+        sourceCode.getScope(identifier)
       );
 
       const variableType = variable?.defs[0].type;
