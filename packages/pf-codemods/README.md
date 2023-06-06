@@ -768,7 +768,7 @@ The default value of the `appendTo` prop on DatePicker has been updated, which m
 
 The helperText property of `DatePicker` now expects the <HelperText> component, and `TimePicker` now uses a <HelperText> component internally.
 
-This rule will raise a warning, but will not make any code changes
+This rule will raise a warning, but will not make any code changes.
 
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
 
@@ -1386,7 +1386,47 @@ This rule will raise a warning, but will not make any changes.
 
 ### formgroup-remove-helpertextProps [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
-We've removed the helper text related props from `FormGroup`: `helperText`, `helperTextInvalid`, `validated`, `helperTextIcon`, `helperTextInvalidIcon`, and `isHelperTextBeforeField`. The `FormHelperText`, `HelperText`, and `HelperTextItem` components should now be used directly as part of `children` instead of these props. This rule will throw an error but not make any changes. 
+We've removed the helper text related props from `FormGroup`: `helperText`, `helperTextInvalid`, `validated`, `helperTextIcon`, `helperTextInvalidIcon`, and `isHelperTextBeforeField`. The `FormHelperText`, `HelperText`, and `HelperTextItem` components should now be used directly as part of `children` instead of these props. This rule will throw an error but not make any changes.
+
+#### Example manual fix
+
+In:
+```jsx
+<FormGroup
+  helperTextInvalid={helpText !== null && typeof helpText === 'object' ? intl.formatMessage(helpText) : helpText}
+  validated={validated}
+>
+  <TextInput
+    validated={validated}
+    value={value}
+    onChange={onChange}
+    isRequired={isRequired}
+    placeholder={placeholder}
+  />
+</FormGroup>
+```
+
+Out:
+```jsx
+<FormGroup>
+  <TextInput
+    validated={validated}
+    value={value}
+    onChange={onChange}
+    isRequired={isRequired}
+    placeholder={placeholder}
+  />
+  {validated === 'error' && helpText && (
+    <FormHelperText>
+      <HelperText>
+        <HelperTextItem variant="error">
+          {helpText}
+        </HelperTextItem>
+      </HelperText>
+    </FormHelperText>
+  )}
+</FormGroup>
+```
 
 ### formhelpertext-remove-props [(#8810)](https://github.com/patternfly/patternfly-react/pull/8810)
 
