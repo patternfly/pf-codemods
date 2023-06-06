@@ -12,7 +12,6 @@ const specifiersToMove = [
   "OptionsMenuToggleWithText",
   "OptionsMenuPosition",
   "OptionsMenuDirection",
-  "OptionsMenuToggleWithText",
   "OptionsMenuToggleWithTextProps"
 ];
 

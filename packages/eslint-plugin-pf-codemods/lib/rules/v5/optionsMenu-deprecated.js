@@ -14,7 +14,6 @@ const specifiersToMove = [
   "OptionsMenuToggleWithText",
   "OptionsMenuPosition",
   "OptionsMenuDirection",
-  "OptionsMenuToggleWithText",
   "OptionsMenuToggleWithTextProps"
 ];
 const fromPackage = "@patternfly/react-core";
