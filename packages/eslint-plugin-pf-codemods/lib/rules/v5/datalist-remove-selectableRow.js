@@ -1,8 +1,4 @@
-const {
-  getFromPackage,
-  findVariableDeclaration,
-  getAllJSXElements,
-} = require("../../helpers");
+const { getFromPackage, findVariableDeclaration } = require("../../helpers");
 
 //https://github.com/patternfly/patternfly-react/pull/8827
 module.exports = {
@@ -28,17 +24,6 @@ module.exports = {
           (prop.key.type === "Literal" && prop.key.value === propName)
       );
 
-    const swapCallbackParam = (params, toReplace) => {
-      if (params.length === 1) {
-        toReplace.push([params[0], `event, ${sourceCode.getText(params[0])}`]);
-      } else if (params.length === 2) {
-        toReplace.push(
-          [params[0], sourceCode.getText(params[1])],
-          [params[1], sourceCode.getText(params[0])]
-        );
-      }
-    };
-
     const handleObjectExpression = (expr, toReplace) => {
       const propVal = getObjectProp(expr, "onChange")?.value;
 
@@ -49,28 +34,13 @@ module.exports = {
       if (propVal.type === "Identifier") {
         toReplace.push([expr, sourceCode.getText(propVal)]);
         handleIdentifierOfFunction(propVal, toReplace);
-      } else if (propVal.type === "ArrowFunctionExpression") {
-        const paramsLength = propVal.params.length;
-        if (paramsLength === 1 || paramsLength === 2) {
-          toReplace.push([
-            expr,
-            `(${
-              paramsLength === 1 ? "event" : sourceCode.getText(propVal.params[1])
-            }, ${sourceCode.getText(propVal.params[0])}) => ${sourceCode.getText(
-              propVal.body
-            )}`,
-          ]);
-        }
-      } else if (propVal.type === "FunctionExpression") {
-        const paramsLength = propVal.params.length;
-        if (paramsLength === 1 || paramsLength === 2) {
-          toReplace.push([
-            expr,
-            `function ${propVal.id ? sourceCode.getText(propVal.id) : ""}(${
-              paramsLength === 1 ? "event" : sourceCode.getText(propVal.params[1])
-            }, ${sourceCode.getText(propVal.params[0])}) ${sourceCode.getText(propVal.body)}`,
-          ]);
-        }
+      } else if (
+        ["ArrowFunctionExpression", "FunctionExpression"].includes(
+          propVal.type
+        ) &&
+        [1, 2].includes(propVal.params.length)
+      ) {
+        toReplace.push([expr, sourceCode.getText(propVal)]);
       }
     };
 
@@ -98,7 +68,9 @@ module.exports = {
           (n.property.name === "onChange" || n.property.value === "onChange") &&
           n.parent.type === "AssignmentExpression"
         ) {
-          rangeStartsToReplaceConst.push(variable?.defs[0].node.parent.range[0]);
+          rangeStartsToReplaceConst.push(
+            variable?.defs[0].node.parent.range[0]
+          );
           toReplace.push([n, sourceCode.getText(n.object)]);
           handleRightAssignmentSide_Function(n.parent.right, toReplace);
         } else if (
@@ -115,9 +87,7 @@ module.exports = {
     };
 
     const handleRightAssignmentSide_Function = (node, toReplace) => {
-      if (node.type.includes("FunctionExpression")) {
-        swapCallbackParam(node.params, toReplace);
-      } else if (node.type === "Identifier") {
+      if (node.type === "Identifier") {
         handleIdentifierOfFunction(node, toReplace);
       }
     };
@@ -148,72 +118,54 @@ module.exports = {
         variableNode.init &&
           handleRightAssignmentSide_Function(variableNode.init, toReplace);
       }
-
-      if (variableType === "FunctionName") {
-        swapCallbackParam(variableNode.params, toReplace);
-      }
     };
 
-    const jsxOpeningsElementsToFix = getAllJSXElements(context)
-      .map((elem) => elem.openingElement)
-      .filter(
-        (openingElem) =>
-          openingElem.name.name === dataListImport.local.name &&
-          openingElem.attributes.some(
-            (attr) =>
-              attr.name.name === "selectableRow" &&
-              attr.value?.type === "JSXExpressionContainer"
-          )
-      );
-
-    let toReplace = [];
-
-    for (const elem of jsxOpeningsElementsToFix) {
-      const selectableRowAttr = elem.attributes.find(
-        (attr) =>
-          attr.name?.name === "selectableRow" &&
-          attr.value?.type === "JSXExpressionContainer"
-      );
-
-      if (!selectableRowAttr) {
-        continue;
-      }
-
-      const expr = selectableRowAttr.value.expression;
-
-      if (expr.type === "ObjectExpression") {
-        handleObjectExpression(expr, toReplace);
-      }
-
-      if (expr.type === "Identifier") {
-        handleIdentifierOfObject(expr, toReplace);
-      }
-
-      toReplace.push([selectableRowAttr.name, "onSelectableRowChange"]);
-    }
-
-    // Having the same fix more than once would lead to errors
-    let toReplaceUnique = [];
-
-    for (const [oldVal, newVal] of toReplace) {
-      if (
-        toReplaceUnique.every(
-          ([oldUnique, newUnique]) =>
-            oldUnique !== oldVal || newUnique !== newVal
-        )
-      ) {
-        toReplaceUnique.push([oldVal, newVal]);
-      }
-    }
-
-    const reportMessage = `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`;
-
     return {
-      // We use Program node to perform a one-time fix to prevent swapping callback parameters back and forth
-      Program(node) {
+      JSXOpeningElement(node) {
+        if (node.name.name !== dataListImport.local.name) {
+          return;
+        }
+
+        const selectableRowAttr = node.attributes.find(
+          (attr) =>
+            attr.name?.name === "selectableRow" &&
+            attr.value?.type === "JSXExpressionContainer"
+        );
+
+        if (!selectableRowAttr) {
+          return;
+        }
+
+        let toReplace = [];
+        const expr = selectableRowAttr.value.expression;
+
+        if (expr.type === "ObjectExpression") {
+          handleObjectExpression(expr, toReplace);
+        }
+
+        if (expr.type === "Identifier") {
+          handleIdentifierOfObject(expr, toReplace);
+        }
+
+        toReplace.push([selectableRowAttr.name, "onSelectableRowChange"]);
+
+        // Having the same fix more than once would lead to errors
+        let toReplaceUnique = [];
+
+        for (const [oldVal, newVal] of toReplace) {
+          if (
+            toReplaceUnique.every(
+              ([oldUnique, newUnique]) =>
+                oldUnique !== oldVal || newUnique !== newVal
+            )
+          ) {
+            toReplaceUnique.push([oldVal, newVal]);
+          }
+        }
+
         toReplaceUnique.length &&
           context.report({
-            message: reportMessage,
+            message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
             node,
             fix: function (fixer) {
               return [
@@ -229,15 +181,6 @@ module.exports = {
               ];
             },
           });
-      },
-      // Only to report where the node is located
-      JSXOpeningElement(node) {
-        if (jsxOpeningsElementsToFix.includes(node)) {
-          context.report({
-            message: reportMessage,
-            node,
-          });
-        }
       },
     };
   },

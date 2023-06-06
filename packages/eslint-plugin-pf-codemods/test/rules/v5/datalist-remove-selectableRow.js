@@ -77,59 +77,97 @@ ruleTester.run("datalist-remove-selectableRow", rule, {
   ],
   invalid: [
     {
-      code: `
-      import { DataList } from "@patternfly/react-core";
-
+      code: `import { DataList } from "@patternfly/react-core";
+      <DataList selectableRow={{ onChange: (id, event) => {} }} />;`,
+      output: `import { DataList } from "@patternfly/react-core";
+      <DataList onSelectableRowChange={(id, event) => {}} />;`,
+      errors: [
+        {
+          message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { DataList } from "@patternfly/react-core";
+      function onChangeFunc(id, event) {};
+      <DataList selectableRow={{ onChange: onChangeFunc }} />;`,
+      output: `import { DataList } from "@patternfly/react-core";
+      function onChangeFunc(id, event) {};
+      <DataList onSelectableRowChange={onChangeFunc} />;`,
+      errors: [
+        {
+          message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { DataList } from "@patternfly/react-core";
+      const onChange = (id) => {};
+      <DataList selectableRow={{ onChange }} />;`,
+      output: `import { DataList } from "@patternfly/react-core";
+      const onChange = (id) => {};
+      <DataList onSelectableRowChange={onChange} />;`,
+      errors: [
+        {
+          message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { DataList } from "@patternfly/react-core";
       const onChange = (id) => {};
       function onChangeFunc(id, event) {};
       
       const selectableRowObject = { onChange: function (id, event) {} };
       selectableRowObject.onChange = onChangeFunc;
       selectableRowObject["onChange"] = onChange;
-      
-      let selectableRowObject2 = { onChange: onChangeFunc };
-      selectableRowObject2 = selectableRowObject;
-      
-      <>
-        <DataList selectableRow={{ onChange: (id, event) => {} }} />
-        <DataList selectableRow={{ onChange: onChangeFunc }} />
-        <DataList selectableRow={{ onChange }} />
-        
-        <DataList selectableRow={selectableRowObject} />
-        <DataList selectableRow={selectableRowObject2} />
-      </>;
-      `,
-      output: `
-      import { DataList } from "@patternfly/react-core";
 
-      const onChange = (event, id) => {};
-      function onChangeFunc(event, id) {};
+      <DataList selectableRow={selectableRowObject} />;`,
+      output: `import { DataList } from "@patternfly/react-core";
+      const onChange = (id) => {};
+      function onChangeFunc(id, event) {};
       
-      let selectableRowObject = function (event, id) {};
+      let selectableRowObject = function (id, event) {};
       selectableRowObject = onChangeFunc;
       selectableRowObject = onChange;
-      
-      let selectableRowObject2 = onChangeFunc;
-      selectableRowObject2 = selectableRowObject;
-      
-      <>
-        <DataList onSelectableRowChange={(event, id) => {}} />
-        <DataList onSelectableRowChange={onChangeFunc} />
-        <DataList onSelectableRowChange={onChange} />
-        
-        <DataList onSelectableRowChange={selectableRowObject} />
-        <DataList onSelectableRowChange={selectableRowObject2} />
-      </>;
-      `,
+
+      <DataList onSelectableRowChange={selectableRowObject} />;`,
       errors: [
         {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-          type: "Program",
+          type: "JSXOpeningElement",
         },
-        ...Array(5).fill({
+      ],
+    },
+    {
+      code: `
+      import { DataList } from "@patternfly/react-core";
+
+      function onChangeFunc(id, event) {};
+      
+      const selectableRowObject = { onChange: function (id, event) {} };
+      let selectableRowObject2 = { onChange: onChangeFunc };
+      selectableRowObject2 = selectableRowObject;
+      
+      <DataList selectableRow={selectableRowObject2} />;`,
+      output: `
+      import { DataList } from "@patternfly/react-core";
+
+      function onChangeFunc(id, event) {};
+      
+      const selectableRowObject = function (id, event) {};
+      let selectableRowObject2 = onChangeFunc;
+      selectableRowObject2 = selectableRowObject;
+      
+      <DataList onSelectableRowChange={selectableRowObject2} />;`,
+      errors: [
+        {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
           type: "JSXOpeningElement",
-        }),
+        },
       ],
     },
   ],

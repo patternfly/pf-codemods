@@ -646,6 +646,38 @@ Out:
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core/deprecated';
 ```
 
+### dataList-onSelectableRowChange-updated-callback [(#8827)](https://github.com/patternfly/patternfly-react/pull/8827)
+
+We've removed the `selectableRow` property for DataList and replaced it with `onSelectableRowChange`. The value of the selectableRow's onChange field
+was a callback, which can now be directly passed to the onSelectableRowChange prop. We have a special rule `datalist-remove-selectableRow` for that change.
+
+However, it's worth noting that the order of the params in the `onSelectableRowChange` callback has been updated so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+<DataList onSelectableRowChange={(id) => handler(id)} />
+<DataList onSelectableRowChange={(id, event) => handler(id, event)} />
+const handler1 = (id, event) => {};
+<DataList onSelectableRowChange={handler1} />
+function handler2(id, event) {};
+<DataList onSelectableRowChange={handler2} />
+```
+
+Out:
+
+```jsx
+<DataList onSelectableRowChange={(_event, id) => handler(id)} />
+<DataList onSelectableRowChange={(event, id) => handler(id, event)} />
+const handler1 = (_event, id) => {};
+<DataList onSelectableRowChange={handler1} />
+function handler2(_event, id) {};
+<DataList onSelectableRowChange={handler2} />
+```
+
+
 ### datalist-remove-props [(#8388)](https://github.com/patternfly/patternfly-react/pull/8388)
 
 We've removed the deprecated `onDragFinish`, `onDragStart`, `onDragMove`, `onDragCancel`, and `itemOrder` props from DataList.
@@ -668,9 +700,12 @@ Out:
 
 ### datalist-remove-selectableRow [(#8827)](https://github.com/patternfly/patternfly-react/pull/8827)
 
-We've removed the selectableRow property and replaced it with onSelectableRowChange. The value of the selectableRow's onChange field
-was a callback, which can now be directly passed to the onSelectableRowChange prop. However, it's worth noting that the order of the params 
-in the callback has been updated so that the event param is first.
+We've removed the `selectableRow` property for DataList and replaced it with `onSelectableRowChange`. The value of the selectableRow's onChange field
+was a callback, which can now be directly passed to the onSelectableRowChange prop. 
+
+However, it's worth noting that the order of the params in the callback has been updated so that the event param is first. This rule on its own will not update the callback, but we also introduced the `dataList-onSelectableRowChange-updated-callback` rule, which updates the callback accordingly, once this `datalist-remove-selectableRow` rule has finished.
+
+This rule is a setup rule, meaning it will run before others, so the `dataList-onSelectableRowChange-updated-callback` rule can update the callback correctly.
 
 #### Examples
 
@@ -683,19 +718,19 @@ const selectableRowObject = { onChange: (id, event) => {}};
 <DataList selectableRow={selectableRowObject} />
 
 const onChange = (id, event) => {};
-const selectableRowObject = { onChange: onChange};
-<DataList selectableRow={selectableRowObject} />
+const selectableRowObject2 = { onChange: onChange};
+<DataList selectableRow={selectableRowObject2} />
 ```
 
 Out:
 
 ```jsx
-<DataList onSelectableRowChange={(event, id) => {}} />
+<DataList onSelectableRowChange={(id, event) => {}} />
 
-const selectableRowObject = (event, id) => {};
+const selectableRowObject = (id, event) => {};
 <DataList onSelectableRowChange={selectableRowObject} />
 
-const onChange = (event, id) => {};
+const onChange = (id, event) => {};
 const selectableRowObject2 = onChange;
 <DataList onSelectableRowChange={selectableRowObject2} />
 ```
@@ -770,6 +805,10 @@ The helperText property of `DatePicker` now expects the <HelperText> component, 
 
 This rule will raise a warning, but will not make any code changes
 
+### deprecatedSelect-warn-markupUpdated [(#9172)](https://github.com/patternfly/patternfly-react/pull/9172)
+
+Our deprecated implementation of Select has had its markup changed. Selectors may require updating. This rule will raise a warning, but will not make any changes.
+
 ### divider-remove-isVertical [(#8199)](https://github.com/patternfly/patternfly-react/pull/8199)
 
 We've replaced the `isVertical` flag with the `orientation` property that can define verticality on different breakpoints.
@@ -785,10 +824,6 @@ Out:
 ```jsx
 <Divider orientation={{ default: "vertical" }} />
 ```
-
-### deprecatedSelect-warn-markupUpdated [(#9172)](https://github.com/patternfly/patternfly-react/pull/9172)
-
-Our deprecated implementation of Select has had its markup changed. Selectors may require updating. This rule will raise a warning, but will not make any changes.
 
 ### drawerPanelContent-warn-updated-callback [(#8736)](https://github.com/patternfly/patternfly-react/pull/8736)
 
@@ -1792,20 +1827,6 @@ The placement Nav flyouts in the DOM has been changed, if you have Nav elements 
 ### nextComponents-update-path [(#8821)](https://github.com/patternfly/patternfly-react/pull/8821) [(#8825)](https://github.com/patternfly/patternfly-react/pull/8825) [(#8835)](https://github.com/patternfly/patternfly-react/pull/8835)
 
 We've promoted the "Next" implementations of our Dropdown, Select, and Wizard components and they are now our default implementation. This rule will update import and/or export paths.
-
-### Examples
-
-In:
-
-```tsx
-import { Dropdown } from '@patternfly/react-core/next';
-```
-
-Out:
-
-```tsx
-import { Dropdown /* data-codemods */ } from '@patternfly/react-core/next';
-```
 
 ### no-unused-imports-v5
 
