@@ -3,11 +3,19 @@ const { moveSpecifiers } = require("../../helpers");
 
 const specifiersToMove = [
   "OptionsMenu",
+  "OptionsMenuProps",
   "OptionsMenuToggle",
+  "OptionsMenuToggleProps",
   "OptionsMenuItemGroup",
+  "OptionsMenuItemGroupProps",
   "OptionsMenuItem",
+  "OptionsMenuItemProps",
   "OptionsMenuSeparator",
   "OptionsMenuToggleWithText",
+  "OptionsMenuPosition",
+  "OptionsMenuDirection",
+  "OptionsMenuToggleWithText",
+  "OptionsMenuToggleWithTextProps"
 ];
 const fromPackage = "@patternfly/react-core";
 const toPackage = "@patternfly/react-core/deprecated";

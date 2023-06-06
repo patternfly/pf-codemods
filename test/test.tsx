@@ -107,6 +107,7 @@ import {
   Tooltip,
   TreeView,
   Wizard,
+  WizardStepFunctionType
 } from "@patternfly/react-core";
 import {
   SelectOption,
@@ -130,11 +131,11 @@ const tdSelectTypeObj = { disable: true };
 import foo from "Bar";
 
 //eslint-disable-next-line @typescript/foo
-
 const isRead = true;
 const myVariant = EmptyStateVariant.small;
 const newTheme = getCustomTheme("1", "2", "3");
 const backgroundImgSrcObj: BackgroundImageSrcMap = {};
+const wizardStepFunType: WizardStepFunctionType = () => {};
 
 const variantOption = "default";
 const alertVariantOption = AlertVariant.default;

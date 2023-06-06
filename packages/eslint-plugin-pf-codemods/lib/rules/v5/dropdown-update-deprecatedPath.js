@@ -2,20 +2,31 @@ const { moveSpecifiers } = require("../../helpers");
 
 const specifiersToMove = [
   "BadgeToggle",
+  "BadgeToggleProps",
   "Dropdown",
+  "DropdownProps",
   "DropdownPosition",
   "DropdownDirection",
   "DropdownContext",
   "DropdownArrowContext",
   "DropdownGroup",
+  "DropdownGroupProps",
   "DropdownItem",
+  "DropdownItemProps",
   "DropdownMenu",
+  "DropdownMenuProps",
+  "DropdownMenuItem",
   "DropdownSeparator",
+  "SeparatorProps",
   "DropdownToggle",
+  "DropdownToggleProps",
   "DropdownToggleAction",
+  "DropdownToggleActionProps",
   "DropdownToggleCheckbox",
+  "DropdownToggleCheckboxProps",
   "DropdownWithContext",
   "KebabToggle",
+  "KebabToggleProps"
 ];
 const fromPackage = "@patternfly/react-core";
 const toPackage = "@patternfly/react-core/deprecated";
