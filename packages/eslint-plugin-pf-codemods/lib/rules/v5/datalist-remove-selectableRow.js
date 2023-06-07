@@ -149,27 +149,13 @@ module.exports = {
 
         toReplace.push([selectableRowAttr.name, "onSelectableRowChange"]);
 
-        // Having the same fix more than once would lead to errors
-        let toReplaceUnique = [];
-
-        for (const [oldVal, newVal] of toReplace) {
-          if (
-            toReplaceUnique.every(
-              ([oldUnique, newUnique]) =>
-                oldUnique !== oldVal || newUnique !== newVal
-            )
-          ) {
-            toReplaceUnique.push([oldVal, newVal]);
-          }
-        }
-
-        toReplaceUnique.length &&
+        toReplace.length &&
           context.report({
             message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
             node,
             fix: function (fixer) {
               return [
-                ...toReplaceUnique.map(([oldValue, newValue]) =>
+                ...toReplace.map(([oldValue, newValue]) =>
                   fixer.replaceText(oldValue, newValue)
                 ),
                 ...[...new Set(rangeStartsToReplaceConst)].map((rangeStart) =>
