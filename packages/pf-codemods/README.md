@@ -1844,7 +1844,7 @@ import { Dropdown } from '@patternfly/react-core/next';
 Out:
 
 ```tsx
-import { Dropdown /* data-codemods */ } from '@patternfly/react-core/next';
+import { Dropdown /* data-codemods */ } from '@patternfly/react-core';
 ```
 
 ### no-unused-imports-v5
