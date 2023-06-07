@@ -1828,6 +1828,20 @@ The placement Nav flyouts in the DOM has been changed, if you have Nav elements 
 
 We've promoted the "Next" implementations of our Dropdown, Select, and Wizard components and they are now our default implementation. This rule will update import and/or export paths.
 
+### Examples
+
+In:
+
+```tsx
+import { Dropdown } from '@patternfly/react-core/next';
+```
+
+Out:
+
+```tsx
+import { Dropdown /* data-codemods */ } from '@patternfly/react-core/next';
+```
+
 ### no-unused-imports-v5
 
 This rule, when run with `--fix` option, removes all unused imports from `patternfly/react` packages. It is a cleanup rule which will run after all the rules.
