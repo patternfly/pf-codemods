@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.82.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.82.1...@patternfly/eslint-plugin-pf-codemods@1.82.2) (2023-06-07)
+
+
+### Bug Fixes
+
+* **Pagination:** handle case when titles value is not a direct object expression ([#507](https://github.com/patternfly/pf-codemods/issues/507)) ([65757c1](https://github.com/patternfly/pf-codemods/commit/65757c130c64c9d3a68fb3092b005ba879f3d17c))
+
+
+
+
+
 ## [1.82.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.82.0...@patternfly/eslint-plugin-pf-codemods@1.82.1) (2023-06-02)
 
 
