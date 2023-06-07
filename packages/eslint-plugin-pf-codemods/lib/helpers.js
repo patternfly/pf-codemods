@@ -817,6 +817,19 @@ function getAllJSXElements(context) {
   return jsxElements;
 }
 
+function findVariableDeclaration(name, scope) {
+  while (scope !== null) {
+    const variable = scope.variables.find((v) => v.name === name);
+
+    if (variable) {
+      return variable;
+    }
+
+    scope = scope.upper;
+  }
+  return undefined;
+}
+
 module.exports = {
   createAliasImportSpecifiers,
   ensureImports,
@@ -829,4 +842,5 @@ module.exports = {
   splitSpecifiers,
   addCallbackParam,
   getAllJSXElements,
+  findVariableDeclaration,
 };
