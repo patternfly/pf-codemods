@@ -489,7 +489,41 @@ const newTheme = getCustomTheme(ChartThemeColor.default, customTheme);
 return (
   <Chart theme={newTheme}/>
 );
-```
+
+### charts-various-imports [(#8869)](https://github.com/patternfly/patternfly-react/pull/8869)
+
+The following are no longer exported from react-charts and should be replaced accordingly:
+
+| Export | Replacement |
+|--|--|
+| `ChartAreaSortOrder` | Victory's `SortOrderPropType` |
+| `ChartDonutLabelPosition` | Victory's `VictorySliceLabelPositionType` |
+| `ChartDonutSortOrder` | Victory's `SortOrderPropType` |
+| `ChartDonutThresholdSortOrder` | Victory's `SortOrderPropType` |
+| `ChartDonutUtilizationLabelPosition` | Victory's `VictorySliceLabelPositionType` |
+| `ChartDonutUtilizationSortOrder` | Victory's `SortOrderPropType` |
+| `ChartGroupSortOrder` | Victory's `SortOrderPropType` |
+| `ChartLabelPlacement` | Victory's `LabelOrientationType` |
+| `ChartLegendOrientation` | Victory's `VictoryLegendOrientationType` |
+| `ChartLegendRowGutter` | Victory's `BlockProps` |
+| `ChartLineSortOrder` | Victory's `SortOrderPropType` |
+| `ChartPieLabelPosition` | Victory's `VictorySliceLabelPositionType` |
+| `ChartPieSortOrder` | Victory's `SortOrderPropType` |
+| `ChartScatterSortOrder` | Victory's `SortOrderPropType` |
+| `ChartDonutThresholdDonutOrientation` | No replacement |
+| `ChartDonutThresholdLabelOrientation` | No replacement |
+| `ChartDonutThresholdLabelPosition` | No replacement |
+| `ChartLegendPosition` | No replacement |
+| `ChartDonutSubTitlePosition` | `ChartDonutProps.subTitlePosition` |
+| `ChartDonutThresholdSubTitlePosition` | `ChartDonutThresholdProps.subTitlePosition` |
+| `ChartDonutUtilizationLegendOrientation` | `ChartDonutUtilizationProps.legendOrientation` |
+| `ChartDonutUtilizationLegendPosition` | `ChartDonutUtilizationProps.legendPosition` |
+| `ChartDonutUtilizationSubTitlePosition` | `ChartDonutUtilizationProps.subTitlePosition` |
+| `ChartLabelDirection` | `ChartLabelProps.direction` |
+| `ChartPieLegendPosition` | `ChartPieProps.legendPosition` |
+| `ChartVoronoiDimension` | `ChartVoronoiContainerProps.voronoiDimension` |
+
+This rule will raise an error, but will not make any changes.
 
 ### charts-warn-tooltip [(#8592)](https://github.com/patternfly/patternfly-react/pull/8592)
 
