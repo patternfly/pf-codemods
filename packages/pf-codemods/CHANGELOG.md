@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.80.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.80.4...@patternfly/pf-codemods@1.80.5) (2023-06-08)
+
+
+### Bug Fixes
+
+* **Charts:** raised error for cleaned up exports ([#510](https://github.com/patternfly/pf-codemods/issues/510)) ([57ab096](https://github.com/patternfly/pf-codemods/commit/57ab0960703ace26b01442eb2e92a172b671ab22))
+
+
+
+
+
 ## [1.80.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.80.3...@patternfly/pf-codemods@1.80.4) (2023-06-07)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
