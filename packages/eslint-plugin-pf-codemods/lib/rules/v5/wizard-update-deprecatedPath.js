@@ -2,13 +2,25 @@ const { moveSpecifiers } = require("../../helpers");
 
 const specifiersToMove = [
   "Wizard",
+  "WizardProps",
+  "WizardStep",
+  "WizardStepFunctionType",
   "WizardContext",
+  "WizardContextType",
+  "WizardContextProvider",
+  "WizardContextConsumer",
   "WizardNav",
+  "WizardNavProps",
   "WizardNavItem",
+  "WizardNavItemProps",
   "WizardHeader",
+  "WizardHeaderProps",
   "WizardBody",
+  "WizardBodyProps",
   "WizardFooter",
+  "WizardFooterProps",
   "WizardToggle",
+  "WizardToggleProps"
 ];
 const fromPackage = "@patternfly/react-core";
 const toPackage = "@patternfly/react-core/deprecated";

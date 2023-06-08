@@ -2,8 +2,11 @@ const { moveSpecifiers } = require("../../helpers");
 
 const specifiersToMove = [
   "ContextSelector",
+  "ContextSelectorProps",
   "ContextSelectorItem",
+  "ContextSelectorItemProps",
   "ContextSelectorFooter",
+  "ContextSelectorFooterProps",
 ];
 const fromPackage = "@patternfly/react-core";
 const toPackage = "@patternfly/react-core/deprecated";
