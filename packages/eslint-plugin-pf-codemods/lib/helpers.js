@@ -23,7 +23,6 @@ function moveSpecifiers(
           )
         );
       });
-      console.log(specs);
       return specs;
     }
     const importSpecifiersToMove = getSpecifiersToMove(fromPackageImports);
@@ -133,12 +132,10 @@ function moveSpecifiers(
               : importString;
           }
         );
-        console.log("importkind", node.importKind);
         const newToPackageImportDeclaration = `import${(node.importKind === "type") ? " type" : ""} {\n\t${[
           ...existingToPackageImportSpecifiers,
           ...newAliasToPackageSpecifiers,
         ].join(`,\n\t`)}\n} from '${modifiedToPackageImport || toPackage}';`;
-        console.log({newToPackageImportDeclaration})
 
         context.report({
           node,
@@ -161,7 +158,6 @@ function moveSpecifiers(
             }
             const fixes = [];
             if (existingToPackageImportDeclaration) {
-              console.log("1");
               fixes.push(
                 fixer.replaceText(
                   existingToPackageImportDeclaration,
@@ -169,7 +165,6 @@ function moveSpecifiers(
                 )
               );
             } else {
-              console.log("2");
               fixes.push(
                 fixer.insertTextAfter(
                   node,
@@ -178,10 +173,8 @@ function moveSpecifiers(
               );
             }
             if (!fromPackageSpecifiers.length) {
-              console.log("3");
               fixes.push(fixer.remove(node));
             } else {
-              console.log("4");
               fixes.push(
                 fixer.replaceText(
                   node,
@@ -191,7 +184,6 @@ function moveSpecifiers(
                 )
               );
             }
-            console.log({fixes});
             return fixes;
           },
         });
