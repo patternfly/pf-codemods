@@ -74,7 +74,7 @@ function moveSpecifiers(
         return (
           node?.type === nodeType &&
           [modifiedPackage, toPackage].includes(node?.source?.value) &&
-          specifierReference.parent.importKind === node?.importKind
+          specifierReference?.parent?.importKind === node?.importKind
         );
       });
     }
