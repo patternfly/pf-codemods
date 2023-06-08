@@ -12,7 +12,8 @@ function moveSpecifiers(
       getFromPackage(context, fromPackage, specifiersToMove);
 
     const getSpecifiersToMove = (specifiers) =>
-      specifiers.filter((specifier) => {
+    {
+      const specs = specifiers.filter((specifier) => {
         const comments = src.getCommentsAfter(specifier);
 
         return (
@@ -22,6 +23,9 @@ function moveSpecifiers(
           )
         );
       });
+      console.log(specs);
+      return specs;
+    }
     const importSpecifiersToMove = getSpecifiersToMove(fromPackageImports);
     const exportSpecifiersToMove = getSpecifiersToMove(fromPackageExports);
 
@@ -61,12 +65,20 @@ function moveSpecifiers(
       exportSpecifiersToMove[0]
     );
 
-    const getExistingDeclaration = (nodeType, modifiedPackage) =>
-      src.ast.body.find(
-        (node) =>
+    const getExistingDeclaration = (nodeType, modifiedPackage) => {
+      return src.ast.body.find((node) => {
+        const specifierReference =
+          nodeType === "ImportDeclaration"
+            ? importSpecifiersToMove[0]
+            : exportSpecifiersToMove[0];
+
+        return (
           node?.type === nodeType &&
-          [modifiedPackage, toPackage].includes(node?.source?.value)
-      );
+          [modifiedPackage, toPackage].includes(node?.source?.value) &&
+          specifierReference.parent.importKind === node?.importKind
+        );
+      });
+    }
     const existingToPackageImportDeclaration = getExistingDeclaration(
       "ImportDeclaration",
       modifiedToPackageImport
@@ -121,10 +133,12 @@ function moveSpecifiers(
               : importString;
           }
         );
-        const newToPackageImportDeclaration = `import {\n\t${[
+        console.log("importkind", node.importKind);
+        const newToPackageImportDeclaration = `import${(node.importKind === "type") ? " type" : ""} {\n\t${[
           ...existingToPackageImportSpecifiers,
           ...newAliasToPackageSpecifiers,
         ].join(`,\n\t`)}\n} from '${modifiedToPackageImport || toPackage}';`;
+        console.log({newToPackageImportDeclaration})
 
         context.report({
           node,
@@ -147,6 +161,7 @@ function moveSpecifiers(
             }
             const fixes = [];
             if (existingToPackageImportDeclaration) {
+              console.log("1");
               fixes.push(
                 fixer.replaceText(
                   existingToPackageImportDeclaration,
@@ -154,6 +169,7 @@ function moveSpecifiers(
                 )
               );
             } else {
+              console.log("2");
               fixes.push(
                 fixer.insertTextAfter(
                   node,
@@ -162,17 +178,20 @@ function moveSpecifiers(
               );
             }
             if (!fromPackageSpecifiers.length) {
+              console.log("3");
               fixes.push(fixer.remove(node));
             } else {
+              console.log("4");
               fixes.push(
                 fixer.replaceText(
                   node,
-                  `import {\n\t${fromPackageSpecifiers
+                  `import${(node.importKind === "type") ? " type" : ""} {\n\t${fromPackageSpecifiers
                     .map((specifier) => createSpecifierString(specifier))
                     .join(",\n\t")}\n} from '${node.source.value}';`
                 )
               );
             }
+            console.log({fixes});
             return fixes;
           },
         });
