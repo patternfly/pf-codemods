@@ -559,6 +559,17 @@ function getMoveSpecifiersInvalidtests(
         output: ` import {\n\tFoo,\n\t${specifier} as PF${specifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
         errors: importErrors,
       });
+      // With type
+      tests.push({
+        code: `import type {${specifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated';\nimport type { FooType } from '@patternfly/react-${package}/deprecated';`,
+        output: `\nimport { Foo } from '@patternfly/react-${package}/deprecated';\nimport type {\n\tFooType,\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+        errors: importErrors,
+      });
+      tests.push({
+        code: `import type {${specifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated';`,
+        output: `import type {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';\nimport { Foo } from '@patternfly/react-${package}/deprecated';`,
+        errors: importErrors,
+      });
 
       // No existing deprecated export + no other core export
       tests.push({
