@@ -74,7 +74,10 @@ function moveSpecifiers(
         return (
           node?.type === nodeType &&
           [modifiedPackage, toPackage].includes(node?.source?.value) &&
-          specifierReference?.parent?.importKind === node?.importKind
+          (
+            specifierReference?.parent?.importKind === node?.importKind &&
+            specifierReference?.parent?.exportKind === node?.exportKind
+          )
         );
       });
     }
@@ -201,8 +204,7 @@ function moveSpecifiers(
         ) {
           return;
         }
-
-        const newToPackageExportDeclaration = `export {\n\t${[
+        const newToPackageExportDeclaration = `export${(node.exportKind === "type") ? " type" : ""} {\n\t${[
           ...existingToPackageExportSpecifiers,
           ...newToPackageSpecifiers.map((exportSpecifier) => {
             const exportString = src.getText(exportSpecifier);
@@ -256,7 +258,7 @@ function moveSpecifiers(
               fixes.push(
                 fixer.replaceText(
                   node,
-                  `export {\n\t${fromPackageSpecifiers
+                  `export${(node.exportKind === "type") ? " type" : ""} {\n\t${fromPackageSpecifiers
                     .map((specifier) => {
                       const specifierText = src.getText(specifier);
                       const specifierComments =
