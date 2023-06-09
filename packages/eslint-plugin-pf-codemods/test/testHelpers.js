@@ -559,6 +559,17 @@ function getMoveSpecifiersInvalidtests(
         output: ` import {\n\tFoo,\n\t${specifier} as PF${specifier}\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
         errors: importErrors,
       });
+      // With type
+      tests.push({
+        code: `import type {${specifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated';\nimport type { FooType } from '@patternfly/react-${package}/deprecated';`,
+        output: `\nimport { Foo } from '@patternfly/react-${package}/deprecated';\nimport type {\n\tFooType,\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+        errors: importErrors,
+      });
+      tests.push({
+        code: `import type {${specifier} } from '@patternfly/react-${package}';\nimport { Foo } from '@patternfly/react-${package}/deprecated';`,
+        output: `import type {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';\nimport { Foo } from '@patternfly/react-${package}/deprecated';`,
+        errors: importErrors,
+      });
 
       // No existing deprecated export + no other core export
       tests.push({
@@ -582,6 +593,17 @@ function getMoveSpecifiersInvalidtests(
       tests.push({
         code: `export {${specifier} as CustomExport } from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js';`,
         output: `export {\n\t${specifier} as CustomExport\n} from '@patternfly/react-${package}/dist/esm/deprecated/components/${specifier}/index.js';`,
+        errors: exportErrors,
+      });
+      // With type
+      tests.push({
+        code: `export type {${specifier} } from '@patternfly/react-${package}';\nexport { Foo } from '@patternfly/react-${package}/deprecated';\nexport type { FooType } from '@patternfly/react-${package}/deprecated';`,
+        output: `\nexport { Foo } from '@patternfly/react-${package}/deprecated';\nexport type {\n\tFooType,\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';`,
+        errors: exportErrors,
+      });
+      tests.push({
+        code: `export type {${specifier} } from '@patternfly/react-${package}';\nexport { Foo } from '@patternfly/react-${package}/deprecated';`,
+        output: `export type {\n\t${specifier}\n} from '@patternfly/react-${package}/deprecated';\nexport { Foo } from '@patternfly/react-${package}/deprecated';`,
         errors: exportErrors,
       });
     }
@@ -664,6 +686,12 @@ function getMoveSpecifiersInvalidtests(
       tests.push({
         code: `export {${specifier} as CustomExport } from '@patternfly/react-${package}/dist/esm/next/components/${specifier}/index.js';`,
         output: `export {\n\t${specifier} as CustomExport /* data-codemods */\n} from '@patternfly/react-${package}/dist/esm/components/${specifier}/index.js';`,
+        errors: exportErrors,
+      });
+      // With type
+      tests.push({
+        code: `export type {${specifier} } from '@patternfly/react-${package}/next';\nexport { Foo } from '@patternfly/react-${package}';\nexport type { FooType } from '@patternfly/react-${package}';`,
+        output: `\nexport { Foo } from '@patternfly/react-${package}';\nexport type {\n\tFooType,\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-${package}';`,
         errors: exportErrors,
       });
     }
