@@ -11,8 +11,7 @@ function moveSpecifiers(
     const { imports: fromPackageImports, exports: fromPackageExports } =
       getFromPackage(context, fromPackage, specifiersToMove);
 
-    const getSpecifiersToMove = (specifiers) =>
-    {
+    const getSpecifiersToMove = (specifiers) => {
       const specs = specifiers.filter((specifier) => {
         const comments = src.getCommentsAfter(specifier);
 
@@ -24,7 +23,7 @@ function moveSpecifiers(
         );
       });
       return specs;
-    }
+    };
     const importSpecifiersToMove = getSpecifiersToMove(fromPackageImports);
     const exportSpecifiersToMove = getSpecifiersToMove(fromPackageExports);
 
@@ -74,13 +73,11 @@ function moveSpecifiers(
         return (
           node?.type === nodeType &&
           [modifiedPackage, toPackage].includes(node?.source?.value) &&
-          (
-            specifierReference?.parent?.importKind === node?.importKind &&
-            specifierReference?.parent?.exportKind === node?.exportKind
-          )
+          specifierReference?.parent?.importKind === node?.importKind &&
+          specifierReference?.parent?.exportKind === node?.exportKind
         );
       });
-    }
+    };
     const existingToPackageImportDeclaration = getExistingDeclaration(
       "ImportDeclaration",
       modifiedToPackageImport
@@ -135,7 +132,9 @@ function moveSpecifiers(
               : importString;
           }
         );
-        const newToPackageImportDeclaration = `import${(node.importKind === "type") ? " type" : ""} {\n\t${[
+        const newToPackageImportDeclaration = `import${
+          node.importKind === "type" ? " type" : ""
+        } {\n\t${[
           ...existingToPackageImportSpecifiers,
           ...newAliasToPackageSpecifiers,
         ].join(`,\n\t`)}\n} from '${modifiedToPackageImport || toPackage}';`;
@@ -181,7 +180,9 @@ function moveSpecifiers(
               fixes.push(
                 fixer.replaceText(
                   node,
-                  `import${(node.importKind === "type") ? " type" : ""} {\n\t${fromPackageSpecifiers
+                  `import${
+                    node.importKind === "type" ? " type" : ""
+                  } {\n\t${fromPackageSpecifiers
                     .map((specifier) => createSpecifierString(specifier))
                     .join(",\n\t")}\n} from '${node.source.value}';`
                 )
@@ -204,7 +205,9 @@ function moveSpecifiers(
         ) {
           return;
         }
-        const newToPackageExportDeclaration = `export${(node.exportKind === "type") ? " type" : ""} {\n\t${[
+        const newToPackageExportDeclaration = `export${
+          node.exportKind === "type" ? " type" : ""
+        } {\n\t${[
           ...existingToPackageExportSpecifiers,
           ...newToPackageSpecifiers.map((exportSpecifier) => {
             const exportString = src.getText(exportSpecifier);
@@ -258,7 +261,9 @@ function moveSpecifiers(
               fixes.push(
                 fixer.replaceText(
                   node,
-                  `export${(node.exportKind === "type") ? " type" : ""} {\n\t${fromPackageSpecifiers
+                  `export${
+                    node.exportKind === "type" ? " type" : ""
+                  } {\n\t${fromPackageSpecifiers
                     .map((specifier) => {
                       const specifierText = src.getText(specifier);
                       const specifierComments =
@@ -637,7 +642,7 @@ function addCallbackParam(
                 if (propProperties.type === "ArrowFunctionExpression") {
                   propProperties.params = attribute.value?.expression?.params;
                 } else if (propProperties.type === "Identifier") {
-                  const currentScope = context.getScope();
+                  const currentScope = context.getSourceCode().getScope(node);
                   const matchingVariable = currentScope.variables.find(
                     (variable) => variable.name === propProperties.name
                   );
@@ -649,6 +654,20 @@ function addCallbackParam(
                     matchingDefinition?.type === "FunctionName"
                       ? matchingDefinition?.node?.params
                       : matchingDefinition?.node?.init?.params;
+                } else if (propProperties.type === "MemberExpression") {
+                  const memberExpression = attribute.value.expression;
+                  if (memberExpression.object.type === "ThisExpression") {
+                    const parentClass = findParentClass(memberExpression);
+                    const methods = parentClass.body.body;
+                    const methodDefinition = methods.find(
+                      (method) =>
+                        method.key.type === "Identifier" &&
+                        method.key.name === memberExpression.property.name
+                    );
+
+                    propProperties.params = methodDefinition.value?.params;
+                    propProperties.memberExpression = memberExpression;
+                  }
                 }
                 const { type, params } = propProperties;
 
@@ -764,9 +783,11 @@ function addCallbackParam(
                       };
 
                       if (
-                        !["ArrowFunctionExpression", "Identifier"].includes(
-                          type
-                        )
+                        ![
+                          "ArrowFunctionExpression",
+                          "Identifier",
+                          "MemberExpression",
+                        ].includes(type)
                       ) {
                         return fixes;
                       }
@@ -775,16 +796,38 @@ function addCallbackParam(
                         (param) => param.name === newParam
                       );
 
-                      if (currentIndexOfNewParam > 0) {
-                        const currentUseOfNewParam =
-                          params[currentIndexOfNewParam];
+                      if (
+                        type === "MemberExpression" &&
+                        propProperties.hasOwnProperty("memberExpression")
+                      ) {
+                        const replacementParams = `${newParam}, ${context
+                          .getSourceCode()
+                          .getText(params[0])}`;
 
                         fixes.push(
-                          createRemoveCurrentParamUseFix(currentUseOfNewParam)
+                          fixer.replaceText(
+                            propProperties.memberExpression,
+                            `(${replacementParams}) => ${context
+                              .getSourceCode()
+                              .getText(
+                                propProperties.memberExpression
+                              )}(${params
+                              .map((p) => context.getSourceCode().getText(p))
+                              .join(", ")})`
+                          )
                         );
-                        fixes.push(createParamAdditionFix(params));
-                      } else if (params[0].name !== newParam) {
-                        fixes.push(createParamAdditionFix(params));
+                      } else {
+                        if (currentIndexOfNewParam > 0) {
+                          const currentUseOfNewParam =
+                            params[currentIndexOfNewParam];
+
+                          fixes.push(
+                            createRemoveCurrentParamUseFix(currentUseOfNewParam)
+                          );
+                          fixes.push(createParamAdditionFix(params));
+                        } else if (params[0].name !== newParam) {
+                          fixes.push(createParamAdditionFix(params));
+                        }
                       }
 
                       return fixes;
@@ -840,6 +883,20 @@ function findVariableDeclaration(name, scope) {
 
     scope = scope.upper;
   }
+  return undefined;
+}
+
+function findParentClass(node) {
+  let current = node?.parent;
+
+  while (current) {
+    if (current.type === "ClassDeclaration") {
+      return current;
+    }
+
+    current = current.parent;
+  }
+
   return undefined;
 }
 
