@@ -655,17 +655,17 @@ function addCallbackParam(
                       ? matchingDefinition?.node?.params
                       : matchingDefinition?.node?.init?.params;
                 } else if (propProperties.type === "MemberExpression") {
-                  const memberExpression = attribute.value.expression;
+                  const memberExpression = attribute.value?.expression;
                   if (memberExpression.object.type === "ThisExpression") {
                     const parentClass = findParentClass(memberExpression);
-                    const methods = parentClass.body.body;
-                    const methodDefinition = methods.find(
+                    const methods = parentClass?.body?.body;
+                    const methodDefinition = methods?.find(
                       (method) =>
                         method.key.type === "Identifier" &&
                         method.key.name === memberExpression.property.name
                     );
 
-                    propProperties.params = methodDefinition.value?.params;
+                    propProperties.params = methodDefinition?.value?.params;
                     propProperties.memberExpression = memberExpression;
                   }
                 }
@@ -782,16 +782,6 @@ function addCallbackParam(
                         return fixer.replaceTextRange(targetRange, "");
                       };
 
-                      if (
-                        ![
-                          "ArrowFunctionExpression",
-                          "Identifier",
-                          "MemberExpression",
-                        ].includes(type)
-                      ) {
-                        return fixes;
-                      }
-
                       const currentIndexOfNewParam = params?.findIndex(
                         (param) => param.name === newParam
                       );
@@ -800,6 +790,10 @@ function addCallbackParam(
                         type === "MemberExpression" &&
                         propProperties.hasOwnProperty("memberExpression")
                       ) {
+                        if (!params || params.length === 0) {
+                          return fixes;
+                        }
+
                         const replacementParams = `${newParam}, ${context
                           .getSourceCode()
                           .getText(params[0])}`;
