@@ -786,11 +786,12 @@ function addCallbackParam(
                         (param) => param.name === newParam
                       );
 
-                      if (
-                        type === "MemberExpression" &&
-                        propProperties.hasOwnProperty("memberExpression")
-                      ) {
-                        if (!params || params.length === 0) {
+                      if (type === "MemberExpression") {
+                        if (
+                          !propProperties.hasOwnProperty("memberExpression") ||
+                          !params ||
+                          params.length === 0
+                        ) {
                           return fixes;
                         }
 
