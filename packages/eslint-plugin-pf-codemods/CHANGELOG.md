@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.83.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.82.6...@patternfly/eslint-plugin-pf-codemods@1.83.0) (2023-06-12)
+
+
+### Features
+
+* **Datalist:** provide fixer for selectableRow prop ([#466](https://github.com/patternfly/pf-codemods/issues/466)) ([aa1abad](https://github.com/patternfly/pf-codemods/commit/aa1abad210b28f8ca71b6ea22206cf37ea664fd0))
+
+
+
+
+
 ## [1.82.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.82.5...@patternfly/eslint-plugin-pf-codemods@1.82.6) (2023-06-12)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
