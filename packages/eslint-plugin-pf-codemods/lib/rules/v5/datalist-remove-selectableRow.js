@@ -1,25 +1,126 @@
-const { getFromPackage} = require('../../helpers');
+const { getFromPackage, findVariableDeclaration } = require("../../helpers");
 
 //https://github.com/patternfly/patternfly-react/pull/8827
 module.exports = {
-  meta: {},
+  meta: { fixable: "code" },
   create: function (context) {
-    const dataListImport =  getFromPackage(context, '@patternfly/react-core')
-      .imports.filter(specifier => specifier.imported.name == 'DataList');
+    const dataListImport = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    ).imports.find((specifier) => specifier.imported.name == "DataList");
 
-    return dataListImport.length === 0 ? {} : {
-      JSXOpeningElement(node) {
-        if (dataListImport.map(imp => imp.local.name).includes(node.name.name)) {
-          const selectableRow = node.attributes.find(a => a.name?.name === 'selectableRow');
-          if (selectableRow) {
-            context.report({
-              node,
-              message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-            });
-          }
-        }
+    if (!dataListImport) {
+      return {};
+    }
+
+    let rangeStartsToReplaceConst = [];
+
+    const sourceCode = context.getSourceCode();
+
+    const getObjectProp = (expr, propName) =>
+      expr.properties.find(
+        (prop) =>
+          (prop.key.type === "Identifier" && prop.key.name === propName) ||
+          (prop.key.type === "Literal" && prop.key.value === propName)
+      );
+
+    const handleObjectExpression = (expr, toReplace) => {
+      const propVal = getObjectProp(expr, "onChange")?.value;
+
+      if (propVal) {
+        toReplace.push([expr, sourceCode.getText(propVal)]);
       }
+    };
+
+    const handleRightAssignmentSide_Object = (node, toReplace) => {
+      if (node.type === "ObjectExpression") {
+        handleObjectExpression(node, toReplace);
+      } else if (node.type === "Identifier") {
+        handleIdentifierOfObject(node, toReplace);
+      }
+    };
+
+    const handleIdentifierOfObject = (identifier, toReplace) => {
+      const variable = findVariableDeclaration(
+        identifier.name,
+        sourceCode.getScope(identifier)
+      );
+
+      const nodesUsingVariable = variable?.references.map(
+        (ref) => ref.identifier.parent
+      );
+
+      nodesUsingVariable.forEach((n) => {
+        if (
+          n.type === "MemberExpression" &&
+          (n.property.name === "onChange" || n.property.value === "onChange") &&
+          n.parent.type === "AssignmentExpression"
+        ) {
+          rangeStartsToReplaceConst.push(
+            variable?.defs[0].node.parent.range[0]
+          );
+          toReplace.push([n, sourceCode.getText(n.object)]);
+        } else if (
+          n.type === "AssignmentExpression" &&
+          n.left.name === identifier.name
+        ) {
+          handleRightAssignmentSide_Object(n.right, toReplace);
+        }
+      });
+
+      const variableValue = variable?.defs[0].node.init;
+      variableValue &&
+        handleRightAssignmentSide_Object(variableValue, toReplace);
+    };
+
+    return {
+      JSXOpeningElement(node) {
+        if (node.name.name !== dataListImport.local.name) {
+          return;
+        }
+
+        const selectableRowAttr = node.attributes.find(
+          (attr) =>
+            attr.name?.name === "selectableRow" &&
+            attr.value?.type === "JSXExpressionContainer"
+        );
+
+        if (!selectableRowAttr) {
+          return;
+        }
+
+        let toReplace = [];
+        const expr = selectableRowAttr.value.expression;
+
+        if (expr.type === "ObjectExpression") {
+          handleObjectExpression(expr, toReplace);
+        }
+
+        if (expr.type === "Identifier") {
+          handleIdentifierOfObject(expr, toReplace);
+        }
+
+        toReplace.push([selectableRowAttr.name, "onSelectableRowChange"]);
+
+        toReplace.length &&
+          context.report({
+            message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
+            node,
+            fix: function (fixer) {
+              return [
+                ...toReplace.map(([oldValue, newValue]) =>
+                  fixer.replaceText(oldValue, newValue)
+                ),
+                ...[...new Set(rangeStartsToReplaceConst)].map((rangeStart) =>
+                  fixer.replaceTextRange(
+                    [rangeStart, rangeStart + "const".length],
+                    "let"
+                  )
+                ),
+              ];
+            },
+          });
+      },
     };
   },
 };
-

@@ -32,6 +32,7 @@ const setupRules = [
   "applicationLauncher-deprecated",
   "contextSelector-update-deprecatedPath",
   "dropdown-update-deprecatedPath",
+  "datalist-remove-selectableRow",
   "optionsMenu-deprecated",
   "pageHeader-deprecated",
   "select-deprecated",
