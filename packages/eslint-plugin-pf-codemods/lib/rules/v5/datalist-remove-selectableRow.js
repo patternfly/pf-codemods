@@ -27,19 +27,7 @@ module.exports = {
     const handleObjectExpression = (expr, toReplace) => {
       const propVal = getObjectProp(expr, "onChange")?.value;
 
-      if (!propVal) {
-        return;
-      }
-
-      if (propVal.type === "Identifier") {
-        toReplace.push([expr, sourceCode.getText(propVal)]);
-        handleIdentifierOfFunction(propVal, toReplace);
-      } else if (
-        ["ArrowFunctionExpression", "FunctionExpression"].includes(
-          propVal.type
-        ) &&
-        [1, 2].includes(propVal.params.length)
-      ) {
+      if (propVal) {
         toReplace.push([expr, sourceCode.getText(propVal)]);
       }
     };
@@ -72,7 +60,6 @@ module.exports = {
             variable?.defs[0].node.parent.range[0]
           );
           toReplace.push([n, sourceCode.getText(n.object)]);
-          handleRightAssignmentSide_Function(n.parent.right, toReplace);
         } else if (
           n.type === "AssignmentExpression" &&
           n.left.name === identifier.name
@@ -84,40 +71,6 @@ module.exports = {
       const variableValue = variable?.defs[0].node.init;
       variableValue &&
         handleRightAssignmentSide_Object(variableValue, toReplace);
-    };
-
-    const handleRightAssignmentSide_Function = (node, toReplace) => {
-      if (node.type === "Identifier") {
-        handleIdentifierOfFunction(node, toReplace);
-      }
-    };
-
-    const handleIdentifierOfFunction = (identifier, toReplace) => {
-      const variable = findVariableDeclaration(
-        identifier.name,
-        sourceCode.getScope(identifier)
-      );
-
-      const variableType = variable?.defs[0].type;
-      const variableNode = variable?.defs[0].node;
-
-      if (variableType === "Variable") {
-        const nodesUsingVariable = variable.references.map(
-          (ref) => ref.identifier.parent
-        );
-
-        nodesUsingVariable.forEach((n) => {
-          if (
-            n.type === "AssignmentExpression" &&
-            n.left.name === identifier.name
-          ) {
-            handleRightAssignmentSide_Function(n.right, toReplace);
-          }
-        });
-
-        variableNode.init &&
-          handleRightAssignmentSide_Function(variableNode.init, toReplace);
-      }
     };
 
     return {
