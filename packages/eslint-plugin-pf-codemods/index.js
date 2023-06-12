@@ -1,8 +1,5 @@
 // if you want your rule to only run when explicitly called for using the --only flag, add the rule name to the below array
-const betaRuleNames = [
-  "radio-update-onChange-params",
-  "slider-update-onChangeParams",
-];
+const betaRuleNames = [];
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
 const warningRules = [
