@@ -83,6 +83,58 @@ function getInvalidAddCallbackParamTests(
         ],
       });
       tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core';
+        class MyClass {
+          handleChange(id) {}
+          render() {
+            return <${componentName} ${propName}={this.handleChange} />;
+          }
+        }`,
+        output: `import { ${componentName} } from '@patternfly/react-core';
+        class MyClass {
+          handleChange(id) {}
+          render() {
+            return <${componentName} ${propName}={(${newParamName}, id) => this.handleChange(id)} />;
+          }
+        }`,
+        errors: [
+          {
+            message: createMessageCallback(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
+        code: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js';
+        class MyClass {
+          handleChange(id) {}
+          render() {
+            return <${componentName} ${propName}={this.handleChange} />;
+          }
+        }`,
+        output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js';
+        class MyClass {
+          handleChange(id) {}
+          render() {
+            return <${componentName} ${propName}={(${newParamName}, id) => this.handleChange(id)} />;
+          }
+        }`,
+        errors: [
+          {
+            message: createMessageCallback(
+              componentName,
+              propName,
+              newParamName
+            ),
+            type: "JSXOpeningElement",
+          },
+        ],
+      });
+      tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(id: bar) => handler(id)} />;`,
         output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={(${newParamName}, id: bar) => handler(id)} />;`,
         errors: [
