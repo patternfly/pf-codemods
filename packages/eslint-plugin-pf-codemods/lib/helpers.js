@@ -795,20 +795,23 @@ function addCallbackParam(
                           return fixes;
                         }
 
-                        const replacementParams = `${newParam}, ${context
-                          .getSourceCode()
-                          .getText(params[0])}`;
+                        const paramsToText = (paramsList) =>
+                          paramsList
+                            .map((p) => context.getSourceCode().getText(p))
+                            .join(", ");
+
+                        const newParamsText = `${newParam}, ${paramsToText(
+                          params.filter((p) => p.name !== newParam)
+                        )}`;
 
                         fixes.push(
                           fixer.replaceText(
                             propProperties.memberExpression,
-                            `(${replacementParams}) => ${context
+                            `(${newParamsText}) => ${context
                               .getSourceCode()
                               .getText(
                                 propProperties.memberExpression
-                              )}(${params
-                              .map((p) => context.getSourceCode().getText(p))
-                              .join(", ")})`
+                              )}(${paramsToText(params)})`
                           )
                         );
                       } else {
