@@ -683,6 +683,8 @@ function addCallbackParam(
                         callee.property.name === "useState")
                     ) {
                       propProperties.isStateSetter = true;
+                      propProperties.stateType =
+                        matchingDefinition?.node.init.typeParameters?.params[0].typeName?.name;
                     }
                   }
                 } else if (propProperties.type === "MemberExpression") {
@@ -784,10 +786,13 @@ function addCallbackParam(
                       const fixes = [];
 
                       if (propProperties.hasOwnProperty("isStateSetter")) {
+                        const typeText = propProperties.stateType
+                          ? `: ${propProperties.stateType}`
+                          : "";
                         fixes.push(
                           fixer.replaceText(
                             propProperties.nodeToReplace,
-                            `(${newParam}, val) => ${propProperties.name}(val)`
+                            `(${newParam}, val${typeText}) => ${propProperties.name}(val)`
                           )
                         );
                       } else if (
@@ -816,14 +821,14 @@ function addCallbackParam(
                       } else {
                         const createParamAdditionFix = (params) => {
                           const firstParam = params[0];
-  
+
                           const replacementParams = `${newParam}, ${context
                             .getSourceCode()
                             .getText(firstParam)}`;
-  
+
                           const hasParenthesis =
                             context.getTokenBefore(firstParam).value === "(";
-  
+
                           return fixer.replaceText(
                             firstParam,
                             hasParenthesis
@@ -831,7 +836,7 @@ function addCallbackParam(
                               : `(${replacementParams})`
                           );
                         };
-  
+
                         const createRemoveCurrentParamUseFix = (
                           currentUseOfNewParam
                         ) => {
@@ -841,14 +846,14 @@ function addCallbackParam(
                             tokenBeforeCurrentUse.range[0],
                             currentUseOfNewParam.range[1],
                           ];
-  
+
                           return fixer.replaceTextRange(targetRange, "");
                         };
-  
+
                         const currentIndexOfNewParam = params?.findIndex(
                           (param) => param.name === newParam
                         );
-                        
+
                         if (currentIndexOfNewParam > 0) {
                           const currentUseOfNewParam =
                             params[currentIndexOfNewParam];
