@@ -642,13 +642,32 @@ function addCallbackParam(
                 if (propProperties.type === "ArrowFunctionExpression") {
                   propProperties.params = attribute.value?.expression?.params;
                 } else if (propProperties.type === "Identifier") {
-                  const currentScope = context.getSourceCode().getScope(node);
-                  const matchingVariable = currentScope.variables.find(
-                    (variable) => variable.name === propProperties.name
+                  const matchingVariable = findVariableDeclaration(
+                    propProperties.name,
+                    context.getSourceCode().getScope(node)
                   );
                   const matchingDefinition = matchingVariable?.defs.find(
                     (def) => def.name?.name === propProperties.name
                   );
+
+                  if (
+                    matchingDefinition?.type === "Variable" &&
+                    matchingDefinition?.node.id.type === "ArrayPattern" &&
+                    matchingDefinition?.node.init.type === "CallExpression"
+                  ) {
+                    const callee = matchingDefinition?.node.init.callee;
+                    if (
+                      (callee.type === "Identifier" &&
+                        callee.name === "useState") ||
+                      (callee.type === "MemberExpression" &&
+                        callee.object.name === "React" &&
+                        callee.property.name === "useState")
+                    ) {
+                      console.log("hereeee");
+                      propProperties.stateSetterToReplace =
+                        attribute.value?.expression;
+                    }
+                  }
 
                   propProperties.params =
                     matchingDefinition?.type === "FunctionName"
@@ -739,7 +758,8 @@ function addCallbackParam(
                 if (
                   (params?.length >= 1 &&
                     ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
-                  type === "MemberExpression"
+                  type === "MemberExpression" ||
+                  propProperties.hasOwnProperty("stateSetterToReplace")
                 ) {
                   context.report({
                     node,
@@ -812,6 +832,15 @@ function addCallbackParam(
                               .getText(
                                 propProperties.memberExpression
                               )}(${paramsToText(params)})`
+                          )
+                        );
+                      } else if (
+                        propProperties.hasOwnProperty("stateSetterToReplace")
+                      ) {
+                        fixes.push(
+                          fixer.replaceText(
+                            propProperties.stateSetterToReplace,
+                            `(${newParam}, val) => ${propProperties.name}(val)`
                           )
                         );
                       } else {
