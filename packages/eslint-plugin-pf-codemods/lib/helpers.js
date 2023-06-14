@@ -656,14 +656,26 @@ function addCallbackParam(
                     matchingDefinition?.node.init.type === "CallExpression"
                   ) {
                     const callee = matchingDefinition?.node.init.callee;
+                    const reactImports = getFromPackage(
+                      context,
+                      "react"
+                    ).imports;
+
+                    const defaultSpecifierName = reactImports.find(
+                      (spec) => spec.type === "ImportDefaultSpecifier"
+                    )?.local.name;
+
+                    const useStateLocalName = reactImports.find(
+                      (spec) => spec.imported?.name === "useState"
+                    )?.local.name;
+
                     if (
                       (callee.type === "Identifier" &&
-                        callee.name === "useState") ||
+                        callee.name === useStateLocalName) ||
                       (callee.type === "MemberExpression" &&
-                        callee.object.name === "React" &&
+                        callee.object.name === defaultSpecifierName &&
                         callee.property.name === "useState")
                     ) {
-                      console.log("hereeee");
                       propProperties.stateSetterToReplace =
                         attribute.value?.expression;
                     }
