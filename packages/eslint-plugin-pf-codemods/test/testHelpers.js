@@ -305,6 +305,94 @@ function getInvalidAddCallbackParamTests(
             },
           ],
         });
+        tests.push({
+          code: `import { ${componentName} } from '@patternfly/react-core'; import React from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = React.useState(0);
+            return <${componentName} ${propName}={setCount} />;
+          };`,
+          output: `import { ${componentName} } from '@patternfly/react-core'; import React from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = React.useState(0);
+            return <${componentName} ${propName}={(_event, val) => setCount(val)} />;
+          };`,
+          errors: [
+            {
+              message: createMessageCallback(
+                componentName,
+                propName,
+                newParamName
+              ),
+              type: "JSXOpeningElement",
+            },
+          ],
+        });
+        tests.push({
+          code: `import { ${componentName} } from '@patternfly/react-core'; import { useState } from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = useState(0);
+            return <${componentName} ${propName}={setCount} />;
+          };`,
+          output: `import { ${componentName} } from '@patternfly/react-core'; import { useState } from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = useState(0);
+            return <${componentName} ${propName}={(_event, val) => setCount(val)} />;
+          };`,
+          errors: [
+            {
+              message: createMessageCallback(
+                componentName,
+                propName,
+                newParamName
+              ),
+              type: "JSXOpeningElement",
+            },
+          ],
+        });
+        tests.push({
+          code: `import { ${componentName} } from '@patternfly/react-core'; import React from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = React.useState<Number>(0);
+            return <${componentName} ${propName}={setCount} />;
+          };`,
+          output: `import { ${componentName} } from '@patternfly/react-core'; import React from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = React.useState<Number>(0);
+            return <${componentName} ${propName}={(_event, val: Number) => setCount(val)} />;
+          };`,
+          errors: [
+            {
+              message: createMessageCallback(
+                componentName,
+                propName,
+                newParamName
+              ),
+              type: "JSXOpeningElement",
+            },
+          ],
+        });
+        tests.push({
+          code: `import { ${componentName} } from '@patternfly/react-core'; import { useState } from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = useState<Number>(0);
+            return <${componentName} ${propName}={setCount} />;
+          };`,
+          output: `import { ${componentName} } from '@patternfly/react-core'; import { useState } from "react";
+          const SimpleComponent = () => {
+            const [count, setCount] = useState<Number>(0);
+            return <${componentName} ${propName}={(_event, val: Number) => setCount(val)} />;
+          };`,
+          errors: [
+            {
+              message: createMessageCallback(
+                componentName,
+                propName,
+                newParamName
+              ),
+              type: "JSXOpeningElement",
+            },
+          ],
+        });
       }
     });
   });

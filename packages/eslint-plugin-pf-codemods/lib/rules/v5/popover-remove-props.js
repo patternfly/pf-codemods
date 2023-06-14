@@ -53,7 +53,7 @@ module.exports = {
             }
 
             // only report if 3 are passed or one has tip in name
-            if(params?.length === 3 || params.some( (p) => /tip/i.test("" + p.name))) {
+            if(params?.length === 3 || params?.some( (p) => /tip/i.test("" + p.name))) {
               context.report({
                 node,
                 message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
