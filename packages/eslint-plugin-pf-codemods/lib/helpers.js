@@ -637,6 +637,7 @@ function addCallbackParam(
                 const propProperties = {
                   type: attribute.value?.expression?.type,
                   name: attribute.value?.expression?.name,
+                  nodeToReplace: attribute.value?.expression,
                 };
 
                 if (propProperties.type === "ArrowFunctionExpression") {
@@ -649,6 +650,11 @@ function addCallbackParam(
                   const matchingDefinition = matchingVariable?.defs.find(
                     (def) => def.name?.name === propProperties.name
                   );
+
+                  propProperties.params =
+                    matchingDefinition?.type === "FunctionName"
+                      ? matchingDefinition?.node?.params
+                      : matchingDefinition?.node?.init?.params;
 
                   if (
                     matchingDefinition?.type === "Variable" &&
@@ -676,15 +682,9 @@ function addCallbackParam(
                         callee.object.name === defaultSpecifierName &&
                         callee.property.name === "useState")
                     ) {
-                      propProperties.stateSetterToReplace =
-                        attribute.value?.expression;
+                      propProperties.isStateSetter = true;
                     }
                   }
-
-                  propProperties.params =
-                    matchingDefinition?.type === "FunctionName"
-                      ? matchingDefinition?.node?.params
-                      : matchingDefinition?.node?.init?.params;
                 } else if (propProperties.type === "MemberExpression") {
                   const memberExpression = attribute.value?.expression;
                   if (memberExpression.object.type === "ThisExpression") {
@@ -697,7 +697,7 @@ function addCallbackParam(
                     );
 
                     propProperties.params = methodDefinition?.value?.params;
-                    propProperties.memberExpression = memberExpression;
+                    propProperties.isThisExpression = true;
                   }
                 }
                 const { type, params } = propProperties;
@@ -770,8 +770,8 @@ function addCallbackParam(
                 if (
                   (params?.length >= 1 &&
                     ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
-                  type === "MemberExpression" ||
-                  propProperties.hasOwnProperty("stateSetterToReplace")
+                  propProperties.hasOwnProperty("isThisExpression") ||
+                  propProperties.hasOwnProperty("isStateSetter")
                 ) {
                   context.report({
                     node,
@@ -783,79 +783,72 @@ function addCallbackParam(
                     fix(fixer) {
                       const fixes = [];
 
-                      const createParamAdditionFix = (params) => {
-                        const firstParam = params[0];
-
-                        const replacementParams = `${newParam}, ${context
-                          .getSourceCode()
-                          .getText(firstParam)}`;
-
-                        const hasParenthesis =
-                          context.getTokenBefore(firstParam).value === "(";
-
-                        return fixer.replaceText(
-                          firstParam,
-                          hasParenthesis
-                            ? replacementParams
-                            : `(${replacementParams})`
-                        );
-                      };
-
-                      const createRemoveCurrentParamUseFix = (
-                        currentUseOfNewParam
-                      ) => {
-                        const tokenBeforeCurrentUse =
-                          context.getTokenBefore(currentUseOfNewParam);
-                        const targetRange = [
-                          tokenBeforeCurrentUse.range[0],
-                          currentUseOfNewParam.range[1],
-                        ];
-
-                        return fixer.replaceTextRange(targetRange, "");
-                      };
-
-                      const currentIndexOfNewParam = params?.findIndex(
-                        (param) => param.name === newParam
-                      );
-
-                      if (type === "MemberExpression") {
-                        if (
-                          !propProperties.hasOwnProperty("memberExpression") ||
-                          !params ||
-                          params.length === 0
-                        ) {
-                          return fixes;
-                        }
-
-                        const paramsToText = (paramsList) =>
-                          paramsList
-                            .map((p) => context.getSourceCode().getText(p))
-                            .join(", ");
-
-                        const newParamsText = `${newParam}, ${paramsToText(
-                          params.filter((p) => p.name !== newParam)
-                        )}`;
-
+                      if (propProperties.hasOwnProperty("isStateSetter")) {
                         fixes.push(
                           fixer.replaceText(
-                            propProperties.memberExpression,
-                            `(${newParamsText}) => ${context
-                              .getSourceCode()
-                              .getText(
-                                propProperties.memberExpression
-                              )}(${paramsToText(params)})`
-                          )
-                        );
-                      } else if (
-                        propProperties.hasOwnProperty("stateSetterToReplace")
-                      ) {
-                        fixes.push(
-                          fixer.replaceText(
-                            propProperties.stateSetterToReplace,
+                            propProperties.nodeToReplace,
                             `(${newParam}, val) => ${propProperties.name}(val)`
                           )
                         );
+                      } else if (
+                        propProperties.hasOwnProperty("isThisExpression") ||
+                        type === "Identifier"
+                      ) {
+                        if (!params || params.length === 0) {
+                          return fixes;
+                        }
+
+                        const newParamsText = `${newParam}, ${params
+                          .filter((p) => p.name !== newParam)
+                          .map((p) => context.getSourceCode().getText(p))
+                          .join(", ")}`;
+
+                        fixes.push(
+                          fixer.replaceText(
+                            propProperties.nodeToReplace,
+                            `(${newParamsText}) => ${context
+                              .getSourceCode()
+                              .getText(propProperties.nodeToReplace)}(${params
+                              .map((p) => p.name)
+                              .join(", ")})`
+                          )
+                        );
                       } else {
+                        const createParamAdditionFix = (params) => {
+                          const firstParam = params[0];
+  
+                          const replacementParams = `${newParam}, ${context
+                            .getSourceCode()
+                            .getText(firstParam)}`;
+  
+                          const hasParenthesis =
+                            context.getTokenBefore(firstParam).value === "(";
+  
+                          return fixer.replaceText(
+                            firstParam,
+                            hasParenthesis
+                              ? replacementParams
+                              : `(${replacementParams})`
+                          );
+                        };
+  
+                        const createRemoveCurrentParamUseFix = (
+                          currentUseOfNewParam
+                        ) => {
+                          const tokenBeforeCurrentUse =
+                            context.getTokenBefore(currentUseOfNewParam);
+                          const targetRange = [
+                            tokenBeforeCurrentUse.range[0],
+                            currentUseOfNewParam.range[1],
+                          ];
+  
+                          return fixer.replaceTextRange(targetRange, "");
+                        };
+  
+                        const currentIndexOfNewParam = params?.findIndex(
+                          (param) => param.name === newParam
+                        );
+                        
                         if (currentIndexOfNewParam > 0) {
                           const currentUseOfNewParam =
                             params[currentIndexOfNewParam];

@@ -164,7 +164,7 @@ function getInvalidAddCallbackParamTests(
       });
       tests.push({
         code: `import { ${componentName} as ${componentName}Deprecated } from '@patternfly/react-core/deprecated'; const handler = (id) => {}; <${componentName}Deprecated ${propName}={handler} />;`,
-        output: `import { ${componentName} as ${componentName}Deprecated } from '@patternfly/react-core/deprecated'; const handler = (${newParamName}, id) => {}; <${componentName}Deprecated ${propName}={handler} />;`,
+        output: `import { ${componentName} as ${componentName}Deprecated } from '@patternfly/react-core/deprecated'; const handler = (id) => {}; <${componentName}Deprecated ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
             message: createMessageCallback(
@@ -178,7 +178,7 @@ function getInvalidAddCallbackParamTests(
       });
       tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id: bar) => {}; <${componentName} ${propName}={handler} />;`,
-        output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id: bar) => {}; <${componentName} ${propName}={handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id: bar) => {}; <${componentName} ${propName}={(${newParamName}, id: bar) => handler(id)} />;`,
         errors: [
           {
             message: createMessageCallback(
@@ -192,7 +192,7 @@ function getInvalidAddCallbackParamTests(
       });
       tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id) {}; <${componentName} ${propName}={handler} />;`,
-        output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id) {}; <${componentName} ${propName}={handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; function handler(id) {}; <${componentName} ${propName}={(${newParamName}, id) => handler(id)} />;`,
         errors: [
           {
             message: createMessageCallback(
@@ -206,21 +206,7 @@ function getInvalidAddCallbackParamTests(
       });
       tests.push({
         code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id: bar) {}; <${componentName} ${propName}={handler} />;`,
-        output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id: bar) {}; <${componentName} ${propName}={handler} />;`,
-        errors: [
-          {
-            message: createMessageCallback(
-              componentName,
-              propName,
-              newParamName
-            ),
-            type: "JSXOpeningElement",
-          },
-        ],
-      });
-      tests.push({
-        code: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={this.handler} />;`,
-        output: `import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName}={this.handler} />;`,
+        output: `import { ${componentName} } from '@patternfly/react-core'; function handler(id: bar) {}; <${componentName} ${propName}={(${newParamName}, id: bar) => handler(id)} />;`,
         errors: [
           {
             message: createMessageCallback(
@@ -279,7 +265,7 @@ function getInvalidAddCallbackParamTests(
         });
         tests.push({
           code: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id, text) => {}; <${componentName} ${propName}={handler} />;`,
-          output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (${newParamName}, id, text) => {}; <${componentName} ${propName}={handler} />;`,
+          output: `import { ${componentName} } from '@patternfly/react-core'; const handler = (id, text) => {}; <${componentName} ${propName}={(${newParamName}, id, text) => handler(id, text)} />;`,
           errors: [
             {
               message: createMessageCallback(
@@ -293,7 +279,7 @@ function getInvalidAddCallbackParamTests(
         });
         tests.push({
           code: `import { ${componentName} } from '@patternfly/react-core'; function handler(id, text) {}; <${componentName} ${propName}={handler} />;`,
-          output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${newParamName}, id, text) {}; <${componentName} ${propName}={handler} />;`,
+          output: `import { ${componentName} } from '@patternfly/react-core'; function handler(id, text) {}; <${componentName} ${propName}={(${newParamName}, id, text) => handler(id, text)} />;`,
           errors: [
             {
               message: createMessageCallback(
@@ -372,7 +358,7 @@ function getInvalidSwapCallbackParamTests(
 
           tests.push({
             code: `import { ${componentName} } from '@patternfly/react-core'; function handler(${initialArgs}) {}; <${componentName} ${propName}={handler} />;`,
-            output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
+            output: `import { ${componentName} } from '@patternfly/react-core'; function handler(${initialArgs}) {}; <${componentName} ${propName}={(${fixedArgs}) => handler(${initialArgs})} />;`,
             errors: [
               {
                 message: createMessageCallback(
@@ -386,7 +372,7 @@ function getInvalidSwapCallbackParamTests(
           });
           tests.push({
             code: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${initialArgs}) {}; <${componentName} ${propName}={handler} />;`,
-            output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${fixedArgs}) {}; <${componentName} ${propName}={handler} />;`,
+            output: `import { ${componentName} } from '@patternfly/react-core/dist/esm/components/${componentName}/index.js'; function handler(${initialArgs}) {}; <${componentName} ${propName}={(${fixedArgs}) => handler(${initialArgs})} />;`,
             errors: [
               {
                 message: createMessageCallback(
