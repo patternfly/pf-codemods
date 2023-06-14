@@ -70,7 +70,7 @@ Out:
 <AccordionExpandableContentBody>Body</AccordionExpandableContentBody>
 ```
 
-### accordion-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
+### accordion-rename-displaySize-large [(#8206)](https://github.com/patternfly/patternfly-react/pull/8206)
 
 We've renamed the `large` prop value of `displaySize` to `lg`.
 
@@ -221,7 +221,7 @@ Out:
 const backgroundImgSrcObj = {};
 ```
 
-### banner-update-variant [(#8204)](https://github.com/patternfly/patternfly-react/issues/8204)
+### banner-update-variant [(#8808)](https://github.com/patternfly/patternfly-react/pull/8808)
 
 We've updated the `variant` prop type for Banner. `"default"` is still a valid value, but the following status values have been replaced with color values:
 
@@ -489,6 +489,7 @@ const newTheme = getCustomTheme(ChartThemeColor.default, customTheme);
 return (
   <Chart theme={newTheme}/>
 );
+```
 
 ### charts-various-imports [(#8869)](https://github.com/patternfly/patternfly-react/pull/8869)
 
@@ -799,7 +800,7 @@ function toggle2(_event, id) {};
 <DataList onSelectDataListItem={toggle2}>
 ```
 
-### dataListCheck-warn-updated-callback [(#8735)](https://github.com/patternfly/patternfly-react/pull/8735)
+### dataListCheck-updated-callback [(#8735)](https://github.com/patternfly/patternfly-react/pull/8735)
 
 We've updated the `onChange` prop for DataListCheck so that the `event` parameter is the first parameter. Handlers may require an update.
 
