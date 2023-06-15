@@ -305,6 +305,10 @@ function getInvalidAddCallbackParamTests(
             },
           ],
         });
+      }
+
+      // tests only for param addition in case of converting stateSetter to an arrow function calling the stateSetter
+      if (!previousParamIndex) {
         tests.push({
           code: `import { ${componentName} } from '@patternfly/react-core'; import React from "react";
           const SimpleComponent = () => {
