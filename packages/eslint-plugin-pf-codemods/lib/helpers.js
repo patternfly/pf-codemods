@@ -747,7 +747,7 @@ function addCallbackParam(
                     params?.length && params[previousParamIndex]?.name;
 
                   // if the expected index of the newParam exceeds the number of current params just set treat it like a param addition with the default param value
-                  if (previousParamIndex >= params?.length) {
+                  if ((previousParamIndex >= params?.length) || !params?.length) {
                     newParam = defaultParamName;
                   }
 
