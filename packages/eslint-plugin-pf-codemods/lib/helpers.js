@@ -658,8 +658,8 @@ function addCallbackParam(
 
                   if (
                     matchingDefinition?.type === "Variable" &&
-                    matchingDefinition?.node.id.type === "ArrayPattern" &&
-                    matchingDefinition?.node.init.type === "CallExpression"
+                    matchingDefinition?.node.id?.type === "ArrayPattern" &&
+                    matchingDefinition?.node.init?.type === "CallExpression"
                   ) {
                     const callee = matchingDefinition?.node.init.callee;
                     const reactImports = getFromPackage(
@@ -675,13 +675,14 @@ function addCallbackParam(
                       (spec) => spec.imported?.name === "useState"
                     )?.local.name;
 
-                    if (
+                    const isStateSetter = (callee) =>
                       (callee.type === "Identifier" &&
                         callee.name === useStateLocalName) ||
                       (callee.type === "MemberExpression" &&
                         callee.object.name === defaultSpecifierName &&
-                        callee.property.name === "useState")
-                    ) {
+                        callee.property.name === "useState");
+
+                    if (isStateSetter(callee)) {
                       propProperties.isStateSetter = true;
                       propProperties.stateType =
                         matchingDefinition?.node.init.typeParameters?.params[0].typeName?.name;
@@ -772,8 +773,8 @@ function addCallbackParam(
                 if (
                   (params?.length >= 1 &&
                     ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
-                  propProperties.hasOwnProperty("isThisExpression") ||
-                  propProperties.hasOwnProperty("isStateSetter")
+                  propProperties.isThisExpression ||
+                  propProperties.isStateSetter
                 ) {
                   context.report({
                     node,
@@ -785,7 +786,7 @@ function addCallbackParam(
                     fix(fixer) {
                       const fixes = [];
 
-                      if (propProperties.hasOwnProperty("isStateSetter")) {
+                      if (propProperties.isStateSetter) {
                         const typeText = propProperties.stateType
                           ? `: ${propProperties.stateType}`
                           : "";
@@ -796,7 +797,7 @@ function addCallbackParam(
                           )
                         );
                       } else if (
-                        propProperties.hasOwnProperty("isThisExpression") ||
+                        propProperties.isThisExpression ||
                         type === "Identifier"
                       ) {
                         if (!params || params.length === 0) {
