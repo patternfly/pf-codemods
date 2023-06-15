@@ -979,7 +979,7 @@ Out:
 <DropdownToggle toggleVariant="primary" />
 ```
 
-### dropdownToggleCheckbox-update-onChange [(#8784)](https://github.com/patternfly/patternfly-react/issues/8784)
+### dropdownToggleCheckbox-update-onChange [(#8787)](https://github.com/patternfly/patternfly-react/pull/8787)
 
 We've updated the `onChange` prop for DropdownToggleCheckbox to include the `event` as its first parameter. Handlers may require an update.
 
@@ -1223,7 +1223,7 @@ const myVariant = EmptyStateVariant.sm;
 <EmptyState variant="lg" />
 ```
 
-### expandable-section-rename-displaySize-large [(#8212)](https://github.com/patternfly/patternfly-react/pull/8212)
+### expandable-section-rename-displaySize-large [(#8206)](https://github.com/patternfly/patternfly-react/pull/8206)
 
 We've renamed the `large` prop value of `displaySize` to `lg`.
 
@@ -2272,10 +2272,6 @@ import { Pagination, PaginationToggleTemplateProps } from '@patternfly/react-cor
 <Pagination toggleTemplate={({firstIndex, lastIndex} : PaginationToggleTemplateProps) => <div />} />
 ```
 
-### popover-appendTo-default [(#8621)](https://github.com/patternfly/patternfly-react/pull/8621)
-
-The default value of the `appendTo` prop on Popover has been updated, which may cause markup changes that require updating selectors in tests. This rule will raise a warning, but will not make any changes.
-
 ### popover-remove-props [(#8201)](https://github.com/patternfly/patternfly-react/pull/8201)
 
 We've removed the `boundary` and `tippyProps` from Popover, as well as removed the first parameter of `shouldClose` and all parameters of `onHidden`, `onHide`, `onMount`, `onShow`, and `onShown`.
@@ -2399,13 +2395,13 @@ function handler2(_event, checked) {};
 ```
 
 
-### react-dropzone-warn-upgrade [(#7926)](// https://github.com/patternfly/patternfly-react/pull/7926)
+### react-dropzone-warn-upgrade [(#7926)](https://github.com/patternfly/patternfly-react/pull/7926)
 
 The `react-dropzone` dependency used with FileUpload, MultipleFileUpload, and CodeEditor has been updated from version 9 to version 14. As part of this upgrade, FileUpload has had type changes to its `onFileInputChange` and `dropzoneProps` props, and MultipleFileUpload has had a type change to its `dropzoneProps` prop.
 
 This rule will raise a warning when any of these three components are imported, but will not make any code changes.
 
-### react-icons-remove-props [(#5275)](// https://github.com/patternfly/patternfly-react/pull/5275)
+### react-icons-remove-props [(#5275)](https://github.com/patternfly/patternfly-react/pull/5275)
 
 We've removed the `size`, `color`, and `noVerticalAlign` properties from icons which are imported from @patternfly/react-icons. Wrap your react-icon with the <Icon> component to customize its size and color.
 
@@ -2624,7 +2620,7 @@ function handler2(_event, id) {};
 ```
 
 
-### table-rename-isHoverable [((#9083))](https://github.com/patternfly/patternfly-react/pull/9083)
+### table-rename-isHoverable [(#9083)](https://github.com/patternfly/patternfly-react/pull/9083)
 
 We've renamed the `isHoverable` prop for Table components to `isClickable`. This rule provides a fix for the `Tr` component when using our new default, composable implementation of Table.
 
@@ -2693,10 +2689,6 @@ import {
  TableProps
 } from '@patternfly/react-table/deprecated';
 ```
-
-### table-update-deprecatedPath [(#8892)](https://github.com/patternfly/patternfly-react/pull/8892)
-
-We've deprecated the current implementation of Table. In order to continue using this deprecated implementation, the import path must be updated to our deprecated package and specifiers must be aliased. However, we suggest updating to our composable Table implementation.
   
 ### table-warn-actionsColumn [(#8629)](https://github.com/patternfly/patternfly-react/pull/8629)
 
