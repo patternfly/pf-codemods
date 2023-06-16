@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.83.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.83.0...@patternfly/eslint-plugin-pf-codemods@1.83.1) (2023-06-16)
+
+
+### Bug Fixes
+
+* **helpers:** addCallbackParam fix for MemberExpression nodes ([#521](https://github.com/patternfly/pf-codemods/issues/521)) ([4a19e80](https://github.com/patternfly/pf-codemods/commit/4a19e80ced44f2e04e76d41993a35debe19d345b))
+
+
+
+
+
 # [1.83.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.82.6...@patternfly/eslint-plugin-pf-codemods@1.83.0) (2023-06-12)
 
 
