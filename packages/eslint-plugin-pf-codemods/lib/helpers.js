@@ -11,8 +11,7 @@ function moveSpecifiers(
     const { imports: fromPackageImports, exports: fromPackageExports } =
       getFromPackage(context, fromPackage, specifiersToMove);
 
-    const getSpecifiersToMove = (specifiers) =>
-    {
+    const getSpecifiersToMove = (specifiers) => {
       const specs = specifiers.filter((specifier) => {
         const comments = src.getCommentsAfter(specifier);
 
@@ -24,7 +23,7 @@ function moveSpecifiers(
         );
       });
       return specs;
-    }
+    };
     const importSpecifiersToMove = getSpecifiersToMove(fromPackageImports);
     const exportSpecifiersToMove = getSpecifiersToMove(fromPackageExports);
 
@@ -74,13 +73,11 @@ function moveSpecifiers(
         return (
           node?.type === nodeType &&
           [modifiedPackage, toPackage].includes(node?.source?.value) &&
-          (
-            specifierReference?.parent?.importKind === node?.importKind &&
-            specifierReference?.parent?.exportKind === node?.exportKind
-          )
+          specifierReference?.parent?.importKind === node?.importKind &&
+          specifierReference?.parent?.exportKind === node?.exportKind
         );
       });
-    }
+    };
     const existingToPackageImportDeclaration = getExistingDeclaration(
       "ImportDeclaration",
       modifiedToPackageImport
@@ -135,7 +132,9 @@ function moveSpecifiers(
               : importString;
           }
         );
-        const newToPackageImportDeclaration = `import${(node.importKind === "type") ? " type" : ""} {\n\t${[
+        const newToPackageImportDeclaration = `import${
+          node.importKind === "type" ? " type" : ""
+        } {\n\t${[
           ...existingToPackageImportSpecifiers,
           ...newAliasToPackageSpecifiers,
         ].join(`,\n\t`)}\n} from '${modifiedToPackageImport || toPackage}';`;
@@ -181,7 +180,9 @@ function moveSpecifiers(
               fixes.push(
                 fixer.replaceText(
                   node,
-                  `import${(node.importKind === "type") ? " type" : ""} {\n\t${fromPackageSpecifiers
+                  `import${
+                    node.importKind === "type" ? " type" : ""
+                  } {\n\t${fromPackageSpecifiers
                     .map((specifier) => createSpecifierString(specifier))
                     .join(",\n\t")}\n} from '${node.source.value}';`
                 )
@@ -204,7 +205,9 @@ function moveSpecifiers(
         ) {
           return;
         }
-        const newToPackageExportDeclaration = `export${(node.exportKind === "type") ? " type" : ""} {\n\t${[
+        const newToPackageExportDeclaration = `export${
+          node.exportKind === "type" ? " type" : ""
+        } {\n\t${[
           ...existingToPackageExportSpecifiers,
           ...newToPackageSpecifiers.map((exportSpecifier) => {
             const exportString = src.getText(exportSpecifier);
@@ -258,7 +261,9 @@ function moveSpecifiers(
               fixes.push(
                 fixer.replaceText(
                   node,
-                  `export${(node.exportKind === "type") ? " type" : ""} {\n\t${fromPackageSpecifiers
+                  `export${
+                    node.exportKind === "type" ? " type" : ""
+                  } {\n\t${fromPackageSpecifiers
                     .map((specifier) => {
                       const specifierText = src.getText(specifier);
                       const specifierComments =
@@ -632,14 +637,15 @@ function addCallbackParam(
                 const propProperties = {
                   type: attribute.value?.expression?.type,
                   name: attribute.value?.expression?.name,
+                  nodeToReplace: attribute.value?.expression,
                 };
 
                 if (propProperties.type === "ArrowFunctionExpression") {
                   propProperties.params = attribute.value?.expression?.params;
                 } else if (propProperties.type === "Identifier") {
-                  const currentScope = context.getScope();
-                  const matchingVariable = currentScope.variables.find(
-                    (variable) => variable.name === propProperties.name
+                  const matchingVariable = findVariableDeclaration(
+                    propProperties.name,
+                    context.getSourceCode().getScope(node)
                   );
                   const matchingDefinition = matchingVariable?.defs.find(
                     (def) => def.name?.name === propProperties.name
@@ -649,6 +655,54 @@ function addCallbackParam(
                     matchingDefinition?.type === "FunctionName"
                       ? matchingDefinition?.node?.params
                       : matchingDefinition?.node?.init?.params;
+
+                  const isPotentialUseStateHook = (definition) =>
+                    definition?.type === "Variable" &&
+                    definition?.node.id?.type === "ArrayPattern" &&
+                    definition?.node.init?.type === "CallExpression";
+
+                  if (isPotentialUseStateHook(matchingDefinition)) {
+                    const callee = matchingDefinition?.node.init.callee;
+                    const reactImports = getFromPackage(
+                      context,
+                      "react"
+                    ).imports;
+
+                    const defaultSpecifierName = reactImports.find(
+                      (spec) => spec.type === "ImportDefaultSpecifier"
+                    )?.local.name;
+
+                    const useStateLocalName = reactImports.find(
+                      (spec) => spec.imported?.name === "useState"
+                    )?.local.name;
+
+                    const isStateSetter = (callee) =>
+                      (callee.type === "Identifier" &&
+                        callee.name === useStateLocalName) ||
+                      (callee.type === "MemberExpression" &&
+                        callee.object.name === defaultSpecifierName &&
+                        callee.property.name === "useState");
+
+                    if (isStateSetter(callee)) {
+                      propProperties.isStateSetter = true;
+                      propProperties.stateType =
+                        matchingDefinition?.node.init.typeParameters?.params[0].typeName?.name;
+                    }
+                  }
+                } else if (propProperties.type === "MemberExpression") {
+                  const memberExpression = attribute.value?.expression;
+                  if (memberExpression.object.type === "ThisExpression") {
+                    const parentClass = findParentClass(memberExpression);
+                    const methods = parentClass?.body?.body;
+                    const methodDefinition = methods?.find(
+                      (method) =>
+                        method.key.type === "Identifier" &&
+                        method.key.name === memberExpression.property.name
+                    );
+
+                    propProperties.params = methodDefinition?.value?.params;
+                    propProperties.isThisExpression = true;
+                  }
                 }
                 const { type, params } = propProperties;
 
@@ -694,7 +748,7 @@ function addCallbackParam(
                     params?.length && params[previousParamIndex]?.name;
 
                   // if the expected index of the newParam exceeds the number of current params just set treat it like a param addition with the default param value
-                  if (previousParamIndex >= params?.length) {
+                  if (previousParamIndex >= params?.length || !params?.length) {
                     newParam = defaultParamName;
                   }
 
@@ -720,7 +774,8 @@ function addCallbackParam(
                 if (
                   (params?.length >= 1 &&
                     ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
-                  type === "MemberExpression"
+                  propProperties.isThisExpression ||
+                  propProperties.isStateSetter
                 ) {
                   context.report({
                     node,
@@ -732,59 +787,86 @@ function addCallbackParam(
                     fix(fixer) {
                       const fixes = [];
 
-                      const createParamAdditionFix = (params) => {
-                        const firstParam = params[0];
-
-                        const replacementParams = `${newParam}, ${context
-                          .getSourceCode()
-                          .getText(firstParam)}`;
-
-                        const hasParenthesis =
-                          context.getTokenBefore(firstParam).value === "(";
-
-                        return fixer.replaceText(
-                          firstParam,
-                          hasParenthesis
-                            ? replacementParams
-                            : `(${replacementParams})`
+                      if (propProperties.isStateSetter) {
+                        const typeText = propProperties.stateType
+                          ? `: ${propProperties.stateType}`
+                          : "";
+                        fixes.push(
+                          fixer.replaceText(
+                            propProperties.nodeToReplace,
+                            `(${newParam}, val${typeText}) => ${propProperties.name}(val)`
+                          )
                         );
-                      };
-
-                      const createRemoveCurrentParamUseFix = (
-                        currentUseOfNewParam
-                      ) => {
-                        const tokenBeforeCurrentUse =
-                          context.getTokenBefore(currentUseOfNewParam);
-                        const targetRange = [
-                          tokenBeforeCurrentUse.range[0],
-                          currentUseOfNewParam.range[1],
-                        ];
-
-                        return fixer.replaceTextRange(targetRange, "");
-                      };
-
-                      if (
-                        !["ArrowFunctionExpression", "Identifier"].includes(
-                          type
-                        )
+                      } else if (
+                        propProperties.isThisExpression ||
+                        type === "Identifier"
                       ) {
-                        return fixes;
-                      }
+                        if (!params || params.length === 0) {
+                          return fixes;
+                        }
 
-                      const currentIndexOfNewParam = params?.findIndex(
-                        (param) => param.name === newParam
-                      );
-
-                      if (currentIndexOfNewParam > 0) {
-                        const currentUseOfNewParam =
-                          params[currentIndexOfNewParam];
+                        const newParamsText = `${newParam}, ${params
+                          .filter((p) => p.name !== newParam)
+                          .map((p) => context.getSourceCode().getText(p))
+                          .join(", ")}`;
 
                         fixes.push(
-                          createRemoveCurrentParamUseFix(currentUseOfNewParam)
+                          fixer.replaceText(
+                            propProperties.nodeToReplace,
+                            `(${newParamsText}) => ${context
+                              .getSourceCode()
+                              .getText(propProperties.nodeToReplace)}(${params
+                              .map((p) => p.name)
+                              .join(", ")})`
+                          )
                         );
-                        fixes.push(createParamAdditionFix(params));
-                      } else if (params[0].name !== newParam) {
-                        fixes.push(createParamAdditionFix(params));
+                      } else {
+                        const createParamAdditionFix = (params) => {
+                          const firstParam = params[0];
+
+                          const replacementParams = `${newParam}, ${context
+                            .getSourceCode()
+                            .getText(firstParam)}`;
+
+                          const hasParenthesis =
+                            context.getTokenBefore(firstParam).value === "(";
+
+                          return fixer.replaceText(
+                            firstParam,
+                            hasParenthesis
+                              ? replacementParams
+                              : `(${replacementParams})`
+                          );
+                        };
+
+                        const createRemoveCurrentParamUseFix = (
+                          currentUseOfNewParam
+                        ) => {
+                          const tokenBeforeCurrentUse =
+                            context.getTokenBefore(currentUseOfNewParam);
+                          const targetRange = [
+                            tokenBeforeCurrentUse.range[0],
+                            currentUseOfNewParam.range[1],
+                          ];
+
+                          return fixer.replaceTextRange(targetRange, "");
+                        };
+
+                        const currentIndexOfNewParam = params?.findIndex(
+                          (param) => param.name === newParam
+                        );
+
+                        if (currentIndexOfNewParam > 0) {
+                          const currentUseOfNewParam =
+                            params[currentIndexOfNewParam];
+
+                          fixes.push(
+                            createRemoveCurrentParamUseFix(currentUseOfNewParam)
+                          );
+                          fixes.push(createParamAdditionFix(params));
+                        } else if (params[0].name !== newParam) {
+                          fixes.push(createParamAdditionFix(params));
+                        }
                       }
 
                       return fixes;
@@ -840,6 +922,20 @@ function findVariableDeclaration(name, scope) {
 
     scope = scope.upper;
   }
+  return undefined;
+}
+
+function findParentClass(node) {
+  let current = node?.parent;
+
+  while (current) {
+    if (current.type === "ClassDeclaration") {
+      return current;
+    }
+
+    current = current.parent;
+  }
+
   return undefined;
 }
 
