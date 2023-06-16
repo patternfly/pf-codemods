@@ -656,11 +656,12 @@ function addCallbackParam(
                       ? matchingDefinition?.node?.params
                       : matchingDefinition?.node?.init?.params;
 
-                  if (
-                    matchingDefinition?.type === "Variable" &&
-                    matchingDefinition?.node.id?.type === "ArrayPattern" &&
-                    matchingDefinition?.node.init?.type === "CallExpression"
-                  ) {
+                  const isPotentialUseStateHook = (definition) =>
+                    definition?.type === "Variable" &&
+                    definition?.node.id?.type === "ArrayPattern" &&
+                    definition?.node.init?.type === "CallExpression";
+
+                  if (isPotentialUseStateHook(matchingDefinition)) {
                     const callee = matchingDefinition?.node.init.callee;
                     const reactImports = getFromPackage(
                       context,
@@ -747,7 +748,7 @@ function addCallbackParam(
                     params?.length && params[previousParamIndex]?.name;
 
                   // if the expected index of the newParam exceeds the number of current params just set treat it like a param addition with the default param value
-                  if ((previousParamIndex >= params?.length) || !params?.length) {
+                  if (previousParamIndex >= params?.length || !params?.length) {
                     newParam = defaultParamName;
                   }
 
