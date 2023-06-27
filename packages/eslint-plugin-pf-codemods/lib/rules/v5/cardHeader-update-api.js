@@ -1,4 +1,4 @@
-const { getFromPackage, pfPackageMatches } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8759
 module.exports = {
@@ -12,36 +12,33 @@ module.exports = {
       (specifier) => specifier.imported.name === "CardHeader"
     );
 
-    const findParents = (node, elementNameToFind) => {
-      const parents = {
-        current: node?.parent,
-        conditionalExpression: undefined,
+    const getClosestParentAndExpression = (node, elementNameToFind) => {
+      const current = {
+        parent: node?.parent,
+        expression: undefined,
       };
 
-      while (parents.current) {
-        if (parents.current.openingElement?.name?.name === elementNameToFind) {
-          return parents;
+      while (current.parent) {
+        if (current.parent.openingElement?.name?.name === elementNameToFind) {
+          return current;
         }
         if (
           ["ConditionalExpression", "LogicalExpression"].includes(
-            parents.current.type
+            current.parent.type
           )
         ) {
-          parents.conditionalExpression = parents.current;
+          current.expression = current.parent;
         }
 
-        parents.current = parents.current.parent;
+        current.parent = current.parent.parent;
       }
 
       return undefined;
     };
-    const getComponentContent = (component) => {
-      const tagsRegex = new RegExp(
-        `<\/?${component.openingElement.name.name}(.*?)>`,
-        "g"
-      );
-
-      return context.getSourceCode().getText(component).replace(tagsRegex, "");
+    const getNodeContent = (node) => {
+      return node.children
+        ?.map((child) => context.getSourceCode().getText(child))
+        .join("");
     };
     const createReplacementContent = (content, conditionOrLogicExpression) => {
       const isCardHeaderMainContent = /^<>.*<\/>$/.test(content);
@@ -92,8 +89,11 @@ module.exports = {
                   removedImport?.local?.name,
                 ].includes(nodeName)
             );
-            const nodeParents = findParents(node, "CardHeader");
-            if (!nodeIsRemovedImport || !nodeParents.current) {
+            const closestParentAndExpression = getClosestParentAndExpression(
+              node,
+              "CardHeader"
+            );
+            if (!nodeIsRemovedImport || !closestParentAndExpression.parent) {
               return;
             }
 
@@ -106,16 +106,14 @@ module.exports = {
               }`,
               fix(fixer) {
                 const fixes = [];
-                const nodeContent = getComponentContent(node);
-                const { current, conditionalExpression } = nodeParents;
-                const nodeToReplace = conditionalExpression
-                  ? conditionalExpression.parent
-                  : node;
+                const nodeContent = getNodeContent(node);
+                const { parent, expression } = closestParentAndExpression;
+                const nodeToReplace = expression ? expression.parent : node;
 
                 if (relatedImportName?.imported.name === "CardHeaderMain") {
                   const replacementContent = createReplacementContent(
                     `<>${nodeContent}</>`,
-                    conditionalExpression
+                    expression
                   );
                   fixes.push(
                     fixer.replaceText(nodeToReplace, replacementContent)
@@ -136,12 +134,12 @@ module.exports = {
                   }}`;
                   const replacementContent = createReplacementContent(
                     newActionsPropValue,
-                    conditionalExpression
+                    expression
                   );
 
                   fixes.push(
                     fixer.insertTextAfter(
-                      current.openingElement.name,
+                      parent.openingElement.name,
                       ` ${replacementContent} `
                     ),
                     fixer.remove(nodeToReplace)
