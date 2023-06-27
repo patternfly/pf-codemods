@@ -1,4 +1,4 @@
-const { getFromPackage, pfPackageMatches } = require("../../helpers");
+const { getFromPackage } = require("../../helpers");
 
 // https://github.com/patternfly/patternfly-react/pull/8759
 module.exports = {
@@ -8,142 +8,144 @@ module.exports = {
     const removedCardImports = imports.filter((specifier) =>
       ["CardHeaderMain", "CardActions"].includes(specifier.imported.name)
     );
-    const cardHeaderImport = imports.find((specifier) => specifier.imported.name === "CardHeader");
+    const cardHeaderImport = imports.find(
+      (specifier) => specifier.imported.name === "CardHeader"
+    );
+
+    const getClosestParentAndExpression = (node, elementNameToFind) => {
+      const current = {
+        parent: node?.parent,
+        expression: undefined,
+      };
+
+      while (current.parent) {
+        if (current.parent.openingElement?.name?.name === elementNameToFind) {
+          return current;
+        }
+        if (
+          ["ConditionalExpression", "LogicalExpression"].includes(
+            current.parent.type
+          )
+        ) {
+          current.expression = current.parent;
+        }
+
+        current.parent = current.parent.parent;
+      }
+
+      return undefined;
+    };
+    const getNodeContent = (node) => {
+      return node.children
+        ?.map((child) => context.getSourceCode().getText(child))
+        .join("");
+    };
+    const createReplacementContent = (content, conditionOrLogicExpression) => {
+      const isCardHeaderMainContent = /^<>.*<\/>$/.test(content);
+
+      if (!conditionOrLogicExpression) {
+        return isCardHeaderMainContent ? content : `actions={${content}}`;
+      }
+
+      const sourceCode = context.getSourceCode();
+
+      if (conditionOrLogicExpression.type === "LogicalExpression") {
+        const logicalExpressionContent = sourceCode.getText(
+          conditionOrLogicExpression.left
+        );
+        const { operator } = conditionOrLogicExpression;
+
+        return isCardHeaderMainContent
+          ? `{${logicalExpressionContent} ${operator} ${content}}`
+          : `{...(${logicalExpressionContent} ${operator} {actions: ${content}})}`;
+      }
+
+      if (conditionOrLogicExpression.type === "ConditionalExpression") {
+        const conditionalTestContent = sourceCode.getText(
+          conditionOrLogicExpression.test
+        );
+        const conditionalAlternateContent = sourceCode.getText(
+          conditionOrLogicExpression.alternate
+        );
+
+        return isCardHeaderMainContent
+          ? `{${conditionalTestContent} ? ${content} : ${conditionalAlternateContent}}`
+          : `actions={${conditionalTestContent} ? ${content} : {}}`;
+      }
+    };
 
     return ![...removedCardImports, cardHeaderImport].length
       ? {}
       : {
-          ImportDeclaration(node) {
-            if (
-              !pfPackageMatches("@patternfly/react-core", node.source.value) ||
-              !node.specifiers.filter((specifier) =>
-                removedCardImports
-                  .map((imp) => imp.imported.name)
-                  .includes(specifier?.imported?.name)
-              ).length
-            ) {
-              return;
-            }
-
-            const validImports = node.specifiers.filter(
-              (specifier) =>
-                !["CardHeaderMain", "CardActions"].includes(
-                  specifier.imported.name
-                )
-            );
-
-            const existingCardHeaderMain = node.specifiers.find(
-              (specifier) => specifier.imported.name === "CardHeaderMain"
-            );
-            const existingCardActions = node.specifiers.find(
-              (specifier) => specifier.imported.name === "CardActions"
-            );
-
-            const newImportDeclaration = `import { ${validImports
-              .map((imp) => context.getSourceCode().getText(imp))
-              .join(", ")} } from '${node.source.value}';`;
-
-            const importMessagePrefix = [
-              existingCardHeaderMain?.imported?.name,
-              existingCardActions?.imported?.name,
-            ]
-              .filter((specifierName) => specifierName)
-              .join(" and ");
-
-            context.report({
-              node,
-              message: `${importMessagePrefix} ${
-                importMessagePrefix.includes(" and ") ? "are" : "is"
-              } no longer exported.`,
-              fix(fixer) {
-                return validImports.length
-                  ? fixer.replaceText(node, newImportDeclaration)
-                  : fixer.remove(node);
-              },
-            });
-          },
           JSXElement(node) {
-            if (
-              ![
-                cardHeaderImport?.imported?.name,
-                cardHeaderImport?.local?.name,
-              ].includes(node.openingElement.name.name)
-            ) {
+            const nodeName = node?.openingElement?.name?.name;
+            const relatedImportName = removedCardImports.find(
+              (removedImport) => removedImport.local.name === nodeName
+            );
+            const nodeIsRemovedImport = removedCardImports.find(
+              (removedImport) =>
+                [
+                  removedImport?.imported?.name,
+                  removedImport?.local?.name,
+                ].includes(nodeName)
+            );
+            const closestParentAndExpression = getClosestParentAndExpression(
+              node,
+              "CardHeader"
+            );
+            if (!nodeIsRemovedImport || !closestParentAndExpression.parent) {
               return;
             }
-
-            const findChildComponent = (childName) =>
-              node.children.find(
-                (child) =>
-                  child.type === "JSXElement" &&
-                  child.openingElement.name.name === childName
-              );
-
-            const getChildComponentContent = (childComponent) => {
-              const childRegex = new RegExp(
-                `<\/?${childComponent.openingElement.name.name}(.*?)>`,
-                "g"
-              );
-
-              return context
-                .getSourceCode()
-                .getText(childComponent)
-                .replace(childRegex, "");
-            };
-
-            const cardHeaderMain = findChildComponent("CardHeaderMain");
-            const cardActions = findChildComponent("CardActions");
-
-            if (!cardHeaderMain && !cardActions) {
-              return;
-            }
-            const messagePrefix = [
-              cardHeaderMain?.openingElement?.name?.name,
-              cardActions?.openingElement?.name?.name,
-            ]
-              .filter((componentName) => componentName)
-              .join(" and ");
 
             context.report({
               node,
-              message: `${messagePrefix} ${
-                messagePrefix.includes(" and ") ? "are" : "is"
-              } now rendered internally within CardHeader and should be passed to CardHeader instead.`,
+              message: `${nodeName} is no longer exported and is instead rendered internally within CardHeader. ${nodeName} ${
+                relatedImportName?.imported.name === "CardActions"
+                  ? `props and content should instead be passed as an object to CardHeader's "actions" prop.`
+                  : "content should instead be passed directly as children to CardHeader."
+              }`,
               fix(fixer) {
                 const fixes = [];
+                const nodeContent = getNodeContent(node);
+                const { parent, expression } = closestParentAndExpression;
+                const nodeToReplace = expression ? expression.parent : node;
 
-                if (cardHeaderMain) {
-                  const cardHeaderMainContent =
-                    getChildComponentContent(cardHeaderMain);
-
+                if (relatedImportName?.imported.name === "CardHeaderMain") {
+                  const replacementContent = createReplacementContent(
+                    `<>${nodeContent}</>`,
+                    expression
+                  );
                   fixes.push(
-                    fixer.replaceText(cardHeaderMain, cardHeaderMainContent)
+                    fixer.replaceText(nodeToReplace, replacementContent)
                   );
                 }
 
-                if (cardActions) {
-                  const cardActionProps = cardActions.openingElement.attributes;
+                if (relatedImportName?.imported.name === "CardActions") {
+                  const cardActionProps = node.openingElement.attributes;
                   const existingClassProp = cardActionProps.find(
                     (prop) => prop.name.name === "className"
                   );
-                  const cardActionsContent =
-                    getChildComponentContent(cardActions).trim();
-                  const newActionsPropValue = `{ actions: <>${cardActionsContent}</>, hasNoOffset: ${cardActionProps.some(
+                  const newActionsPropValue = `{ actions: <>${nodeContent.trim()}</>, hasNoOffset: ${cardActionProps.some(
                     (prop) => prop.name.name === "hasNoOffset"
                   )}, className: ${
                     existingClassProp
                       ? `"${existingClassProp.value.value}"`
                       : undefined
                   }}`;
+                  const replacementContent = createReplacementContent(
+                    newActionsPropValue,
+                    expression
+                  );
 
                   fixes.push(
                     fixer.insertTextAfter(
-                      node.openingElement.name,
-                      ` actions={${newActionsPropValue}} `
+                      parent.openingElement.name,
+                      ` ${replacementContent} `
                     ),
-                    fixer.remove(cardActions)
+                    fixer.remove(nodeToReplace)
                   );
                 }
+
                 return fixes;
               },
             });
