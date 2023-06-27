@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.83.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.83.1...@patternfly/eslint-plugin-pf-codemods@1.83.2) (2023-06-27)
+
+
+### Bug Fixes
+
+* **CardHeader:** updated logic to take into account conditional rendering ([#525](https://github.com/patternfly/pf-codemods/issues/525)) ([1aecf33](https://github.com/patternfly/pf-codemods/commit/1aecf335a13ee9775222855ca66658cfecceef0d))
+
+
+
+
+
 ## [1.83.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.83.0...@patternfly/eslint-plugin-pf-codemods@1.83.1) (2023-06-16)
 
 
