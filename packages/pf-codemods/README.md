@@ -156,6 +156,7 @@ const searchHandler1 = (text) => {};
 function handler2(id) {};
 function searchHandler2(text) {};
 <ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
+<ApplicationLauncher onFavorite={this.onFavorite} onSearch={this.onSearch}>
 ```
 
 Out:
@@ -168,6 +169,9 @@ const searchHandler1 = (_event, text) => {};
 function handler2(_event, id) {};
 function searchHandler2(_event, text) {};
 <ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
+<ApplicationLauncher onFavorite={this.onFavorite} onSearch={this.onSearch}>
+<ApplicationLauncher onFavorite={(_event, id) => this.onFavorite(id)} onSearch={(_event, text) => this.onSearch(text)}>
+
 ```
 
 
@@ -283,6 +287,7 @@ const handler1 = (newDate, event) => {};
 function changeHandler2(date) {};
 function handler2(newDate, event) {};
 <CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
+<CalendarMonth onChange={this.onChange} onMonthChange={this.onMonthChange}>
 ```
 
 Out:
@@ -296,6 +301,7 @@ const handler1 = (_event, newDate) => {};
 function changeHandler2(_event, date) {};
 function handler2(_event, newDate) {};
 <CalendarMonth onChange={changeHandler2} onMonthChange={handler2}>
+<CalendarMonth onChange={(_event, date) => this.onChange(date)} onMonthChange={(_event, newDate) => this.onMonthChange(newDate)}>
 ```
 
 ### card-deprecate-props [(#9092)](https://github.com/patternfly/patternfly-react/pull/9092)
@@ -359,6 +365,7 @@ const handler1 = (id) => {};
 <Card onSelectableInputChange={handler1}>
 function handler2(id) {};
 <Card onSelectableInputChange={handler2}>
+<Card onSelectableInputChange={this.onSelectableInputChange}>
 ```
 
 Out:
@@ -369,6 +376,7 @@ const handler1 = (_event, id) => {};
 <Card onSelectableInputChange={handler1}>
 function handler2(_event, id) {};
 <Card onSelectableInputChange={handler2}>
+<Card onSelectableInputChange={(_event, id) => this.onSelectableInputChange(id)}>
 ```
 
 ### card-warn-component [(#8601)](https://github.com/patternfly/patternfly-react/pull/8601)
@@ -547,6 +555,7 @@ const handler1 = (id, event) => {};
 <Checkbox onChange={handler1}>
 function handler2(id, event) {};
 <Checkbox onChange={handler2}>
+<Checkbox onChange={this.onChange}>
 ```
 
 Out:
@@ -558,6 +567,7 @@ const handler1 = (_event, id) => {};
 <Checkbox onChange={handler1}>
 function handler2(_event, id) {};
 <Checkbox onChange={handler2}>
+<Checkbox onChange={(_event, id) => this.onChange(id)}>
 ```
 
 ### clipboardCopy-onChange-event-added [(#8747)](https://github.com/patternfly/patternfly-react/pull/8747)
@@ -574,6 +584,7 @@ const handleChange1 = (text) => {};
 <ClipboardCopy onChange={toggle1}>
 function handleChange2(text) {};
 <ClipboardCopy onChange={toggle2}>
+<ClipboardCopy onChange={this.onChange}>
 ```
 
 Out:
@@ -584,6 +595,7 @@ const handleChange1 = (_event, text) => {};
 <ClipboardCopy onChange={toggle1}>
 function handleChange2(_event, text) {};
 <ClipboardCopy onChange={toggle2}>
+<ClipboardCopy onChange={(_event, text) => this.onChange(text)}>
 ```
 
 ### clipboardCopy-remove-popoverPosition [(#8226)](https://github.com/patternfly/patternfly-react/pull/8226)
@@ -699,6 +711,7 @@ const handler1 = (id, event) => {};
 <DataList onSelectableRowChange={handler1} />
 function handler2(id, event) {};
 <DataList onSelectableRowChange={handler2} />
+<DataList onSelectableRowChange={this.onSelectableRowChange} />
 ```
 
 Out:
@@ -710,6 +723,7 @@ const handler1 = (_event, id) => {};
 <DataList onSelectableRowChange={handler1} />
 function handler2(_event, id) {};
 <DataList onSelectableRowChange={handler2} />
+<DataList onSelectableRowChange={(_event, id) => this.onSelectableRowChange(id)} />
 ```
 
 
@@ -786,6 +800,8 @@ const toggle1 = (id) => {};
 
 function toggle2(id) {};
 <DataList onSelectDataListItem={toggle2}>
+
+<DataList onSelectDataListItem={this.onSelectDataListItem}>
 ```
 
 Out:
@@ -798,6 +814,8 @@ const toggle1 = (_event, id) => {};
 
 function toggle2(_event, id) {};
 <DataList onSelectDataListItem={toggle2}>
+
+<DataList onSelectDataListItem={(_event, id) => this.onSelectDataListItem(id)}>
 ```
 
 ### dataListCheck-updated-callback [(#8735)](https://github.com/patternfly/patternfly-react/pull/8735)
@@ -816,6 +834,8 @@ const onChange1 = (checked) => {};
 
 function onChange2(checked) {};
 <DataListCheck onChange={onChange2}>
+
+<DataListCheck onChange={this.onChange}>
 ```
 
 Out:
@@ -828,6 +848,8 @@ const onChange1 = (_event, checked) => {};
 
 function onChange2(_event, checked) {};
 <DataListCheck onChange={onChange2}>
+
+<DataListCheck onChange={(_event, checked) => this.onChange(checked)}>
 ```
 
 ### datePicker-warn-appendTo-default-value-changed [(#8636)](https://github.com/patternfly/patternfly-react/pull/8636)
@@ -876,6 +898,8 @@ const onResize1 = (width, id) => {};
 
 function onResize2(width, id) {};
 <DrawerPanelContent onResize={onResize2}>
+
+<DrawerPanelContent onResize={this.onResize}>
 ```
 
 Out:
@@ -888,6 +912,8 @@ const onResize1 = (_event, width, id) => {};
 
 function onResize2(_event, width, id) {};
 <DrawerPanelContent onResize={onResize2}>
+
+<DrawerPanelContent onResize={(_event, width, id) => this.onResize(width, id)}>
 ```
 
 ### dropdown-update-deprecatedPath [(#8835)](https://github.com/patternfly/patternfly-react/pull/8835)
@@ -991,8 +1017,11 @@ In:
 ```jsx
 <DropdownToggleCheckbox onChange={(id) => handler(id)} />
 <DropdownToggleCheckbox onChange={(id, event) => handler(id, event)} />
+
 const handler1 = (id, event) => {};
 <DropdownToggleCheckbox onChange={handler1}>
+
+<DropdownToggleCheckbox onChange={this.onChange}>
 ```
 
 
@@ -1001,8 +1030,11 @@ Out:
 ```jsx
 <DropdownToggleCheckbox onChange={(_event, id) => handler(id)} />
 <DropdownToggleCheckboxDeprecated onChange={(event, id) => handler(id, event)} />
+
 const handler1 = (event, id) => {};
 <DropdownToggleCheckbox onChange={handler1}>
+
+<DropdownToggleCheckbox onChange={(_event, id) => this.onChange(id)}>
 ```
 
 ### dualListSelector-update-paramCallbacks [(#8793)](https://github.com/patternfly/patternfly-react/pull/8793)
@@ -1033,6 +1065,8 @@ const handler1 = (id) => {};
 <DualListSelector onListChange={handler1}>
 function handler2(id) {};
 <DualListSelector onListChange={handler2}>
+
+<DualListSelector onListChange={this.onListChange}>
 ```
 
 Out:
@@ -1057,6 +1091,8 @@ const handler1 = (_event, id) => {};
 <DualListSelector onListChange={handler1}>
 function handler2(_event, id) {};
 <DualListSelector onListChange={handler2}>
+
+<DualListSelector onListChange={(_event, id) => this.onListChange(id)}>
 ```
 
 ### editableSelectInputCell-onSelect-clearSelection-swap-params [(#9057)](https://github.com/patternfly/patternfly-react/pull/9057)
@@ -1069,26 +1105,36 @@ In:
 
 ```jsx
 <EditableSelectInputCell onSelect={(value) => onSelectHandler(value)} clearSelection={(row, cell) => clearSelectionHandler(row, cell)} />
+
 <EditableSelectInputCell onSelect={(value, event) => onSelectHandler(value, event)} />
+
 const onSelectHandler1 = (value, event) => {};
 const clearSelectionHandler1 = (row, cell) => {};
 <EditableSelectInputCell onSelect={onSelectHandler1} clearSelection={clearSelectionHandler1} />
+
 function onSelectHandler2(value) {};
 function clearSelectionHandler2(row, cell) {};
 <EditableSelectInputCell onSelect={onSelectHandler2} clearSelection={clearSelectionHandler2} />
+
+<EditableSelectInputCell onSelect={this.onSelect} clearSelection={this.clearSelection} />
 ```
 
 Out:
 
 ```jsx
 <EditableSelectInputCell onSelect={(_event, value) => onSelectHandler(value)} clearSelection={(_event, row, cell) => clearSelectionHandler(row, cell)} />
+
 <EditableSelectInputCell onSelect={(event, value) => onSelectHandler(value, event)} />
+
 const onSelectHandler1 = (event, value) => {};
 const clearSelectionHandler1 = (event, row, cell) => {};
 <EditableSelectInputCell onSelect={onSelectHandler1} clearSelection={clearSelectionHandler1} />
+
 function onSelectHandler2(_event, value) {};
 function clearSelectionHandler2(_event, row, cell) {};
 <EditableSelectInputCell onSelect={onSelectHandler2} clearSelection={clearSelectionHandler2} />
+
+<EditableSelectInputCell onSelect={(_event, value) => this.onSelect(value)} clearSelection={(_event, row, cell) => this.clearSelection(row, cell)} />
 ```
 
 ### emptyState-rename-components [(#8737)](https://github.com/patternfly/patternfly-react/pull/8737)
@@ -1253,20 +1299,28 @@ In:
 
 ```jsx
 <ExpandableSection onToggle={(id) => handler(id)} />
+
 const handler1 = (id) => {};
 <ExpandableSection onToggle={handler1} />
+
 function handler2(id) {};
 <ExpandableSection onToggle={handler2} />
+
+<ExpandableSection onToggle={this.onToggle} />
 ```
 
 Out:
 
 ```jsx
 <ExpandableSection onToggle={(_event, id) => handler(id)} />
+
 const handler1 = (_event, id) => {};
 <ExpandableSection onToggle={handler1} />
+
 function handler2(_event, id) {};
 <ExpandableSection onToggle={handler2} />
+
+<ExpandableSection onToggle={(_event, id) => this.onToggle(id)} />
 ```
 
 
@@ -1281,14 +1335,19 @@ In:
 ```jsx
 <FileUpload onTextChange={text => textHandler(text)} />
 <FileUploadField onTextChange={text => textHandler1(text)} />
+
 const textHandler2 = (text) => {};
 const textHandler3 = (text) => {};
 <FileUpload onTextChange={textHandler2} />
 <FileUploadField onTextChange={textHandler3} />
+
 function textHandler4(text) {};
 function textHandler5(text) {};
 <FileUpload onTextChange={textHandler4} />
 <FileUploadField onTextChange={textHandler5} />
+
+<FileUpload onTextChange={this.onTextChange} />
+<FileUploadField onTextChange={this.onTextChange} />
 ```
 
 Out:
@@ -1296,14 +1355,19 @@ Out:
 ```jsx
 <FileUpload onTextChange={(_event, text) => textHandler(text)} />
 <FileUploadField onTextChange={(_event, text) => textHandler1(text)} />
+
 const textHandler2 = (_event, text) => {};
 const textHandler3 = (_event, text) => {};
 <FileUpload onTextChange={textHandler2} />
 <FileUploadField onTextChange={textHandler3} />
+
 function textHandler4(_event, text) {};
 function textHandler5(_event, text) {};
 <FileUpload onTextChange={textHandler4} />
 <FileUploadField onTextChange={textHandler5} />
+
+<FileUpload onTextChange={(_event, text) => this.onTextChange(text)} />
+<FileUploadField onTextChange={(_event, text) => this.onTextChange(text)} />
 ```
 
 
@@ -1344,6 +1408,13 @@ function readStartedHandler2(fileHandle) {};
   onReadFinished={readFinishedHandler2}
   onReadStarted={readStartedHandler2}
 />;
+
+<FileUpload
+  onDataChange={this.onDataChange}
+  onReadFailed={this.onReadFailed}
+  onReadFinished={this.onReadFinished}
+  onReadStarted={this.onReadStarted}
+/>;
 ```
 
 Out:
@@ -1376,6 +1447,13 @@ function readStartedHandler2(_event, fileHandle) {};
   onReadFailed={readFailedHandler2}
   onReadFinished={readFinishedHandler2}
   onReadStarted={readStartedHandler2}
+/>;
+
+<FileUpload
+  onDataChange={(_event, data) => this.onDataChange(data)}
+  onReadFailed={(_event, error, fileHandle) => this.onReadFailed(error, fileHandle)}
+  onReadFinished={(_event, fileHandled) => this.onReadFinished(fileHandled)}
+  onReadStarted={(_event, fileHandle) => this.onReadStarted(fileHandle)}
 />;
 ```
 
@@ -1527,10 +1605,14 @@ In:
 ```jsx
 <FormSelect onChange={(id) => handler(id)} />
 <FormSelect onChange={(id, event) => handler(id, event)} />
+
 const handler1 = (id, event) => {};
 <FormSelect onChange={handler1} />
+
 function handler2(id, event) {};
 <FormSelect onChange={handler2} />
+
+<FormSelect onChange={this.onChange} />
 ```
 
 Out:
@@ -1538,10 +1620,14 @@ Out:
 ```jsx
 <FormSelect onChange={(_event, id) => handler(id)} />
 <FormSelect onChange={(event, id) => handler(id, event)} />
+
 const handler1 = (_event, id) => {};
 <FormSelect onChange={handler1} />
+
 function handler2(_event, id) {};
 <FormSelect onChange={handler2} />
+
+<FormSelect onChange={(_event, id) => this.onChange(id)} />
 ```
 
 
@@ -1676,6 +1762,12 @@ const rememberMeHandler1 = (id, event) => {};
 <LoginForm onChangeRememberMe={rememberMeHandler1} />
 function rememberMeHandler2(id, event) {};
 <LoginForm onChangeRememberMe={rememberMeHandler2} />
+
+<LoginForm 
+  onChangeUsername={this.onChangeUsername} 
+  onChangeRememberMe={this.onChangeRememberMe}
+  onChangePassword={this.onChangePassword}
+/>
 ```
 
 Out:
@@ -1701,6 +1793,12 @@ const rememberMeHandler1 = (_event, id) => {};
 <LoginForm onChangeRememberMe={rememberMeHandler1} />
 function rememberMeHandler2(_event, id) {};
 <LoginForm onChangeRememberMe={rememberMeHandler2} />
+
+<LoginForm 
+  onChangeUsername={(_event, id) => this.onChangeUsername(id)} 
+  onChangeRememberMe={(_event, id) => this.onChangeRememberMe(id)}
+  onChangePassword={(_event, id) => this.onChangePassword(id)}
+/>
 ```
 
 ### loginPage-update-props [(#8931)](https://github.com/patternfly/patternfly-react/pull/8931)
@@ -1841,20 +1939,28 @@ In:
 
 ```jsx
 <MultipleFileUpload onFileDrop={(id) => handler(id)} />
+
 const handler1 = (id) => {};
 <MultipleFileUpload onFileDrop={handler1} />
+
 function handler2(id) {};
 <MultipleFileUpload onFileDrop={handler2} />
+
+<MultipleFileUpload onFileDrop={this.onFileDrop} />
 ```
 
 Out:
 
 ```jsx
 <MultipleFileUpload onFileDrop={(_event, id) => handler(id)} />
+
 const handler1 = (_event, id) => {};
 <MultipleFileUpload onFileDrop={handler1} />
+
 function handler2(_event, id) {};
 <MultipleFileUpload onFileDrop={handler2} />
+
+<MultipleFileUpload onFileDrop={(_event, id) => this.onFileDrop(id)} />
 ```
 
 ### nav-update-callbackParams [(#8997)](https://github.com/patternfly/patternfly-react/pull/8997)
@@ -1867,32 +1973,44 @@ In:
 
 ```jsx
 <Navigation onSelect={(id) => handler(id)} />
+
 const handler1 = (id) => {};
 <Navigation onSelect={handler1} />
+
 function handler2(id) {};
 <Navigation onSelect={handler2} />
 
 <Navigation onToggle={(id) => handler(id)} />
+
 const toggleHandler1 = (id) => {};
 <Navigation onToggle={toggleHandler1} />
+
 function toggleHandler2(id) {};
 <Navigation onToggle={toggleHandler2} />
+
+<Navigation onSelect={this.onSelect} />
 ```
 
 Out:
 
 ```jsx
 <Navigation onSelect={(_event, id) => handler(id)} />
+
 const handler1 = (_event, id) => {};
 <Navigation onSelect={handler1} />
+
 function handler2(_event, id) {};
 <Navigation onSelect={handler2} />
 
 <Navigation onToggle={(_event, id) => handler(id)} />
+
 const toggleHandler1 = (_event, id) => {};
 <Navigation onToggle={toggleHandler1} />
+
 function toggleHandler2(_event, id) {};
 <Navigation onToggle={toggleHandler2} />
+
+<Navigation onSelect={(_event, id) => this.onSelect(id)} />
 ```
 
 ### nav-warn-flyouts-now-inline [(#8628)](https://github.com/patternfly/patternfly-react/pull/8628)
@@ -2007,6 +2125,8 @@ const toggleBadge = (isOpen) => {};
 
 function toggleDropdown(isOpen) {};
 <DropdownToggle onToggle={toggleDropdown}>
+
+<DropdownToggle onToggle={this.onToggle}>
 ```
 
 Out:
@@ -2019,6 +2139,8 @@ const toggleBadge = (_event, isOpen) => {};
 
 function toggleDropdown(_event, isOpen) {};
 <DropdownToggle onToggle={toggleDropdown}>
+
+<DropdownToggle onToggle={(_event, isOpen) => this.onToggle(isOpen)}>
 ```
 
 ### optionsMenu-deprecate [(8798)](https://github.com/patternfly/patternfly-react/pull/8798)
@@ -2105,6 +2227,8 @@ const resize1 = ({obj}) => {};
 
 function resize2({obj}) {};
 <Page onPageResize={resize2}>
+
+<Page onPageResize={this.onPageResize}>
 ```
 
 Out:
@@ -2117,6 +2241,8 @@ const resize1 = (_event, {obj}) => {};
 
 function resize2(_event, {obj}) {};
 <Page onPageResize={resize2}>
+
+<Page onPageResize={(_event, {obj}) => this.onPageResize({obj})}>
 ```
 
 ### pageHeader-deprecated [(#8854)](https://github.com/patternfly/patternfly-react/pull/8854)
@@ -2320,12 +2446,16 @@ In:
 ```jsx
 <Popover shouldOpen={(fn) => openHandler(fn)} shouldClose={(fn2) => closeHandler(fn2)} />
 <Popover shouldOpen={(fn, event) => openHandler(fn, event)} shouldClose={(fn, event) => closeHandler(fn, event)}/>
+
 const openHandler1 = (fn, event) => {};
 const closeHandler1 = (fn, event) => {};
 <Popover shouldOpen={openHandler1} shouldClose={closeHandler1} />
+
 function openHandler2(fn, event) {};
 function closeHandler2(fn, event) {};
 <Popover shouldOpen={openHandler2} shouldClose={closeHandler2} />
+
+<Popover shouldOpen={this.shouldOpen} shouldClose={this.shouldClose} />
 ```
 
 Out:
@@ -2333,12 +2463,16 @@ Out:
 ```jsx
 <Popover shouldOpen={(_event, fn) => openHandler(fn)} shouldClose={(_event, fn2) => closeHandler(fn2)} />
 <Popover shouldOpen={(event, fn) => openHandler(fn, event)} shouldClose={(event, fn) => closeHandler(fn, event)}/>
+
 const openHandler1 = (event, id) => {};
 const closeHandler1 = (event, id) => {};
 <Popover shouldOpen={openHandler1} shouldClose={closeHandler1} />
+
 function openHandler2(event, id) {};
 function closeHandler2(event, id) {};
 <Popover shouldOpen={openHandler2} shouldClose={closeHandler2} />
+
+<Popover shouldOpen={(_event, id) => this.shouldOpen(id)} shouldClose={(_event, id) => this.shouldClose(id)} />
 ```
 
 
@@ -2377,10 +2511,14 @@ In:
 ```jsx
 <Radio onChange={(checked) => handler(checked)} />
 <Radio onChange={(checked, event) => handler(checked, event)} />
+
 const handler1 = (checked, event) => {};
 <Radio onChange={handler1} />
+
 function handler2(checked, event) {};
 <Radio onChange={handler2} />
+
+<Radio onChange={this.onChange} />
 ```
 
 Out:
@@ -2388,10 +2526,14 @@ Out:
 ```jsx
 <Radio onChange={(_event, checked) => handler(checked)} />
 <Radio onChange={(event, checked) => handler(checked, event)} />
+
 const handler1 = (_event, checked) => {};
 <Radio onChange={handler1} />
+
 function handler2(_event, checked) {};
 <Radio onChange={handler2} />
+
+<Radio onChange={(_event, checked) => this.onChange(checked)} />
 ```
 
 
@@ -2556,20 +2698,28 @@ In:
 
 ```jsx
 <Slider onChange={(value) => handler(value)} />
+
 const handler1 = (value) => {};
 <Slider onChange={handler1} />
+
 function handler2(value) {};
 <Slider onChange={handler2} />
+
+<Slider onChange={this.onChange} />
 ```
 
 Out:
 
 ```jsx
 <Slider onChange={(_event, value) => handler(value)} />
+
 const handler1 = (_event, value) => {};
 <Slider onChange={handler1} />
+
 function handler2(_event, value) {};
 <Slider onChange={handler2} />
+
+<Slider onChange={(_event, value) => this.onChange(value)} />
 ```
 
 
@@ -2602,10 +2752,14 @@ In:
 ```jsx
 <Switch onChange={(id) => handler(id)} />
 <Switch onChange={(id, event) => handler(id, event)} />
+
 const handler1 = (id, event) => {};
 <Switch onChange={handler1} />
+
 function handler2(id, event) {};
 <Switch onChange={handler2} />
+
+<Switch onChange={this.onChange} />
 ```
 
 Out:
@@ -2613,10 +2767,14 @@ Out:
 ```jsx
 <Switch onChange={(_event, id) => handler(id)} />
 <Switch onChange={(event, id) => handler(id, event)} />
+
 const handler1 = (_event, id) => {};
 <Switch onChange={handler1} />
+
 function handler2(_event, id) {};
 <Switch onChange={handler2} />
+
+<Switch onChange={(_event, id) => this.onChange(id)} />
 ```
 
 
@@ -2726,20 +2884,28 @@ In:
 
 ```jsx
 <Tabs onToggle={(id) => handler(id)} />
+
 const handler1 = (id) => {};
 <Tabs onToggle={handler1} />
+
 function handler2(id) {};
 <Tabs onToggle={handler2} />
+
+<Tabs onToggle={this.onToggle} />
 ```
 
 Out:
 
 ```jsx
 <Tabs onToggle={(_event, id) => handler(id)} />
+
 const handler1 = (_event, id) => {};
 <Tabs onToggle={handler1} />
+
 function handler2(_event, id) {};
 <Tabs onToggle={handler2} />
+
+<Tabs onToggle={(_event, id) => this.onToggle(id)} />
 ```
 
 
@@ -2844,10 +3010,14 @@ In:
 ```jsx
 <TextArea onChange={(id) => handler(id)} />
 <TextArea onChange={(id, event) => handler(id, event)} />
+
 const handler1 = (id, event) => {};
 <TextArea onChange={handler1} />
+
 function handler2(id, event) {};
 <TextArea onChange={handler2} />
+
+<TextArea onChange={this.onChange} />
 ```
 
 Out:
@@ -2855,10 +3025,14 @@ Out:
 ```jsx
 <TextArea onChange={(_event, id) => handler(id)} />
 <TextArea onChange={(event, id) => handler(id, event)} />
+
 const handler1 = (_event, id) => {};
 <TextArea onChange={handler1} />
+
 function handler2(_event, id) {};
 <TextArea onChange={handler2} />
+
+<TextArea onChange={(_event, id) => this.onChange(id)} />
 ```
 
 ### textInput-swap-onChange-params [(#9064)](https://github.com/patternfly/patternfly-react/pull/9064)
@@ -2872,10 +3046,14 @@ In:
 ```jsx
 <TextInput onChange={(id) => handler(id)} />
 <TextInput onChange={(id, event) => handler(id, event)} />
+
 const handler1 = (id, event) => {};
 <TextInput onChange={handler1} />
+
 function handler2(id, event) {};
 <TextInput onChange={handler2} />
+
+<TextInput onChange={this.onChange} />
 ```
 
 Out:
@@ -2883,10 +3061,14 @@ Out:
 ```jsx
 <TextInput onChange={(_event, id) => handler(id)} />
 <TextInput onChange={(event, id) => handler(id, event)} />
+
 const handler1 = (_event, id) => {};
 <TextInput onChange={handler1} />
+
 function handler2(_event, id) {};
 <TextInput onChange={handler2} />
+
+<TextInput onChange={(_event, id) => this.onChange(id)} />
 ```
 
 
@@ -2919,10 +3101,14 @@ In:
 ```jsx
 <ToggleGroupItem onChange={(id) => handler(id)} />
 <ToggleGroupItem onChange={(id, event) => handler(id, event)} />
+
 const handler1 = (id, event) => {};
 <ToggleGroupItem onChange={handler1} />
+
 function handler2(id, event) {};
 <ToggleGroupItem onChange={handler2} />
+
+<ToggleGroupItem onChange={this.onChange} />
 ```
 
 Out:
@@ -2930,10 +3116,14 @@ Out:
 ```jsx
 <ToggleGroupItem onChange={(_event, id) => handler(id)} />
 <ToggleGroupItem onChange={(event, id) => handler(id, event)} />
+
 const handler1 = (_event, id) => {};
 <ToggleGroupItem onChange={handler1} />
+
 function handler2(_event, id) {};
 <ToggleGroupItem onChange={handler2} />
+
+<ToggleGroupItem onChange={(_event, id) => this.onChange(id)} />
 ```
 
 
