@@ -169,7 +169,6 @@ const searchHandler1 = (_event, text) => {};
 function handler2(_event, id) {};
 function searchHandler2(_event, text) {};
 <ApplicationLauncher onFavorite={handler2} onSearch={searchHandler2}>
-<ApplicationLauncher onFavorite={this.onFavorite} onSearch={this.onSearch}>
 <ApplicationLauncher onFavorite={(_event, id) => this.onFavorite(id)} onSearch={(_event, text) => this.onSearch(text)}>
 
 ```
