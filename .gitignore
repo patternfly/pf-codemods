@@ -3,3 +3,4 @@ lerna-output.txt
 .cache*
 .idea
 test/packages/*
+.DS_Store
