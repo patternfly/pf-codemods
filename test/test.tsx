@@ -139,6 +139,8 @@ const wizardStepFunType: WizardStepFunctionType = () => {};
 
 const variantOption = "default";
 const alertVariantOption = AlertVariant.default;
+const globalClassName = '$pf-global--font-path';
+const themeClassName = 'pf-theme-dark';
 <>
   <Alert aria-label='tester' className='pf-c-foo' />
   <Alert titleHeadingLevel={"h4"} variant={AlertVariant.default} />
