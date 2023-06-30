@@ -4,15 +4,16 @@ const path = require("path");
 const { isDir } = require("./utils");
 const { printDiff } = require("./printDiff");
 
-async function classNameUpdate(globTarget, makeChange, fileTypesRegex) {
+async function classNameUpdate(globTarget, makeChange, fileTypesRegex, excludeFiles = []) {
   const acceptedFileTypesRegex = fileTypesRegex || /\.(s?css|less|(t|j)sx?|md)$/;
 
   const changeNeededRegex = /\bpf-([cul])-/g;
   const version = "v5";
 
   const files = glob.sync(globTarget, { ignore: "**/node_modules/**" });
+  const includedFiles = files.filter(filePath => !excludeFiles.includes(filePath))
 
-  files.forEach(async (file) => {
+  includedFiles.forEach(async (file) => {
     const filePath = path.join(process.cwd(), file);
     const isDirectory = await isDir(filePath, file);
     const isUnexpectedFile = !acceptedFileTypesRegex.test(filePath);

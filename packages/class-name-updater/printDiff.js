@@ -22,6 +22,15 @@ function formatDiff(diff, part, i) {
 }
 
 function printDiff(fileName, oldContent, newContent, changeNeededRegex) {
+  if (oldContent.length > 400_000) {
+    process.stdout.write(`\n ${fileName}`);
+    process.stdout.write(
+      "\n  this file may take a long time to diff or hang perpetually because of its size, you will likely want to exclude it"[
+        "red"
+      ]
+    );
+  }
+
   const fileSplitByLine = oldContent.split("\n");
   const loggedFiles = [];
   let lastPartLineNumber;

@@ -26,6 +26,7 @@ Usage: @patternfly/class-name-updater [options] <path> [otherPaths...]
 Options:
   -V, --version      output the version number
   --extensions       comma-delineated list of file extensions to update, by default includes css, scss, less, ts, tsx, js, jsx and md
+  --exclude          comma-delineated list of files to exclude, files should include their path relative to where this utility is being called
   --fix              whether to run fixer
   -h, --help         display help for command
 ```

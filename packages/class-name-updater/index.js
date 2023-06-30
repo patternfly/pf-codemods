@@ -14,6 +14,10 @@ program
     "--extensions <extensions>",
     "Comma-delineated list of file extensions to update"
   )
+  .option(
+    "--exclude <files>",
+    "Comma-delineated list of files to exclude, files should include their path relative to where this utility is being called"
+  )
   .option("--fix", "Whether to run fixer")
   .action(runClassNameUpdate);
 
@@ -35,7 +39,7 @@ async function runClassNameUpdate(path, otherPaths, options) {
   }
 
   allPaths.forEach(async (path) => {
-    await classNameUpdate(path, options.fix, fileTypes);
+    await classNameUpdate(path, options.fix, fileTypes, options.exclude);
   });
 }
 
