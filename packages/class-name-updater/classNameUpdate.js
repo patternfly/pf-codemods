@@ -7,7 +7,7 @@ const { printDiff } = require("./printDiff");
 async function classNameUpdate(globTarget, makeChange, fileTypesRegex, excludeFiles = []) {
   const acceptedFileTypesRegex = fileTypesRegex || /\.(s?css|less|(t|j)sx?|md)$/;
 
-  const changeNeededRegex = /(\b|\$)pf-([cul]|global|theme)-/g;
+  const changeNeededRegex = /(\b|\$)pf-([cul]|global|theme|color)-/g;
   const version = "v5";
 
   const files = glob.sync(globTarget, { ignore: "**/node_modules/**" });
