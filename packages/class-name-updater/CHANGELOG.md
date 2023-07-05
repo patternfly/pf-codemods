@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@1.2.0...@patternfly/class-name-updater@1.3.0) (2023-07-05)
+
+
+### Features
+
+* **class-name-updater:** Add support for color class names ([#530](https://github.com/patternfly/pf-codemods/issues/530)) ([0c6dfe4](https://github.com/patternfly/pf-codemods/commit/0c6dfe4dd35dbdaa129bfd61b2ad217290225446))
+
+
+
+
+
 # [1.2.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@1.1.2...@patternfly/class-name-updater@1.2.0) (2023-06-30)
 
 
