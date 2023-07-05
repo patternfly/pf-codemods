@@ -7,7 +7,7 @@ module.exports = {
     const dataListImport = getFromPackage(
       context,
       "@patternfly/react-core"
-    ).imports.find((specifier) => specifier.imported.name == "DataList");
+    ).imports.find((specifier) => specifier.imported?.name == "DataList");
 
     if (!dataListImport) {
       return {};
