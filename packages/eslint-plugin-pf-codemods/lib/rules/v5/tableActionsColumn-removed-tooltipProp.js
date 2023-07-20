@@ -56,7 +56,7 @@ module.exports = {
 
             const itemsWithTooltip = getItemsWithTooltipProp(itemsPropValue);
 
-            if (itemsWithTooltip.length) {
+            if (itemsWithTooltip?.length) {
               const getTooltipPropValue = (tooltipProp) => {
                 const { type, value, name } = tooltipProp.value;
 
