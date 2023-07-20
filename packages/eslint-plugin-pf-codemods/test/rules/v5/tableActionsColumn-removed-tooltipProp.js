@@ -4,7 +4,7 @@ const rule = require("../../../lib/rules/v5/tableActionsColumn-removed-tooltipPr
 ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
   valid: [
     {
-      code: `<ActionsColumn items={[{tooltipProps: {content: "test"}}]} />`,
+      code: `import { ActionsColumn } from '@patternfly/react-table'; <ActionsColumn items={[{tooltipProps: {content: "test"}}]} />`,
     },
     // No @patternfly/react-table import
     {
