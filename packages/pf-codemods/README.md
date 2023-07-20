@@ -1268,20 +1268,6 @@ const myVariant = EmptyStateVariant.sm;
 <EmptyState variant="lg" />
 ```
 
-### Examples
-
-In:
-
-```tsx
-import { Dropdown } from '@patternfly/react-core/next';
-```
-
-Out:
-
-```tsx
-import { Dropdown /* data-codemods */ } from '@patternfly/react-core';
-```
-
 ### expandable-section-rename-displaySize-large [(#8206)](https://github.com/patternfly/patternfly-react/pull/8206)
 
 We've renamed the `large` prop value of `displaySize` to `lg`.
@@ -2033,6 +2019,20 @@ The placement Nav flyouts in the DOM has been changed, if you have Nav elements 
 ### nextComponents-update-path [(#8821)](https://github.com/patternfly/patternfly-react/pull/8821) [(#8825)](https://github.com/patternfly/patternfly-react/pull/8825) [(#8835)](https://github.com/patternfly/patternfly-react/pull/8835)
 
 We've promoted the "Next" implementations of our Dropdown, Select, and Wizard components and they are now our default implementation. This rule will update import and/or export paths.
+
+### Examples
+
+In:
+
+```tsx
+import { Dropdown } from '@patternfly/react-core/next';
+```
+
+Out:
+
+```tsx
+import { Dropdown /* data-codemods */ } from '@patternfly/react-core';
+```
 
 ### no-unused-imports-v5
 
