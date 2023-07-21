@@ -2855,6 +2855,39 @@ Table and TableComposable's `ActionsColumn` has been updated to use our new impl
 
 `collapseAllAriaLabel` on `ThExpandType` has been updated to a `string` from `''`. Workarounds casting this property to an empty string are no longer required.
 
+### tableActionsColumn-removed-tooltipProp [(#9382)](https://github.com/patternfly/patternfly-react/pull/9382)
+
+The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.
+
+#### Examples
+
+In:
+
+```jsx
+<ActionsColumn items={[{tooltip: "test"}]} />
+<ActionsColumn items={[{tooltip: "test", tooltipProps: {direction: "top"}}]} />
+
+const actionItems = [{tooltip: "test"}];
+<ActionsColumn items={actionItems} />
+
+const actionItems = () => [{tooltip: "test"}];
+<ActionsColumn items={actionItems} />
+```
+
+Out:
+
+```jsx
+<ActionsColumn items={[{tooltipProps: { content: "test" }}]} />
+<ActionsColumn items={[{ tooltipProps: {content: "test", direction: "top"}}]} />
+
+const actionItems = [{tooltipProps: { content: "test" }}];
+<ActionsColumn items={actionItems} />
+
+const actionItems = () => [{tooltipProps: { content: "test" }}];
+<ActionsColumn items={actionItems} />
+```
+
+
 ### tableComposable-remove-hasSelectableRowCaption [(#8352)](https://github.com/patternfly/patternfly-react/pull/8352)
 
 We've removed the deprecated `hasSelectableRowCaption` prop.
