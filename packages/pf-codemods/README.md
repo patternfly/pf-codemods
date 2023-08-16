@@ -569,6 +569,44 @@ function handler2(_event, id) {};
 <Checkbox onChange={(_event, id) => this.onChange(id)}>
 ```
 
+### chip-update-badgeAPI [(#9493)](https://github.com/patternfly/patternfly-react/pull/9493)
+
+We've added a `badge` prop to the Chip component, which should now be used instead of passing a Badge as children to Chip. This rule will raise a warning, but a fix can be applied.
+
+#### Examples
+
+In:
+
+```jsx
+<Chip>
+  Some content
+  <Badge>5</Badge>
+</Chip>
+
+<Chip>
+  Some content
+  <div>
+    Some other content
+    <Badge>5</Badge>
+  </div>
+</Chip>
+```
+
+Out:
+
+```jsx
+<Chip badge={<Badge>5</Badge>}>
+  Some content
+</Chip>
+
+<Chip badge={<Badge>5</Badge>}>
+  Some content
+  <div>
+    Some other content
+  </div>
+</Chip>
+```
+
 ### clipboardCopy-onChange-event-added [(#8747)](https://github.com/patternfly/patternfly-react/pull/8747)
 
 The `onChange` prop for ClipboardCopy has been updated to include the `event` as its first parameter. `onChange` handlers may require an update.

@@ -8,6 +8,7 @@ const warningRules = [
   "card-deprecate-props",
   "card-warn-component",
   "charts-warn-tooltip",
+  "chip-update-badgeAPI",
   "conditional-aria",
   "datePicker-warn-appendTo-default-value-changed",
   "datepicker-warn-helperText",
