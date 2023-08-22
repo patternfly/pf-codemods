@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.82.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.81.8...@patternfly/pf-codemods@1.82.0) (2023-08-22)
+
+
+### Features
+
+* **Chip:** added badge prop ([#537](https://github.com/patternfly/pf-codemods/issues/537)) ([25417f4](https://github.com/patternfly/pf-codemods/commit/25417f458a687fa2c0eb99f379e8c85970949b22))
+
+
+
+
+
 ## [1.81.8](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.81.7...@patternfly/pf-codemods@1.81.8) (2023-07-21)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
