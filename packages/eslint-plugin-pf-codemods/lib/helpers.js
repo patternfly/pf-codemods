@@ -692,7 +692,10 @@ function addCallbackParam(
                 } else if (propProperties.type === "MemberExpression") {
                   const memberExpression = attribute.value?.expression;
                   if (memberExpression.object.type === "ThisExpression") {
-                    const parentClass = findParentClass(memberExpression);
+                    const parentClass = findAncestor(
+                      memberExpression,
+                      (current) => current.type === "ClassDeclaration"
+                    );
                     const methods = parentClass?.body?.body;
                     const methodDefinition = methods?.find(
                       (method) =>
@@ -925,11 +928,11 @@ function findVariableDeclaration(name, scope) {
   return undefined;
 }
 
-function findParentClass(node) {
+function findAncestor(node, conditionCallback = (_current) => false) {
   let current = node?.parent;
 
   while (current) {
-    if (current.type === "ClassDeclaration") {
+    if (conditionCallback(current)) {
       return current;
     }
 
@@ -952,4 +955,5 @@ module.exports = {
   addCallbackParam,
   getAllJSXElements,
   findVariableDeclaration,
+  findAncestor,
 };
