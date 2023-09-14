@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Chart,
   ChartLegend,
@@ -5,6 +6,7 @@ import {
   getCustomTheme,
   getResizeObserver,
   LightBlueColorTheme,
+  ChartThemeVariant,
 } from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
 import { FrogIcon } from "@patternfly/react-icons";
