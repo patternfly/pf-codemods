@@ -16,7 +16,7 @@ module.exports = {
             if (
               node.specifiers.find(
                 (specifier) =>
-                  specifier.imported.name ===
+                  specifier.imported?.name ===
                   chartThemeVariantImport[0].imported.name
               )
             )
