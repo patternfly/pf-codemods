@@ -11,7 +11,7 @@ const warningRules = [
   "chip-update-badgeAPI",
   "conditional-aria",
   "datePicker-warn-appendTo-default-value-changed",
-  "datepicker-warn-helperText",
+  "datetimepicker-warn-helperText",
   "deprecatedSelect-warn-markupUpdated",
   "emptyState-warn-change-structure",
   "formControls-updated-markup",

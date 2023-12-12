@@ -103,6 +103,7 @@ import {
   TextArea,
   TextInput,
   Title,
+  TimePicker,
   Toggle,
   ToggleGroupItem,
   ToggleTemplateProps,
@@ -328,6 +329,7 @@ const themeClassName = 'pf-theme-dark';
     customIconDimensions
   />
   <TextInput onChange={(foo, event) => handler(foo, event)} />
+  <TimePicker helperText='foo' />
   <Toggle isPrimary onToggle={} />
   <ToggleGroupItem onChange={(foo, event) => handler(foo, event)} />
   <Tooltip />
