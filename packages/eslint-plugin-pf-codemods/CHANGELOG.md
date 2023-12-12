@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.84.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.84.1...@patternfly/eslint-plugin-pf-codemods@1.84.2) (2023-12-12)
+
+
+### Bug Fixes
+
+* **datetimepicker:** set rule intended to be a warning as a warning ([#544](https://github.com/patternfly/pf-codemods/issues/544)) ([e69efc9](https://github.com/patternfly/pf-codemods/commit/e69efc9885b835c6fa5090093cbc3184f8d9a5ee))
+
+
+
+
+
 ## [1.84.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.84.0...@patternfly/eslint-plugin-pf-codemods@1.84.1) (2023-10-16)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
