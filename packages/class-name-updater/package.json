@@ -5,7 +5,7 @@
   "author": "Red Hat",
   "license": "MIT",
   "bin": {
-    "class-name-updater": "./index.js"
+    "class-name-updater": "./dist/cli.js"
   },
   "engines": {
     "node": ">=8"
@@ -13,10 +13,19 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "tsc --build --verbose ./tsconfig.json",
+    "clean": "rimraf ./dist",
+    "test": "jest"
+  },
   "dependencies": {
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "diff": "^5.1.0",
     "glob": "^10.2.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/diff": "^5.0.9"
   }
 }

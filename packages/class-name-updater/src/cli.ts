@@ -1,13 +1,20 @@
 #!/usr/bin/env node
-const { join } = require("path");
-const { Command } = require("commander");
+import { join } from "path";
+import { Command } from "commander";
 const program = new Command();
 
-const { isDir } = require("./utils");
-const { classNameUpdate } = require("./classNameUpdate");
+import { isDir } from "./utils";
+import { classNameUpdate } from "./classNameUpdate";
 
 program
-  .version(require("./package.json").version)
+  .version(
+    require(join(
+      process.cwd(),
+      "packages",
+      "class-name-updater",
+      "package.json"
+    )).version
+  )
   .description("Update class name versioning")
   .arguments("<path> [otherPaths...]")
   .option(
@@ -21,7 +28,11 @@ program
   .option("--fix", "Whether to run fixer")
   .action(runClassNameUpdate);
 
-async function runClassNameUpdate(path, otherPaths, options) {
+async function runClassNameUpdate(
+  path: string,
+  otherPaths: string,
+  options: { extensions: string; fix: boolean; exclude: string[] | undefined }
+) {
   let allPaths = [path, ...otherPaths];
 
   // if all paths are resolved to be directories assume that they want to run on all contents of those directories
@@ -33,7 +44,7 @@ async function runClassNameUpdate(path, otherPaths, options) {
     allPaths = allPaths.map((path) => join(path, "**", "*"));
   }
 
-  let fileTypes;
+  let fileTypes: RegExp;
   if (options.extensions) {
     fileTypes = new RegExp(`\.(${options.extensions.split(",").join("|")})$`);
   }
