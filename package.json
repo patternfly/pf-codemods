@@ -17,6 +17,7 @@
     "get:packages": "node getPackages.js",
     "generate": "plop",
     "build": "lerna run build",
+    "build:readme": "lerna run build:readme",
     "clean": "lerna run clean"
   },
   "repository": {
@@ -35,6 +36,7 @@
   "devDependencies": {
     "lerna": "^3.22.0",
     "mocha": "^7.2.0",
-    "plop": "^3.1.2"
+    "plop": "^3.1.2",
+    "ts-node": "^10.9.2"
   }
 }
