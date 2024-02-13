@@ -4,5 +4,5 @@
     "outDir": "./dist/esm"
   },
   "include": ["src/**/*"],
-  "exclude": ["dist", "test", "node_modules"]
+  "exclude": ["dist", "test", "node_modules", "src/rules/**/*.test.ts", "src/rules/**/*.tsx"]
 }

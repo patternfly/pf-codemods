@@ -15,8 +15,9 @@
     "test:packages": "yarn get:packages && node --unhandled-rejections=strict packages/pf-codemods/index.js --no-cache test/packages",
     "test:classnames": "class-name-updater --no-cache test",
     "get:packages": "node getPackages.js",
-    "generate": "plop",
+    "generate": "yarn build:generators && plop",
     "build": "lerna run build",
+    "build:generators": "tsc --build --verbose generators/tsconfig.cjs.json",
     "build:readme": "lerna run build:readme",
     "clean": "lerna run clean"
   },
@@ -37,6 +38,9 @@
     "lerna": "^3.22.0",
     "mocha": "^7.2.0",
     "plop": "^3.1.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "case-anything": "^2.1.13",
+    "fs-extra": "^11.2.0",
+    "@types/fs-extra": "^11.0.4"
   }
 }

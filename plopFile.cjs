@@ -2,77 +2,77 @@ const {
   genericRule,
   addEventCBRule,
   swapCBRule,
-} = require("./generators/write-rule");
+} = require("./generators/dist/js/write-rule");
 const {
   genericTest,
   addEventCBTest,
   swapCBTest,
-} = require("./generators/write-test");
+} = require("./generators/dist/js/write-test");
 const {
   genericReadme,
   addEventCBReadme,
-  swapCBReadme,
-} = require("./generators/update-readme");
+  swapCBReadme
+} = require("./generators/dist/js/write-readme");
 const {
   genericTestSingle,
   addEventCBTestSingle,
   swapCBTestSingle,
-} = require("./generators/update-test-single");
+} = require("./generators/dist/js/write-test-single");
 
 module.exports = function (plop) {
-  plop.setActionType("generateRule", function (answers, config, plop) {
+  plop.setActionType("generateRule", async function (answers, config, plop) {
     console.log("Generating rule file", answers.ruleName);
     switch (config.generatorSelection) {
       case "addEventCB":
-        addEventCBRule(answers);
+        await addEventCBRule(answers);
         break;
       case "swapCB":
-        swapCBRule(answers);
+        await swapCBRule(answers);
         break;
       default:
-        genericRule(answers);
+        await genericRule(answers);
     }
   });
 
-  plop.setActionType("generateTest", function (answers, config, plop) {
+  plop.setActionType("generateTest", async function (answers, config, plop) {
     console.log("Generating test file", answers.ruleName);
     switch (config.generatorSelection) {
       case "addEventCB":
-        addEventCBTest(answers);
+        await addEventCBTest(answers);
         break;
       case "swapCB":
-        swapCBTest(answers);
+        await swapCBTest(answers);
         break;
       default:
-        genericTest(answers);
+        await genericTest(answers);
     }
   });
 
-  plop.setActionType("updateReadme", function (answers, config, plop) {
-    console.log("Updating README for", answers.ruleName);
+  plop.setActionType("generateReadMe", async function (answers, config, plop) {
+    console.log("Generating README for", answers.ruleName);
     switch (config.generatorSelection) {
       case "addEventCB":
-        addEventCBReadme(answers);
+        await addEventCBReadme(answers);
         break;
       case "swapCB":
-        swapCBReadme(answers);
+        await swapCBReadme(answers);
         break;
       default:
-        genericReadme(answers);
+        await genericReadme(answers);
     }
   });
 
-  plop.setActionType("updateTestSingle", function (answers, config, plop) {
-    console.log("Updating test.tsx for", answers.ruleName);
+  plop.setActionType("generateTestSingle", async function (answers, config, plop) {
+    console.log("Generating tsx files for", answers.ruleName);
     switch (config.generatorSelection) {
       case "addEventCB":
-        addEventCBTestSingle(answers);
+        await addEventCBTestSingle(answers);
         break;
       case "swapCB":
-        swapCBTestSingle(answers);
+        await swapCBTestSingle(answers);
         break;
       default:
-        genericTestSingle(answers);
+        await genericTestSingle(answers);
     }
   });
 
@@ -114,10 +114,10 @@ module.exports = function (plop) {
         type: "generateTest",
       },
       {
-        type: "updateReadme",
+        type: "generateReadMe",
       },
       {
-        type: "updateTestSingle",
+        type: "generateTestSingle",
       },
     ],
   });
@@ -157,11 +157,11 @@ module.exports = function (plop) {
         generatorSelection: "addEventCB",
       },
       {
-        type: "updateReadme",
+        type: "generateReadMe",
         generatorSelection: "addEventCB",
       },
       {
-        type: "updateTestSingle",
+        type: "generateTestSingle",
         generatorSelection: "addEventCB",
       },
     ],
@@ -202,11 +202,11 @@ module.exports = function (plop) {
         generatorSelection: "swapCB",
       },
       {
-        type: "updateReadme",
+        type: "generateReadMe",
         generatorSelection: "swapCB",
       },
       {
-        type: "updateTestSingle",
+        type: "generateTestSingle",
         generatorSelection: "swapCB",
       },
     ],
