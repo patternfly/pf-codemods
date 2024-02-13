@@ -1,3 +1,3 @@
-import { NewComponentName } from "@patternfly/react-core";
+import { ComponentName } from "@patternfly/react-core";
 
-export const ExampleRule = () => <NewComponentName>Body</NewComponentName>;
+export const ExampleRule = () => <ComponentName >Body</ComponentName>;

@@ -12,7 +12,7 @@ async function baseTest(ruleName: string, fileContent: string) {
         /dist\/(js|esm)\/index\.js/,
         `src/rules/v6/${camelCaseRuleName}`
       ),
-    `${camelCaseRuleName}.test.ts`
+    `${ruleName}.test.ts`
   );
 
   await outputFile(destination, fileContent);

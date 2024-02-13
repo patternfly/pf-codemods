@@ -6,8 +6,8 @@ module.exports = {
   create: function(context: { report: (arg0: { node: any; message: string; fix(fixer: any): any; }) => void; }) {
     const {imports, exports} = getFromPackage(context, '@patternfly/react-core')
       
-    const componentImports = imports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === 'componentName');
-    const componentExports = exports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === 'componentName');
+    const componentImports = imports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === 'ComponentName');
+    const componentExports = exports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === 'ComponentName');
 
     return !componentImports.length && !componentExports.length ? {} : {
       JSXOpeningElement(node: { name: { name: any; }; attributes: any[]; }) {

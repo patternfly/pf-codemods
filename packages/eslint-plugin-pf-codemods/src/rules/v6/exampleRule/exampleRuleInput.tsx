@@ -1,3 +1,3 @@
 import { ComponentName } from "@patternfly/react-core";
 
-export const ExampleRule = () => <ComponentName>Body</ComponentName>;
+export const ExampleRule = () => <ComponentName propName="foo">Body</ComponentName>;

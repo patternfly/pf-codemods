@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist/esm"
+    "outDir": "./dist/esm",
+    "allowJs": true
   },
   "include": ["src/**/*"],
-  "exclude": ["dist", "test", "node_modules", "src/rules/**/*.test.ts", "src/rules/**/*.tsx"]
+  "exclude": ["dist", "test", "node_modules", "src/rules/**/*.tsx"]
 }

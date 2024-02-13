@@ -12,7 +12,7 @@ async function baseReadme({ referencePR, ruleName, message }: Answers) {
         /dist\/(js|esm)\/index\.js/,
         `src/rules/v6/${camelCaseRuleName}`
       ),
-    `${camelCaseRuleName}.md`
+    `${ruleName}.md`
   );
 
   const readMeContent = `### ${ruleName} [(#${referencePR})](https://github.com/patternfly/patternfly-react/pull/${referencePR})
