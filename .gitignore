@@ -4,3 +4,4 @@ lerna-output.txt
 .idea
 test/packages/*
 .DS_Store
+dist

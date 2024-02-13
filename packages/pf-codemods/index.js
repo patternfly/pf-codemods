@@ -5,7 +5,8 @@ const {
   configs,
   ruleVersionMapping,
   setupRules,
-  cleanupRules
+  cleanupRules,
+  v5Rules
 } = require('@patternfly/eslint-plugin-pf-codemods');
 const { Command } = require('commander');
 const program = new Command();

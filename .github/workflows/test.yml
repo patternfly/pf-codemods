@@ -29,6 +29,7 @@ jobs:
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - run: yarn build
       - name: Run tests
         run: yarn test --maxWorkers=2
   error-tests:
@@ -63,5 +64,6 @@ jobs:
         with:
           path: test/packages/**
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('getPackages.js', 'test/packages/*/package.json') }}
+      - run: yarn build
       - name: Test packages
         run: yarn test:packages

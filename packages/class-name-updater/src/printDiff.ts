@@ -1,7 +1,7 @@
 require("colors");
-const Diff = require("diff");
+import { Change, diffChars} from "diff";
 
-function formatLineNumber(lastLineNumber, newLineNumber) {
+function formatLineNumber(lastLineNumber: number, newLineNumber: number) {
   if (newLineNumber === lastLineNumber) {
     return "";
   }
@@ -10,7 +10,7 @@ function formatLineNumber(lastLineNumber, newLineNumber) {
   return `${newLine}  ${newLineNumber + 1}: `;
 }
 
-function formatDiff(diff, part, i) {
+function formatDiff(diff: Change[], part: Change, i: number) {
   const proceedingPartSplit = diff[i - 1].value.split("\n");
   const proceedingPart =
     proceedingPartSplit[proceedingPartSplit.length - 1].trim();
@@ -18,24 +18,25 @@ function formatDiff(diff, part, i) {
   const followingPartSplit = diff[i + 1].value.split("\n");
   const followingPart = followingPartSplit[0].trim();
 
-  return proceedingPart["grey"] + part.value["green"] + followingPart["grey"];
+  // The color package is weird, which is why we have to cast to any
+  return proceedingPart["grey" as any] + part.value["green" as any] + followingPart["grey" as any];
 }
 
-function printDiff(fileName, oldContent, newContent, changeNeededRegex) {
+export function printDiff(fileName: string, oldContent: string, newContent: string, changeNeededRegex: RegExp) {
   if (oldContent.length > 400_000) {
     process.stdout.write(`\n ${fileName}`);
     process.stdout.write(
       "\n  this file may take a long time to diff or hang perpetually because of its size, you will likely want to exclude it"[
-        "red"
+        "red" as any
       ]
     );
   }
 
   const fileSplitByLine = oldContent.split("\n");
-  const loggedFiles = [];
-  let lastPartLineNumber;
+  const loggedFiles: string[] = [];
+  let lastPartLineNumber: number;
 
-  const diff = Diff.diffChars(oldContent, newContent);
+  const diff = diffChars(oldContent, newContent);
 
   diff.forEach((part, i) => {
     if (!part.added) {
@@ -74,7 +75,3 @@ function printDiff(fileName, oldContent, newContent, changeNeededRegex) {
     process.stdout.write(fullContextLine);
   });
 }
-
-module.exports = {
-  printDiff,
-};

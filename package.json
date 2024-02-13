@@ -13,8 +13,11 @@
     "test:console": "pf-codemods --no-cache test/console/frontend",
     "test:integreatly": "pf-codemods --no-cache test/tutorial-web-app",
     "test:packages": "yarn get:packages && node --unhandled-rejections=strict packages/pf-codemods/index.js --no-cache test/packages",
+    "test:classnames": "class-name-updater --no-cache test",
     "get:packages": "node getPackages.js",
-    "generate": "plop"
+    "generate": "plop",
+    "build": "lerna run build",
+    "clean": "lerna run clean"
   },
   "repository": {
     "type": "git",
