@@ -14,7 +14,6 @@
     "build": "yarn build:esm && yarn build:cjs",
     "build:esm": "tsc --build --verbose ./tsconfig.json",
     "build:cjs": "tsc --build --verbose ./tsconfig.cjs.json",
-    "build:readme": "ts-node-esm ./scripts/buildReadme.ts",
     "test": "eslint . --ext .ts",
     "clean": "rimraf ./dist"
   },
@@ -24,7 +23,6 @@
     "typescript": ">=3.8.3"
   },
   "devDependencies": {
-    "@types/eslint": "^8.56.0",
-    "ts-node": "^10.9.2"
+    "@types/eslint": "^8.56.0"
   }
 }

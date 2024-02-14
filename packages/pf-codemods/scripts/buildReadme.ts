@@ -2,13 +2,14 @@ import glob from "glob";
 import { join } from "path";
 import { readdir, readFile, writeFile } from "fs/promises";
 
-const rulePath = join(process.cwd(), "src", "rules");
+const rulePath = require
+  .resolve("@patternfly/eslint-plugin-pf-codemods")
+  .replace(/dist\/(esm|js)\/index\.js/, join("src", "rules", "v6"));
 
-const baseReadMePath = join(rulePath, "baseReadMe.md");
+const baseReadMePath = join(process.cwd(), "scripts", "baseReadMe.md");
 const baseReadMeContent = readFile(baseReadMePath, "utf-8");
 
-const v6RuleDirs = glob.sync(join(rulePath, "v6", "*"));
-console.log(v6RuleDirs);
+const v6RuleDirs = glob.sync(join(rulePath, "*"));
 
 const builtReadMes = v6RuleDirs.map(async (ruleDir) => {
   const files = await readdir(ruleDir);
@@ -37,5 +38,5 @@ builtReadMes.unshift(baseReadMeContent);
 
 Promise.all(builtReadMes).then(async (builtReadMes) => {
   const readMeContent = builtReadMes.reduce((acc, readMe) => acc + readMe, "");
-  await writeFile(join(rulePath, "README.md"), readMeContent);
+  await writeFile(join(process.cwd(), "README.md"), readMeContent);
 });

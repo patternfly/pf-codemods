@@ -13,6 +13,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build:readme": "ts-node-esm ./scripts/buildReadme.ts"
+  },
   "dependencies": {
     "@patternfly/eslint-plugin-pf-codemods": "^1.84.3",
     "@typescript-eslint/parser": "^5.58.0",
