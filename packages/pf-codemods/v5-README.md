@@ -68,3 +68,31 @@ import { ComponentName } from "@patternfly/react-core";
 export const ExampleRule = () => <ComponentName >Body</ComponentName>;
 ```
 
+### foo-the-bar [(#1234)](https://github.com/patternfly/patternfly-react/pull/1234)
+
+We've updated the `bar` prop for Foo so that the `event` parameter is the first parameter. Handlers may require an update.
+
+#### Examples
+
+In:
+
+```jsx
+import React from 'react';
+import { Foo } from '@patternfly/react-core';
+
+export const FooTheBarInput = () => (
+    <Foo bar={foo => handler(foo)} />
+);
+```
+
+Out:
+
+```jsx
+import React from 'react';
+import { Foo } from '@patternfly/react-core';
+
+export const FooTheBarOutput = () => (
+    <Foo bar={foo => handler(foo)} />
+);
+```
+

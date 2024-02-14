@@ -17,24 +17,15 @@ async function baseTestSingle(
   const testInputPath = join(ruleDir, `${camelCaseRuleName}Input.tsx`);
   const testOutputPath = join(ruleDir, `${camelCaseRuleName}Output.tsx`);
 
-  const testInputContent = `import React from 'react';
-import { ${componentName} } from '@patternfly/react-core';
+  const testInputContent = `import { ${componentName} } from '@patternfly/react-core';
 
 export const ${pascalCaseRuleName}Input = () => (
   ${componentUsage}
 );
 `;
 
-  const testOutputContent = `import React from 'react';
-import { ${componentName} } from '@patternfly/react-core';
-
-export const ${pascalCaseRuleName}Output = () => (
-  ${componentUsage}
-);
-`;
-
   await outputFile(testInputPath, testInputContent);
-  await outputFile(testOutputPath, testOutputContent);
+  await outputFile(testOutputPath, testInputContent);
 }
 export async function genericTestSingle(answers: Answers) {
   const { componentName, propName } = answers;
