@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.83.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.82.4...@patternfly/pf-codemods@1.83.0) (2024-02-15)
+
+
+### Features
+
+* **Masthead:** Remove backgroundColor prop ([#566](https://github.com/patternfly/pf-codemods/issues/566)) ([d4f52bc](https://github.com/patternfly/pf-codemods/commit/d4f52bca3424fb87b67847a49cbf48d549e40e96))
+
+
+
+
+
 ## [1.82.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.82.3...@patternfly/pf-codemods@1.82.4) (2024-02-15)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
