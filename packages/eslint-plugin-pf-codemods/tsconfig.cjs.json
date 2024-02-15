@@ -2,8 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "commonjs",
-    "outDir": "./dist/js"
+    "outDir": "./dist/js",
+    "allowJs": true,
+    "strict": false
   },
   "include": ["src/**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist", "test", "node_modules", "src/rules/**/*.tsx"]
 }

@@ -4,19 +4,23 @@
   "description": "PF codemods monorepo",
   "private": true,
   "scripts": {
-    "test": "mocha packages/eslint-plugin-pf-codemods/test/rules/*",
+    "test": "yarn test:v4 && yarn test:v5 && yarn test:v6",
     "test:v4": "mocha packages/eslint-plugin-pf-codemods/test/rules/v4",
     "test:v5": "mocha packages/eslint-plugin-pf-codemods/test/rules/v5",
+    "test:v6": "yarn build && mocha packages/eslint-plugin-pf-codemods/dist/js/rules/v6/*/*.test.js",
     "test:v4:single": "pf-codemods --v4 --no-cache test/v4test.tsx",
     "test:v5:single": "pf-codemods --no-cache test/test.tsx",
+    "test:v6:single": "yarn build && pf-codemods --v6 --no-cache packages/eslint-plugin-pf-codemods/src/rules/v6/*/*.tsx",
     "test:koku": "pf-codemods --no-cache test/koku-ui",
     "test:console": "pf-codemods --no-cache test/console/frontend",
     "test:integreatly": "pf-codemods --no-cache test/tutorial-web-app",
     "test:packages": "yarn get:packages && node --unhandled-rejections=strict packages/pf-codemods/index.js --no-cache test/packages",
     "test:classnames": "class-name-updater --no-cache test",
     "get:packages": "node getPackages.js",
-    "generate": "plop",
+    "generate": "yarn build:generators && plop",
     "build": "lerna run build",
+    "build:generators": "tsc --build --verbose generators/tsconfig.cjs.json",
+    "build:readme": "lerna run build:readme",
     "clean": "lerna run clean"
   },
   "repository": {
@@ -35,6 +39,10 @@
   "devDependencies": {
     "lerna": "^3.22.0",
     "mocha": "^7.2.0",
-    "plop": "^3.1.2"
+    "plop": "^3.1.2",
+    "ts-node": "^10.9.2",
+    "case-anything": "^2.1.13",
+    "fs-extra": "^11.2.0",
+    "@types/fs-extra": "^11.0.4"
   }
 }
