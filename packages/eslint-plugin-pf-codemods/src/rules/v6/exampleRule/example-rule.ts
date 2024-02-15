@@ -1,4 +1,4 @@
-const { getFromPackage } = require("../../helpers");
+import { getFromPackage } from '../../helpers';
 
 // https://github.com/patternfly/patternfly-react/pull/1234
 module.exports = {

@@ -17,12 +17,9 @@ async function baseTestSingle(
   const testInputPath = join(ruleDir, `${camelCaseRuleName}Input.tsx`);
   const testOutputPath = join(ruleDir, `${camelCaseRuleName}Output.tsx`);
 
-  const testInputContent = `import { ${componentName} } from '@patternfly/react-core';
+  const testInputContent = `import { ${componentName} } from "@patternfly/react-core";
 
-export const ${pascalCaseRuleName}Input = () => (
-  ${componentUsage}
-);
-`;
+export const ${pascalCaseRuleName}Input = () => ${componentUsage}`;
 
   await outputFile(testInputPath, testInputContent);
   await outputFile(testOutputPath, testInputContent);
@@ -30,7 +27,7 @@ export const ${pascalCaseRuleName}Input = () => (
 export async function genericTestSingle(answers: Answers) {
   const { componentName, propName } = answers;
 
-  baseTestSingle(answers, `  <${componentName} ${propName} />`);
+  baseTestSingle(answers, `<${componentName} ${propName} />`);
 }
 
 export async function addEventCBTestSingle(answers: Answers) {
@@ -38,7 +35,16 @@ export async function addEventCBTestSingle(answers: Answers) {
 
   baseTestSingle(
     answers,
-    `  <${componentName} ${propName}={foo => handler(foo)} />`
+    `{
+  function handler1(foo) {}
+  return (
+    <>
+      <${componentName} ${propName}={handler1} />
+      <${componentName} ${propName}={(foo) => handler(foo)} />
+    </>
+  );
+}
+`
   );
 }
 
@@ -47,6 +53,15 @@ export async function swapCBTestSingle(answers: Answers) {
 
   baseTestSingle(
     answers,
-    `  <${componentName} ${propName}={(foo, event) => handler(foo, event)} />`
+    `{
+  function handler1(foo, event) {}
+  return (
+    <>
+      <${componentName} ${propName}={handler1} />
+      <${componentName} ${propName}={(foo, event) => handler(foo)} />
+    </>
+  );
+}
+`
   );
 }

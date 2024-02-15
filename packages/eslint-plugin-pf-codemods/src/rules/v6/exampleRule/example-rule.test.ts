@@ -1,5 +1,5 @@
 const ruleTester = require('../../ruletester');
-const rule = require('./example-rule');
+import * as rule from './example-rule';
 
 ruleTester.run("example-rule", rule, {
   valid: [

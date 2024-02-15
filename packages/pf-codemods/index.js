@@ -5,9 +5,7 @@ const {
   configs,
   ruleVersionMapping,
   setupRules,
-  cleanupRules,
-  v5Rules,
-  v6rules,
+  cleanupRules
 } = require("@patternfly/eslint-plugin-pf-codemods/dist/js");
 const { Command } = require("commander");
 const program = new Command();
@@ -70,7 +68,7 @@ async function printResults(eslint, results, format) {
   return true;
 }
 
-function ruleVersion(options) {
+function getRulesToRemove(options) {
   if (options.v4) {
     return [...ruleVersionMapping["v5"], ...ruleVersionMapping["v6"]];
   } else if (options.v6) {
@@ -97,7 +95,7 @@ async function runCodemods(path, otherPaths, options) {
       .forEach((rule) => delete configs.recommended.rules[prefix + rule]);
   }
 
-  const rulesToRemove = ruleVersion(options);
+  const rulesToRemove = getRulesToRemove(options);
 
   rulesToRemove.forEach((rule) => delete configs.recommended.rules[prefix + rule]);
   const eslintBaseConfig = {

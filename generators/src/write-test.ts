@@ -26,7 +26,7 @@ export async function genericTest({
 }: Answers) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
   const content = `const ruleTester = require('../../ruletester');
-const rule = require('../../../lib/rules/v5/${ruleName}');
+import * as rule from './${ruleName}';
 
 ruleTester.run("${ruleName}", rule, {
   valid: [
@@ -37,7 +37,7 @@ ruleTester.run("${ruleName}", rule, {
   invalid: [
     {
       code:   \`import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName} />\`,
-      output: \`import { ${componentName} } from '@patternfly/react-core'; <${componentName} ${propName} />\`,
+      output: \`import { ${componentName} } from '@patternfly/react-core'; <${componentName}  />\`,
       errors: [{
         message: \`${message}\`,
         type: "JSXOpeningElement",

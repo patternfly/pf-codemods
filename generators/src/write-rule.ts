@@ -26,7 +26,7 @@ export async function genericRule({
   message,
 }: Answers) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
-  const content = `const { getFromPackage } = require('../../helpers');
+  const content = `import { getFromPackage } from '../../helpers';
   
 // https://github.com/patternfly/patternfly-react/pull/${referencePR}
 module.exports = {

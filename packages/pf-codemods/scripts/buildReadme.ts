@@ -19,8 +19,7 @@ const builtReadMes = v6RuleDirs.map(async (ruleDir) => {
   const output = files.find((file) => file.includes("Output.tsx"));
 
   if (!readMe || !input || !output) {
-    console.error("Missing file in rule directory: ", ruleDir);
-    throw new Error("Missing file in rule directory");
+    throw new Error(`Missing file in rule directory: ${ruleDir}`);
   }
 
   const readMeContent = await readFile(join(ruleDir, readMe), "utf-8");

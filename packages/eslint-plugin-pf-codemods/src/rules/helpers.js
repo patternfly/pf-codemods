@@ -1,6 +1,6 @@
 const evk = require("eslint-visitor-keys");
 
-function moveSpecifiers(
+export function moveSpecifiers(
   specifiersToMove,
   fromPackage,
   toPackage,
@@ -286,7 +286,7 @@ function moveSpecifiers(
   };
 }
 
-function pfPackageMatches(packageName, nodeSrc) {
+export function pfPackageMatches(packageName, nodeSrc) {
   const parts = packageName.split("/");
   const regex = new RegExp(
     "^" +
@@ -305,9 +305,9 @@ function pfPackageMatches(packageName, nodeSrc) {
  * @param context
  * @param {string} packageName
  * @param {string[]} specifierNames
- * @returns {Object} an object containing an array of imports and array of named exports
+ * @returns {{ imports, exports }} an object containing an array of imports and array of named exports
  */
-function getFromPackage(context, packageName, specifierNames = []) {
+export function getFromPackage(context, packageName, specifierNames = []) {
   const astBody = context.getSourceCode().ast.body;
   const getSpecifiers = (nodeType) =>
     astBody
@@ -336,7 +336,7 @@ function getFromPackage(context, packageName, specifierNames = []) {
       };
 }
 
-function splitSpecifiers(declaration, specifiersToSplit) {
+export function splitSpecifiers(declaration, specifiersToSplit) {
   let keepSpecifiers = [];
 
   const takeSpecifiers = declaration.specifiers.filter((specifier) => {
@@ -357,7 +357,7 @@ function splitSpecifiers(declaration, specifiersToSplit) {
  * @param {*} specifiers
  * @returns {String[]} an array of alias imports
  */
-function createAliasImportSpecifiers(specifiers) {
+export function createAliasImportSpecifiers(specifiers) {
   return specifiers.map((imp) => {
     const { imported, local } = imp;
 
@@ -368,7 +368,7 @@ function createAliasImportSpecifiers(specifiers) {
   });
 }
 
-function renamePropsOnNode(context, imports, node, renames) {
+export function renamePropsOnNode(context, imports, node, renames) {
   const componentName = imports.find((imp) => imp.local.name === node.name.name)
     ?.imported.name;
 
@@ -447,7 +447,7 @@ function renamePropsOnNode(context, imports, node, renames) {
  * @param {string} packageName
  * @returns 
  */
-function renameProps(renames, packageName = "@patternfly/react-core") {
+export function renameProps(renames, packageName = "@patternfly/react-core") {
   return function (context) {
     const imports = getFromPackage(context, packageName).imports.filter(
       (specifier) => Object.keys(renames).includes(specifier.imported.name)
@@ -473,15 +473,15 @@ function renameProps(renames, packageName = "@patternfly/react-core") {
   };
 }
 
-function renameComponents(
+export function renameComponents(
   componentMap,
   condition = (_context, _package) => true,
   message = (prevName, newName) =>
     `${prevName} has been replaced with ${newName}`,
-  package = "@patternfly/react-core"
+  packageName = "@patternfly/react-core"
 ) {
   return function (context) {
-    const { imports, exports } = getFromPackage(context, package);
+    const { imports, exports } = getFromPackage(context, packageName);
 
     const filteredImports = imports.filter((specifier) =>
       Object.keys(componentMap).includes(specifier?.imported?.name)
@@ -493,14 +493,14 @@ function renameComponents(
 
     if (
       (!filteredImports.length && !filteredExports.length) ||
-      !condition(context, package)
+      !condition(context, packageName)
     ) {
       return renameComponentFunctions;
     }
 
     if (filteredImports.length) {
       renameComponentFunctions["ImportDeclaration"] = function (node) {
-        ensureImports(context, node, package, [
+        ensureImports(context, node, packageName, [
           ...new Set(Object.values(componentMap)),
         ]);
       };
@@ -576,11 +576,11 @@ function renameComponents(
   };
 }
 
-function ensureImports(context, node, package, imports) {
-  if (!pfPackageMatches(package, node.source.value)) {
+export function ensureImports(context, node, packageName, imports) {
+  if (!pfPackageMatches(packageName, node.source.value)) {
     return;
   }
-  const { imports: patternflyImports } = getFromPackage(context, package);
+  const { imports: patternflyImports } = getFromPackage(context, packageName);
   const patternflyImportNames = patternflyImports.map(
     (imp) => imp.imported.name
   );
@@ -603,7 +603,7 @@ function ensureImports(context, node, package, imports) {
 
 // propMap structure: { propName: { defaultParamName: string, previousParamIndex?: number, otherMatchers?: /regex/ } | string }
 // example:           { onClick: { defaultParamName: '_event', previousParamIndex: 1, otherMatchers?: /^_?(ev\w*|e$)/ } }
-function addCallbackParam(
+export function addCallbackParam(
   componentsArray,
   propMap,
   message = (propName, componentName, paramName) =>
@@ -888,7 +888,7 @@ function addCallbackParam(
  * @param context
  * @returns {JSXElement[]} an array of all JSXElements in the file
  */
-function getAllJSXElements(context) {
+export function getAllJSXElements(context) {
   const jsxElements = [];
 
   const traverse = (node) => {
@@ -915,7 +915,7 @@ function getAllJSXElements(context) {
   return jsxElements;
 }
 
-function findVariableDeclaration(name, scope) {
+export function findVariableDeclaration(name, scope) {
   while (scope !== null) {
     const variable = scope.variables.find((v) => v.name === name);
 
@@ -928,7 +928,7 @@ function findVariableDeclaration(name, scope) {
   return undefined;
 }
 
-function findAncestor(node, conditionCallback = (_current) => false) {
+export function findAncestor(node, conditionCallback = (_current) => false) {
   let current = node?.parent;
 
   while (current) {
@@ -941,19 +941,3 @@ function findAncestor(node, conditionCallback = (_current) => false) {
 
   return undefined;
 }
-
-module.exports = {
-  createAliasImportSpecifiers,
-  ensureImports,
-  getFromPackage,
-  moveSpecifiers,
-  pfPackageMatches,
-  renamePropsOnNode,
-  renameProps,
-  renameComponents,
-  splitSpecifiers,
-  addCallbackParam,
-  getAllJSXElements,
-  findVariableDeclaration,
-  findAncestor,
-};
