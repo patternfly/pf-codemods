@@ -46,25 +46,25 @@ These rules are based off the breaking change notes for React. Each rule links t
 
 Some rules will add either a comment (`/* data-codemods */`) or data attribute (`data-codemods="true"`) in order to prevent certain other rules from applying an unnecessary fix.
 
-### example-rule[(#1234)](https://github.com/patternfly/patternfly-react/pull/1234)
+### masthead-remove-background-color [(#9774)](https://github.com/patternfly/patternfly-react/pull/9774)
 
-We've renamed the `ComponentName` component to `NewComponentName`.
+We've removed the `backgroundColor` prop from Masthead as theming is no longer handled React-side.
 
 #### Examples
 
 In:
 
 ```jsx
-import { ComponentName } from "@patternfly/react-core";
+import { Masthead } from "@patternfly/react-core";
 
-export const ExampleRule = () => <ComponentName propName="foo">Body</ComponentName>;
+export const MastheadRemoveBackgroundColorInput = () => <Masthead backgroundColor />
 ```
 
 Out:
 
 ```jsx
-import { ComponentName } from "@patternfly/react-core";
+import { Masthead } from "@patternfly/react-core";
 
-export const ExampleRule = () => <ComponentName >Body</ComponentName>;
+export const MastheadRemoveBackgroundColorInput = () => <Masthead  />
 ```
 

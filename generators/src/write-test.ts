@@ -32,6 +32,9 @@ ruleTester.run("${ruleName}", rule, {
   valid: [
     {
       code: \`<${componentName} ${propName} />\`
+    },
+    {
+      code: \`import { ${componentName} } from '@patternfly/react-core'; <${componentName} someOtherProp />\`
     }
   ],
   invalid: [
