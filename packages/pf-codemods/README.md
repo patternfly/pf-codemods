@@ -46,7 +46,7 @@ These rules are based off the breaking change notes for React. Each rule links t
 
 Some rules will add either a comment (`/* data-codemods */`) or data attribute (`data-codemods="true"`) in order to prevent certain other rules from applying an unnecessary fix.
 
-### masthead-remove-background-color [(#9744)](https://github.com/patternfly/patternfly-react/pull/9744)
+### masthead-remove-background-color [(#9774)](https://github.com/patternfly/patternfly-react/pull/9774)
 
 We've removed the `backgroundColor` prop from Masthead as theming is no longer handled React-side.
 
