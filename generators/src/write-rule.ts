@@ -31,7 +31,7 @@ export async function genericRule({
 // https://github.com/patternfly/patternfly-react/pull/${referencePR}
 module.exports = {
   meta: { fixable: 'code' },
-  create: function(context: { report: (arg0: { node: any; message: string; fix(fixer: any): any; }) => void; }) {
+  create: function(context: { report: (arg0: { node: any; message: string; fix?(fixer: any): any; }) => void; }) {
     const {imports, exports} = getFromPackage(context, '@patternfly/react-core')
       
     const componentImports = imports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === '${componentName}');
