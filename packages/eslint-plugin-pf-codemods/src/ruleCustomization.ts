@@ -21,6 +21,7 @@ export const warningRules = [
   "overflowMenu-warn-updated-dropdownItem",
   "popover-warn-appendTo-default",
   "react-dropzone-warn-upgrade",
+  "simpleFileUpload-warn-changes",
   "table-warn-actionsColumn",
   "table-warn-thExpandType",
   "tabs-warn-children-type-changed",
