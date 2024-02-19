@@ -13,6 +13,7 @@ export const warningRules = [
   "datePicker-warn-appendTo-default-value-changed",
   "datetimepicker-warn-helperText",
   "deprecatedSelect-warn-markupUpdated",
+  "drawerHead-warn-updated-markup",
   "emptyState-warn-change-structure",
   "formControls-updated-markup",
   "horizontalSubnav-warn-ariaLabel",
