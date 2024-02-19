@@ -15,6 +15,7 @@ export const warningRules = [
   "deprecatedSelect-warn-markupUpdated",
   "emptyState-warn-change-structure",
   "formControls-updated-markup",
+  "helperTextItem-warn-screenReaderText-update",
   "horizontalSubnav-warn-ariaLabel",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
