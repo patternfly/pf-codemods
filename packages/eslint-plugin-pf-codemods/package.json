@@ -23,6 +23,7 @@
     "typescript": ">=3.8.3"
   },
   "devDependencies": {
-    "@types/eslint": "^8.56.0"
+    "@types/eslint": "^8.56.0",
+    "@types/estree-jsx": "^1.0.4"
   }
 }

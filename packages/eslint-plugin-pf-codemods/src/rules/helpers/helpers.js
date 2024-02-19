@@ -286,56 +286,6 @@ export function moveSpecifiers(
   };
 }
 
-export function pfPackageMatches(packageName, nodeSrc) {
-  const parts = packageName.split("/");
-  const regex = new RegExp(
-    "^" +
-      parts[0] +
-      "/" +
-      parts[1] +
-      "(/dist/(esm|js))?" +
-      (parts[2] ? "/" + parts[2] : "") +
-      "(/(components|helpers)/.*)?$"
-  );
-  return regex.test(nodeSrc);
-}
-
-/**
- *
- * @param context
- * @param {string} packageName
- * @param {string[]} specifierNames
- * @returns {{ imports, exports }} an object containing an array of imports and array of named exports
- */
-export function getFromPackage(context, packageName, specifierNames = []) {
-  const astBody = context.getSourceCode().ast.body;
-  const getSpecifiers = (nodeType) =>
-    astBody
-      .filter((node) => node?.type === nodeType)
-      .filter((node) => {
-        if (packageName.startsWith("@patternfly")) {
-          return pfPackageMatches(packageName, node?.source?.value);
-        }
-        return node?.source?.value === packageName;
-      })
-      .map((node) => node?.specifiers)
-      .reduce((acc, val) => acc.concat(val), []);
-
-  const imports = getSpecifiers("ImportDeclaration");
-  const exports = getSpecifiers("ExportNamedDeclaration");
-
-  return !specifierNames.length
-    ? { imports, exports }
-    : {
-        imports: imports.filter((s) =>
-          specifierNames?.includes(s?.imported?.name)
-        ),
-        exports: exports.filter((s) =>
-          specifierNames?.includes(s?.local?.name)
-        ),
-      };
-}
-
 export function splitSpecifiers(declaration, specifiersToSplit) {
   let keepSpecifiers = [];
 
