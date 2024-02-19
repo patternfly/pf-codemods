@@ -23,6 +23,7 @@ export const warningRules = [
   "react-dropzone-warn-upgrade",
   "table-warn-actionsColumn",
   "table-warn-thExpandType",
+  "tabs-update-markup",
   "tabs-warn-children-type-changed",
   "tooltip-warn-triggerRef-may-be-required",
   "wizard-warn-button-order",
