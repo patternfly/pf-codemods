@@ -1,3 +1,6 @@
+import { getFromPackage } from "./getFromPackage";
+import { pfPackageMatches } from "./pfPackageMatches";
+
 const evk = require("eslint-visitor-keys");
 
 export function moveSpecifiers(
