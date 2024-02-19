@@ -1,5 +1,6 @@
 import { getFromPackage } from "../../helpers";
 
+// https://github.com/patternfly/patternfly-react/pull/9930
 // https://github.com/patternfly/patternfly-react/pull/10044
 module.exports = {
   meta: { fixable: "code" },
