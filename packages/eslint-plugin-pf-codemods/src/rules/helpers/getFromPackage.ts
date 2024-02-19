@@ -55,7 +55,7 @@ function getSpecifiers<
 }
 
 export function getFromPackage(context: Rule.RuleContext, packageName: string) {
-  const astBody = context.sourceCode.ast.body;
+  const astBody = context.getSourceCode().ast.body;
 
   const imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
     astBody,
