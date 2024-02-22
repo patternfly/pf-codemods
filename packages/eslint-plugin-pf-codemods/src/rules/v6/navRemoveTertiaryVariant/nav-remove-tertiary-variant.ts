@@ -48,11 +48,9 @@ module.exports = {
                   node,
                   message:
                     'The "tertiary" Nav variant is no longer supported. Use variant="horizontal-subnav" instead.',
-                  fix(fixer: {
-                    replaceText: (arg0: any, arg1: string) => any;
-                  }) {
+                  fix: <Rule.ReportFixer>function (fixer) {
                     return fixer.replaceText(
-                      variantLiteral,
+                      variantLiteral!,
                       '"horizontal-subnav"'
                     );
                   },
