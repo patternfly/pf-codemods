@@ -19,6 +19,7 @@ export const warningRules = [
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
   "overflowMenu-warn-updated-dropdownItem",
+  "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
   "react-dropzone-warn-upgrade",
   "table-warn-actionsColumn",
