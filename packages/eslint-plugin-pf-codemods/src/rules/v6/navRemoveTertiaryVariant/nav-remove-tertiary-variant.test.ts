@@ -4,7 +4,7 @@ import * as rule from "./nav-remove-tertiary-variant";
 ruleTester.run("nav-remove-tertiary-variant", rule, {
   valid: [
     {
-      code: `<Nav variant />`,
+      code: `<Nav variant="tertiary" />`,
     },
     {
       code: `import { Nav } from '@patternfly/react-core'; <Nav someOtherProp />`,
