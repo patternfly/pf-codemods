@@ -42,10 +42,7 @@ module.exports = {
                   message: variantAttribute
                     ? `${baseMessage} Running the fix for this rule will replace an existing \`variant\` prop (which had no effect if \`isOverflowLabel\` was used).`
                     : baseMessage,
-                  fix(fixer: {
-                    replaceText: (arg0: any, arg1: string) => any;
-                    remove: (arg0: any) => any;
-                  }) {
+                  fix: <Rule.ReportFixer>function (fixer) {
                     const fixes = [
                       fixer.replaceText(
                         isOverflowLabelAttribute,
