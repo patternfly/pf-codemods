@@ -1,3 +1,5 @@
-import { Page } from "@patternfly/react-core";
+import { Page } from '@patternfly/react-core';
 
-export const PageRenameIsTertiaryNavGroupedInput = () => <Page isTertiaryNavGrouped />
+export const PageRenameIsTertiaryNavGroupedInput = () => (
+  <Page isTertiaryNavGrouped />
+);

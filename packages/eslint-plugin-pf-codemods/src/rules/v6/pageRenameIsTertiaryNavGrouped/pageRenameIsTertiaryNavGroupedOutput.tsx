@@ -1,3 +1,5 @@
-import { Page } from "@patternfly/react-core";
+import { Page } from '@patternfly/react-core';
 
-export const PageRenameIsTertiaryNavGroupedInput = () => <Page isHorizontalSubnavGrouped />
+export const PageRenameIsTertiaryNavGroupedInput = () => (
+  <Page isHorizontalSubnavGrouped />
+);

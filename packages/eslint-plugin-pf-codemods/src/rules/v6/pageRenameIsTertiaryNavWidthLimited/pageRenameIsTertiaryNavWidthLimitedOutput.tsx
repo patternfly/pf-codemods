@@ -1,3 +1,5 @@
-import { Page } from "@patternfly/react-core";
+import { Page } from '@patternfly/react-core';
 
-export const PageRenameIsTertiaryNavWidthLimitedInput = () => <Page isHorizontalSubnavWidthLimited />
+export const PageRenameIsTertiaryNavWidthLimitedInput = () => (
+  <Page isHorizontalSubnavWidthLimited />
+);
