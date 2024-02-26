@@ -1,3 +1,5 @@
-import { Avatar } from "@patternfly/react-core";
+import { Avatar } from '@patternfly/react-core';
 
-export const AvatarReplaceBorderForIsBorderedInput = () => <Avatar border={"dark"} />
+export const AvatarReplaceBorderForIsBorderedInput = () => (
+  <Avatar border={'dark'} />
+);
