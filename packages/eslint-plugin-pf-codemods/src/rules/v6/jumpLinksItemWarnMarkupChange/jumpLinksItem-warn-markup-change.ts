@@ -9,8 +9,7 @@ module.exports = {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
     const jumpLinksItemImport = imports.find(
-      (specifier: { imported: { name: string } }) =>
-        specifier.imported.name === "JumpLinksItem"
+      (specifier) => specifier.imported.name === "JumpLinksItem"
     );
 
     return !jumpLinksItemImport
@@ -20,8 +19,8 @@ module.exports = {
             if (
               node.specifiers.find(
                 (specifier) =>
-                  (specifier as ImportSpecifier)?.imported.name ===
-                  jumpLinksItemImport.imported.name
+                  specifier.type === "ImportSpecifier" &&
+                  specifier.imported.name === jumpLinksItemImport.imported.name
               )
             ) {
               context.report({
