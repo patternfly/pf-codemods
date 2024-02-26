@@ -16,6 +16,7 @@ export const warningRules = [
   "emptyState-warn-change-structure",
   "formControls-updated-markup",
   "horizontalSubnav-warn-ariaLabel",
+  "jumpLinksItem-warn-markup-change",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
   "overflowMenu-warn-updated-dropdownItem",

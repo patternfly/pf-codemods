@@ -1,34 +1,28 @@
 import { getFromPackage } from "../../helpers";
+import { Rule } from "eslint";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9848
 module.exports = {
   meta: {},
-  create: function (context: {
-    report: (arg0: {
-      node: any;
-      message: string;
-      fix?(fixer: any): any;
-    }) => void;
-  }) {
+  create: function (context: Rule.RuleContext) {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    const componentImports = imports.filter(
-      (specifier: { imported: { name: string } }) =>
-        specifier.imported.name === "PageSection"
+    const pageSectionImport = imports.find(
+      (specifier) => specifier.imported.name === "PageSection"
     );
 
-    return !componentImports.length
+    return !pageSectionImport
       ? {}
       : {
-          JSXOpeningElement(node: { name: { name: any }; attributes: any[] }) {
+          JSXOpeningElement(node: JSXOpeningElement) {
             if (
-              componentImports
-                .map((imp: { local: { name: any } }) => imp.local.name)
-                .includes(node.name.name)
+              node.name.type === "JSXIdentifier" &&
+              pageSectionImport.local.name === node.name.name
             ) {
               const attribute = node.attributes.find(
-                (attr: { name: { name: string } }) =>
-                  attr.name?.name === "variant"
+                (attr) =>
+                  attr.type === "JSXAttribute" && attr.name.name === "variant"
               );
               if (attribute) {
                 context.report({
