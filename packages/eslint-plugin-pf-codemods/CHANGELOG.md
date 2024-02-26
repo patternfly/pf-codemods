@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.86.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.85.1...@patternfly/eslint-plugin-pf-codemods@1.86.0) (2024-02-26)
+
+
+### Features
+
+* **JumpLinks:** warned about href and markup/type updates ([#575](https://github.com/patternfly/pf-codemods/issues/575)) ([0af1541](https://github.com/patternfly/pf-codemods/commit/0af1541ef2613bfb3c6c4be0ff6c84603d1108d2))
+
+
+
+
+
 ## [1.85.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.85.0...@patternfly/eslint-plugin-pf-codemods@1.85.1) (2024-02-21)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
