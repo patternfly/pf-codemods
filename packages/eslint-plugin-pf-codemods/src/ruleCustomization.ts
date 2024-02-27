@@ -21,6 +21,7 @@ export const warningRules = [
   "horizontalSubnav-warn-ariaLabel",
   "jumpLinksItem-warn-markup-change",
   "label-warn-truncated-default",
+  "menuToggle-warn-iconOnly-toggle",
   "nav-warn-flyouts-now-inline",
   "overflowMenu-warn-updated-dropdownItem",
   "pageSection-warn-variantClasses-applied",
