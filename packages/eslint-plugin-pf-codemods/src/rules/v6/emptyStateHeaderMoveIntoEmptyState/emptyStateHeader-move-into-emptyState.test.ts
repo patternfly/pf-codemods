@@ -113,7 +113,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState. You must manually supply a titleText prop, then you can rerun this codemod.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState. You must manually supply a titleText prop to EmptyState, then you can rerun this codemod.`,
           type: "JSXElement",
         },
       ],
@@ -168,7 +168,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState. You must manually supply a titleText prop.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState. You must manually supply a titleText prop to EmptyState.`,
           type: "JSXElement",
         },
       ],
