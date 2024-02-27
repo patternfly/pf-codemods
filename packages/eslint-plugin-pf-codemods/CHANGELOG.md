@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.87.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.86.0...@patternfly/eslint-plugin-pf-codemods@1.87.0) (2024-02-27)
+
+
+### Features
+
+* **Label:** replace isOverflowLabel with variant="overflow" ([#580](https://github.com/patternfly/pf-codemods/issues/580)) ([1f856e5](https://github.com/patternfly/pf-codemods/commit/1f856e5b7f7fe703f064def93ed52fe3ea271194))
+
+
+
+
+
 # [1.86.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.85.1...@patternfly/eslint-plugin-pf-codemods@1.86.0) (2024-02-26)
 
 
