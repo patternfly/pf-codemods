@@ -15,4 +15,3 @@ Out:
 ```jsx
 %outputExample%
 ```
-
