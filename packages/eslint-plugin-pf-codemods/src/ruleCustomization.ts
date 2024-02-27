@@ -23,6 +23,7 @@ export const warningRules = [
   "label-warn-truncated-default",
   "menuToggle-warn-iconOnly-toggle",
   "nav-warn-flyouts-now-inline",
+  "notificationBadge-warn-markup-change",
   "overflowMenu-warn-updated-dropdownItem",
   "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
