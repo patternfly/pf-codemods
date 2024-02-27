@@ -19,6 +19,7 @@ export const warningRules = [
   "jumpLinksItem-warn-markup-change",
   "label-warn-truncated-default",
   "nav-warn-flyouts-now-inline",
+  "notificationBadge-warn-markup-change",
   "overflowMenu-warn-updated-dropdownItem",
   "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
