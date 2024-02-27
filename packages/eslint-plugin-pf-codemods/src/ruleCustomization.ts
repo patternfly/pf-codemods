@@ -44,6 +44,7 @@ export const warningRules = [
 // rules that will run before other rules (move to deprecated?)
 export const setupRules = [
   "applicationLauncher-deprecated",
+  "chip-deprecated",
   "contextSelector-update-deprecatedPath",
   "dropdown-update-deprecatedPath",
   "datalist-remove-selectableRow",

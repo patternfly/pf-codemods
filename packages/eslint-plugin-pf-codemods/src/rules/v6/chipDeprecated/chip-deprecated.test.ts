@@ -4,20 +4,17 @@ import * as rule from './chip-deprecated';
 ruleTester.run('chip-deprecated', rule, {
   valid: [
     {
-      code: `<Chip  />`,
-    },
-    {
-      code: `import { Chip } from '@patternfly/react-core'; <Chip someOtherProp />`,
+      code: `import { Chip } from '@someOtherPackage';`,
     },
   ],
   invalid: [
     {
-      code: `import { Chip } from '@patternfly/react-core'; <Chip  />`,
-      output: `import { Chip } from '@patternfly/react-core/deprecated'; <Chip  />`,
+      code: `import { Chip } from '@patternfly/react-core';`,
+      output: `import { Chip } from '@patternfly/react-core/deprecated';`,
       errors: [
         {
-          message: `Chip has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Label.`,
-          type: 'JSXOpeningElement',
+          message: `Chip has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Label instead.`,
+          type: 'ImportDeclaration',
         },
       ],
     },
