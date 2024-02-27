@@ -1,3 +1,11 @@
 import { Card } from "@patternfly/react-core";
 
-export const CardRemoveVariousPropsInput = () => <Card />;
+export const CardRemoveVariousPropsInput = () => (
+  <Card
+    
+    
+    
+    
+    
+  />
+);
