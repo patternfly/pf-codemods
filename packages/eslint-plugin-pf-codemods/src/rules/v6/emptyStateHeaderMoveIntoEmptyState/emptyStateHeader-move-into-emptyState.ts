@@ -4,10 +4,7 @@ import {
   ImportDeclaration,
   ImportSpecifier,
   JSXAttribute,
-  Literal,
   Node,
-  Expression,
-  ClassExpression,
   JSXText,
   JSXExpressionContainer,
   JSXSpreadChild,
@@ -25,24 +22,24 @@ module.exports = {
     const pkg = "@patternfly/react-core";
     const { imports } = getFromPackage(context, pkg);
 
-    function allOfType(nodes: Node[], type: string) {
-      return nodes.every((specifier) => specifier.type === type);
-    }
+    const allOfType = (nodes: Node[], type: string) =>
+      nodes.every((specifier) => specifier.type === type);
 
     const includesImport = (
       arr: ImportDeclaration["specifiers"],
       targetImport: string
-    ) =>
-      arr.some(
+    ) => {
+      if (!allOfType(arr, "ImportSpecifier")) {
+        return false;
+      }
+
+      return arr.some(
         (specifier) =>
-          allOfType(arr, "ImportSpecifier") &&
           (specifier as ImportSpecifier).imported.name === targetImport
       );
+    };
 
-    if (
-      !includesImport(imports, "EmptyStateHeader") ||
-      !includesImport(imports, "EmptyState")
-    ) {
+    if (!includesImport(imports, "EmptyState")) {
       return {};
     }
 
@@ -101,6 +98,10 @@ module.exports = {
         return value.value;
       }
 
+      if (value.type === "JSXExpressionContainer") {
+        return context.getSourceCode().getText(value.expression);
+      }
+
       return "";
     };
 
@@ -135,20 +136,21 @@ module.exports = {
     };
 
     return {
-      ImportDeclaration(node: ImportDeclaration) {
-        if (
-          !pfPackageMatches(pkg, node.source.value) ||
-          !includesImport(node.specifiers, "EmptyStateHeader")
-        ) {
-          return;
-        }
-      },
       JSXElement(node: JSXElement) {
         if (!isComponentNode(node, "EmptyState")) {
           return;
         }
 
         const header = getChildElementByName("EmptyStateHeader", node);
+        const emptyStateTitleTextAttribute = getAttribute(node, "titleText");
+
+        if (!header && !emptyStateTitleTextAttribute) {
+          context.report({
+            node,
+            message: `${baseMessage} You must manually supply a titleText prop to EmptyState.`,
+          });
+          return;
+        }
 
         if (!header || header.type !== "JSXElement") {
           return;
@@ -165,7 +167,7 @@ module.exports = {
         if (!titleTextAttribute && !headerChildren.length) {
           context.report({
             node,
-            message: `${baseMessage} You must manually supply a titleText prop, then you can rerun this codemod.`,
+            message: `${baseMessage} You must manually supply a titleText prop to EmptyState, then you can rerun this codemod.`,
           });
           return;
         }
@@ -202,8 +204,12 @@ module.exports = {
           emptyStateIconComponent &&
           getAttribute(emptyStateIconComponent, "icon");
 
-        const emptyStateIconComponentColorAttribute = emptyStateIconComponent && getAttribute(emptyStateIconComponent, "color");
-        const emptyStateIconComponentColor = getAttributeText(emptyStateIconComponentColorAttribute);
+        const emptyStateIconComponentColorAttribute =
+          emptyStateIconComponent &&
+          getAttribute(emptyStateIconComponent, "color");
+        const emptyStateIconComponentColor = getAttributeText(
+          emptyStateIconComponentColorAttribute
+        );
 
         if (emptyStateIconComponentColor) {
           context.report({

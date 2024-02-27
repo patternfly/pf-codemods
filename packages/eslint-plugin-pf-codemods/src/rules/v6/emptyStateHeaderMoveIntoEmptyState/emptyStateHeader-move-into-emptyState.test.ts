@@ -149,6 +149,31 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       ],
     },
     {
+      // without an EmptyStateHeader or titleText
+      code: `import { EmptyState } from "@patternfly/react-core";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          Foo bar
+        </EmptyState>
+      );
+      `,
+      output: `import { EmptyState } from "@patternfly/react-core";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          Foo bar
+        </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState. You must manually supply a titleText prop.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
       // with both titleText and children
       code: `import {
         EmptyState,
