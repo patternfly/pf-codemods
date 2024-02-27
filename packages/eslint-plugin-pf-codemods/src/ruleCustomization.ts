@@ -4,6 +4,7 @@ export const betaRuleNames: string[] = [];
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
 export const warningRules = [
   "aboutModalBoxHero-remove-subcomponent",
+  "accordionItem-warn-update-markup",
   "applicationLauncher-warn-input",
   "card-deprecate-props",
   "card-warn-component",
