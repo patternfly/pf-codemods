@@ -14,7 +14,7 @@ ruleTester.run('notificationBadge-warn-markup-change', rule, {
       errors: [
         {
           message: `The markup for NotificationBadge has changed, as it now uses stateful button internally.`,
-          type: 'JSXOpeningElement',
+          type: 'ImportDeclaration',
         },
       ],
     },
