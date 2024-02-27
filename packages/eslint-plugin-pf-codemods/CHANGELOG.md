@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.88.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.87.0...@patternfly/eslint-plugin-pf-codemods@1.88.0) (2024-02-27)
+
+
+### Features
+
+* **Button:** Rename isActive to isClicked ([#567](https://github.com/patternfly/pf-codemods/issues/567)) ([c3416bb](https://github.com/patternfly/pf-codemods/commit/c3416bbbbbbaee5679327eb5409299955ed09a02))
+
+
+
+
+
 # [1.87.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.86.0...@patternfly/eslint-plugin-pf-codemods@1.87.0) (2024-02-27)
 
 
