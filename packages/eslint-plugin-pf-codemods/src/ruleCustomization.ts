@@ -1,5 +1,6 @@
 // if you want your rule to only run when explicitly called for using the --only flag, add the rule name to the below array
 export const betaRuleNames: string[] = [
+  "formGroup-rename-labelIcon",
   "menuItemAction-warn-update-markup",
   "menuToggle-warn-iconOnly-toggle",
 ];
