@@ -1,33 +1,25 @@
 import { getFromPackage } from "../../helpers";
+import { Rule } from "eslint";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/10029
 module.exports = {
   meta: { fixable: "code" },
-  create: function (context: {
-    report: (arg0: {
-      node: any;
-      message: string;
-      fix?(fixer: any): any;
-    }) => void;
-  }) {
-    const { imports, exports } = getFromPackage(
-      context,
-      "@patternfly/react-core"
-    );
+  create: function (context: Rule.RuleContext) {
+    const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    const componentImports = imports.filter(
+    const helperTextItemImport = imports.find(
       (specifier: { imported: { name: string } }) =>
         specifier.imported.name === "HelperTextItem"
     );
 
-    return !componentImports.length
+    return !helperTextItemImport
       ? {}
       : {
-          JSXOpeningElement(node: { name: { name: any }; attributes: any[] }) {
+          JSXOpeningElement(node: JSXOpeningElement) {
             if (
-              componentImports
-                .map((imp: { local: { name: any } }) => imp.local.name)
-                .includes(node.name.name)
+              node.name.type === "JSXIdentifier" &&
+              helperTextItemImport.local.name === node.name.name
             ) {
               context.report({
                 node,
