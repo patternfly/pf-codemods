@@ -10,7 +10,7 @@ ruleTester.run('chip-deprecated', rule, {
   invalid: [
     {
       code: `import { Chip } from '@patternfly/react-core';`,
-      output: `import { Chip } from '@patternfly/react-core/deprecated';`,
+      output: `import {\n\tChip\n} from '@patternfly/react-core/deprecated';`,
       errors: [
         {
           message: `Chip has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Label instead.`,
