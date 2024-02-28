@@ -88,25 +88,11 @@ module.exports = {
     };
 
     const getAttributeValueText = (attribute?: JSXAttribute) => {
-      console.log("attribute", attribute);
       if (!attribute || !attribute.value) {
         return "";
       }
 
-      const { value } = attribute;
-
-      if (value.type === "Literal") {
-        return `"${value.value}"`;
-      }
-
-      if (
-        value.type === "JSXExpressionContainer" &&
-        value.expression.type === "Literal"
-      ) {
-        return `{"${value.expression.value}"}`;
-      }
-
-      return "";
+      return context.getSourceCode().getText(attribute.value);
     };
 
     const getNodesText = (nodes: Node[]) => {
