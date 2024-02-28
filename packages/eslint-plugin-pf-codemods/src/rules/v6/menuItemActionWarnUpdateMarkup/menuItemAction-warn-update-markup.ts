@@ -2,17 +2,17 @@ import { getFromPackage } from "../../helpers";
 import { Rule } from "eslint";
 import { ImportDeclaration } from "estree-jsx";
 
-// https://github.com/patternfly/patternfly-react/pull/10027
+// https://github.com/patternfly/patternfly-react/pull/10089
 module.exports = {
   meta: {},
   create: function (context: Rule.RuleContext) {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    const jumpLinksItemImport = imports.find(
-      (specifier) => specifier.imported.name === "JumpLinksItem"
+    const menuItemActionImport = imports.find(
+      (specifier) => specifier.imported.name === "MenuItemAction"
     );
 
-    return !jumpLinksItemImport
+    return !menuItemActionImport
       ? {}
       : {
           ImportDeclaration(node: ImportDeclaration) {
@@ -20,13 +20,13 @@ module.exports = {
               node.specifiers.find(
                 (specifier) =>
                   specifier.type === "ImportSpecifier" &&
-                  specifier.imported.name === jumpLinksItemImport.imported.name
+                  specifier.imported.name === menuItemActionImport.imported.name
               )
             ) {
               context.report({
                 node,
                 message:
-                  "The markup for JumpLinksItem has changed, as it now uses our Button component internally. Additionally, the `onClick` prop type has been updated to just `React.MouseEvent` (previously `React.MouseEvent<HTMLAnchorElement>`).",
+                  "The markup for MenuItemAction has been updated. It now uses our Button component internally, has a wrapper around the action button, and no longer renders an icon wrapper inside the action button.",
               });
             }
           },
