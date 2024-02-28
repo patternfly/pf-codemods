@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.89.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.88.0...@patternfly/eslint-plugin-pf-codemods@1.89.0) (2024-02-28)
+
+
+### Features
+
+* **Accordion:** updates props ([#569](https://github.com/patternfly/pf-codemods/issues/569)) ([fee9102](https://github.com/patternfly/pf-codemods/commit/fee9102229b9eefe7b5a5f8387451486c3b9c9d7))
+* **Card:** Remove deprecated and unused props ([#591](https://github.com/patternfly/pf-codemods/issues/591)) ([3d0cbb1](https://github.com/patternfly/pf-codemods/commit/3d0cbb11a5fdba8977ec8da6ef51ae2a710658af))
+* **Drawer:** removed and updated props ([#574](https://github.com/patternfly/pf-codemods/issues/574)) ([b077584](https://github.com/patternfly/pf-codemods/commit/b07758416fe7594baf3f826f296ba422e2896869))
+* **EmptyState:** Add rule to move EmptyStateHeader into EmptyState ([#582](https://github.com/patternfly/pf-codemods/issues/582)) ([23968dd](https://github.com/patternfly/pf-codemods/commit/23968dd9095384d812bd569385e70ac212f55a65))
+* **HelperTextItem:** added rule for prop removals and updates ([#572](https://github.com/patternfly/pf-codemods/issues/572)) ([0d42b51](https://github.com/patternfly/pf-codemods/commit/0d42b51976df37507d9d776cde6c76e135ebd53f))
+* **Menu:** updated markup for MenuItemAction ([#590](https://github.com/patternfly/pf-codemods/issues/590)) ([2fa045b](https://github.com/patternfly/pf-codemods/commit/2fa045be06f698ec03d649e3294c3d6c3476a086))
+* **MenuToggle:** updated recommended icon usage ([#586](https://github.com/patternfly/pf-codemods/issues/586)) ([72806cd](https://github.com/patternfly/pf-codemods/commit/72806cdf4b93004c419670c2344031d3ed22418b))
+* **Nav:** props updates ([#585](https://github.com/patternfly/pf-codemods/issues/585)) ([3a78b8a](https://github.com/patternfly/pf-codemods/commit/3a78b8acf9d55c51aaf7be932913d8e200847072))
+* **SimpleFileUpload:** added rule to warn about component changes ([#570](https://github.com/patternfly/pf-codemods/issues/570)) ([fa19da5](https://github.com/patternfly/pf-codemods/commit/fa19da5392f2c8be1975e10d60a3e9be7d4daf77))
+* **Tabs:** updated props and markup ([#578](https://github.com/patternfly/pf-codemods/issues/578)) ([1f246aa](https://github.com/patternfly/pf-codemods/commit/1f246aa5673f2610715776df14408ad3eb573d6e))
+
+
+
+
+
 # [1.88.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.87.0...@patternfly/eslint-plugin-pf-codemods@1.88.0) (2024-02-27)
 
 
