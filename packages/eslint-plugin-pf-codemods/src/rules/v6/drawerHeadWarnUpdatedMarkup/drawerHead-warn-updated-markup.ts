@@ -1,30 +1,25 @@
 import { getFromPackage } from "../../helpers";
+import { Rule } from "eslint";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/10036
 module.exports = {
   meta: {},
-  create: function (context: {
-    report: (arg0: {
-      node: any;
-      message: string;
-      fix?(fixer: any): any;
-    }) => void;
-  }) {
+  create: function (context: Rule.RuleContext) {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    const componentImports = imports.filter(
+    const drawerHeadImport = imports.find(
       (specifier: { imported: { name: string } }) =>
         specifier.imported.name === "DrawerHead"
     );
 
-    return !componentImports.length
+    return !drawerHeadImport
       ? {}
       : {
-          JSXOpeningElement(node: { name: { name: any }; attributes: any[] }) {
+          JSXOpeningElement(node: JSXOpeningElement) {
             if (
-              componentImports
-                .map((imp: { local: { name: any } }) => imp.local.name)
-                .includes(node.name.name)
+              node.name.type === "JSXIdentifier" &&
+              drawerHeadImport.local.name === node.name.name
             ) {
               context.report({
                 node,

@@ -1,15 +1,11 @@
 import { getFromPackage } from "../../helpers";
+import { Rule } from "eslint";
+import { ImportDeclaration } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/10044
 module.exports = {
   meta: { fixable: "code" },
-  create: function (context: {
-    report: (arg0: {
-      node: any;
-      message: string;
-      fix?(fixer: any): any;
-    }) => void;
-  }) {
+  create: function (context: Rule.RuleContext) {
     const { imports, exports } = getFromPackage(
       context,
       "@patternfly/react-core"
@@ -23,12 +19,11 @@ module.exports = {
     return !tabsImport
       ? {}
       : {
-          ImportDeclaration(node: {
-            specifiers: { imported: { name: string } }[];
-          }) {
+          ImportDeclaration(node: ImportDeclaration) {
             if (
               node.specifiers.find(
-                (specifier: { imported: { name: string } }) =>
+                (specifier) =>
+                  specifier.type === "ImportSpecifier" &&
                   specifier.imported.name === tabsImport.imported.name
               )
             ) {
