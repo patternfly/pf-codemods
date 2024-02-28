@@ -88,6 +88,7 @@ module.exports = {
     };
 
     const getAttributeValueText = (attribute?: JSXAttribute) => {
+      console.log("attribute", attribute);
       if (!attribute || !attribute.value) {
         return "";
       }
@@ -95,11 +96,14 @@ module.exports = {
       const { value } = attribute;
 
       if (value.type === "Literal") {
-        return value.value;
+        return `"${value.value}"`;
       }
 
-      if (value.type === "JSXExpressionContainer") {
-        return context.getSourceCode().getText(value.expression);
+      if (
+        value.type === "JSXExpressionContainer" &&
+        value.expression.type === "Literal"
+      ) {
+        return `{"${value.expression.value}"}`;
       }
 
       return "";
@@ -185,7 +189,7 @@ module.exports = {
         );
 
         const headingClassName = headingClassNameValue
-          ? `headerClassName="${headingClassNameValue}"`
+          ? `headerClassName=${headingClassNameValue}`
           : "";
         const headingLevel = getAttributeText(headingLevelAttribute);
         const titleClassName = getAttributeText(titleClassNameAttribute);
