@@ -16,7 +16,7 @@ ruleTester.run('avatar-replace-border-for-isBordered', rule, {
       output: `import { Avatar } from '@patternfly/react-core'; <Avatar isBordered />`,
       errors: [
         {
-          message: `border prop has been removed since light and dark borders are no longer supported. isBordered prop was added to add a border to avatar.`,
+          message: `border prop has been removed from Avatar since theming is not longer handled React-side. We recommend using the isBordered prop instead to add a border to Avatar.`,
           type: 'JSXOpeningElement',
         },
       ],
