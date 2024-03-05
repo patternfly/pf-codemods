@@ -1,6 +1,6 @@
 import { getFromPackage, findElementAncestor } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement, JSXElement } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9876
 module.exports = {
