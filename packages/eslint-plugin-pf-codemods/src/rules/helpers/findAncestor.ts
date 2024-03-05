@@ -1,13 +1,13 @@
-import { JSXElement, JSXOpeningElement } from "estree-jsx";
+import { Node } from "estree-jsx";
 
-type ElementWithParent = (JSXOpeningElement | JSXElement) & {
-  parent?: ElementWithParent | null;
+type NodeWithParent = Node & {
+  parent?: NodeWithParent | null;
 };
 
-export function findElementAncestor(
-  node: ElementWithParent,
-  ancestorNameToFind: string
-): JSXElement | undefined {
+export function findAncestor(
+  node: NodeWithParent,
+  conditionCallback: (_current: NodeWithParent) => boolean
+) {
   if (!node) {
     return;
   }
@@ -15,11 +15,7 @@ export function findElementAncestor(
   let current = node.parent;
 
   while (current) {
-    if (
-      current.type === "JSXElement" &&
-      current.openingElement.name.type === "JSXIdentifier" &&
-      current.openingElement.name.name === ancestorNameToFind
-    ) {
+    if (conditionCallback(current)) {
       return current;
     }
 

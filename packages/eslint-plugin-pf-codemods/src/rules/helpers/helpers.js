@@ -1,5 +1,6 @@
 import { getFromPackage } from "./getFromPackage";
 import { pfPackageMatches } from "./pfPackageMatches";
+import { findAncestor } from "./findAncestor";
 
 const evk = require("eslint-visitor-keys");
 

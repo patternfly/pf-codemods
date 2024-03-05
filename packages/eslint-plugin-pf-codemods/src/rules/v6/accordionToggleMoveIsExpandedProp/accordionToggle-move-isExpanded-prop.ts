@@ -1,6 +1,6 @@
-import { getFromPackage, findElementAncestor } from "../../helpers";
+import { getFromPackage, findAncestor } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement } from "estree-jsx";
+import { JSXElement, JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9876
 module.exports = {
@@ -36,10 +36,13 @@ module.exports = {
                 message:
                   "The `isExpanded` prop for AccordionToggle has been moved to AccordionItem.",
                 fix(fixer) {
-                  const accordionItemAncestor = findElementAncestor(
+                  const accordionItemAncestor = findAncestor(
                     node,
-                    "AccordionItem"
-                  );
+                    (current) =>
+                      current.type === "JSXElement" &&
+                      current.openingElement.name.type === "JSXIdentifier" &&
+                      current.openingElement.name.name === "AccordionItem"
+                  ) as JSXElement | undefined;
                   const attributeValue = context
                     .getSourceCode()
                     .getText(attribute);
