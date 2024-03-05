@@ -6,18 +6,17 @@ import {
   JSXFragment,
   Node,
 } from "estree-jsx";
-import { getFromPackage } from "../../helpers";
 import {
+  getAttribute,
   getAttributeText,
   getAttributeValueText,
-  getNodesText,
-} from "../../helpers/getText";
-import { includesImport } from "../../helpers/includesImport";
-import {
   getChildElementByName,
+  getNodesText,
+  getExpression,
+  getFromPackage,
+  includesImport,
   nodeIsComponentNamed,
-} from "../../helpers/JSXElements";
-import { getAttribute, getExpression } from "../../helpers/JSXAttributes";
+} from "../../helpers";
 
 const baseMessage =
   "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.";
