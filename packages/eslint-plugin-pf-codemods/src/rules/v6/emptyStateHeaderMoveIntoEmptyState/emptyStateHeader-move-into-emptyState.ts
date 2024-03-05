@@ -101,28 +101,33 @@ module.exports = {
         .join("");
     };
 
-    const getElementChildText = (children: JSXElement["children"]) => {
+    const getChildrenText = (children: JSXElement["children"]) => {
       if (!children.length) {
         return "";
       }
 
-      switch (children[0].type) {
-        case "JSXText":
-          return (children as JSXText[]).map((child) => child.value).join("");
-        case "JSXExpressionContainer":
-        case "JSXSpreadChild":
-          return getNodesText(
-            children.map(
-              (child) =>
-                (child as JSXExpressionContainer | JSXSpreadChild).expression
-            )
-          );
-        case "JSXElement":
-        case "JSXFragment":
-          return getNodesText(children as JSXElement[] | JSXFragment[]);
-        default:
-          return "";
+      if (children.length === 1 && children[0].type === "JSXText") {
+        return `"${children[0].value.trim()}"`;
       }
+
+      const potentialSingleChild = children.filter(
+        (child) => !(child.type === "JSXText" && child.value.trim() === "")
+      );
+
+      if (potentialSingleChild.length === 1) {
+        const singleChild = potentialSingleChild[0];
+        const singleChildText = context
+          .getSourceCode()
+          .getText(
+            singleChild as JSXExpressionContainer | JSXElement | JSXFragment
+          );
+
+        return singleChild.type === "JSXExpressionContainer"
+          ? singleChildText
+          : `{${singleChildText}}`;
+      }
+
+      return `{<>${getNodesText(children as Node[])}</>}`;
     };
 
     return {
@@ -182,8 +187,7 @@ module.exports = {
         const titleTextPropValue = getAttributeText(titleTextAttribute);
 
         const titleText =
-          titleTextPropValue ||
-          `titleText="${getElementChildText(headerChildren)}"`;
+          titleTextPropValue || `titleText=${getChildrenText(headerChildren)}`;
 
         const iconPropValue = getExpressionValue(headerIconAttribute?.value);
 
