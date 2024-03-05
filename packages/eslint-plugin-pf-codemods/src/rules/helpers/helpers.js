@@ -880,17 +880,3 @@ export function findVariableDeclaration(name, scope) {
   }
   return undefined;
 }
-
-export function findAncestor(node, conditionCallback = (_current) => false) {
-  let current = node?.parent;
-
-  while (current) {
-    if (conditionCallback(current)) {
-      return current;
-    }
-
-    current = current.parent;
-  }
-
-  return undefined;
-}
