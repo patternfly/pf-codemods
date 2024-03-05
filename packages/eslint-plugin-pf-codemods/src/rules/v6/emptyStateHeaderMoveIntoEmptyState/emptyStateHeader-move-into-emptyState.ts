@@ -1,16 +1,23 @@
 import { AST, Rule } from "eslint";
 import {
-  JSXElement,
-  ImportDeclaration,
   ImportSpecifier,
-  JSXAttribute,
-  Node,
-  JSXText,
+  JSXElement,
   JSXExpressionContainer,
-  JSXSpreadChild,
   JSXFragment,
+  Node,
 } from "estree-jsx";
-import { getFromPackage, pfPackageMatches } from "../../helpers";
+import { getFromPackage } from "../../helpers";
+import {
+  getAttributeText,
+  getAttributeValueText,
+  getNodesText,
+} from "../../helpers/getText";
+import { includesImport } from "../../helpers/includesImport";
+import {
+  getChildElementByName,
+  nodeIsComponentNamed,
+} from "../../helpers/JSXElements";
+import { getAttribute, getExpression } from "../../helpers/JSXAttributes";
 
 const baseMessage =
   "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.";
@@ -22,121 +29,17 @@ module.exports = {
     const pkg = "@patternfly/react-core";
     const { imports } = getFromPackage(context, pkg);
 
-    const allOfType = (nodes: Node[], type: string) =>
-      nodes.every((specifier) => specifier.type === type);
-
-    const includesImport = (
-      arr: ImportDeclaration["specifiers"],
-      targetImport: string
-    ) => {
-      if (!allOfType(arr, "ImportSpecifier")) {
-        return false;
-      }
-
-      return arr.some(
-        (specifier) =>
-          (specifier as ImportSpecifier).imported.name === targetImport
-      );
-    };
-
     if (!includesImport(imports, "EmptyState")) {
       return {};
     }
 
-    const getChildElementByName = (name: string, node: JSXElement) =>
-      node.children?.find(
-        (child) =>
-          child.type === "JSXElement" &&
-          child.openingElement.name.type === "JSXIdentifier" &&
-          child.openingElement.name.name === name
-      );
-
-    const isComponentNode = (node: JSXElement, componentName: string) => {
-      if (node.openingElement.name.type === "JSXIdentifier") {
-        return node.openingElement.name.name === componentName;
-      }
-
-      return false;
-    };
-
-    const getAttribute = (
-      node: JSXElement,
-      attributeName: string
-    ): JSXAttribute | undefined => {
-      const attributes = node.openingElement.attributes.filter(
-        (attr) => attr.type === "JSXAttribute"
-      ) as JSXAttribute[];
-      return attributes.find((attr) => attr.name.name === attributeName);
-    };
-
-    const getExpressionValue = (node?: JSXAttribute["value"]) => {
-      if (!node) {
-        return;
-      }
-
-      if (node.type === "JSXExpressionContainer") {
-        return node.expression;
-      }
-    };
-
-    const getAttributeText = (attribute?: JSXAttribute) => {
-      if (!attribute) {
-        return "";
-      }
-
-      return context.getSourceCode().getText(attribute);
-    };
-
-    const getAttributeValueText = (attribute?: JSXAttribute) => {
-      if (!attribute || !attribute.value) {
-        return "";
-      }
-
-      return context.getSourceCode().getText(attribute.value);
-    };
-
-    const getNodesText = (nodes: Node[]) => {
-      return nodes
-        .map((node) => context.getSourceCode().getText(node))
-        .join("");
-    };
-
-    const getChildrenText = (children: JSXElement["children"]) => {
-      if (!children.length) {
-        return "";
-      }
-
-      if (children.length === 1 && children[0].type === "JSXText") {
-        return `"${children[0].value.trim()}"`;
-      }
-
-      const potentialSingleChild = children.filter(
-        (child) => !(child.type === "JSXText" && child.value.trim() === "")
-      );
-
-      if (potentialSingleChild.length === 1) {
-        const singleChild = potentialSingleChild[0];
-        const singleChildText = context
-          .getSourceCode()
-          .getText(
-            singleChild as JSXExpressionContainer | JSXElement | JSXFragment
-          );
-
-        return singleChild.type === "JSXExpressionContainer"
-          ? singleChildText
-          : `{${singleChildText}}`;
-      }
-
-      return `{<>${getNodesText(children as Node[])}</>}`;
-    };
-
     return {
       JSXElement(node: JSXElement) {
-        if (!isComponentNode(node, "EmptyState")) {
+        if (!nodeIsComponentNamed(node, "EmptyState")) {
           return;
         }
 
-        const header = getChildElementByName("EmptyStateHeader", node);
+        const header = getChildElementByName(node, "EmptyStateHeader");
         const emptyStateTitleTextAttribute = getAttribute(node, "titleText");
 
         if (!header && !emptyStateTitleTextAttribute) {
@@ -176,20 +79,56 @@ module.exports = {
         }
 
         const headingClassNameValue = getAttributeValueText(
+          context,
           headingClassNameAttribute
         );
 
         const headingClassName = headingClassNameValue
           ? `headerClassName=${headingClassNameValue}`
           : "";
-        const headingLevel = getAttributeText(headingLevelAttribute);
-        const titleClassName = getAttributeText(titleClassNameAttribute);
-        const titleTextPropValue = getAttributeText(titleTextAttribute);
+        const headingLevel = getAttributeText(context, headingLevelAttribute);
+        const titleClassName = getAttributeText(
+          context,
+          titleClassNameAttribute
+        );
+        const titleTextPropValue = getAttributeText(
+          context,
+          titleTextAttribute
+        );
+
+        const getChildrenText = (children: JSXElement["children"]) => {
+          if (!children.length) {
+            return "";
+          }
+
+          if (children.length === 1 && children[0].type === "JSXText") {
+            return `"${children[0].value.trim()}"`;
+          }
+
+          const potentialSingleChild = children.filter(
+            (child) => !(child.type === "JSXText" && child.value.trim() === "")
+          );
+
+          if (potentialSingleChild.length === 1) {
+            const singleChild = potentialSingleChild[0];
+            const singleChildText = context
+              .getSourceCode()
+              .getText(
+                singleChild as JSXExpressionContainer | JSXElement | JSXFragment
+              );
+
+            return singleChild.type === "JSXExpressionContainer"
+              ? singleChildText
+              : `{${singleChildText}}`;
+          }
+
+          return `{<>${getNodesText(context, children as Node[])}</>}`;
+        };
 
         const titleText =
           titleTextPropValue || `titleText=${getChildrenText(headerChildren)}`;
 
-        const iconPropValue = getExpressionValue(headerIconAttribute?.value);
+        const iconPropValue = getExpression(headerIconAttribute?.value);
 
         const emptyStateIconComponent =
           iconPropValue?.type === "JSXElement" ? iconPropValue : undefined;
@@ -202,6 +141,7 @@ module.exports = {
           emptyStateIconComponent &&
           getAttribute(emptyStateIconComponent, "color");
         const emptyStateIconComponentColor = getAttributeText(
+          context,
           emptyStateIconComponentColorAttribute
         );
 
