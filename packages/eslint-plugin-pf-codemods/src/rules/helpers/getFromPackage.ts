@@ -54,19 +54,32 @@ function getSpecifiers<
   );
 }
 
-export function getFromPackage(context: Rule.RuleContext, packageName: string) {
+export function getFromPackage(
+  context: Rule.RuleContext,
+  packageName: string,
+  specifierNames?: string[]
+) {
   const astBody = context.getSourceCode().ast.body;
 
-  const imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
+  let imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
     astBody,
     "ImportDeclaration",
     packageName
   );
-  const exports = getSpecifiers<ExportNamedDeclaration, ExportSpecifier>(
+  let exports = getSpecifiers<ExportNamedDeclaration, ExportSpecifier>(
     astBody,
     "ExportNamedDeclaration",
     packageName
   );
+
+  if (specifierNames) {
+    imports = imports.filter((specifier) =>
+      specifierNames?.includes(specifier.imported.name)
+    );
+    exports = exports.filter((specifier) =>
+      specifierNames?.includes(specifier.exported.name)
+    );
+  }
 
   return { imports, exports };
 }
