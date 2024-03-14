@@ -5,6 +5,7 @@ import {
   getAttributeText,
   getAttributeValueText,
   getChildElementByName,
+  getDefaultImportsFromPackage,
   getExpression,
   getFromPackage,
   includesImport,
@@ -98,8 +99,48 @@ module.exports = {
 
         const iconPropValue = getExpression(headerIconAttribute?.value);
 
-        const emptyStateIconComponent =
-          iconPropValue?.type === "JSXElement" ? iconPropValue : undefined;
+        const iconElementIdentifier =
+          iconPropValue?.type === "JSXElement" &&
+          iconPropValue.openingElement.name.type === "JSXIdentifier"
+            ? iconPropValue.openingElement.name
+            : undefined;
+
+        const iconPropIsEmptyStateIconComponent = () => {
+          const emptyStateIconImport = imports.find(
+            (specifier) => specifier.imported.name === "EmptyStateIcon"
+          );
+
+          return (
+            iconElementIdentifier?.name === emptyStateIconImport?.local.name
+          );
+        };
+
+        const iconPropIsIconElement = () => {
+          const pfIconsPackage = "@patternfly/react-icons";
+          const { imports: iconSpecifiers } = getFromPackage(
+            context,
+            pfIconsPackage
+          );
+          const iconDefaultSpecifiers = getDefaultImportsFromPackage(
+            context,
+            pfIconsPackage
+          );
+          const allIconSpecifiers = [
+            ...iconSpecifiers,
+            ...iconDefaultSpecifiers,
+          ];
+
+          return (
+            iconElementIdentifier !== undefined &&
+            allIconSpecifiers.some(
+              (spec) => spec.local.name === iconElementIdentifier.name
+            )
+          );
+        };
+
+        const emptyStateIconComponent = iconPropIsEmptyStateIconComponent()
+          ? (iconPropValue as JSXElement)
+          : undefined;
 
         const emptyStateIconComponentIconAttribute =
           emptyStateIconComponent &&
@@ -108,12 +149,8 @@ module.exports = {
         const emptyStateIconComponentColorAttribute =
           emptyStateIconComponent &&
           getAttribute(emptyStateIconComponent, "color");
-        const emptyStateIconComponentColor = getAttributeText(
-          context,
-          emptyStateIconComponentColorAttribute
-        );
 
-        if (emptyStateIconComponentColor) {
+        if (emptyStateIconComponentColorAttribute) {
           context.report({
             node,
             message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
@@ -124,6 +161,8 @@ module.exports = {
           ? context
               .getSourceCode()
               .getText(emptyStateIconComponentIconAttribute)
+          : iconPropIsIconElement()
+          ? `icon={${iconElementIdentifier!.name}}`
           : "";
 
         context.report({
