@@ -54,7 +54,11 @@ function getSpecifiers<
   );
 }
 
-export function getFromPackage(context: Rule.RuleContext, packageName: string) {
+export function getFromPackage(
+  context: Rule.RuleContext,
+  packageName: string,
+  specifierNames?: string[]
+) {
   const astBody = context.getSourceCode().ast.body;
 
   const imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
@@ -68,5 +72,16 @@ export function getFromPackage(context: Rule.RuleContext, packageName: string) {
     packageName
   );
 
-  return { imports, exports };
+  if (!specifierNames) {
+    return { imports, exports };
+  }
+
+  const specifiedImports = imports.filter((specifier) =>
+    specifierNames.includes(specifier.imported.name)
+  );
+  const specifiedExports = exports.filter((specifier) =>
+    specifierNames.includes(specifier.exported.name)
+  );
+
+  return { imports: specifiedImports, exports: specifiedExports };
 }
