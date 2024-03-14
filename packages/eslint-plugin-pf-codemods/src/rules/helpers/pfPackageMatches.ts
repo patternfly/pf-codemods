@@ -16,7 +16,9 @@ export function pfPackageMatches(
       parts[1] +
       "(/dist/(esm|js))?" +
       (parts[2] ? "/" + parts[2] : "") +
-      "(/(components|helpers)/.*)?$"
+      `(/(components|helpers${
+        parts[1] === "react-icons" ? "|icons" : ""
+      })/.*)?$`
   );
   return regex.test(nodeSrc);
 }
