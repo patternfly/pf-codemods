@@ -61,25 +61,27 @@ export function getFromPackage(
 ) {
   const astBody = context.getSourceCode().ast.body;
 
-  let imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
+  const imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
     astBody,
     "ImportDeclaration",
     packageName
   );
-  let exports = getSpecifiers<ExportNamedDeclaration, ExportSpecifier>(
+  const exports = getSpecifiers<ExportNamedDeclaration, ExportSpecifier>(
     astBody,
     "ExportNamedDeclaration",
     packageName
   );
 
-  if (specifierNames) {
-    imports = imports.filter((specifier) =>
-      specifierNames?.includes(specifier.imported.name)
-    );
-    exports = exports.filter((specifier) =>
-      specifierNames?.includes(specifier.exported.name)
-    );
+  if (!specifierNames) {
+    return { imports, exports };
   }
 
-  return { imports, exports };
+  const specifiedImports = imports.filter((specifier) =>
+    specifierNames.includes(specifier.imported.name)
+  );
+  const specifiedExports = exports.filter((specifier) =>
+    specifierNames.includes(specifier.exported.name)
+  );
+
+  return { imports: specifiedImports, exports: specifiedExports };
 }
