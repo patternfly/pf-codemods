@@ -16,12 +16,13 @@
     "test:console": "pf-codemods --v6 --no-cache test/console/frontend",
     "test:integreatly": "pf-codemods --v6 --no-cache test/tutorial-web-app",
     "test:packages": "yarn get:packages && node --unhandled-rejections=strict packages/pf-codemods/index.js --v6 --no-cache test/packages",
-    "test:classnames": "class-name-updater --no-cache test",
+    "test:classnames": "yarn build:classnames && lerna run test --scope=@patternfly/class-name-updater --stream",
     "get:packages": "node getPackages.js",
     "generate": "yarn build:generators && plop",
     "build": "lerna run build",
     "build:generators": "tsc --build --verbose generators/tsconfig.cjs.json",
     "build:readme": "lerna run build:readme",
+    "build:classnames": "lerna run build --scope=@patternfly/class-name-updater",
     "clean": "lerna run clean"
   },
   "repository": {
