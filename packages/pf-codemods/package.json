@@ -8,7 +8,7 @@
     "pf-codemods": "./index.js"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@patternfly/eslint-plugin-pf-codemods": "^1.91.4",
-    "@typescript-eslint/parser": "^5.58.0",
+    "@typescript-eslint/parser": "^7.3.1",
     "commander": "^5.1.0",
     "eslint": "^7.3.0 || ^8.29.0",
     "typescript": "^5.4.2"
