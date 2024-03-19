@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc --build --verbose ./tsconfig.json",
     "clean": "rimraf ./dist",
-    "test": "jest"
+    "test": "node ./dist/cli.js test --exclude test/largeFile.js"
   },
   "dependencies": {
     "colors": "^1.4.0",
