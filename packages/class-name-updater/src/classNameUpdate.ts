@@ -4,11 +4,11 @@ import { join } from "path";
 import { isDir } from "./utils";
 import { printDiff } from "./printDiff";
 
-export async function classNameUpdate(globTarget: string, makeChange: boolean, fileTypesRegex: RegExp, excludeFiles: string[] = []) {
+export async function classNameUpdate(globTarget: string, makeChange: boolean, fileTypesRegex: RegExp, excludeFiles: string[] = [], pfVersion: string) {
   const acceptedFileTypesRegex = fileTypesRegex || /\.(s?css|less|(t|j)sx?|md)$/;
 
   const changeNeededRegex = /(\b|\$)pf-([cul]|global|theme|color)-/g;
-  const version = "v5";
+  const version = "v5" || pfVersion;
 
   const files = sync(globTarget, { ignore: "**/node_modules/**" });
   const includedFiles = files.filter((filePath: string) => !excludeFiles.includes(filePath))
