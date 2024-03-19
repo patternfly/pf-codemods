@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.2...@patternfly/pf-codemods@2.0.3) (2024-03-19)
+
+
+### Bug Fixes
+
+* **deps:** Update ts-eslint parser to support newer TS version ([#616](https://github.com/patternfly/pf-codemods/issues/616)) ([d57b415](https://github.com/patternfly/pf-codemods/commit/d57b415959f79390043b9a7fb902a07595e28318))
+
+
+
+
+
 ## [2.0.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.1...@patternfly/pf-codemods@2.0.2) (2024-03-14)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
