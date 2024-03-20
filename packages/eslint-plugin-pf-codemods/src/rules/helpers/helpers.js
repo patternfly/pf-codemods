@@ -1,5 +1,6 @@
 import { getFromPackage } from "./getFromPackage";
 import { pfPackageMatches } from "./pfPackageMatches";
+import { findAncestor } from "./findAncestor";
 
 const evk = require("eslint-visitor-keys");
 
@@ -878,19 +879,5 @@ export function findVariableDeclaration(name, scope) {
 
     scope = scope.upper;
   }
-  return undefined;
-}
-
-export function findAncestor(node, conditionCallback = (_current) => false) {
-  let current = node?.parent;
-
-  while (current) {
-    if (conditionCallback(current)) {
-      return current;
-    }
-
-    current = current.parent;
-  }
-
   return undefined;
 }
