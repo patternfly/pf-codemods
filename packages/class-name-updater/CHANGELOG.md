@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@2.0.2...@patternfly/class-name-updater@2.0.3) (2024-03-20)
+
+
+### Bug Fixes
+
+* **class-name-updater:** fix cli to grab package file relatively ([#615](https://github.com/patternfly/pf-codemods/issues/615)) ([9df19dd](https://github.com/patternfly/pf-codemods/commit/9df19dd7119d47a635edd70066665d5d15a01037))
+
+
+
+
+
 ## [2.0.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@2.0.1...@patternfly/class-name-updater@2.0.2) (2024-03-19)
 
 
