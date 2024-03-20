@@ -42,12 +42,13 @@ module.exports = {
                       current.type === "JSXElement" &&
                       current.openingElement.name.type === "JSXIdentifier" &&
                       current.openingElement.name.name === "AccordionItem"
-                  ) as JSXElement | undefined;
+                  );
                   const attributeValue = context
                     .getSourceCode()
                     .getText(attribute);
 
-                  return accordionItemAncestor
+                  return accordionItemAncestor &&
+                    accordionItemAncestor.type === "JSXElement"
                     ? [
                         fixer.replaceText(attribute, ""),
                         fixer.insertTextAfter(
