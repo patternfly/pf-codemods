@@ -23,14 +23,14 @@ program
   .option("--fix", "Whether to run fixer")
   .option(
     "--pfVersion <pfVersion>",
-    "Version of PatternFly to use"
+    "Version of PatternFly to use, pass just the version number."
   )
   .action(runClassNameUpdate);
 
 async function runClassNameUpdate(
   path: string,
   otherPaths: string,
-  options: { extensions: string; fix: boolean; exclude: string[] | undefined; pfVersion: string;}
+  options: { extensions: string; fix: boolean; exclude: string[] | undefined; pfVersion: number;}
 ) {
   let allPaths = [path, ...otherPaths];
 
