@@ -26,36 +26,49 @@ export async function genericRule({
   message,
 }: Answers) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
-  const content = `import { getFromPackage } from '../../helpers';
-  
+  const content = `import { Rule } from "eslint";
+import { JSXOpeningElement } from "estree-jsx";
+import { getFromPackage } from "../../helpers";
+
 // https://github.com/patternfly/patternfly-react/pull/${referencePR}
 module.exports = {
-  meta: { fixable: 'code' },
-  create: function(context: { report: (arg0: { node: any; message: string; fix?(fixer: any): any; }) => void; }) {
-    const {imports, exports} = getFromPackage(context, '@patternfly/react-core')
-      
-    const componentImports = imports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === '${componentName}');
-    const componentExports = exports.filter((specifier: { imported: { name: string; }; }) => specifier.imported.name === '${componentName}');
+  meta: { fixable: "code" },
+  create: function (context: Rule.RuleContext) {
+    const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    return !componentImports.length && !componentExports.length ? {} : {
-      JSXOpeningElement(node: { name: { name: any; }; attributes: any[]; }) {
-        if (componentImports.map((imp: { local: { name: any; }; }) => imp.local.name).includes(node.name.name)) {
-          const attribute = node.attributes.find((attr: { name: { name: string; }; }) => attr.name?.name === '${propName}');
-          if (attribute) {
-            context.report({
-              node,
-              message: '${message}',
-              fix(fixer: { replaceText: (arg0: any, arg1: string) => any; }) {
-                return fixer.replaceText(attribute, '');
+    const componentImports = imports.filter(
+      (specifier) => specifier.imported.name === "${componentName}"
+    );
+
+    return !componentImports.length
+      ? {}
+      : {
+          JSXOpeningElement(node: JSXOpeningElement) {
+            if (
+              node.name.type === "JSXIdentifier" &&
+              componentImports
+                .map((imp) => imp.local.name)
+                .includes(node.name.name)
+            ) {
+              const attribute = node.attributes.find(
+                (attr) =>
+                  attr.type === "JSXAttribute" && attr.name.name === "${propName}"
+              );
+              if (attribute) {
+                context.report({
+                  node,
+                  message: "${message}",
+                  fix(fixer) {
+                    return fixer.replaceText(attribute, "");
+                  },
+                });
               }
-            });
-          }
-        }
-      }
-    };
-  }
+            }
+          },
+        };
+  },
 };
-  `;
+`;
   baseRule(ruleName, content);
 }
 
