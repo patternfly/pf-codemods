@@ -1,21 +1,15 @@
 import { AST, Rule } from "eslint";
-import {
-  ImportSpecifier,
-  JSXElement,
-  JSXExpressionContainer,
-  JSXFragment,
-  Node,
-} from "estree-jsx";
+import { ImportSpecifier, JSXElement } from "estree-jsx";
 import {
   getAttribute,
   getAttributeText,
   getAttributeValueText,
   getChildElementByName,
-  getNodesText,
   getExpression,
   getFromPackage,
   includesImport,
   nodeIsComponentNamed,
+  getChildrenAsAttributeValueText,
 } from "../../helpers";
 
 const baseMessage =
@@ -95,37 +89,12 @@ module.exports = {
           titleTextAttribute
         );
 
-        const getChildrenText = (children: JSXElement["children"]) => {
-          if (!children.length) {
-            return "";
-          }
-
-          if (children.length === 1 && children[0].type === "JSXText") {
-            return `"${children[0].value.trim()}"`;
-          }
-
-          const potentialSingleChild = children.filter(
-            (child) => !(child.type === "JSXText" && child.value.trim() === "")
-          );
-
-          if (potentialSingleChild.length === 1) {
-            const singleChild = potentialSingleChild[0];
-            const singleChildText = context
-              .getSourceCode()
-              .getText(
-                singleChild as JSXExpressionContainer | JSXElement | JSXFragment
-              );
-
-            return singleChild.type === "JSXExpressionContainer"
-              ? singleChildText
-              : `{${singleChildText}}`;
-          }
-
-          return `{<>${getNodesText(context, children as Node[])}</>}`;
-        };
-
         const titleText =
-          titleTextPropValue || `titleText=${getChildrenText(headerChildren)}`;
+          titleTextPropValue ||
+          `titleText=${getChildrenAsAttributeValueText(
+            context,
+            headerChildren
+          )}`;
 
         const iconPropValue = getExpression(headerIconAttribute?.value);
 
