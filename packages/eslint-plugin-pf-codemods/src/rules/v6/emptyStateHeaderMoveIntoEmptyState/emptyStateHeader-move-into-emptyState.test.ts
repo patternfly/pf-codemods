@@ -119,7 +119,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       ],
     },
     {
-      // without any EmptyStateHeader props but with children
+      // without any EmptyStateHeader props but with children as text
       code: `import {
         EmptyState,
         EmptyStateHeader,
@@ -138,6 +138,112 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       
       export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
         <EmptyState     titleText="Foo bar">
+          </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      // without any EmptyStateHeader props but with children as single JSXElement
+      code: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <EmptyStateHeader>
+            <h1>Foo bar</h1>
+          </EmptyStateHeader>
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState     titleText={<h1>Foo bar</h1>}>
+          </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      // without any EmptyStateHeader props but with children as single JSXExpressionContainer
+      code: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      const title = "Some title";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <EmptyStateHeader>
+            {title}
+          </EmptyStateHeader>
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      const title = "Some title";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState     titleText={title}>
+          </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      // without any EmptyStateHeader props but with children consisting of multiple elements
+      code: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      const title = "Some title";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <EmptyStateHeader>
+            {title} followed by some text
+          </EmptyStateHeader>
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      const title = "Some title";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState     titleText={<>
+            {title} followed by some text
+          </>}>
           </EmptyState>
       );
       `,
