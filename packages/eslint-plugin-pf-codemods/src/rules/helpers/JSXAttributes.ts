@@ -1,10 +1,9 @@
 import { JSXElement, JSXAttribute } from "estree-jsx";
 
 export function getAttribute(node: JSXElement, attributeName: string) {
-  const attributes = node.openingElement.attributes.filter(
-    (attr) => attr.type === "JSXAttribute"
-  ) as JSXAttribute[];
-  return attributes.find((attr) => attr.name.name === attributeName);
+  return node.openingElement.attributes.find(
+    (attr) => attr.type === "JSXAttribute" && attr.name.name === attributeName
+  ) as JSXAttribute | undefined;
 }
 
 export function getExpression(node?: JSXAttribute["value"]) {
