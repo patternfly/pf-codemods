@@ -60,7 +60,7 @@ module.exports = {
           : "";
 
         const wrapperProps = [
-          hrefAttributeText,
+          !hrefAttributeText ? 'href=""' : hrefAttributeText, // default value of 'href' attribute was an empty string
           targetAttributeText,
           linkComponentPropsSpread,
         ]

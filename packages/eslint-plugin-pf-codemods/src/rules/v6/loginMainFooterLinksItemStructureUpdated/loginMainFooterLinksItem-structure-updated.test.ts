@@ -92,6 +92,18 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
       </Button></LoginMainFooterLinksItem>`,
       errors: [loginMainFooterLinksItemError],
     },
+    // without attributes
+    {
+      code: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      <LoginMainFooterLinksItem>
+        <i>GitHub icon</i>
+      </LoginMainFooterLinksItem>`,
+      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      <LoginMainFooterLinksItem data-codemods="true" ><Button variant="link" component="a" href="">
+        <i>GitHub icon</i>
+      </Button></LoginMainFooterLinksItem>`,
+      errors: [loginMainFooterLinksItemError],
+    },
     // self-closing with children as attribute
     {
       code: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
