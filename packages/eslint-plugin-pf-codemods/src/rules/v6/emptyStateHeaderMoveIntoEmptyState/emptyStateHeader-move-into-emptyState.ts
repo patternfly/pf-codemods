@@ -157,13 +157,21 @@ module.exports = {
           });
         }
 
-        const icon = emptyStateIconComponentIconAttribute
-          ? context
+        const getIconPropText = () => {
+          if (emptyStateIconComponentIconAttribute) {
+            return context
               .getSourceCode()
-              .getText(emptyStateIconComponentIconAttribute)
-          : iconPropIsIconElement()
-          ? `icon={${iconElementIdentifier!.name}}`
-          : "";
+              .getText(emptyStateIconComponentIconAttribute);
+          }
+
+          if (iconPropIsIconElement()) {
+            return `icon={${iconElementIdentifier!.name}}`;
+          }
+
+          return "";
+        };
+
+        const icon = getIconPropText();
 
         context.report({
           node,
