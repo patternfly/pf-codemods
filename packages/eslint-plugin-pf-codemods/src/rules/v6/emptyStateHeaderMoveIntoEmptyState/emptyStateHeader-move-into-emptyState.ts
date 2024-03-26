@@ -110,8 +110,12 @@ module.exports = {
             (specifier) => specifier.imported.name === "EmptyStateIcon"
           );
 
+          if (!emptyStateIconImport) {
+            return false;
+          }
+
           return (
-            iconElementIdentifier?.name === emptyStateIconImport?.local.name
+            iconElementIdentifier?.name === emptyStateIconImport.local.name
           );
         };
 
