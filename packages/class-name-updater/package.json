@@ -16,7 +16,9 @@
   "scripts": {
     "build": "tsc --build --verbose ./tsconfig.json",
     "clean": "rimraf ./dist",
-    "test": "node ./dist/cli.js test --exclude test/largeFile.js"
+    "test": "yarn build && yarn test:v5 && yarn test:v6",
+    "test:v5": "node ./dist/cli.js test --exclude test/largeFile.js",
+    "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --pfVersion 6"
   },
   "dependencies": {
     "colors": "^1.4.0",

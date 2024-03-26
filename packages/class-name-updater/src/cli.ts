@@ -21,12 +21,16 @@ program
     "Comma-delineated list of files to exclude, files should include their path relative to where this utility is being called"
   )
   .option("--fix", "Whether to run fixer")
+  .option(
+    "--pfVersion <pfVersion>",
+    "Version of PatternFly to use, pass just the version number."
+  )
   .action(runClassNameUpdate);
 
 async function runClassNameUpdate(
   path: string,
   otherPaths: string,
-  options: { extensions: string; fix: boolean; exclude: string[] | undefined }
+  options: { extensions: string; fix: boolean; exclude: string[] | undefined; pfVersion: number;}
 ) {
   let allPaths = [path, ...otherPaths];
 
@@ -45,7 +49,7 @@ async function runClassNameUpdate(
   }
 
   allPaths.forEach(async (path) => {
-    await classNameUpdate(path, options.fix, fileTypes, options.exclude);
+    await classNameUpdate(path, options.fix, fileTypes, options.exclude, options.pfVersion);
   });
 }
 
