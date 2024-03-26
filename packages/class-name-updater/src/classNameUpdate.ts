@@ -6,7 +6,6 @@ import { printDiff } from "./printDiff";
 
 export async function classNameUpdate(globTarget: string, makeChange: boolean, fileTypesRegex: RegExp, excludeFiles: string[] = [], pfVersion: number) {
   const acceptedFileTypesRegex = fileTypesRegex || /\.(s?css|less|(t|j)sx?|md)$/;
-  // const changeNeededRegex = /(\b|\$)pf-([cul]|global|theme|color)-/g;
   const previousVersion = pfVersion ? "-v" + (pfVersion - 1) : "";
   const changeNeededRegex = new RegExp(
     "(\\b|\\$)pf" + previousVersion + "-([cul]|global|theme|color)-",
