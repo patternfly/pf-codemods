@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.92.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.6...@patternfly/eslint-plugin-pf-codemods@1.92.0) (2024-03-27)
+
+
+### Features
+
+* **FormFiledGroupHeaderTitleTextObject:** interface renamed (typo) ([#610](https://github.com/patternfly/pf-codemods/issues/610)) ([a58b56d](https://github.com/patternfly/pf-codemods/commit/a58b56d0973f646d1f566c85cc2d344d88080773))
+
+
+
+
+
 ## [1.91.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.5...@patternfly/eslint-plugin-pf-codemods@1.91.6) (2024-03-21)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
