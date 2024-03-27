@@ -378,5 +378,79 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
         },
       ],
     },
+    {
+      // with icon prop value not being wrapped in EmptyStateIcon (default import)
+      code: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <EmptyStateHeader
+            icon={<CubesIcon />}
+            titleText="Empty state"
+          />
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState   icon={CubesIcon}  titleText="Empty state">
+          </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      // with icon prop value not being wrapped in EmptyStateIcon (classic import)
+      code: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      import { CubesIcon } from '@patternfly/react-icons';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <EmptyStateHeader
+            icon={<CubesIcon />}
+            titleText="Empty state"
+          />
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateHeader,
+      } from "@patternfly/react-core";
+
+      import { CubesIcon } from '@patternfly/react-icons';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState   icon={CubesIcon}  titleText="Empty state">
+          </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.`,
+          type: "JSXElement",
+        },
+      ],
+    },
   ],
 });

@@ -5,6 +5,7 @@ import {
   Statement,
   Directive,
   ExportNamedDeclaration,
+  ImportDefaultSpecifier,
   ImportSpecifier,
   ExportSpecifier,
 } from "estree-jsx";
@@ -84,4 +85,24 @@ export function getFromPackage(
   );
 
   return { imports: specifiedImports, exports: specifiedExports };
+}
+
+export function getDefaultImportsFromPackage(
+  context: Rule.RuleContext,
+  packageName: string
+): ImportDefaultSpecifier[] {
+  const astBody = context.getSourceCode().ast.body;
+
+  const importDeclarations = astBody.filter(
+    (node) => node?.type === "ImportDeclaration"
+  ) as ImportDeclaration[];
+
+  const importDeclarationsFromPackage = filterByPackageName(
+    importDeclarations,
+    packageName
+  ) as ImportDeclaration[];
+
+  return importDeclarationsFromPackage
+    .filter((imp) => imp.specifiers[0]?.type === "ImportDefaultSpecifier")
+    .map((imp) => imp.specifiers[0]) as ImportDefaultSpecifier[];
 }
