@@ -24,18 +24,20 @@ function isRenameConfig(obj: any): obj is RenameConfig {
 }
 
 const getNewName = (
-  removed: boolean,
+  replaced: boolean,
   propRename: RenameConfig | string | Record<PropertyKey, never>
 ) => {
-  if (removed) return '';
-  return isRenameConfig(propRename) ? propRename.newName : propRename;
+  if (!replaced) return '';
+  return (
+    isRenameConfig(propRename) ? propRename.newName : propRename
+  ) as string;
 };
 
 const getAction = (
-  removed: boolean,
+  replaced: boolean,
   propRename: RenameConfig | string | Record<PropertyKey, never>
 ) => {
-  if (removed) return 'removed';
+  if (!replaced) return 'removed';
   return propRename.replace ? 'replaced with ' : 'renamed to ';
 };
 
@@ -44,12 +46,21 @@ const getMessage = (
   propRename: RenameConfig | string | Record<PropertyKey, never>,
   defaultMessage: string
 ) => {
-  if (!(isRenameConfig(propRename) && propRename.message))
-    return defaultMessage;
+  if (!isRenameConfig(propRename) || !propRename.message) return defaultMessage;
 
   return propRename.message instanceof Function
     ? propRename.message(node)
     : propRename.message;
+};
+
+const getFixer = (
+  attribute: JSXAttribute,
+  propRename: RenameConfig | string | Record<PropertyKey, never>,
+  newName: string
+) => {
+  const toReplace =
+    propRename.replace || newName === '' ? attribute : attribute.name;
+  return (fixer: Rule.RuleFixer) => fixer.replaceText(toReplace, newName);
 };
 
 export function renameSinglePropOnNode(
@@ -62,38 +73,22 @@ export function renameSinglePropOnNode(
 
   const isConfig = isRenameConfig(propRename);
 
-  const isRemoved = !(
+  const isReplaced =
     (isConfig && propRename.newName !== '') ||
-    (typeof propRename === 'string' && propRename !== '')
-  );
+    (typeof propRename === 'string' && propRename !== '');
 
-  const action = getAction(isRemoved, propRename);
+  const action = getAction(isReplaced, propRename);
 
-  const newName = getNewName(isRemoved, propRename);
+  const newName = getNewName(isReplaced, propRename);
 
   const defaultMessage = `${attribute.name.name} prop for ${
     (node.name as JSXIdentifier).name
   } has been ${action}${newName}`;
   const message = getMessage(node, propRename, defaultMessage);
 
-  if (!isRemoved) {
-    context.report({
-      node,
-      message,
-      fix(fixer) {
-        return fixer.replaceText(
-          propRename.replace ? attribute : (attribute as JSXAttribute).name,
-          newName as string
-        );
-      },
-    });
-  } else {
-    context.report({
-      node,
-      message,
-      fix(fixer) {
-        return fixer.replaceText(attribute, '');
-      },
-    });
-  }
+  context.report({
+    node,
+    message,
+    fix: getFixer(attribute, propRename, newName),
+  });
 }
