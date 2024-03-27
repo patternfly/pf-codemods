@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.93.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.92.0...@patternfly/eslint-plugin-pf-codemods@1.93.0) (2024-03-27)
+
+
+### Features
+
+* **EmptyState:** support icons passed directly to EmptyStateHeader ([#612](https://github.com/patternfly/pf-codemods/issues/612)) ([b5d2340](https://github.com/patternfly/pf-codemods/commit/b5d2340daf94e1bc23e4fe9c2e88ff57356b65fe))
+
+
+
+
+
 # [1.92.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.6...@patternfly/eslint-plugin-pf-codemods@1.92.0) (2024-03-27)
 
 
