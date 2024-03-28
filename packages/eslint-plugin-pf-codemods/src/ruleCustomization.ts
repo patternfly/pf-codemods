@@ -40,6 +40,7 @@ export const warningRules = [
   "tabs-update-markup",
   "tabs-warn-children-type-changed",
   "tooltip-warn-triggerRef-may-be-required",
+  "treeView-warn-selectable-styling-modifier-removed",
   "wizard-warn-button-order",
 ];
 
