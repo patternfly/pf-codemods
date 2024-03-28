@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.94.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.93.0...@patternfly/eslint-plugin-pf-codemods@1.94.0) (2024-03-28)
+
+
+### Features
+
+* **TreeView:** warning for removal of selectable styling modifier ([#617](https://github.com/patternfly/pf-codemods/issues/617)) ([a7f1836](https://github.com/patternfly/pf-codemods/commit/a7f1836e287aaefa3ae89e413e531ac92a014e39))
+
+
+
+
+
 # [1.93.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.92.0...@patternfly/eslint-plugin-pf-codemods@1.93.0) (2024-03-27)
 
 
