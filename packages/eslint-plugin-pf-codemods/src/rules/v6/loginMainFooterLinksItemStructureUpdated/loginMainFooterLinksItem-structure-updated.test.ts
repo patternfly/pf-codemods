@@ -21,7 +21,7 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
       >
         <i>GitHub icon</i>
       </LoginMainFooterLinksItem>`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" 
         
         
@@ -41,7 +41,7 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
       >
         <i>GitHub icon</i>
       </LoginMainFooterLinksItem>`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" 
         
         
@@ -63,7 +63,7 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
       >
         <i>GitHub icon</i>
       </LoginMainFooterLinksItem>`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" 
         
         
@@ -83,7 +83,7 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
       >
         <i>GitHub icon</i>
       </LoginMainFooterLinksItem>`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" 
         
         className="some-class"
@@ -98,7 +98,7 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
       <LoginMainFooterLinksItem>
         <i>GitHub icon</i>
       </LoginMainFooterLinksItem>`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" ><Button variant="link" component="a" href="">
         <i>GitHub icon</i>
       </Button></LoginMainFooterLinksItem>`,
@@ -112,7 +112,7 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
         linkComponentProps={{ "aria-label": "Login with Github" }}
         children={<i>GitHub icon</i>}
       />`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" 
         
         
@@ -128,12 +128,36 @@ ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {
         linkComponentProps={{ "aria-label": "Login with Github" }}
         children={<i>GitHub icon</i>}
       ></LoginMainFooterLinksItem>`,
-      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core';
+      output: `import { LoginMainFooterLinksItem, Button } from '@patternfly/react-core';
       <LoginMainFooterLinksItem data-codemods="true" 
         
         
         
       ><Button variant="link" component="a" href="https://github.com/login" {...{ "aria-label": "Login with Github" }}><i>GitHub icon</i></Button></LoginMainFooterLinksItem>`,
+      errors: [loginMainFooterLinksItemError],
+    },
+    // with Button component already imported
+    {
+      code: `import { Button, LoginMainFooterLinksItem } from '@patternfly/react-core';
+      <>
+      <Button>Some button</Button>
+      <LoginMainFooterLinksItem
+        href="https://github.com/login"
+        linkComponentProps={{ "aria-label": "Login with Github" }}
+      >
+        <i>GitHub icon</i>
+      </LoginMainFooterLinksItem>
+      </>`,
+      output: `import { Button, LoginMainFooterLinksItem } from '@patternfly/react-core';
+      <>
+      <Button>Some button</Button>
+      <LoginMainFooterLinksItem data-codemods="true" 
+        
+        
+      ><Button variant="link" component="a" href="https://github.com/login" {...{ "aria-label": "Login with Github" }}>
+        <i>GitHub icon</i>
+      </Button></LoginMainFooterLinksItem>
+      </>`,
       errors: [loginMainFooterLinksItemError],
     },
   ],

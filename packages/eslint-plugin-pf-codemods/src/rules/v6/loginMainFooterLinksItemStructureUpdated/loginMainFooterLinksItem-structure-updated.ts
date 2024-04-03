@@ -15,7 +15,11 @@ module.exports = {
   create: function (context: Rule.RuleContext) {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    if (!includesImport(imports, "LoginMainFooterLinksItem")) {
+    const loginMainFooterLinksItemImport = imports.find(
+      (specifier) => specifier.imported.name === "LoginMainFooterLinksItem"
+    );
+
+    if (!loginMainFooterLinksItemImport) {
       return {};
     }
 
@@ -118,6 +122,15 @@ module.exports = {
               fixer.insertTextAfter(node.openingElement, wrapperOpeningElement),
               ...removeAttributes
             );
+
+            if (!includesImport(imports, "Button")) {
+              fixes.push(
+                fixer.insertTextAfter(
+                  loginMainFooterLinksItemImport,
+                  ", Button"
+                )
+              );
+            }
 
             if (node.openingElement.selfClosing) {
               const openingElementRange = node.openingElement.range;
