@@ -1,4 +1,4 @@
-import { LoginMainFooterLinksItem } from "@patternfly/react-core";
+import { LoginMainFooterLinksItem, Button } from "@patternfly/react-core";
 
 export const LoginMainFooterLinksItemStructureUpdatedInput = () => (
   <LoginMainFooterLinksItem data-codemods="true">
