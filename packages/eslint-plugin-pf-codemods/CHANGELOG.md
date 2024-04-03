@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.95.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.94.0...@patternfly/eslint-plugin-pf-codemods@1.95.0) (2024-04-03)
+
+
+### Features
+
+* **LoginMainFooterLinksItem:** pass children instead of props ([#608](https://github.com/patternfly/pf-codemods/issues/608)) ([abedb80](https://github.com/patternfly/pf-codemods/commit/abedb80ac59886cae1dced3c6b0ff97e92e4180a))
+
+
+
+
+
 # [1.94.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.93.0...@patternfly/eslint-plugin-pf-codemods@1.94.0) (2024-03-28)
 
 
