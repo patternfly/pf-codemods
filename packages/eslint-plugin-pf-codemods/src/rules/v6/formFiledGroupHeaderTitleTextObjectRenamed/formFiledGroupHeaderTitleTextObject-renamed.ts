@@ -1,5 +1,5 @@
 import { AST, Rule } from "eslint";
-import { ImportSpecifier, Identifier, Node } from "estree-jsx";
+import { ImportSpecifier, ExportSpecifier, Identifier, Node } from "estree-jsx";
 import { getFromPackage } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10016
@@ -19,8 +19,8 @@ module.exports = {
       return {};
     }
 
-    const hasAlias = (specifier: ImportSpecifier) =>
-      specifier.local.name !== specifier.imported.name;
+    const importHasAlias =
+      interfaceImport.local.name !== interfaceImport.imported.name;
 
     const reportMessage =
       "There was a typo in FormFiledGroupHeaderTitleTextObject interface. It was renamed to the intended FormFieldGroupHeaderTitleTextObject.";
@@ -41,16 +41,18 @@ module.exports = {
           callContextReport(node, node.imported);
         }
       },
+      ExportSpecifier(node: ExportSpecifier) {
+        if (!importHasAlias && node.local.name === previousName) {
+          callContextReport(node, node.local);
+        }
+      },
       TSTypeReference(node: { typeName: Identifier }) {
-        if (!hasAlias(interfaceImport) && node.typeName.name === previousName) {
+        if (!importHasAlias && node.typeName.name === previousName) {
           callContextReport(node as unknown as Node, node.typeName);
         }
       },
       TSInterfaceHeritage(node: { expression: Identifier }) {
-        if (
-          !hasAlias(interfaceImport) &&
-          node.expression.name === previousName
-        ) {
+        if (!importHasAlias && node.expression.name === previousName) {
           callContextReport(node as unknown as Node, node.expression);
         }
       },

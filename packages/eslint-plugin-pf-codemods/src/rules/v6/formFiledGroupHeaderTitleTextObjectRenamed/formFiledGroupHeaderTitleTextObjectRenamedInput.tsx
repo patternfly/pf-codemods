@@ -6,3 +6,5 @@ const titleTextObject: FormFiledGroupHeaderTitleTextObject = {
   text: "Some title",
   id: "form-field-group-header-title-text",
 };
+
+export { FormFiledGroupHeaderTitleTextObject as HeaderTitleObject };

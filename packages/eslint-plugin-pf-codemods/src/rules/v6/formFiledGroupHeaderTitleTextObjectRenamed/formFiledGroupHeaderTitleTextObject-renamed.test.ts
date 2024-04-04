@@ -39,5 +39,19 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
         },
       ],
     },
+    {
+      code: `import { FormFiledGroupHeaderTitleTextObject } from '@patternfly/react-core'; export { FormFiledGroupHeaderTitleTextObject as TitleTextObject }`,
+      output: `import { FormFieldGroupHeaderTitleTextObject } from '@patternfly/react-core'; export { FormFieldGroupHeaderTitleTextObject as TitleTextObject }`,
+      errors: [
+        {
+          message: errorMessage,
+          type: "ImportSpecifier",
+        },
+        {
+          message: errorMessage,
+          type: "ExportSpecifier",
+        },
+      ],
+    },
   ],
 });
