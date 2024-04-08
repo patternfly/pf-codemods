@@ -1,7 +1,7 @@
 import { Rule } from 'eslint';
 import { getFromPackage } from './getFromPackage';
 import { renamePropsOnNode } from './renamePropsOnNode';
-import { Renames } from './renamePropsOnNode';
+import { Renames } from './renameSinglePropOnNode';
 import { JSXOpeningElement } from 'estree-jsx';
 
 export function renameProps(

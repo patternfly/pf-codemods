@@ -5,21 +5,7 @@ import {
   JSXAttribute,
   JSXIdentifier,
 } from 'estree-jsx';
-import { renameSinglePropOnNode } from './renameSinglePropOnNode';
-
-export interface RenameConfig {
-  newName: string;
-  message?: string | ((node: any) => string);
-  replace?: boolean;
-}
-
-export interface ComponentRenames {
-  [propName: string]: RenameConfig | string | Record<PropertyKey, never>;
-}
-
-export interface Renames {
-  [componentName: string]: ComponentRenames;
-}
+import { renameSinglePropOnNode, Renames } from './renameSinglePropOnNode';
 
 export function renamePropsOnNode(
   context: Rule.RuleContext,
@@ -32,7 +18,9 @@ export function renamePropsOnNode(
       node.name.type === 'JSXIdentifier' && imp.local.name === node.name.name
   )?.imported.name;
 
-  if (!componentName) return;
+  if (!componentName) {
+    return;
+  }
 
   const renamedProps = renames[componentName];
 

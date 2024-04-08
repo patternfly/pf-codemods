@@ -1,52 +1,80 @@
 import { JSXAttribute, JSXIdentifier, JSXOpeningElement } from 'estree-jsx';
-import { RenameConfig } from './renamePropsOnNode';
+
 import { Rule } from 'eslint';
 
-function isRenameConfig(obj: any): obj is RenameConfig {
-  const hasValidObjectType = typeof obj === 'object' && obj !== null;
-
-  const hasValidNewNameType = typeof obj.newName === 'string';
-
-  const isValidMessage =
-    obj.message === undefined ||
-    typeof obj.message === 'string' ||
-    typeof obj.message === 'function';
-
-  const isValidReplace =
-    obj.replace === undefined || typeof obj.replace === 'boolean';
-
-  return (
-    hasValidObjectType &&
-    hasValidNewNameType &&
-    isValidMessage &&
-    isValidReplace
-  );
+export interface RenameConfig {
+  newName: string;
+  message?: string | ((node: any) => string);
+  replace?: boolean;
 }
 
-const getNewName = (
-  replaced: boolean,
-  propRename: RenameConfig | string | Record<PropertyKey, never>
-) => {
-  if (!replaced) return '';
-  return (
-    isRenameConfig(propRename) ? propRename.newName : propRename
-  ) as string;
+type RenameInput = RenameConfig | string | Record<PropertyKey, never>;
+
+export interface ComponentRenames {
+  [propName: string]: RenameInput;
+}
+
+export interface Renames {
+  [componentName: string]: ComponentRenames;
+}
+
+function checkIsRenameConfig(
+  renameInput: RenameInput
+): renameInput is RenameConfig {
+  const hasValidObjectType =
+    typeof renameInput === 'object' && renameInput !== null;
+
+  if (!hasValidObjectType) {
+    return false;
+  }
+
+  if (
+    typeof renameInput === 'string' ||
+    Object.keys(renameInput).length === 0
+  ) {
+    return false;
+  }
+
+  const hasValidNewNameType = typeof renameInput.newName === 'string';
+
+  const isValidMessage =
+    renameInput.message === undefined ||
+    typeof renameInput.message === 'string' ||
+    typeof renameInput.message === 'function';
+
+  const isValidReplace =
+    renameInput.replace === undefined ||
+    typeof renameInput.replace === 'boolean';
+
+  return hasValidNewNameType && isValidMessage && isValidReplace;
+}
+
+const getNewName = (replaced: boolean, propRename: RenameInput) => {
+  const isRenameConfig = checkIsRenameConfig(propRename);
+
+  const isString = typeof propRename === 'string';
+
+  if (!replaced || (!isRenameConfig && !isString)) {
+    return '';
+  }
+  return isRenameConfig ? propRename.newName : propRename;
 };
 
-const getAction = (
-  replaced: boolean,
-  propRename: RenameConfig | string | Record<PropertyKey, never>
-) => {
-  if (!replaced) return 'removed';
+const getAction = (replaced: boolean, propRename: RenameInput) => {
+  if (!replaced) {
+    return 'removed';
+  }
   return propRename.replace ? 'replaced with ' : 'renamed to ';
 };
 
 const getMessage = (
   node: JSXOpeningElement,
-  propRename: RenameConfig | string | Record<PropertyKey, never>,
+  propRename: RenameInput,
   defaultMessage: string
 ) => {
-  if (!isRenameConfig(propRename) || !propRename.message) return defaultMessage;
+  if (!checkIsRenameConfig(propRename) || !propRename.message) {
+    return defaultMessage;
+  }
 
   return propRename.message instanceof Function
     ? propRename.message(node)
@@ -55,7 +83,7 @@ const getMessage = (
 
 const getFixer = (
   attribute: JSXAttribute,
-  propRename: RenameConfig | string | Record<PropertyKey, never>,
+  propRename: RenameInput,
   newName: string
 ) => {
   const toReplace =
@@ -67,14 +95,16 @@ export function renameSinglePropOnNode(
   context: Rule.RuleContext,
   attribute: JSXAttribute,
   node: JSXOpeningElement,
-  propRename: RenameConfig | string | Record<PropertyKey, never>
+  propRename: RenameInput
 ) {
-  if (attribute.name.type !== 'JSXIdentifier') return;
+  if (attribute.name.type !== 'JSXIdentifier') {
+    return;
+  }
 
-  const isConfig = isRenameConfig(propRename);
+  const isRenameConfig = checkIsRenameConfig(propRename);
 
   const isReplaced =
-    (isConfig && propRename.newName !== '') ||
+    (isRenameConfig && propRename.newName !== '') ||
     (typeof propRename === 'string' && propRename !== '');
 
   const action = getAction(isReplaced, propRename);
