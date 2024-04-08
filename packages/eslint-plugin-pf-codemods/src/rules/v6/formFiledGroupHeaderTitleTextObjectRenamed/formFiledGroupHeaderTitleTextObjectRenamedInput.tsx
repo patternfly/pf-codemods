@@ -1,4 +1,5 @@
 import { FormFiledGroupHeaderTitleTextObject } from "@patternfly/react-core";
+export { FormFiledGroupHeaderTitleTextObject as HeaderTitleObject } from "@patternfly/react-core";
 
 interface MyExtension extends FormFiledGroupHeaderTitleTextObject {}
 
@@ -6,5 +7,3 @@ const titleTextObject: FormFiledGroupHeaderTitleTextObject = {
   text: "Some title",
   id: "form-field-group-header-title-text",
 };
-
-export { FormFiledGroupHeaderTitleTextObject as HeaderTitleObject };
