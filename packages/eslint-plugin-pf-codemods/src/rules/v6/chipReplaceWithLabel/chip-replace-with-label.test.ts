@@ -13,7 +13,7 @@ ruleTester.run('chip-replace-with-label', rule, {
   invalid: [
     {
       code: `import { Chip } from '@patternfly/react-core/deprecated'; <Chip badge={identifier}onClick={handleOnClick} someOtherProp>This is a chip</Chip>`,
-      output: `import { Label } from '@patternfly/react-core'; <Label variant="outline" onClose={handleOnClick} someOtherProp>This is a chip{identifier}</Label>`,
+      output: `import { Label } from '@patternfly/react-core'; <Label variant="outline" onClose={handleOnClick} someOtherProp>This is a chip {identifier}</Label>`,
       errors: [
         {
           message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,

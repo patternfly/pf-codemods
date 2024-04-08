@@ -1,14 +1,14 @@
-import { getFromPackage } from '../../helpers';
+import { getAttribute, getFromPackage } from '../../helpers';
 import {
   ImportDeclaration,
   ImportSpecifier,
-  JSXAttribute,
   JSXClosingElement,
   JSXElement,
   JSXExpressionContainer,
   JSXFragment,
   Literal,
   Node,
+  JSXIdentifier,
 } from 'estree-jsx';
 import { Rule } from 'eslint';
 
@@ -48,16 +48,9 @@ const renameImportSpecifier = (
   const aliasText = importedName !== localName ? ` as ${localName}` : '';
   const rename = `${name}${aliasText}`;
   return [
-    fixer.replaceText(importSpecifier, newName),
+    fixer.replaceText(importSpecifier, rename),
     fixer.replaceText(node.source, "'@patternfly/react-core'"),
   ];
-};
-
-const getJSXAttribute = (node: JSXElement, attributeName: string) => {
-  return node.openingElement.attributes.find(
-    (attribute) =>
-      attribute.type === 'JSXAttribute' && attribute.name.name === attributeName
-  ) as JSXAttribute | undefined;
 };
 
 const parseBadgeAttributeValue = (
@@ -79,19 +72,19 @@ const moveBadgeAttributeToBody = (
   fixer: Rule.RuleFixer,
   context: Rule.RuleContext
 ) => {
-  const badgeAttribute = getJSXAttribute(node, 'badge');
+  const badgeAttribute = getAttribute(node, 'badge');
+
+  const textToInsert = badgeAttribute?.value
+    ? ` ${context
+        .getSourceCode()
+        .getText(parseBadgeAttributeValue(badgeAttribute.value))}`
+    : '';
 
   return badgeAttribute
     ? [
         fixer.insertTextBefore(
           node.closingElement as JSXClosingElement,
-          context
-            .getSourceCode()
-            .getText(
-              badgeAttribute?.value
-                ? parseBadgeAttributeValue(badgeAttribute.value)
-                : undefined
-            )
+          textToInsert
         ),
         fixer.remove(badgeAttribute),
       ]
@@ -99,7 +92,7 @@ const moveBadgeAttributeToBody = (
 };
 
 const renameOnClickAttribute = (node: JSXElement, fixer: Rule.RuleFixer) => {
-  const onClickAttribute = getJSXAttribute(node, 'onClick');
+  const onClickAttribute = getAttribute(node, 'onClick');
 
   return onClickAttribute
     ? [fixer.replaceText(onClickAttribute.name, 'onClose')]
@@ -123,9 +116,8 @@ module.exports = {
       (specifier) => specifier.imported.name === 'ChipGroup'
     );
 
-    return !chipImport && !chipGroupImport
-      ? {}
-      : {
+    return chipImport || chipGroupImport
+      ? {
           ImportDeclaration(node: ImportDeclaration) {
             context.report({
               node,
@@ -145,58 +137,56 @@ module.exports = {
           },
 
           JSXElement(node: JSXElement) {
-            if (node.openingElement.name.type === 'JSXIdentifier') {
+            if (node.openingElement.name.type !== 'JSXIdentifier') {
+              return;
+            }
+
+            const fix = (fixer: Rule.RuleFixer) => {
               if (
                 chipImport &&
-                chipImport.local.name === node.openingElement.name.name
+                chipImport.local.name ===
+                  (node.openingElement.name as JSXIdentifier).name
               ) {
-                context.report({
-                  node,
-                  message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,
-                  fix(fixer) {
-                    return [
-                      fixer.replaceText(node.openingElement.name, 'Label'),
-                      fixer.insertTextAfter(
-                        node.openingElement.name,
-                        ' variant="outline"'
-                      ),
-                      ...renameOnClickAttribute(node, fixer),
-                      ...(node.closingElement
-                        ? [
-                            fixer.replaceText(
-                              node.closingElement.name,
-                              'Label'
-                            ),
-                            ...moveBadgeAttributeToBody(node, fixer, context),
-                          ]
-                        : []),
-                    ];
-                  },
-                });
+                return [
+                  fixer.replaceText(node.openingElement.name, 'Label'),
+                  fixer.insertTextAfter(
+                    node.openingElement.name,
+                    ' variant="outline"'
+                  ),
+                  ...renameOnClickAttribute(node, fixer),
+                  ...(node.closingElement
+                    ? [
+                        fixer.replaceText(node.closingElement.name, 'Label'),
+                        ...moveBadgeAttributeToBody(node, fixer, context),
+                      ]
+                    : []),
+                ];
               } else if (
                 chipGroupImport &&
-                chipGroupImport.local.name === node.openingElement.name.name
+                chipGroupImport.local.name ===
+                  (node.openingElement.name as JSXIdentifier).name
               ) {
-                context.report({
-                  node,
-                  message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,
-                  fix(fixer) {
-                    return [
-                      fixer.replaceText(node.openingElement.name, 'LabelGroup'),
-                      ...(node.closingElement
-                        ? [
-                            fixer.replaceText(
-                              node.closingElement.name,
-                              'LabelGroup'
-                            ),
-                          ]
-                        : []),
-                    ];
-                  },
-                });
-              }
-            }
+                return [
+                  fixer.replaceText(node.openingElement.name, 'LabelGroup'),
+                  ...(node.closingElement
+                    ? [
+                        fixer.replaceText(
+                          node.closingElement.name,
+                          'LabelGroup'
+                        ),
+                      ]
+                    : []),
+                ];
+              } else return [];
+            };
+
+            context.report({
+              node,
+              message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,
+              fix,
+            });
           },
-        };
+        }
+      : {};
   },
 };
