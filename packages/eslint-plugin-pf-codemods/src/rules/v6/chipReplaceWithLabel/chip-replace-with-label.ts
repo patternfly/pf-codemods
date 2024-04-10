@@ -1,4 +1,9 @@
-import { getAttribute, getFromPackage } from '../../helpers';
+import {
+  getAllJSXElements,
+  getAttribute,
+  getFromPackage,
+  getImportDeclarations,
+} from '../../helpers';
 import {
   ImportDeclaration,
   ImportSpecifier,
@@ -17,41 +22,6 @@ type JSXAttributeValue =
   | JSXExpressionContainer
   | JSXElement
   | JSXFragment;
-
-const getImportSpecifier = (node: ImportDeclaration, specifierName: string) => {
-  return node.specifiers.find(
-    (specifier) =>
-      specifier.type === 'ImportSpecifier' &&
-      specifier.imported.name === specifierName
-  ) as ImportSpecifier | undefined;
-};
-
-const renameImportSpecifier = (
-  importToRename: ImportSpecifier | undefined,
-  node: ImportDeclaration,
-  fixer: Rule.RuleFixer,
-  newName: string
-) => {
-  if (!importToRename) {
-    return [];
-  }
-
-  const oldName = importToRename.imported.name;
-  const importSpecifier = getImportSpecifier(
-    node,
-    importToRename.imported.name
-  ) as ImportSpecifier;
-
-  const importedName = importSpecifier.imported.name;
-  const name = importedName.replace(oldName, newName);
-  const localName = importSpecifier.local.name;
-  const aliasText = importedName !== localName ? ` as ${localName}` : '';
-  const rename = `${name}${aliasText}`;
-  return [
-    fixer.replaceText(importSpecifier, rename),
-    fixer.replaceText(node.source, "'@patternfly/react-core'"),
-  ];
-};
 
 const parseBadgeAttributeValue = (
   badgeAttributeValue: JSXAttributeValue
@@ -103,87 +73,196 @@ const renameOnClickAttribute = (node: JSXElement, fixer: Rule.RuleFixer) => {
 module.exports = {
   meta: { fixable: 'code' },
   create: function (context: Rule.RuleContext) {
-    const { imports } = getFromPackage(
+    const { imports } = getFromPackage(context, '@patternfly/react-core');
+
+    const labelImport = imports.find(
+      (specifier) => specifier.imported.name === 'Label'
+    );
+
+    const labelGroupImport = imports.find(
+      (specifier) => specifier.imported.name === 'LabelGroup'
+    );
+
+    const { imports: importsFromDeprecated } = getFromPackage(
       context,
       '@patternfly/react-core/deprecated'
     );
 
-    const chipImport = imports.find(
+    const chipImport = importsFromDeprecated.find(
       (specifier) => specifier.imported.name === 'Chip'
     );
 
-    const chipGroupImport = imports.find(
+    const chipGroupImport = importsFromDeprecated.find(
       (specifier) => specifier.imported.name === 'ChipGroup'
     );
+
+    const isImportDeclarationWithChipOrChipGroup = (node: ImportDeclaration) =>
+      node.source.value === '@patternfly/react-core/deprecated' &&
+      node.specifiers.every(
+        (specifier) => specifier.type === 'ImportSpecifier'
+      ) &&
+      ((chipImport && node.specifiers.includes(chipImport)) ||
+        (chipGroupImport && node.specifiers.includes(chipGroupImport)));
 
     return chipImport || chipGroupImport
       ? {
           ImportDeclaration(node: ImportDeclaration) {
-            context.report({
-              node,
-              message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,
-              fix(fixer) {
-                return [
-                  ...renameImportSpecifier(chipImport, node, fixer, 'Label'),
-                  ...renameImportSpecifier(
-                    chipGroupImport,
-                    node,
-                    fixer,
-                    'LabelGroup'
-                  ),
-                ];
-              },
-            });
-          },
-
-          JSXElement(node: JSXElement) {
-            if (node.openingElement.name.type !== 'JSXIdentifier') {
+            if (!isImportDeclarationWithChipOrChipGroup(node)) {
               return;
             }
 
-            const fix = (fixer: Rule.RuleFixer) => {
-              if (
-                chipImport &&
-                chipImport.local.name ===
-                  (node.openingElement.name as JSXIdentifier).name
-              ) {
+            const removeChipAndChipGroupImports = (
+              node: ImportDeclaration,
+              fixer: Rule.RuleFixer
+            ) => {
+              const importIncludesOnlyChipAndChipGroup = (
+                node.specifiers as ImportSpecifier[]
+              ).every((specifier) =>
+                ['Chip', 'ChipGroup'].includes(specifier.imported.name)
+              );
+
+              if (importIncludesOnlyChipAndChipGroup) {
+                return [fixer.remove(node)];
+              }
+
+              const fixes = [];
+              for (const specifier of [chipImport, chipGroupImport]) {
+                if (specifier) {
+                  fixes.push(fixer.remove(specifier));
+                  const tokenAfter = context
+                    .getSourceCode()
+                    .getTokenAfter(specifier);
+                  if (tokenAfter?.value === ',') {
+                    fixes.push(fixer.remove(tokenAfter));
+                  }
+                }
+              }
+              return fixes;
+            };
+
+            const addLabelAndLabelGroupImports = (fixer: Rule.RuleFixer) => {
+              if (!labelImport && !labelGroupImport) {
+                const pfImportDeclarations = getImportDeclarations(
+                  context,
+                  '@patternfly/react-core'
+                );
+
+                const labelImportsToAdd = [chipImport, chipGroupImport]
+                  .map((specifier, index) =>
+                    specifier ? ['Label', 'LabelGroup'][index] : null
+                  )
+                  .filter((value) => value !== null)
+                  .join(', ');
+
+                if (pfImportDeclarations.length) {
+                  // add label specifiers at the beginning of first import declaration
+                  return [
+                    fixer.insertTextBefore(
+                      pfImportDeclarations[0].specifiers[0],
+                      `${labelImportsToAdd}, `
+                    ),
+                  ];
+                }
+
+                // add whole import declaration
                 return [
-                  fixer.replaceText(node.openingElement.name, 'Label'),
                   fixer.insertTextAfter(
-                    node.openingElement.name,
-                    ' variant="outline"'
+                    node,
+                    `import { ${labelImportsToAdd} } from '@patternfly/react-core';`
                   ),
-                  ...renameOnClickAttribute(node, fixer),
-                  ...(node.closingElement
-                    ? [
-                        fixer.replaceText(node.closingElement.name, 'Label'),
-                        ...moveBadgeAttributeToBody(node, fixer, context),
-                      ]
-                    : []),
                 ];
-              } else if (
-                chipGroupImport &&
-                chipGroupImport.local.name ===
-                  (node.openingElement.name as JSXIdentifier).name
-              ) {
-                return [
-                  fixer.replaceText(node.openingElement.name, 'LabelGroup'),
-                  ...(node.closingElement
-                    ? [
-                        fixer.replaceText(
-                          node.closingElement.name,
-                          'LabelGroup'
-                        ),
-                      ]
-                    : []),
-                ];
-              } else return [];
+              }
+
+              if (chipImport && !labelImport) {
+                return [fixer.insertTextAfter(labelGroupImport!, ', Label')];
+              }
+              if (chipGroupImport && !labelGroupImport) {
+                return [fixer.insertTextAfter(labelImport!, ', LabelGroup')];
+              }
+              return [];
+            };
+
+            const handleJSXElements = (fixer: Rule.RuleFixer) => {
+              const elements: JSXElement[] = getAllJSXElements(context);
+
+              const labelName = labelImport?.local.name ?? 'Label';
+              const labelGroupName =
+                labelGroupImport?.local.name ?? 'LabelGroup';
+
+              const getChipFixes = (
+                node: JSXElement,
+                fixer: Rule.RuleFixer
+              ) => [
+                fixer.replaceText(node.openingElement.name, labelName),
+                fixer.insertTextAfter(
+                  node.openingElement.name,
+                  ' variant="outline"'
+                ),
+                ...renameOnClickAttribute(node, fixer),
+                ...(node.closingElement
+                  ? [
+                      ...moveBadgeAttributeToBody(node, fixer, context),
+                      fixer.replaceText(node.closingElement.name, labelName),
+                    ]
+                  : []),
+              ];
+
+              const getChipGroupFixes = (
+                node: JSXElement,
+                fixer: Rule.RuleFixer
+              ) => [
+                fixer.replaceText(node.openingElement.name, labelGroupName),
+                ...(node.closingElement
+                  ? [
+                      fixer.replaceText(
+                        node.closingElement.name,
+                        labelGroupName
+                      ),
+                    ]
+                  : []),
+              ];
+
+              const fixes = [];
+
+              for (const node of elements) {
+                if (
+                  node.openingElement.name.type !== 'JSXIdentifier' ||
+                  ![
+                    chipImport?.local.name,
+                    chipGroupImport?.local.name,
+                  ].includes(node.openingElement.name.name)
+                ) {
+                  continue;
+                }
+
+                if (
+                  chipImport &&
+                  chipImport.local.name ===
+                    (node.openingElement.name as JSXIdentifier).name
+                ) {
+                  fixes.push(...getChipFixes(node, fixer));
+                } else if (
+                  chipGroupImport &&
+                  chipGroupImport.local.name ===
+                    (node.openingElement.name as JSXIdentifier).name
+                ) {
+                  fixes.push(...getChipGroupFixes(node, fixer));
+                }
+              }
+
+              return fixes;
             };
 
             context.report({
               node,
               message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,
-              fix,
+              fix(fixer) {
+                return [
+                  ...removeChipAndChipGroupImports(node, fixer),
+                  ...addLabelAndLabelGroupImports(fixer),
+                  ...handleJSXElements(fixer),
+                ];
+              },
             });
           },
         }
