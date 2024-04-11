@@ -1,6 +1,7 @@
 import { getFromPackage } from './getFromPackage';
 import { pfPackageMatches } from './pfPackageMatches';
 import { findAncestor } from './findAncestor';
+import { getVariableDeclaration } from './JSXAttributes';
 
 const evk = require('eslint-visitor-keys');
 
@@ -492,7 +493,7 @@ export function addCallbackParam(
                 if (propProperties.type === 'ArrowFunctionExpression') {
                   propProperties.params = attribute.value?.expression?.params;
                 } else if (propProperties.type === 'Identifier') {
-                  const matchingVariable = findVariableDeclaration(
+                  const matchingVariable = getVariableDeclaration(
                     propProperties.name,
                     context.getSourceCode().getScope(node)
                   );
@@ -762,17 +763,4 @@ export function getAllJSXElements(context) {
   traverse(context.getSourceCode().ast);
 
   return jsxElements;
-}
-
-export function findVariableDeclaration(name, scope) {
-  while (scope !== null) {
-    const variable = scope.variables.find((v) => v.name === name);
-
-    if (variable) {
-      return variable;
-    }
-
-    scope = scope.upper;
-  }
-  return undefined;
 }
