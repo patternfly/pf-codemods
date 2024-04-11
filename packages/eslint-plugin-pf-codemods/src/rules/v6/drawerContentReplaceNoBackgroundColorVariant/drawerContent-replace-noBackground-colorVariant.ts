@@ -42,12 +42,14 @@ module.exports = {
               drawerColorVariantEnumImport &&
               drawerColorVariantEnumImport.local.name;
             const hasPatternFlyEnum =
+              colorVariantValue &&
               colorVariantValue.object &&
               colorVariantValue.object.name === drawerColorVariantLocalName;
-            const hasNoBackgroundValue = colorVariantValue.property
-              ? hasPatternFlyEnum &&
-                colorVariantValue.property.name === "noBackground"
-              : colorVariantValue === "no-background";
+            const hasNoBackgroundValue =
+              colorVariantValue && colorVariantValue.property
+                ? hasPatternFlyEnum &&
+                  colorVariantValue.property.name === "noBackground"
+                : colorVariantValue === "no-background";
 
             if (!hasPatternFlyEnum && !hasNoBackgroundValue) {
               return;
