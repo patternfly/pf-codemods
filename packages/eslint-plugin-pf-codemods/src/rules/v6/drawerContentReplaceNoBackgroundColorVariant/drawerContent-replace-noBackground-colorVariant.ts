@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, MemberExpression } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10211
@@ -75,15 +75,6 @@ module.exports = {
                       validDrawerContentValues.includes(enumPropertyName)
                         ? `colorVariant="${colorVariantValue.property.name}"`
                         : ""
-                    )
-                  );
-                }
-
-                if (!hasNoBackgroundValue && !hasPatternFlyEnum) {
-                  fixes.push(
-                    fixer.replaceText(
-                      colorVariantProp,
-                      `colorVariant="${colorVariantValue}"`
                     )
                   );
                 }

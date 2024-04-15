@@ -34,6 +34,16 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       ],
     },
     {
+      code: `import { DrawerContent } from '@patternfly/react-core'; <DrawerContent colorVariant={"no-background"} />`,
+      output: `import { DrawerContent } from '@patternfly/react-core'; <DrawerContent  />`,
+      errors: [
+        {
+          message: `The "no-background" value of the \`colorVariant\` prop on DrawerContent has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
       code: `import { DrawerContent } from '@patternfly/react-core'; const color = "no-background"; <DrawerContent colorVariant={color} />`,
       output: `import { DrawerContent } from '@patternfly/react-core'; const color = "no-background"; <DrawerContent  />`,
       errors: [

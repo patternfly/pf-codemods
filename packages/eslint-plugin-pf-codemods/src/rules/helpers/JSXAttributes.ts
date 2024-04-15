@@ -95,4 +95,7 @@ export function getAttributeValue(
   if (isExpressionContainer && node.expression.type === "MemberExpression") {
     return getMemberExpression(node.expression);
   }
+  if (isExpressionContainer && node.expression.type === "Literal") {
+    return node.expression.value;
+  }
 }
