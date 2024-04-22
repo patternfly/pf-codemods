@@ -9,6 +9,9 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
     {
       code: `const titleTextObject: FormFiledGroupHeaderTitleTextObject = {text: "Some title", id: "form-field-group-header-title-text"};`,
     },
+    {
+      code: `export { FormFieldGroupHeaderTitleTextObject as TitleTextObject }`,
+    },
   ],
   invalid: [
     {
@@ -36,6 +39,30 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
         {
           message: errorMessage,
           type: "TSInterfaceHeritage",
+        },
+      ],
+    },
+    {
+      code: `import { FormFiledGroupHeaderTitleTextObject } from '@patternfly/react-core'; export { FormFiledGroupHeaderTitleTextObject as TitleTextObject }`,
+      output: `import { FormFieldGroupHeaderTitleTextObject } from '@patternfly/react-core'; export { FormFieldGroupHeaderTitleTextObject as TitleTextObject }`,
+      errors: [
+        {
+          message: errorMessage,
+          type: "ImportSpecifier",
+        },
+        {
+          message: errorMessage,
+          type: "ExportSpecifier",
+        },
+      ],
+    },
+    {
+      code: `export { FormFiledGroupHeaderTitleTextObject as TitleTextObject } from '@patternfly/react-core'`,
+      output: `export { FormFieldGroupHeaderTitleTextObject as TitleTextObject } from '@patternfly/react-core'`,
+      errors: [
+        {
+          message: errorMessage,
+          type: "ExportSpecifier",
         },
       ],
     },
