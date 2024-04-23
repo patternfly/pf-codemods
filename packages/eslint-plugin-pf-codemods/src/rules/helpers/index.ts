@@ -1,5 +1,6 @@
 export * from "./findAncestor";
 export * from "./helpers";
+export * from "./getImportDeclaration";
 export * from "./getFromPackage";
 export * from "./getText";
 export * from "./includesImport";
