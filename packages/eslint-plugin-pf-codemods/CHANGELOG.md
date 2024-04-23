@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.97.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.96.2...@patternfly/eslint-plugin-pf-codemods@1.97.0) (2024-04-23)
+
+
+### Features
+
+* **DrawerContent:** removed no-background colorVariant ([#629](https://github.com/patternfly/pf-codemods/issues/629)) ([fb7076c](https://github.com/patternfly/pf-codemods/commit/fb7076c1043a65ff1854f21051064e3272d3a345))
+
+
+
+
+
 ## [1.96.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.96.1...@patternfly/eslint-plugin-pf-codemods@1.96.2) (2024-04-23)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
