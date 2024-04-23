@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.98.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.97.0...@patternfly/eslint-plugin-pf-codemods@1.98.0) (2024-04-23)
+
+
+### Features
+
+* **DragDrop:** deprecate ([#631](https://github.com/patternfly/pf-codemods/issues/631)) ([e0f6dd0](https://github.com/patternfly/pf-codemods/commit/e0f6dd0ea035348c308ea5670110f13a598bb2f2))
+
+
+
+
+
 # [1.97.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.96.2...@patternfly/eslint-plugin-pf-codemods@1.97.0) (2024-04-23)
 
 
