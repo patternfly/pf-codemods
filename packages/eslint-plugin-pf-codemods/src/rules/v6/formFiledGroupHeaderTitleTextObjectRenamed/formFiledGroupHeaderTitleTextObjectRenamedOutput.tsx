@@ -1,4 +1,5 @@
 import { FormFieldGroupHeaderTitleTextObject } from "@patternfly/react-core";
+export { FormFieldGroupHeaderTitleTextObject as HeaderTitleObject } from "@patternfly/react-core";
 
 interface MyExtension extends FormFieldGroupHeaderTitleTextObject {}
 
