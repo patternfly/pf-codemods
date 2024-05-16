@@ -16,6 +16,36 @@ export function getAttribute(
   ) as JSXAttribute | undefined;
 }
 
+export function getAttributeValue(
+  context: Rule.RuleContext,
+  node?: JSXAttribute["value"]
+) {
+  if (!node) {
+    return;
+  }
+
+  const valueType = node.type;
+
+  if (valueType === "Literal") {
+    return node.value;
+  }
+
+  const isExpressionContainer = valueType === "JSXExpressionContainer";
+  if (isExpressionContainer && node.expression.type === "Identifier") {
+    const variableScope = context.getSourceCode().getScope(node);
+    return getVariableValue(node.expression.name, variableScope);
+  }
+  if (isExpressionContainer && node.expression.type === "MemberExpression") {
+    return getMemberExpression(node.expression);
+  }
+  if (isExpressionContainer && node.expression.type === "Literal") {
+    return node.expression.value;
+  }
+  if (isExpressionContainer && node.expression.type === "ObjectExpression") {
+    return node.expression.properties;
+  }
+}
+
 export function getExpression(node?: JSXAttribute["value"]) {
   if (!node) {
     return;
@@ -53,7 +83,6 @@ export function getVariableDeclaration(
 
 export function getVariableValue(name: string, scope: Scope.Scope | null) {
   const variableDeclaration = getVariableDeclaration(name, scope);
-
   if (!variableDeclaration) {
     return;
   }
@@ -71,31 +100,7 @@ export function getVariableValue(name: string, scope: Scope.Scope | null) {
   if (variableInit.type === "MemberExpression") {
     return getMemberExpression(variableInit);
   }
-}
-
-export function getAttributeValue(
-  context: Rule.RuleContext,
-  node?: JSXAttribute["value"]
-) {
-  if (!node) {
-    return;
-  }
-
-  const valueType = node.type;
-
-  if (valueType === "Literal") {
-    return node.value;
-  }
-
-  const isExpressionContainer = valueType === "JSXExpressionContainer";
-  if (isExpressionContainer && node.expression.type === "Identifier") {
-    const variableScope = context.getSourceCode().getScope(node);
-    return getVariableValue(node.expression.name, variableScope);
-  }
-  if (isExpressionContainer && node.expression.type === "MemberExpression") {
-    return getMemberExpression(node.expression);
-  }
-  if (isExpressionContainer && node.expression.type === "Literal") {
-    return node.expression.value;
+  if (variableInit.type === "ObjectExpression") {
+    return variableInit.properties;
   }
 }

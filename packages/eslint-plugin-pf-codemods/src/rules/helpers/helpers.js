@@ -130,7 +130,7 @@ export function moveSpecifiers(
           (importSpecifier) => {
             const importString = src.getText(importSpecifier);
 
-            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+            return /^@patternfly\/react-core\/(dist\/(esm|js|dynamic)\/)?next/.test(
               importSpecifier.parent?.source?.value
             )
               ? `${importString} /* data-codemods */`
@@ -217,7 +217,7 @@ export function moveSpecifiers(
           ...newToPackageSpecifiers.map((exportSpecifier) => {
             const exportString = src.getText(exportSpecifier);
 
-            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+            return /^@patternfly\/react-core\/(dist\/(esm|js|dynamic)\/)?next/.test(
               exportSpecifier.parent?.source?.value
             )
               ? `${exportString} /* data-codemods */`
