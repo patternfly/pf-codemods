@@ -14,7 +14,7 @@ export function pfPackageMatches(
       parts[0] +
       "/" +
       parts[1] +
-      "(/dist/(esm|js))?" +
+      "(/dist/(esm|js|dynamic))?" +
       (parts[2] ? "/" + parts[2] : "") +
       `(/(components|helpers${
         parts[1] === "react-icons" ? "|icons" : ""
