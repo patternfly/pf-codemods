@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.98.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.98.0...@patternfly/eslint-plugin-pf-codemods@1.98.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **Toolbar:** updated align values to logical names ([#640](https://github.com/patternfly/pf-codemods/issues/640)) ([f81d5d1](https://github.com/patternfly/pf-codemods/commit/f81d5d1677cc74f02c4438d79cf98048642e14e2))
+
+
+
+
+
 # [1.98.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.97.0...@patternfly/eslint-plugin-pf-codemods@1.98.0) (2024-04-23)
 
 
