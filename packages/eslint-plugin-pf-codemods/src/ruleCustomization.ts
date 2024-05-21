@@ -30,18 +30,23 @@ export const warningRules = [
   "menuToggle-warn-iconOnly-toggle",
   "nav-warn-flyouts-now-inline",
   "notificationBadge-warn-markup-change",
+  "notificationDrawerHeader-warn-update-markup",
   "overflowMenu-warn-updated-dropdownItem",
   "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
   "react-dropzone-warn-upgrade",
   "simpleFileUpload-warn-changes",
+  "sliderStep-warn-update-markup",
   "table-warn-actionsColumn",
   "table-warn-thExpandType",
   "tabs-update-markup",
   "tabs-warn-children-type-changed",
+  "Th-Td-warn-update-markup",
   "tooltip-warn-triggerRef-may-be-required",
   "treeView-warn-selectable-styling-modifier-removed",
   "wizard-warn-button-order",
+  "wizardFooter-warn-update-markup",
+  "wizardNavItem-warn-update-markup",
 ];
 
 // rules that will run before other rules (move to deprecated?)

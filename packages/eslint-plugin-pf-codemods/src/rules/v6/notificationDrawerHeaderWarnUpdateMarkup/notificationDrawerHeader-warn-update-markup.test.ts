@@ -19,6 +19,16 @@ ruleTester.run("notificationDrawerHeader-warn-update-markup", rule, {
       ],
     },
     {
+      code: `import { NotificationDrawerHeader as CustomDrawerHeader } from '@patternfly/react-core'; <CustomDrawerHeader />`,
+      output: `import { NotificationDrawerHeader as CustomDrawerHeader } from '@patternfly/react-core'; <CustomDrawerHeader />`,
+      errors: [
+        {
+          message: `NotificationDrawerHeader no longer uses our Text component internally, and instead renders a native \`h1\` element.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
       code: `import { NotificationDrawerHeader } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <NotificationDrawerHeader />`,
       output: `import { NotificationDrawerHeader } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <NotificationDrawerHeader />`,
       errors: [

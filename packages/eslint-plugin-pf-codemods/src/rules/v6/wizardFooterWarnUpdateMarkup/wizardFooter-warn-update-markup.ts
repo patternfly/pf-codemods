@@ -1,6 +1,10 @@
 import { Rule } from "eslint";
 import { JSXElement } from "estree-jsx";
-import { getFromPackage, getAllChildElementsByName } from "../../helpers";
+import {
+  getFromPackage,
+  getAttribute,
+  getAllChildElementsByName,
+} from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10378
 module.exports = {
@@ -23,21 +27,12 @@ module.exports = {
               node.openingElement.name.type === "JSXIdentifier" &&
               wizardImport.local.name === node.openingElement.name.name
             ) {
-              const wizardFooterProp = node.openingElement.attributes.find(
-                (attr) =>
-                  attr.type === "JSXAttribute" && attr.name.name === "footer"
-              );
+              const wizardFooterProp = getAttribute(node, "footer");
               const wizardSteps = wizardStepImport
-                ? getAllChildElementsByName(node, wizardStepImport?.local.name)
+                ? getAllChildElementsByName(node, wizardStepImport.local.name)
                 : undefined;
               const allWizardStepsHaveFooter = wizardSteps
-                ? wizardSteps.every((step) =>
-                    step.openingElement.attributes.find(
-                      (attr) =>
-                        attr.type === "JSXAttribute" &&
-                        attr.name.name === "footer"
-                    )
-                  )
+                ? wizardSteps.every((step) => getAttribute(step, "footer"))
                 : false;
 
               if (wizardFooterProp || allWizardStepsHaveFooter) {

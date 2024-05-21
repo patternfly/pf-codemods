@@ -1,3 +1,3 @@
 import { Wizard } from "@patternfly/react-core";
 
-export const WizardFooterWarnUpdateMarkupInput = () => <Wizard none />
+export const WizardFooterWarnUpdateMarkupInput = () => <Wizard />;
