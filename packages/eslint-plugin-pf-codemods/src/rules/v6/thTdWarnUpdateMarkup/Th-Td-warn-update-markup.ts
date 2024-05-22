@@ -22,11 +22,7 @@ module.exports = {
                 .map((imp) => imp.local.name)
                 .includes(node.name.name)
             ) {
-              const attribute = node.attributes.find(
-                (attr) =>
-                  attr.type === "JSXAttribute" &&
-                  attr.name.name === "isStickyColumn"
-              );
+              const attribute = getAttribute(node, "isStickyColumn");
               if (attribute) {
                 context.report({
                   node,

@@ -15,7 +15,7 @@ export function getAllChildElementsByName(node: JSXElement, name: string) {
       child.type === "JSXElement" &&
       child.openingElement.name.type === "JSXIdentifier" &&
       child.openingElement.name.name === name
-  ) as JSXElement[] | undefined;
+  ) as JSXElement[];
 }
 
 export function nodeIsComponentNamed(node: JSXElement, componentName: string) {
