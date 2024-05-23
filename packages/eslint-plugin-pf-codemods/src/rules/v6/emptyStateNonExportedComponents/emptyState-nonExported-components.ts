@@ -1,7 +1,6 @@
 import { Rule } from "eslint";
 import {
   ImportSpecifier,
-  ExportSpecifier,
   ExportNamedDeclaration,
   ExportDefaultDeclaration,
 } from "estree-jsx";
@@ -97,9 +96,7 @@ module.exports = {
         const exportName =
           node.declaration.type === "Identifier" && node.declaration.name;
         const isEmptyStateDefaultExport = emptyStateImports.some(
-          (imp) =>
-            node.declaration.type === "Identifier" &&
-            imp.local.name === exportName
+          (imp) => imp.local.name === exportName
         );
 
         if (isEmptyStateDefaultExport) {

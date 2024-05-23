@@ -117,5 +117,33 @@ ruleTester.run("emptyState-nonExported-components", rule, {
         },
       ],
     },
+    {
+      code: `import { EmptyStateHeader } from '@patternfly/react-core';export default EmptyStateHeader;`,
+      output: `import { EmptyStateHeader } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `EmptyStateHeader is no longer exported by PatternFly.`,
+          type: "ExportDefaultDeclaration",
+        },
+      ],
+    },
+    {
+      code: `import { EmptyStateHeader as CustomHeader } from '@patternfly/react-core';export default CustomHeader;`,
+      output: `import { EmptyStateHeader as CustomHeader } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
+          type: "ImportSpecifier",
+        },
+        {
+          message: `CustomHeader is no longer exported by PatternFly.`,
+          type: "ExportDefaultDeclaration",
+        },
+      ],
+    },
   ],
 });
