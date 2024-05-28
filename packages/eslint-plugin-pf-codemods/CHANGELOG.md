@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.100.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.99.0...@patternfly/eslint-plugin-pf-codemods@1.100.0) (2024-05-28)
+
+
+### Features
+
+* **Banner:** added color and status props ([#649](https://github.com/patternfly/pf-codemods/issues/649)) ([67f0dfb](https://github.com/patternfly/pf-codemods/commit/67f0dfb70e74c3ec82d291bbddc80d49e754de05))
+
+
+
+
+
 # [1.99.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.98.1...@patternfly/eslint-plugin-pf-codemods@1.99.0) (2024-05-22)
 
 
