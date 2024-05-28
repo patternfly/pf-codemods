@@ -5,7 +5,10 @@ module.exports = {
   meta: { fixable: 'code' },
   create: renameProps({
     Page: {
-      header: 'masthead',
+      header: {
+        newName: 'masthead',
+        message: `We've renamed the \`header\` prop for Page to \`masthead\`.`,
+      },
     },
   }),
 };
