@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, JSXAttribute } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 import { Property } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
@@ -52,9 +52,10 @@ module.exports = {
                           val.value?.type === "Literal" &&
                           (val.value.value as string).replace("spacer", "gap");
 
-                        fixes.push(
-                          fixer.replaceText(val.value, `"${newValue}"`)
-                        );
+                        newValue &&
+                          fixes.push(
+                            fixer.replaceText(val.value, `"${newValue}"`)
+                          );
                       });
 
                     fixes.push(fixer.replaceText(spacerProp.name, "gap"));

@@ -39,6 +39,13 @@ toolbarComponents.forEach((component) => {
   );
   invalidTests.push(
     createInvalidTest(
+      `import { ${component} } from '@patternfly/react-core'; const NO_SPACER = "spacerNone"; <${component} spacer={{default: NO_SPACER}} />`,
+      `import { ${component} } from '@patternfly/react-core'; const NO_SPACER = "spacerNone"; <${component} gap={{default: NO_SPACER}} />`,
+      spacerErrorMessage
+    )
+  );
+  invalidTests.push(
+    createInvalidTest(
       `import { ${component} as CustomComponent } from '@patternfly/react-core'; <CustomComponent spacer={{default: "spacerNone"}} />`,
       `import { ${component} as CustomComponent } from '@patternfly/react-core'; <CustomComponent gap={{default: "gapNone"}} />`,
       `The spacer property has been removed from CustomComponent. We recommend instead using our new gap, columnGap, or rowGap properties.`
