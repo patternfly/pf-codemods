@@ -22,6 +22,16 @@ ruleTester.run('page-rename-header', rule, {
       errors: [error],
     },
     {
+      code: `import { Page as CustomPage } from '@patternfly/react-core'; <CustomPage header={<Masthead />} />`,
+      output: `import { Page as CustomPage } from '@patternfly/react-core'; <CustomPage masthead={<Masthead />} />`,
+      errors: [
+        {
+          message: `header prop for CustomPage has been renamed to masthead`,
+          type: 'JSXOpeningElement',
+        },
+      ],
+    },
+    {
       code: `import { Page } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <Page header={<Masthead />} />`,
       output: `import { Page } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <Page masthead={<Masthead />} />`,
       errors: [error],
