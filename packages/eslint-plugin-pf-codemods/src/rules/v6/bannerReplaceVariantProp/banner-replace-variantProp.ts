@@ -8,17 +8,17 @@ module.exports = {
   create: function (context: Rule.RuleContext) {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    const componentImports = imports.find(
+    const bannerImport = imports.find(
       (specifier) => specifier.imported.name === "Banner"
     );
 
-    return !componentImports
+    return !bannerImport
       ? {}
       : {
           JSXOpeningElement(node: JSXOpeningElement) {
             if (
               node.name.type === "JSXIdentifier" &&
-              componentImports.local.name === node.name.name
+              bannerImport.local.name === node.name.name
             ) {
               const attribute = getAttribute(node, "variant");
               if (!attribute) {
@@ -37,7 +37,7 @@ module.exports = {
                 node,
                 message: `The variant property has been removed from Banner. We recommend using our new color or status properties, depending on the original intent of the variant property. Running the fix for this rule will ${fixMessage}, but additional manual updates may need to be made.`,
                 fix(fixer) {
-                  if (attributeValue === "default") {
+                  if (isValueDefault) {
                     return fixer.replaceText(attribute, "");
                   }
 
