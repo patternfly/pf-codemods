@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.101.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.100.0...@patternfly/eslint-plugin-pf-codemods@1.101.0) (2024-05-29)
+
+
+### Features
+
+* **Toolbar:** replaced spacer props with gap ([#648](https://github.com/patternfly/pf-codemods/issues/648)) ([2c73046](https://github.com/patternfly/pf-codemods/commit/2c73046aa8c5434854c4b7d8e6bf5f8877ca6705))
+
+
+
+
+
 # [1.100.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.99.0...@patternfly/eslint-plugin-pf-codemods@1.100.0) (2024-05-28)
 
 
