@@ -69,6 +69,12 @@ const renameOnClickAttribute = (node: JSXElement, fixer: Rule.RuleFixer) => {
     : [];
 };
 
+const removeIsReadOnlyProp = (node: JSXElement, fixer: Rule.RuleFixer) => {
+  const isReadOnlyProp = getAttribute(node, "isReadOnly");
+
+  return isReadOnlyProp ? [fixer.replaceText(isReadOnlyProp, "")] : [];
+};
+
 // https://github.com/patternfly/patternfly-react/pull/10049
 module.exports = {
   meta: { fixable: 'code' },
@@ -199,6 +205,7 @@ module.exports = {
                   ' variant="outline"'
                 ),
                 ...renameOnClickAttribute(node, fixer),
+                ...removeIsReadOnlyProp(node, fixer),
                 ...(node.closingElement
                   ? [
                       ...moveBadgeAttributeToBody(node, fixer, context),
