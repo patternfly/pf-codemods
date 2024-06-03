@@ -150,5 +150,25 @@ ruleTester.run('chip-replace-with-label', rule, {
       </>`,
       errors: [chipImportError],
     },
+    // with isReadOnly prop
+    {
+      code: `import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
+      <>
+        <ChipGroup>
+          <Chip isReadOnly>
+            This is a chip
+          </Chip>
+        </ChipGroup>
+      </>`,
+      output: `import { Label, LabelGroup } from '@patternfly/react-core';
+      <>
+        <LabelGroup>
+          <Label variant="outline" >
+            This is a chip
+          </Label>
+        </LabelGroup>
+      </>`,
+      errors: [chipImportError],
+    },
   ],
 });
