@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.101.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.101.1...@patternfly/eslint-plugin-pf-codemods@1.101.2) (2024-06-03)
+
+
+### Bug Fixes
+
+* **Chip:** Remove isReadOnly prop during label conversion ([#653](https://github.com/patternfly/pf-codemods/issues/653)) ([7638965](https://github.com/patternfly/pf-codemods/commit/7638965d334b31a66a595ee650167cc1d559964c))
+
+
+
+
+
 ## [1.101.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.101.0...@patternfly/eslint-plugin-pf-codemods@1.101.1) (2024-05-31)
 
 
