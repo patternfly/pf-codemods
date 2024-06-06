@@ -1,7 +1,6 @@
-import { getFromPackage } from "../../helpers";
+import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement, JSXAttribute, Literal } from "estree-jsx";
-import { isJsxAttribute } from "typescript";
+import { JSXOpeningElement, JSXAttribute } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9774
 // https://github.com/patternfly/patternfly-react/pull/9848
@@ -13,6 +12,10 @@ module.exports = {
     const pageSectionImport = imports.find(
       (specifier) => specifier.imported.name === "PageSection"
     );
+    const pageSectionVariantImport = imports.find(
+      (specifier) => specifier.imported.name === "PageSectionVariants"
+    );
+    const validValues = ["default", "secondary"];
 
     return !pageSectionImport
       ? {}
@@ -22,20 +25,30 @@ module.exports = {
               node.name.type === "JSXIdentifier" &&
               pageSectionImport.local.name === node.name.name
             ) {
-              const attribute = node.attributes.find(
-                (attr) =>
-                  attr.type === "JSXAttribute" && attr.name.name === "variant"
-              ) as JSXAttribute | undefined;
+              const variantProp = getAttribute(node, "variant");
 
-              if (!attribute || !attribute.value) {
+              if (!variantProp || !variantProp.value) {
                 return;
               }
+              const variantValue = getAttributeValue(
+                context,
+                variantProp.value
+              );
+              const pageSectionVariantLocalName =
+                pageSectionVariantImport && pageSectionVariantImport.local.name;
+              const hasPatternFlyEnum =
+                variantValue.object &&
+                variantValue.object.name === pageSectionVariantLocalName;
 
-              if (
-                attribute.value.type === "Literal" &&
-                typeof attribute.value.value === "string" &&
-                !["default", "secondary"].includes(attribute.value.value)
-              ) {
+              if (variantProp.value.type !== "Literal" && !hasPatternFlyEnum) {
+                return;
+              }
+              const hasValidValue = variantValue.property
+                ? validValues.includes(variantValue.property.name)
+                : validValues.includes(variantValue);
+              console.log(hasValidValue);
+
+              if (!hasValidValue) {
                 context.report({
                   node,
                   message:
@@ -43,7 +56,7 @@ module.exports = {
                   fix(fixer: {
                     replaceText: (arg0: any, arg1: string) => any;
                   }) {
-                    return fixer.replaceText(attribute, "");
+                    return fixer.replaceText(variantProp, "");
                   },
                 });
               }
