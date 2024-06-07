@@ -28,7 +28,12 @@ module.exports = {
 
     return {
       ImportSpecifier(node: ImportSpecifier) {
-        if (!emptyStateImports.length) {
+        if (
+          !emptyStateImports.length ||
+          !emptyStateImports
+            ?.map((imp) => imp.imported.name)
+            .includes(node.imported.name)
+        ) {
           return;
         }
 
