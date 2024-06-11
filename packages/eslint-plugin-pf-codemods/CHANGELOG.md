@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.102.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.102.0...@patternfly/eslint-plugin-pf-codemods@1.102.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* **EmptyState:** resolved rule being flagged for every specifier ([#659](https://github.com/patternfly/pf-codemods/issues/659)) ([1603e39](https://github.com/patternfly/pf-codemods/commit/1603e39c67b9ed325e1b702a9ffaf7f47d47953f))
+
+
+
+
+
 # [1.102.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.101.2...@patternfly/eslint-plugin-pf-codemods@1.102.0) (2024-06-06)
 
 
