@@ -30,7 +30,6 @@ module.exports = {
 
               const variantValue = getAttributeValue(context, variant.value);
 
-              console.log(variantValue);
               if (
                 (variant.value.type === "Literal" &&
                   variantValue === "chip-group") ||
