@@ -37,6 +37,16 @@ ruleTester.run("pageSection-update-variant-values", rule, {
       ],
     },
     {
+      code: `import { PageSection } from '@patternfly/react-core'; <PageSection variant={"dark"} />`,
+      output: `import { PageSection } from '@patternfly/react-core'; <PageSection  />`,
+      errors: [
+        {
+          message: `The \`variant\` prop for PageSection now only accepts a value of "default" or "secondary". Running the fix for this rule will remove the prop so it uses the default value of "default".`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
       code: `import { PageSection as CustomPageSection } from '@patternfly/react-core'; <CustomPageSection variant="dark" />`,
       output: `import { PageSection as CustomPageSection } from '@patternfly/react-core'; <CustomPageSection  />`,
       errors: [

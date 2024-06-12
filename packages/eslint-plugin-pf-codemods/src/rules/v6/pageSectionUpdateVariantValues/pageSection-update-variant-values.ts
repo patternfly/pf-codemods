@@ -1,6 +1,6 @@
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement, JSXAttribute } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9774
 // https://github.com/patternfly/patternfly-react/pull/9848
@@ -39,23 +39,23 @@ module.exports = {
               const hasPatternFlyEnum =
                 variantValue.object &&
                 variantValue.object.name === pageSectionVariantLocalName;
-
-              if (variantProp.value.type !== "Literal" && !hasPatternFlyEnum) {
+              const variantValueIsLiteral =
+                variantProp.value.type === "Literal" ||
+                (variantProp.value.type === "JSXExpressionContainer" &&
+                  variantProp.value.expression.type === "Literal");
+              if (!variantValueIsLiteral && !hasPatternFlyEnum) {
                 return;
               }
               const hasValidValue = variantValue.property
                 ? validValues.includes(variantValue.property.name)
                 : validValues.includes(variantValue);
-              console.log(hasValidValue);
 
               if (!hasValidValue) {
                 context.report({
                   node,
                   message:
                     'The `variant` prop for PageSection now only accepts a value of "default" or "secondary". Running the fix for this rule will remove the prop so it uses the default value of "default".',
-                  fix(fixer: {
-                    replaceText: (arg0: any, arg1: string) => any;
-                  }) {
+                  fix(fixer) {
                     return fixer.replaceText(variantProp, "");
                   },
                 });
