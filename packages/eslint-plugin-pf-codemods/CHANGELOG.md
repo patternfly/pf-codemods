@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.104.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.103.1...@patternfly/eslint-plugin-pf-codemods@1.104.0) (2024-06-20)
+
+
+### Features
+
+* **DualListSelector:** promoted Next implementation ([#661](https://github.com/patternfly/pf-codemods/issues/661)) ([cd3e316](https://github.com/patternfly/pf-codemods/commit/cd3e3166c26699e1b6ef9694ddf226a9b9d3eb8d))
+
+
+
+
+
 ## [1.103.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.103.0...@patternfly/eslint-plugin-pf-codemods@1.103.1) (2024-06-13)
 
 
