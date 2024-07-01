@@ -65,4 +65,4 @@ export const setupRules = [
 ];
 
 // rules that will run after other rules (cleanup imports?)
-export const cleanupRules = ["no-unused-imports-v5"];
+export const cleanupRules = ["no-unused-imports-v5", "no-unused-imports-v6"];
