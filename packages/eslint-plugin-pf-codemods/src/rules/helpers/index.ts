@@ -7,4 +7,5 @@ export * from './JSXAttributes';
 export * from './JSXElements';
 export * from './pfPackageMatches';
 export * from './renameProps';
-export * from "./getImportDeclaration";
+export * from './renamePropsOnNode';
+export * from './getImportDeclaration';

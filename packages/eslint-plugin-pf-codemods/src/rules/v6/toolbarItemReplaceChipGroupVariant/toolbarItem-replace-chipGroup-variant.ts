@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement } from "estree-jsx";
+import { JSXOpeningElement, MemberExpression, Identifier } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10378
@@ -18,6 +18,23 @@ module.exports = {
     return !componentImport
       ? {}
       : {
+          MemberExpression(node: MemberExpression) {
+            if (
+              enumImport &&
+              (node.object as Identifier).name === enumImport.local.name &&
+              node.property.type === "Literal" &&
+              node.property.value === "chip-group"
+            ) {
+              context.report({
+                node,
+                message:
+                  'The "chip-group" variant for ToolbarItem has been replaced with "label-group".',
+                fix(fixer) {
+                  return fixer.replaceText(node.property, '"label-group"');
+                },
+              });
+            }
+          },
           JSXOpeningElement(node: JSXOpeningElement) {
             if (
               node.name.type === "JSXIdentifier" &&
@@ -31,16 +48,16 @@ module.exports = {
               const variantValue = getAttributeValue(context, variant.value);
 
               if (
-                (variant.value.type === "Literal" &&
-                  variantValue === "chip-group") ||
-                (variant.value.type === "JSXExpressionContainer" &&
-                  variantValue.property.value === "chip-group" &&
-                  variantValue.object.name === enumImport?.local.name)
+                variant.value.type === "Literal" &&
+                variantValue === "chip-group"
               ) {
                 context.report({
                   node,
                   message:
-                    'The classname applied to the ToolbarItem when its variant is "chip-group" has been updated from `pf-m-chip-group` to `pf-m-label-group`.',
+                    'The "chip-group" variant for ToolbarItem has been replaced with "label-group".',
+                  fix(fixer) {
+                    return fixer.replaceText(variant, `variant="label-group"`);
+                  },
                 });
               }
             }
