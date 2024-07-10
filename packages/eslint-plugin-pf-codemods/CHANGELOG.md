@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.105.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.2...@patternfly/eslint-plugin-pf-codemods@1.105.0) (2024-07-10)
+
+
+### Features
+
+* **Button:** updated icon usage ([#689](https://github.com/patternfly/pf-codemods/issues/689)) ([90347a7](https://github.com/patternfly/pf-codemods/commit/90347a7e4c3cab849649301bfcd04bb1e2ac4d43))
+
+
+
+
+
 ## [1.104.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.1...@patternfly/eslint-plugin-pf-codemods@1.104.2) (2024-07-10)
 
 
