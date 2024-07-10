@@ -34,6 +34,7 @@ export const warningRules = [
   "overflowMenu-warn-updated-dropdownItem",
   "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
+  "popper-update-appendTo-default",
   "react-dropzone-warn-upgrade",
   "simpleFileUpload-warn-changes",
   "sliderStep-warn-update-markup",
