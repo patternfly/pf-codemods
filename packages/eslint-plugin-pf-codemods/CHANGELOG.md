@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.104.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.0...@patternfly/eslint-plugin-pf-codemods@1.104.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* **Switch:** removed labelOff prop for a11y ([#686](https://github.com/patternfly/pf-codemods/issues/686)) ([cd27b84](https://github.com/patternfly/pf-codemods/commit/cd27b84024aa41589752c16cab31dfe573bf1fa4))
+
+
+
+
+
 # [1.104.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.103.1...@patternfly/eslint-plugin-pf-codemods@1.104.0) (2024-06-20)
 
 
