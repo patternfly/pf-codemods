@@ -2,7 +2,7 @@ import { Rule } from "eslint";
 import { JSXOpeningElement, MemberExpression, Identifier } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
-// https://github.com/patternfly/patternfly-react/pull/10378
+// https://github.com/patternfly/patternfly-react/pull/10649
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {

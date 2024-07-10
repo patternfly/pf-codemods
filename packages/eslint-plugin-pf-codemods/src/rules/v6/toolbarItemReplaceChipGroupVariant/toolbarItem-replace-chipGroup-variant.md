@@ -1,3 +1,17 @@
-### toolbarItem-warn-update-markup [(#10378)](https://github.com/patternfly/patternfly-react/pull/10378)
+### toolbarItem-warn-update-markup [(#10649)](https://github.com/patternfly/patternfly-react/pull/10649)
 
-The classname applied to the ToolbarItem when its variant is "chip-group" has been updated from `pf-m-chip-group` to `pf-m-label-group`.
+The "chip-group" variant for ToolbarItem has been replaced with "label-group".
+
+#### Examples
+
+In:
+
+```jsx
+%inputExample%
+```
+
+Out:
+
+```jsx
+%outputExample%
+```
