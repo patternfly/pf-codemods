@@ -22,15 +22,15 @@ program
   )
   .option("--fix", "Whether to run fixer")
   .option(
-    "--pfVersion <pfVersion>",
-    "Version of PatternFly to use, pass just the version number."
+    "--v6",
+    "Apply v6 class names."
   )
   .action(runClassNameUpdate);
 
 async function runClassNameUpdate(
   path: string,
   otherPaths: string,
-  options: { extensions: string; fix: boolean; exclude: string[] | undefined; pfVersion: number;}
+  options: { extensions: string; fix: boolean; exclude: string[] | undefined; v6?: boolean;}
 ) {
   let allPaths = [path, ...otherPaths];
 
@@ -48,8 +48,10 @@ async function runClassNameUpdate(
     fileTypes = new RegExp(`\.(${options.extensions.split(",").join("|")})$`);
   }
 
+  const pfVersion = options.v6 ? 6 : 5
+
   allPaths.forEach(async (path) => {
-    await classNameUpdate(path, options.fix, fileTypes, options.exclude, options.pfVersion);
+    await classNameUpdate(path, options.fix, fileTypes, options.exclude, pfVersion);
   });
 }
 
