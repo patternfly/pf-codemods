@@ -44,6 +44,17 @@ ruleTester.run("no-unused-imports-v6", rule, {
         },
       ],
     },
+    //when there's multiple invalid and one valid import
+    {
+      code: `import { Bash, Bar, Foo, Bang } from '@patternfly/react-core'; <Bar someProp />`,
+      output: `import { Bar,  } from '@patternfly/react-core'; <Bar someProp />`,
+      errors: [
+        {
+          message: `Unused PatternFly imports Bash, Foo, Bang from '@patternfly/react-core' should be removed`,
+          type: "ImportDeclaration",
+        },
+      ],
+    },
     // dist/esm import
     {
       code: `import { Bar, Foo } from '@patternfly/react-core/dist/esm/components'; <Bar someProp />`,
