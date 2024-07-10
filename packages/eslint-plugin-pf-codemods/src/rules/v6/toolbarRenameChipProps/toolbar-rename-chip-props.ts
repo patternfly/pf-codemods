@@ -24,7 +24,7 @@ const renames = {
   ToolbarLabelGroupContent: {
     chipGroupContentRef: "labelGroupContentRef",
     customChipGroupContent: "customLabelGroupContent",
-  }
+  },
   ToolbarToggleGroup: {
     chipContainerRef: "labelContainerRef",
   },
