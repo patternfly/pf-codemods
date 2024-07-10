@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.105.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.105.0...@patternfly/eslint-plugin-pf-codemods@1.105.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* **LogViewer:** moved styles into repo ([#690](https://github.com/patternfly/pf-codemods/issues/690)) ([bd6babe](https://github.com/patternfly/pf-codemods/commit/bd6babe7aae0f4caa7b1691c0396617f8b6e30b8))
+
+
+
+
+
 # [1.105.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.2...@patternfly/eslint-plugin-pf-codemods@1.105.0) (2024-07-10)
 
 
