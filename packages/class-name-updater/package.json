@@ -18,7 +18,7 @@
     "clean": "rimraf ./dist",
     "test": "yarn build && yarn test:v5 && yarn test:v6",
     "test:v5": "node ./dist/cli.js test --exclude test/largeFile.js",
-    "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --pfVersion 6"
+    "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --v6"
   },
   "dependencies": {
     "colors": "^1.4.0",
