@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.33](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.32...@patternfly/pf-codemods@2.0.33) (2024-07-11)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
 ## [2.0.32](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.31...@patternfly/pf-codemods@2.0.32) (2024-07-11)
 
 **Note:** Version bump only for package @patternfly/pf-codemods

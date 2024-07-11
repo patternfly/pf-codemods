@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.107.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.106.0...@patternfly/eslint-plugin-pf-codemods@1.107.0) (2024-07-11)
+
+
+### Features
+
+* **Toolbar:** replaced chip instances with label ([#692](https://github.com/patternfly/pf-codemods/issues/692)) ([7f5efb5](https://github.com/patternfly/pf-codemods/commit/7f5efb5cd70c67be39069e7db8706a37a8560277))
+
+
+
+
+
 # [1.106.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.105.1...@patternfly/eslint-plugin-pf-codemods@1.106.0) (2024-07-11)
 
 
