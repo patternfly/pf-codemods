@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.107.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.107.0...@patternfly/eslint-plugin-pf-codemods@1.107.1) (2024-07-11)
+
+
+### Bug Fixes
+
+* **noUnusedImports:** Add unused import removal for v6 rules ([#678](https://github.com/patternfly/pf-codemods/issues/678)) ([4b6bb1d](https://github.com/patternfly/pf-codemods/commit/4b6bb1dee1e6c622d9b3c54b8d53c746d6bdaeb0))
+
+
+
+
+
 # [1.107.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.106.0...@patternfly/eslint-plugin-pf-codemods@1.107.0) (2024-07-11)
 
 
