@@ -40,20 +40,20 @@ const validTests: ValidTests = [];
 const invalidTests: InvalidTests = [];
 for (const component in renames) {
   for (const oldProp in renames[component]) {
+    const newProp = renames[component][oldProp];
     validTests.push(createValidTest(`<${component} ${oldProp} />`));
     validTests.push(
       createValidTest(
-        `import { ${component} } from '@patternfly/react-core'; <${component} ${renames[component][oldProp]} />`
+        `import { ${component} } from '@patternfly/react-core'; <${component} ${newProp} />`
       )
     );
 
-    const newProp = renames[component][oldProp];
     const createMessage = (name: string = component) =>
       `${oldProp} prop for ${name} has been renamed to ${newProp}`;
     invalidTests.push(
       createInvalidTest(
         `import { ${component} } from '@patternfly/react-core'; <${component} ${oldProp} />`,
-        `import { ${component} } from '@patternfly/react-core'; <${component} ${renames[component][oldProp]} />`,
+        `import { ${component} } from '@patternfly/react-core'; <${component} ${newProp} />`,
         [
           {
             message: createMessage(),
@@ -65,7 +65,7 @@ for (const component in renames) {
     invalidTests.push(
       createInvalidTest(
         `import { ${component} } from '@patternfly/react-core'; <${component} ${oldProp}="test" />`,
-        `import { ${component} } from '@patternfly/react-core'; <${component} ${renames[component][oldProp]}="test" />`,
+        `import { ${component} } from '@patternfly/react-core'; <${component} ${newProp}="test" />`,
         [
           {
             message: createMessage(),
@@ -77,7 +77,7 @@ for (const component in renames) {
     invalidTests.push(
       createInvalidTest(
         `import { ${component} as CustomThing } from '@patternfly/react-core'; <CustomThing ${oldProp} />`,
-        `import { ${component} as CustomThing } from '@patternfly/react-core'; <CustomThing ${renames[component][oldProp]} />`,
+        `import { ${component} as CustomThing } from '@patternfly/react-core'; <CustomThing ${newProp} />`,
         [
           {
             message: createMessage("CustomThing"),
@@ -89,7 +89,7 @@ for (const component in renames) {
     invalidTests.push(
       createInvalidTest(
         `import { ${component} } from '@patternfly/react-core/dist/esm/components/Toolbar/index.js'; <${component} ${oldProp} />`,
-        `import { ${component} } from '@patternfly/react-core/dist/esm/components/Toolbar/index.js'; <${component} ${renames[component][oldProp]} />`,
+        `import { ${component} } from '@patternfly/react-core/dist/esm/components/Toolbar/index.js'; <${component} ${newProp} />`,
         [
           {
             message: createMessage(),
@@ -101,7 +101,7 @@ for (const component in renames) {
     invalidTests.push(
       createInvalidTest(
         `import { ${component} } from '@patternfly/react-core/dist/js/components/Toolbar/index.js'; <${component} ${oldProp} />`,
-        `import { ${component} } from '@patternfly/react-core/dist/js/components/Toolbar/index.js'; <${component} ${renames[component][oldProp]} />`,
+        `import { ${component} } from '@patternfly/react-core/dist/js/components/Toolbar/index.js'; <${component} ${newProp} />`,
         [
           {
             message: createMessage(),
@@ -113,7 +113,7 @@ for (const component in renames) {
     invalidTests.push(
       createInvalidTest(
         `import { ${component} } from '@patternfly/react-core/dist/dynamic/components/Toolbar/index.js'; <${component} ${oldProp} />`,
-        `import { ${component} } from '@patternfly/react-core/dist/dynamic/components/Toolbar/index.js'; <${component} ${renames[component][oldProp]} />`,
+        `import { ${component} } from '@patternfly/react-core/dist/dynamic/components/Toolbar/index.js'; <${component} ${newProp} />`,
         [
           {
             message: createMessage(),
