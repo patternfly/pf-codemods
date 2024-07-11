@@ -26,6 +26,12 @@ const renames: { [key: string]: { [key: string]: string } } = {
     chipGroupContentRef: "labelGroupContentRef",
     customChipGroupContent: "customLabelGroupContent",
   },
+  // We can't assume that the rename rule will run after this one, so just add the renamed
+  // component to this list
+  ToolbarLabelGroupContent: {
+    chipGroupContentRef: "labelGroupContentRef",
+    customChipGroupContent: "customLabelGroupContent",
+  },
   ToolbarToggleGroup: {
     chipContainerRef: "labelContainerRef",
   },
