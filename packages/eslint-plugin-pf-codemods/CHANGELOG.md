@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.108.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.107.1...@patternfly/eslint-plugin-pf-codemods@1.108.0) (2024-07-12)
+
+
+### Features
+
+* **Banner,Label:** renamed cyan/gold color values ([#691](https://github.com/patternfly/pf-codemods/issues/691)) ([4e69fdb](https://github.com/patternfly/pf-codemods/commit/4e69fdbb7ba4a58f73b11d8a9fc6ea4f04d53f55))
+
+
+
+
+
 ## [1.107.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.107.0...@patternfly/eslint-plugin-pf-codemods@1.107.1) (2024-07-11)
 
 
