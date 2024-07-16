@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.111.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.110.0...@patternfly/eslint-plugin-pf-codemods@1.111.0) (2024-07-16)
+
+
+### Features
+
+* **Page:** updated logic to allow section grouping ([#699](https://github.com/patternfly/pf-codemods/issues/699)) ([db387e7](https://github.com/patternfly/pf-codemods/commit/db387e7e18e79f28ee0b04fa72a70061fad5b554))
+
+
+
+
+
 # [1.110.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.109.0...@patternfly/eslint-plugin-pf-codemods@1.110.0) (2024-07-16)
 
 
