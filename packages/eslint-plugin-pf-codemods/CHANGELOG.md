@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.109.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.2...@patternfly/eslint-plugin-pf-codemods@1.109.0) (2024-07-16)
+
+
+### Features
+
+* **NavItem:** added default nav item wrapper ([#687](https://github.com/patternfly/pf-codemods/issues/687)) ([52b355d](https://github.com/patternfly/pf-codemods/commit/52b355dce8471dab8bcb01a607f497d63a93cc88))
+
+
+
+
+
 ## [1.108.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.1...@patternfly/eslint-plugin-pf-codemods@1.108.2) (2024-07-16)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
