@@ -34,6 +34,7 @@ export const warningRules = [
   "notificationDrawerHeader-warn-update-markup",
   "overflowMenu-warn-updated-dropdownItem",
   "page-warn-updated-markup",
+  "pageBreadcrumbAndSection-warn-updated-wrapperLogic",
   "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
   "popper-update-appendTo-default",
