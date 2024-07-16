@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.110.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.109.0...@patternfly/eslint-plugin-pf-codemods@1.110.0) (2024-07-16)
+
+
+### Features
+
+* **Pagination:** added wrapper around menu toggle ([#701](https://github.com/patternfly/pf-codemods/issues/701)) ([700c347](https://github.com/patternfly/pf-codemods/commit/700c3475a18f7b866d1efa5c65be638eecfc7eb4))
+
+
+
+
+
 # [1.109.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.2...@patternfly/eslint-plugin-pf-codemods@1.109.0) (2024-07-16)
 
 
