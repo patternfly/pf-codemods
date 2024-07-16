@@ -16,6 +16,22 @@ export function getAttribute(
   ) as JSXAttribute | undefined;
 }
 
+export function getAnyAttribute(
+  node: JSXElement | JSXOpeningElement,
+  attributeNames: string[]
+) {
+  let foundAttribute = undefined;
+  for (const attribute of attributeNames) {
+    foundAttribute = getAttribute(node, attribute);
+
+    if (foundAttribute) {
+      break;
+    }
+  }
+
+  return foundAttribute;
+}
+
 export function getAttributeValue(
   context: Rule.RuleContext,
   node?: JSXAttribute["value"]
