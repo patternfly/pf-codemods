@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.108.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.0...@patternfly/eslint-plugin-pf-codemods@1.108.1) (2024-07-16)
+
+
+### Bug Fixes
+
+* **Toolbar:** updated for parity with Core updates ([#696](https://github.com/patternfly/pf-codemods/issues/696)) ([ab0b417](https://github.com/patternfly/pf-codemods/commit/ab0b417d7d087d05c3cd4d14ed4e6060dfae6228))
+
+
+
+
+
 # [1.108.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.107.1...@patternfly/eslint-plugin-pf-codemods@1.108.0) (2024-07-12)
 
 
