@@ -33,6 +33,7 @@ export const warningRules = [
   "notificationBadge-warn-markup-change",
   "notificationDrawerHeader-warn-update-markup",
   "overflowMenu-warn-updated-dropdownItem",
+  "page-warn-updated-markup",
   "pageSection-warn-variantClasses-applied",
   "popover-warn-appendTo-default",
   "popper-update-appendTo-default",
