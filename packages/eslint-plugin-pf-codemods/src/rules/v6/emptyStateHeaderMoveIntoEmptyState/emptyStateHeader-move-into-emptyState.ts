@@ -1,5 +1,10 @@
-import { AST, Rule } from "eslint";
-import { ImportSpecifier, JSXElement } from "estree-jsx";
+import { Rule } from "eslint";
+import {
+  ImportSpecifier,
+  JSXAttribute,
+  JSXElement,
+  JSXIdentifier,
+} from "estree-jsx";
 import {
   getAttribute,
   getAttributeText,
@@ -11,12 +16,104 @@ import {
   includesImport,
   nodeIsComponentNamed,
   getChildrenAsAttributeValueText,
+  removeElement,
+  removeEmptyLineAfter,
 } from "../../helpers";
-
-const baseMessage =
-  "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.";
-
 // https://github.com/patternfly/patternfly-react/pull/9947
+
+const composeMessage = (
+  hasTitleText?: boolean,
+  hasIcon?: boolean,
+  hasChildren?: boolean
+) => {
+  let message =
+    "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props";
+  const missingTitleTextMessage =
+    ", and the titleText prop is now required on EmptyState.";
+
+  if (hasTitleText) {
+    message += ".";
+  } else {
+    message += missingTitleTextMessage;
+  }
+
+  if (hasTitleText && hasChildren) {
+    message +=
+      " Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop";
+  } else if (!hasTitleText && !hasChildren) {
+    message += " You must manually supply a titleText prop to EmptyState";
+  }
+
+  const hasHeader = [hasTitleText, hasIcon, hasChildren].some(
+    (arg) => typeof arg !== "undefined"
+  );
+
+  if (hasTitleText === hasChildren && hasHeader) {
+    message += ", then you can rerun this codemod.";
+  }
+
+  if (hasIcon) {
+    message +=
+      " Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.";
+  }
+
+  return message;
+};
+
+const iconPropIsEmptyStateIconComponent = (
+  imports: ImportSpecifier[],
+  identifier?: JSXIdentifier
+) => {
+  const emptyStateIconImport = imports.find(
+    (specifier) => specifier.imported.name === "EmptyStateIcon"
+  );
+
+  if (!emptyStateIconImport) {
+    return false;
+  }
+
+  return identifier?.name === emptyStateIconImport.local.name;
+};
+
+const iconPropIsIconElement = (
+  context: Rule.RuleContext,
+  identifier?: JSXIdentifier
+) => {
+  if (!identifier) {
+    return;
+  }
+
+  const pfIconsPackage = "@patternfly/react-icons";
+  const { imports: iconImports } = getFromPackage(context, pfIconsPackage);
+  const iconDefaultImports = getDefaultImportsFromPackage(
+    context,
+    pfIconsPackage
+  );
+  const allIconImports = [...iconImports, ...iconDefaultImports];
+
+  return allIconImports.some(
+    (iconImport) => iconImport.local.name === identifier.name
+  );
+};
+
+const getIconPropText = (
+  context: Rule.RuleContext,
+  iconElementIdentifier?: JSXIdentifier,
+  emptyStateIconComponentIconAttribute?: JSXAttribute
+) => {
+  if (emptyStateIconComponentIconAttribute) {
+    return context
+      .getSourceCode()
+      .getText(emptyStateIconComponentIconAttribute);
+  }
+
+  if (iconPropIsIconElement(context, iconElementIdentifier)) {
+    return `icon={${iconElementIdentifier!.name}}`;
+  }
+
+  return "";
+};
+
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
@@ -36,15 +133,19 @@ module.exports = {
         const header = getChildElementByName(node, "EmptyStateHeader");
         const emptyStateTitleTextAttribute = getAttribute(node, "titleText");
 
-        if (!header && !emptyStateTitleTextAttribute) {
-          context.report({
-            node,
-            message: `${baseMessage} You must manually supply a titleText prop to EmptyState.`,
-          });
+        if (!header && emptyStateTitleTextAttribute) {
+          // early return if there is no header and the titleText attribute already exists on EmptyState as no changes
+          // are needed
           return;
         }
 
         if (!header || header.type !== "JSXElement") {
+          // report without fixer if there is no header or the header is not a React element, because creating a
+          // titleText for the EmptyState in this case is difficult
+          context.report({
+            node,
+            message: composeMessage(),
+          });
           return;
         }
 
@@ -56,19 +157,23 @@ module.exports = {
 
         const headerChildren = header.children;
 
+        const message = composeMessage(
+          !!titleTextAttribute,
+          !!headerIconAttribute,
+          !!headerChildren.length
+        );
+
         if (!titleTextAttribute && !headerChildren.length) {
-          context.report({
-            node,
-            message: `${baseMessage} You must manually supply a titleText prop to EmptyState, then you can rerun this codemod.`,
-          });
+          // report without fixer if there is a header, but it doesn't have titleText or children, because creating a
+          // titleText for the EmptyState in this case is difficult
+          context.report({ node, message });
           return;
         }
 
         if (titleTextAttribute && headerChildren.length) {
-          context.report({
-            node,
-            message: `${baseMessage} Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop, then you can rerun this codemod.`,
-          });
+          // report without fixer if there is the header has a titleText and children, because creating an accessible
+          // titleText for the EmptyState in this case is difficult
+          context.report({ node, message });
           return;
         }
 
@@ -105,44 +210,10 @@ module.exports = {
             ? iconPropValue.openingElement.name
             : undefined;
 
-        const iconPropIsEmptyStateIconComponent = () => {
-          const emptyStateIconImport = imports.find(
-            (specifier) => specifier.imported.name === "EmptyStateIcon"
-          );
-
-          if (!emptyStateIconImport) {
-            return false;
-          }
-
-          return (
-            iconElementIdentifier?.name === emptyStateIconImport.local.name
-          );
-        };
-
-        const iconPropIsIconElement = () => {
-          const pfIconsPackage = "@patternfly/react-icons";
-          const { imports: iconSpecifiers } = getFromPackage(
-            context,
-            pfIconsPackage
-          );
-          const iconDefaultSpecifiers = getDefaultImportsFromPackage(
-            context,
-            pfIconsPackage
-          );
-          const allIconSpecifiers = [
-            ...iconSpecifiers,
-            ...iconDefaultSpecifiers,
-          ];
-
-          return (
-            iconElementIdentifier !== undefined &&
-            allIconSpecifiers.some(
-              (spec) => spec.local.name === iconElementIdentifier.name
-            )
-          );
-        };
-
-        const emptyStateIconComponent = iconPropIsEmptyStateIconComponent()
+        const emptyStateIconComponent = iconPropIsEmptyStateIconComponent(
+          imports,
+          iconElementIdentifier
+        )
           ? (iconPropValue as JSXElement)
           : undefined;
 
@@ -161,56 +232,23 @@ module.exports = {
           });
         }
 
-        const getIconPropText = () => {
-          if (emptyStateIconComponentIconAttribute) {
-            return context
-              .getSourceCode()
-              .getText(emptyStateIconComponentIconAttribute);
-          }
-
-          if (iconPropIsIconElement()) {
-            return `icon={${iconElementIdentifier!.name}}`;
-          }
-
-          return "";
-        };
-
-        const icon = getIconPropText();
+        const icon = getIconPropText(
+          context,
+          iconElementIdentifier,
+          emptyStateIconComponentIconAttribute
+        );
 
         context.report({
           node,
-          message: baseMessage,
+          message,
           fix(fixer) {
-            const removeEmptyLineAfter = (
-              node?: JSXElement | ImportSpecifier | AST.Token | null
-            ) => {
-              if (!node) {
-                return [];
-              }
-              const token = context.getSourceCode().getTokenAfter(node);
-
-              return token &&
-                token.type === "JSXText" &&
-                token.value.trim() === ""
-                ? [fixer.remove(token)]
-                : [];
-            };
-
-            const removeElement = (node?: JSXElement) => {
-              if (!node) {
-                return [];
-              }
-
-              return [fixer.remove(node)];
-            };
-
             return [
               fixer.insertTextAfter(
                 node.openingElement.name,
                 ` ${headingClassName} ${headingLevel} ${icon} ${titleClassName} ${titleText}`
               ),
-              ...removeElement(header),
-              ...removeEmptyLineAfter(header),
+              ...removeElement(fixer, header),
+              ...removeEmptyLineAfter(context, fixer, header),
             ];
           },
         });
