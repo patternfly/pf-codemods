@@ -452,5 +452,145 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
         },
       ],
     },
+    {
+      // with a Title child and no EmptyStateHeader
+      code: `import {
+        EmptyState,
+        EmptyStateBody,
+        Title
+      } from "@patternfly/react-core";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <Title headingLevel="h4" size="lg">
+            Title text
+          </Title>
+          <EmptyStateBody>
+            Body
+          </EmptyStateBody>
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateBody,
+        Title
+      } from "@patternfly/react-core";
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState titleText={<Title headingLevel="h4" size="lg">
+            Title text
+          </Title>}>
+          <EmptyStateBody>
+            Body
+          </EmptyStateBody>
+        </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      // with Title and EmptyStateIcon children and no EmptyStateHeader
+      code: `import {
+        EmptyState,
+        EmptyStateBody,
+        EmptyStateIcon,
+        Title
+      } from "@patternfly/react-core";
+      import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <Title headingLevel="h4" size="lg">
+            Title text
+          </Title>
+          <EmptyStateIcon icon={CubesIcon} color="red" />
+          <EmptyStateBody>
+            Body
+          </EmptyStateBody>
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateBody,
+        EmptyStateIcon,
+        Title
+      } from "@patternfly/react-core";
+      import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState titleText={<Title headingLevel="h4" size="lg">
+            Title text
+          </Title>} icon={CubesIcon}>
+          <EmptyStateBody>
+            Body
+          </EmptyStateBody>
+        </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
+          type: "JSXElement",
+        },
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    {
+      // with EmptyStateHeader and EmptyStateIcon children
+      code: `import {
+        EmptyState,
+        EmptyStateBody,
+        EmptyStateHeader,
+        EmptyStateIcon
+      } from "@patternfly/react-core";
+      import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState>
+          <EmptyStateHeader>Foo</EmptyStateHeader>
+          <EmptyStateIcon icon={CubesIcon} color="red" />
+          <EmptyStateBody>
+            Body
+          </EmptyStateBody>
+        </EmptyState>
+      );
+      `,
+      output: `import {
+        EmptyState,
+        EmptyStateBody,
+        EmptyStateHeader,
+        EmptyStateIcon
+      } from "@patternfly/react-core";
+      import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon';
+      
+      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
+        <EmptyState   icon={CubesIcon}  titleText="Foo">
+          <EmptyStateBody>
+            Body
+          </EmptyStateBody>
+        </EmptyState>
+      );
+      `,
+      errors: [
+        {
+          message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
+          type: "JSXElement",
+        },
+        {
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
+          type: "JSXElement",
+        },
+      ],
+    },
   ],
 });
