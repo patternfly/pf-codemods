@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.111.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.111.0...@patternfly/eslint-plugin-pf-codemods@1.111.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* **WizardStep:** prevented omitting the WizardBody component ([#685](https://github.com/patternfly/pf-codemods/issues/685)) ([0d7036a](https://github.com/patternfly/pf-codemods/commit/0d7036ac3548a51b14077a7e63c110bfa984bf04))
+
+
+
+
+
 # [1.111.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.110.0...@patternfly/eslint-plugin-pf-codemods@1.111.0) (2024-07-16)
 
 
