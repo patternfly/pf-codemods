@@ -3,7 +3,6 @@ export * from "./findAncestor";
 export * from "./fixers";
 export * from "./getEndRange";
 export * from "./getFromPackage";
-export * from "./getRemoveElementFixes";
 export * from "./getText";
 export * from "./helpers";
 export * from "./importAndExport";

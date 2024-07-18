@@ -1,5 +1,6 @@
 import { Rule } from "eslint";
 import {
+  JSXElement,
   ImportDeclaration,
   ExportNamedDeclaration,
   ImportSpecifier,
@@ -8,6 +9,7 @@ import {
   ImportNamespaceSpecifier,
 } from "estree-jsx";
 import { getEndRange } from "./getEndRange";
+import { removeElement, removeEmptyLineAfter } from "./index";
 
 export function removeSpecifierFromDeclaration(
   fixer: Rule.RuleFixer,
@@ -33,3 +35,16 @@ export function removeSpecifierFromDeclaration(
   }
   return [fixer.removeRange([startRange, endRange])];
 }
+
+export const getRemoveElementFixes = (
+  context: Rule.RuleContext,
+  fixer: Rule.RuleFixer,
+  elementsToRemove: JSXElement[]
+) => {
+  return elementsToRemove
+    .map((element) => [
+      ...removeElement(fixer, element),
+      ...removeEmptyLineAfter(context, fixer, element),
+    ])
+    .flat();
+};
