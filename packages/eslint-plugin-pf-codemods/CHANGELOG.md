@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.112.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.111.1...@patternfly/eslint-plugin-pf-codemods@1.112.0) (2024-07-18)
+
+
+### Features
+
+* Text to Content ([#675](https://github.com/patternfly/pf-codemods/issues/675)) ([09443bb](https://github.com/patternfly/pf-codemods/commit/09443bbecd468c04857a3c4d5aa4385e79f1866a))
+
+
+
+
+
 ## [1.111.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.111.0...@patternfly/eslint-plugin-pf-codemods@1.111.1) (2024-07-17)
 
 
