@@ -1,6 +1,6 @@
 /** if you want your rule to only run when explicitly called for using the --only flag,
- * add the rule name to the below array. If a React PR is not yet merged, provide a comment
- * by the rule stating such, so that we can easily remove them in the future.
+ * add the rule name to the below array. Do not add rules here if the React PR is
+ * not yet merged; instead add a "do not merge" label to the codemod PR.
  */
 export const betaRuleNames: string[] = ["kebabToggle-replace-with-menuToggle"];
 
