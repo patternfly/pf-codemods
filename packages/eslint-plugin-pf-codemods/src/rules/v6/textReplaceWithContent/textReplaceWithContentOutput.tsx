@@ -1,9 +1,9 @@
 import {
   Content,
-  Content as PFContent,
-  Content as PFContent,
-  Content as PFContent,
-} from '@patternfly/react-core';
+  Content,
+  Content,
+  Content,
+} from "@patternfly/react-core";
 
 export const TextReplaceWithContentInput = () => (
   <>
@@ -16,5 +16,10 @@ export const TextReplaceWithContentInput = () => (
     <Content component="ol">Abc</Content>
     <Content component="li">Abc</Content>
     <Content component="dt">Abc</Content>
+    <Content component="ul">
+      <Content component="li">A</Content>
+      <Content component="li">B</Content>
+      <Content component="li">C</Content>
+    </Content>
   </>
 );

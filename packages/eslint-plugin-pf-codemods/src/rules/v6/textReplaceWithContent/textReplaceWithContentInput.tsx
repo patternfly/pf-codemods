@@ -3,7 +3,7 @@ import {
   TextContent,
   TextList,
   TextListItem,
-} from '@patternfly/react-core';
+} from "@patternfly/react-core";
 
 export const TextReplaceWithContentInput = () => (
   <>
@@ -16,5 +16,10 @@ export const TextReplaceWithContentInput = () => (
     <TextList component="ol">Abc</TextList>
     <TextListItem>Abc</TextListItem>
     <TextListItem component="dt">Abc</TextListItem>
+    <TextList>
+      <TextListItem>A</TextListItem>
+      <TextListItem>B</TextListItem>
+      <TextListItem>C</TextListItem>
+    </TextList>
   </>
 );
