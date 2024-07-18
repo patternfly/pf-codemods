@@ -9,5 +9,6 @@ export * from "./pfPackageMatches";
 export * from "./renameProps";
 export * from "./getImportDeclaration";
 export * from "./getEndRange";
+export * from "./getRemoveElementFixes";
 export * from "./removeElement";
 export * from "./removeEmptyLineAfter";

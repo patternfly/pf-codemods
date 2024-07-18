@@ -4,6 +4,7 @@ import {
   JSXAttribute,
   JSXElement,
   JSXIdentifier,
+  Node,
 } from "estree-jsx";
 import {
   getAttribute,
@@ -16,8 +17,7 @@ import {
   includesImport,
   nodeIsComponentNamed,
   getChildrenAsAttributeValueText,
-  removeElement,
-  removeEmptyLineAfter,
+  getRemoveElementFixes,
 } from "../../helpers";
 // https://github.com/patternfly/patternfly-react/pull/9947
 
@@ -114,9 +114,38 @@ const getIconPropText = (
   return "";
 };
 
+const getIcon = (
+  context: Rule.RuleContext,
+  node: Node,
+  emptyStateIconComponent?: JSXElement,
+  iconElementIdentifier?: JSXIdentifier
+) => {
+  const emptyStateIconComponentIconAttribute =
+    emptyStateIconComponent && getAttribute(emptyStateIconComponent, "icon");
+
+  const emptyStateIconComponentColorAttribute =
+    emptyStateIconComponent && getAttribute(emptyStateIconComponent, "color");
+
+  if (emptyStateIconComponentColorAttribute) {
+    context.report({
+      node,
+      message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
+    });
+  }
+
+  const iconProp = getIconPropText(
+    context,
+    iconElementIdentifier,
+    emptyStateIconComponentIconAttribute
+  );
+
+  return iconProp;
+};
+
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
+    const source = context.getSourceCode();
     const pkg = "@patternfly/react-core";
     const { imports } = getFromPackage(context, pkg);
 
@@ -139,9 +168,14 @@ module.exports = {
           return;
         }
 
-        if (!header || header.type !== "JSXElement") {
-          // report without fixer if there is no header or the header is not a React element, because creating a
-          // titleText for the EmptyState in this case is difficult
+        const titleChild = getChildElementByName(node, "Title");
+
+        if (
+          (!header || header.type !== "JSXElement") &&
+          (!titleChild || titleChild.type !== "JSXElement")
+        ) {
+          // report without fixer if there is no header/title or the header/title is not a React element, because
+          // creating a titleText for the EmptyState in this case is difficult
           context.report({
             node,
             message: composeMessage(),
@@ -149,106 +183,138 @@ module.exports = {
           return;
         }
 
-        const headingClassNameAttribute = getAttribute(header, "className");
-        const headingLevelAttribute = getAttribute(header, "headingLevel");
-        const titleClassNameAttribute = getAttribute(header, "titleClassName");
-        const titleTextAttribute = getAttribute(header, "titleText");
-        const headerIconAttribute = getAttribute(header, "icon");
+        const newEmptyStateProps: string[] = [];
+        const removeElements: JSXElement[] = [];
 
-        const headerChildren = header.children;
+        if (titleChild && !header) {
+          // there is no header, but there is a Title as a child of the emptyState
 
-        const message = composeMessage(
-          !!titleTextAttribute,
-          !!headerIconAttribute,
-          !!headerChildren.length
-        );
-
-        if (!titleTextAttribute && !headerChildren.length) {
-          // report without fixer if there is a header, but it doesn't have titleText or children, because creating a
-          // titleText for the EmptyState in this case is difficult
-          context.report({ node, message });
-          return;
+          const titleComponentText = source.getText(titleChild);
+          newEmptyStateProps.push(`titleText={${titleComponentText}}`);
+          removeElements.push(titleChild);
         }
 
-        if (titleTextAttribute && headerChildren.length) {
-          // report without fixer if there is the header has a titleText and children, because creating an accessible
-          // titleText for the EmptyState in this case is difficult
-          context.report({ node, message });
-          return;
+        const emptyStateIconChild = getChildElementByName(
+          node,
+          "EmptyStateIcon"
+        );
+
+        let iconProp: string = "";
+
+        if (emptyStateIconChild) {
+          iconProp = getIcon(context, node, emptyStateIconChild);
+          removeElements.push(emptyStateIconChild);
         }
 
-        const headingClassNameValue = getAttributeValueText(
-          context,
-          headingClassNameAttribute
-        );
+        if (emptyStateIconChild && !header) {
+          newEmptyStateProps.push(iconProp);
+        }
 
-        const headingClassName = headingClassNameValue
-          ? `headerClassName=${headingClassNameValue}`
-          : "";
-        const headingLevel = getAttributeText(context, headingLevelAttribute);
-        const titleClassName = getAttributeText(
-          context,
-          titleClassNameAttribute
-        );
-        const titleTextPropValue = getAttributeText(
-          context,
-          titleTextAttribute
-        );
+        let hasTitleText = false;
+        let hasIcon = !!emptyStateIconChild;
+        let hasChildren = !!titleChild;
 
-        const titleText =
-          titleTextPropValue ||
-          `titleText=${getChildrenAsAttributeValueText(
+        if (header) {
+          const headingClassNameAttribute = getAttribute(header, "className");
+          const headingLevelAttribute = getAttribute(header, "headingLevel");
+          const titleClassNameAttribute = getAttribute(
+            header,
+            "titleClassName"
+          );
+          const titleTextAttribute = getAttribute(header, "titleText");
+          const headerIconAttribute = getAttribute(header, "icon");
+
+          hasTitleText = !!titleTextAttribute;
+          hasIcon ||= !!headerIconAttribute;
+          hasChildren ||= header.children.length > 0;
+
+          const message = composeMessage(hasTitleText, hasIcon, hasChildren);
+
+          if (!titleTextAttribute && !hasChildren) {
+            // report without fixer if there is a header, but it doesn't have titleText or children, because creating a
+            // titleText for the EmptyState in this case is difficult
+            context.report({ node, message });
+            return;
+          }
+
+          if (titleTextAttribute && hasChildren) {
+            // report without fixer if there is the header has a titleText and children, because creating an accessible
+            // titleText for the EmptyState in this case is difficult
+            context.report({ node, message });
+            return;
+          }
+
+          const headingClassNameValue = getAttributeValueText(
             context,
-            headerChildren
-          )}`;
+            headingClassNameAttribute
+          );
+          const headingClassNameProp = headingClassNameValue
+            ? `headerClassName=${headingClassNameValue}`
+            : "";
 
-        const iconPropValue = getExpression(headerIconAttribute?.value);
+          const headingLevel = getAttributeText(context, headingLevelAttribute);
+          const titleClassName = getAttributeText(
+            context,
+            titleClassNameAttribute
+          );
+          const titleTextPropValue = getAttributeText(
+            context,
+            titleTextAttribute
+          );
 
-        const iconElementIdentifier =
-          iconPropValue?.type === "JSXElement" &&
-          iconPropValue.openingElement.name.type === "JSXIdentifier"
-            ? iconPropValue.openingElement.name
+          const titleText =
+            titleTextPropValue ||
+            `titleText=${getChildrenAsAttributeValueText(
+              context,
+              header.children
+            )}`;
+
+          const iconPropValue = getExpression(headerIconAttribute?.value);
+
+          const iconElementIdentifier =
+            iconPropValue?.type === "JSXElement" &&
+            iconPropValue.openingElement.name.type === "JSXIdentifier"
+              ? iconPropValue.openingElement.name
+              : undefined;
+
+          const emptyStateIconComponent = iconPropIsEmptyStateIconComponent(
+            imports,
+            iconElementIdentifier
+          )
+            ? (iconPropValue as JSXElement)
             : undefined;
 
-        const emptyStateIconComponent = iconPropIsEmptyStateIconComponent(
-          imports,
-          iconElementIdentifier
-        )
-          ? (iconPropValue as JSXElement)
-          : undefined;
+          if (headerIconAttribute) {
+            iconProp = getIcon(
+              context,
+              node,
+              emptyStateIconComponent,
+              iconElementIdentifier
+            );
+          }
 
-        const emptyStateIconComponentIconAttribute =
-          emptyStateIconComponent &&
-          getAttribute(emptyStateIconComponent, "icon");
-
-        const emptyStateIconComponentColorAttribute =
-          emptyStateIconComponent &&
-          getAttribute(emptyStateIconComponent, "color");
-
-        if (emptyStateIconComponentColorAttribute) {
-          context.report({
-            node,
-            message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
-          });
+          removeElements.push(header);
+          newEmptyStateProps.push(
+            ...[
+              headingClassNameProp,
+              headingLevel,
+              iconProp,
+              titleClassName,
+              titleText,
+            ]
+          );
         }
-
-        const icon = getIconPropText(
-          context,
-          iconElementIdentifier,
-          emptyStateIconComponentIconAttribute
-        );
 
         context.report({
           node,
-          message,
+          message: composeMessage(hasTitleText, hasIcon, hasChildren),
           fix(fixer) {
             return [
               fixer.insertTextAfter(
                 node.openingElement.name,
-                ` ${headingClassName} ${headingLevel} ${icon} ${titleClassName} ${titleText}`
+                ` ${newEmptyStateProps.join(" ")}`
               ),
-              ...removeElement(fixer, header),
-              ...removeEmptyLineAfter(context, fixer, header),
+              ...getRemoveElementFixes(context, fixer, removeElements),
             ];
           },
         });
