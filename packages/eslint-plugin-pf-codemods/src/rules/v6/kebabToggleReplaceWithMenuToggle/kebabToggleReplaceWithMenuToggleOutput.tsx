@@ -3,7 +3,7 @@ import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-ico
 
 export const KebabToggleRemovedInput = () => (
   <>
-    <MenuToggle icon={<EllipsisVIcon aria-hidden="true" />} onClick={() => {}} />
-    <Dropdown toggle={<MenuToggle icon={<EllipsisVIcon aria-hidden="true" />} onClick={() => {}} />} />
+    <MenuToggle variant="plain" icon={<EllipsisVIcon aria-hidden="true" />} onClick={() => {}} />
+    <Dropdown toggle={<MenuToggle variant="plain" icon={<EllipsisVIcon aria-hidden="true" />} onClick={() => {}} />} />
   </>
 );

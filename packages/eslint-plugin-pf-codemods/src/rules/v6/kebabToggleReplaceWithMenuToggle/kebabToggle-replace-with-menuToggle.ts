@@ -5,6 +5,7 @@ import {
   replaceNodeText,
   IdentifierWithParent,
   getAttribute,
+  getAttributeValue,
   removeSpecifierFromDeclaration,
   getAllImportDeclarations,
 } from "../../helpers";
@@ -99,6 +100,9 @@ module.exports = {
             ) {
               const onToggleProp = getAttribute(node, "onToggle");
               const iconProp = getAttribute(node, "icon");
+              const variantProp = getAttribute(node, "variant");
+              const variantValue =
+                variantProp && getAttributeValue(context, variantProp.value);
 
               context.report({
                 node,
@@ -107,6 +111,19 @@ module.exports = {
                   const fixes = [
                     fixer.replaceText(node.openingElement.name, "MenuToggle"),
                   ];
+                  if (!variantProp) {
+                    fixes.push(
+                      fixer.insertTextAfter(
+                        node.openingElement.name,
+                        ` variant="plain"`
+                      )
+                    );
+                  }
+                  if (variantProp && variantValue !== "plain") {
+                    fixes.push(
+                      fixer.replaceText(variantProp, 'variant="plain"')
+                    );
+                  }
 
                   if (!iconProp) {
                     fixes.push(

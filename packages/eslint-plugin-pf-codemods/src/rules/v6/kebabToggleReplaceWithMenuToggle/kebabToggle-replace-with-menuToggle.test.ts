@@ -70,7 +70,7 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
     },
     {
       code: `import { KebabToggle } from "@patternfly/react-core/deprecated"; <KebabToggle />`,
-      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle icon={<EllipsisVIcon aria-hidden="true" />} />`,
+      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle variant="plain" icon={<EllipsisVIcon aria-hidden="true" />} />`,
       errors: [
         {
           message,
@@ -84,7 +84,7 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
     },
     {
       code: `import { KebabToggle } from "@patternfly/react-core/deprecated"; <KebabToggle></KebabToggle>`,
-      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle icon={<EllipsisVIcon aria-hidden="true" />}></MenuToggle>`,
+      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle variant="plain" icon={<EllipsisVIcon aria-hidden="true" />}></MenuToggle>`,
       errors: [
         {
           message,
@@ -98,7 +98,7 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
     },
     {
       code: `import { KebabToggle } from "@patternfly/react-core/deprecated"; <KebabToggle onToggle={someCallback} />`,
-      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle icon={<EllipsisVIcon aria-hidden="true" />} onClick={someCallback} />`,
+      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle variant="plain" icon={<EllipsisVIcon aria-hidden="true" />} onClick={someCallback} />`,
       errors: [
         {
           message,
@@ -114,7 +114,7 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
     // Possible TODO of only importing this icon if the KebabToggle does not have an icon prop already
     {
       code: `import { KebabToggle } from "@patternfly/react-core/deprecated"; <KebabToggle icon={<SomeIcon />} />`,
-      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle icon={<SomeIcon />} />`,
+      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <MenuToggle variant="plain" icon={<SomeIcon />} />`,
       errors: [
         {
           message,
@@ -172,7 +172,7 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
     },
     {
       code: `import { KebabToggle } from "@patternfly/react-core/deprecated"; <Dropdown toggle={<KebabToggle onToggle={() => {}} />} />`,
-      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <Dropdown toggle={<MenuToggle icon={<EllipsisVIcon aria-hidden="true" />} onClick={() => {}} />} />`,
+      output: `import { MenuToggle } from "@patternfly/react-core";\nimport EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon"; <Dropdown toggle={<MenuToggle variant="plain" icon={<EllipsisVIcon aria-hidden="true" />} onClick={() => {}} />} />`,
       errors: [
         {
           message,
