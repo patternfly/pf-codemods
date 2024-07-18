@@ -1,16 +1,7 @@
 import { Rule } from "eslint";
-import {
-  ExportSpecifier,
-  ImportSpecifier,
-  Identifier,
-  JSXIdentifier,
-  Node,
-} from "estree-jsx";
-import { getFromPackage } from "../../helpers";
+import { ExportSpecifier, ImportSpecifier, JSXIdentifier } from "estree-jsx";
+import { getFromPackage, IdentifierWithParent } from "../../helpers";
 
-interface IdentifierWithParent extends Identifier {
-  parent?: Node;
-}
 // https://github.com/patternfly/patternfly-react/pull/10649
 module.exports = {
   meta: { fixable: "code" },

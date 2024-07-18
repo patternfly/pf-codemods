@@ -131,6 +131,10 @@ const componentErrorMessages = {
     "We recommmend using our [custom menu context selector example: https://staging-v6.patternfly.org/components/menus/custom-menus#context-selector-menu",
   dropdown:
     "We recommend using either our current composable Dropdown or our Dropdown template implementation",
+  kebabToggle:
+    "We recommend using our MenuToggle component. You can explicitly run the kebabToggle-replace-with-menuToggle rule for an auto fixer.",
+  badgeToggle:
+    "We recommend using our badge menu toggle as a starting point for replacement: https://staging-v6.patternfly.org/components/menus/menu-toggle#with-a-badge",
   optionsMenu:
     "We recommend using either our current composable Select or our Select template implementation",
   pageHeader:
@@ -173,13 +177,21 @@ const dropdownSpecifiers = [
   "DropdownGroup",
   "DropdownItem",
   "DropdownSeparator",
-  "BadgeToggle",
-  "KebabToggle",
   "DropdownToggle",
   "DropdownToggleCheckbox",
   "DropdownToggleAction",
 ];
 createAllInvalidTests(dropdownSpecifiers, componentErrorMessages.dropdown);
+const kebabToggleSpecifier = "KebabToggle";
+createAllInvalidTests(
+  [kebabToggleSpecifier],
+  componentErrorMessages.kebabToggle
+);
+const badgeToggleSpecifier = "BadgeToggle";
+createAllInvalidTests(
+  [badgeToggleSpecifier],
+  componentErrorMessages.badgeToggle
+);
 
 const optionsMenuSpecifiers = [
   "OptionsMenu",
