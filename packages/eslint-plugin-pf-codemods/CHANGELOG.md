@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.113.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.112.0...@patternfly/eslint-plugin-pf-codemods@1.113.0) (2024-07-18)
+
+
+### Features
+
+* **EmptyState:** Add auto fix support for some child components ([#703](https://github.com/patternfly/pf-codemods/issues/703)) ([f80f157](https://github.com/patternfly/pf-codemods/commit/f80f1575315ec2604377b2b0bc8c109c976e2f7e))
+
+
+
+
+
 # [1.112.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.111.1...@patternfly/eslint-plugin-pf-codemods@1.112.0) (2024-07-18)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/pf-codemods",
-  "version": "2.0.42",
+  "version": "2.0.43",
   "description": "Codemods for v4 breaking change release 2020.07",
   "author": "Red Hat",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "build:readme": "ts-node-esm ./scripts/buildReadme.ts"
   },
   "dependencies": {
-    "@patternfly/eslint-plugin-pf-codemods": "^1.112.0",
+    "@patternfly/eslint-plugin-pf-codemods": "^1.113.0",
     "@typescript-eslint/parser": "^7.3.1",
     "commander": "^5.1.0",
     "eslint": "^7.3.0 || ^8.29.0",
