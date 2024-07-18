@@ -1,10 +1,8 @@
-// if you want your rule to only run when explicitly called for using the --only flag, add the rule name to the below array
-export const betaRuleNames: string[] = [
-  "checkbox-radio-replace-isLabelBeforeButton",
-  "formGroup-rename-labelIcon",
-  "menuItemAction-warn-update-markup",
-  "menuToggle-warn-iconOnly-toggle",
-];
+/** if you want your rule to only run when explicitly called for using the --only flag,
+ * add the rule name to the below array. If a React PR is not yet merged, provide a comment
+ * by the rule stating such, so that we can easily remove them in the future.
+ */
+export const betaRuleNames: string[] = ["kebabToggle-replace-with-menuToggle"];
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
 export const warningRules = [
