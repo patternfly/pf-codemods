@@ -36,6 +36,9 @@ const builtReadMes = v6RuleDirs.map(async (ruleDir) => {
 builtReadMes.unshift(baseReadMeContent);
 
 Promise.all(builtReadMes).then(async (builtReadMes) => {
-  const readMeContent = builtReadMes.reduce((acc, readMe) => acc + readMe, "");
+  const readMeContent = builtReadMes.reduce(
+    (acc, readMe) => acc + readMe + "\n",
+    ""
+  );
   await writeFile(join(process.cwd(), "README.md"), readMeContent);
 });
