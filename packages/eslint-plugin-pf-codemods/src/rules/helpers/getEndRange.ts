@@ -3,11 +3,16 @@ import {
   ImportSpecifier,
   ImportDefaultSpecifier,
   ImportNamespaceSpecifier,
+  ExportSpecifier,
 } from "estree-jsx";
 
 export const getEndRange = (
   sourceCode: SourceCode,
-  specifier: ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier
+  specifier:
+    | ImportSpecifier
+    | ImportDefaultSpecifier
+    | ImportNamespaceSpecifier
+    | ExportSpecifier
 ) => {
   const tokenAfter = sourceCode.getTokenAfter(specifier);
   const commentsAfter = sourceCode.getCommentsAfter(specifier);
