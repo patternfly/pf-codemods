@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.114.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.113.0...@patternfly/eslint-plugin-pf-codemods@1.114.0) (2024-07-19)
+
+
+### Features
+
+* **Dropdown deprecated:** added rule to replace with MenuToggle ([#702](https://github.com/patternfly/pf-codemods/issues/702)) ([4b1201d](https://github.com/patternfly/pf-codemods/commit/4b1201df222baa8ec6538b7229e82df8d8ba4c79))
+
+
+
+
+
 # [1.113.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.112.0...@patternfly/eslint-plugin-pf-codemods@1.113.0) (2024-07-18)
 
 
