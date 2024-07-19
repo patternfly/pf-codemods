@@ -1,8 +1,10 @@
 import {
   EmptyState,
+  EmptyStateBody,
   EmptyStateHeader,
   EmptyStateIcon,
-  CubesIcon
+  CubesIcon,
+  Title,
 } from "@patternfly/react-core";
 
 export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
@@ -12,5 +14,15 @@ export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
       headingLevel="h4"
       icon={<EmptyStateIcon icon={CubesIcon} />}
     />
+  </EmptyState>
+);
+
+export const EmptyStateWithoutHeaderMoveIntoEmptyStateInput = () => (
+  <EmptyState>
+    <Title headingLevel="h4" size="lg">
+      Foo
+    </Title>
+    <EmptyStateIcon icon={CubesIcon} />
+    <EmptyStateBody>Body</EmptyStateBody>
   </EmptyState>
 );

@@ -1,6 +1,6 @@
 import { getFromPackage, findAncestor } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement } from "estree-jsx";
+import { JSXElement, JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9876
 module.exports = {
@@ -26,30 +26,39 @@ module.exports = {
                   attr.type === "JSXAttribute" &&
                   attr.name.name === "isExpanded"
               );
-              if (attribute) {
-                context.report({
-                  node,
-                  message:
-                    "The `isExpanded` prop for AccordionToggle has been moved to AccordionItem.",
-                  fix(fixer) {
-                    const accordionItemAncestor = findAncestor(
-                      node,
-                      (current) =>
-                        current?.openingElement?.name?.name === "AccordionItem"
-                    );
-                    const attributeValue = context
-                      .getSourceCode()
-                      .getText(attribute);
-                    return [
-                      fixer.replaceText(attribute, ""),
-                      fixer.insertTextAfter(
-                        accordionItemAncestor.openingElement.name,
-                        ` ${attributeValue}`
-                      ),
-                    ];
-                  },
-                });
+
+              if (!attribute) {
+                return;
               }
+
+              context.report({
+                node,
+                message:
+                  "The `isExpanded` prop for AccordionToggle has been moved to AccordionItem.",
+                fix(fixer) {
+                  const accordionItemAncestor = findAncestor(
+                    node,
+                    (current) =>
+                      current.type === "JSXElement" &&
+                      current.openingElement.name.type === "JSXIdentifier" &&
+                      current.openingElement.name.name === "AccordionItem"
+                  );
+                  const attributeValue = context
+                    .getSourceCode()
+                    .getText(attribute);
+
+                  return accordionItemAncestor &&
+                    accordionItemAncestor.type === "JSXElement"
+                    ? [
+                        fixer.replaceText(attribute, ""),
+                        fixer.insertTextAfter(
+                          accordionItemAncestor.openingElement.name,
+                          ` ${attributeValue}`
+                        ),
+                      ]
+                    : [];
+                },
+              });
             }
           },
         };

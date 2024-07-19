@@ -16,12 +16,15 @@
     "test:console": "pf-codemods --v6 --no-cache test/console/frontend",
     "test:integreatly": "pf-codemods --v6 --no-cache test/tutorial-web-app",
     "test:packages": "yarn get:packages && node --unhandled-rejections=strict packages/pf-codemods/index.js --v6 --no-cache test/packages",
-    "test:classnames": "class-name-updater --no-cache test",
+    "test:classnames": "lerna run test --scope=@patternfly/class-name-updater --stream",
+    "test:classnames:v5": "yarn build:classnames && lerna run test:v5 --scope=@patternfly/class-name-updater --stream",
+    "test:classnames:v6": "yarn build:classnames && lerna run test:v6 --scope=@patternfly/class-name-updater --stream",
     "get:packages": "node getPackages.js",
     "generate": "yarn build:generators && plop",
     "build": "lerna run build",
     "build:generators": "tsc --build --verbose generators/tsconfig.cjs.json",
     "build:readme": "lerna run build:readme",
+    "build:classnames": "lerna run build --scope=@patternfly/class-name-updater",
     "clean": "lerna run clean"
   },
   "repository": {
@@ -45,5 +48,6 @@
     "case-anything": "^2.1.13",
     "fs-extra": "^11.2.0",
     "@types/fs-extra": "^11.0.4"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

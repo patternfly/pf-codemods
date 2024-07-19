@@ -1,253 +1,320 @@
-import { AST, Rule } from "eslint";
+import { Rule } from "eslint";
 import {
-  JSXElement,
-  ImportDeclaration,
   ImportSpecifier,
   JSXAttribute,
+  JSXElement,
+  JSXIdentifier,
   Node,
-  JSXText,
-  JSXExpressionContainer,
-  JSXSpreadChild,
-  JSXFragment,
 } from "estree-jsx";
-import { getFromPackage, pfPackageMatches } from "../../helpers";
-
-const baseMessage =
-  "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the EmptyStateIcon component now wraps content passed to the icon prop automatically. Additionally, the titleText prop is now required on EmptyState.";
-
+import {
+  getAttribute,
+  getAttributeText,
+  getAttributeValueText,
+  getChildElementByName,
+  getDefaultImportsFromPackage,
+  getExpression,
+  getFromPackage,
+  includesImport,
+  nodeIsComponentNamed,
+  getChildrenAsAttributeValueText,
+  getRemoveElementFixes,
+} from "../../helpers";
 // https://github.com/patternfly/patternfly-react/pull/9947
+
+const composeMessage = (
+  hasTitleText?: boolean,
+  hasIcon?: boolean,
+  hasChildren?: boolean
+) => {
+  let message =
+    "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props";
+  const missingTitleTextMessage =
+    ", and the titleText prop is now required on EmptyState.";
+
+  if (hasTitleText) {
+    message += ".";
+  } else {
+    message += missingTitleTextMessage;
+  }
+
+  if (hasTitleText && hasChildren) {
+    message +=
+      " Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop";
+  } else if (!hasTitleText && !hasChildren) {
+    message += " You must manually supply a titleText prop to EmptyState";
+  }
+
+  const hasHeader = [hasTitleText, hasIcon, hasChildren].some(
+    (arg) => typeof arg !== "undefined"
+  );
+
+  if (hasTitleText === hasChildren && hasHeader) {
+    message += ", then you can rerun this codemod.";
+  }
+
+  if (hasIcon) {
+    message +=
+      " Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.";
+  }
+
+  return message;
+};
+
+const iconPropIsEmptyStateIconComponent = (
+  imports: ImportSpecifier[],
+  identifier?: JSXIdentifier
+) => {
+  const emptyStateIconImport = imports.find(
+    (specifier) => specifier.imported.name === "EmptyStateIcon"
+  );
+
+  if (!emptyStateIconImport) {
+    return false;
+  }
+
+  return identifier?.name === emptyStateIconImport.local.name;
+};
+
+const iconPropIsIconElement = (
+  context: Rule.RuleContext,
+  identifier?: JSXIdentifier
+) => {
+  if (!identifier) {
+    return;
+  }
+
+  const pfIconsPackage = "@patternfly/react-icons";
+  const { imports: iconImports } = getFromPackage(context, pfIconsPackage);
+  const iconDefaultImports = getDefaultImportsFromPackage(
+    context,
+    pfIconsPackage
+  );
+  const allIconImports = [...iconImports, ...iconDefaultImports];
+
+  return allIconImports.some(
+    (iconImport) => iconImport.local.name === identifier.name
+  );
+};
+
+const getIconPropText = (
+  context: Rule.RuleContext,
+  iconElementIdentifier?: JSXIdentifier,
+  emptyStateIconComponentIconAttribute?: JSXAttribute
+) => {
+  if (emptyStateIconComponentIconAttribute) {
+    return context
+      .getSourceCode()
+      .getText(emptyStateIconComponentIconAttribute);
+  }
+
+  if (iconPropIsIconElement(context, iconElementIdentifier)) {
+    return `icon={${iconElementIdentifier!.name}}`;
+  }
+
+  return "";
+};
+
+const getIcon = (
+  context: Rule.RuleContext,
+  node: Node,
+  emptyStateIconComponent?: JSXElement,
+  iconElementIdentifier?: JSXIdentifier
+) => {
+  const emptyStateIconComponentIconAttribute =
+    emptyStateIconComponent && getAttribute(emptyStateIconComponent, "icon");
+
+  const emptyStateIconComponentColorAttribute =
+    emptyStateIconComponent && getAttribute(emptyStateIconComponent, "color");
+
+  if (emptyStateIconComponentColorAttribute) {
+    context.report({
+      node,
+      message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
+    });
+  }
+
+  const iconProp = getIconPropText(
+    context,
+    iconElementIdentifier,
+    emptyStateIconComponentIconAttribute
+  );
+
+  return iconProp;
+};
+
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
+    const source = context.getSourceCode();
     const pkg = "@patternfly/react-core";
     const { imports } = getFromPackage(context, pkg);
-
-    const allOfType = (nodes: Node[], type: string) =>
-      nodes.every((specifier) => specifier.type === type);
-
-    const includesImport = (
-      arr: ImportDeclaration["specifiers"],
-      targetImport: string
-    ) => {
-      if (!allOfType(arr, "ImportSpecifier")) {
-        return false;
-      }
-
-      return arr.some(
-        (specifier) =>
-          (specifier as ImportSpecifier).imported.name === targetImport
-      );
-    };
 
     if (!includesImport(imports, "EmptyState")) {
       return {};
     }
 
-    const getChildElementByName = (name: string, node: JSXElement) =>
-      node.children?.find(
-        (child) =>
-          child.type === "JSXElement" &&
-          child.openingElement.name.type === "JSXIdentifier" &&
-          child.openingElement.name.name === name
-      );
-
-    const isComponentNode = (node: JSXElement, componentName: string) => {
-      if (node.openingElement.name.type === "JSXIdentifier") {
-        return node.openingElement.name.name === componentName;
-      }
-
-      return false;
-    };
-
-    const getAttribute = (
-      node: JSXElement,
-      attributeName: string
-    ): JSXAttribute | undefined => {
-      const attributes = node.openingElement.attributes.filter(
-        (attr) => attr.type === "JSXAttribute"
-      ) as JSXAttribute[];
-      return attributes.find((attr) => attr.name.name === attributeName);
-    };
-
-    const getExpressionValue = (node?: JSXAttribute["value"]) => {
-      if (!node) {
-        return;
-      }
-
-      if (node.type === "JSXExpressionContainer") {
-        return node.expression;
-      }
-    };
-
-    const getAttributeText = (attribute?: JSXAttribute) => {
-      if (!attribute) {
-        return "";
-      }
-
-      return context.getSourceCode().getText(attribute);
-    };
-
-    const getAttributeValueText = (attribute?: JSXAttribute) => {
-      if (!attribute || !attribute.value) {
-        return "";
-      }
-
-      return context.getSourceCode().getText(attribute.value);
-    };
-
-    const getNodesText = (nodes: Node[]) => {
-      return nodes
-        .map((node) => context.getSourceCode().getText(node))
-        .join("");
-    };
-
-    const getElementChildText = (children: JSXElement["children"]) => {
-      if (!children.length) {
-        return "";
-      }
-
-      switch (children[0].type) {
-        case "JSXText":
-          return (children as JSXText[]).map((child) => child.value).join("");
-        case "JSXExpressionContainer":
-        case "JSXSpreadChild":
-          return getNodesText(
-            children.map(
-              (child) =>
-                (child as JSXExpressionContainer | JSXSpreadChild).expression
-            )
-          );
-        case "JSXElement":
-        case "JSXFragment":
-          return getNodesText(children as JSXElement[] | JSXFragment[]);
-        default:
-          return "";
-      }
-    };
-
     return {
       JSXElement(node: JSXElement) {
-        if (!isComponentNode(node, "EmptyState")) {
+        if (!nodeIsComponentNamed(node, "EmptyState")) {
           return;
         }
 
-        const header = getChildElementByName("EmptyStateHeader", node);
+        const header = getChildElementByName(node, "EmptyStateHeader");
         const emptyStateTitleTextAttribute = getAttribute(node, "titleText");
 
-        if (!header && !emptyStateTitleTextAttribute) {
+        if (!header && emptyStateTitleTextAttribute) {
+          // early return if there is no header and the titleText attribute already exists on EmptyState as no changes
+          // are needed
+          return;
+        }
+
+        const titleChild = getChildElementByName(node, "Title");
+
+        if (
+          (!header || header.type !== "JSXElement") &&
+          (!titleChild || titleChild.type !== "JSXElement")
+        ) {
+          // report without fixer if there is no header/title or the header/title is not a React element, because
+          // creating a titleText for the EmptyState in this case is difficult
           context.report({
             node,
-            message: `${baseMessage} You must manually supply a titleText prop to EmptyState.`,
+            message: composeMessage(),
           });
           return;
         }
 
-        if (!header || header.type !== "JSXElement") {
-          return;
+        const newEmptyStateProps: string[] = [];
+        const removeElements: JSXElement[] = [];
+
+        if (titleChild && !header) {
+          // there is no header, but there is a Title as a child of the emptyState
+
+          const titleComponentText = source.getText(titleChild);
+          newEmptyStateProps.push(`titleText={${titleComponentText}}`);
+          removeElements.push(titleChild);
         }
 
-        const headingClassNameAttribute = getAttribute(header, "className");
-        const headingLevelAttribute = getAttribute(header, "headingLevel");
-        const titleClassNameAttribute = getAttribute(header, "titleClassName");
-        const titleTextAttribute = getAttribute(header, "titleText");
-        const headerIconAttribute = getAttribute(header, "icon");
-
-        const headerChildren = header.children;
-
-        if (!titleTextAttribute && !headerChildren.length) {
-          context.report({
-            node,
-            message: `${baseMessage} You must manually supply a titleText prop to EmptyState, then you can rerun this codemod.`,
-          });
-          return;
-        }
-
-        if (titleTextAttribute && headerChildren.length) {
-          context.report({
-            node,
-            message: `${baseMessage} Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop, then you can rerun this codemod.`,
-          });
-          return;
-        }
-
-        const headingClassNameValue = getAttributeValueText(
-          headingClassNameAttribute
+        const emptyStateIconChild = getChildElementByName(
+          node,
+          "EmptyStateIcon"
         );
 
-        const headingClassName = headingClassNameValue
-          ? `headerClassName=${headingClassNameValue}`
-          : "";
-        const headingLevel = getAttributeText(headingLevelAttribute);
-        const titleClassName = getAttributeText(titleClassNameAttribute);
-        const titleTextPropValue = getAttributeText(titleTextAttribute);
+        let iconProp: string = "";
 
-        const titleText =
-          titleTextPropValue ||
-          `titleText="${getElementChildText(headerChildren)}"`;
-
-        const iconPropValue = getExpressionValue(headerIconAttribute?.value);
-
-        const emptyStateIconComponent =
-          iconPropValue?.type === "JSXElement" ? iconPropValue : undefined;
-
-        const emptyStateIconComponentIconAttribute =
-          emptyStateIconComponent &&
-          getAttribute(emptyStateIconComponent, "icon");
-
-        const emptyStateIconComponentColorAttribute =
-          emptyStateIconComponent &&
-          getAttribute(emptyStateIconComponent, "color");
-        const emptyStateIconComponentColor = getAttributeText(
-          emptyStateIconComponentColorAttribute
-        );
-
-        if (emptyStateIconComponentColor) {
-          context.report({
-            node,
-            message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
-          });
+        if (emptyStateIconChild) {
+          iconProp = getIcon(context, node, emptyStateIconChild);
+          removeElements.push(emptyStateIconChild);
         }
 
-        const icon = emptyStateIconComponentIconAttribute
-          ? context
-              .getSourceCode()
-              .getText(emptyStateIconComponentIconAttribute)
-          : "";
+        if (emptyStateIconChild && !header) {
+          newEmptyStateProps.push(iconProp);
+        }
+
+        let hasTitleText = false;
+        let hasIcon = !!emptyStateIconChild;
+        let hasChildren = !!titleChild;
+
+        if (header) {
+          const headingClassNameAttribute = getAttribute(header, "className");
+          const headingLevelAttribute = getAttribute(header, "headingLevel");
+          const titleClassNameAttribute = getAttribute(
+            header,
+            "titleClassName"
+          );
+          const titleTextAttribute = getAttribute(header, "titleText");
+          const headerIconAttribute = getAttribute(header, "icon");
+
+          hasTitleText = !!titleTextAttribute;
+          hasIcon ||= !!headerIconAttribute;
+          hasChildren ||= header.children.length > 0;
+
+          const message = composeMessage(hasTitleText, hasIcon, hasChildren);
+
+          if (!titleTextAttribute && !hasChildren) {
+            // report without fixer if there is a header, but it doesn't have titleText or children, because creating a
+            // titleText for the EmptyState in this case is difficult
+            context.report({ node, message });
+            return;
+          }
+
+          if (titleTextAttribute && hasChildren) {
+            // report without fixer if there is the header has a titleText and children, because creating an accessible
+            // titleText for the EmptyState in this case is difficult
+            context.report({ node, message });
+            return;
+          }
+
+          const headingClassNameValue = getAttributeValueText(
+            context,
+            headingClassNameAttribute
+          );
+          const headingClassNameProp = headingClassNameValue
+            ? `headerClassName=${headingClassNameValue}`
+            : "";
+
+          const headingLevel = getAttributeText(context, headingLevelAttribute);
+          const titleClassName = getAttributeText(
+            context,
+            titleClassNameAttribute
+          );
+          const titleTextPropValue = getAttributeText(
+            context,
+            titleTextAttribute
+          );
+
+          const titleText =
+            titleTextPropValue ||
+            `titleText=${getChildrenAsAttributeValueText(
+              context,
+              header.children
+            )}`;
+
+          const iconPropValue = getExpression(headerIconAttribute?.value);
+
+          const iconElementIdentifier =
+            iconPropValue?.type === "JSXElement" &&
+            iconPropValue.openingElement.name.type === "JSXIdentifier"
+              ? iconPropValue.openingElement.name
+              : undefined;
+
+          const emptyStateIconComponent = iconPropIsEmptyStateIconComponent(
+            imports,
+            iconElementIdentifier
+          )
+            ? (iconPropValue as JSXElement)
+            : undefined;
+
+          if (headerIconAttribute) {
+            iconProp = getIcon(
+              context,
+              node,
+              emptyStateIconComponent,
+              iconElementIdentifier
+            );
+          }
+
+          removeElements.push(header);
+          newEmptyStateProps.push(
+            ...[
+              headingClassNameProp,
+              headingLevel,
+              iconProp,
+              titleClassName,
+              titleText,
+            ]
+          );
+        }
 
         context.report({
           node,
-          message: baseMessage,
+          message: composeMessage(hasTitleText, hasIcon, hasChildren),
           fix(fixer) {
-            const removeEmptyLineAfter = (
-              node?: JSXElement | ImportSpecifier | AST.Token | null
-            ) => {
-              if (!node) {
-                return [];
-              }
-              const token = context.getSourceCode().getTokenAfter(node);
-
-              return token &&
-                token.type === "JSXText" &&
-                token.value.trim() === ""
-                ? [fixer.remove(token)]
-                : [];
-            };
-
-            const removeElement = (node?: JSXElement) => {
-              if (!node) {
-                return [];
-              }
-
-              return [fixer.remove(node)];
-            };
-
             return [
               fixer.insertTextAfter(
                 node.openingElement.name,
-                ` ${headingClassName} ${headingLevel} ${icon} ${titleClassName} ${titleText}`
+                ` ${newEmptyStateProps.join(" ")}`
               ),
-              ...removeElement(header),
-              ...removeEmptyLineAfter(header),
+              ...getRemoveElementFixes(context, fixer, removeElements),
             ];
           },
         });

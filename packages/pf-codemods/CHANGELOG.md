@@ -3,6 +3,375 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.44](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.43...@patternfly/pf-codemods@2.0.44) (2024-07-19)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.43](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.42...@patternfly/pf-codemods@2.0.43) (2024-07-18)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.42](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.41...@patternfly/pf-codemods@2.0.42) (2024-07-18)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.41](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.40...@patternfly/pf-codemods@2.0.41) (2024-07-17)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.40](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.39...@patternfly/pf-codemods@2.0.40) (2024-07-16)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.39](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.38...@patternfly/pf-codemods@2.0.39) (2024-07-16)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.38](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.37...@patternfly/pf-codemods@2.0.38) (2024-07-16)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.37](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.36...@patternfly/pf-codemods@2.0.37) (2024-07-16)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.36](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.35...@patternfly/pf-codemods@2.0.36) (2024-07-16)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.35](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.34...@patternfly/pf-codemods@2.0.35) (2024-07-12)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.34](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.33...@patternfly/pf-codemods@2.0.34) (2024-07-11)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.33](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.32...@patternfly/pf-codemods@2.0.33) (2024-07-11)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.32](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.31...@patternfly/pf-codemods@2.0.32) (2024-07-11)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.31](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.30...@patternfly/pf-codemods@2.0.31) (2024-07-10)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.30](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.29...@patternfly/pf-codemods@2.0.30) (2024-07-10)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.29](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.28...@patternfly/pf-codemods@2.0.29) (2024-07-10)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.28](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.27...@patternfly/pf-codemods@2.0.28) (2024-07-10)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.27](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.26...@patternfly/pf-codemods@2.0.27) (2024-06-20)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.26](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.25...@patternfly/pf-codemods@2.0.26) (2024-06-13)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.25](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.24...@patternfly/pf-codemods@2.0.25) (2024-06-11)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.24](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.23...@patternfly/pf-codemods@2.0.24) (2024-06-11)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.23](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.22...@patternfly/pf-codemods@2.0.23) (2024-06-06)
+
+
+### Reverts
+
+* Revert "fix: packages/pf-codemods/package.json to reduce vulnerabilities (#650)" (#654) ([743c590](https://github.com/patternfly/pf-codemods/commit/743c590a88c2ba356d5b1a2d1b4a252f87b154ea)), closes [#650](https://github.com/patternfly/pf-codemods/issues/650) [#654](https://github.com/patternfly/pf-codemods/issues/654)
+
+
+
+
+
+## [2.0.22](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.21...@patternfly/pf-codemods@2.0.22) (2024-06-06)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.21](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.20...@patternfly/pf-codemods@2.0.21) (2024-06-03)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.20](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.19...@patternfly/pf-codemods@2.0.20) (2024-05-31)
+
+
+### Bug Fixes
+
+* packages/pf-codemods/package.json to reduce vulnerabilities ([#650](https://github.com/patternfly/pf-codemods/issues/650)) ([fe3aef5](https://github.com/patternfly/pf-codemods/commit/fe3aef530ede2a8821bb71b088bbd63fa4118bab))
+
+
+
+
+
+## [2.0.19](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.18...@patternfly/pf-codemods@2.0.19) (2024-05-31)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.18](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.17...@patternfly/pf-codemods@2.0.18) (2024-05-29)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.17](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.16...@patternfly/pf-codemods@2.0.17) (2024-05-28)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.16](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.15...@patternfly/pf-codemods@2.0.16) (2024-05-22)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.15](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.14...@patternfly/pf-codemods@2.0.15) (2024-05-20)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.14](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.13...@patternfly/pf-codemods@2.0.14) (2024-04-23)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.13](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.12...@patternfly/pf-codemods@2.0.13) (2024-04-23)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.12](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.11...@patternfly/pf-codemods@2.0.12) (2024-04-23)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.11](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.10...@patternfly/pf-codemods@2.0.11) (2024-04-23)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.10](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.9...@patternfly/pf-codemods@2.0.10) (2024-04-22)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.9](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.8...@patternfly/pf-codemods@2.0.9) (2024-04-03)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.8](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.7...@patternfly/pf-codemods@2.0.8) (2024-03-28)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.7](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.6...@patternfly/pf-codemods@2.0.7) (2024-03-27)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.5...@patternfly/pf-codemods@2.0.6) (2024-03-27)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.4...@patternfly/pf-codemods@2.0.5) (2024-03-21)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.3...@patternfly/pf-codemods@2.0.4) (2024-03-20)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.2...@patternfly/pf-codemods@2.0.3) (2024-03-19)
+
+
+### Bug Fixes
+
+* **deps:** Update ts-eslint parser to support newer TS version ([#616](https://github.com/patternfly/pf-codemods/issues/616)) ([d57b415](https://github.com/patternfly/pf-codemods/commit/d57b415959f79390043b9a7fb902a07595e28318))
+
+
+
+
+
+## [2.0.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.1...@patternfly/pf-codemods@2.0.2) (2024-03-14)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+## [2.0.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.83.10...@patternfly/pf-codemods@2.0.1) (2024-03-08)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
+# [2.0.0](https://github.com/wise-king-sullyman/pf-codemods/compare/@patternfly/pf-codemods@1.83.10...@patternfly/pf-codemods@2.0.0) (2024-03-08)
+
+**Note:** Version bump only for package @patternfly/pf-codemods
+
+
+
+
+
 ## [1.83.10](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@1.83.9...@patternfly/pf-codemods@1.83.10) (2024-02-28)
 
 **Note:** Version bump only for package @patternfly/pf-codemods

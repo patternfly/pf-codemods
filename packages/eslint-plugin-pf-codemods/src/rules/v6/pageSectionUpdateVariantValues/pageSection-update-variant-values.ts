@@ -1,7 +1,6 @@
-import { getFromPackage } from "../../helpers";
+import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement, JSXAttribute, Literal } from "estree-jsx";
-import { isJsxAttribute } from "typescript";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9774
 // https://github.com/patternfly/patternfly-react/pull/9848
@@ -13,6 +12,10 @@ module.exports = {
     const pageSectionImport = imports.find(
       (specifier) => specifier.imported.name === "PageSection"
     );
+    const pageSectionVariantImport = imports.find(
+      (specifier) => specifier.imported.name === "PageSectionVariants"
+    );
+    const validValues = ["default", "secondary"];
 
     return !pageSectionImport
       ? {}
@@ -22,28 +25,38 @@ module.exports = {
               node.name.type === "JSXIdentifier" &&
               pageSectionImport.local.name === node.name.name
             ) {
-              const attribute = node.attributes.find(
-                (attr) =>
-                  attr.type === "JSXAttribute" && attr.name.name === "variant"
-              ) as JSXAttribute | undefined;
+              const variantProp = getAttribute(node, "variant");
 
-              if (!attribute || !attribute.value) {
+              if (!variantProp || !variantProp.value) {
                 return;
               }
+              const variantValue = getAttributeValue(
+                context,
+                variantProp.value
+              );
+              const pageSectionVariantLocalName =
+                pageSectionVariantImport && pageSectionVariantImport.local.name;
+              const hasPatternFlyEnum =
+                variantValue.object &&
+                variantValue.object.name === pageSectionVariantLocalName;
+              const variantValueIsLiteral =
+                variantProp.value.type === "Literal" ||
+                (variantProp.value.type === "JSXExpressionContainer" &&
+                  variantProp.value.expression.type === "Literal");
+              if (!variantValueIsLiteral && !hasPatternFlyEnum) {
+                return;
+              }
+              const hasValidValue = variantValue.property
+                ? validValues.includes(variantValue.property.name)
+                : validValues.includes(variantValue);
 
-              if (
-                attribute.value.type === "Literal" &&
-                typeof attribute.value.value === "string" &&
-                !["default", "secondary"].includes(attribute.value.value)
-              ) {
+              if (!hasValidValue) {
                 context.report({
                   node,
                   message:
                     'The `variant` prop for PageSection now only accepts a value of "default" or "secondary". Running the fix for this rule will remove the prop so it uses the default value of "default".',
-                  fix(fixer: {
-                    replaceText: (arg0: any, arg1: string) => any;
-                  }) {
-                    return fixer.replaceText(attribute, "");
+                  fix(fixer) {
+                    return fixer.replaceText(variantProp, "");
                   },
                 });
               }

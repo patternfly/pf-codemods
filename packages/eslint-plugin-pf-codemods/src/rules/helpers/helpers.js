@@ -1,7 +1,9 @@
-import { getFromPackage } from "./getFromPackage";
-import { pfPackageMatches } from "./pfPackageMatches";
+import { getFromPackage } from './getFromPackage';
+import { pfPackageMatches } from './pfPackageMatches';
+import { findAncestor } from './findAncestor';
+import { getVariableDeclaration } from './JSXAttributes';
 
-const evk = require("eslint-visitor-keys");
+const evk = require('eslint-visitor-keys');
 
 export function moveSpecifiers(
   specifiersToMove,
@@ -21,7 +23,7 @@ export function moveSpecifiers(
         return (
           !comments?.length ||
           !comments?.find((comment) =>
-            comment?.value?.includes("data-codemods")
+            comment?.value?.includes('data-codemods')
           )
         );
       });
@@ -37,26 +39,26 @@ export function moveSpecifiers(
     const getModifiedToPackage = (firstSpecifier) => {
       // expecting @patternfly/{package} or
       // @patternfly/{package}/{designator} where designator is deprecated
-      const toParts = toPackage.split("/");
+      const toParts = toPackage.split('/');
 
       if (
-        !firstSpecifier?.parent?.source?.value?.includes("dist/esm") ||
-        toParts[0] !== "@patternfly"
+        !firstSpecifier?.parent?.source?.value?.includes('dist/esm') ||
+        toParts[0] !== '@patternfly'
       ) {
         return;
       }
 
-      const fromParts = firstSpecifier.parent.source.value.split("/");
+      const fromParts = firstSpecifier.parent.source.value.split('/');
       //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
       //needing toPath to look like fromPath with the designator before /components
       if (toParts.length === 3) {
         fromParts.splice(4, 0, toParts[2]);
-        return fromParts.join("/");
+        return fromParts.join('/');
       }
       // Expecting @patternfly/{package}/dist/esm/next/components/{Component}/index.js
       // Needing toPath to look like fromPath *without* the designator before /components
       if (toParts.length === 2) {
-        return fromParts.filter((part) => part !== "next").join("/");
+        return fromParts.filter((part) => part !== 'next').join('/');
       }
     };
     const modifiedToPackageImport = getModifiedToPackage(
@@ -69,7 +71,7 @@ export function moveSpecifiers(
     const getExistingDeclaration = (nodeType, modifiedPackage) => {
       return src.ast.body.find((node) => {
         const specifierReference =
-          nodeType === "ImportDeclaration"
+          nodeType === 'ImportDeclaration'
             ? importSpecifiersToMove[0]
             : exportSpecifiersToMove[0];
 
@@ -82,11 +84,11 @@ export function moveSpecifiers(
       });
     };
     const existingToPackageImportDeclaration = getExistingDeclaration(
-      "ImportDeclaration",
+      'ImportDeclaration',
       modifiedToPackageImport
     );
     const existingToPackageExportDeclaration = getExistingDeclaration(
-      "ExportNamedDeclaration",
+      'ExportNamedDeclaration',
       modifiedToPackageExport
     );
 
@@ -96,9 +98,9 @@ export function moveSpecifiers(
 
       return `${specifierText}${
         specifierComments.length
-          ? " " +
-            specifierComments.map((comment) => `/*${comment.value}*/`).join("")
-          : ""
+          ? ' ' +
+            specifierComments.map((comment) => `/*${comment.value}*/`).join('')
+          : ''
       }`;
     };
     const getExistingSpecifiersFromDeclaration = (declaration) =>
@@ -128,7 +130,7 @@ export function moveSpecifiers(
           (importSpecifier) => {
             const importString = src.getText(importSpecifier);
 
-            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+            return /^@patternfly\/react-core\/(dist\/(esm|js|dynamic)\/)?next/.test(
               importSpecifier.parent?.source?.value
             )
               ? `${importString} /* data-codemods */`
@@ -136,7 +138,7 @@ export function moveSpecifiers(
           }
         );
         const newToPackageImportDeclaration = `import${
-          node.importKind === "type" ? " type" : ""
+          node.importKind === 'type' ? ' type' : ''
         } {\n\t${[
           ...existingToPackageImportSpecifiers,
           ...newAliasToPackageSpecifiers,
@@ -147,11 +149,11 @@ export function moveSpecifiers(
           message:
             `${newToPackageSpecifiers
               .map((s) => s.imported.name)
-              .join(", ")
-              .replace(/, ([^,]+)$/, ", and $1")}` +
-            `${newToPackageSpecifiers.length > 1 ? " have " : " has "}${
+              .join(', ')
+              .replace(/, ([^,]+)$/, ', and $1')}` +
+            `${newToPackageSpecifiers.length > 1 ? ' have ' : ' has '}${
               messageAfterSpecifierPathChange ||
-              "been moved. Running the fix flag will update your imports."
+              'been moved. Running the fix flag will update your imports.'
             }`,
           fix(fixer) {
             //no other imports left, replace the fromPackage
@@ -184,10 +186,10 @@ export function moveSpecifiers(
                 fixer.replaceText(
                   node,
                   `import${
-                    node.importKind === "type" ? " type" : ""
+                    node.importKind === 'type' ? ' type' : ''
                   } {\n\t${fromPackageSpecifiers
                     .map((specifier) => createSpecifierString(specifier))
-                    .join(",\n\t")}\n} from '${node.source.value}';`
+                    .join(',\n\t')}\n} from '${node.source.value}';`
                 )
               );
             }
@@ -209,13 +211,13 @@ export function moveSpecifiers(
           return;
         }
         const newToPackageExportDeclaration = `export${
-          node.exportKind === "type" ? " type" : ""
+          node.exportKind === 'type' ? ' type' : ''
         } {\n\t${[
           ...existingToPackageExportSpecifiers,
           ...newToPackageSpecifiers.map((exportSpecifier) => {
             const exportString = src.getText(exportSpecifier);
 
-            return /^@patternfly\/react-core\/(dist\/(esm|js)\/)?next/.test(
+            return /^@patternfly\/react-core\/(dist\/(esm|js|dynamic)\/)?next/.test(
               exportSpecifier.parent?.source?.value
             )
               ? `${exportString} /* data-codemods */`
@@ -228,11 +230,11 @@ export function moveSpecifiers(
           message:
             `${newToPackageSpecifiers
               .map((s) => s.local.name)
-              .join(", ")
-              .replace(/, ([^,]+)$/, ", and $1")}` +
-            `${newToPackageSpecifiers.length > 1 ? " have " : " has "}${
+              .join(', ')
+              .replace(/, ([^,]+)$/, ', and $1')}` +
+            `${newToPackageSpecifiers.length > 1 ? ' have ' : ' has '}${
               messageAfterSpecifierPathChange ||
-              "been moved. Running the fix flag will update your exports."
+              'been moved. Running the fix flag will update your exports.'
             }`,
           fix(fixer) {
             //no other exports left, replace the fromPackage
@@ -265,7 +267,7 @@ export function moveSpecifiers(
                 fixer.replaceText(
                   node,
                   `export${
-                    node.exportKind === "type" ? " type" : ""
+                    node.exportKind === 'type' ? ' type' : ''
                   } {\n\t${fromPackageSpecifiers
                     .map((specifier) => {
                       const specifierText = src.getText(specifier);
@@ -274,10 +276,10 @@ export function moveSpecifiers(
                           .getCommentsAfter(specifier)
                           .map((comment) => comment?.value) || [];
                       return specifierComments.length
-                        ? `${specifierText} /* ${specifierComments.join("")} */`
+                        ? `${specifierText} /* ${specifierComments.join('')} */`
                         : specifierText;
                     })
-                    .join(",\n\t")}\n} from '${node?.source?.value}';`
+                    .join(',\n\t')}\n} from '${node?.source?.value}';`
                 )
               );
             }
@@ -321,117 +323,12 @@ export function createAliasImportSpecifiers(specifiers) {
   });
 }
 
-export function renamePropsOnNode(context, imports, node, renames) {
-  const componentName = imports.find((imp) => imp.local.name === node.name.name)
-    ?.imported.name;
-
-  if (componentName) {
-    const renamedProps = renames[componentName];
-
-    node.attributes
-      .filter((attribute) => renamedProps.hasOwnProperty(attribute.name?.name))
-      .forEach((attribute) => {
-        const newPropObject = renamedProps[attribute.name.name];
-
-        const message = newPropObject.message
-          ? newPropObject.message instanceof Function
-            ? newPropObject.message(node)
-            : newPropObject.message
-          : undefined;
-
-        if (
-          newPropObject.newName === undefined ||
-          newPropObject.newName === ""
-        ) {
-          context.report({
-            node,
-            message:
-              message ||
-              `${attribute.name.name} prop for ${node.name.name} has been removed`,
-            fix(fixer) {
-              return fixer.replaceText(attribute, "");
-            },
-          });
-        } else {
-          context.report({
-            node,
-            message:
-              message ||
-              `${attribute.name.name} prop for ${node.name.name} has been ${
-                newPropObject.replace ? "replaced with" : "renamed to"
-              } ${newPropObject.newName}`,
-            fix(fixer) {
-              return fixer.replaceText(
-                newPropObject.replace ? attribute : attribute.name,
-                newPropObject.newName
-              );
-            },
-          });
-        }
-      });
-  }
-}
-
-/**
- * 
- * @param {*} renames 
- * structure of the renames object:
- * {
- *    ComponentOne: {
-        propA: {
-          newName: "newPropA",
-          message: (node) => `propA prop has been renamed to newPropA for ${node.name.name}, some custom message`, // message is optional, default message will always be provided
-        },
-        isSmall: {
-          newName: 'size="sm"',
-          replace // when replace is present, it will replace the entire prop, including its value (e.g. isSmall={true} will be replaced with size="sm")
-        }
-      },
-      ComponentTwo: {
-        propToDelete: {
-          newName: "" // removing a prop is done by an empty string newName
-          message: "propToDelete has been deleted on ComponentTwo" // message can also be a string, but function is preferable to keep the node name, when using aliased import of a component
-        },
-        propToDeleteShort: "", // shorter way to remove a prop
-        propToRenameShort: "someNewPropName", // shorter way to rename a prop
-        propToDeleteAlternativeWay: {}, // this will also work for removing a prop
-      }
- * }
- * @param {string} packageName
- * @returns 
- */
-export function renameProps(renames, packageName = "@patternfly/react-core") {
-  return function (context) {
-    const imports = getFromPackage(context, packageName).imports.filter(
-      (specifier) => Object.keys(renames).includes(specifier.imported.name)
-    );
-
-    if (imports.length === 0) {
-      return {};
-    }
-
-    Object.keys(renames).forEach((component) => {
-      Object.entries(renames[component]).forEach(([oldName, value]) => {
-        if (typeof value === "string") {
-          renames[component][oldName] = { newName: value };
-        }
-      });
-    });
-
-    return {
-      JSXOpeningElement(node) {
-        renamePropsOnNode(context, imports, node, renames);
-      },
-    };
-  };
-}
-
 export function renameComponents(
   componentMap,
   condition = (_context, _package) => true,
   message = (prevName, newName) =>
     `${prevName} has been replaced with ${newName}`,
-  packageName = "@patternfly/react-core"
+  packageName = '@patternfly/react-core'
 ) {
   return function (context) {
     const { imports, exports } = getFromPackage(context, packageName);
@@ -452,12 +349,12 @@ export function renameComponents(
     }
 
     if (filteredImports.length) {
-      renameComponentFunctions["ImportDeclaration"] = function (node) {
+      renameComponentFunctions['ImportDeclaration'] = function (node) {
         ensureImports(context, node, packageName, [
           ...new Set(Object.values(componentMap)),
         ]);
       };
-      renameComponentFunctions["JSXIdentifier"] = function (node) {
+      renameComponentFunctions['JSXIdentifier'] = function (node) {
         const nodeName = node?.name;
         const importedNode = filteredImports.find(
           (imp) => imp?.local?.name === nodeName
@@ -468,14 +365,14 @@ export function renameComponents(
         ) {
           // if data-codemods attribute, do nothing
           const parentNode = node?.parent;
-          const isOpeningTag = parentNode?.type === "JSXOpeningElement";
+          const isOpeningTag = parentNode?.type === 'JSXOpeningElement';
           const openingTagAttributes = isOpeningTag
             ? parentNode?.attributes
             : parentNode?.parent?.openingElement?.attributes;
           const hasDataAttr =
             openingTagAttributes &&
             openingTagAttributes.filter(
-              (attr) => attr.name?.name === "data-codemods"
+              (attr) => attr.name?.name === 'data-codemods'
             ).length;
           if (hasDataAttr) {
             return;
@@ -487,7 +384,7 @@ export function renameComponents(
             context.getSourceCode().getText(node).replace(nodeName, newName);
           const addDataAttr = (jsxStr) =>
             `${jsxStr.slice(0, -1)} data-codemods="true">`;
-          const newOpeningParentTag = newName.includes("Toolbar")
+          const newOpeningParentTag = newName.includes('Toolbar')
             ? addDataAttr(updateTagName(parentNode))
             : updateTagName(parentNode);
           context.report({
@@ -504,7 +401,7 @@ export function renameComponents(
     }
 
     if (filteredExports.length) {
-      renameComponentFunctions["ExportNamedDeclaration"] = function (node) {
+      renameComponentFunctions['ExportNamedDeclaration'] = function (node) {
         const exportedNode = node?.specifiers?.find((specifier) =>
           filteredExports
             .map((exp) => exp?.local?.name)
@@ -541,7 +438,7 @@ export function ensureImports(context, node, packageName, imports) {
   const missingImports = imports
     .filter((imp) => !patternflyImportNames.includes(imp)) // not added by consumer
     .filter((imp) => !myImports.includes(imp)) // not added by this rule
-    .join(", ");
+    .join(', ');
   if (missingImports) {
     const lastSpecifier = node.specifiers[node.specifiers.length - 1];
     context.report({
@@ -565,11 +462,11 @@ export function addCallbackParam(
   return function (context) {
     const { imports: reactCoreImports } = getFromPackage(
       context,
-      "@patternfly/react-core"
+      '@patternfly/react-core'
     );
     const { imports: deprecatedImports } = getFromPackage(
       context,
-      "@patternfly/react-core/deprecated"
+      '@patternfly/react-core/deprecated'
     );
     const imports = [...reactCoreImports, ...deprecatedImports].filter(
       (specifier) => componentsArray.includes(specifier?.imported?.name)
@@ -593,10 +490,10 @@ export function addCallbackParam(
                   nodeToReplace: attribute.value?.expression,
                 };
 
-                if (propProperties.type === "ArrowFunctionExpression") {
+                if (propProperties.type === 'ArrowFunctionExpression') {
                   propProperties.params = attribute.value?.expression?.params;
-                } else if (propProperties.type === "Identifier") {
-                  const matchingVariable = findVariableDeclaration(
+                } else if (propProperties.type === 'Identifier') {
+                  const matchingVariable = getVariableDeclaration(
                     propProperties.name,
                     context.getSourceCode().getScope(node)
                   );
@@ -605,36 +502,36 @@ export function addCallbackParam(
                   );
 
                   propProperties.params =
-                    matchingDefinition?.type === "FunctionName"
+                    matchingDefinition?.type === 'FunctionName'
                       ? matchingDefinition?.node?.params
                       : matchingDefinition?.node?.init?.params;
 
                   const isPotentialUseStateHook = (definition) =>
-                    definition?.type === "Variable" &&
-                    definition?.node.id?.type === "ArrayPattern" &&
-                    definition?.node.init?.type === "CallExpression";
+                    definition?.type === 'Variable' &&
+                    definition?.node.id?.type === 'ArrayPattern' &&
+                    definition?.node.init?.type === 'CallExpression';
 
                   if (isPotentialUseStateHook(matchingDefinition)) {
                     const callee = matchingDefinition?.node.init.callee;
                     const reactImports = getFromPackage(
                       context,
-                      "react"
+                      'react'
                     ).imports;
 
                     const defaultSpecifierName = reactImports.find(
-                      (spec) => spec.type === "ImportDefaultSpecifier"
+                      (spec) => spec.type === 'ImportDefaultSpecifier'
                     )?.local.name;
 
                     const useStateLocalName = reactImports.find(
-                      (spec) => spec.imported?.name === "useState"
+                      (spec) => spec.imported?.name === 'useState'
                     )?.local.name;
 
                     const isStateSetter = (callee) =>
-                      (callee.type === "Identifier" &&
+                      (callee.type === 'Identifier' &&
                         callee.name === useStateLocalName) ||
-                      (callee.type === "MemberExpression" &&
+                      (callee.type === 'MemberExpression' &&
                         callee.object.name === defaultSpecifierName &&
-                        callee.property.name === "useState");
+                        callee.property.name === 'useState');
 
                     if (isStateSetter(callee)) {
                       propProperties.isStateSetter = true;
@@ -642,17 +539,17 @@ export function addCallbackParam(
                         matchingDefinition?.node.init.typeParameters?.params[0].typeName?.name;
                     }
                   }
-                } else if (propProperties.type === "MemberExpression") {
+                } else if (propProperties.type === 'MemberExpression') {
                   const memberExpression = attribute.value?.expression;
-                  if (memberExpression.object.type === "ThisExpression") {
+                  if (memberExpression.object.type === 'ThisExpression') {
                     const parentClass = findAncestor(
                       memberExpression,
-                      (current) => current.type === "ClassDeclaration"
+                      (current) => current.type === 'ClassDeclaration'
                     );
                     const methods = parentClass?.body?.body;
                     const methodDefinition = methods?.find(
                       (method) =>
-                        method.key.type === "Identifier" &&
+                        method.key.type === 'Identifier' &&
                         method.key.name === memberExpression.property.name
                     );
 
@@ -663,14 +560,14 @@ export function addCallbackParam(
                 const { type, params } = propProperties;
 
                 const parameterConfig = propMap[attribute.name.name];
-                const isParamAdditionOnly = typeof parameterConfig === "string";
+                const isParamAdditionOnly = typeof parameterConfig === 'string';
                 const newOrDefaultParamName = isParamAdditionOnly
                   ? parameterConfig
                   : parameterConfig.defaultParamName;
 
                 let potentialParamMatchers = `(^_?${newOrDefaultParamName.replace(
                   /^_+/,
-                  ""
+                  ''
                 )}$)`;
                 const otherMatchersString = parameterConfig.otherMatchers
                   ?.toString()
@@ -729,7 +626,7 @@ export function addCallbackParam(
 
                 if (
                   (params?.length >= 1 &&
-                    ["ArrowFunctionExpression", "Identifier"].includes(type)) ||
+                    ['ArrowFunctionExpression', 'Identifier'].includes(type)) ||
                   propProperties.isThisExpression ||
                   propProperties.isStateSetter
                 ) {
@@ -746,7 +643,7 @@ export function addCallbackParam(
                       if (propProperties.isStateSetter) {
                         const typeText = propProperties.stateType
                           ? `: ${propProperties.stateType}`
-                          : "";
+                          : '';
                         fixes.push(
                           fixer.replaceText(
                             propProperties.nodeToReplace,
@@ -755,7 +652,7 @@ export function addCallbackParam(
                         );
                       } else if (
                         propProperties.isThisExpression ||
-                        type === "Identifier"
+                        type === 'Identifier'
                       ) {
                         if (!params || params.length === 0) {
                           return fixes;
@@ -764,7 +661,7 @@ export function addCallbackParam(
                         const newParamsText = `${newParam}, ${params
                           .filter((p) => p.name !== newParam)
                           .map((p) => context.getSourceCode().getText(p))
-                          .join(", ")}`;
+                          .join(', ')}`;
 
                         fixes.push(
                           fixer.replaceText(
@@ -773,7 +670,7 @@ export function addCallbackParam(
                               .getSourceCode()
                               .getText(propProperties.nodeToReplace)}(${params
                               .map((p) => p.name)
-                              .join(", ")})`
+                              .join(', ')})`
                           )
                         );
                       } else {
@@ -785,7 +682,7 @@ export function addCallbackParam(
                             .getText(firstParam)}`;
 
                           const hasParenthesis =
-                            context.getTokenBefore(firstParam).value === "(";
+                            context.getTokenBefore(firstParam).value === '(';
 
                           return fixer.replaceText(
                             firstParam,
@@ -805,7 +702,7 @@ export function addCallbackParam(
                             currentUseOfNewParam.range[1],
                           ];
 
-                          return fixer.replaceTextRange(targetRange, "");
+                          return fixer.replaceTextRange(targetRange, '');
                         };
 
                         const currentIndexOfNewParam = params?.findIndex(
@@ -848,7 +745,7 @@ export function getAllJSXElements(context) {
     if (!node) {
       return;
     }
-    if (node.type === "JSXElement") {
+    if (node.type === 'JSXElement') {
       jsxElements.push(node);
     }
 
@@ -857,7 +754,7 @@ export function getAllJSXElements(context) {
 
       if (Array.isArray(child)) {
         child.forEach((c) => traverse(c));
-      } else if (child && typeof child === "object") {
+      } else if (child && typeof child === 'object') {
         traverse(child);
       }
     }
@@ -866,31 +763,4 @@ export function getAllJSXElements(context) {
   traverse(context.getSourceCode().ast);
 
   return jsxElements;
-}
-
-export function findVariableDeclaration(name, scope) {
-  while (scope !== null) {
-    const variable = scope.variables.find((v) => v.name === name);
-
-    if (variable) {
-      return variable;
-    }
-
-    scope = scope.upper;
-  }
-  return undefined;
-}
-
-export function findAncestor(node, conditionCallback = (_current) => false) {
-  let current = node?.parent;
-
-  while (current) {
-    if (conditionCallback(current)) {
-      return current;
-    }
-
-    current = current.parent;
-  }
-
-  return undefined;
 }

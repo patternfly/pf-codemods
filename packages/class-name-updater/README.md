@@ -1,6 +1,6 @@
 # class-name-updater
 
-This utility automatically identifies Patternfly class names that need to be updated after the introduction of versioned class names in Patternfly v5.
+This utility automatically identifies Patternfly class names that need to be updated after the introduction of versioned class names in Patternfly v5 or v6. Currently v5 is set at the default so if you are updating to v6, please use the `--v6` option.
 
 ## Usage
 
@@ -25,6 +25,7 @@ Usage: @patternfly/class-name-updater [options] <path> [otherPaths...]
 
 Options:
   -V, --version      output the version number
+  --v6               run in PF6 mode
   --extensions       comma-delineated list of file extensions to update, by default includes css, scss, less, ts, tsx, js, jsx and md
   --exclude          comma-delineated list of files to exclude, files should include their path relative to where this utility is being called
   --fix              whether to run fixer

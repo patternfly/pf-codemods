@@ -3,6 +3,431 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.114.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.113.0...@patternfly/eslint-plugin-pf-codemods@1.114.0) (2024-07-19)
+
+
+### Features
+
+* **Dropdown deprecated:** added rule to replace with MenuToggle ([#702](https://github.com/patternfly/pf-codemods/issues/702)) ([4b1201d](https://github.com/patternfly/pf-codemods/commit/4b1201df222baa8ec6538b7229e82df8d8ba4c79))
+
+
+
+
+
+# [1.113.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.112.0...@patternfly/eslint-plugin-pf-codemods@1.113.0) (2024-07-18)
+
+
+### Features
+
+* **EmptyState:** Add auto fix support for some child components ([#703](https://github.com/patternfly/pf-codemods/issues/703)) ([f80f157](https://github.com/patternfly/pf-codemods/commit/f80f1575315ec2604377b2b0bc8c109c976e2f7e))
+
+
+
+
+
+# [1.112.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.111.1...@patternfly/eslint-plugin-pf-codemods@1.112.0) (2024-07-18)
+
+
+### Features
+
+* Text to Content ([#675](https://github.com/patternfly/pf-codemods/issues/675)) ([09443bb](https://github.com/patternfly/pf-codemods/commit/09443bbecd468c04857a3c4d5aa4385e79f1866a))
+
+
+
+
+
+## [1.111.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.111.0...@patternfly/eslint-plugin-pf-codemods@1.111.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* **WizardStep:** prevented omitting the WizardBody component ([#685](https://github.com/patternfly/pf-codemods/issues/685)) ([0d7036a](https://github.com/patternfly/pf-codemods/commit/0d7036ac3548a51b14077a7e63c110bfa984bf04))
+
+
+
+
+
+# [1.111.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.110.0...@patternfly/eslint-plugin-pf-codemods@1.111.0) (2024-07-16)
+
+
+### Features
+
+* **Page:** updated logic to allow section grouping ([#699](https://github.com/patternfly/pf-codemods/issues/699)) ([db387e7](https://github.com/patternfly/pf-codemods/commit/db387e7e18e79f28ee0b04fa72a70061fad5b554))
+
+
+
+
+
+# [1.110.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.109.0...@patternfly/eslint-plugin-pf-codemods@1.110.0) (2024-07-16)
+
+
+### Features
+
+* **Pagination:** added wrapper around menu toggle ([#701](https://github.com/patternfly/pf-codemods/issues/701)) ([700c347](https://github.com/patternfly/pf-codemods/commit/700c3475a18f7b866d1efa5c65be638eecfc7eb4))
+
+
+
+
+
+# [1.109.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.2...@patternfly/eslint-plugin-pf-codemods@1.109.0) (2024-07-16)
+
+
+### Features
+
+* **NavItem:** added default nav item wrapper ([#687](https://github.com/patternfly/pf-codemods/issues/687)) ([52b355d](https://github.com/patternfly/pf-codemods/commit/52b355dce8471dab8bcb01a607f497d63a93cc88))
+
+
+
+
+
+## [1.108.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.1...@patternfly/eslint-plugin-pf-codemods@1.108.2) (2024-07-16)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+## [1.108.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.108.0...@patternfly/eslint-plugin-pf-codemods@1.108.1) (2024-07-16)
+
+
+### Bug Fixes
+
+* **Toolbar:** updated for parity with Core updates ([#696](https://github.com/patternfly/pf-codemods/issues/696)) ([ab0b417](https://github.com/patternfly/pf-codemods/commit/ab0b417d7d087d05c3cd4d14ed4e6060dfae6228))
+
+
+
+
+
+# [1.108.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.107.1...@patternfly/eslint-plugin-pf-codemods@1.108.0) (2024-07-12)
+
+
+### Features
+
+* **Banner,Label:** renamed cyan/gold color values ([#691](https://github.com/patternfly/pf-codemods/issues/691)) ([4e69fdb](https://github.com/patternfly/pf-codemods/commit/4e69fdbb7ba4a58f73b11d8a9fc6ea4f04d53f55))
+
+
+
+
+
+## [1.107.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.107.0...@patternfly/eslint-plugin-pf-codemods@1.107.1) (2024-07-11)
+
+
+### Bug Fixes
+
+* **noUnusedImports:** Add unused import removal for v6 rules ([#678](https://github.com/patternfly/pf-codemods/issues/678)) ([4b6bb1d](https://github.com/patternfly/pf-codemods/commit/4b6bb1dee1e6c622d9b3c54b8d53c746d6bdaeb0))
+
+
+
+
+
+# [1.107.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.106.0...@patternfly/eslint-plugin-pf-codemods@1.107.0) (2024-07-11)
+
+
+### Features
+
+* **Toolbar:** replaced chip instances with label ([#692](https://github.com/patternfly/pf-codemods/issues/692)) ([7f5efb5](https://github.com/patternfly/pf-codemods/commit/7f5efb5cd70c67be39069e7db8706a37a8560277))
+
+
+
+
+
+# [1.106.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.105.1...@patternfly/eslint-plugin-pf-codemods@1.106.0) (2024-07-11)
+
+
+### Features
+
+* **various:** removed deprecated components ([#684](https://github.com/patternfly/pf-codemods/issues/684)) ([cb5ec04](https://github.com/patternfly/pf-codemods/commit/cb5ec04816a0196f9f8af166a29893dbc9d7b0c4))
+
+
+
+
+
+## [1.105.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.105.0...@patternfly/eslint-plugin-pf-codemods@1.105.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* **LogViewer:** moved styles into repo ([#690](https://github.com/patternfly/pf-codemods/issues/690)) ([bd6babe](https://github.com/patternfly/pf-codemods/commit/bd6babe7aae0f4caa7b1691c0396617f8b6e30b8))
+
+
+
+
+
+# [1.105.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.2...@patternfly/eslint-plugin-pf-codemods@1.105.0) (2024-07-10)
+
+
+### Features
+
+* **Button:** updated icon usage ([#689](https://github.com/patternfly/pf-codemods/issues/689)) ([90347a7](https://github.com/patternfly/pf-codemods/commit/90347a7e4c3cab849649301bfcd04bb1e2ac4d43))
+
+
+
+
+
+## [1.104.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.1...@patternfly/eslint-plugin-pf-codemods@1.104.2) (2024-07-10)
+
+
+### Bug Fixes
+
+* **Popper:** updated default of appendTo prop ([#688](https://github.com/patternfly/pf-codemods/issues/688)) ([61a071c](https://github.com/patternfly/pf-codemods/commit/61a071c8e6f0e900819c811b324c6ac09b9103c5))
+
+
+
+
+
+## [1.104.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.104.0...@patternfly/eslint-plugin-pf-codemods@1.104.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* **Switch:** removed labelOff prop for a11y ([#686](https://github.com/patternfly/pf-codemods/issues/686)) ([cd27b84](https://github.com/patternfly/pf-codemods/commit/cd27b84024aa41589752c16cab31dfe573bf1fa4))
+
+
+
+
+
+# [1.104.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.103.1...@patternfly/eslint-plugin-pf-codemods@1.104.0) (2024-06-20)
+
+
+### Features
+
+* **DualListSelector:** promoted Next implementation ([#661](https://github.com/patternfly/pf-codemods/issues/661)) ([cd3e316](https://github.com/patternfly/pf-codemods/commit/cd3e3166c26699e1b6ef9694ddf226a9b9d3eb8d))
+
+
+
+
+
+## [1.103.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.103.0...@patternfly/eslint-plugin-pf-codemods@1.103.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* **PageSection:** updated logic to account for variant enum ([#657](https://github.com/patternfly/pf-codemods/issues/657)) ([28cc392](https://github.com/patternfly/pf-codemods/commit/28cc39230ea4c86fb6b06a32ae645ffab9b9a64b))
+
+
+
+
+
+# [1.103.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.102.1...@patternfly/eslint-plugin-pf-codemods@1.103.0) (2024-06-11)
+
+
+### Features
+
+* **Modal:** promoted Next implementation ([#660](https://github.com/patternfly/pf-codemods/issues/660)) ([9a08828](https://github.com/patternfly/pf-codemods/commit/9a08828e907a05963fc09e9e6f17afc83158dd71))
+
+
+
+
+
+## [1.102.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.102.0...@patternfly/eslint-plugin-pf-codemods@1.102.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* **EmptyState:** resolved rule being flagged for every specifier ([#659](https://github.com/patternfly/pf-codemods/issues/659)) ([1603e39](https://github.com/patternfly/pf-codemods/commit/1603e39c67b9ed325e1b702a9ffaf7f47d47953f))
+
+
+
+
+
+# [1.102.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.101.2...@patternfly/eslint-plugin-pf-codemods@1.102.0) (2024-06-06)
+
+
+### Features
+
+* **Page:** rename header to masthead ([#652](https://github.com/patternfly/pf-codemods/issues/652)) ([b3e8f40](https://github.com/patternfly/pf-codemods/commit/b3e8f4045af1c43694bc9ebfc871878841efde65))
+
+
+
+
+
+## [1.101.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.101.1...@patternfly/eslint-plugin-pf-codemods@1.101.2) (2024-06-03)
+
+
+### Bug Fixes
+
+* **Chip:** Remove isReadOnly prop during label conversion ([#653](https://github.com/patternfly/pf-codemods/issues/653)) ([7638965](https://github.com/patternfly/pf-codemods/commit/7638965d334b31a66a595ee650167cc1d559964c))
+
+
+
+
+
+## [1.101.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.101.0...@patternfly/eslint-plugin-pf-codemods@1.101.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* **EmptyState:** components no longer exported ([#642](https://github.com/patternfly/pf-codemods/issues/642)) ([f6f3028](https://github.com/patternfly/pf-codemods/commit/f6f302835eeba91501f8349ecf039977ab76f70e))
+
+
+
+
+
+# [1.101.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.100.0...@patternfly/eslint-plugin-pf-codemods@1.101.0) (2024-05-29)
+
+
+### Features
+
+* **Toolbar:** replaced spacer props with gap ([#648](https://github.com/patternfly/pf-codemods/issues/648)) ([2c73046](https://github.com/patternfly/pf-codemods/commit/2c73046aa8c5434854c4b7d8e6bf5f8877ca6705))
+
+
+
+
+
+# [1.100.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.99.0...@patternfly/eslint-plugin-pf-codemods@1.100.0) (2024-05-28)
+
+
+### Features
+
+* **Banner:** added color and status props ([#649](https://github.com/patternfly/pf-codemods/issues/649)) ([67f0dfb](https://github.com/patternfly/pf-codemods/commit/67f0dfb70e74c3ec82d291bbddc80d49e754de05))
+
+
+
+
+
+# [1.99.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.98.1...@patternfly/eslint-plugin-pf-codemods@1.99.0) (2024-05-22)
+
+
+### Features
+
+* **various:** updated markup for several components ([#644](https://github.com/patternfly/pf-codemods/issues/644)) ([90052e1](https://github.com/patternfly/pf-codemods/commit/90052e18eca55981bbb6443b1cff025d357952d5))
+
+
+
+
+
+## [1.98.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.98.0...@patternfly/eslint-plugin-pf-codemods@1.98.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **Toolbar:** updated align values to logical names ([#640](https://github.com/patternfly/pf-codemods/issues/640)) ([f81d5d1](https://github.com/patternfly/pf-codemods/commit/f81d5d1677cc74f02c4438d79cf98048642e14e2))
+
+
+
+
+
+# [1.98.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.97.0...@patternfly/eslint-plugin-pf-codemods@1.98.0) (2024-04-23)
+
+
+### Features
+
+* **DragDrop:** deprecate ([#631](https://github.com/patternfly/pf-codemods/issues/631)) ([e0f6dd0](https://github.com/patternfly/pf-codemods/commit/e0f6dd0ea035348c308ea5670110f13a598bb2f2))
+
+
+
+
+
+# [1.97.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.96.2...@patternfly/eslint-plugin-pf-codemods@1.97.0) (2024-04-23)
+
+
+### Features
+
+* **DrawerContent:** removed no-background colorVariant ([#629](https://github.com/patternfly/pf-codemods/issues/629)) ([fb7076c](https://github.com/patternfly/pf-codemods/commit/fb7076c1043a65ff1854f21051064e3272d3a345))
+
+
+
+
+
+## [1.96.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.96.1...@patternfly/eslint-plugin-pf-codemods@1.96.2) (2024-04-23)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+## [1.96.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.96.0...@patternfly/eslint-plugin-pf-codemods@1.96.1) (2024-04-23)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+# [1.96.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.95.0...@patternfly/eslint-plugin-pf-codemods@1.96.0) (2024-04-22)
+
+
+### Features
+
+* **FormFiledGroupHeaderTitleTextObject:** handle export specifier ([#625](https://github.com/patternfly/pf-codemods/issues/625)) ([35db8fd](https://github.com/patternfly/pf-codemods/commit/35db8fd9dcdd17ef3461587a929c4e9db5703951))
+
+
+
+
+
+# [1.95.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.94.0...@patternfly/eslint-plugin-pf-codemods@1.95.0) (2024-04-03)
+
+
+### Features
+
+* **LoginMainFooterLinksItem:** pass children instead of props ([#608](https://github.com/patternfly/pf-codemods/issues/608)) ([abedb80](https://github.com/patternfly/pf-codemods/commit/abedb80ac59886cae1dced3c6b0ff97e92e4180a))
+
+
+
+
+
+# [1.94.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.93.0...@patternfly/eslint-plugin-pf-codemods@1.94.0) (2024-03-28)
+
+
+### Features
+
+* **TreeView:** warning for removal of selectable styling modifier ([#617](https://github.com/patternfly/pf-codemods/issues/617)) ([a7f1836](https://github.com/patternfly/pf-codemods/commit/a7f1836e287aaefa3ae89e413e531ac92a014e39))
+
+
+
+
+
+# [1.93.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.92.0...@patternfly/eslint-plugin-pf-codemods@1.93.0) (2024-03-27)
+
+
+### Features
+
+* **EmptyState:** support icons passed directly to EmptyStateHeader ([#612](https://github.com/patternfly/pf-codemods/issues/612)) ([b5d2340](https://github.com/patternfly/pf-codemods/commit/b5d2340daf94e1bc23e4fe9c2e88ff57356b65fe))
+
+
+
+
+
+# [1.92.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.6...@patternfly/eslint-plugin-pf-codemods@1.92.0) (2024-03-27)
+
+
+### Features
+
+* **FormFiledGroupHeaderTitleTextObject:** interface renamed (typo) ([#610](https://github.com/patternfly/pf-codemods/issues/610)) ([a58b56d](https://github.com/patternfly/pf-codemods/commit/a58b56d0973f646d1f566c85cc2d344d88080773))
+
+
+
+
+
+## [1.91.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.5...@patternfly/eslint-plugin-pf-codemods@1.91.6) (2024-03-21)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+## [1.91.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.4...@patternfly/eslint-plugin-pf-codemods@1.91.5) (2024-03-20)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+## [1.91.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.3...@patternfly/eslint-plugin-pf-codemods@1.91.4) (2024-03-14)
+
+
+### Bug Fixes
+
+* **getFromPackage:** add parameter to filter imports and exports by names ([#606](https://github.com/patternfly/pf-codemods/issues/606)) ([c038e79](https://github.com/patternfly/pf-codemods/commit/c038e797bbaf1dc58291a32af07d01a1fbe953fa))
+
+
+
+
+
 ## [1.91.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.91.2...@patternfly/eslint-plugin-pf-codemods@1.91.3) (2024-02-28)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods

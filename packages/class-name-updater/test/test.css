@@ -20,3 +20,7 @@
   .pf-u-screen-reader > .pf-l-stack__item{
     color: red;
   }
+
+  .pf-v5-c-toolbar__item {
+    color: green;
+  }
