@@ -14,7 +14,7 @@
     "access": "public"
   },
   "scripts": {
-    "build:readme": "ts-node-esm ./scripts/buildReadme.ts"
+    "build:readme": "ts-node ./scripts/buildReadme.ts"
   },
   "dependencies": {
     "@patternfly/eslint-plugin-pf-codemods": "^1.114.0",
