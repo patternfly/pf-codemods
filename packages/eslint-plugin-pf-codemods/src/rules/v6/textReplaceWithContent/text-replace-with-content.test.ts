@@ -1,17 +1,21 @@
-const ruleTester = require('../../ruletester');
-import * as rule from './text-replace-with-content';
+const ruleTester = require("../../ruletester");
+import * as rule from "./text-replace-with-content";
 
 const errorMessage = `We have replaced Text, TextContent, TextList and TextListItem with one Content component. Running this fix will change all of those components names to Content and add a \`component\` prop where necessary.`;
 const importDeclarationError = {
   message: errorMessage,
-  type: 'ImportDeclaration',
+  type: "ImportDeclaration",
 };
 const jsxElementError = {
   message: errorMessage,
-  type: 'JSXElement',
+  type: "JSXElement",
+};
+const identifierError = {
+  message: errorMessage,
+  type: "Identifier",
 };
 
-ruleTester.run('text-replace-with-content', rule, {
+ruleTester.run("text-replace-with-content", rule, {
   valid: [
     {
       code: `<Text />`,
@@ -96,6 +100,16 @@ ruleTester.run('text-replace-with-content', rule, {
       code: `import { TextList } from '@patternfly/react-core'; <TextList isPlain></TextList>`,
       output: `import { Content } from '@patternfly/react-core'; <Content component="ul" isPlainList></Content>`,
       errors: [importDeclarationError, jsxElementError],
+    },
+    {
+      code: `import { TextVariants } from '@patternfly/react-core'; const foo = TextVariants.h1`,
+      output: `import { ContentVariants } from '@patternfly/react-core'; const foo = ContentVariants.h1`,
+      errors: [importDeclarationError, identifierError],
+    },
+    {
+      code: `import { TextProps } from '@patternfly/react-core'; interface Foo extends TextProps {}`,
+      output: `import { ContentProps } from '@patternfly/react-core'; interface Foo extends ContentProps {}`,
+      errors: [importDeclarationError, identifierError],
     },
     // with alias
     {
