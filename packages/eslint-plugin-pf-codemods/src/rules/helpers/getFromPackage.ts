@@ -106,7 +106,8 @@ export function getDefaultImportsFromPackage(
   return importDeclarationsFromPackage
     .filter(
       (imp) =>
-        imp.source.value?.toString().includes(componentName) &&
+        (!componentName ||
+          imp.source.value?.toString().includes(componentName)) &&
         imp.specifiers[0]?.type === "ImportDefaultSpecifier"
     )
     .map((imp) => imp.specifiers[0]) as ImportDefaultSpecifier[];
