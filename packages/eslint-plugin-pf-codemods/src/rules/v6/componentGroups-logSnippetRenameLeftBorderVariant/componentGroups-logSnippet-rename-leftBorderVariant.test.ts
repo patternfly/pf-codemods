@@ -1,5 +1,5 @@
 const ruleTester = require("../../ruletester");
-import * as rule from "./logSnippet-rename-leftBorderVariant";
+import * as rule from "./componentGroups-logSnippet-rename-leftBorderVariant";
 
 const propError = {
   message: `We've renamed leftBorderVariant prop to variant on LogSnippet component group.`,
@@ -11,7 +11,7 @@ const enumError = {
   type: "MemberExpression",
 };
 
-ruleTester.run("logSnippet-rename-leftBorderVariant", rule, {
+ruleTester.run("componentGroups-logSnippet-rename-leftBorderVariant", rule, {
   valid: [
     {
       code: `<LogSnippet leftBorderVariant />`,
