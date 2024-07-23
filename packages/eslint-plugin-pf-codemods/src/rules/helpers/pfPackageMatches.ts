@@ -16,9 +16,11 @@ export function pfPackageMatches(
       parts[1] +
       "(/dist/(esm|js|dynamic))?" +
       (parts[2] ? "/" + parts[2] : "") +
-      `(/(components|helpers${
-        parts[1] === "react-icons" ? "|icons" : ""
-      })/.*)?$`
+      (parts[1] === "react-component-groups"
+        ? `(/.*)?$`
+        : `(/(components|helpers${
+            parts[1] === "react-icons" ? "|icons" : ""
+          })/.*)?$`)
   );
   return regex.test(nodeSrc);
 }
