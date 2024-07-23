@@ -45,8 +45,8 @@ function getSpecifiers<
   const specifierType =
     nodeType === "ImportDeclaration" ? "ImportSpecifier" : "ExportSpecifier";
 
-  const filteredSpecifiersByType = specifiers.filter((specifierArray) =>
-    specifierArray.every((specifier) => specifier.type === specifierType)
+  const filteredSpecifiersByType = specifiers.map((specifierArray) =>
+    specifierArray.filter((specifier) => specifier.type === specifierType)
   ) as unknown as SpecifierType[];
 
   return filteredSpecifiersByType.reduce(
@@ -89,7 +89,8 @@ export function getFromPackage(
 
 export function getDefaultImportsFromPackage(
   context: Rule.RuleContext,
-  packageName: string
+  packageName: string,
+  componentName: string = ""
 ): ImportDefaultSpecifier[] {
   const astBody = context.getSourceCode().ast.body;
 
@@ -103,6 +104,10 @@ export function getDefaultImportsFromPackage(
   ) as ImportDeclaration[];
 
   return importDeclarationsFromPackage
-    .filter((imp) => imp.specifiers[0]?.type === "ImportDefaultSpecifier")
+    .filter(
+      (imp) =>
+        imp.source.value?.toString().includes(componentName) &&
+        imp.specifiers[0]?.type === "ImportDefaultSpecifier"
+    )
     .map((imp) => imp.specifiers[0]) as ImportDefaultSpecifier[];
 }
