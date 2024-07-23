@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.114.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.114.0...@patternfly/eslint-plugin-pf-codemods@1.114.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **Text:** Replace TextVariants and TextProps with Content ([#707](https://github.com/patternfly/pf-codemods/issues/707)) ([5e77a4c](https://github.com/patternfly/pf-codemods/commit/5e77a4c53f8125a23555ee2cb270b093eb03354d))
+
+
+
+
+
 # [1.114.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.113.0...@patternfly/eslint-plugin-pf-codemods@1.114.0) (2024-07-19)
 
 
