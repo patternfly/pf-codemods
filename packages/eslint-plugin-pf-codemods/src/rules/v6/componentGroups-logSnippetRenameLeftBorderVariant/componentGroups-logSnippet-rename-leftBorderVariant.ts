@@ -2,8 +2,8 @@ import { Rule } from "eslint";
 import { JSXOpeningElement, MemberExpression } from "estree-jsx";
 import {
   getAttribute,
-  getDefaultImportsFromPackage,
   getFromPackage,
+  getImportSpecifiersLocalNames,
 } from "../../helpers";
 
 // https://github.com/patternfly/react-component-groups/pull/145
@@ -14,24 +14,15 @@ module.exports = {
 
     const { imports } = getFromPackage(context, componentGroupsPackage);
 
-    const logSnippetImports = imports.filter(
-      (specifier) => specifier.imported.name === "LogSnippet"
-    );
-
     const logSnippetBorderVariantImports = imports.filter(
       (specifier) => specifier.imported.name === "LogSnippetBorderVariant"
     );
 
-    const defaultLogSnippetImports = getDefaultImportsFromPackage(
+    const logSnippetLocalNames = getImportSpecifiersLocalNames(
       context,
-      componentGroupsPackage,
-      "LogSnippet"
+      "LogSnippet",
+      componentGroupsPackage
     );
-
-    const logSnippetLocalNames = [
-      ...logSnippetImports.map((imp) => imp.local.name),
-      ...defaultLogSnippetImports.map((imp) => imp.local.name),
-    ];
 
     return !logSnippetLocalNames.length &&
       !logSnippetBorderVariantImports.length
