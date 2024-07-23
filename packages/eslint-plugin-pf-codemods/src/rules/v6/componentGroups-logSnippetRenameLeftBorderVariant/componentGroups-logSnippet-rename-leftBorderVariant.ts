@@ -60,12 +60,13 @@ module.exports = {
                 .map((imp) => imp.local.name)
                 .includes(node.object.name)
             ) {
-              const replaceToken =
-                node.property.type === "Identifier"
-                  ? node.property.name
-                  : node.property.type === "Literal"
-                  ? (node.property.value as string)
-                  : null;
+              let replaceToken;
+              if (node.property.type === "Identifier") {
+                replaceToken = node.property.name;
+              }
+              if (node.property.type === "Literal") {
+                replaceToken = node.property.value as string;
+              }
 
               if (replaceToken) {
                 context.report({
