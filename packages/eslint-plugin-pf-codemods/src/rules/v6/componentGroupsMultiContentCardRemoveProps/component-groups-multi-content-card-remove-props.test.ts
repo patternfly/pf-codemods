@@ -2,7 +2,7 @@ const ruleTester = require("../../ruletester");
 import * as rule from "./component-groups-multi-content-card-remove-props";
 
 const errors = ["leftBorderVariant", "withHeaderBorder"].map((prop) => ({
-  message: `${prop} prop for MultiContentCard has been removed`,
+  message: `The ${prop} prop for MultiContentCard has been removed.`,
   type: "JSXOpeningElement",
 }));
 
@@ -39,6 +39,11 @@ ruleTester.run("component-groups-multi-content-card-remove-props", rule, {
     {
       code: `import { MultiContentCard } from '@patternfly/react-component-groups/dist/dynamic/MultiContentCard'; <MultiContentCard leftBorderVariant="danger" withHeaderBorder/>`,
       output: `import { MultiContentCard } from '@patternfly/react-component-groups/dist/dynamic/MultiContentCard'; <MultiContentCard  />`,
+      errors
+    },
+    {
+      code: `import MCC from '@patternfly/react-component-groups/dist/dynamic/MultiContentCard'; <MCC leftBorderVariant="danger" withHeaderBorder/>`,
+      output: `import MCC from '@patternfly/react-component-groups/dist/dynamic/MultiContentCard'; <MCC  />`,
       errors
     },
   ],

@@ -112,3 +112,19 @@ export function getDefaultImportsFromPackage(
     )
     .map((imp) => imp.specifiers[0]) as ImportDefaultSpecifier[];
 }
+
+export function getAllImportsFromPackage(
+  context: Rule.RuleContext,
+  packageName: string,
+  componentNames: string[]
+) {
+  const { imports } = getFromPackage(context, packageName);
+  const defaultImports = componentNames
+    .map((comp) => getDefaultImportsFromPackage(context, packageName, comp))
+    .flat();
+  const filteredImports = imports.filter((imp) =>
+    componentNames.includes(imp.imported.name)
+  );
+
+  return [filteredImports, defaultImports].flat();
+}
