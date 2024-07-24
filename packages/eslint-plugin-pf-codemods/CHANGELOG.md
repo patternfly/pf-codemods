@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.115.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.114.1...@patternfly/eslint-plugin-pf-codemods@1.115.0) (2024-07-24)
+
+
+### Features
+
+* **LogSnippet:** rename leftBorderVariant prop, remove enum ([#710](https://github.com/patternfly/pf-codemods/issues/710)) ([f281d47](https://github.com/patternfly/pf-codemods/commit/f281d470a2fec51b68a04d14cbf622abe104d007))
+
+
+
+
+
 ## [1.114.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.114.0...@patternfly/eslint-plugin-pf-codemods@1.114.1) (2024-07-23)
 
 
