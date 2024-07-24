@@ -5,13 +5,9 @@ import {
   JSXAttribute,
   JSXIdentifier,
   ImportDefaultSpecifier,
-  ImportDeclaration,
 } from "estree-jsx";
 import { renameSinglePropOnNode, Renames } from "./renameSinglePropOnNode";
-
-interface ImportDefaultSpecifierWithParent extends ImportDefaultSpecifier {
-  parent?: ImportDeclaration;
-}
+import { ImportDefaultSpecifierWithParent } from "./interfaces";
 
 function getComponentName(
   specifier: ImportSpecifier | ImportDefaultSpecifierWithParent,
