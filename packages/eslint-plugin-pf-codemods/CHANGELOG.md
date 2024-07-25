@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.116.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.115.0...@patternfly/eslint-plugin-pf-codemods@1.116.0) (2024-07-25)
+
+
+### Features
+
+* **MultiContentCard:** Remove leftBorderVariant and withHeaderBorder ([#712](https://github.com/patternfly/pf-codemods/issues/712)) ([8b8a055](https://github.com/patternfly/pf-codemods/commit/8b8a05506d3a6f1b94fdd487cd2eeef9b178df07))
+
+
+
+
+
 # [1.115.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.114.1...@patternfly/eslint-plugin-pf-codemods@1.115.0) (2024-07-24)
 
 
