@@ -8,40 +8,12 @@ module.exports = {
   create: function (context: Rule.RuleContext) {
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
-    const createKey = (specifier: ImportSpecifier) =>
-      `${specifier.imported.name}:${specifier.local.name}`;
-
     const findDuplicates = (specifiers: ImportSpecifier[]) => {
-      const occurrences = new Map<string, number>();
+      const localNames = specifiers.map((spec) => spec.local.name);
 
-      // Build a map to count occurrences of each similar import
-      specifiers.forEach((specifier) => {
-        const key = createKey(specifier);
-        if (occurrences.has(key)) {
-          occurrences.set(key, occurrences.get(key)! + 1);
-        } else {
-          occurrences.set(key, 1);
-        }
-      });
-
-      const seen = new Set<string>();
-      const duplicates: ImportSpecifier[] = [];
-
-      specifiers.forEach((specifier) => {
-        const key = createKey(specifier);
-
-        if (occurrences.get(key) === 1) {
-          return;
-        }
-
-        if (seen.has(key)) {
-          duplicates.push(specifier);
-        } else {
-          seen.add(key);
-        }
-      });
-
-      return duplicates;
+      return specifiers.filter(
+        (specifier, index) => localNames.indexOf(specifier.local.name) !== index
+      );
     };
 
     const duplicatesToRemove = findDuplicates(imports);
