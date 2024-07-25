@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.117.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.116.0...@patternfly/eslint-plugin-pf-codemods@1.117.0) (2024-07-25)
+
+
+### Features
+
+* **ErrorState componentGroup:** rename props ([#711](https://github.com/patternfly/pf-codemods/issues/711)) ([4f7a867](https://github.com/patternfly/pf-codemods/commit/4f7a8672b334d9959d4e1ce9e930a29d892d3815))
+
+
+
+
+
 # [1.116.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.115.0...@patternfly/eslint-plugin-pf-codemods@1.116.0) (2024-07-25)
 
 
