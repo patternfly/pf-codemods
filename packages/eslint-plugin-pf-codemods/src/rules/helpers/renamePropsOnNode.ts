@@ -1,33 +1,62 @@
-import { Rule } from 'eslint';
+import { Rule } from "eslint";
 import {
   JSXOpeningElement,
   ImportSpecifier,
   JSXAttribute,
   JSXIdentifier,
-} from 'estree-jsx';
-import { renameSinglePropOnNode, Renames } from './renameSinglePropOnNode';
+  ImportDefaultSpecifier,
+} from "estree-jsx";
+import { renameSinglePropOnNode, Renames } from "./renameSinglePropOnNode";
+import { ImportDefaultSpecifierWithParent } from "./interfaces";
+
+function getComponentName(
+  specifier: ImportSpecifier | ImportDefaultSpecifierWithParent,
+  renames: Renames
+) {
+  if (specifier.type === "ImportSpecifier") {
+    return specifier.imported.name;
+  }
+
+  const localName = specifier.local.name;
+  if (renames[localName]) {
+    return localName;
+  }
+
+  const renamedComponents = Object.keys(renames);
+  const importString = specifier?.parent?.source.value?.toString();
+
+  for (const component of renamedComponents) {
+    if (importString?.includes(component)) {
+      return component;
+    }
+  }
+
+  return "";
+}
 
 export function renamePropsOnNode(
   context: Rule.RuleContext,
-  imports: ImportSpecifier[],
+  imports: (ImportSpecifier | ImportDefaultSpecifier)[],
   node: JSXOpeningElement,
   renames: Renames
 ) {
-  const componentName = imports.find(
+  const component = imports.find(
     (imp) =>
-      node.name.type === 'JSXIdentifier' && imp.local.name === node.name.name
-  )?.imported.name;
+      node.name.type === "JSXIdentifier" && imp.local.name === node.name.name
+  );
 
-  if (!componentName) {
+  if (!component) {
     return;
   }
+
+  const componentName = getComponentName(component, renames);
 
   const renamedProps = renames[componentName];
 
   const JSXAttributes = node.attributes.filter(
     (attribute) =>
-      attribute.type === 'JSXAttribute' &&
-      attribute.name.type === 'JSXIdentifier' &&
+      attribute.type === "JSXAttribute" &&
+      attribute.name.type === "JSXIdentifier" &&
       renamedProps.hasOwnProperty(attribute.name?.name)
   ) as JSXAttribute[];
 
