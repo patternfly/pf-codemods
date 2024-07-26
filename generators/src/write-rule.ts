@@ -22,15 +22,16 @@ export async function genericRule({
   componentName,
   propName,
   ruleName,
+  referenceRepo,
   referencePR,
   message,
 }: Answers) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
   const content = `import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
-import { getFromPackage } from "../../helpers";
+import { getFromPackage, checkMatchingJSXOpeningElement, getAttribute } from "../../helpers";
 
-// https://github.com/patternfly/patternfly-react/pull/${referencePR}
+// https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
@@ -44,16 +45,8 @@ module.exports = {
       ? {}
       : {
           JSXOpeningElement(node: JSXOpeningElement) {
-            if (
-              node.name.type === "JSXIdentifier" &&
-              componentImports
-                .map((imp) => imp.local.name)
-                .includes(node.name.name)
-            ) {
-              const attribute = node.attributes.find(
-                (attr) =>
-                  attr.type === "JSXAttribute" && attr.name.name === "${propName}"
-              );
+            if (checkMatchingJSXOpeningElement(node, componentImports)) {
+              const attribute = getAttribute(node, "${propName}");
               if (attribute) {
                 context.report({
                   node,
@@ -76,11 +69,12 @@ export async function addEventCBRule({
   componentName,
   propName,
   ruleName,
+  referenceRepo,
   referencePR,
 }: Answers) {
   const content = `const { addCallbackParam } = require("../../helpers");
 
-// https://github.com/patternfly/patternfly-react/pull/${referencePR}
+// https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: addCallbackParam(["${componentName}"], { ${propName}: "_event" }),
@@ -93,11 +87,12 @@ export async function swapCBRule({
   componentName,
   propName,
   ruleName,
+  referenceRepo,
   referencePR,
 }: Answers) {
   const content = `const { addCallbackParam } = require("../../helpers");
 
-// https://github.com/patternfly/patternfly-react/pull/${referencePR}
+// https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: addCallbackParam(["${componentName}"], { ${propName}: { defaultParamName: "_event", previousParamIndex: 1, otherMatchers: /^_?(ev\\w*|e$)/ } }),
