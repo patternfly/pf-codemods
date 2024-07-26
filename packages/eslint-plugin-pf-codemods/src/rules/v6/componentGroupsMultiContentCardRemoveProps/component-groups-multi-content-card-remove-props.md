@@ -1,4 +1,4 @@
-### component-groups-multi-content-card-remove-props [(#145)](https://github.com/patternfly/patternfly-react/pull/145)
+### component-groups-multi-content-card-remove-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
 
 The `leftBorderVariant` and `withHeaderBorder` props have been removed from MultiContentCard.
 
