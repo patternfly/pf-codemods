@@ -1,5 +1,8 @@
 import {
   Content,
+  Content,
+  Content,
+  Content,
   ContentProps,
   ContentVariants,
 } from "@patternfly/react-core";
