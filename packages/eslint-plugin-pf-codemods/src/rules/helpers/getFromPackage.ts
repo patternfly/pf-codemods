@@ -10,6 +10,7 @@ import {
   ExportSpecifier,
 } from "estree-jsx";
 import { pfPackageMatches } from "./pfPackageMatches";
+import { ImportDefaultSpecifierWithParent } from "./interfaces";
 
 type Declarations = ImportDeclaration | ExportNamedDeclaration;
 type Specifiers = ImportSpecifier | ExportSpecifier;
@@ -126,5 +127,5 @@ export function getAllImportsFromPackage(
     componentNames.includes(imp.imported.name)
   );
 
-  return [filteredImports, defaultImports].flat();
+  return [filteredImports, defaultImports as ImportDefaultSpecifierWithParent[]].flat();
 }
