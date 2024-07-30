@@ -1,8 +1,15 @@
-import { JSXOpeningElement, ImportSpecifier } from "estree-jsx";
+import {
+  JSXOpeningElement,
+  ImportSpecifier,
+  ImportDefaultSpecifier,
+} from "estree-jsx";
 
 export function checkMatchingJSXOpeningElement(
   node: JSXOpeningElement,
-  imports: ImportSpecifier | ImportSpecifier[]
+  imports:
+    | ImportSpecifier
+    | ImportDefaultSpecifier
+    | (ImportSpecifier | ImportDefaultSpecifier)[]
 ) {
   if (Array.isArray(imports)) {
     return (

@@ -29,30 +29,27 @@ export async function genericRule({
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
   const content = `import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
-import { getFromPackage, checkMatchingJSXOpeningElement, getAttribute } from "../../helpers";
+import { getAllImportsFromPackage, checkMatchingJSXOpeningElement, getAttribute } from "../../helpers";
 
 // https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
-    const { imports } = getFromPackage(context, "@patternfly/react-core");
-
-    const componentImports = imports.filter(
-      (specifier) => specifier.imported.name === "${componentName}"
-    );
+    const basePackage = "@patternfly/react-core";
+    const componentImports = getAllImportsFromPackage(context, basePackage, ["${componentName}"]);
 
     return !componentImports.length
       ? {}
       : {
           JSXOpeningElement(node: JSXOpeningElement) {
             if (checkMatchingJSXOpeningElement(node, componentImports)) {
-              const attribute = getAttribute(node, "${propName}");
-              if (attribute) {
+              const ${propName}Prop = getAttribute(node, "${propName}");
+              if (${propName}Prop) {
                 context.report({
                   node,
                   message: "${message}",
                   fix(fixer) {
-                    return fixer.replaceText(attribute, "");
+                    return fixer.replaceText(${propName}Prop, "");
                   },
                 });
               }
