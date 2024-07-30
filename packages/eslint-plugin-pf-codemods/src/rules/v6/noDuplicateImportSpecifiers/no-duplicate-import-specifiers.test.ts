@@ -14,6 +14,22 @@ ruleTester.run("no-duplicate-import-specifiers", rule, {
         <AnotherButton>Another one</AnotherButton>
       </>`,
     },
+    {
+      code: `import { Select } from '@patternfly/react-core/deprecated';
+      import { Select } from '@patternfly/react-core';`
+    },
+    {
+      code: `import { Select } from '@patternfly/react-core/deprecated';
+      import { Select } from '@patternfly/react-core/dist/dynamic/components/Select';`
+    },
+    {
+      code: `import { Select } from '@patternfly/react-core/next';
+      import { Select } from '@patternfly/react-core';`
+    },
+    {
+      code: `import { Select } from '@patternfly/react-core/next';
+      import { Select } from '@patternfly/react-core/dist/dynamic/components/Select';`
+    }
   ],
   invalid: [
     {
@@ -38,6 +54,20 @@ ruleTester.run("no-duplicate-import-specifiers", rule, {
       errors: [
         {
           message: `Duplicate import specifier Button imported from '@patternfly/react-core'.`,
+          type: "ImportSpecifier",
+        },
+      ],
+    },
+    {
+      code: `import { Button } from "@patternfly/react-core";
+      import { Button } from '@patternfly/react-core/dist/dynamic/components/Button';
+      <Button>Sample button</Button>`,
+      output: `import { Button } from "@patternfly/react-core";
+      
+      <Button>Sample button</Button>`,
+      errors: [
+        {
+          message: `Duplicate import specifier Button imported from '@patternfly/react-core/dist/dynamic/components/Button'.`,
           type: "ImportSpecifier",
         },
       ],
