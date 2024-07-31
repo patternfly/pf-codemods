@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.121.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.121.0...@patternfly/eslint-plugin-pf-codemods@1.121.1) (2024-07-31)
+
+
+### Bug Fixes
+
+* **Button:** Fix error when attempting to access undefined variantValue ([#727](https://github.com/patternfly/pf-codemods/issues/727)) ([93bd081](https://github.com/patternfly/pf-codemods/commit/93bd08147b6077c52f06e7ce1747f71ccb080591))
+
+
+
+
+
 # [1.121.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.120.0...@patternfly/eslint-plugin-pf-codemods@1.121.0) (2024-07-31)
 
 
