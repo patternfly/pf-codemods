@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.121.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.120.0...@patternfly/eslint-plugin-pf-codemods@1.121.0) (2024-07-31)
+
+
+### Features
+
+* No duplicate import specifiers rule ([#713](https://github.com/patternfly/pf-codemods/issues/713)) ([8a09099](https://github.com/patternfly/pf-codemods/commit/8a09099b59539c364608dc47e3ebe39029565cad))
+
+
+
+
+
 # [1.120.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.119.0...@patternfly/eslint-plugin-pf-codemods@1.120.0) (2024-07-30)
 
 
