@@ -41,9 +41,9 @@ module.exports = {
 
               const isEnumValuePlain =
                 buttonVariantEnumImport &&
-                variantValue.object?.name ===
+                variantValue?.object?.name ===
                   buttonVariantEnumImport.local.name &&
-                variantValue.property.name === "plain";
+                variantValue?.property.name === "plain";
               if (variantValue !== "plain" && !isEnumValuePlain) {
                 return;
               }
