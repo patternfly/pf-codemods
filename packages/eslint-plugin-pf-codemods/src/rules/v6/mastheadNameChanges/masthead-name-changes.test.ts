@@ -46,7 +46,7 @@ ruleTester.run("masthead-name-changes", rule, {
     // dist imports
     {
       code: `import { MastheadBrand } from '@patternfly/react-core/dist/esm/components/Masthead/MastheadBrand'; <MastheadBrand />`,
-      output: `import { MastheadLogo } from '@patternfly/react-core/dist/esm/components/Masthead/MastheadBrand'; <MastheadLogo data-codemods />`,
+      output: `import { MastheadLogo } from '@patternfly/react-core/dist/esm/components/Masthead/MastheadLogo'; <MastheadLogo data-codemods />`,
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
@@ -56,7 +56,7 @@ ruleTester.run("masthead-name-changes", rule, {
     },
     {
       code: `import { MastheadBrand } from '@patternfly/react-core/dist/js/components/Masthead/MastheadBrand'; <MastheadBrand />`,
-      output: `import { MastheadLogo } from '@patternfly/react-core/dist/js/components/Masthead/MastheadBrand'; <MastheadLogo data-codemods />`,
+      output: `import { MastheadLogo } from '@patternfly/react-core/dist/js/components/Masthead/MastheadLogo'; <MastheadLogo data-codemods />`,
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
@@ -66,7 +66,7 @@ ruleTester.run("masthead-name-changes", rule, {
     },
     {
       code: `import { MastheadBrand } from '@patternfly/react-core/dist/dynamic/components/Masthead/MastheadBrand'; <MastheadBrand />`,
-      output: `import { MastheadLogo } from '@patternfly/react-core/dist/dynamic/components/Masthead/MastheadBrand'; <MastheadLogo data-codemods />`,
+      output: `import { MastheadLogo } from '@patternfly/react-core/dist/dynamic/components/Masthead/MastheadLogo'; <MastheadLogo data-codemods />`,
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,

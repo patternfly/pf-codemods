@@ -1,7 +1,7 @@
 import { Rule } from "eslint";
-import { ImportSpecifier } from "estree-jsx";
 import { getAllImportsFromPackage } from "./getFromPackage";
 import {
+  ImportSpecifierWithParent,
   ImportDefaultSpecifierWithParent,
   JSXOpeningElementWithParent,
 } from "./interfaces";
@@ -22,7 +22,7 @@ function formatDefaultMessage(oldName: string, newName: string) {
 
 function getFixes(
   fixer: Rule.RuleFixer,
-  nodeImport: ImportSpecifier | ImportDefaultSpecifierWithParent,
+  nodeImport: ImportSpecifierWithParent | ImportDefaultSpecifierWithParent,
   node: JSXOpeningElementWithParent,
   oldName: string,
   newName: string
@@ -30,19 +30,23 @@ function getFixes(
   const fixes = [];
 
   const isNamedImport = nodeImport.type === "ImportSpecifier";
+  const importDeclaration = nodeImport.parent;
+  const importSource = importDeclaration?.source.raw;
+  const importSourceHasComponentName = importSource?.includes(oldName);
+  const newImportDeclaration = importSource?.replace(oldName, newName);
+
   if (isNamedImport) {
     fixes.push(fixer.replaceText(nodeImport.imported, newName));
-  } else {
-    const importDeclaration = nodeImport.parent;
-    const newImportDeclaration = importDeclaration?.source.raw?.replace(
-      oldName,
-      newName
+  }
+
+  if (
+    importDeclaration &&
+    newImportDeclaration &&
+    importSourceHasComponentName
+  ) {
+    fixes.push(
+      fixer.replaceText(importDeclaration.source, newImportDeclaration)
     );
-    if (importDeclaration && newImportDeclaration) {
-      fixes.push(
-        fixer.replaceText(importDeclaration.source, newImportDeclaration)
-      );
-    }
   }
 
   const shouldRenameNode =
