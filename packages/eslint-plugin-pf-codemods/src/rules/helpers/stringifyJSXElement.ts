@@ -38,7 +38,7 @@ function getAttributeName(attr: JSXAttribute) {
   }
 }
 
-/** Gets a string representation of an element including  */
+/** Gets a string representation of an element including props and children */
 export function stringifyJSXElement(
   context: Rule.RuleContext,
   node: JSXElementWithParent
