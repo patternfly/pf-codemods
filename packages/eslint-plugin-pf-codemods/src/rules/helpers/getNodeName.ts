@@ -1,19 +1,19 @@
 import { JSXOpeningElement, JSXMemberExpression } from "estree-jsx";
 
-/** Gets the name of an opening element or member expression */
-export function getNodeName(node: JSXOpeningElement | JSXMemberExpression) {
-  if (node.type === "JSXMemberExpression") {
-    switch (node.object.type) {
-      case "JSXMemberExpression":
-        return getNodeName(node.object);
-      case "JSXIdentifier":
-        return node.object.name;
-    }
+function getJSXMemberExpressionName(node: JSXMemberExpression) {
+  switch (node.object.type) {
+    case "JSXMemberExpression":
+      return getJSXMemberExpressionName(node.object);
+    case "JSXIdentifier":
+      return node.object.name;
   }
+}
 
+/** Gets the name of an opening element */
+export function getNodeName(node: JSXOpeningElement) {
   switch (node.name.type) {
     case "JSXMemberExpression":
-      return getNodeName(node.name);
+      return getJSXMemberExpressionName(node.name);
     case "JSXIdentifier":
     case "JSXNamespacedName":
       return typeof node.name.name === "string"
