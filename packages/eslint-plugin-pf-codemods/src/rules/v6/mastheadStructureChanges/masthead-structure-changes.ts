@@ -4,10 +4,14 @@ import {
   ImportSpecifier,
   JSXAttribute,
   JSXElement,
+  JSXIdentifier,
+  JSXMemberExpression,
+  JSXNamespacedName,
   JSXOpeningElement,
 } from "estree-jsx";
 import { getAllImportsFromPackage, getChildElementByName } from "../../helpers";
 import { stringifyJSXElement } from "../../helpers/stringifyJSXElement";
+import { ImportDefaultSpecifierWithParent } from "../../helpers";
 // https://github.com/patternfly/patternfly-react/pull/10809
 
 // new interfaces, just local for now to avoid conflicts with the masthead rename RP
@@ -40,19 +44,67 @@ function hasCodeModDataTag(openingElement: JSXOpeningElement) {
   return attributeNames.includes("data-codemods");
 }
 
+// Similar story here, will use the getName helper from my other PR once it goes in
+function getName(
+  nodeName: JSXIdentifier | JSXMemberExpression | JSXNamespacedName
+) {
+  switch (nodeName.type) {
+    case "JSXIdentifier":
+      return nodeName.name;
+    case "JSXMemberExpression":
+      return getName(nodeName.object);
+    case "JSXNamespacedName":
+      return nodeName.namespace.name;
+  }
+}
+
+// and here
+function getDeclarationString(
+  defaultImportSpecifier: ImportDefaultSpecifierWithParent
+) {
+  return defaultImportSpecifier?.parent?.source.value?.toString();
+}
+// and here
+function getComponentImportName(
+  importSpecifier: ImportSpecifier | ImportDefaultSpecifierWithParent,
+  potentialNames: string[]
+) {
+  if (importSpecifier.type === "ImportSpecifier") {
+    return importSpecifier.imported.name;
+  }
+
+  return potentialNames.find((name) =>
+    getDeclarationString(importSpecifier)?.includes(name)
+  );
+}
+
 function moveNodeIntoMastheadMain(
   context: Rule.RuleContext,
   fixer: Rule.RuleFixer,
-  node: JSXOpeningElementWithParent
+  node: JSXOpeningElementWithParent,
+  componentImports: (ImportSpecifier | ImportDefaultSpecifier)[]
 ) {
   if (!node.parent || !node.parent.parent) {
     return [];
   }
 
-  const mastheadMain = getChildElementByName(
-    node.parent.parent,
-    "MastheadMain"
+  const namedImports = componentImports.filter(
+    (imp) => imp.type === "ImportSpecifier"
   );
+
+  const mastheadMainImport = namedImports.find(
+    (name) => (name as ImportSpecifier).imported.name === "MastheadMain"
+  );
+  const isAlias =
+    (mastheadMainImport as ImportSpecifier)?.imported.name !==
+    mastheadMainImport?.local.name;
+
+  const componentName =
+    mastheadMainImport && isAlias
+      ? mastheadMainImport.local.name
+      : "MastheadMain";
+
+  const mastheadMain = getChildElementByName(node.parent.parent, componentName);
 
   if (!mastheadMain) {
     return [];
@@ -82,20 +134,29 @@ function wrapNodeInMastheadBrand(
     ? node.parent.closingElement
     : node;
 
-  fixes.push(fixer.insertTextBefore(node, "<MastheadBrand data-codemods>"));
-  fixes.push(fixer.insertTextAfter(closingNode, "</MastheadBrand>"));
-
   const importCount = componentImports.length - 1;
   const lastImport = componentImports[importCount];
 
   const namedImports = componentImports.filter(
     (imp) => imp.type === "ImportSpecifier"
   );
-  const importNames = namedImports.map(
-    (imp) => (imp as ImportSpecifier).imported.name
-  );
 
-  if (!importNames.includes("MastheadBrand")) {
+  const mastheadBrandImport = namedImports.find(
+    (name) => (name as ImportSpecifier).imported.name === "MastheadBrand"
+  );
+  const isAlias =
+    (mastheadBrandImport as ImportSpecifier)?.imported.name !==
+    mastheadBrandImport?.local.name;
+
+  const componentName =
+    mastheadBrandImport && isAlias
+      ? mastheadBrandImport.local.name
+      : "MastheadBrand";
+
+  fixes.push(fixer.insertTextBefore(node, `<${componentName} data-codemods>`));
+  fixes.push(fixer.insertTextAfter(closingNode, `</${componentName}>`));
+
+  if (!mastheadBrandImport) {
     fixes.push(fixer.insertTextAfter(lastImport, ", MastheadBrand"));
   }
 
@@ -105,14 +166,41 @@ function wrapNodeInMastheadBrand(
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
+    const targetComponents = [
+      "MastheadBrand",
+      "MastheadToggle",
+      "MastheadLogo",
+      "Masthead",
+      "MastheadMain"
+    ];
     const componentImports = getAllImportsFromPackage(
       context,
       "@patternfly/react-core",
-      ["MastheadBrand", "MastheadToggle", "MastheadLogo"]
+      targetComponents
     );
 
     const message =
       "The structure of Masthead has been updated, MastheadToggle and MastheadBrand should now be wrapped in MastheadMain.";
+
+    function isPFImport(
+      node: JSXOpeningElementWithParent,
+      potentialComponentNames: string[]
+    ) {
+      const nodeName = getName(node.name);
+      const nodeImport = componentImports.find(
+        (imp) => imp.local.name === nodeName
+      );
+
+      if (!(nodeImport?.type === "ImportSpecifier")) {
+        return false;
+      }
+
+      const nodeImportedName = nodeImport.imported.name;
+
+      return componentImports
+        .map((imp) => getComponentImportName(imp, potentialComponentNames))
+        .includes(nodeImportedName);
+    }
 
     return !componentImports.length
       ? {}
@@ -120,9 +208,7 @@ module.exports = {
           JSXOpeningElement(node: JSXOpeningElementWithParent) {
             if (
               node.name.type !== "JSXIdentifier" ||
-              !componentImports
-                .map((imp) => imp.local.name)
-                .includes(node.name.name)
+              !isPFImport(node, targetComponents)
             ) {
               return;
             }
@@ -133,29 +219,53 @@ module.exports = {
             }
 
             const nodeName = node.name.name;
+
+            const nodeImport = componentImports.find(
+              (imp) => imp.local.name === nodeName
+            );
+
+            const nodeImportedName =
+              nodeImport?.type === "ImportSpecifier" &&
+              nodeImport.imported.name;
+
             const parentName =
               parentOpeningElement.name.type === "JSXIdentifier" &&
               parentOpeningElement.name.name;
 
+            const parentImport = componentImports.find(
+              (imp) => imp.local.name === parentName
+            );
+   
+            const parentImportedName =
+              parentImport?.type === "ImportSpecifier" &&
+              parentImport.imported.name;
+
             if (
-              nodeName === "MastheadToggle" &&
-              parentName !== "MastheadMain"
+              nodeImportedName === "MastheadToggle" &&
+              parentImportedName !== "MastheadMain"
             ) {
               context.report({
                 node,
                 message,
-                fix: (fixer) => moveNodeIntoMastheadMain(context, fixer, node),
+                fix: (fixer) =>
+                  moveNodeIntoMastheadMain(
+                    context,
+                    fixer,
+                    node,
+                    componentImports
+                  ),
               });
               return;
             }
 
             const isPreRenameMastheadBrand =
-              nodeName === "MastheadBrand" &&
-              parentName === "MastheadMain" &&
+              nodeImportedName === "MastheadBrand" &&
+              parentImportedName === "MastheadMain" &&
               !hasCodeModDataTag(node);
 
             const isPostRenameMastheadBrand =
-              nodeName === "MastheadLogo" && parentName !== "MastheadBrand";
+              nodeImportedName === "MastheadLogo" &&
+              parentImportedName !== "MastheadBrand";
 
             if (isPreRenameMastheadBrand || isPostRenameMastheadBrand) {
               context.report({

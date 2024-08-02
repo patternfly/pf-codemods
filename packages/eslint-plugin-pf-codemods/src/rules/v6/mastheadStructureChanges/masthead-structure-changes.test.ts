@@ -63,5 +63,30 @@ ruleTester.run("masthead-structure-changes", rule, {
         },
       ],
     },
+    // with aliases
+    {
+      code: `import { Masthead as MH, MastheadBrand as MB, MastheadMain as MM, MastheadToggle as MT } from '@patternfly/react-core'; <MH><MT>Foo</MT><MM><MB>Bar</MB></MM></MH>`,
+      output: `import { Masthead as MH, MastheadBrand as MB, MastheadMain as MM, MastheadToggle as MT } from '@patternfly/react-core'; <MH><MM><MT>Foo</MT><MB>Bar</MB></MM></MH>`,
+      errors: [
+        {
+          message: `The structure of Masthead has been updated, MastheadToggle and MastheadBrand should now be wrapped in MastheadMain.`,
+          type: "JSXOpeningElement",
+        },
+        {
+          message: `The structure of Masthead has been updated, MastheadToggle and MastheadBrand should now be wrapped in MastheadMain.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { Masthead as MH, MastheadBrand as MB, MastheadMain as MM, MastheadToggle as MT } from '@patternfly/react-core'; <MH><MM><MT>Foo</MT><MB>Bar</MB></MM></MH>`,
+      output: `import { Masthead as MH, MastheadBrand as MB, MastheadMain as MM, MastheadToggle as MT } from '@patternfly/react-core'; <MH><MM><MT>Foo</MT><MB data-codemods><MB>Bar</MB></MB></MM></MH>`,
+      errors: [
+        {
+          message: `The structure of Masthead has been updated, MastheadToggle and MastheadBrand should now be wrapped in MastheadMain.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
   ],
 });
