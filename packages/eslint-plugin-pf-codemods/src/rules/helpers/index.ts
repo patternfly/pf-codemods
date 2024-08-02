@@ -3,7 +3,7 @@ export * from "./findAncestor";
 export * from "./fixers";
 export * from "./getAttributeName";
 export * from "./getComponentImportName";
-export * from "./getDeclarationString";
+export * from "./getDefaultDeclarationString";
 export * from "./getEndRange";
 export * from "./getFromPackage";
 export * from "./getNodeName";

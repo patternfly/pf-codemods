@@ -1,6 +1,6 @@
 import { ImportSpecifier } from "estree-jsx";
 import { ImportDefaultSpecifierWithParent } from "./interfaces";
-import { getDeclarationString } from "./getDeclarationString";
+import { getDefaultDeclarationString } from "./getDefaultDeclarationString";
 
 /** Gets the name of an import based on the specifier and an array of names that should be looked for in default import paths */
 export function getComponentImportName(
@@ -12,6 +12,6 @@ export function getComponentImportName(
   }
 
   return potentialNames.find((name) =>
-    getDeclarationString(importSpecifier)?.includes(name)
+    getDefaultDeclarationString(importSpecifier)?.includes(name)
   );
 }

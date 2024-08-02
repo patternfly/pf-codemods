@@ -6,7 +6,7 @@ import {
   JSXOpeningElementWithParent,
 } from "./interfaces";
 import {
-  getDeclarationString,
+  getDefaultDeclarationString,
   getComponentImportName,
   getNodeName,
   hasCodeModDataTag,
@@ -90,7 +90,7 @@ export function renameComponent(
           }
 
           return oldNames.some((name) =>
-            getDeclarationString(imp)?.includes(name)
+            getDefaultDeclarationString(imp)?.includes(name)
           );
         });
 
