@@ -4,7 +4,6 @@ import { renameComponent } from "../../helpers/renameComponent";
 
 const renames = {
   MastheadBrand: "MastheadLogo",
-  MastheadMain: "MastheadBrand",
 };
 
 module.exports = {
