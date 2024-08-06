@@ -87,6 +87,18 @@ module.exports = {
                         fixes.push(fixer.replaceText(child, ""))
                     );
                   }
+
+                  if (node.closingElement) {
+                    const closingSymbol = context
+                      .getSourceCode()
+                      .getLastToken(node.openingElement)!;
+
+                    fixes.push(
+                      fixer.replaceText(closingSymbol, " />"),
+                      fixer.remove(node.closingElement)
+                    );
+                  }
+
                   return fixes;
                 },
               });

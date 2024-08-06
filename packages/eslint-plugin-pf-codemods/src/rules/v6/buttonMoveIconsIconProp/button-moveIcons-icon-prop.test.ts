@@ -13,7 +13,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
   invalid: [
     {
       code: `import { Button } from '@patternfly/react-core'; const icon = <span>Some icon</span>; <Button variant="plain">{icon}</Button>`,
-      output: `import { Button } from '@patternfly/react-core'; const icon = <span>Some icon</span>; <Button icon={icon} variant="plain"></Button>`,
+      output: `import { Button } from '@patternfly/react-core'; const icon = <span>Some icon</span>; <Button icon={icon} variant="plain" />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
@@ -23,7 +23,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
     },
     {
       code: `import { Button } from '@patternfly/react-core'; <Button variant="plain"><span>Some icon</span></Button>`,
-      output: `import { Button } from '@patternfly/react-core'; <Button icon={<span>Some icon</span>} variant="plain"></Button>`,
+      output: `import { Button } from '@patternfly/react-core'; <Button icon={<span>Some icon</span>} variant="plain" />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
@@ -33,7 +33,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
     },
     {
       code: `import { Button, ButtonVariant } from '@patternfly/react-core'; <Button variant={ButtonVariant.plain}><span>Some icon</span></Button>`,
-      output: `import { Button, ButtonVariant } from '@patternfly/react-core'; <Button icon={<span>Some icon</span>} variant={ButtonVariant.plain}></Button>`,
+      output: `import { Button, ButtonVariant } from '@patternfly/react-core'; <Button icon={<span>Some icon</span>} variant={ButtonVariant.plain} />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
@@ -43,7 +43,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
     },
     {
       code: `import { Button as CustomThing } from '@patternfly/react-core'; <CustomThing variant="plain"><span>Some icon</span></CustomThing>`,
-      output: `import { Button as CustomThing } from '@patternfly/react-core'; <CustomThing icon={<span>Some icon</span>} variant="plain"></CustomThing>`,
+      output: `import { Button as CustomThing } from '@patternfly/react-core'; <CustomThing icon={<span>Some icon</span>} variant="plain" />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
@@ -53,7 +53,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
     },
     {
       code: `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button variant="plain"><span>Some icon</span></Button>`,
-      output: `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button icon={<span>Some icon</span>} variant="plain"></Button>`,
+      output: `import { Button } from '@patternfly/react-core/dist/esm/components/Button/index.js'; <Button icon={<span>Some icon</span>} variant="plain" />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
@@ -63,7 +63,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
     },
     {
       code: `import { Button } from '@patternfly/react-core/dist/js/components/Button/index.js'; <Button variant="plain"><span>Some icon</span></Button>`,
-      output: `import { Button } from '@patternfly/react-core/dist/js/components/Button/index.js'; <Button icon={<span>Some icon</span>} variant="plain"></Button>`,
+      output: `import { Button } from '@patternfly/react-core/dist/js/components/Button/index.js'; <Button icon={<span>Some icon</span>} variant="plain" />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
@@ -73,7 +73,7 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
     },
     {
       code: `import { Button } from '@patternfly/react-core/dist/dynamic/components/Button/index.js'; <Button variant="plain"><span>Some icon</span></Button>`,
-      output: `import { Button } from '@patternfly/react-core/dist/dynamic/components/Button/index.js'; <Button icon={<span>Some icon</span>} variant="plain"></Button>`,
+      output: `import { Button } from '@patternfly/react-core/dist/dynamic/components/Button/index.js'; <Button icon={<span>Some icon</span>} variant="plain" />`,
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
