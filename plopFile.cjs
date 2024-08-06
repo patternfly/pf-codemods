@@ -9,15 +9,48 @@ const {
   swapCBTest,
 } = require("./generators/dist/js/write-test");
 const {
+  RepoNames,
   genericReadme,
   addEventCBReadme,
-  swapCBReadme
+  swapCBReadme,
 } = require("./generators/dist/js/write-readme");
 const {
   genericTestSingle,
   addEventCBTestSingle,
   swapCBTestSingle,
 } = require("./generators/dist/js/write-test-single");
+
+const componentNamePrompt = {
+  type: "input",
+  name: "componentName",
+  message: "What is the name of the component being changed? (PascalCase)",
+};
+const propNamePrompt = {
+  type: "input",
+  name: "propName",
+  message: "What is the name of the prop being changed? (camelCase)",
+};
+const ruleNamePrompt = {
+  type: "input",
+  name: "ruleName",
+  message: "What should the name of this rule be? (kebab-case)",
+};
+const referenceRepoPrompt = {
+  type: "list",
+  name: "referenceRepo",
+  message: "What is the repo the PR was made in",
+  choices: Object.values(RepoNames),
+};
+const referencePrPrompt = {
+  type: "input",
+  name: "referencePR",
+  message: "What is the PR reference number",
+};
+const messagePrompt = {
+  type: "input",
+  name: "message",
+  message: "What message should the codemod send? (Sentence case)",
+};
 
 module.exports = function (plop) {
   plop.setActionType("generateRule", async function (answers, config, plop) {
@@ -62,49 +95,32 @@ module.exports = function (plop) {
     }
   });
 
-  plop.setActionType("generateTestSingle", async function (answers, config, plop) {
-    console.log("Generating tsx files for", answers.ruleName);
-    switch (config.generatorSelection) {
-      case "addEventCB":
-        await addEventCBTestSingle(answers);
-        break;
-      case "swapCB":
-        await swapCBTestSingle(answers);
-        break;
-      default:
-        await genericTestSingle(answers);
+  plop.setActionType(
+    "generateTestSingle",
+    async function (answers, config, plop) {
+      console.log("Generating tsx files for", answers.ruleName);
+      switch (config.generatorSelection) {
+        case "addEventCB":
+          await addEventCBTestSingle(answers);
+          break;
+        case "swapCB":
+          await swapCBTestSingle(answers);
+          break;
+        default:
+          await genericTestSingle(answers);
+      }
     }
-  });
+  );
 
   plop.setGenerator("generic", {
     description: "create a generic new rule",
     prompts: [
-      {
-        type: "input",
-        name: "componentName",
-        message:
-          "What is the name of the component being changed? (PascalCase)",
-      },
-      {
-        type: "input",
-        name: "propName",
-        message: "What is the name of the prop being changed? (camelCase)",
-      },
-      {
-        type: "input",
-        name: "ruleName",
-        message: "What should the name of this rule be? (kebab-case)",
-      },
-      {
-        type: "input",
-        name: "referencePR",
-        message: "What is the PR reference number",
-      },
-      {
-        type: "input",
-        name: "message",
-        message: "What message should the codemod send? (Sentence case)",
-      },
+      componentNamePrompt,
+      propNamePrompt,
+      ruleNamePrompt,
+      referenceRepoPrompt,
+      referencePrPrompt,
+      messagePrompt,
     ],
     actions: [
       {
@@ -125,27 +141,12 @@ module.exports = function (plop) {
   plop.setGenerator("add event parameter", {
     description: "add an event parameter to the front of a callback",
     prompts: [
-      {
-        type: "input",
-        name: "componentName",
-        message:
-          "What is the name of the component being changed? (PascalCase)",
-      },
-      {
-        type: "input",
-        name: "propName",
-        message: "What is the name of the prop being changed? (camelCase)",
-      },
-      {
-        type: "input",
-        name: "ruleName",
-        message: "What should the name of this rule be? (kebab-case)",
-      },
-      {
-        type: "input",
-        name: "referencePR",
-        message: "What is the PR reference number",
-      },
+      componentNamePrompt,
+      propNamePrompt,
+      ruleNamePrompt,
+      referenceRepoPrompt,
+      referencePrPrompt,
+      ,
     ],
     actions: [
       {
@@ -170,27 +171,11 @@ module.exports = function (plop) {
   plop.setGenerator("swap parameter", {
     description: "move the position of a parameter in a callback to the front",
     prompts: [
-      {
-        type: "input",
-        name: "componentName",
-        message:
-          "What is the name of the component being changed? (PascalCase)",
-      },
-      {
-        type: "input",
-        name: "propName",
-        message: "What is the name of the prop being changed? (camelCase)",
-      },
-      {
-        type: "input",
-        name: "ruleName",
-        message: "What should the name of this rule be? (kebab-case)",
-      },
-      {
-        type: "input",
-        name: "referencePR",
-        message: "What is the PR reference number",
-      },
+      componentNamePrompt,
+      propNamePrompt,
+      ruleNamePrompt,
+      referenceRepoPrompt,
+      referencePrPrompt,
     ],
     actions: [
       {
