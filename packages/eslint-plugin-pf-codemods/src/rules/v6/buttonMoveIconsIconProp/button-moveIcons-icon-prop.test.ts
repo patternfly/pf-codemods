@@ -81,5 +81,27 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
         },
       ],
     },
+    // with Icon component child
+    {
+      code: `import { Button, Icon } from '@patternfly/react-core'; <Button><Icon>Some icon</Icon></Button>`,
+      output: `import { Button, Icon } from '@patternfly/react-core'; <Button icon={<Icon>Some icon</Icon>}></Button>`,
+      errors: [
+        {
+          message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
+          type: "JSXElement",
+        },
+      ],
+    },
+    // with react-icons icon child
+    {
+      code: `import { Button } from '@patternfly/react-core'; import { SomeIcon } from "@patternfly/react-icons"; <Button><SomeIcon /></Button>`,
+      output: `import { Button } from '@patternfly/react-core'; import { SomeIcon } from "@patternfly/react-icons"; <Button icon={<SomeIcon />}></Button>`,
+      errors: [
+        {
+          message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
+          type: "JSXElement",
+        },
+      ],
+    },
   ],
 });
