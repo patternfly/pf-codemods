@@ -15,6 +15,9 @@ export const TextReplaceWithContentInput = () => {
       <Text component="h3">Abc</Text>
       <Text>Abc</Text>
       <TextContent>Abc</TextContent>
+      <TextContent>
+        <Text>Some text</Text>
+      </TextContent>
       <TextContent isVisited>Abc</TextContent>
       <TextList>Abc</TextList>
       <TextList isPlain>Abc</TextList>

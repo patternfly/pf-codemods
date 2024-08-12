@@ -6,9 +6,13 @@ const importDeclarationError = {
   message: errorMessage,
   type: "ImportDeclaration",
 };
-const jsxElementError = {
+const jsxOpeningElementError = {
   message: errorMessage,
-  type: "JSXElement",
+  type: "JSXOpeningElement",
+};
+const jsxClosingElementError = {
+  message: errorMessage,
+  type: "JSXClosingElement",
 };
 const identifierError = {
   message: errorMessage,
@@ -28,78 +32,109 @@ ruleTester.run("text-replace-with-content", rule, {
     {
       code: `import { Text } from '@patternfly/react-core'; <Text>Abc</Text>`,
       output: `import { Content } from '@patternfly/react-core'; <Content component="p">Abc</Content>`,
-      errors: [importDeclarationError, jsxElementError],
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+      ],
     },
     {
       code: `import { Text } from '@patternfly/react-core'; <Text component="h3">Abc</Text>`,
       output: `import { Content } from '@patternfly/react-core'; <Content component="h3">Abc</Content>`,
-      errors: [importDeclarationError, jsxElementError],
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+      ],
     },
-    // {
-    //   code: `import { Text, TextContent } from '@patternfly/react-core';
-    //   <TextContent>
-    //     <Text component="h3">Abc</Text>
-    //   </TextContent>`,
-    //   output: `import { Content, TextContent } from '@patternfly/react-core';
-    //   <Content>
-    //     <Content component="h3">Abc</Content>
-    //   </Content>`,
-    //   errors: [importDeclarationError, jsxElementError, jsxElementError],
-    // },
+    {
+      code: `import { Text, TextContent } from '@patternfly/react-core';
+      <TextContent>
+        <Text component="h3">Abc</Text>
+      </TextContent>`,
+      output: `import { Content, TextContent } from '@patternfly/react-core';
+      <Content>
+        <Content component="h3">Abc</Content>
+      </Content>`,
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxClosingElementError,
+      ],
+    },
     {
       code: `import { TextContent } from '@patternfly/react-core'; <TextContent isVisited></TextContent>`,
       output: `import { Content } from '@patternfly/react-core'; <Content isVisitedLink></Content>`,
-      errors: [importDeclarationError, jsxElementError],
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+      ],
     },
-    // {
-    //   code: `import { TextList, TextListItem } from '@patternfly/react-core';
-    //   <TextList>
-    //     <TextListItem>A</TextListItem>
-    //     <TextListItem>B</TextListItem>
-    //     <TextListItem>C</TextListItem>
-    //   </TextList>`,
-    //   output: `import { Content, TextListItem } from '@patternfly/react-core';
-    //   <Content component="ul">
-    //     <Content component="li">A</Content>
-    //     <Content component="li">B</Content>
-    //     <Content component="li">C</Content>
-    //   </Content>`,
-    //   errors: [
-    //     importDeclarationError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //   ],
-    // },
-    // {
-    //   code: `import { TextList, TextListItem } from '@patternfly/react-core';
-    //   <TextList component="dl">
-    //     <TextListItem component="dt">A</TextListItem>
-    //     <TextListItem component="dd">letter A</TextListItem>
-    //     <TextListItem component="dt">B</TextListItem>
-    //     <TextListItem component="dd">letter B</TextListItem>
-    //   </TextList>`,
-    //   output: `import { Content, TextListItem } from '@patternfly/react-core';
-    //   <Content component="dl">
-    //     <Content component="dt">A</Content>
-    //     <Content component="dd">letter A</Content>
-    //     <Content component="dt">B</Content>
-    //     <Content component="dd">letter B</Content>
-    //   </Content>`,
-    //   errors: [
-    //     importDeclarationError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //     jsxElementError,
-    //   ],
-    // },
+    {
+      code: `import { TextList, TextListItem } from '@patternfly/react-core';
+      <TextList>
+        <TextListItem>A</TextListItem>
+        <TextListItem>B</TextListItem>
+        <TextListItem>C</TextListItem>
+      </TextList>`,
+      output: `import { Content, TextListItem } from '@patternfly/react-core';
+      <Content component="ul">
+        <Content component="li">A</Content>
+        <Content component="li">B</Content>
+        <Content component="li">C</Content>
+      </Content>`,
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxClosingElementError,
+      ],
+    },
+    {
+      code: `import { TextList, TextListItem } from '@patternfly/react-core';
+      <TextList component="dl">
+        <TextListItem component="dt">A</TextListItem>
+        <TextListItem component="dd">letter A</TextListItem>
+        <TextListItem component="dt">B</TextListItem>
+        <TextListItem component="dd">letter B</TextListItem>
+      </TextList>`,
+      output: `import { Content, TextListItem } from '@patternfly/react-core';
+      <Content component="dl">
+        <Content component="dt">A</Content>
+        <Content component="dd">letter A</Content>
+        <Content component="dt">B</Content>
+        <Content component="dd">letter B</Content>
+      </Content>`,
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+        jsxClosingElementError,
+      ],
+    },
     {
       code: `import { TextList } from '@patternfly/react-core'; <TextList isPlain></TextList>`,
       output: `import { Content } from '@patternfly/react-core'; <Content component="ul" isPlainList></Content>`,
-      errors: [importDeclarationError, jsxElementError],
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+      ],
     },
     {
       code: `import { TextVariants } from '@patternfly/react-core'; const foo = TextVariants.h1`,
@@ -115,7 +150,11 @@ ruleTester.run("text-replace-with-content", rule, {
     {
       code: `import { Text as PFText } from '@patternfly/react-core'; <PFText>Abc</PFText>`,
       output: `import { Content } from '@patternfly/react-core'; <Content component="p">Abc</Content>`,
-      errors: [importDeclarationError, jsxElementError],
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        jsxClosingElementError,
+      ],
     },
   ],
 });
