@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.122.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.121.3...@patternfly/eslint-plugin-pf-codemods@1.122.0) (2024-08-13)
+
+
+### Features
+
+* **Masthead:** Update subcomponent names ([#729](https://github.com/patternfly/pf-codemods/issues/729)) ([23a8d8d](https://github.com/patternfly/pf-codemods/commit/23a8d8d6af2cb0a3d8262c82782f2f756fc1724a))
+
+
+
+
+
 ## [1.121.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.121.2...@patternfly/eslint-plugin-pf-codemods@1.121.3) (2024-08-12)
 
 
