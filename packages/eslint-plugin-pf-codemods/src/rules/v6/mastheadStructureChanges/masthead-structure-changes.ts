@@ -74,6 +74,21 @@ function wrapNodeInMastheadBrand(
   return fixes;
 }
 
+function formatMessage(
+  component: "MastheadToggle" | "MastheadBrand" | "MastheadLogo"
+) {
+  const baseMessage = "The structure of Masthead has been updated, ";
+
+  const restOfMessage = {
+    MastheadToggle: "MastheadToggle should now be wrapped in MastheadMain.",
+    MastheadBrand:
+      "the PF5 MastheadBrand has been renamed to MastheadLogo (this renaming is handled by our masthead-name-changes codemod) and should now be wrapped in a new MastheadBrand.",
+    MastheadLogo: "MastheadLogo should now be wrapped in MastheadBrand.",
+  };
+
+  return baseMessage + restOfMessage[component];
+}
+
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
@@ -89,14 +104,9 @@ module.exports = {
       "@patternfly/react-core",
       targetComponents
     );
-    const _namedImports = componentImports.filter(
+    const namedImports = componentImports.filter(
       (imp) => imp.type === "ImportSpecifier"
-    );
-    // TS isn't properly resolving that namedImports is just ImportSpecifiers, hence this seemingly unneeded assertion
-    const namedImports = _namedImports as ImportSpecifier[];
-
-    const message =
-      "The structure of Masthead has been updated, MastheadToggle and MastheadBrand should now be wrapped in MastheadMain.";
+    ) as ImportSpecifier[];
 
     return !namedImports.length
       ? {}
@@ -124,7 +134,7 @@ module.exports = {
             ) {
               context.report({
                 node,
-                message,
+                message: formatMessage("MastheadToggle"),
                 fix: (fixer) =>
                   moveNodeIntoMastheadMain(context, fixer, node, namedImports),
               });
@@ -140,10 +150,20 @@ module.exports = {
               nodeImportedName === "MastheadLogo" &&
               parentImportedName !== "MastheadBrand";
 
-            if (isPreRenameMastheadBrand || isPostRenameMastheadBrand) {
+            if (isPreRenameMastheadBrand) {
               context.report({
                 node,
-                message,
+                message: formatMessage("MastheadBrand"),
+                fix: (fixer) =>
+                  wrapNodeInMastheadBrand(fixer, node, namedImports),
+              });
+              return;
+            }
+
+            if (isPostRenameMastheadBrand) {
+              context.report({
+                node,
+                message: formatMessage("MastheadLogo"),
                 fix: (fixer) =>
                   wrapNodeInMastheadBrand(fixer, node, namedImports),
               });
