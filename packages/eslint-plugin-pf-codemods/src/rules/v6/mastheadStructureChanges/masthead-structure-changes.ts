@@ -1,46 +1,15 @@
 import { Rule } from "eslint";
+import { ImportSpecifier } from "estree-jsx";
+import { JSXOpeningElementWithParent } from "../../helpers";
 import {
-  ImportSpecifier,
-  JSXAttribute,
-  JSXElement,
-  JSXOpeningElement,
-} from "estree-jsx";
-import { getAllImportsFromPackage, getChildElementByName } from "../../helpers";
-import { getImportedName } from "../../helpers/getImportedName";
-import { getLocalComponentName } from "../../helpers/getLocalComponentName";
+  getAllImportsFromPackage,
+  getChildElementByName,
+  getImportedName,
+  getLocalComponentName,
+  hasCodeModDataTag,
+} from "../../helpers";
 // https://github.com/patternfly/patternfly-react/pull/10809
 
-// new interfaces, just local for now to avoid conflicts with the masthead rename RP
-interface JSXElementWithParent extends JSXElement {
-  parent?: JSXElement;
-}
-
-interface JSXOpeningElementWithParent extends JSXOpeningElement {
-  parent?: JSXElementWithParent;
-}
-
-// same story here, will remove this from this file once the other PR is in and I can merge it into this branch
-function getAttributeName(attr: JSXAttribute) {
-  switch (attr.name.type) {
-    case "JSXIdentifier":
-      return attr.name.name;
-    case "JSXNamespacedName":
-      return attr.name.name.name;
-  }
-}
-
-// same story here, will remove this from this file once the other PR is in and I can merge it into this branch
-function hasCodeModDataTag(openingElement: JSXOpeningElement) {
-  const nonSpreadAttributes = openingElement.attributes.filter(
-    (attr) => attr.type === "JSXAttribute"
-  );
-  const attributeNames = nonSpreadAttributes.map((attr) =>
-    getAttributeName(attr as JSXAttribute)
-  );
-  return attributeNames.includes("data-codemods");
-}
-
-// "real" code starts here
 function moveNodeIntoMastheadMain(
   context: Rule.RuleContext,
   fixer: Rule.RuleFixer,
@@ -63,7 +32,7 @@ function moveNodeIntoMastheadMain(
 
   const fixes = [fixer.remove(node.parent)];
 
-  const nodeString = context.getSourceCode().getText(node.parent)
+  const nodeString = context.getSourceCode().getText(node.parent);
 
   fixes.push(fixer.insertTextAfter(mastheadMain.openingElement, nodeString));
 

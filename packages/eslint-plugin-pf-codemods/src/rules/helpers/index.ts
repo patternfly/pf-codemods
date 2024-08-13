@@ -7,6 +7,8 @@ export * from "./getComponentImportName";
 export * from "./getDefaultDeclarationString";
 export * from "./getEndRange";
 export * from "./getFromPackage";
+export * from "./getImportedName";
+export * from "./getLocalComponentName";
 export * from "./getNodeName";
 export * from "./getText";
 export * from "./hasCodemodDataTag";
