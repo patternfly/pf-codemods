@@ -6,7 +6,6 @@ import {
   JSXOpeningElement,
 } from "estree-jsx";
 import { getAllImportsFromPackage, getChildElementByName } from "../../helpers";
-import { stringifyJSXElement } from "../../helpers/stringifyJSXElement";
 import { getImportedName } from "../../helpers/getImportedName";
 import { getLocalComponentName } from "../../helpers/getLocalComponentName";
 // https://github.com/patternfly/patternfly-react/pull/10809
@@ -64,7 +63,7 @@ function moveNodeIntoMastheadMain(
 
   const fixes = [fixer.remove(node.parent)];
 
-  const nodeString = stringifyJSXElement(context, node.parent);
+  const nodeString = context.getSourceCode().getText(node.parent)
 
   fixes.push(fixer.insertTextAfter(mastheadMain.openingElement, nodeString));
 
