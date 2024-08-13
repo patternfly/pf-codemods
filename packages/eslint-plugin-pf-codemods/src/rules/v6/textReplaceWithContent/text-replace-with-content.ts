@@ -2,8 +2,9 @@ import { Rule } from "eslint";
 import {
   ImportDeclaration,
   ImportSpecifier,
-  JSXElement,
+  JSXClosingElement,
   JSXIdentifier,
+  JSXOpeningElement,
 } from "estree-jsx";
 import {
   getAttribute,
@@ -65,14 +66,10 @@ module.exports = {
               });
             }
           },
-          JSXElement(node: JSXElement) {
-            const openingElement = node.openingElement;
-            const closingElement = node.closingElement;
-
-            if (openingElement.name.type === "JSXIdentifier") {
+          JSXOpeningElement(node: JSXOpeningElement) {
+            if (node.name.type === "JSXIdentifier") {
               const componentImport = textImports.find(
-                (imp) =>
-                  imp.local.name === (openingElement.name as JSXIdentifier).name
+                (imp) => imp.local.name === (node.name as JSXIdentifier).name
               );
 
               if (!componentImport) {
@@ -102,7 +99,7 @@ module.exports = {
 
                     fixes.push(
                       fixer.insertTextAfter(
-                        openingElement.name,
+                        node.name,
                         ` component="${componentMap[componentName]}"`
                       )
                     );
@@ -129,14 +126,28 @@ module.exports = {
                     }
                   }
 
-                  fixes.push(fixer.replaceText(openingElement.name, "Content"));
-                  if (closingElement) {
-                    fixes.push(
-                      fixer.replaceText(closingElement.name, "Content")
-                    );
-                  }
+                  fixes.push(fixer.replaceText(node.name, "Content"));
 
                   return fixes;
+                },
+              });
+            }
+          },
+          JSXClosingElement(node: JSXClosingElement) {
+            if (node.name.type === "JSXIdentifier") {
+              const componentImport = textImports.find(
+                (imp) => imp.local.name === (node.name as JSXIdentifier).name
+              );
+
+              if (!componentImport) {
+                return;
+              }
+
+              context.report({
+                node,
+                message: errorMessage,
+                fix(fixer) {
+                  return fixer.replaceText(node.name, "Content");
                 },
               });
             }

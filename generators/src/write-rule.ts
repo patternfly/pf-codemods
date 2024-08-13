@@ -22,44 +22,34 @@ export async function genericRule({
   componentName,
   propName,
   ruleName,
+  referenceRepo,
   referencePR,
   message,
 }: Answers) {
   // the formatting for content here looks weird, but that's to preserve indentation in the written file
   const content = `import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
-import { getFromPackage } from "../../helpers";
+import { getAllImportsFromPackage, checkMatchingJSXOpeningElement, getAttribute } from "../../helpers";
 
-// https://github.com/patternfly/patternfly-react/pull/${referencePR}
+// https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
-    const { imports } = getFromPackage(context, "@patternfly/react-core");
-
-    const componentImports = imports.filter(
-      (specifier) => specifier.imported.name === "${componentName}"
-    );
+    const basePackage = "@patternfly/react-core";
+    const componentImports = getAllImportsFromPackage(context, basePackage, ["${componentName}"]);
 
     return !componentImports.length
       ? {}
       : {
           JSXOpeningElement(node: JSXOpeningElement) {
-            if (
-              node.name.type === "JSXIdentifier" &&
-              componentImports
-                .map((imp) => imp.local.name)
-                .includes(node.name.name)
-            ) {
-              const attribute = node.attributes.find(
-                (attr) =>
-                  attr.type === "JSXAttribute" && attr.name.name === "${propName}"
-              );
-              if (attribute) {
+            if (checkMatchingJSXOpeningElement(node, componentImports)) {
+              const ${propName}Prop = getAttribute(node, "${propName}");
+              if (${propName}Prop) {
                 context.report({
                   node,
                   message: "${message}",
                   fix(fixer) {
-                    return fixer.replaceText(attribute, "");
+                    return fixer.replaceText(${propName}Prop, "");
                   },
                 });
               }
@@ -76,11 +66,12 @@ export async function addEventCBRule({
   componentName,
   propName,
   ruleName,
+  referenceRepo,
   referencePR,
 }: Answers) {
   const content = `const { addCallbackParam } = require("../../helpers");
 
-// https://github.com/patternfly/patternfly-react/pull/${referencePR}
+// https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: addCallbackParam(["${componentName}"], { ${propName}: "_event" }),
@@ -93,11 +84,12 @@ export async function swapCBRule({
   componentName,
   propName,
   ruleName,
+  referenceRepo,
   referencePR,
 }: Answers) {
   const content = `const { addCallbackParam } = require("../../helpers");
 
-// https://github.com/patternfly/patternfly-react/pull/${referencePR}
+// https://github.com/patternfly/${referenceRepo}/pull/${referencePR}
 module.exports = {
   meta: { fixable: "code" },
   create: addCallbackParam(["${componentName}"], { ${propName}: { defaultParamName: "_event", previousParamIndex: 1, otherMatchers: /^_?(ev\\w*|e$)/ } }),

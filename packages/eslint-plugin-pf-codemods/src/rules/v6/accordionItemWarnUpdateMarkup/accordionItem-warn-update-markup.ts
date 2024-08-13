@@ -1,4 +1,4 @@
-import { getFromPackage } from "../../helpers";
+import { getFromPackage, checkMatchingJSXOpeningElement } from "../../helpers";
 import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
 
@@ -17,10 +17,7 @@ module.exports = {
       ? {}
       : {
           JSXOpeningElement(node: JSXOpeningElement) {
-            if (
-              node.name.type === "JSXIdentifier" &&
-              accordionItemImport.local.name === node.name.name
-            ) {
+            if (checkMatchingJSXOpeningElement(node, accordionItemImport)) {
               context.report({
                 node,
                 message:

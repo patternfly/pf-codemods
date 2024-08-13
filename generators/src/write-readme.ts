@@ -3,7 +3,17 @@ import { outputFile } from "fs-extra";
 import { camelCase } from "case-anything";
 import { Answers } from "./plop-interfaces";
 
-async function baseReadme({ referencePR, ruleName, message }: Answers) {
+export enum RepoNames {
+  react = "patternfly-react",
+  componentGroups = "react-component-groups",
+}
+
+async function baseReadme({
+  referenceRepo,
+  referencePR,
+  ruleName,
+  message,
+}: Answers) {
   const camelCaseRuleName = camelCase(ruleName);
   const readMePath = join(
     require
@@ -15,7 +25,9 @@ async function baseReadme({ referencePR, ruleName, message }: Answers) {
     `${ruleName}.md`
   );
 
-  const readMeContent = `### ${ruleName} [(#${referencePR})](https://github.com/patternfly/patternfly-react/pull/${referencePR})
+  const prLinkTextPrefix =
+    referenceRepo === RepoNames.react ? "" : `${referenceRepo}/`;
+  const readMeContent = `### ${ruleName} [(${prLinkTextPrefix}#${referencePR})](https://github.com/patternfly/${referenceRepo}/pull/${referencePR})
 
 ${message}
 
