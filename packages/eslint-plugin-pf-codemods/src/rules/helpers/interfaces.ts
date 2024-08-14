@@ -20,6 +20,10 @@ export interface ImportDefaultSpecifierWithParent
   parent?: ImportDeclaration;
 }
 
-export interface JSXOpeningElementWithParent extends JSXOpeningElement {
+export interface JSXElementWithParent extends JSXElement {
   parent?: JSXElement;
+}
+
+export interface JSXOpeningElementWithParent extends JSXOpeningElement {
+  parent?: JSXElementWithParent;
 }
