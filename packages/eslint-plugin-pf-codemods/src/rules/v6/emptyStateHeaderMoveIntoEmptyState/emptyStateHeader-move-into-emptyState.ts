@@ -10,7 +10,7 @@ import {
   getAttribute,
   getAttributeText,
   getAttributeValueText,
-  getChildElementByName,
+  getChildJSXElementByName,
   getDefaultImportsFromPackage,
   getExpression,
   getFromPackage,
@@ -159,7 +159,7 @@ module.exports = {
           return;
         }
 
-        const header = getChildElementByName(node, "EmptyStateHeader");
+        const header = getChildJSXElementByName(node, "EmptyStateHeader");
         const emptyStateTitleTextAttribute = getAttribute(node, "titleText");
 
         if (!header && emptyStateTitleTextAttribute) {
@@ -168,7 +168,7 @@ module.exports = {
           return;
         }
 
-        const titleChild = getChildElementByName(node, "Title");
+        const titleChild = getChildJSXElementByName(node, "Title");
 
         if (
           (!header || header.type !== "JSXElement") &&
@@ -194,7 +194,7 @@ module.exports = {
           removeElements.push(titleChild);
         }
 
-        const emptyStateIconChild = getChildElementByName(
+        const emptyStateIconChild = getChildJSXElementByName(
           node,
           "EmptyStateIcon"
         );
