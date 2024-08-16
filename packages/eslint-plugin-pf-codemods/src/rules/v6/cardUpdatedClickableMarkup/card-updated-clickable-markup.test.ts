@@ -20,6 +20,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
     },
   ],
   invalid: [
+    // No invalid properties
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
@@ -30,6 +31,19 @@ ruleTester.run("card-updated-clickable-markup", rule, {
         },
       ],
     },
+    // 1 valid property + 1 invalid property
+    {
+      code: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: '#', selectableActionId: 'Id'}} /></Card>`,
+      output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: '#'}} /></Card>`,
+      errors: [
+        {
+          message:
+            "The markup for clickable-only cards has been updated.Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.",
+          type: "JSXElement",
+        },
+      ],
+    },
+    // 2 invalid properties
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{name: 'Test', selectableActionId: 'Id'}} /></Card>`,
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{}} /></Card>`,
@@ -41,6 +55,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
         },
       ],
     },
+    // 1 valid property + 2 invalid properties
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#", name: 'Test', selectableActionId: 'Id'}} /></Card>`,
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
@@ -53,6 +68,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
         },
       ],
     },
+    // Passed as a variable reference
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core'; const obj = {name: 'Test', selectableActionId: 'Id'}; <Card isClickable><CardHeader selectableActions={obj} /></Card>`,
       output: `import { Card, CardHeader } from '@patternfly/react-core'; const obj = {}; <Card isClickable><CardHeader selectableActions={obj} /></Card>`,
@@ -64,6 +80,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
         },
       ],
     },
+    // Passed as a variable reference with 2 valid and 2 invalid properties
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core'; const obj = {to: "#", name: 'Test', extra: "thing", selectableActionId: 'Id'}; <Card isClickable><CardHeader selectableActions={obj} /></Card>`,
       output: `import { Card, CardHeader } from '@patternfly/react-core'; const obj = {to: "#", extra: "thing"}; <Card isClickable><CardHeader selectableActions={obj} /></Card>`,
