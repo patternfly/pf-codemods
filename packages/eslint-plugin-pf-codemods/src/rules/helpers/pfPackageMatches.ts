@@ -16,7 +16,7 @@ export function pfPackageMatches(
       parts[1] +
       "(/dist/(esm|js|dynamic))?" +
       (parts[2] ? "/" + parts[2] : "") +
-      (parts[1] === "react-component-groups"
+      (["react-component-groups", "react-tokens"].includes(parts[1])
         ? `(/.*)?$`
         : `(/(components|helpers${
             parts[1] === "react-icons" ? "|icons" : ""
