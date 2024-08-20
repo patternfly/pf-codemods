@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.58...@patternfly/pf-codemods@2.1.0) (2024-08-20)
+
+
+### Features
+
+* **README:** update to include all flags ([#742](https://github.com/patternfly/pf-codemods/issues/742)) ([c362262](https://github.com/patternfly/pf-codemods/commit/c36226241f87ee34605bfaab4dfc664e0a1b5352))
+
+
+
+
+
 ## [2.0.58](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.0.57...@patternfly/pf-codemods@2.0.58) (2024-08-14)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
