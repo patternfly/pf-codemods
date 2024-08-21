@@ -45,7 +45,6 @@ export const warningRules = [
   "tabs-update-markup",
   "tabs-warn-children-type-changed",
   "Th-Td-warn-update-markup",
-  "tile-deprecated",
   "toolbarLabelGroupContent-updated-markup",
   "tooltip-warn-triggerRef-may-be-required",
   "treeView-warn-selectable-styling-modifier-removed",
@@ -65,6 +64,7 @@ export const setupRules = [
   "pageHeader-deprecated",
   "select-deprecated",
   "table-update-deprecatedPath",
+  "tile-deprecated",
   "wizard-update-deprecatedPath",
 ];
 
