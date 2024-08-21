@@ -34,7 +34,7 @@ export const warningRules = [
   "page-warn-updated-markup",
   "pageBreadcrumbAndSection-warn-updated-wrapperLogic",
   "pageSection-warn-variantClasses-applied",
-  "pagination-warn-markup-changed.test",
+  "pagination-warn-markup-changed",
   "popover-warn-appendTo-default",
   "popper-update-appendTo-default",
   "react-dropzone-warn-upgrade",
