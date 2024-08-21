@@ -52,6 +52,7 @@ export const warningRules = [
   "toolbarLabelGroupContent-updated-markup",
   "tooltip-warn-triggerRef-may-be-required",
   "treeView-warn-selectable-styling-modifier-removed",
+  "user-feedback-warn-changes",
   "wizard-warn-button-order",
   "wizardFooter-warn-update-markup",
   "wizardNavItem-warn-update-markup",
