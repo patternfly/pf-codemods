@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.124.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.123.0...@patternfly/eslint-plugin-pf-codemods@1.124.0) (2024-08-21)
+
+
+### Features
+
+* **UnavailableContent:** update props to use bodyText ([#737](https://github.com/patternfly/pf-codemods/issues/737)) ([045a156](https://github.com/patternfly/pf-codemods/commit/045a15612ae5383bccc421e9901ed7482d6e160d))
+
+
+
+
+
 # [1.123.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.122.0...@patternfly/eslint-plugin-pf-codemods@1.123.0) (2024-08-14)
 
 
