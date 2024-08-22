@@ -1,6 +1,10 @@
 const ruleTester = require("../../ruletester");
 import * as rule from "./card-updated-clickable-markup";
 
+const baseMessage = "The markup for clickable-only cards has been updated.";
+const propertyMessage =
+  " Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.";
+
 ruleTester.run("card-updated-clickable-markup", rule, {
   valid: [
     {
@@ -26,7 +30,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
       errors: [
         {
-          message: "The markup for clickable-only cards has been updated.",
+          message: baseMessage,
           type: "JSXElement",
         },
       ],
@@ -37,8 +41,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: '#'}} /></Card>`,
       errors: [
         {
-          message:
-            "The markup for clickable-only cards has been updated.Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.",
+          message: baseMessage + propertyMessage,
           type: "JSXElement",
         },
       ],
@@ -49,8 +52,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{}} /></Card>`,
       errors: [
         {
-          message:
-            "The markup for clickable-only cards has been updated.Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.",
+          message: baseMessage + propertyMessage,
           type: "JSXElement",
         },
       ],
@@ -61,9 +63,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
       errors: [
         {
-          message:
-            "The markup for clickable-only cards has been updated.Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.",
-          // message: `The markup for clickable-only cards has been updated, now using button and anchor elements for the respective clickable action. The \`selectableActions.selectableActionId\` and \`selectableActions.name\` props are also no longer necessary for clickable-only cards. Passing them in will not cause any errors, but running the fix for this rule will remove them.`,
+          message: baseMessage + propertyMessage,
           type: "JSXElement",
         },
       ],
@@ -74,8 +74,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core'; const obj = {}; <Card isClickable><CardHeader selectableActions={obj} /></Card>`,
       errors: [
         {
-          message:
-            "The markup for clickable-only cards has been updated.Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.",
+          message: baseMessage + propertyMessage,
           type: "JSXElement",
         },
       ],
@@ -86,8 +85,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core'; const obj = {to: "#", extra: "thing"}; <Card isClickable><CardHeader selectableActions={obj} /></Card>`,
       errors: [
         {
-          message:
-            "The markup for clickable-only cards has been updated.Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards.",
+          message: baseMessage + propertyMessage,
           type: "JSXElement",
         },
       ],
@@ -98,7 +96,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card as CustomCard, CardHeader as CustomCardHeader } from '@patternfly/react-core'; <CustomCard isClickable><CustomCardHeader selectableActions={{to: "#"}} /></CustomCard>`,
       errors: [
         {
-          message: "The markup for clickable-only cards has been updated.",
+          message: baseMessage,
           type: "JSXElement",
         },
       ],
@@ -109,7 +107,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core/dist/esm/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
       errors: [
         {
-          message: "The markup for clickable-only cards has been updated.",
+          message: baseMessage,
           type: "JSXElement",
         },
       ],
@@ -119,7 +117,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core/dist/js/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
       errors: [
         {
-          message: "The markup for clickable-only cards has been updated.",
+          message: baseMessage,
           type: "JSXElement",
         },
       ],
@@ -129,7 +127,7 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       output: `import { Card, CardHeader } from '@patternfly/react-core/dist/dynamic/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
       errors: [
         {
-          message: "The markup for clickable-only cards has been updated.",
+          message: baseMessage,
           type: "JSXElement",
         },
       ],

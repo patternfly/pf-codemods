@@ -10,32 +10,37 @@ export function getNodeForAttributeFixer(
   context: Rule.RuleContext,
   attribute: JSXAttribute
 ) {
-  if (!attribute.value) {
+  if (!attribute?.value) {
     return;
   }
 
-  if (
-    attribute.value.type === "JSXExpressionContainer" &&
-    attribute.value.expression.type === "Identifier"
-  ) {
-    const scope = context.getSourceCode().getScope(attribute);
-    const variableDeclaration = getVariableDeclaration(
-      attribute.value.expression.name,
-      scope
-    );
+  switch (attribute.value.type) {
+    case "Literal":
+      return attribute.value;
+    case "JSXExpressionContainer":
+      return getJSXExpressionContainerValue(context, attribute);
+  }
+}
 
-    return variableDeclaration && variableDeclaration.defs[0].node.init;
+function getJSXExpressionContainerValue(
+  context: Rule.RuleContext,
+  attribute: JSXAttribute
+) {
+  if (!attribute.value || attribute.value.type !== "JSXExpressionContainer") {
+    return;
   }
 
-  if (attribute.value.type === "Literal") {
-    return attribute.value;
-  }
-  if (
-    attribute.value.type === "JSXExpressionContainer" &&
-    ["ObjectExpression", "MemberExpression"].includes(
-      attribute.value.expression.type
-    )
-  ) {
-    return attribute.value.expression;
+  switch (attribute.value.expression.type) {
+    case "ObjectExpression":
+    case "MemberExpression":
+      return attribute.value.expression;
+    case "Identifier":
+      const scope = context.getSourceCode().getScope(attribute);
+      const variableDeclaration = getVariableDeclaration(
+        attribute.value.expression.name,
+        scope
+      );
+
+      return variableDeclaration && variableDeclaration.defs[0].node.init;
   }
 }

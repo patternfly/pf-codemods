@@ -1,18 +1,16 @@
-import { ImportSpecifier, ImportDefaultSpecifier } from "estree-jsx";
+import { ImportSpecifier } from "estree-jsx";
 import { getSpecifierFromImports } from "./getSpecifierFromImports";
 
 /** Resolves the local name of an import */
 export function getLocalComponentName(
-  namedImports: (ImportSpecifier | ImportDefaultSpecifier)[],
+  namedImports: ImportSpecifier[],
   importedName: string
 ) {
   const componentImport = getSpecifierFromImports(namedImports, importedName);
-  const isDefaultImport = componentImport?.type === "ImportDefaultSpecifier";
   const isAlias =
-    !isDefaultImport &&
     componentImport?.imported.name !== componentImport?.local.name;
 
-  if ((componentImport && isAlias) || isDefaultImport) {
+  if (componentImport && isAlias) {
     return componentImport.local.name;
   }
 

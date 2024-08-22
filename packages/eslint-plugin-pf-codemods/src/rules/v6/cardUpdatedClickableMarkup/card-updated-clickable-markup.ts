@@ -2,6 +2,7 @@ import { Rule } from "eslint";
 import { JSXElement, Property, Literal } from "estree-jsx";
 import {
   getAllImportsFromPackage,
+  getFromPackage,
   checkMatchingJSXOpeningElement,
   getAttribute,
   getAttributeValue,
@@ -17,10 +18,7 @@ module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
     const basePackage = "@patternfly/react-core";
-    const componentImports = getAllImportsFromPackage(context, basePackage, [
-      "Card",
-      "CardHeader",
-    ]);
+    const { imports: componentImports } = getFromPackage(context, basePackage);
     const cardImport = getSpecifierFromImports(componentImports, "Card");
     const cardHeaderImport = getSpecifierFromImports(
       componentImports,
@@ -57,6 +55,10 @@ module.exports = {
                 context,
                 selectableActionsProp.value
               );
+              if (!selectableActionsValue) {
+                return;
+              }
+
               const nameProperty = getObjectProperty(
                 context,
                 selectableActionsValue,
@@ -72,7 +74,7 @@ module.exports = {
                 "The markup for clickable-only cards has been updated.";
               const message = `${baseMessage}${
                 nameProperty || idProperty
-                  ? "Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards."
+                  ? " Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards."
                   : ""
               }`;
               context.report({

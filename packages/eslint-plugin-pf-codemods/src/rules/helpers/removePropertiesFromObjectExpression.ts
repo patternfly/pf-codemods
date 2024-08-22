@@ -32,7 +32,7 @@ export function removePropertiesFromObjectExpression(
     }
 
     if (property.key.type === "Literal") {
-      return propertyNamesToRemove.includes(property.key.value);
+      return !propertyNamesToRemove.includes(property.key.value);
     }
 
     return false;
