@@ -23,6 +23,9 @@ module.exports = {
     const buttonVariantEnumImport = imports.find(
       (specifier) => specifier.imported.name === "ButtonVariant"
     );
+    const hasIconImport = imports.some(
+      (specifier) => specifier.imported.name === "Icon"
+    );
 
     return !buttonImport
       ? {}
@@ -58,7 +61,7 @@ module.exports = {
                   childrenProp?.value
                 );
                 childrenValue = childrenPropExpression
-                  ? source.getText(childrenPropExpression)
+                  ? `{${source.getText(childrenPropExpression)}}`
                   : "";
               } else if (isPlain) {
                 childrenValue = getChildrenAsAttributeValueText(
@@ -71,7 +74,8 @@ module.exports = {
                 return;
               }
 
-              const iconComponentChild = getChildElementByName(node, "Icon");
+              const iconComponentChild =
+                hasIconImport && getChildElementByName(node, "Icon");
 
               const jsxElementChildren = node.children.filter(
                 (child) => child.type === "JSXElement"
@@ -102,12 +106,14 @@ module.exports = {
 
                   if (childrenProp) {
                     fixes.push(fixer.remove(childrenProp));
-                  } else {
+                  } else if (isPlain) {
                     node.children.forEach(
                       (child) =>
                         child.type !== "JSXSpreadChild" &&
                         fixes.push(fixer.replaceText(child, ""))
                     );
+                  } else if (iconChild) {
+                    fixes.push(fixer.replaceText(iconChild, ""));
                   }
                   return fixes;
                 },
