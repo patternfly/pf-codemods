@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.125.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.124.1...@patternfly/eslint-plugin-pf-codemods@1.125.0) (2024-08-22)
+
+
+### Features
+
+* **tokens:** warn about old react-tokens usage ([#739](https://github.com/patternfly/pf-codemods/issues/739)) ([1e685a2](https://github.com/patternfly/pf-codemods/commit/1e685a21fb04bc1e6adad4e8baa6458be4cf9478))
+
+
+
+
+
 ## [1.124.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.124.0...@patternfly/eslint-plugin-pf-codemods@1.124.1) (2024-08-21)
 
 
