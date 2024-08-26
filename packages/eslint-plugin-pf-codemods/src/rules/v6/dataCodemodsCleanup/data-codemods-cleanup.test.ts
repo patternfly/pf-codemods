@@ -86,5 +86,27 @@ ruleTester.run("data-codemods-cleanup", rule, {
         },
       ],
     },
+    // comment including other text and data-codemods
+    {
+      code: `import { DualListSelector /* This has been passed by data-codemods */ } from '@patternfly/react-core';`,
+      output: `import { DualListSelector  } from '@patternfly/react-core';`,
+      errors: [
+        {
+          message,
+          type: "ImportSpecifier",
+        },
+      ],
+    },
+    // data-codemods attribute including other value than true
+    {
+      code: `import { LoginMainFooterLinksItem } from '@patternfly/react-core'; <LoginMainFooterLinksItem data-codemods="no-remove" />`,
+      output: `import { LoginMainFooterLinksItem } from '@patternfly/react-core'; <LoginMainFooterLinksItem  />`,
+      errors: [
+        {
+          message,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
   ],
 });
