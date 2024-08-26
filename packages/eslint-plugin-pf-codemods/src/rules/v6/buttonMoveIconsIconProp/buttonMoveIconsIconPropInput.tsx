@@ -1,4 +1,4 @@
-import { Button } from "@patternfly/react-core";
+import { Button, Icon } from "@patternfly/react-core";
 import { SomeIcon } from "@patternfly/react-icons";
 
 export const ButtonMoveIconsIconPropInput = () => (
