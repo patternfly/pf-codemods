@@ -20,6 +20,7 @@ export * from "./helpers";
 export * from "./importAndExport";
 export * from "./includesImport";
 export * from "./interfaces";
+export * from "./isReactIcon";
 export * from "./JSXAttributes";
 export * from "./nodeMatches";
 export * from "./pfPackageMatches";

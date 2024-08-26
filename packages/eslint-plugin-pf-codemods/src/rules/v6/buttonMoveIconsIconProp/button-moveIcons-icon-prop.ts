@@ -6,12 +6,15 @@ import {
   getAttributeValue,
   getExpression,
   getChildrenAsAttributeValueText,
+  getChildJSXElementByName,
+  isReactIcon,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10663
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
+    const source = context.getSourceCode();
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
     const buttonImport = imports.find(
@@ -19,6 +22,9 @@ module.exports = {
     );
     const buttonVariantEnumImport = imports.find(
       (specifier) => specifier.imported.name === "ButtonVariant"
+    );
+    const hasIconImport = imports.some(
+      (specifier) => specifier.imported.name === "Icon"
     );
 
     return !buttonImport
@@ -31,12 +37,12 @@ module.exports = {
             ) {
               const variantProp = getAttribute(node.openingElement, "variant");
               const iconProp = getAttribute(node.openingElement, "icon");
-              if (!variantProp || iconProp) {
+              if (iconProp) {
                 return;
               }
               const variantValue = getAttributeValue(
                 context,
-                variantProp.value
+                variantProp?.value
               );
 
               const isEnumValuePlain =
@@ -44,27 +50,47 @@ module.exports = {
                 variantValue?.object?.name ===
                   buttonVariantEnumImport.local.name &&
                 variantValue?.property.name === "plain";
-              if (variantValue !== "plain" && !isEnumValuePlain) {
-                return;
-              }
+
+              const isPlain = variantValue === "plain" || isEnumValuePlain;
+
               const childrenProp = getAttribute(node, "children");
-              let childrenValue;
+
+              let childrenValue: string | undefined;
               if (childrenProp) {
                 const childrenPropExpression = getExpression(
                   childrenProp?.value
                 );
                 childrenValue = childrenPropExpression
-                  ? context.getSourceCode().getText(childrenPropExpression)
+                  ? `{${source.getText(childrenPropExpression)}}`
                   : "";
-              } else {
+              } else if (isPlain) {
                 childrenValue = getChildrenAsAttributeValueText(
                   context,
                   node.children
                 );
               }
-              if (!childrenValue) {
+
+              if (!childrenValue && isPlain) {
                 return;
               }
+
+              const iconComponentChild =
+                hasIconImport && getChildJSXElementByName(node, "Icon");
+
+              const jsxElementChildren = node.children.filter(
+                (child) => child.type === "JSXElement"
+              ) as JSXElement[];
+              const reactIconChild = jsxElementChildren.find((child) =>
+                isReactIcon(context, child)
+              );
+
+              const iconChild = iconComponentChild || reactIconChild;
+
+              if (!isPlain && !iconChild) {
+                return;
+              }
+
+              const iconChildString = `{${source.getText(iconChild)}}`;
 
               context.report({
                 node,
@@ -74,18 +100,20 @@ module.exports = {
                   fixes.push(
                     fixer.insertTextAfter(
                       node.openingElement.name,
-                      ` icon=${childrenValue}`
+                      ` icon=${childrenValue || iconChildString}`
                     )
                   );
 
                   if (childrenProp) {
                     fixes.push(fixer.remove(childrenProp));
-                  } else {
+                  } else if (isPlain) {
                     node.children.forEach(
                       (child) =>
                         child.type !== "JSXSpreadChild" &&
                         fixes.push(fixer.replaceText(child, ""))
                     );
+                  } else if (iconChild) {
+                    fixes.push(fixer.replaceText(iconChild, ""));
                   }
                   return fixes;
                 },
