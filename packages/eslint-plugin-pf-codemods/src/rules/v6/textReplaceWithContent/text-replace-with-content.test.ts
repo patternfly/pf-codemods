@@ -142,6 +142,16 @@ ruleTester.run("text-replace-with-content", rule, {
       errors: [importDeclarationError, identifierError],
     },
     {
+      code: `import { TextListVariants } from '@patternfly/react-core'; const foo = TextListVariants.ul`,
+      output: `import { ContentVariants } from '@patternfly/react-core'; const foo = ContentVariants.ul`,
+      errors: [importDeclarationError, identifierError],
+    },
+    {
+      code: `import { TextListItemVariants } from '@patternfly/react-core'; const foo = TextListItemVariants.li`,
+      output: `import { ContentVariants } from '@patternfly/react-core'; const foo = ContentVariants.li`,
+      errors: [importDeclarationError, identifierError],
+    },
+    {
       code: `import { TextProps } from '@patternfly/react-core'; interface Foo extends TextProps {}`,
       output: `import { ContentProps } from '@patternfly/react-core'; interface Foo extends ContentProps {}`,
       errors: [importDeclarationError, identifierError],
