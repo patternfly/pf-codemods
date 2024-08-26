@@ -6,7 +6,7 @@ import {
   getAttributeValue,
   getExpression,
   getChildrenAsAttributeValueText,
-  getChildElementByName,
+  getChildJSXElementByName,
   isReactIcon,
 } from "../../helpers";
 
@@ -75,7 +75,7 @@ module.exports = {
               }
 
               const iconComponentChild =
-                hasIconImport && getChildElementByName(node, "Icon");
+                hasIconImport && getChildJSXElementByName(node, "Icon");
 
               const jsxElementChildren = node.children.filter(
                 (child) => child.type === "JSXElement"
