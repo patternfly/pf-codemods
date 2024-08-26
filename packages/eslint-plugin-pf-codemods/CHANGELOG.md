@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.125.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.125.0...@patternfly/eslint-plugin-pf-codemods@1.125.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* **Card:** updated markup for actionable cards ([#738](https://github.com/patternfly/pf-codemods/issues/738)) ([8941915](https://github.com/patternfly/pf-codemods/commit/8941915f7d67cbcc3ec487d3b435aff6ad316a91))
+
+
+
+
+
 # [1.125.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.124.1...@patternfly/eslint-plugin-pf-codemods@1.125.0) (2024-08-22)
 
 
