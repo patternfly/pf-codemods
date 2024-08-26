@@ -3,7 +3,7 @@ import { ImportSpecifier } from "estree-jsx";
 import { JSXOpeningElementWithParent } from "../../helpers";
 import {
   getAllImportsFromPackage,
-  getChildElementByName,
+  getChildJSXElementByName,
   getImportedName,
   getLocalComponentName,
   hasCodeModDataTag,
@@ -21,7 +21,7 @@ function moveNodeIntoMastheadMain(
   }
 
   const localMastheadMain = getLocalComponentName(namedImports, "MastheadMain");
-  const mastheadMain = getChildElementByName(
+  const mastheadMain = getChildJSXElementByName(
     node.parent.parent,
     localMastheadMain
   );
