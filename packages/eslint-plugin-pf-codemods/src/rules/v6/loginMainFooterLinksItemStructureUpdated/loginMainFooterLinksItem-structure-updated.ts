@@ -1,12 +1,12 @@
 import { Rule } from "eslint";
 import { JSXElement } from "estree-jsx";
 import {
+  checkMatchingJSXOpeningElement,
   getAttribute,
   getAttributeText,
   getExpression,
   getFromPackage,
   includesImport,
-  nodeIsComponentNamed,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10107
@@ -25,7 +25,12 @@ module.exports = {
 
     return {
       JSXElement(node: JSXElement) {
-        if (!nodeIsComponentNamed(node, "LoginMainFooterLinksItem")) {
+        if (
+          !checkMatchingJSXOpeningElement(
+            node.openingElement,
+            loginMainFooterLinksItemImport
+          )
+        ) {
           return;
         }
 

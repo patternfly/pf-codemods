@@ -21,7 +21,6 @@ export * from "./importAndExport";
 export * from "./includesImport";
 export * from "./interfaces";
 export * from "./JSXAttributes";
-export * from "./nodeIsComponentNamed";
 export * from "./nodeMatches";
 export * from "./pfPackageMatches";
 export * from "./removeElement";

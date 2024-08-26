@@ -7,6 +7,7 @@ import {
   Node,
 } from "estree-jsx";
 import {
+  checkMatchingJSXOpeningElement,
   getAttribute,
   getAttributeText,
   getAttributeValueText,
@@ -14,8 +15,6 @@ import {
   getDefaultImportsFromPackage,
   getExpression,
   getFromPackage,
-  includesImport,
-  nodeIsComponentNamed,
   getChildrenAsAttributeValueText,
   getRemoveElementFixes,
 } from "../../helpers";
@@ -149,13 +148,19 @@ module.exports = {
     const pkg = "@patternfly/react-core";
     const { imports } = getFromPackage(context, pkg);
 
-    if (!includesImport(imports, "EmptyState")) {
+    const emptyStateImport = imports.find(
+      (specifier) => specifier.imported.name === "EmptyState"
+    );
+
+    if (!emptyStateImport) {
       return {};
     }
 
     return {
       JSXElement(node: JSXElement) {
-        if (!nodeIsComponentNamed(node, "EmptyState")) {
+        if (
+          !checkMatchingJSXOpeningElement(node.openingElement, emptyStateImport)
+        ) {
           return;
         }
 
