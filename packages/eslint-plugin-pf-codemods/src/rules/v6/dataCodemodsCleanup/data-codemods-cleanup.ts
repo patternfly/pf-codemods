@@ -9,7 +9,16 @@ import {
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
-    const { imports } = getFromPackage(context, "@patternfly/react-core");
+    const { imports: coreImports } = getFromPackage(
+      context,
+      "@patternfly/react-core"
+    );
+    const { imports: tableImports } = getFromPackage(
+      context,
+      "@patternfly/react-table"
+    );
+
+    const imports = [...coreImports, ...tableImports];
 
     const message =
       "This rule will remove data-codemods attributes and comments, which were introduced by our codemods in order to work correctly.";

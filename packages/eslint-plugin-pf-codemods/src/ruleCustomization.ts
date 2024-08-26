@@ -69,7 +69,6 @@ export const setupRules = [
 
 // rules that will run after other rules (cleanup imports?)
 export const cleanupRules = [
-  "data-codemods-cleanup",
   "no-unused-imports-v5",
   "no-unused-imports-v6",
   "no-duplicate-import-specifiers",
