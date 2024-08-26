@@ -3,6 +3,91 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.125.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.125.1...@patternfly/eslint-plugin-pf-codemods@1.125.2) (2024-08-26)
+
+**Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
+
+
+
+
+
+## [1.125.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.125.0...@patternfly/eslint-plugin-pf-codemods@1.125.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* **Card:** updated markup for actionable cards ([#738](https://github.com/patternfly/pf-codemods/issues/738)) ([8941915](https://github.com/patternfly/pf-codemods/commit/8941915f7d67cbcc3ec487d3b435aff6ad316a91))
+
+
+
+
+
+# [1.125.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.124.1...@patternfly/eslint-plugin-pf-codemods@1.125.0) (2024-08-22)
+
+
+### Features
+
+* **tokens:** warn about old react-tokens usage ([#739](https://github.com/patternfly/pf-codemods/issues/739)) ([1e685a2](https://github.com/patternfly/pf-codemods/commit/1e685a21fb04bc1e6adad4e8baa6458be4cf9478))
+
+
+
+
+
+## [1.124.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.124.0...@patternfly/eslint-plugin-pf-codemods@1.124.1) (2024-08-21)
+
+
+### Bug Fixes
+
+* **Pagination:** Fix rule to report as a warning instead of an error ([#743](https://github.com/patternfly/pf-codemods/issues/743)) ([56c7ff9](https://github.com/patternfly/pf-codemods/commit/56c7ff94f9d091b1cbc50df3955fee5db445c645))
+
+
+
+
+
+# [1.124.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.123.0...@patternfly/eslint-plugin-pf-codemods@1.124.0) (2024-08-21)
+
+
+### Features
+
+* **UnavailableContent:** update props to use bodyText ([#737](https://github.com/patternfly/pf-codemods/issues/737)) ([045a156](https://github.com/patternfly/pf-codemods/commit/045a15612ae5383bccc421e9901ed7482d6e160d))
+
+
+
+
+
+# [1.123.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.122.0...@patternfly/eslint-plugin-pf-codemods@1.123.0) (2024-08-14)
+
+
+### Features
+
+* **Masthead:** Update structure ([#730](https://github.com/patternfly/pf-codemods/issues/730)) ([827500c](https://github.com/patternfly/pf-codemods/commit/827500c64944e813eea115da3efebb4b6b387fdc))
+
+
+
+
+
+# [1.122.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.121.3...@patternfly/eslint-plugin-pf-codemods@1.122.0) (2024-08-13)
+
+
+### Features
+
+* **Masthead:** Update subcomponent names ([#729](https://github.com/patternfly/pf-codemods/issues/729)) ([23a8d8d](https://github.com/patternfly/pf-codemods/commit/23a8d8d6af2cb0a3d8262c82782f2f756fc1724a))
+
+
+
+
+
+## [1.121.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.121.2...@patternfly/eslint-plugin-pf-codemods@1.121.3) (2024-08-12)
+
+
+### Bug Fixes
+
+* **textReplaceWithContent:** fix nested JSXElements handling ([#726](https://github.com/patternfly/pf-codemods/issues/726)) ([5a20c30](https://github.com/patternfly/pf-codemods/commit/5a20c30f4b18cfa3064fa1271c62323aceb9537a))
+
+
+
+
+
 ## [1.121.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.121.1...@patternfly/eslint-plugin-pf-codemods@1.121.2) (2024-08-06)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods

@@ -3,7 +3,7 @@ import { JSXElement } from "estree-jsx";
 import {
   getFromPackage,
   getAttribute,
-  getAllChildElementsByName,
+  getAllChildJSXElementsByName,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10378
@@ -29,10 +29,15 @@ module.exports = {
             ) {
               const wizardFooterProp = getAttribute(node, "footer");
               const wizardSteps = wizardStepImport
-                ? getAllChildElementsByName(node, wizardStepImport.local.name)
+                ? getAllChildJSXElementsByName(
+                    node,
+                    wizardStepImport.local.name
+                  )
                 : undefined;
               const allWizardStepsHaveFooter = wizardSteps
-                ? wizardSteps.every((step) => getAttribute(step, "footer"))
+                ? (wizardSteps as JSXElement[]).every((step) =>
+                    getAttribute(step, "footer")
+                  )
                 : false;
 
               if (wizardFooterProp || allWizardStepsHaveFooter) {

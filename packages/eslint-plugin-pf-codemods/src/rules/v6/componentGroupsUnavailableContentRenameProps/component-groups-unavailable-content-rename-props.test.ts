@@ -1,18 +1,13 @@
 const ruleTester = require("../../ruletester");
 import * as rule from "./component-groups-unavailable-content-rename-props";
 
-const renames = [
-  { oldName: "unavailableTitleText", newName: "titleText" },
-  { oldName: "unavailableBodyPreStatusLinkText", newName: "preLinkBodyText" },
-  { oldName: "unavailableBodyPostStatusLinkText", newName: "postLinkBodyText" },
-];
-
-const errors = renames.map(
-  ({ oldName, newName }: { oldName: string; newName: string }) => ({
-    message: `The \`${oldName}\` prop for UnavailableContent has been renamed to \`${newName}\`.`,
+const errors = [
+  {
+    message:
+      "The unavailableTitleText prop for UnavailableContent has been renamed to titleText.",
     type: "JSXOpeningElement",
-  })
-);
+  },
+];
 
 ruleTester.run("component-groups-unavailable-content-rename-props", rule, {
   valid: [
@@ -25,33 +20,33 @@ ruleTester.run("component-groups-unavailable-content-rename-props", rule, {
   ],
   invalid: [
     {
-      code: `import { UnavailableContent } from '@patternfly/react-component-groups'; <UnavailableContent unavailableTitleText="foo" unavailableBodyPreStatusLinkText="bar" unavailableBodyPostStatusLinkText="bash" />`,
-      output: `import { UnavailableContent } from '@patternfly/react-component-groups'; <UnavailableContent titleText="foo" preLinkBodyText="bar" postLinkBodyText="bash" />`,
+      code: `import { UnavailableContent } from '@patternfly/react-component-groups'; <UnavailableContent unavailableTitleText="foo" />`,
+      output: `import { UnavailableContent } from '@patternfly/react-component-groups'; <UnavailableContent titleText="foo" />`,
       errors,
     },
     {
-      code: `import { UnavailableContent } from '@patternfly/react-component-groups'; const foo = "foo"; const bar = "bar"; const bash = "bash"; <UnavailableContent unavailableTitleText={foo} unavailableBodyPreStatusLinkText={bar} unavailableBodyPostStatusLinkText={bash} />`,
-      output: `import { UnavailableContent } from '@patternfly/react-component-groups'; const foo = "foo"; const bar = "bar"; const bash = "bash"; <UnavailableContent titleText={foo} preLinkBodyText={bar} postLinkBodyText={bash} />`,
+      code: `import { UnavailableContent } from '@patternfly/react-component-groups'; const foo = "foo"; <UnavailableContent unavailableTitleText={foo} />`,
+      output: `import { UnavailableContent } from '@patternfly/react-component-groups'; const foo = "foo"; <UnavailableContent titleText={foo} />`,
       errors,
     },
     {
-      code: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/js/UnavailableContent'; <UnavailableContent unavailableTitleText="foo" unavailableBodyPreStatusLinkText="bar" unavailableBodyPostStatusLinkText="bash" />`,
-      output: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/js/UnavailableContent'; <UnavailableContent titleText="foo" preLinkBodyText="bar" postLinkBodyText="bash" />`,
+      code: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/js/UnavailableContent'; <UnavailableContent unavailableTitleText="foo" />`,
+      output: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/js/UnavailableContent'; <UnavailableContent titleText="foo" />`,
       errors,
     },
     {
-      code: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/esm/UnavailableContent'; <UnavailableContent unavailableTitleText="foo" unavailableBodyPreStatusLinkText="bar" unavailableBodyPostStatusLinkText="bash" />`,
-      output: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/esm/UnavailableContent'; <UnavailableContent titleText="foo" preLinkBodyText="bar" postLinkBodyText="bash" />`,
+      code: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/esm/UnavailableContent'; <UnavailableContent unavailableTitleText="foo" />`,
+      output: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/esm/UnavailableContent'; <UnavailableContent titleText="foo" />`,
       errors,
     },
     {
-      code: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UnavailableContent unavailableTitleText="foo" unavailableBodyPreStatusLinkText="bar" unavailableBodyPostStatusLinkText="bash" />`,
-      output: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UnavailableContent titleText="foo" preLinkBodyText="bar" postLinkBodyText="bash" />`,
+      code: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UnavailableContent unavailableTitleText="foo" />`,
+      output: `import { UnavailableContent } from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UnavailableContent titleText="foo" />`,
       errors,
     },
     {
-      code: `import UC from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UC unavailableTitleText="foo" unavailableBodyPreStatusLinkText="bar" unavailableBodyPostStatusLinkText="bash" />`,
-      output: `import UC from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UC titleText="foo" preLinkBodyText="bar" postLinkBodyText="bash" />`,
+      code: `import UC from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UC unavailableTitleText="foo" />`,
+      output: `import UC from '@patternfly/react-component-groups/dist/dynamic/UnavailableContent'; <UC titleText="foo" />`,
       errors,
     },
   ],
