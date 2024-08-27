@@ -151,6 +151,23 @@ ruleTester.run("text-replace-with-content", rule, {
       output: `import { ContentVariants } from '@patternfly/react-core'; const foo = ContentVariants.li`,
       errors: [importDeclarationError, identifierError],
     },
+    // phase one of passing an enum directly as a prop
+    {
+      code: `import { TextListItem, TextListItemVariants } from '@patternfly/react-core'; <TextListItem component={TextListItemVariants.li}>Abc</TextListItem>`,
+      output: `import { Content, TextListItemVariants } from '@patternfly/react-core'; <Content component={ContentVariants.li}>Abc</Content>`,
+      errors: [
+        importDeclarationError,
+        jsxOpeningElementError,
+        identifierError,
+        jsxClosingElementError,
+      ],
+    },
+    // phase two of passing an enum directly as a prop
+    {
+      code: `import { Content, TextListItemVariants } from '@patternfly/react-core'; <Content component={ContentVariants.li}>Abc</Content>`,
+      output: `import { Content, ContentVariants } from '@patternfly/react-core'; <Content component={ContentVariants.li}>Abc</Content>`,
+      errors: [importDeclarationError],
+    },
     {
       code: `import { TextProps } from '@patternfly/react-core'; interface Foo extends TextProps {}`,
       output: `import { ContentProps } from '@patternfly/react-core'; interface Foo extends ContentProps {}`,
