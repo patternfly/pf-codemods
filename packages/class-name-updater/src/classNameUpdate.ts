@@ -1,20 +1,33 @@
 import { sync } from "glob";
-import { readFileSync, writeFileSync} from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { isDir } from "./utils";
 import { printDiff } from "./printDiff";
 
-export async function classNameUpdate(globTarget: string, makeChange: boolean, fileTypesRegex: RegExp, excludeFiles: string[] = [], pfVersion: number) {
-  const acceptedFileTypesRegex = fileTypesRegex || /\.(s?css|less|(t|j)sx?|md)$/;
-  const previousVersion = pfVersion ? "-v" + (pfVersion - 1) : "";
+export async function classNameUpdate(
+  globTarget: string,
+  makeChange: boolean,
+  fileTypesRegex: RegExp,
+  excludeFiles: string[] = [],
+  pfVersion: number
+) {
+  const acceptedFileTypesRegex =
+    fileTypesRegex || /\.(s?css|less|(t|j)sx?|md)$/;
+  const isPostV5 = pfVersion > 5;
+  const previousVersion = isPostV5 ? "-v" + (pfVersion - 1) : "";
+  const classNameMatches = "[cul]";
+  const cssVarMatches = `${classNameMatches}|global|theme|color`;
+  const bodyMatches = isPostV5 ? classNameMatches : cssVarMatches;
   const changeNeededRegex = new RegExp(
-    "(\\b|\\$)pf" + previousVersion + "-([cul]|global|theme|color)-",
+    "(\\b|\\$)pf" + previousVersion + `-(${bodyMatches})-`,
     "g"
   );
-  const newVersion = pfVersion || 5
+  const newVersion = pfVersion || 5;
 
   const files = sync(globTarget, { ignore: "**/node_modules/**" });
-  const includedFiles = files.filter((filePath: string) => !excludeFiles.includes(filePath))
+  const includedFiles = files.filter(
+    (filePath: string) => !excludeFiles.includes(filePath)
+  );
 
   includedFiles.forEach(async (file: string) => {
     const filePath = join(process.cwd(), file);
