@@ -12,6 +12,7 @@ function findSpecifier(
   );
 }
 
+/** Used to check whether the current ImportDeclaration node matches at least 1 of the import specifiers. */
 export function checkMatchingImportDeclaration(
   node: ImportDeclaration,
   imports: ImportSpecifier | ImportSpecifier[],
