@@ -16,16 +16,14 @@ function findSpecifier(
 export function checkMatchingImportDeclaration(
   node: ImportDeclaration,
   imports: ImportSpecifier | ImportSpecifier[],
-  exactMatch: boolean = false
+  packageNamne: string = "@patternfly/react-core"
 ) {
-  if (!pfPackageMatches("@patternfly/react-core", node.source.value)) {
+  if (!pfPackageMatches(packageNamne, node.source.value)) {
     return false;
   }
 
   if (Array.isArray(imports)) {
-    return exactMatch
-      ? imports.every((imp) => findSpecifier(node, imp))
-      : imports.some((imp) => findSpecifier(node, imp));
+    return imports.some((imp) => findSpecifier(node, imp));
   }
 
   return findSpecifier(node, imports);
