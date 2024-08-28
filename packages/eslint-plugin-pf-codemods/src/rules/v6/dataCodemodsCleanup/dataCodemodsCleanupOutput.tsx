@@ -1,5 +1,5 @@
 import {
-  DualListSelector,
+  DualListSelector ,
   LoginMainFooterLinksItem,
   MastheadLogo,
 } from "@patternfly/react-core";
@@ -7,7 +7,7 @@ import {
 export const DataCodemodsCleanupInput = () => (
   <>
     <DualListSelector />
-    <LoginMainFooterLinksItem />
-    <MastheadLogo />
+    <LoginMainFooterLinksItem  />
+    <MastheadLogo  />
   </>
 );
