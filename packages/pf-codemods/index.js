@@ -5,7 +5,7 @@ const {
   configs,
   ruleVersionMapping,
   setupRules,
-  cleanupRules
+  cleanupRules,
 } = require("@patternfly/eslint-plugin-pf-codemods/dist/js");
 const { Command } = require("commander");
 const program = new Command();
@@ -97,7 +97,12 @@ async function runCodemods(path, otherPaths, options) {
 
   const rulesToRemove = getRulesToRemove(options);
 
-  rulesToRemove.forEach((rule) => delete configs.recommended.rules[prefix + rule]);
+  rulesToRemove.forEach((rule) => {
+    // data-codemods-cleanup rule should exist for any version of codemods
+    if (rule !== "data-codemods-cleanup") {
+      delete configs.recommended.rules[prefix + rule];
+    }
+  });
   const eslintBaseConfig = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     baseConfig: configs.recommended,

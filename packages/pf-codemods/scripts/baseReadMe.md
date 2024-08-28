@@ -16,6 +16,12 @@ Requires Node.js >= 10.
 npx @patternfly/pf-codemods ./path-to-src
 ```
 
+Note: when updating from PatternFly 5 to 6, add the `--v6` flag.
+
+```sh
+npx @patternfly/pf-codemods --v6 ./path-to-src
+```
+
 Giving node more RAM can help for large codebases.
 
 ```sh
@@ -37,6 +43,9 @@ Options:
   --exclude <rules>  Run recommended rules EXCLUDING this comma-seperated list
   --fix              Whether to run fixer
   --format <format>  What eslint report format to use (default: "stylish")
+  --no-cache         Disables eslint caching
+  --v4               Run v3 to v4 codemods
+  --v6               Run v5 to v6 codemods
   -h, --help         display help for command
 ```
 
@@ -45,4 +54,5 @@ Options:
 These rules are based off the breaking change notes for React. Each rule links the breaking change patternfly-react PR in case you want to better understand the change. Also, each rule makes sure you're using a PatternFly component before running.
 
 Some rules will add either a comment (`/* data-codemods */`) or data attribute (`data-codemods="true"`) in order to prevent certain other rules from applying an unnecessary fix.
+These `data-codemods` attributes and comments can be removed by our `data-codemods-cleanup` rule. You should run this rule only once, after you finish running the general codemods, by adding the `--only data-codemods-cleanup` option.
 

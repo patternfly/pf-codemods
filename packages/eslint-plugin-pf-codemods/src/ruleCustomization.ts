@@ -2,7 +2,10 @@
  * add the rule name to the below array. Do not add rules here if the React PR is
  * not yet merged; instead add a "do not merge" label to the codemod PR.
  */
-export const betaRuleNames: string[] = ["kebabToggle-replace-with-menuToggle"];
+export const betaRuleNames: string[] = [
+  "data-codemods-cleanup",
+  "kebabToggle-replace-with-menuToggle",
+];
 
 // if you want a rule to have a severity that defaults to warning rather than error, add the rule name to the below array
 export const warningRules = [
