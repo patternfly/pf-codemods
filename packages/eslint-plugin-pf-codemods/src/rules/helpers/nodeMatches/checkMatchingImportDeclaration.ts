@@ -1,14 +1,14 @@
 import { ImportDeclaration, ImportSpecifier } from "estree-jsx";
 import { pfPackageMatches } from "../pfPackageMatches";
 
-function findSpecifier(
+function checkSpecifierExists(
   node: ImportDeclaration,
-  imporSpecifier: ImportSpecifier
+  importSpecifier: ImportSpecifier
 ) {
-  return node.specifiers.find(
+  return node.specifiers.some(
     (specifier) =>
       specifier.type === "ImportSpecifier" &&
-      specifier.imported.name === imporSpecifier.imported.name
+      specifier.imported.name === importSpecifier.imported.name
   );
 }
 
@@ -16,15 +16,15 @@ function findSpecifier(
 export function checkMatchingImportDeclaration(
   node: ImportDeclaration,
   imports: ImportSpecifier | ImportSpecifier[],
-  packageNamne: string = "@patternfly/react-core"
+  packageName: string = "@patternfly/react-core"
 ) {
-  if (!pfPackageMatches(packageNamne, node.source.value)) {
+  if (!pfPackageMatches(packageName, node.source.value)) {
     return false;
   }
 
   if (Array.isArray(imports)) {
-    return imports.some((imp) => findSpecifier(node, imp));
+    return imports.some((imp) => checkSpecifierExists(node, imp));
   }
 
-  return findSpecifier(node, imports);
+  return checkSpecifierExists(node, imports);
 }
