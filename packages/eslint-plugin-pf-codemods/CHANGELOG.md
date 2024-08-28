@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.126.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.126.0...@patternfly/eslint-plugin-pf-codemods@1.126.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* **Text:** Replace missed text variant enums with content variant enum ([#750](https://github.com/patternfly/pf-codemods/issues/750)) ([cad7d53](https://github.com/patternfly/pf-codemods/commit/cad7d53a4e46e8567a6cda1cf6a03af6c628fbef))
+
+
+
+
+
 # [1.126.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.125.2...@patternfly/eslint-plugin-pf-codemods@1.126.0) (2024-08-26)
 
 
