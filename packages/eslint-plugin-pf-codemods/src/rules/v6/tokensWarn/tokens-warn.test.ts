@@ -92,5 +92,26 @@ ruleTester.run("tokens-warn", rule, {
         },
       ],
     },
+    // CSS variables in strings
+    {
+      code: `<div style={{ "--pf-v5-global--success-color--200": "#abc" }}></div>`,
+      output: `<div style={{ "--pf-v5-global--success-color--200": "#abc" }}></div>`,
+      errors: [
+        {
+          message: getWarnMessage("--pf-v5-global--success-color--200"),
+          type: "Literal",
+        },
+      ],
+    },
+    {
+      code: `<div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>`,
+      output: `<div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>`,
+      errors: [
+        {
+          message: getWarnMessage("var(--pf-v5-global--BorderWidth--lg)"),
+          type: "Literal",
+        },
+      ],
+    },
   ],
 });
