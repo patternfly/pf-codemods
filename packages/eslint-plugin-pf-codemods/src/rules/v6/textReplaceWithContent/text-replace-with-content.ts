@@ -14,6 +14,7 @@ import {
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10643
+
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
@@ -21,7 +22,12 @@ module.exports = {
 
     const textComponents = ["Text", "TextContent", "TextList", "TextListItem"];
 
-    const nonComponentTextIdentifiers = ["TextProps", "TextVariants"];
+    const nonComponentTextIdentifiers = [
+      "TextProps",
+      "TextVariants",
+      "TextListVariants",
+      "TextListItemVariants",
+    ];
 
     const allTextIdentifiers = [
       ...textComponents,
@@ -34,6 +40,18 @@ module.exports = {
 
     const errorMessage =
       "We have replaced Text, TextContent, TextList and TextListItem with one Content component. Running this fix will change all of those components names to Content and add a `component` prop where necessary.";
+
+    function getNewText(specifier: string) {
+      if (textComponents.includes(specifier)) {
+        return "Content";
+      }
+
+      if (specifier === "TextProps") {
+        return "ContentProps";
+      }
+
+      return "ContentVariants";
+    }
 
     return !textImports.length
       ? {}
@@ -51,11 +69,7 @@ module.exports = {
               }
 
               const specifierName = specifierToReplace.imported.name;
-              const newText = nonComponentTextIdentifiers.includes(
-                specifierName
-              )
-                ? specifierName.replace("Text", "Content")
-                : "Content";
+              const newText = getNewText(specifierName);
 
               context.report({
                 node,
@@ -173,7 +187,7 @@ module.exports = {
               return;
             }
 
-            const newText = node.name.replace("Text", "Content");
+            const newText = getNewText(node.name);
 
             context.report({
               node,

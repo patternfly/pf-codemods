@@ -2,13 +2,18 @@ import {
   Content,
   Content,
   Content,
+  ContentVariants,
   Content,
+  ContentVariants,
   ContentProps,
   ContentVariants,
 } from "@patternfly/react-core";
 
 export const TextReplaceWithContentInput = () => {
   interface Foo extends ContentProps {}
+  const foo = ContentVariants.h1;
+  const bar = ContentVariants.ul;
+  const baz = ContentVariants.li;
 
   return (
     <>

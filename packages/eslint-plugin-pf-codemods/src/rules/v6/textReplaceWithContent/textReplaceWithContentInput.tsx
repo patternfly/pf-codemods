@@ -2,13 +2,18 @@ import {
   Text,
   TextContent,
   TextList,
+  TextListVariants,
   TextListItem,
+  TextListItemVariants,
   TextProps,
   TextVariants,
 } from "@patternfly/react-core";
 
 export const TextReplaceWithContentInput = () => {
   interface Foo extends TextProps {}
+  const foo = TextVariants.h1;
+  const bar = TextListVariants.ul;
+  const baz = TextListItemVariants.li;
 
   return (
     <>
