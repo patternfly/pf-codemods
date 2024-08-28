@@ -1,6 +1,7 @@
 import { Rule } from "eslint";
-import { JSXElement } from "estree-jsx";
+import { JSXElement, JSXFragment } from "estree-jsx";
 import {
+  childrenIsEmpty,
   getFromPackage,
   getAttribute,
   getAttributeValue,
@@ -8,6 +9,7 @@ import {
   getChildrenAsAttributeValueText,
   getChildJSXElementByName,
   isReactIcon,
+  makeJSXElementSelfClosing,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10663
@@ -23,7 +25,7 @@ module.exports = {
     const buttonVariantEnumImport = imports.find(
       (specifier) => specifier.imported.name === "ButtonVariant"
     );
-    const hasIconImport = imports.some(
+    const iconImport = imports.find(
       (specifier) => specifier.imported.name === "Icon"
     );
 
@@ -53,31 +55,45 @@ module.exports = {
 
               const isPlain = variantValue === "plain" || isEnumValuePlain;
 
+              let plainButtonChildrenString: string | undefined;
+              let nodeWithChildren: JSXElement | JSXFragment = node;
               const childrenProp = getAttribute(node, "children");
 
-              let childrenValue: string | undefined;
-              if (childrenProp) {
+              if (childrenProp && childrenIsEmpty(node.children)) {
                 const childrenPropExpression = getExpression(
                   childrenProp?.value
                 );
-                childrenValue = childrenPropExpression
-                  ? `{${source.getText(childrenPropExpression)}}`
-                  : "";
+                if (
+                  childrenPropExpression?.type === "JSXElement" ||
+                  childrenPropExpression?.type === "JSXFragment"
+                ) {
+                  nodeWithChildren = childrenPropExpression;
+                }
+
+                if (isPlain) {
+                  plainButtonChildrenString = childrenPropExpression
+                    ? `{${source.getText(childrenPropExpression)}}`
+                    : "";
+                }
               } else if (isPlain) {
-                childrenValue = getChildrenAsAttributeValueText(
+                plainButtonChildrenString = getChildrenAsAttributeValueText(
                   context,
                   node.children
                 );
               }
 
-              if (!childrenValue && isPlain) {
+              if (!plainButtonChildrenString && isPlain) {
                 return;
               }
 
               const iconComponentChild =
-                hasIconImport && getChildJSXElementByName(node, "Icon");
+                iconImport &&
+                getChildJSXElementByName(
+                  nodeWithChildren,
+                  iconImport.local.name
+                );
 
-              const jsxElementChildren = node.children.filter(
+              const jsxElementChildren = nodeWithChildren.children.filter(
                 (child) => child.type === "JSXElement"
               ) as JSXElement[];
               const reactIconChild = jsxElementChildren.find((child) =>
@@ -100,17 +116,17 @@ module.exports = {
                   fixes.push(
                     fixer.insertTextAfter(
                       node.openingElement.name,
-                      ` icon=${childrenValue || iconChildString}`
+                      ` icon=${plainButtonChildrenString || iconChildString}`
                     )
                   );
 
-                  if (childrenProp) {
-                    fixes.push(fixer.remove(childrenProp));
-                  } else if (isPlain) {
-                    node.children.forEach(
-                      (child) =>
-                        child.type !== "JSXSpreadChild" &&
-                        fixes.push(fixer.replaceText(child, ""))
+                  if (isPlain) {
+                    if (childrenProp) {
+                      fixes.push(fixer.remove(childrenProp));
+                    }
+
+                    fixes.push(
+                      ...makeJSXElementSelfClosing(node, context, fixer, true)
                     );
                   } else if (iconChild) {
                     fixes.push(fixer.replaceText(iconChild, ""));
