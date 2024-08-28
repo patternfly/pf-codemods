@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.127.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.126.1...@patternfly/eslint-plugin-pf-codemods@1.127.0) (2024-08-28)
+
+
+### Features
+
+* data-codemods cleanup rule ([#745](https://github.com/patternfly/pf-codemods/issues/745)) ([52845bb](https://github.com/patternfly/pf-codemods/commit/52845bba54f59d0babc8b77cf2c9459318129ca7))
+
+
+
+
+
 ## [1.126.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.126.0...@patternfly/eslint-plugin-pf-codemods@1.126.1) (2024-08-28)
 
 
