@@ -1,4 +1,3 @@
-import { version } from "typescript";
 import { betaRuleNames, warningRules } from "./ruleCustomization";
 import { join } from "path";
 
@@ -27,13 +26,14 @@ const createListOfRules = (version: string, includeBeta = false) => {
       }
     }
   });
-  
+
   return rules;
 };
 
 export const v6rules = createListOfRules("6");
 export const v5rules = createListOfRules("5");
 export const v4rules = createListOfRules("4");
+export const betaV6Rules = createListOfRules("6", true);
 export const betaV5Rules = createListOfRules("5", true);
 
 const createRules = (rules: Rules) => {
@@ -52,7 +52,13 @@ export const mappedRules = {
   ...createRules(v4rules),
 };
 
-export const rules = { ...v6rules, ...v5rules, ...v4rules, ...betaV5Rules };
+export const rules = {
+  ...v6rules,
+  ...v5rules,
+  ...v4rules,
+  ...betaV6Rules,
+  ...betaV5Rules,
+};
 
 export const ruleVersionMapping = {
   v4: Object.keys(v4rules),
