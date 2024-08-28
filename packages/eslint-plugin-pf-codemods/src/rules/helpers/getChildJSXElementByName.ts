@@ -25,7 +25,10 @@ function getChildJSXElementCallback(
 /** Can be used to run logic if the specific child element exists, or to run logic on the
  * specified element.
  */
-export function getChildJSXElementByName(node: JSXElement, name: string) {
+export function getChildJSXElementByName(
+  node: JSXElement | JSXFragment,
+  name: string
+) {
   return node.children?.find((child) =>
     getChildJSXElementCallback(child, name)
   ) as JSXElement | undefined;
@@ -34,7 +37,10 @@ export function getChildJSXElementByName(node: JSXElement, name: string) {
 /** Can be used to run logic if the specific child elements exist, or to run logic on the
  * specified elements.
  */
-export function getAllChildJSXElementsByName(node: JSXElement, name: string) {
+export function getAllChildJSXElementsByName(
+  node: JSXElement | JSXFragment,
+  name: string
+) {
   return node.children?.filter((child) =>
     getChildJSXElementCallback(child, name)
   ) as JSXElement[];

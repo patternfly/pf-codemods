@@ -1,7 +1,10 @@
 import { Rule, Scope } from "eslint";
 import {
-  JSXElement,
+  Expression,
   JSXAttribute,
+  JSXElement,
+  JSXEmptyExpression,
+  JSXFragment,
   JSXOpeningElement,
   MemberExpression,
 } from "estree-jsx";
@@ -68,7 +71,7 @@ export function getExpression(node?: JSXAttribute["value"]) {
   }
 
   if (node.type === "JSXExpressionContainer") {
-    return node.expression;
+    return node.expression as Expression | JSXEmptyExpression | JSXFragment;
   }
 }
 
