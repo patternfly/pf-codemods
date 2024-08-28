@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.128.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.127.0...@patternfly/eslint-plugin-pf-codemods@1.128.0) (2024-08-28)
+
+
+### Features
+
+* **tokens:** warn for CSS variables in strings ([#755](https://github.com/patternfly/pf-codemods/issues/755)) ([5ef0d4d](https://github.com/patternfly/pf-codemods/commit/5ef0d4daa6c65b129219a720eda04e0cbbcaac95))
+
+
+
+
+
 # [1.127.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.126.1...@patternfly/eslint-plugin-pf-codemods@1.127.0) (2024-08-28)
 
 
