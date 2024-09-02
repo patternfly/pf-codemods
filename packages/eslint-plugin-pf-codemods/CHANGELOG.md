@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.128.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.128.1...@patternfly/eslint-plugin-pf-codemods@1.128.2) (2024-09-02)
+
+
+### Bug Fixes
+
+* **LoginPage:** updated markup for LoginMainHeader ([#752](https://github.com/patternfly/pf-codemods/issues/752)) ([722b9e6](https://github.com/patternfly/pf-codemods/commit/722b9e617ba52632c8d6a5337909e6942a8e00c0))
+
+
+
+
+
 ## [1.128.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.128.0...@patternfly/eslint-plugin-pf-codemods@1.128.1) (2024-08-28)
 
 
