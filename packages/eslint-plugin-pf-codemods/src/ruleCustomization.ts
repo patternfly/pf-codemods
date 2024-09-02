@@ -27,6 +27,7 @@ export const warningRules = [
   "horizontalSubnav-warn-ariaLabel",
   "jumpLinksItem-warn-markup-change",
   "label-warn-truncated-default",
+  "loginMainHeader-warn-updated-markup",
   "logViewer-moved-styles",
   "menuItemAction-warn-update-markup",
   "menuToggle-warn-iconOnly-toggle",
