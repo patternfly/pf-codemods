@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.128.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.128.0...@patternfly/eslint-plugin-pf-codemods@1.128.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* **buttonMoveIconsIconProp:** make elements self-closing ([#728](https://github.com/patternfly/pf-codemods/issues/728)) ([57090b5](https://github.com/patternfly/pf-codemods/commit/57090b5965be9d7b0ab294e55c9468fa455e4734))
+
+
+
+
+
 # [1.128.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.127.0...@patternfly/eslint-plugin-pf-codemods@1.128.0) (2024-08-28)
 
 

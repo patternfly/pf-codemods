@@ -1,3 +1,4 @@
+export * from "./childrenIsEmpty";
 export * from "./contextReports";
 export * from "./findAncestor";
 export * from "./fixers";
@@ -22,6 +23,7 @@ export * from "./includesImport";
 export * from "./interfaces";
 export * from "./isReactIcon";
 export * from "./JSXAttributes";
+export * from "./makeJSXElementSelfClosing";
 export * from "./nodeMatches/checkMatchingImportDeclaration";
 export * from "./nodeMatches/checkMatchingJSXOpeningElement";
 export * from "./pfPackageMatches";
