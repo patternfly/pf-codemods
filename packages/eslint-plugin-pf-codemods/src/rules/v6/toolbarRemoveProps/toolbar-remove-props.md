@@ -6,6 +6,7 @@ The following props have been removed from Toolbar components:
 | ------------------ | --------------- |
 | Toolbar            | `usePageInsets` |
 | ToolbarContent     | `alignSelf`     |
+| ToolbarItem        | `widths`        |
 | ToolbarToggleGroup | `alignment`     |
 
 #### Examples

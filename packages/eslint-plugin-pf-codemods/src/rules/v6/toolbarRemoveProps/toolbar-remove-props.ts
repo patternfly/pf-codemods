@@ -7,6 +7,9 @@ const renames = {
   ToolbarContent: {
     alignSelf: "",
   },
+  ToolbarItem: {
+    widths: "",
+  },
   ToolbarToggleGroup: {
     alignment: "",
   },

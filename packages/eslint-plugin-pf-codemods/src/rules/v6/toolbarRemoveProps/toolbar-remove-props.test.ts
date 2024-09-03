@@ -13,6 +13,9 @@ const renames: { [key: string]: { [key: string]: string } } = {
   ToolbarContent: {
     alignSelf: "",
   },
+  ToolbarItem: {
+    widths: "",
+  },
   ToolbarToggleGroup: {
     alignment: "",
   },
