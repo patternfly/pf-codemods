@@ -1,3 +1,4 @@
+export * from "./attributeValueIsString";
 export * from "./childrenIsEmpty";
 export * from "./contextReports";
 export * from "./findAncestor";
