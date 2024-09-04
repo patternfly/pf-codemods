@@ -1,5 +1,5 @@
 const ruleTester = require("../../ruletester");
-import * as rule from "./toolbarGroup-updated-iconButtonGroup-variant";
+import * as rule from "./toolbarGroup-updated-variant";
 import {
   ValidTests,
   InvalidTests,

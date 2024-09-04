@@ -1,4 +1,4 @@
-### toolbarGroup-updated-iconButtonGroup-variant [(#10674)](https://github.com/patternfly/patternfly-react/pull/10674)
+### toolbarGroup-updated-variant [(#10674)](https://github.com/patternfly/patternfly-react/pull/10674)
 
 The `variant` prop of ToolbarGroup and ToolbarToggleGroup had these options renamed:
 

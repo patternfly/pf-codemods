@@ -4,7 +4,7 @@ import {
   ToolbarGroupVariant,
 } from "@patternfly/react-core";
 
-export const ToolbarGroupUpdatedIconButtonGroupVariantInput = () => (
+export const ToolbarGroupUpdatedVariantInput = () => (
   <>
     <ToolbarGroup variant='button-group' />
     <ToolbarGroup variant={ToolbarGroupVariant["icon-button-group"]} />
