@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.130.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.129.0...@patternfly/eslint-plugin-pf-codemods@1.130.0) (2024-09-04)
+
+
+### Features
+
+* **ToolbarItem:** variant prop options removed ([#757](https://github.com/patternfly/pf-codemods/issues/757)) ([50be98f](https://github.com/patternfly/pf-codemods/commit/50be98f610fc3a3c1e81e4b47e4d1a538a2676cb))
+
+
+
+
+
 # [1.129.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.128.2...@patternfly/eslint-plugin-pf-codemods@1.129.0) (2024-09-04)
 
 
