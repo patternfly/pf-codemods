@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.129.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.128.2...@patternfly/eslint-plugin-pf-codemods@1.129.0) (2024-09-04)
+
+
+### Features
+
+* **ToolbarGroup:** rename button-group variant option ([#759](https://github.com/patternfly/pf-codemods/issues/759)) ([9482ccf](https://github.com/patternfly/pf-codemods/commit/9482ccf104e7d1b72e9a99b1bf0b17a05c3adde2))
+* **ToolbarItem:** remove widths prop ([#758](https://github.com/patternfly/pf-codemods/issues/758)) ([f0eeac5](https://github.com/patternfly/pf-codemods/commit/f0eeac5880f2002d659a73cd84d9ee5a5b6ce86b))
+
+
+
+
+
 ## [1.128.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.128.1...@patternfly/eslint-plugin-pf-codemods@1.128.2) (2024-09-02)
 
 
