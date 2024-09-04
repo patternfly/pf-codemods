@@ -15,6 +15,12 @@ module.exports = {
       (specifier) => specifier.imported.name === "ToolbarGroupVariant"
     );
 
+    const renames = {
+      "button-group": "action-group",
+      "icon-button-group": "action-group-plain",
+    };
+    const oldVariantNames = Object.keys(renames);
+
     return !componentImports.length
       ? {}
       : {
@@ -32,28 +38,27 @@ module.exports = {
               }
 
               const variantValue = getAttributeValue(context, variant.value);
-              const isEnumValueIconButtonGroup =
+              const isEnumToRename =
                 variantEnumImport &&
                 variantValue.object?.name === variantEnumImport.local.name &&
-                variantValue.property.value === "icon-button-group";
-              if (
-                variantValue !== "icon-button-group" &&
-                !isEnumValueIconButtonGroup
-              ) {
+                oldVariantNames.includes(variantValue.property.value);
+
+              if (!oldVariantNames.includes(variantValue) && !isEnumToRename) {
                 return;
               }
 
+              const variantToRename: "button-group" | "icon-button-group" =
+                variantValue.property?.value ?? variantValue;
+
               context.report({
                 node,
-                message: `The \`icon-button-group\` variant of ${applicableComponent.imported.name} has been renamed to \`action-group-plain\`.`,
+                message: `The \`${variantToRename}\` variant of ${applicableComponent.imported.name} has been renamed to \`${renames[variantToRename]}\`.`,
                 fix(fixer) {
                   return fixer.replaceText(
-                    isEnumValueIconButtonGroup
-                      ? variantValue.property
-                      : variant,
-                    isEnumValueIconButtonGroup
-                      ? '"action-group-plain"'
-                      : 'variant="action-group-plain"'
+                    isEnumToRename ? variantValue.property : variant,
+                    isEnumToRename
+                      ? `"${renames[variantToRename]}"`
+                      : `variant="${renames[variantToRename]}"`
                   );
                 },
               });

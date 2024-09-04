@@ -6,9 +6,9 @@ import {
 
 export const ToolbarGroupUpdatedIconButtonGroupVariantInput = () => (
   <>
-    <ToolbarGroup variant="action-group-plain" />
+    <ToolbarGroup variant="action-group" />
     <ToolbarGroup variant={ToolbarGroupVariant["action-group-plain"]} />
     <ToolbarToggleGroup variant="action-group-plain" />
-    <ToolbarToggleGroup variant={ToolbarGroupVariant["action-group-plain"]} />
+    <ToolbarToggleGroup variant={ToolbarGroupVariant["action-group"]} />
   </>
 );

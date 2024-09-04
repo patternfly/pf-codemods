@@ -1,6 +1,11 @@
 ### toolbarGroup-updated-iconButtonGroup-variant [(#10674)](https://github.com/patternfly/patternfly-react/pull/10674)
 
-The `icon-button-group` variant of ToolbarGroup and ToolbarToggleGroup has been renamed to `action-group-plain`.
+The `variant` prop of ToolbarGroup and ToolbarToggleGroup had these options renamed:
+
+| Old variant option  | New variant option   |
+| ------------------- | -------------------- |
+| `button-group`      | `action-group`       |
+| `icon-button-group` | `action-group-plain` |
 
 #### Examples
 
