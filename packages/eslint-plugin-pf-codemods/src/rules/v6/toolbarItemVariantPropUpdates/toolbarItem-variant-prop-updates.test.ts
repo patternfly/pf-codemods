@@ -1,5 +1,5 @@
 const ruleTester = require("../../ruletester");
-import * as rule from "./toolbarItem-replace-chipGroup-variant";
+import * as rule from "./toolbarItem-variant-prop-updates";
 
 ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
   valid: [
@@ -22,6 +22,16 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
   invalid: [
     {
       code: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant="chip-group" />`,
+      output: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant="label-group" />`,
+      errors: [
+        {
+          message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant={"chip-group"} />`,
       output: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant="label-group" />`,
       errors: [
         {
@@ -87,6 +97,87 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
           type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant="bulk-select" />`,
+      output: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem  />`,
+      errors: [
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant="overflow-menu" />`,
+      output: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem  />`,
+      errors: [
+        {
+          message: `The "overflow-menu" variant for ToolbarItem has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant="search-filter" />`,
+      output: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem  />`,
+      errors: [
+        {
+          message: `The "search-filter" variant for ToolbarItem has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem variant={"bulk-select"} />`,
+      output: `import { ToolbarItem } from '@patternfly/react-core'; <ToolbarItem  />`,
+      errors: [
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; <ToolbarItem variant={ToolbarItemVariant["bulk-select"]} />`,
+      output: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; <ToolbarItem  />`,
+      errors: [
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "JSXOpeningElement",
+        },
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "MemberExpression",
+        },
+      ],
+    },
+    {
+      code: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; 
+      const variant = ToolbarItemVariant["bulk-select"]; <ToolbarItem variant={variant} />`,
+      output: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; 
+      const variant = ToolbarItemVariant["bulk-select"]; <ToolbarItem  />`,
+      errors: [
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "MemberExpression",
+        },
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "JSXOpeningElement",
+        },
+      ],
+    },
+    // error without the option to fix
+    {
+      code: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; const variant = ToolbarItemVariant["bulk-select"];`,
+      output: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; const variant = ToolbarItemVariant["bulk-select"];`,
+      errors: [
+        {
+          message: `The "bulk-select" variant for ToolbarItem has been removed.`,
+          type: "MemberExpression",
         },
       ],
     },
