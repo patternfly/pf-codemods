@@ -105,10 +105,11 @@ ruleTester.run("tokens-warn", rule, {
     },
     {
       code: `<div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>`,
-      output: `<div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>`,
+      output: `<div style={{ borderWidth: "var(--pf-t--global--border--width--extra-strong)" }}></div>`,
       errors: [
         {
-          message: getWarnMessage("var(--pf-v5-global--BorderWidth--lg)"),
+          message:
+            "--pf-v5-global--BorderWidth--lg is an old CSS token and has been replaced with --pf-t--global--border--width--extra-strong. If you want to use a different token, check our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.",
           type: "Literal",
         },
       ],

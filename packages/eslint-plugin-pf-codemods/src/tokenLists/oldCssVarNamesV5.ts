@@ -1,4 +1,4 @@
-// names of css variables of the oldTokens list
+// names of css variables for each token of the oldTokens list
 export const oldCssVarNamesV5 = [
   "--pf-v5-c-about-modal-box__brand--PaddingBottom",
   "--pf-v5-c-about-modal-box__brand--PaddingLeft",
