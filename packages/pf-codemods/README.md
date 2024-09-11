@@ -56,6 +56,7 @@ These rules are based off the breaking change notes for React. Each rule links t
 Some rules will add either a comment (`/* data-codemods */`) or data attribute (`data-codemods="true"`) in order to prevent certain other rules from applying an unnecessary fix.
 These `data-codemods` attributes and comments can be removed by our `data-codemods-cleanup` rule. You should run this rule only once, after you finish running the general codemods, by adding the `--only data-codemods-cleanup` option.
 
+
 ### accordionContent-remove-isHidden-prop [(#9876)](https://github.com/patternfly/patternfly-react/pull/9876)
 
 The `isHidden` prop has been removed from AccordionContent, as its visibility will now be set automatically based on the `isExpanded` prop on AccordionItem.
@@ -188,22 +189,44 @@ Icons must now be passed to the `icon` prop of Button instead of as children. Th
 In:
 
 ```jsx
-import { Button } from "@patternfly/react-core";
+import { Button, Icon } from "@patternfly/react-core";
+import { SomeIcon } from "@patternfly/react-icons";
 
 export const ButtonMoveIconsIconPropInput = () => (
-  <Button variant='plain'>
-    <span>Icon</span>
-  </Button>
+  <>
+    <Button variant="plain">
+      <span>Icon</span>
+    </Button>
+    <Button>
+      <Icon>
+        <SomeIcon />
+      </Icon>
+    </Button>
+    <Button>
+      <SomeIcon />
+    </Button>
+  </>
 );
 ```
 
 Out:
 
 ```jsx
-import { Button } from "@patternfly/react-core";
+import { Button, Icon } from "@patternfly/react-core";
+import { SomeIcon } from "@patternfly/react-icons";
 
 export const ButtonMoveIconsIconPropInput = () => (
-  <Button icon={<span>Icon</span>} variant='plain'></Button>
+  <>
+    <Button icon={<span>Icon</span>} variant="plain"></Button>
+    <Button icon={<Icon>
+        <SomeIcon />
+      </Icon>}>
+      
+    </Button>
+    <Button icon={<SomeIcon />}>
+      
+    </Button>
+  </>
 );
 ```
 
@@ -275,6 +298,75 @@ export const CardRemoveVariousPropsInput = () => (
 );
 ```
 
+
+### card-updated-clickable-markup [(#10859)](https://github.com/patternfly/patternfly-react/pull/10859)
+
+The markup for clickable-only cards has been updated. Additionally, the `selectableActions.selectableActionId` and `selectableActions.name` props are no longer necessary to pass to CardHeader for clickable-only cards. Passing them in will not cause any errors, but running the fix for this rule will remove them.
+
+#### Examples
+
+In:
+
+```jsx
+import { Card, CardHeader } from "@patternfly/react-core";
+
+export const CardUpdatedClickableMarkupInput = () => {
+  const selectableActionsObj = { name: "Test2", selectableActionId: "Id2" };
+  const selectableActionsObjMany = {
+    to: "#",
+    name: "Test2",
+    selectableActionProps: {},
+    selectableActionId: "Id2",
+  };
+
+  return (
+    <>
+      <Card isClickable>
+        <CardHeader
+          selectableActions={{
+            to: "#",
+            name: "Test",
+            selectableActionId: () => {},
+          }}
+        />
+      </Card>
+      <Card isClickable>
+        <CardHeader selectableActions={selectableActionsObj} />
+      </Card>
+      <Card isClickable>
+        <CardHeader selectableActions={selectableActionsObjMany} />
+      </Card>
+    </>
+  );
+};
+```
+
+Out:
+
+```jsx
+import { Card, CardHeader } from "@patternfly/react-core";
+
+export const CardUpdatedClickableMarkupInput = () => {
+  const selectableActionsObj = {};
+  const selectableActionsObjMany = {to: "#", selectableActionProps: {}};
+
+  return (
+    <>
+      <Card isClickable>
+        <CardHeader
+          selectableActions={{to: "#"}}
+        />
+      </Card>
+      <Card isClickable>
+        <CardHeader selectableActions={selectableActionsObj} />
+      </Card>
+      <Card isClickable>
+        <CardHeader selectableActions={selectableActionsObjMany} />
+      </Card>
+    </>
+  );
+};
+```
 
 ### checkbox-radio-replace-isLabelBeforeButton [(#10016)](https://github.com/patternfly/patternfly-react/pull/10016)
 
@@ -390,6 +482,275 @@ export const ColorPropsReplacedColorsInput = () => (
     <Banner color="teal" />
     <Label color="yellow" />
     <Label color="teal" />
+  </>
+);
+```
+
+### componentGroups-logSnippet-rename-leftBorderVariant [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
+
+In react-component-groups, we've renamed LogSnippet's prop leftBorderVariant to variant and replaced LogSnippetBorderVariant enum with PatternFly's AlertVariant enum.
+
+#### Examples
+
+In:
+
+```jsx
+import {
+  LogSnippet,
+  LogSnippetBorderVariant,
+} from "@patternfly/react-component-groups";
+
+export const LogSnippetRenameLeftBorderVariantInput = () => (
+  <LogSnippet
+    message="Failure - check logs for details"
+    logSnippet="code"
+    leftBorderVariant={LogSnippetBorderVariant.success}
+  />
+);
+```
+
+Out:
+
+```jsx
+import { LogSnippet } from "@patternfly/react-component-groups";
+
+export const LogSnippetRenameLeftBorderVariantInput = () => (
+  <LogSnippet
+    message="Failure - check logs for details"
+    logSnippet="code"
+    variant={"success"}
+  />
+);
+```
+
+
+### componentGroups-errorState-rename-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
+
+In react-component-groups, we've renamed some ErrorState props to comply with its base component - EmptyState.
+
+#### Examples
+
+In:
+
+```jsx
+import { ErrorState } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsErrorStateRenamePropsInput = () => (
+  <ErrorState
+    errorTitle="Sample error title"
+    errorDescription="Sample error description"
+    defaultErrorDescription="Sample default error description"
+  />
+);
+```
+
+Out:
+
+```jsx
+import { ErrorState } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsErrorStateRenamePropsInput = () => (
+  <ErrorState
+    titleText="Sample error title"
+    bodyText="Sample error description"
+    defaultBodyText="Sample default error description"
+  />
+);
+```
+
+
+### component-groups-invalidObject-rename-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
+
+In react-component-groups, we've renamed InvalidObject's props `invalidObjectTitleText` to `titleText` and `invalidObjectBodyText` to `bodyText`.
+
+#### Examples
+
+In:
+
+```jsx
+import { InvalidObject } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsInvalidObjectRenamePropsInput = () => (
+  <InvalidObject
+    invalidObjectTitleText="Sample title"
+    invalidObjectBodyText="Sample description"
+  />
+);
+```
+
+Out:
+
+```jsx
+import { InvalidObject } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsInvalidObjectRenamePropsInput = () => (
+  <InvalidObject
+    titleText="Sample title"
+    bodyText="Sample description"
+  />
+);
+```
+
+
+### component-groups-multi-content-card-remove-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
+
+The `leftBorderVariant` and `withHeaderBorder` props have been removed from MultiContentCard.
+
+#### Examples
+
+In:
+
+```jsx
+import { MultiContentCard } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsMultiContentCardRemovePropsInput = () => <MultiContentCard leftBorderVariant="danger" withHeaderBorder />
+```
+
+Out:
+
+```jsx
+import { MultiContentCard } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsMultiContentCardRemovePropsInput = () => <MultiContentCard   />
+```
+
+
+### component-groups-notAuthorized-rename-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
+
+In react-component-groups, we've renamed NotAuthorized's props `description` to `bodyText` and `title` to `titleText`.
+
+#### Examples
+
+In:
+
+```jsx
+import { NotAuthorized } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsNotAuthorizedRenamePropsInput = () => (
+  <NotAuthorized description="Description text" title="Title text" />
+);
+```
+
+Out:
+
+```jsx
+import { NotAuthorized } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsNotAuthorizedRenamePropsInput = () => (
+  <NotAuthorized bodyText="Description text" titleText="Title text" />
+);
+```
+
+### component-groups-unavailableContent-bodyText-props-update [(react-component-groups/#244)](https://github.com/patternfly/react-component-groups/pull/244)
+
+In react-component-groups, we have replaced UnavailableContent's props `unavailableBodyPreStatusLinkText` and `unavailableBodyPostStatusLinkText` with one `bodyText` prop.
+Also status page link button has changed to a primary button. Consider capitalizing the `statusPageLinkText` prop.
+
+#### Examples
+
+In:
+
+```jsx
+import { UnavailableContent } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsUnavailableContentBodyTextPropsUpdateInput = () => (
+  <>
+    <UnavailableContent
+      unavailableBodyPreStatusLinkText="Visit our"
+      unavailableBodyPostStatusLinkText="for more info."
+      statusPageLinkText="custom status page"
+    />
+    <UnavailableContent unavailableBodyPreStatusLinkText="Visit our" />
+    <UnavailableContent unavailableBodyPostStatusLinkText="for more info." />
+  </>
+);
+```
+
+Out:
+
+```jsx
+import { UnavailableContent } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsUnavailableContentBodyTextPropsUpdateInput = () => (
+  <>
+    <UnavailableContent
+      bodyText="Visit our custom status page for more info."
+      statusPageLinkText="Custom status page"
+    />
+    <UnavailableContent bodyText="Visit our status page for known outages." />
+    <UnavailableContent bodyText="Try refreshing the page. If the problem persists, contact your organization administrator or visit our status page for more info." />
+  </>
+);
+```
+
+
+### component-groups-unavailable-content-rename-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
+
+The UnavailableContent component of React Component Groups has had the `unavailableTitleText` prop renamed to `titleText`.
+
+#### Examples
+
+In:
+
+```jsx
+import { UnavailableContent } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsUnavailableContentRenamePropsInput = () => (
+  <UnavailableContent unavailableTitleText="foo" />
+);
+```
+
+Out:
+
+```jsx
+import { UnavailableContent } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsUnavailableContentRenamePropsInput = () => (
+  <UnavailableContent titleText="foo" />
+);
+```
+
+### data-codemods-cleanup
+
+This rule will remove `data-codemods` attributes and comments, which were introduced by our codemods in order to work correctly.
+You should run this rule only once, after you finish running the codemods.
+
+This rule can only run using the `--only data-codemods-cleanup` option.
+
+#### Examples
+
+In:
+
+```jsx
+import {
+  DualListSelector /* data-codemods */,
+  LoginMainFooterLinksItem,
+  MastheadLogo,
+} from "@patternfly/react-core";
+
+export const DataCodemodsCleanupInput = () => (
+  <>
+    <DualListSelector />
+    <LoginMainFooterLinksItem data-codemods="true" />
+    <MastheadLogo data-codemods />
+  </>
+);
+```
+
+Out:
+
+```jsx
+import {
+  DualListSelector ,
+  LoginMainFooterLinksItem,
+  MastheadLogo,
+} from "@patternfly/react-core";
+
+export const DataCodemodsCleanupInput = () => (
+  <>
+    <DualListSelector />
+    <LoginMainFooterLinksItem  />
+    <MastheadLogo  />
   </>
 );
 ```
@@ -877,9 +1238,38 @@ export const LoginMainFooterLinksItemStructureUpdatedInput = () => (
 );
 ```
 
+### loginMainHeader-warn-updated-markup [(#10880)](https://github.com/patternfly/patternfly-react/pull/10880)
+
+The markup for LoginMainHeader - which is used internally within LoginPage - has been updated, now using a `div` wrapper instead of a `header` element wrapper.
+
 ### logViewer-moved-styles [(#70)](https://github.com/patternfly/react-log-viewer/pull/70)
 
 The stylesheet for LogViewer has been moved out of the PatternFly package and into LogViewer itself. You may need to update stylesheet imports or import the stylesheet manually.
+
+### masthead-name-changes [(#10809)](https://github.com/patternfly/patternfly-react/pull/10809)
+
+Our old implementation of `MastheadBrand` has been renamed to `MastheadLogo`, which must be wrapped by our new implementation of `MastheadBrand`."
+
+This rule will handle the renaming, required restructuring will be handled under a separate rule.
+
+#### Examples
+
+In:
+
+```jsx
+import { MastheadBrand } from "@patternfly/react-core";
+
+export const MastheadNameChanges = () => <MastheadBrand>Logo</MastheadBrand>;
+```
+
+Out:
+
+```jsx
+import { MastheadLogo } from "@patternfly/react-core";
+
+export const MastheadNameChanges = () => <MastheadLogo data-codemods>Logo</MastheadLogo>;
+```
+
 
 ### masthead-remove-background-color [(#9774)](https://github.com/patternfly/patternfly-react/pull/9774)
 
@@ -901,6 +1291,77 @@ Out:
 import { Masthead } from "@patternfly/react-core";
 
 export const MastheadRemoveBackgroundColorInput = () => <Masthead  />
+```
+
+
+### masthead-structure-changes [(#10809)](https://github.com/patternfly/patternfly-react/pull/10809)
+
+The structure of Masthead has been updated, MastheadToggle and MastheadBrand should now be wrapped in MastheadMain.
+
+#### Examples
+
+In:
+
+```jsx
+import {
+  Masthead,
+  MastheadBrand,
+  MastheadMain,
+  MastheadToggle,
+  MastheadLogo
+} from "@patternfly/react-core";
+
+export const MastheadStructureChangesInputPreNameChange = () => (
+  <Masthead>
+    <MastheadToggle>Foo</MastheadToggle>
+    <MastheadMain>
+      <MastheadBrand>Bar</MastheadBrand>
+    </MastheadMain>
+  </Masthead>
+);
+
+export const MastheadStructureChangesInputPostNameChange = () => (
+  <Masthead>
+    <MastheadToggle>Foo</MastheadToggle>
+    <MastheadMain>
+      <MastheadLogo>Bar</MastheadLogo>
+    </MastheadMain>
+  </Masthead>
+);
+```
+
+Out:
+
+```jsx
+import {
+  Masthead,
+  MastheadBrand,
+  MastheadMain,
+  MastheadToggle,
+  MastheadLogo,
+} from "@patternfly/react-core";
+
+export const MastheadStructureChangesInputPreNameChange = () => (
+  <Masthead>
+    <MastheadMain>
+      <MastheadToggle>Foo</MastheadToggle>
+      <MastheadBrand data-codemods>
+        <MastheadBrand>Bar</MastheadBrand>
+      </MastheadBrand>
+    </MastheadMain>
+  </Masthead>
+);
+
+export const MastheadStructureChangesInputPostNameChange = () => (
+  <Masthead>
+    <MastheadMain>
+      <MastheadToggle>Foo</MastheadToggle>
+      <MastheadBrand data-codemods>
+        <MastheadLogo>Bar</MastheadLogo>
+      </MastheadBrand>
+    </MastheadMain>
+  </Masthead>
+);
 ```
 
 
@@ -1059,6 +1520,32 @@ import { Nav } from "@patternfly/react-core";
 
 export const NavRemoveThemePropInput = () => <Nav />;
 export const NavRemoveThemePropInput2 = () => <Nav />;
+```
+
+### no-duplicate-import-specifiers
+
+Duplicate import specifiers should be removed. This is a cleanup rule which runs after other rules. 
+
+#### Examples
+
+In:
+
+```jsx
+import { Button, Button } from "@patternfly/react-core";
+
+export const NoDuplicateImportSpecifiersInput = () => (
+  <Button>Sample button</Button>
+);
+```
+
+Out:
+
+```jsx
+import { Button } from "@patternfly/react-core";
+
+export const NoDuplicateImportSpecifiersInput = () => (
+  <Button>Sample button</Button>
+);
 ```
 
 ### notificationBadge-warn-markup-change [(#10020)](https://github.com/patternfly/patternfly-react/pull/10020)
@@ -1524,27 +2011,42 @@ import {
   Text,
   TextContent,
   TextList,
+  TextListVariants,
   TextListItem,
+  TextListItemVariants,
+  TextProps,
+  TextVariants,
 } from "@patternfly/react-core";
 
-export const TextReplaceWithContentInput = () => (
-  <>
-    <Text component="h3">Abc</Text>
-    <Text>Abc</Text>
-    <TextContent>Abc</TextContent>
-    <TextContent isVisited>Abc</TextContent>
-    <TextList>Abc</TextList>
-    <TextList isPlain>Abc</TextList>
-    <TextList component="ol">Abc</TextList>
-    <TextListItem>Abc</TextListItem>
-    <TextListItem component="dt">Abc</TextListItem>
-    <TextList>
-      <TextListItem>A</TextListItem>
-      <TextListItem>B</TextListItem>
-      <TextListItem>C</TextListItem>
-    </TextList>
-  </>
-);
+export const TextReplaceWithContentInput = () => {
+  interface Foo extends TextProps {}
+  const foo = TextVariants.h1;
+  const bar = TextListVariants.ul;
+  const baz = TextListItemVariants.li;
+
+  return (
+    <>
+      <Text component="h3">Abc</Text>
+      <Text>Abc</Text>
+      <TextContent>Abc</TextContent>
+      <TextContent>
+        <Text>Some text</Text>
+      </TextContent>
+      <TextContent isVisited>Abc</TextContent>
+      <TextList>Abc</TextList>
+      <TextList isPlain>Abc</TextList>
+      <TextList component="ol">Abc</TextList>
+      <TextListItem>Abc</TextListItem>
+      <TextListItem component="dt">Abc</TextListItem>
+      <TextListItem component={TextVariants.dt}>Abc</TextListItem>
+      <TextList>
+        <TextListItem>A</TextListItem>
+        <TextListItem>B</TextListItem>
+        <TextListItem>C</TextListItem>
+      </TextList>
+    </>
+  );
+};
 ```
 
 Out:
@@ -1554,33 +2056,92 @@ import {
   Content,
   Content,
   Content,
+  ContentVariants,
   Content,
+  ContentVariants,
+  ContentProps,
+  ContentVariants,
 } from "@patternfly/react-core";
 
-export const TextReplaceWithContentInput = () => (
-  <>
-    <Content component="h3">Abc</Content>
-    <Content component="p">Abc</Content>
-    <Content>Abc</Content>
-    <Content isVisitedLink>Abc</Content>
-    <Content component="ul">Abc</Content>
-    <Content component="ul" isPlainList>Abc</Content>
-    <Content component="ol">Abc</Content>
-    <Content component="li">Abc</Content>
-    <Content component="dt">Abc</Content>
-    <Content component="ul">
-      <Content component="li">A</Content>
-      <Content component="li">B</Content>
-      <Content component="li">C</Content>
-    </Content>
-  </>
-);
+export const TextReplaceWithContentInput = () => {
+  interface Foo extends ContentProps {}
+  const foo = ContentVariants.h1;
+  const bar = ContentVariants.ul;
+  const baz = ContentVariants.li;
+
+  return (
+    <>
+      <Content component="h3">Abc</Content>
+      <Content component="p">Abc</Content>
+      <Content>Abc</Content>
+      <Content>
+        <Content component="p">Some text</Content>
+      </Content>
+      <Content isVisitedLink>Abc</Content>
+      <Content component="ul">Abc</Content>
+      <Content component="ul" isPlainList>Abc</Content>
+      <Content component="ol">Abc</Content>
+      <Content component="li">Abc</Content>
+      <Content component="dt">Abc</Content>
+      <Content component={ContentVariants.dt}>Abc</Content>
+      <Content component="ul">
+        <Content component="li">A</Content>
+        <Content component="li">B</Content>
+        <Content component="li">C</Content>
+      </Content>
+    </>
+  );
+};
 ```
 
 
 ### Th-Td-warn-update-markup [(#10378)](https://github.com/patternfly/patternfly-react/pull/10378)
 
 The `--pf-v6-c-table__sticky-cell--Left` and `--pf-v6-c-table__sticky-cell--Right` CSS variables applied as inline styles when `isStickyColumn` is true have been updated to `--pf-v6-c-table__sticky-cell--InsetInlineStart` and `--pf-v6-c-table__sticky-cell--InsetInlineEnd`, respectively.
+
+### tokens-warn
+
+We have updated our CSS tokens. About half of our tokens have been replaced with newer ones. To find a suitable replacement token, check our [v6 token documentation](https://staging-v6.patternfly.org/tokens/all-patternfly-tokens).
+
+#### Examples
+
+In:
+
+```jsx
+import global_warning_color_100 from "@patternfly/react-tokens/dist/esm/global_warning_color_100";
+import { c_alert__FontSize } from "@patternfly/react-tokens";
+
+global_warning_color_100;
+c_alert__FontSize;
+
+<>
+  <div
+    style={{
+      "--pf-v5-global--success-color--200": "#abc",
+    }}
+  ></div>
+  <div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>
+</>;
+```
+
+Out:
+
+```jsx
+import global_warning_color_100 from "@patternfly/react-tokens/dist/esm/global_warning_color_100";
+import { c_alert__FontSize } from "@patternfly/react-tokens";
+
+global_warning_color_100;
+c_alert__FontSize;
+
+<>
+  <div
+    style={{
+      "--pf-v5-global--success-color--200": "#abc",
+    }}
+  ></div>
+  <div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>
+</>;
+```
 
 ### toolbarChipGroupContent-rename-component [(#10649)](https://github.com/patternfly/patternfly-react/pull/10649)
 
@@ -1622,9 +2183,14 @@ export const ToolbarChipGroupContentRenameComponentInput = () => (
 export { ToolbarLabelGroupContent as CustomThing };
 ```
 
-### toolbarGroup-updated-iconButtonGroup-variant [(#10674)](https://github.com/patternfly/patternfly-react/pull/10674)
+### toolbarGroup-updated-variant [(#10674)](https://github.com/patternfly/patternfly-react/pull/10674)
 
-The `icon-button-group` variant of ToolbarGroup and ToolbarToggleGroup has been renamed to `action-group-plain`.
+The `variant` prop of ToolbarGroup and ToolbarToggleGroup had these options renamed:
+
+| Old variant option  | New variant option   |
+| ------------------- | -------------------- |
+| `button-group`      | `action-group`       |
+| `icon-button-group` | `action-group-plain` |
 
 #### Examples
 
@@ -1637,12 +2203,12 @@ import {
   ToolbarGroupVariant,
 } from "@patternfly/react-core";
 
-export const ToolbarGroupUpdatedIconButtonGroupVariantInput = () => (
+export const ToolbarGroupUpdatedVariantInput = () => (
   <>
-    <ToolbarGroup variant='icon-button-group' />
+    <ToolbarGroup variant='button-group' />
     <ToolbarGroup variant={ToolbarGroupVariant["icon-button-group"]} />
     <ToolbarToggleGroup variant='icon-button-group' />
-    <ToolbarToggleGroup variant={ToolbarGroupVariant["icon-button-group"]} />
+    <ToolbarToggleGroup variant={ToolbarGroupVariant["button-group"]} />
   </>
 );
 ```
@@ -1656,19 +2222,19 @@ import {
   ToolbarGroupVariant,
 } from "@patternfly/react-core";
 
-export const ToolbarGroupUpdatedIconButtonGroupVariantInput = () => (
+export const ToolbarGroupUpdatedVariantInput = () => (
   <>
-    <ToolbarGroup variant="action-group-plain" />
+    <ToolbarGroup variant="action-group" />
     <ToolbarGroup variant={ToolbarGroupVariant["action-group-plain"]} />
     <ToolbarToggleGroup variant="action-group-plain" />
-    <ToolbarToggleGroup variant={ToolbarGroupVariant["action-group-plain"]} />
+    <ToolbarToggleGroup variant={ToolbarGroupVariant["action-group"]} />
   </>
 );
 ```
 
-### toolbarItem-replace-chipGroup-variant [(#10649)](https://github.com/patternfly/patternfly-react/pull/10649)
+### toolbarItem-variant-prop-updates [(#10649)](https://github.com/patternfly/patternfly-react/pull/10649)
 
-The "chip-group" variant for ToolbarItem has been replaced with "label-group".
+The variant prop for ToolbarItem has been updated: "bulk-select", "overflow-menu" and "search-filter" were removed and "chip-group" was renamed to "label-group".
 
 #### Examples
 
@@ -1677,8 +2243,13 @@ In:
 ```jsx
 import { ToolbarItem } from "@patternfly/react-core";
 
-export const ToolbarItemReplaceChipGroupVariantInput = () => (
-  <ToolbarItem variant='chip-group' />
+export const ToolbarItemVariantPropUpdatesInput = () => (
+  <>
+    <ToolbarItem variant="chip-group" />
+    <ToolbarItem variant="bulk-select" />
+    <ToolbarItem variant="overflow-menu" />
+    <ToolbarItem variant="search-filter" />
+  </>
 );
 ```
 
@@ -1687,8 +2258,13 @@ Out:
 ```jsx
 import { ToolbarItem } from "@patternfly/react-core";
 
-export const ToolbarItemReplaceChipGroupVariantInput = () => (
-  <ToolbarItem variant="label-group" />
+export const ToolbarItemVariantPropUpdatesInput = () => (
+  <>
+    <ToolbarItem variant="label-group" />
+    <ToolbarItem  />
+    <ToolbarItem  />
+    <ToolbarItem  />
+  </>
 );
 ```
 
@@ -1704,6 +2280,7 @@ The following props have been removed from Toolbar components:
 | ------------------ | --------------- |
 | Toolbar            | `usePageInsets` |
 | ToolbarContent     | `alignSelf`     |
+| ToolbarItem        | `widths`        |
 | ToolbarToggleGroup | `alignment`     |
 
 #### Examples
@@ -1714,6 +2291,7 @@ In:
 import {
   Toolbar,
   ToolbarContent,
+  ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
 
@@ -1721,6 +2299,7 @@ export const ToolbarRemovePropsInput = () => (
   <>
     <Toolbar usePageInsets />
     <ToolbarContent alignSelf={{}} />
+    <ToolbarItem widths={{}} />
     <ToolbarToggleGroup alignment={{}} />
   </>
 );
@@ -1732,6 +2311,7 @@ Out:
 import {
   Toolbar,
   ToolbarContent,
+  ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
 
@@ -1739,6 +2319,7 @@ export const ToolbarRemovePropsInput = () => (
   <>
     <Toolbar  />
     <ToolbarContent  />
+    <ToolbarItem  />
     <ToolbarToggleGroup  />
   </>
 );
