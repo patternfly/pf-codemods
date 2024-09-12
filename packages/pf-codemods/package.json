@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@patternfly/eslint-plugin-pf-codemods": "^1.130.0",
-    "@typescript-eslint/parser": "^7.3.1",
+    "@typescript-eslint/parser": "^8.3.0",
     "commander": "^5.1.0",
-    "eslint": "^7.3.0 || ^8.29.0",
+    "eslint": "^8.46.0",
     "typescript": "^5.4.2"
   }
 }
