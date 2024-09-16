@@ -1,17 +1,13 @@
 import { Rule } from "eslint";
 import {
   IdentifierWithParent,
+  ImportDefaultSpecifierWithParent,
   ImportSpecifierWithParent,
   getDefaultImportsFromPackage,
   getFromPackage,
   getImportPath,
 } from "../../helpers";
-import {
-  Identifier,
-  ImportDeclaration,
-  ImportSpecifier,
-  Literal,
-} from "estree-jsx";
+import { Identifier, ImportSpecifier, Literal } from "estree-jsx";
 import {
   oldTokens,
   oldCssVarNamesV5,
@@ -29,20 +25,18 @@ module.exports = {
 
     const { imports: tokenSpecifiers } = getFromPackage(context, tokensPackage);
 
-    const defaultTokenImports = getDefaultImportsFromPackage(
+    const defaultTokenSpecifiers = getDefaultImportsFromPackage(
       context,
       tokensPackage
     )
       .map((specifier) => ({
         specifier,
         path: getImportPath(specifier),
-        declaration: specifier.parent,
       }))
       .filter(({ path }) => path !== undefined)
-      .map(({ specifier, path, declaration }) => ({
+      .map(({ specifier, path }) => ({
         specifier,
         token: (path as string).split("/").pop() as string,
-        declaration,
       }));
 
     const getWarnMessage = (tokenName: string) =>
@@ -51,7 +45,7 @@ module.exports = {
     const getFixMessage = (oldToken: string, newToken: string) =>
       `${oldToken} is an old CSS token and has been replaced with ${newToken}. If you want to use a different token, check our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
 
-    const getColorFixMessage = (oldToken: string, isReactToken = false) =>
+    const getColorFixMessage = (oldToken: string, isReactToken = true) =>
       `${oldToken} is an old color token. This codemod will replace it with a temporary hot pink color token ${
         isReactToken ? "temp_dev_tbd" : "--pf-t--temp--dev--tbd"
       } to prevent build errors. You should find a suitable replacement token in our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
@@ -61,8 +55,24 @@ module.exports = {
       globalNonColorTokensMap[token as keyof typeof globalNonColorTokensMap] !==
         "SKIP";
 
+    const getTokenPathFix = (
+      fixer: Rule.RuleFixer,
+      node: ImportSpecifierWithParent | ImportDefaultSpecifierWithParent,
+      oldToken: string,
+      newToken: string
+    ) => {
+      const packagePath = getImportPath(node);
+      if (packagePath && packagePath.includes(oldToken)) {
+        const newPath = packagePath.replace(oldToken, newToken);
+        return fixer.replaceText(node.parent?.source!, `"${newPath}"`);
+      }
+    };
+
     const replaceToken = (
-      node: ImportDeclaration | ImportSpecifier | Identifier,
+      node:
+        | ImportSpecifierWithParent
+        | ImportDefaultSpecifierWithParent
+        | Identifier,
       oldToken: string
     ) => {
       const newToken =
@@ -74,71 +84,59 @@ module.exports = {
         node,
         message: getFixMessage(oldToken, newToken),
         fix(fixer) {
-          if (node.type === "ImportDeclaration") {
-            const newDeclaration = node.source.value
-              ?.toString()
-              .replace(oldToken, newToken) as string;
-
-            return [
-              fixer.replaceText(node.specifiers[0], newToken),
-              fixer.replaceText(node.source, `"${newDeclaration}"`),
-            ];
+          if (node.type === "Identifier") {
+            return fixer.replaceText(node, newToken);
           }
 
-          if (node.type === "ImportSpecifier") {
-            return fixer.replaceText(node.imported, newToken);
-          }
+          const tokenPathFix = getTokenPathFix(fixer, node, oldToken, newToken);
 
-          return fixer.replaceText(node, newToken);
+          return [
+            fixer.replaceText(
+              node.type === "ImportSpecifier" ? node.imported : node,
+              newToken
+            ),
+            ...(tokenPathFix ? [tokenPathFix] : []),
+          ];
         },
       });
     };
 
     const updateColorTokenImport = (
-      node: ImportSpecifierWithParent | ImportDeclaration,
+      node: ImportSpecifierWithParent | ImportDefaultSpecifierWithParent,
       token: string
     ) => {
-      if (node.type === "ImportDeclaration") {
-        context.report({
-          node,
-          message: getColorFixMessage(token, true),
-          fix(fixer) {
-            const newDeclaration = node.source.value
-              ?.toString()
-              .replace(token, "temp_dev_tbd") as string;
+      // either has an aliased named import, or a default import with a custom name (not matching the token in an import path)
+      const hasAlias = node.local.name !== token;
 
-            return [
-              fixer.insertTextAfter(
-                node.specifiers[0],
-                "/* CODEMODS: you should update this color token */"
-              ),
-              fixer.replaceText(node.source, `"${newDeclaration}"`),
-            ];
-          },
-        });
-        return;
-      }
-
-      const hasAlias = node.local.name !== node.imported.name;
       const comment = `/* CODEMODS: you should update this color token${
-        hasAlias ? `, original v5 token was ${node.imported.name}` : ""
+        hasAlias ? `, original v5 token was ${token}` : ""
       } */`;
 
       context.report({
         node,
-        message: getColorFixMessage(token, true),
+        message: getColorFixMessage(token),
         fix(fixer) {
-          const fixes = [
-            fixer.replaceText(
-              node,
-              `temp_dev_tbd as ${node.local.name} ${comment}`
-            ),
-          ];
+          const fixes = [];
+          const tokenPathFix = getTokenPathFix(
+            fixer,
+            node,
+            token,
+            "temp_dev_tbd"
+          );
 
-          const packagePath = getImportPath(node) as string;
-          if (packagePath.includes(token)) {
-            const newPath = packagePath.replace(token, "temp_dev_tbd");
-            fixes.push(fixer.replaceText(node.parent?.source!, `"${newPath}"`));
+          if (tokenPathFix) {
+            fixes.push(tokenPathFix);
+          }
+
+          if (node.type === "ImportSpecifier") {
+            fixes.push(
+              fixer.replaceText(
+                node,
+                `temp_dev_tbd as ${node.local.name} ${comment}`
+              )
+            );
+          } else {
+            fixes.push(fixer.insertTextAfter(node, comment));
           }
 
           return fixes;
@@ -147,7 +145,7 @@ module.exports = {
     };
 
     const handleToken = (
-      node: ImportSpecifier | ImportDeclaration,
+      node: ImportSpecifierWithParent | ImportDefaultSpecifierWithParent,
       token: string
     ) => {
       if (oldGlobalColorTokens.includes(token)) {
@@ -175,16 +173,16 @@ module.exports = {
           handleToken(node, token);
         }
       },
-      ImportDeclaration(node: ImportDeclaration) {
-        const tokenWithDeclaration = defaultTokenImports.find(
-          ({ declaration }) => node.source.value === declaration?.source.value
+      ImportDefaultSpecifier(node: ImportDefaultSpecifierWithParent) {
+        const specifierWithToken = defaultTokenSpecifiers.find(
+          ({ specifier }) => node === specifier
         );
 
-        if (!tokenWithDeclaration) {
+        if (!specifierWithToken) {
           return;
         }
 
-        handleToken(node, tokenWithDeclaration.token);
+        handleToken(node, specifierWithToken.token);
       },
       Identifier(node: Identifier) {
         const parentType = (node as IdentifierWithParent).parent?.type;
@@ -196,7 +194,7 @@ module.exports = {
           return;
         }
 
-        const tokenInfo = defaultTokenImports.find(
+        const tokenInfo = defaultTokenSpecifiers.find(
           ({ specifier }) => node.name === specifier.local.name
         );
 
@@ -232,7 +230,7 @@ module.exports = {
 
           context.report({
             node,
-            message: getColorFixMessage(varName),
+            message: getColorFixMessage(varName, false),
             fix(fixer) {
               return fixer.replaceText(
                 node,
@@ -269,7 +267,7 @@ module.exports = {
         if (oldCssVarNames.includes(varName)) {
           context.report({
             node,
-            message: getWarnMessage(node.value),
+            message: getWarnMessage(varName),
           });
         }
       },
