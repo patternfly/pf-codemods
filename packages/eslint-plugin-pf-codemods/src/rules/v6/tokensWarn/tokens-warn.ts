@@ -1,9 +1,10 @@
 import { Rule } from "eslint";
 import {
   IdentifierWithParent,
-  getDefaultDeclarationString,
+  ImportSpecifierWithParent,
   getDefaultImportsFromPackage,
   getFromPackage,
+  getImportPath,
 } from "../../helpers";
 import {
   Identifier,
@@ -33,7 +34,7 @@ module.exports = {
     )
       .map((specifier) => ({
         specifier,
-        path: getDefaultDeclarationString(specifier),
+        path: getImportPath(specifier),
         declaration: specifier.parent,
       }))
       .filter(({ path }) => path !== undefined)
