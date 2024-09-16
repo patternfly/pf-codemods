@@ -15,15 +15,15 @@ document.documentElement.style.setProperty("--pf-v5-global--ZIndex--lg", "3");
 ></div>;
 
 // warnings (not fixable)
-import global_warning_color_100 from "@patternfly/react-tokens/dist/esm/global_warning_color_100";
+import c_badge_PaddingLeft from "@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft";
 import { c_alert__FontSize } from "@patternfly/react-tokens";
 
-global_warning_color_100;
+c_badge_PaddingLeft;
 c_alert__FontSize;
 
 <div
   style={{
-    color: "var(--pf-v5-global--success-color--200)",
+    fontSize: "var(--pf-v5-c-alert__FontSize)",
     width: "var(--pf-v5-global--arrow--width)",
   }}
 ></div>;

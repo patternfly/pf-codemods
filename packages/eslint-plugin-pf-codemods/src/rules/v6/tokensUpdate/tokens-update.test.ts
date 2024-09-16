@@ -1,5 +1,5 @@
 const ruleTester = require("../../ruletester");
-import * as rule from "./tokens-warn";
+import * as rule from "./tokens-update";
 
 const getWarnMessage = (tokenName: string) =>
   `${tokenName} is an old CSS token. About half of our tokens have been replaced with newer ones. To find a suitable replacement token, check our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
