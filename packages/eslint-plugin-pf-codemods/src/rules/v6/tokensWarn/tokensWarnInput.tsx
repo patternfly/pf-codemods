@@ -27,3 +27,21 @@ c_alert__FontSize;
     width: "var(--pf-v5-global--arrow--width)",
   }}
 ></div>;
+
+// Colors
+import global_Color_100 from "@patternfly/react-tokens/dist/esm/global_Color_100";
+import { global_Color_200 } from "@patternfly/react-tokens/dist/esm/global_Color_200";
+import { global_Color_300 as color300 } from "@patternfly/react-tokens/dist/esm/global_Color_300";
+import { global_BorderColor_100 } from "@patternfly/react-tokens";
+
+global_Color_100;
+global_Color_200;
+color300;
+global_BorderColor_100;
+
+<div
+  style={{
+    color: "var(--pf-v5-global--Color--100)",
+    backgroundColor: "var(--pf-v5-global--Color--200)",
+  }}
+></div>;

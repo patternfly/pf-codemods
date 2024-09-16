@@ -17,8 +17,9 @@ import {
   oldCssVarNamesV5,
   globalNonColorTokensMap,
   oldGlobalNonColorTokens,
-  oldGlobalNonColorCssVarNames,
   globalNonColorCssVarNamesMap,
+  oldGlobalColorCssVarNames,
+  oldGlobalColorTokens,
 } from "../../../tokenLists";
 
 module.exports = {
@@ -49,6 +50,11 @@ module.exports = {
 
     const getFixMessage = (oldToken: string, newToken: string) =>
       `${oldToken} is an old CSS token and has been replaced with ${newToken}. If you want to use a different token, check our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
+
+    const getColorFixMessage = (oldToken: string, isReactToken = false) =>
+      `${oldToken} is an old color token. This codemod will replace it with a temporary hot pink color token ${
+        isReactToken ? "temp_dev_tbd" : "--pf-t--temp--dev--tbd"
+      } to prevent build errors. You should find a suitable replacement token in our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
 
     const shouldReplaceToken = (token: string) =>
       oldGlobalNonColorTokens.includes(token) &&
@@ -88,13 +94,73 @@ module.exports = {
       });
     };
 
-    const replaceTokenOrWarn = (
+    const updateColorTokenImport = (
+      node: ImportSpecifierWithParent | ImportDeclaration,
+      token: string
+    ) => {
+      if (node.type === "ImportDeclaration") {
+        context.report({
+          node,
+          message: getColorFixMessage(token, true),
+          fix(fixer) {
+            const newDeclaration = node.source.value
+              ?.toString()
+              .replace(token, "temp_dev_tbd") as string;
+
+            return [
+              fixer.insertTextAfter(
+                node.specifiers[0],
+                "/* CODEMODS: you should update this color token */"
+              ),
+              fixer.replaceText(node.source, `"${newDeclaration}"`),
+            ];
+          },
+        });
+        return;
+      }
+
+      const hasAlias = node.local.name !== node.imported.name;
+      const comment = `/* CODEMODS: you should update this color token${
+        hasAlias ? `, original v5 token was ${node.imported.name}` : ""
+      } */`;
+
+      context.report({
+        node,
+        message: getColorFixMessage(token, true),
+        fix(fixer) {
+          const fixes = [
+            fixer.replaceText(
+              node,
+              `temp_dev_tbd as ${node.local.name} ${comment}`
+            ),
+          ];
+
+          const packagePath = getImportPath(node) as string;
+          if (packagePath.includes(token)) {
+            const newPath = packagePath.replace(token, "temp_dev_tbd");
+            fixes.push(fixer.replaceText(node.parent?.source!, `"${newPath}"`));
+          }
+
+          return fixes;
+        },
+      });
+    };
+
+    const handleToken = (
       node: ImportSpecifier | ImportDeclaration,
       token: string
     ) => {
+      if (oldGlobalColorTokens.includes(token)) {
+        updateColorTokenImport(node, token);
+        return;
+      }
+
       if (shouldReplaceToken(token)) {
         replaceToken(node, token);
-      } else if (oldTokens.includes(token)) {
+        return;
+      }
+
+      if (oldTokens.includes(token)) {
         context.report({
           node,
           message: getWarnMessage(token),
@@ -106,7 +172,7 @@ module.exports = {
       ImportSpecifier(node: ImportSpecifier) {
         if (tokenSpecifiers.includes(node)) {
           const token = node.imported.name;
-          replaceTokenOrWarn(node, token);
+          handleToken(node, token);
         }
       },
       ImportDeclaration(node: ImportDeclaration) {
@@ -118,7 +184,7 @@ module.exports = {
           return;
         }
 
-        replaceTokenOrWarn(node, tokenWithDeclaration.token);
+        handleToken(node, tokenWithDeclaration.token);
       },
       Identifier(node: Identifier) {
         const parentType = (node as IdentifierWithParent).parent?.type;
@@ -155,39 +221,52 @@ module.exports = {
 
         let varName = node.value;
         const varRegex = /var\(([^)]+)\)/;
-        const match = node.value.match(varRegex);
+        const varRegexMatch = node.value.match(varRegex);
 
-        if (match) {
-          varName = match[1];
+        if (varRegexMatch) {
+          varName = varRegexMatch[1];
         }
 
-        const shouldReplaceVar =
-          oldGlobalNonColorCssVarNames.includes(varName) &&
+        if (oldGlobalColorCssVarNames.includes(varName)) {
+          const comment = `/* CODEMODS: original v5 color was ${varName} */`;
+
+          context.report({
+            node,
+            message: getColorFixMessage(varName),
+            fix(fixer) {
+              return fixer.replaceText(
+                node,
+                varRegexMatch
+                  ? `"var(--pf-t--temp--dev--tbd)"${comment}`
+                  : `"--pf-t--temp--dev--tbd"${comment}`
+              );
+            },
+          });
+          return;
+        }
+
+        const newVarName =
           globalNonColorCssVarNamesMap[
             varName as keyof typeof globalNonColorCssVarNamesMap
-          ] !== "SKIP";
+          ];
+
+        const shouldReplaceVar = newVarName && newVarName !== "SKIP";
 
         if (shouldReplaceVar) {
-          const newVarName =
-            globalNonColorCssVarNamesMap[
-              varName as keyof typeof globalNonColorCssVarNamesMap
-            ];
+          context.report({
+            node,
+            message: getFixMessage(varName, newVarName),
+            fix(fixer) {
+              return fixer.replaceText(
+                node,
+                varRegexMatch ? `"var(${newVarName})"` : `"${newVarName}"`
+              );
+            },
+          });
+          return;
+        }
 
-          if (newVarName !== "SKIP") {
-            context.report({
-              node,
-              message: getFixMessage(varName, newVarName),
-              fix(fixer) {
-                return fixer.replaceText(
-                  node,
-                  node.value?.toString().startsWith("var")
-                    ? `"var(${newVarName})"`
-                    : `"${newVarName}"`
-                );
-              },
-            });
-          }
-        } else if (oldCssVarNames.includes(varName)) {
+        if (oldCssVarNames.includes(varName)) {
           context.report({
             node,
             message: getWarnMessage(node.value),

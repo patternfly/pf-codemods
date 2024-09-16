@@ -27,3 +27,21 @@ c_alert__FontSize;
     width: "var(--pf-v5-global--arrow--width)",
   }}
 ></div>;
+
+// Colors
+import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";
+import { temp_dev_tbd as global_Color_200 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";
+import { temp_dev_tbd as color300 /* CODEMODS: you should update this color token, original v5 token was global_Color_300 */ } from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";
+import { temp_dev_tbd as global_BorderColor_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens";
+
+global_Color_100;
+global_Color_200;
+color300;
+global_BorderColor_100;
+
+<div
+  style={{
+    color: "var(--pf-t--temp--dev--tbd)"/* CODEMODS: original v5 color was --pf-v5-global--Color--100 */,
+    backgroundColor: "var(--pf-t--temp--dev--tbd)"/* CODEMODS: original v5 color was --pf-v5-global--Color--200 */,
+  }}
+></div>;
