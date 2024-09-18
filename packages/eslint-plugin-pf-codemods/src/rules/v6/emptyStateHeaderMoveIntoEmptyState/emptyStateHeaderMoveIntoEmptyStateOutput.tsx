@@ -19,3 +19,15 @@ export const EmptyStateWithoutHeaderMoveIntoEmptyStateInput = () => (
     <EmptyStateBody>Body</EmptyStateBody>
   </EmptyState>
 );
+
+export const EmptyStateHeaderWithoutTitleTextMoveIntoEmptyStateInput = () => (
+  <EmptyState headerClassName="some-class"  icon={CubesIcon}  >
+    </EmptyState>
+);
+
+export const EmptyStateWithoutHeaderAndTitleTextMoveIntoEmptyStateInput =
+  () => (
+    <EmptyState icon={CubesIcon}>
+      <EmptyStateBody>Body</EmptyStateBody>
+    </EmptyState>
+  );

@@ -2,8 +2,6 @@
 
 EmptyStateHeader and EmptyStateIcon are now rendered internally within EmptyState and should only be customized using props. Content passed to the `icon` prop on EmptyState will also be wrapped by EmptyStateIcon automatically.
 
-Additionally, the `titleText` prop is now required on EmptyState.
-
 #### Examples
 
 In:
@@ -17,4 +15,3 @@ Out:
 ```jsx
 %outputExample%
 ```
-
