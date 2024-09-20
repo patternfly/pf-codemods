@@ -9,7 +9,7 @@ const getFixMessage = (oldToken: string, newToken: string) =>
 
 const getColorFixMessage = (oldToken: string, isReactToken = true) =>
   `${oldToken} is an old color token. This codemod will replace it with a temporary hot pink color token ${
-    isReactToken ? "temp_dev_tbd" : "--pf-t--temp--dev--tbd"
+    isReactToken ? "t_temp_dev_tbd" : "--pf-t--temp--dev--tbd"
   } to prevent build errors. You should find a suitable replacement token in our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
 
 ruleTester.run("tokens-warn", rule, {
@@ -210,7 +210,7 @@ ruleTester.run("tokens-warn", rule, {
       ],
     },
     {
-      // named import - esm
+      // default import - esm
       code: `import global_FontWeight_normal from '@patternfly/react-tokens/dist/esm/global_FontWeight_normal';
       global_FontWeight_normal;`,
       output: `import global_font_weight_body_default from "@patternfly/react-tokens/dist/esm/global_font_weight_body_default";
@@ -233,7 +233,7 @@ ruleTester.run("tokens-warn", rule, {
       ],
     },
     {
-      // named import - js
+      // default import - js
       code: `import global_FontWeight_normal from '@patternfly/react-tokens/dist/js/global_FontWeight_normal';
       global_FontWeight_normal;`,
       output: `import global_font_weight_body_default from "@patternfly/react-tokens/dist/js/global_font_weight_body_default";
@@ -310,7 +310,7 @@ ruleTester.run("tokens-warn", rule, {
     // FIXES - color tokens
     {
       code: `import { global_Color_100 } from "@patternfly/react-tokens";`,
-      output: `import { temp_dev_tbd as global_Color_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens";`,
+      output: `import { t_temp_dev_tbd as global_Color_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
@@ -321,7 +321,7 @@ ruleTester.run("tokens-warn", rule, {
     {
       // with alias
       code: `import { global_Color_100 as color100 } from "@patternfly/react-tokens";`,
-      output: `import { temp_dev_tbd as color100 /* CODEMODS: you should update this color token, original v5 token was global_Color_100 */ } from "@patternfly/react-tokens";`,
+      output: `import { t_temp_dev_tbd as color100 /* CODEMODS: you should update this color token, original v5 token was global_Color_100 */ } from "@patternfly/react-tokens";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
@@ -332,7 +332,7 @@ ruleTester.run("tokens-warn", rule, {
     {
       // named import - esm
       code: `import { global_Color_100 } from '@patternfly/react-tokens/dist/esm/global_Color_100';`,
-      output: `import { temp_dev_tbd as global_Color_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";`,
+      output: `import { t_temp_dev_tbd as global_Color_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
@@ -343,7 +343,7 @@ ruleTester.run("tokens-warn", rule, {
     {
       // named import - js
       code: `import { global_Color_100 } from '@patternfly/react-tokens/dist/js/global_Color_100';`,
-      output: `import { temp_dev_tbd as global_Color_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/js/temp_dev_tbd";`,
+      output: `import { t_temp_dev_tbd as global_Color_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/js/t_temp_dev_tbd";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
@@ -354,7 +354,7 @@ ruleTester.run("tokens-warn", rule, {
     {
       // default import - esm
       code: `import global_Color_100 from '@patternfly/react-tokens/dist/esm/global_Color_100';`,
-      output: `import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";`,
+      output: `import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
@@ -365,7 +365,7 @@ ruleTester.run("tokens-warn", rule, {
     {
       // default import - js
       code: `import global_Color_100 from '@patternfly/react-tokens/dist/js/global_Color_100';`,
-      output: `import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/js/temp_dev_tbd";`,
+      output: `import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/js/t_temp_dev_tbd";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
@@ -376,7 +376,7 @@ ruleTester.run("tokens-warn", rule, {
     {
       // default import with custom name
       code: `import someColor from '@patternfly/react-tokens/dist/esm/global_Color_100';`,
-      output: `import someColor/* CODEMODS: you should update this color token, original v5 token was global_Color_100 */ from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";`,
+      output: `import someColor/* CODEMODS: you should update this color token, original v5 token was global_Color_100 */ from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";`,
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),

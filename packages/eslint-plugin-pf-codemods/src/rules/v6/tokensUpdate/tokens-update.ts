@@ -47,7 +47,7 @@ module.exports = {
 
     const getColorFixMessage = (oldToken: string, isReactToken = true) =>
       `${oldToken} is an old color token. This codemod will replace it with a temporary hot pink color token ${
-        isReactToken ? "temp_dev_tbd" : "--pf-t--temp--dev--tbd"
+        isReactToken ? "t_temp_dev_tbd" : "--pf-t--temp--dev--tbd"
       } to prevent build errors. You should find a suitable replacement token in our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
 
     const shouldReplaceToken = (token: string) =>
@@ -121,7 +121,7 @@ module.exports = {
             fixer,
             node,
             token,
-            "temp_dev_tbd"
+            "t_temp_dev_tbd"
           );
 
           if (tokenPathFix) {
@@ -132,7 +132,7 @@ module.exports = {
             fixes.push(
               fixer.replaceText(
                 node,
-                `temp_dev_tbd as ${node.local.name} ${comment}`
+                `t_temp_dev_tbd as ${node.local.name} ${comment}`
               )
             );
           } else {

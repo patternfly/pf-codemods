@@ -29,10 +29,10 @@ c_alert__FontSize;
 ></div>;
 
 // Colors
-import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";
-import { temp_dev_tbd as global_Color_200 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";
-import { temp_dev_tbd as color300 /* CODEMODS: you should update this color token, original v5 token was global_Color_300 */ } from "@patternfly/react-tokens/dist/esm/temp_dev_tbd";
-import { temp_dev_tbd as global_BorderColor_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens";
+import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";
+import { t_temp_dev_tbd as global_Color_200 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";
+import { t_temp_dev_tbd as color300 /* CODEMODS: you should update this color token, original v5 token was global_Color_300 */ } from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";
+import { t_temp_dev_tbd as global_BorderColor_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens";
 
 global_Color_100;
 global_Color_200;
