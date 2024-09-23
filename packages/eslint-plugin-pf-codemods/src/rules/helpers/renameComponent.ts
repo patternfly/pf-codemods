@@ -49,7 +49,17 @@ function getFixes(
     );
   }
 
-  const shouldRenameNode =
+  let shouldRenameNode = false;
+
+  if (
+    nodeImport.type === "ImportDefaultSpecifier" &&
+    nodeImport.local.name === oldName
+  ) {
+    shouldRenameNode = true;
+    fixes.push(fixer.replaceText(nodeImport, newName));
+  }
+
+  shouldRenameNode ||=
     isNamedImport && nodeImport.imported.name === nodeImport.local.name;
 
   if (shouldRenameNode) {
