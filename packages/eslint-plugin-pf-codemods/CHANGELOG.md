@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.132.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.131.0...@patternfly/eslint-plugin-pf-codemods@1.132.0) (2024-09-24)
+
+
+### Features
+
+* **tokens:** provide autofix for all global tokens ([#763](https://github.com/patternfly/pf-codemods/issues/763)) ([f5d32ce](https://github.com/patternfly/pf-codemods/commit/f5d32ce38746c20079b440d9e67915b4eb21ff84))
+
+
+
+
+
 # [1.131.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.130.0...@patternfly/eslint-plugin-pf-codemods@1.131.0) (2024-09-24)
 
 
