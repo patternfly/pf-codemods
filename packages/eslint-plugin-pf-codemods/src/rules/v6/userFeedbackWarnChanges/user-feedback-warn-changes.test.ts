@@ -21,10 +21,9 @@ ruleTester.run("user-feedback-warn-changes", rule, {
         },
       ],
     },
-    // Test that a warning only gets flagged once
     {
-      code: `import { FeedbackModal } from '@patternfly/react-user-feedback';`,
-      output: `import { FeedbackModal } from '@patternfly/react-user-feedback';`,
+      code: `import { FeedbackModal as MyModal } from '@patternfly/react-user-feedback';`,
+      output: `import { FeedbackModal as MyModal } from '@patternfly/react-user-feedback';`,
       errors: [
         {
           message: `FeedbackModal no longer internally references a scss stylesheet. You may have to import "Feedback.css" located in the dist "@patternfly/react-user-feedback/dist/esm/Feedback/Feedback.css" to maintain styling on FeedbackModal.`,
@@ -32,5 +31,15 @@ ruleTester.run("user-feedback-warn-changes", rule, {
         },
       ],
     },
+    // {
+    //   code: `import myDefaultModal from '@patternfly/react-user-feedback';`,
+    //   output: `import myDefaultModal from '@patternfly/react-user-feedback';`,
+    //   errors: [
+    //     {
+    //       message: `FeedbackModal no longer internally references a scss stylesheet. You may have to import "Feedback.css" located in the dist "@patternfly/react-user-feedback/dist/esm/Feedback/Feedback.css" to maintain styling on FeedbackModal.`,
+    //       type: "ImportDeclaration",
+    //     },
+    //   ],
+    // },
   ],
 });
