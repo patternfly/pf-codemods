@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.131.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.130.0...@patternfly/eslint-plugin-pf-codemods@1.131.0) (2024-09-24)
+
+
+### Features
+
+* **component groups:** rename various components ([#776](https://github.com/patternfly/pf-codemods/issues/776)) ([aa1d152](https://github.com/patternfly/pf-codemods/commit/aa1d1521212c3e8ab67936ec0f361db3e5068c25))
+
+
+
+
+
 # [1.130.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.129.0...@patternfly/eslint-plugin-pf-codemods@1.130.0) (2024-09-04)
 
 
