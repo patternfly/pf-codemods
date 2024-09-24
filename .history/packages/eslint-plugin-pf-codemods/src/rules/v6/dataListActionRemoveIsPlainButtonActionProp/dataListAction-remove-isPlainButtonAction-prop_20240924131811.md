@@ -1,6 +1,6 @@
 ### dataListAction-remove-isPlainButtonAction-prop [(#10939)](https://github.com/patternfly/patternfly-react/pull/10939)
 
-The `isPlainButtonAction` prop has been removed from DataListAction as a wrapper is no longer needed.
+The `isPlainButtonAction` prop has been removed from DataListAction as a wrapper is no longer needed when there is a plain button action.
 
 #### Examples
 
