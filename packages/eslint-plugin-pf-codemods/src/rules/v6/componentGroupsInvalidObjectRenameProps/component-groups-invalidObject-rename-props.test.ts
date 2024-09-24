@@ -6,88 +6,99 @@ const renameMap = {
   invalidObjectBodyText: "bodyText",
 };
 
-const errors = Object.entries(renameMap).map(([oldName, newName]) => ({
-  message: `The ${oldName} prop for InvalidObject has been renamed to ${newName}.`,
-  type: "JSXOpeningElement",
-}));
+const getErrors = (component: string) =>
+  Object.entries(renameMap).map(([oldName, newName]) => ({
+    message: `The ${oldName} prop for ${component} has been renamed to ${newName}.`,
+    type: "JSXOpeningElement",
+  }));
+
+const components = ["InvalidObject", "MissingPage"];
+
+const valid = components
+  .map((component) => [
+    {
+      code: `<${component} invalidObjectTitleText="" />`,
+    },
+    {
+      code: `<${component} invalidObjectBodyText="" />`,
+    },
+    {
+      code: `import { ${component} } from '@patternfly/react-component-groups'; <${component} someOtherProp />`,
+    },
+  ])
+  .flat();
+
+const invalid = components
+  .map((component) => [
+    {
+      code: `import { ${component} } from '@patternfly/react-component-groups';
+    <${component}
+      invalidObjectTitleText="Sample title text"
+      invalidObjectBodyText="Sample body text"
+    />`,
+      output: `import { ${component} } from '@patternfly/react-component-groups';
+    <${component}
+      titleText="Sample title text"
+      bodyText="Sample body text"
+    />`,
+      errors: getErrors(component),
+    },
+    {
+      code: `import ${component} from '@patternfly/react-component-groups/dist/cjs/${component}/index';
+    <${component}
+      invalidObjectTitleText="Sample title text"
+      invalidObjectBodyText="Sample body text"
+    />`,
+      output: `import ${component} from '@patternfly/react-component-groups/dist/cjs/${component}/index';
+    <${component}
+      titleText="Sample title text"
+      bodyText="Sample body text"
+    />`,
+      errors: getErrors(component),
+    },
+    {
+      code: `import ${component} from '@patternfly/react-component-groups/dist/esm/${component}/index';
+    <${component}
+      invalidObjectTitleText="Sample title text"
+      invalidObjectBodyText="Sample body text"
+    />`,
+      output: `import ${component} from '@patternfly/react-component-groups/dist/esm/${component}/index';
+    <${component}
+      titleText="Sample title text"
+      bodyText="Sample body text"
+    />`,
+      errors: getErrors(component),
+    },
+    {
+      code: `import ${component} from '@patternfly/react-component-groups/dist/dynamic/${component}';
+    <${component}
+      invalidObjectTitleText="Sample title text"
+      invalidObjectBodyText="Sample body text"
+    />`,
+      output: `import ${component} from '@patternfly/react-component-groups/dist/dynamic/${component}';
+    <${component}
+      titleText="Sample title text"
+      bodyText="Sample body text"
+    />`,
+      errors: getErrors(component),
+    },
+    {
+      code: `import InvObj from '@patternfly/react-component-groups/dist/dynamic/${component}';
+    <InvObj
+      invalidObjectTitleText="Sample title text"
+      invalidObjectBodyText="Sample body text"
+    />`,
+      output: `import InvObj from '@patternfly/react-component-groups/dist/dynamic/${component}';
+    <InvObj
+      titleText="Sample title text"
+      bodyText="Sample body text"
+    />`,
+      errors: getErrors(component),
+    },
+  ])
+  .flat();
 
 ruleTester.run("component-groups-invalidObject-rename-props", rule, {
-  valid: [
-    {
-      code: `<InvalidObject invalidObjectTitleText="" />`,
-    },
-    {
-      code: `<InvalidObject invalidObjectBodyText="" />`,
-    },
-    {
-      code: `import { InvalidObject } from '@patternfly/react-component-groups'; <InvalidObject someOtherProp />`,
-    },
-  ],
-  invalid: [
-    {
-      code: `import { InvalidObject } from '@patternfly/react-component-groups';
-      <InvalidObject
-        invalidObjectTitleText="Sample title text"
-        invalidObjectBodyText="Sample body text"
-      />`,
-      output: `import { InvalidObject } from '@patternfly/react-component-groups';
-      <InvalidObject
-        titleText="Sample title text"
-        bodyText="Sample body text"
-      />`,
-      errors,
-    },
-    {
-      code: `import InvalidObject from '@patternfly/react-component-groups/dist/cjs/InvalidObject/index';
-      <InvalidObject
-        invalidObjectTitleText="Sample title text"
-        invalidObjectBodyText="Sample body text"
-      />`,
-      output: `import InvalidObject from '@patternfly/react-component-groups/dist/cjs/InvalidObject/index';
-      <InvalidObject
-        titleText="Sample title text"
-        bodyText="Sample body text"
-      />`,
-      errors,
-    },
-    {
-      code: `import InvalidObject from '@patternfly/react-component-groups/dist/esm/InvalidObject/index';
-      <InvalidObject
-        invalidObjectTitleText="Sample title text"
-        invalidObjectBodyText="Sample body text"
-      />`,
-      output: `import InvalidObject from '@patternfly/react-component-groups/dist/esm/InvalidObject/index';
-      <InvalidObject
-        titleText="Sample title text"
-        bodyText="Sample body text"
-      />`,
-      errors,
-    },
-    {
-      code: `import InvalidObject from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';
-      <InvalidObject
-        invalidObjectTitleText="Sample title text"
-        invalidObjectBodyText="Sample body text"
-      />`,
-      output: `import InvalidObject from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';
-      <InvalidObject
-        titleText="Sample title text"
-        bodyText="Sample body text"
-      />`,
-      errors,
-    },
-    {
-      code: `import InvObj from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';
-      <InvObj
-        invalidObjectTitleText="Sample title text"
-        invalidObjectBodyText="Sample body text"
-      />`,
-      output: `import InvObj from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';
-      <InvObj
-        titleText="Sample title text"
-        bodyText="Sample body text"
-      />`,
-      errors,
-    },
-  ],
+  valid,
+  invalid,
 });

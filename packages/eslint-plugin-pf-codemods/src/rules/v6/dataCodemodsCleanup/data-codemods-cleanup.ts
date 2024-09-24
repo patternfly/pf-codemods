@@ -3,6 +3,7 @@ import { ImportSpecifier, JSXOpeningElement } from "estree-jsx";
 import {
   checkMatchingJSXOpeningElement,
   getAttribute,
+  getDefaultImportsFromPackage,
   getFromPackage,
 } from "../../helpers";
 
@@ -17,8 +18,21 @@ module.exports = {
       context,
       "@patternfly/react-table"
     );
+    const { imports: componentGroupsImports } = getFromPackage(
+      context,
+      "@patternfly/react-component-groups"
+    );
+    const componentGroupsDefaultImports = getDefaultImportsFromPackage(
+      context,
+      "@patternfly/react-component-groups"
+    );
 
-    const imports = [...coreImports, ...tableImports];
+    const imports = [
+      ...coreImports,
+      ...tableImports,
+      ...componentGroupsImports,
+      ...componentGroupsDefaultImports,
+    ];
 
     const message =
       "This rule will remove data-codemods attributes and comments, which were introduced by our codemods in order to work correctly.";

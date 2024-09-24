@@ -3,20 +3,27 @@ import { Renames } from "../../helpers/renameSinglePropOnNode";
 
 // https://github.com/patternfly/react-component-groups/pull/145
 
-const formatMessage = (oldPropName: string, newPropName: string) =>
-  `The ${oldPropName} prop for InvalidObject has been renamed to ${newPropName}.`;
+const formatMessage = (
+  component: string,
+  oldPropName: string,
+  newPropName: string
+) =>
+  `The ${oldPropName} prop for ${component} has been renamed to ${newPropName}.`;
+
+const getPropsRenames = (component: string) => ({
+  invalidObjectTitleText: {
+    newName: "titleText",
+    message: formatMessage(component, "invalidObjectTitleText", "titleText"),
+  },
+  invalidObjectBodyText: {
+    newName: "bodyText",
+    message: formatMessage(component, "invalidObjectBodyText", "bodyText"),
+  },
+});
 
 const renames: Renames = {
-  InvalidObject: {
-    invalidObjectTitleText: {
-      newName: "titleText",
-      message: formatMessage("invalidObjectTitleText", "titleText"),
-    },
-    invalidObjectBodyText: {
-      newName: "bodyText",
-      message: formatMessage("invalidObjectBodyText", "bodyText"),
-    },
-  },
+  InvalidObject: getPropsRenames("InvalidObject"),
+  MissingPage: getPropsRenames("MissingPage"),
 };
 
 module.exports = {
