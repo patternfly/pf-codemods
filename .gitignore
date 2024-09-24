@@ -5,3 +5,6 @@ lerna-output.txt
 test/packages/*
 .DS_Store
 dist
+
+# IDE - VSCode
+.history
