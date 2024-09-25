@@ -1,6 +1,6 @@
 // all React tokens in V6, whose value is a Patternfly token variable (has prefix --pf-t)
 // their naming was updated to be prefixed with 't_'
-export const tTokens = [
+export const tokensToPrefixWithT = [
   "chart_global_fill_color_100",
   "chart_theme_colorscales_blue_colorscale_100",
   "chart_theme_colorscales_blue_colorscale_200",
