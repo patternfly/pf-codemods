@@ -234,14 +234,16 @@ module.exports = {
             titleTextAttribute
           );
 
-          const titleText =
-            titleTextPropValue ||
-            (hasChildren
+          const createTitleTextPropFromChildren = () =>
+            hasChildren
               ? `titleText=${getChildrenAsAttributeValueText(
                   context,
                   header.children
                 )}`
-              : "");
+              : "";
+
+          const titleText =
+            titleTextPropValue || createTitleTextPropFromChildren();
 
           const iconPropValue = getExpression(headerIconAttribute?.value);
 
