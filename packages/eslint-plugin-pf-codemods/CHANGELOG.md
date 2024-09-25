@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.134.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.133.0...@patternfly/eslint-plugin-pf-codemods@1.134.0) (2024-09-25)
+
+
+### Features
+
+* **tokens:** prefix with t_ ([#774](https://github.com/patternfly/pf-codemods/issues/774)) ([c82e454](https://github.com/patternfly/pf-codemods/commit/c82e454c1f8e99f55005e0bb62cf1abc9b8ec165))
+
+
+
+
+
 # [1.133.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.132.0...@patternfly/eslint-plugin-pf-codemods@1.133.0) (2024-09-25)
 
 
