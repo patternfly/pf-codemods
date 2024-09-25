@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.133.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.132.0...@patternfly/eslint-plugin-pf-codemods@1.133.0) (2024-09-25)
+
+
+### Features
+
+* **DataListAction:** Remove isPlainButtonAction prop ([#775](https://github.com/patternfly/pf-codemods/issues/775)) ([35bb6b4](https://github.com/patternfly/pf-codemods/commit/35bb6b4b6c6129f3b26e7dd9714d0cff36f57d7d))
+
+
+
+
+
 # [1.132.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.131.0...@patternfly/eslint-plugin-pf-codemods@1.132.0) (2024-09-24)
 
 
