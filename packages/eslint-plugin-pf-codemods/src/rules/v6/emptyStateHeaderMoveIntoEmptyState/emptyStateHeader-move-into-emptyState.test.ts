@@ -15,6 +15,10 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
     {
       code: `import { EmptyState } from '@patternfly/react-core'; <EmptyState titleText="foo" icon={CubesIcon} />`,
     },
+    {
+      // without an EmptyStateHeader or Title text
+      code: `import { EmptyState } from "@patternfly/react-core"; <EmptyState>Foo bar</EmptyState>`,
+    },
   ],
   invalid: [
     {
@@ -106,14 +110,13 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       } from "@patternfly/react-core";
       
       export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
-        <EmptyState>
-          <EmptyStateHeader />
-        </EmptyState>
+        <EmptyState     >
+          </EmptyState>
       );
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState. You must manually supply a titleText prop to EmptyState, then you can rerun this codemod.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
           type: "JSXElement",
         },
       ],
@@ -143,7 +146,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
           type: "JSXElement",
         },
       ],
@@ -175,7 +178,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
           type: "JSXElement",
         },
       ],
@@ -211,7 +214,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
           type: "JSXElement",
         },
       ],
@@ -249,32 +252,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState.`,
-          type: "JSXElement",
-        },
-      ],
-    },
-    {
-      // without an EmptyStateHeader or titleText
-      code: `import { EmptyState } from "@patternfly/react-core";
-      
-      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
-        <EmptyState>
-          Foo bar
-        </EmptyState>
-      );
-      `,
-      output: `import { EmptyState } from "@patternfly/react-core";
-      
-      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
-        <EmptyState>
-          Foo bar
-        </EmptyState>
-      );
-      `,
-      errors: [
-        {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState. You must manually supply a titleText prop to EmptyState`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
           type: "JSXElement",
         },
       ],
@@ -489,7 +467,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       `,
       errors: [
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
           type: "JSXElement",
         },
       ],
@@ -540,7 +518,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
           type: "JSXElement",
         },
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
           type: "JSXElement",
         },
       ],
@@ -587,7 +565,7 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
           type: "JSXElement",
         },
         {
-          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props, and the titleText prop is now required on EmptyState. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
+          message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
           type: "JSXElement",
         },
       ],

@@ -17,6 +17,7 @@ import {
   getFromPackage,
   getChildrenAsAttributeValueText,
   getRemoveElementFixes,
+  childrenIsEmpty,
 } from "../../helpers";
 // https://github.com/patternfly/patternfly-react/pull/9947
 
@@ -26,29 +27,11 @@ const composeMessage = (
   hasChildren?: boolean
 ) => {
   let message =
-    "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props";
-  const missingTitleTextMessage =
-    ", and the titleText prop is now required on EmptyState.";
-
-  if (hasTitleText) {
-    message += ".";
-  } else {
-    message += missingTitleTextMessage;
-  }
+    "EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.";
 
   if (hasTitleText && hasChildren) {
     message +=
-      " Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop";
-  } else if (!hasTitleText && !hasChildren) {
-    message += " You must manually supply a titleText prop to EmptyState";
-  }
-
-  const hasHeader = [hasTitleText, hasIcon, hasChildren].some(
-    (arg) => typeof arg !== "undefined"
-  );
-
-  if (hasTitleText === hasChildren && hasHeader) {
-    message += ", then you can rerun this codemod.";
+      " Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop, then you can rerun this codemod.";
   }
 
   if (hasIcon) {
@@ -175,19 +158,6 @@ module.exports = {
 
         const titleChild = getChildJSXElementByName(node, "Title");
 
-        if (
-          (!header || header.type !== "JSXElement") &&
-          (!titleChild || titleChild.type !== "JSXElement")
-        ) {
-          // report without fixer if there is no header/title or the header/title is not a React element, because
-          // creating a titleText for the EmptyState in this case is difficult
-          context.report({
-            node,
-            message: composeMessage(),
-          });
-          return;
-        }
-
         const newEmptyStateProps: string[] = [];
         const removeElements: JSXElement[] = [];
 
@@ -203,6 +173,10 @@ module.exports = {
           node,
           "EmptyStateIcon"
         );
+
+        if (!header && !titleChild && !emptyStateIconChild) {
+          return;
+        }
 
         let iconProp: string = "";
 
@@ -231,19 +205,12 @@ module.exports = {
 
           hasTitleText = !!titleTextAttribute;
           hasIcon ||= !!headerIconAttribute;
-          hasChildren ||= header.children.length > 0;
+          hasChildren ||= !childrenIsEmpty(header.children);
 
           const message = composeMessage(hasTitleText, hasIcon, hasChildren);
 
-          if (!titleTextAttribute && !hasChildren) {
-            // report without fixer if there is a header, but it doesn't have titleText or children, because creating a
-            // titleText for the EmptyState in this case is difficult
-            context.report({ node, message });
-            return;
-          }
-
           if (titleTextAttribute && hasChildren) {
-            // report without fixer if there is the header has a titleText and children, because creating an accessible
+            // report without fixer if the header has both titleText and children, because creating an accessible
             // titleText for the EmptyState in this case is difficult
             context.report({ node, message });
             return;
@@ -267,12 +234,14 @@ module.exports = {
             titleTextAttribute
           );
 
-          const titleText =
-            titleTextPropValue ||
-            `titleText=${getChildrenAsAttributeValueText(
-              context,
-              header.children
-            )}`;
+          const childrenTitleText = hasChildren
+            ? `titleText=${getChildrenAsAttributeValueText(
+                context,
+                header.children
+              )}`
+            : "";
+
+          const titleText = titleTextPropValue || childrenTitleText;
 
           const iconPropValue = getExpression(headerIconAttribute?.value);
 

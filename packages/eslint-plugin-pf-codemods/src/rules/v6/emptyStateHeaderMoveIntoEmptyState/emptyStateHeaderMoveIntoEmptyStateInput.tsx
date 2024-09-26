@@ -26,3 +26,20 @@ export const EmptyStateWithoutHeaderMoveIntoEmptyStateInput = () => (
     <EmptyStateBody>Body</EmptyStateBody>
   </EmptyState>
 );
+
+export const EmptyStateHeaderWithoutTitleTextMoveIntoEmptyStateInput = () => (
+  <EmptyState>
+    <EmptyStateHeader
+      className="some-class"
+      icon={<EmptyStateIcon icon={CubesIcon} />}
+    />
+  </EmptyState>
+);
+
+export const EmptyStateWithoutHeaderAndTitleTextMoveIntoEmptyStateInput =
+  () => (
+    <EmptyState>
+      <EmptyStateIcon icon={CubesIcon} />
+      <EmptyStateBody>Body</EmptyStateBody>
+    </EmptyState>
+  );
