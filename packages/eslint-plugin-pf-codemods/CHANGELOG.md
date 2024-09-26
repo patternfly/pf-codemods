@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.136.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.135.0...@patternfly/eslint-plugin-pf-codemods@1.136.0) (2024-09-26)
+
+
+### Features
+
+* **mod:** add user-feedback css update warning ([#747](https://github.com/patternfly/pf-codemods/issues/747)) ([2ca012f](https://github.com/patternfly/pf-codemods/commit/2ca012f8d889f05f538b4142c08cd49a1e16eb6b))
+
+
+
+
+
 # [1.135.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.134.0...@patternfly/eslint-plugin-pf-codemods@1.135.0) (2024-09-26)
 
 
