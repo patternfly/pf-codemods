@@ -68,6 +68,7 @@ export const setupRules = [
   "pageHeader-deprecated",
   "select-deprecated",
   "table-update-deprecatedPath",
+  "tile-deprecated",
   "wizard-update-deprecatedPath",
 ];
 
