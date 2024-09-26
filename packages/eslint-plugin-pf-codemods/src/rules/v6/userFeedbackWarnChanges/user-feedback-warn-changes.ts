@@ -1,6 +1,6 @@
-import { getAllImportsFromPackage, getComponentImportName, getDefaultDeclarationString } from "../../helpers";
+import { getAllImportsFromPackage, getComponentImportName } from "../../helpers";
 import { Rule } from "eslint";
-import { ImportDeclaration, ImportSpecifier } from "estree-jsx";
+import { ImportDeclaration } from "estree-jsx";
 
 // https://github.com/patternfly/react-user-feedback/pull/76
 module.exports = {
