@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.135.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.134.0...@patternfly/eslint-plugin-pf-codemods@1.135.0) (2024-09-26)
+
+
+### Features
+
+* **Tile:** add deprecated import update mod ([#740](https://github.com/patternfly/pf-codemods/issues/740)) ([2d23f34](https://github.com/patternfly/pf-codemods/commit/2d23f34f12907560f0ffbbc7032334500357860a))
+
+
+
+
+
 # [1.134.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.133.0...@patternfly/eslint-plugin-pf-codemods@1.134.0) (2024-09-25)
 
 
