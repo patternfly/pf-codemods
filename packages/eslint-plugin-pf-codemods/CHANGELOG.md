@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.137.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.136.0...@patternfly/eslint-plugin-pf-codemods@1.137.0) (2024-09-26)
+
+
+### Features
+
+* **EmptyState:** make titleText optional ([#770](https://github.com/patternfly/pf-codemods/issues/770)) ([81c9dad](https://github.com/patternfly/pf-codemods/commit/81c9dad6964de41e5775872f6dd26bf988cd2989))
+
+
+
+
+
 # [1.136.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.135.0...@patternfly/eslint-plugin-pf-codemods@1.136.0) (2024-09-26)
 
 
