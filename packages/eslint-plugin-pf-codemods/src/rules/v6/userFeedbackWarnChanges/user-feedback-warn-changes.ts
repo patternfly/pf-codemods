@@ -8,24 +8,15 @@ module.exports = {
   create: function (context: Rule.RuleContext) {
     const imports = getAllImportsFromPackage(context, "@patternfly/react-user-feedback", ["FeedbackModal"]);
 
-    const namedImports = imports.filter(
-      (imp) => imp.type === "ImportSpecifier"
-    ) as ImportSpecifier[];
-
-    const feedbackModalImport = namedImports.find(
-      (specifier: { imported: { name: string } }) =>
-        specifier.imported.name === "FeedbackModal"
-    );
-
-    return !feedbackModalImport
+    return !imports.length
       ? {}
       : {
           ImportDeclaration(node: ImportDeclaration) {
             if (
               node.specifiers.find(
                 (specifier) =>
-                  specifier.type === "ImportSpecifier" &&
-                  specifier.imported.name === getComponentImportName(feedbackModalImport, ["FeedbackModal"])
+                  (specifier.type === "ImportSpecifier" || specifier.type === "ImportDefaultSpecifier")
+                  && getComponentImportName(specifier, ["FeedbackModal"]) === "FeedbackModal"
                 )
             ) {
               context.report({
