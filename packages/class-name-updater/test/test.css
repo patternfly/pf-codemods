@@ -11,6 +11,7 @@
   }
   .pf-c-console__actions > div {
     margin-right: var(--pf-v5-global--spacer--sm);
+    box-shadow: var(--pf-v5-c-wizard__toggle--BoxShadow);
   }
 
   .pf-m-selectable {

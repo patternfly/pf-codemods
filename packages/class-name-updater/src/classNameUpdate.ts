@@ -16,10 +16,11 @@ export async function classNameUpdate(
   const isPostV5 = pfVersion > 5;
   const previousVersion = isPostV5 ? "-v" + (pfVersion - 1) : "";
   const classNameMatches = "[cul]";
-  const cssVarMatches = `${classNameMatches}|global|theme|color`;
+  const cssVarMatches = `${classNameMatches}|global|theme|color|chart`;
   const bodyMatches = isPostV5 ? classNameMatches : cssVarMatches;
+  const cssVarStart = isPostV5 ? "[^-]" : "";
   const changeNeededRegex = new RegExp(
-    "(\\b|\\$)pf" + previousVersion + `-(${bodyMatches})-`,
+    `(${cssVarStart})` + "(\\b|\\$)pf" + previousVersion + `-(${bodyMatches})-`,
     "g"
   );
   const newVersion = pfVersion || 5;
@@ -47,7 +48,7 @@ export async function classNameUpdate(
 
     const newContent = fileContent.replace(
       changeNeededRegex,
-      `$1pf-v${newVersion}-$2-`
+      `$1$2pf-v${newVersion}-$3-`
     );
 
     printDiff(file, fileContent, newContent, changeNeededRegex);
