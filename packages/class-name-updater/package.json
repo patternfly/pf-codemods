@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/class-name-updater",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Utility to update class names with Patternfly version numbers",
   "author": "Red Hat",
   "license": "MIT",

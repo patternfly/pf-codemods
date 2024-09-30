@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@2.0.6...@patternfly/class-name-updater@2.0.7) (2024-09-30)
+
+
+### Bug Fixes
+
+* **class-name-updater:** ignore css vars when running in v6 mode ([#778](https://github.com/patternfly/pf-codemods/issues/778)) ([d05506e](https://github.com/patternfly/pf-codemods/commit/d05506eaab6294e1c33921fe960fe34386d28af8))
+
+
+
+
+
 ## [2.0.6](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@2.0.5...@patternfly/class-name-updater@2.0.6) (2024-08-27)
 
 
