@@ -524,6 +524,33 @@ export const LogSnippetRenameLeftBorderVariantInput = () => (
 ```
 
 
+### component-groups-contentHeader-rename-to-pageHeader [(react-component-groups/#313)](https://github.com/patternfly/react-component-groups/pull/313)
+
+In react-component-groups, we've renamed ContentHeader component to PageHeader
+
+#### Examples
+
+In:
+
+```jsx
+import { ContentHeader } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsContentHeaderRenameToPageHeaderInput = () => (
+  <ContentHeader />
+);
+```
+
+Out:
+
+```jsx
+import { PageHeader } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsContentHeaderRenameToPageHeaderInput = () => (
+  <PageHeader data-codemods />
+);
+```
+
+
 ### componentGroups-errorState-rename-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
 
 In react-component-groups, we've renamed some ErrorState props to comply with its base component - EmptyState.
@@ -592,6 +619,31 @@ export const ComponentGroupsInvalidObjectRenamePropsInput = () => (
 ```
 
 
+### component-groups-invalidObject-rename-to-missingPage [(react-component-groups/#313)](https://github.com/patternfly/react-component-groups/pull/313)
+
+In react-component-groups, we've renamed InvalidObject component to MissingPage
+
+#### Examples
+
+In:
+
+```jsx
+import { InvalidObject } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsInvalidObjectRenameToMissingPageInput =
+  () => <InvalidObject />;
+```
+
+Out:
+
+```jsx
+import { MissingPage } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsInvalidObjectRenameToMissingPageInput =
+  () => <MissingPage data-codemods />;
+```
+
+
 ### component-groups-multi-content-card-remove-props [(react-component-groups/#145)](https://github.com/patternfly/react-component-groups/pull/145)
 
 The `leftBorderVariant` and `withHeaderBorder` props have been removed from MultiContentCard.
@@ -640,6 +692,31 @@ export const ComponentGroupsNotAuthorizedRenamePropsInput = () => (
   <NotAuthorized bodyText="Description text" titleText="Title text" />
 );
 ```
+
+### component-groups-notAuthorized-rename-to-unauthorizedAccess [(react-component-groups/#313)](https://github.com/patternfly/react-component-groups/pull/313)
+
+In react-component-groups, we've renamed NotAuthorized component to UnauthorizedAccess
+
+#### Examples
+
+In:
+
+```jsx
+import { NotAuthorized } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsNotAuthorizedRenameToUnauthorizedAccessInput =
+  () => <NotAuthorized />;
+```
+
+Out:
+
+```jsx
+import { UnauthorizedAccess } from "@patternfly/react-component-groups";
+
+export const ComponentGroupsNotAuthorizedRenameToUnauthorizedAccessInput =
+  () => <UnauthorizedAccess data-codemods />;
+```
+
 
 ### component-groups-unavailableContent-bodyText-props-update [(react-component-groups/#244)](https://github.com/patternfly/react-component-groups/pull/244)
 
@@ -752,6 +829,32 @@ export const DataCodemodsCleanupInput = () => (
     <LoginMainFooterLinksItem  />
     <MastheadLogo  />
   </>
+);
+```
+
+### dataListAction-remove-isPlainButtonAction-prop [(#10939)](https://github.com/patternfly/patternfly-react/pull/10939)
+
+The `isPlainButtonAction` prop has been removed from DataListAction as a wrapper is no longer needed.
+
+#### Examples
+
+In:
+
+```jsx
+import { DataListAction } from "@patternfly/react-core";
+
+export const DataListActionRemoveIsPlainButtonActionPropInput = () => (
+  <DataListAction isPlainButtonAction/>
+);
+```
+
+Out:
+
+```jsx
+import { DataListAction } from "@patternfly/react-core";
+
+export const DataListActionRemoveIsPlainButtonActionPropInput = () => (
+  <DataListAction />
 );
 ```
 
@@ -948,8 +1051,6 @@ import {
 
 EmptyStateHeader and EmptyStateIcon are now rendered internally within EmptyState and should only be customized using props. Content passed to the `icon` prop on EmptyState will also be wrapped by EmptyStateIcon automatically.
 
-Additionally, the `titleText` prop is now required on EmptyState.
-
 #### Examples
 
 In:
@@ -983,6 +1084,23 @@ export const EmptyStateWithoutHeaderMoveIntoEmptyStateInput = () => (
     <EmptyStateBody>Body</EmptyStateBody>
   </EmptyState>
 );
+
+export const EmptyStateHeaderWithoutTitleTextMoveIntoEmptyStateInput = () => (
+  <EmptyState>
+    <EmptyStateHeader
+      className="some-class"
+      icon={<EmptyStateIcon icon={CubesIcon} />}
+    />
+  </EmptyState>
+);
+
+export const EmptyStateWithoutHeaderAndTitleTextMoveIntoEmptyStateInput =
+  () => (
+    <EmptyState>
+      <EmptyStateIcon icon={CubesIcon} />
+      <EmptyStateBody>Body</EmptyStateBody>
+    </EmptyState>
+  );
 ```
 
 Out:
@@ -1009,8 +1127,19 @@ export const EmptyStateWithoutHeaderMoveIntoEmptyStateInput = () => (
     <EmptyStateBody>Body</EmptyStateBody>
   </EmptyState>
 );
-```
 
+export const EmptyStateHeaderWithoutTitleTextMoveIntoEmptyStateInput = () => (
+  <EmptyState headerClassName="some-class"  icon={CubesIcon}  >
+    </EmptyState>
+);
+
+export const EmptyStateWithoutHeaderAndTitleTextMoveIntoEmptyStateInput =
+  () => (
+    <EmptyState icon={CubesIcon}>
+      <EmptyStateBody>Body</EmptyStateBody>
+    </EmptyState>
+  );
+```
 
 ### emptyState-nonExported-components [(#10364)](https://github.com/patternfly/patternfly-react/pull/10364)
 
@@ -2099,48 +2228,161 @@ export const TextReplaceWithContentInput = () => {
 
 The `--pf-v6-c-table__sticky-cell--Left` and `--pf-v6-c-table__sticky-cell--Right` CSS variables applied as inline styles when `isStickyColumn` is true have been updated to `--pf-v6-c-table__sticky-cell--InsetInlineStart` and `--pf-v6-c-table__sticky-cell--InsetInlineEnd`, respectively.
 
-### tokens-warn
+### tile-deprecated [(#10821)](https://github.com/patternfly/patternfly-react/pull/10821)
 
-We have updated our CSS tokens. About half of our tokens have been replaced with newer ones. To find a suitable replacement token, check our [v6 token documentation](https://staging-v6.patternfly.org/tokens/all-patternfly-tokens).
+Tile has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Card instead. There is a new Card example on our documentation showcasing how to set up a Card as a Tile.
 
 #### Examples
 
 In:
 
 ```jsx
-import global_warning_color_100 from "@patternfly/react-tokens/dist/esm/global_warning_color_100";
-import { c_alert__FontSize } from "@patternfly/react-tokens";
-
-global_warning_color_100;
-c_alert__FontSize;
-
-<>
-  <div
-    style={{
-      "--pf-v5-global--success-color--200": "#abc",
-    }}
-  ></div>
-  <div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>
-</>;
+import { Tile } from "@patternfly/react-core";
 ```
 
 Out:
 
 ```jsx
-import global_warning_color_100 from "@patternfly/react-tokens/dist/esm/global_warning_color_100";
+import { Tile } from "@patternfly/react-core/deprecated";
+```
+
+### tokens-prefix-with-t [(#11002)](https://github.com/patternfly/patternfly-react/pull/11002)
+
+React tokens, whose value is a Patternfly token variable (with prefix --pf-t), are now prefixed with t_
+
+#### Examples
+
+In:
+
+```jsx
+import color_green_10 from "@patternfly/react-tokens/dist/esm/color_green_10";
+
+color_green_10;
+```
+
+Out:
+
+```jsx
+import t_color_green_10 from "@patternfly/react-tokens/dist/esm/t_color_green_10";
+
+t_color_green_10;
+```
+
+
+### tokens-update
+
+We have updated our CSS tokens. About half of our tokens have been replaced with newer ones. 
+
+- this rule provides an autofix for global non color tokens
+- global color tokens will be replaced with a temporary hot pink color token **that must be manually replaced** (`t_temp_dev_tbd` react token or `--pf-t--temp--dev--tbd` CSS variable)
+- other non-global (component or chart) tokens need to be replaced manually
+
+To find a suitable replacement token, check our [v6 token documentation](https://staging-v6.patternfly.org/tokens/all-patternfly-tokens).
+
+#### Examples
+
+In:
+
+```jsx
+// replacements (fixable with --fix)
+import global_BorderWidth_lg from "@patternfly/react-tokens/dist/esm/global_BorderWidth_lg";
+import { global_FontWeight_normal } from "@patternfly/react-tokens";
+
+global_BorderWidth_lg;
+global_FontWeight_normal;
+
+document.documentElement.style.setProperty("--pf-v5-global--ZIndex--lg", "3");
+<div
+  style={{
+    borderWidth: "var(--pf-v5-global--BorderWidth--lg)",
+    boxShadow: "var(--pf-v5-global--BoxShadow--sm)",
+    marginTop: "var(--pf-v5-global--spacer--3xl)",
+  }}
+></div>;
+
+// warnings (not fixable)
+import c_badge_PaddingLeft from "@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft";
 import { c_alert__FontSize } from "@patternfly/react-tokens";
 
-global_warning_color_100;
+c_badge_PaddingLeft;
 c_alert__FontSize;
 
-<>
-  <div
-    style={{
-      "--pf-v5-global--success-color--200": "#abc",
-    }}
-  ></div>
-  <div style={{ borderWidth: "var(--pf-v5-global--BorderWidth--lg)" }}></div>
-</>;
+<div
+  style={{
+    fontSize: "var(--pf-v5-c-alert__FontSize)",
+    width: "var(--pf-v5-global--arrow--width)",
+  }}
+></div>;
+
+// Colors
+import global_Color_100 from "@patternfly/react-tokens/dist/esm/global_Color_100";
+import { global_Color_200 } from "@patternfly/react-tokens/dist/esm/global_Color_200";
+import { global_Color_300 as color300 } from "@patternfly/react-tokens/dist/esm/global_Color_300";
+import { global_BorderColor_100 } from "@patternfly/react-tokens";
+
+global_Color_100;
+global_Color_200;
+color300;
+global_BorderColor_100;
+
+<div
+  style={{
+    color: "var(--pf-v5-global--Color--100)",
+    backgroundColor: "var(--pf-v5-global--Color--200)",
+  }}
+></div>;
+```
+
+Out:
+
+```jsx
+// replacements (fixable with --fix)
+import global_border_width_extra_strong from "@patternfly/react-tokens/dist/esm/global_border_width_extra_strong";
+import { global_font_weight_body_default } from "@patternfly/react-tokens";
+
+global_border_width_extra_strong;
+global_font_weight_body_default;
+
+document.documentElement.style.setProperty("--pf-t--global--z-index--lg", "3");
+<div
+  style={{
+    borderWidth: "var(--pf-t--global--border--width--extra-strong)",
+    boxShadow: "var(--pf-t--global--box-shadow--sm)",
+    marginTop: "var(--pf-t--global--spacer--3xl)",
+  }}
+></div>;
+
+// warnings (not fixable)
+import c_badge_PaddingLeft from "@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft";
+import { c_alert__FontSize } from "@patternfly/react-tokens";
+
+c_badge_PaddingLeft;
+c_alert__FontSize;
+
+<div
+  style={{
+    fontSize: "var(--pf-v5-c-alert__FontSize)",
+    width: "var(--pf-v5-global--arrow--width)",
+  }}
+></div>;
+
+// Colors
+import global_Color_100/* CODEMODS: you should update this color token */ from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";
+import { t_temp_dev_tbd as global_Color_200 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";
+import { t_temp_dev_tbd as color300 /* CODEMODS: you should update this color token, original v5 token was global_Color_300 */ } from "@patternfly/react-tokens/dist/esm/t_temp_dev_tbd";
+import { t_temp_dev_tbd as global_BorderColor_100 /* CODEMODS: you should update this color token */ } from "@patternfly/react-tokens";
+
+global_Color_100;
+global_Color_200;
+color300;
+global_BorderColor_100;
+
+<div
+  style={{
+    color: "var(--pf-t--temp--dev--tbd)"/* CODEMODS: original v5 color was --pf-v5-global--Color--100 */,
+    backgroundColor: "var(--pf-t--temp--dev--tbd)"/* CODEMODS: original v5 color was --pf-v5-global--Color--200 */,
+  }}
+></div>;
 ```
 
 ### toolbarChipGroupContent-rename-component [(#10649)](https://github.com/patternfly/patternfly-react/pull/10649)
@@ -2617,6 +2859,10 @@ export const ToolbarUpdateAlignValuesInput = () => (
 ### treeView-warn-selectable-styling-modifier-removed [(#10101)](https://github.com/patternfly/patternfly-react/pull/10101)
 
 Selectable styling attribute (`pf-m-selectable`) has been removed on the list items of the TreeView component. You should update selectors, tests and snapshot tests which are relying on the `pf-m-selectable` class.
+
+### user-feedback-warn-changes [(#76)](https://github.com/patternfly/react-user-feedback/pull/76)
+
+The internal scss stylesheet that `FeedbackModal` and its internal components were referencing has been refactored into a css stylesheet. The new `Feedback.css` file will have to be imported to maintain styling on `FeedbackModal`, and may be located in the dist (`@patternfly/react-user-feedback/dist/esm/Feedback/Feedback.css`) or in the `src`.
 
 ### wizardFooter-warn-update-markup [(#10378)](https://github.com/patternfly/patternfly-react/pull/10378)
 
