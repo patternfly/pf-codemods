@@ -18,11 +18,22 @@ const builtReadMes = v6RuleDirs.map(async (ruleDir) => {
   const input = files.find((file) => file.includes("Input.tsx"));
   const output = files.find((file) => file.includes("Output.tsx"));
 
-  if (!readMe || !input || !output) {
-    throw new Error(`Missing file in rule directory: ${ruleDir}`);
+  if (!readMe) {
+    throw new Error(`Missing .md file in rule directory: ${ruleDir}`);
   }
 
   const readMeContent = await readFile(join(ruleDir, readMe), "utf-8");
+
+  if (readMeContent.includes("%inputExample%") && (!input || !output)) {
+    throw new Error(
+      `Either missing the example files, or remove the example part from .md file in rule directory: ${ruleDir}`
+    );
+  }
+
+  if (!input || !output) {
+    return readMeContent;
+  }
+
   const inputContent = await readFile(join(ruleDir, input), "utf-8");
   const outputContent = await readFile(join(ruleDir, output), "utf-8");
 
