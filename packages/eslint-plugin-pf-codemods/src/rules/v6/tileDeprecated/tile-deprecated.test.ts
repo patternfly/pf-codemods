@@ -40,7 +40,7 @@ ruleTester.run('tile-deprecated', rule, {
     },
     {
       code: `import { Tile } from '@patternfly/react-core/dist/js/components/Tile/index.js';`,
-      output: `import {\n\tTile\n} from '@patternfly/react-core/deprecated';`,
+      output: `import {\n\tTile\n} from '@patternfly/react-core/dist/js/deprecated/components/Tile/index.js';`,
       errors: [
         {
           message: `Tile has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Card instead.`,
@@ -50,7 +50,7 @@ ruleTester.run('tile-deprecated', rule, {
     },
     {
       code: `import { Tile } from '@patternfly/react-core/dist/dynamic/components/Tile/index.js';`,
-      output: `import {\n\tTile\n} from '@patternfly/react-core/deprecated';`,
+      output: `import {\n\tTile\n} from '@patternfly/react-core/dist/dynamic/deprecated/components/Tile/index.js';`,
       errors: [
         {
           message: `Tile has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Card instead.`,

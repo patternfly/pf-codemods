@@ -69,14 +69,14 @@ specifiersToMove.forEach((specifier) => {
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/js/components/Modal/index.js';`,
-      `import {\n\t${specifier}\n} from '@patternfly/react-core/deprecated';`,
+      `import {\n\t${specifier}\n} from '@patternfly/react-core/dist/js/deprecated/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ImportDeclaration" }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/dynamic/components/Modal/index.js';`,
-      `import {\n\t${specifier}\n} from '@patternfly/react-core/deprecated';`,
+      `import {\n\t${specifier}\n} from '@patternfly/react-core/dist/dynamic/deprecated/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ImportDeclaration" }]
     )
   );
@@ -97,14 +97,14 @@ specifiersToMove.forEach((specifier) => {
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/js/components/Modal/index.js';`,
-      `export {\n\t${specifier}\n} from '@patternfly/react-core/deprecated';`,
+      `export {\n\t${specifier}\n} from '@patternfly/react-core/dist/js/deprecated/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ExportNamedDeclaration" }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/dynamic/components/Modal/index.js';`,
-      `export {\n\t${specifier}\n} from '@patternfly/react-core/deprecated';`,
+      `export {\n\t${specifier}\n} from '@patternfly/react-core/dist/dynamic/deprecated/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ExportNamedDeclaration" }]
     )
   );

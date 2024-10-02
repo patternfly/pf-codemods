@@ -40,15 +40,20 @@ export function moveSpecifiers(
       // expecting @patternfly/{package} or
       // @patternfly/{package}/{designator} where designator is deprecated
       const toParts = toPackage.split('/');
+      const parentSourceValue = firstSpecifier?.parent?.source?.value;
+      const modulePaths = ['esm', 'js', 'dynamic'].map((path) => `dist/${path}`);
+      const isDistImport = modulePaths.some((path) =>
+        parentSourceValue?.includes(path)
+      );
 
       if (
-        !firstSpecifier?.parent?.source?.value?.includes('dist/esm') ||
+        !isDistImport ||
         toParts[0] !== '@patternfly'
       ) {
         return;
       }
 
-      const fromParts = firstSpecifier.parent.source.value.split('/');
+      const fromParts = parentSourceValue.split('/');
       //expecting @patternfly/{package}/dist/esm/components/{Component}/index.js
       //needing toPath to look like fromPath with the designator before /components
       if (toParts.length === 3) {
