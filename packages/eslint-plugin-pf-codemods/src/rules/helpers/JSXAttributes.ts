@@ -49,18 +49,21 @@ export function getAttributeValue(
     return node.value;
   }
 
-  const isExpressionContainer = valueType === "JSXExpressionContainer";
-  if (isExpressionContainer && node.expression.type === "Identifier") {
-    const variableScope = context.getSourceCode().getScope(node);
-    return getVariableValue(node.expression.name, variableScope);
+  if (valueType !== "JSXExpressionContainer") {
+    return;
   }
-  if (isExpressionContainer && node.expression.type === "MemberExpression") {
+
+  if (node.expression.type === "Identifier") {
+    const variableScope = context.getSourceCode().getScope(node);
+    return getVariableValue(node.expression.name, variableScope, context);
+  }
+  if (node.expression.type === "MemberExpression") {
     return getMemberExpression(node.expression);
   }
-  if (isExpressionContainer && node.expression.type === "Literal") {
+  if (node.expression.type === "Literal") {
     return node.expression.value;
   }
-  if (isExpressionContainer && node.expression.type === "ObjectExpression") {
+  if (node.expression.type === "ObjectExpression") {
     return node.expression.properties;
   }
 }
@@ -100,7 +103,11 @@ export function getVariableDeclaration(
   return undefined;
 }
 
-export function getVariableValue(name: string, scope: Scope.Scope | null) {
+export function getVariableValue(
+  name: string,
+  scope: Scope.Scope | null,
+  context: Rule.RuleContext
+) {
   const variableDeclaration = getVariableDeclaration(name, scope);
   if (!variableDeclaration) {
     return;
@@ -112,6 +119,13 @@ export function getVariableValue(name: string, scope: Scope.Scope | null) {
 
   if (!variableInit) {
     return;
+  }
+  if (variableInit.type === "Identifier") {
+    return getVariableValue(
+      variableInit.name,
+      context.getSourceCode().getScope(variableInit),
+      context
+    );
   }
   if (variableInit.type === "Literal") {
     return variableInit.value;
