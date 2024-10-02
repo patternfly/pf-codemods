@@ -105,7 +105,7 @@ module.exports = {
       },
       Identifier(node: Identifier) {
         const typeName = (node as any).typeAnnotation?.typeAnnotation?.typeName
-          .name;
+          ?.name;
 
         if (splitButtonOptionsLocalNames.includes(typeName)) {
           context.report({
