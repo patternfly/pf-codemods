@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.139.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.138.1...@patternfly/eslint-plugin-pf-codemods@1.139.0) (2024-10-03)
+
+
+### Features
+
+* **charts:** import charts from @patternfly/react-charts/victory ([#779](https://github.com/patternfly/pf-codemods/issues/779)) ([99409dd](https://github.com/patternfly/pf-codemods/commit/99409ddfc3744572c91ed5d175f23ea0dcef050a))
+
+
+
+
+
 ## [1.138.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.138.0...@patternfly/eslint-plugin-pf-codemods@1.138.1) (2024-10-03)
 
 

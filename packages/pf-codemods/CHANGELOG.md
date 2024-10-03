@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.2.16...@patternfly/pf-codemods@2.3.0) (2024-10-03)
+
+
+### Features
+
+* **charts:** import charts from @patternfly/react-charts/victory ([#779](https://github.com/patternfly/pf-codemods/issues/779)) ([99409dd](https://github.com/patternfly/pf-codemods/commit/99409ddfc3744572c91ed5d175f23ea0dcef050a))
+
+
+
+
+
 ## [2.2.16](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.2.15...@patternfly/pf-codemods@2.2.16) (2024-10-03)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
