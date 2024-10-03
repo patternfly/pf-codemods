@@ -84,6 +84,13 @@ specifiersToMove.forEach((specifier) => {
       [{ message: errorMessage, type: "ImportDeclaration" }]
     )
   );
+  invalidTests.push(
+    createInvalidTest(
+      `import { ${specifier} } from '@patternfly/react-charts/dist/js/components/index.js';`,
+      `import {\n\t${specifier}\n} from '@patternfly/react-charts/dist/js/victory/components/index.js';`,
+      [{ message: errorMessage, type: "ImportDeclaration" }]
+    )
+  );
 });
 
 ruleTester.run("chartImport-moved", rule, {
