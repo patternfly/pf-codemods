@@ -64,14 +64,14 @@ specifiersToMove.forEach((specifier) => {
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/js/next/components/Modal/index.js';`,
-      `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
+      `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/js/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ImportDeclaration" }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/dynamic/next/components/Modal/index.js';`,
-      `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
+      `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/dynamic/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ImportDeclaration" }]
     )
   );
@@ -92,14 +92,14 @@ specifiersToMove.forEach((specifier) => {
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/js/next/components/Modal/index.js';`,
-      `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
+      `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/js/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ExportNamedDeclaration" }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/dynamic/next/components/Modal/index.js';`,
-      `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
+      `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/dynamic/components/Modal/index.js';`,
       [{ message: errorMessage, type: "ExportNamedDeclaration" }]
     )
   );
