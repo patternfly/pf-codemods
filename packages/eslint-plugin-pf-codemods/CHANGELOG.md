@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.138.1](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.138.0...@patternfly/eslint-plugin-pf-codemods@1.138.1) (2024-10-03)
+
+
+### Bug Fixes
+
+* **helpers:** get moveSpecifiers to handle cjs/dynamic imports correctly ([#784](https://github.com/patternfly/pf-codemods/issues/784)) ([ce8b9b9](https://github.com/patternfly/pf-codemods/commit/ce8b9b9976f5f0980ae05640c604625c90c2cfaa))
+
+
+
+
+
 # [1.138.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.137.1...@patternfly/eslint-plugin-pf-codemods@1.138.0) (2024-10-02)
 
 
