@@ -37,7 +37,7 @@ module.exports = {
               const pageSectionVariantLocalName =
                 pageSectionVariantImport && pageSectionVariantImport.local.name;
               const hasPatternFlyEnum =
-                variantValue.object &&
+                variantValue?.object &&
                 variantValue.object.name === pageSectionVariantLocalName;
               const variantValueIsLiteral =
                 variantProp.value.type === "Literal" ||
@@ -46,7 +46,7 @@ module.exports = {
               if (!variantValueIsLiteral && !hasPatternFlyEnum) {
                 return;
               }
-              const hasValidValue = variantValue.property
+              const hasValidValue = variantValue?.property
                 ? validValues.includes(variantValue.property.name)
                 : validValues.includes(variantValue);
 
