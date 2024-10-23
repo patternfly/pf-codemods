@@ -7,6 +7,7 @@ import {
   JSXFragment,
   JSXOpeningElement,
   MemberExpression,
+  Property,
 } from "estree-jsx";
 
 export function getAttribute(
@@ -128,12 +129,12 @@ export function getVariableValue(
     );
   }
   if (variableInit.type === "Literal") {
-    return variableInit.value;
+    return variableInit.value as string;
   }
   if (variableInit.type === "MemberExpression") {
     return getMemberExpression(variableInit);
   }
   if (variableInit.type === "ObjectExpression") {
-    return variableInit.properties;
+    return variableInit.properties as Property[];
   }
 }
