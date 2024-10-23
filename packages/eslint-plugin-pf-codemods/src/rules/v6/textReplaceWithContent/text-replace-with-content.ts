@@ -71,11 +71,28 @@ module.exports = {
               const specifierName = specifierToReplace.imported.name;
               const newText = getNewText(specifierName);
 
+              const importPath = node.source.value?.toString() as string;
+
               context.report({
                 node,
                 message: errorMessage,
                 fix(fixer) {
-                  return fixer.replaceText(specifierToReplace, newText);
+                  const specifierFix = fixer.replaceText(
+                    specifierToReplace,
+                    newText
+                  );
+
+                  if (!importPath.includes("Text")) {
+                    return specifierFix;
+                  }
+
+                  return [
+                    specifierFix,
+                    fixer.replaceText(
+                      node.source,
+                      `"${importPath.replace("Text", "Content")}"`
+                    ),
+                  ];
                 },
               });
             }
