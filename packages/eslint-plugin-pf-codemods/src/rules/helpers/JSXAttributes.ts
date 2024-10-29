@@ -59,7 +59,7 @@ export function getAttributeValue(
     return getVariableValue(node.expression.name, variableScope, context);
   }
   if (node.expression.type === "MemberExpression") {
-    return getMemberExpression(node.expression);
+    return node.expression;
   }
   if (node.expression.type === "Literal") {
     return node.expression.value;
@@ -77,15 +77,6 @@ export function getExpression(node?: JSXAttribute["value"]) {
   if (node.type === "JSXExpressionContainer") {
     return node.expression as Expression | JSXEmptyExpression | JSXFragment;
   }
-}
-
-function getMemberExpression(node: MemberExpression) {
-  if (!node) {
-    return;
-  }
-  const { object, property } = node;
-
-  return { object, property };
 }
 
 export function getVariableDeclaration(
@@ -132,7 +123,7 @@ export function getVariableValue(
     return variableInit.value as string;
   }
   if (variableInit.type === "MemberExpression") {
-    return getMemberExpression(variableInit);
+    return variableInit as MemberExpression;
   }
   if (variableInit.type === "ObjectExpression") {
     return variableInit.properties as Property[];
