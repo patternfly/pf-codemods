@@ -1,5 +1,10 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, Property } from "estree-jsx";
+import {
+  Identifier,
+  JSXOpeningElement,
+  ObjectExpression,
+  Property,
+} from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 const componentsPropMap: { [key: string]: string } = {
@@ -47,15 +52,20 @@ module.exports = {
                 return;
               }
 
-              const attributeValue = getAttributeValue(
-                context,
-                attribute.value
-              );
+              const attributeValueProperties = (
+                getAttributeValue(
+                  context,
+                  attribute.value
+                ) as ObjectExpression["properties"]
+              ).filter((prop) => prop.type === "Property") as Property[];
               if (
-                attributeValue.every(
-                  (property: Property) =>
-                    property.value.type === "Literal" &&
-                    !oldPropValues.includes(property.value.value as string)
+                attributeValueProperties.every(
+                  (property) =>
+                    (property.value.type === "Literal" &&
+                      !oldPropValues.includes(
+                        property.value.value as string
+                      )) ||
+                    property.value.type !== "Literal"
                 )
               ) {
                 return;
@@ -67,18 +77,22 @@ module.exports = {
                 fix(fixer) {
                   const fixes = [];
 
-                  for (const property of attributeValue) {
-                    if (oldPropValues.includes(property.value.value)) {
+                  for (const property of attributeValueProperties) {
+                    if (property.value.type !== "Literal") {
+                      continue;
+                    }
+
+                    const propertyValueString = property.value.value as string;
+
+                    if (oldPropValues.includes(propertyValueString)) {
                       const propertyKeyValue =
                         property.key.type === "Literal"
                           ? `"${property.key.value}"`
-                          : property.key.name;
+                          : (property.key as Identifier).name;
                       fixes.push(
                         fixer.replaceText(
                           property,
-                          `${propertyKeyValue}: "${
-                            newPropValueMap[property.value.value]
-                          }"`
+                          `${propertyKeyValue}: "${newPropValueMap[propertyValueString]}"`
                         )
                       );
                     }

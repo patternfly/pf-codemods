@@ -11,8 +11,8 @@ export function isEnumValue(
   propertyName: string | string[]
 ) {
   if (
-    enumExpression.object?.type === "Identifier" &&
-    enumExpression.object.name === enumName
+    enumExpression?.object?.type === "Identifier" &&
+    enumExpression?.object?.name === enumName
   ) {
     const nameMatches = (name: string) =>
       propertyNameMatches(

@@ -1,7 +1,6 @@
 import { Rule } from "eslint";
-import { JSXElement, Property, Literal } from "estree-jsx";
+import { JSXElement, ObjectExpression, Property } from "estree-jsx";
 import {
-  getAllImportsFromPackage,
   getFromPackage,
   checkMatchingJSXOpeningElement,
   getAttribute,
@@ -54,19 +53,23 @@ module.exports = {
               const selectableActionsValue = getAttributeValue(
                 context,
                 selectableActionsProp.value
-              );
+              ) as ObjectExpression["properties"];
               if (!selectableActionsValue) {
                 return;
               }
 
+              const selectableActionsProperties = selectableActionsValue.filter(
+                (val) => val.type === "Property"
+              ) as Property[];
+
               const nameProperty = getObjectProperty(
                 context,
-                selectableActionsValue,
+                selectableActionsProperties,
                 "name"
               );
               const idProperty = getObjectProperty(
                 context,
-                selectableActionsValue,
+                selectableActionsProperties,
                 "selectableActionId"
               );
 
@@ -92,7 +95,7 @@ module.exports = {
                     return [];
                   }
                   const propertiesToKeep = removePropertiesFromObjectExpression(
-                    selectableActionsValue,
+                    selectableActionsProperties,
                     validPropertiesToRemove
                   );
                   const replacementProperties = propertiesToKeep
