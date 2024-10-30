@@ -8,6 +8,7 @@ export * from "./getChildJSXElementByName";
 export * from "./getCodeModDataTag";
 export * from "./getComponentImportName";
 export * from "./getEndRange";
+export * from "./getEnumPropertyName";
 export * from "./getFromPackage";
 export * from "./getImportedName";
 export * from "./getImportPath";
