@@ -34,4 +34,6 @@ export * from "./propertyNameMatches";
 export * from "./removeElement";
 export * from "./removeEmptyLineAfter";
 export * from "./removePropertiesFromObjectExpression";
+export * from "./renameComponent";
+export * from "./renameInterface";
 export * from "./renameProps";
