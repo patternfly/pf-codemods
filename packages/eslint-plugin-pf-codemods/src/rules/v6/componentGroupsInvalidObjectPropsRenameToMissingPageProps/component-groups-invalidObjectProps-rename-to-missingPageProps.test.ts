@@ -1,6 +1,8 @@
 const ruleTester = require("../../ruletester");
 import * as rule from "./component-groups-invalidObjectProps-rename-to-missingPageProps";
 
+const message = `InvalidObjectProps has been renamed to MissingPageProps.`;
+
 ruleTester.run(
   "component-groups-invalidObjectProps-rename-to-missingPageProps",
   rule,
@@ -19,32 +21,40 @@ ruleTester.run(
       {
         code: `import { InvalidObjectProps } from '@patternfly/react-component-groups';
       const props: InvalidObjectProps;
-      const otherProps = props as InvalidObjectProps;`,
+      const otherProps = props as InvalidObjectProps;
+      interface CustomProps extends InvalidObjectProps {};`,
         output: `import { MissingPageProps } from '@patternfly/react-component-groups';
       const props: MissingPageProps;
-      const otherProps = props as MissingPageProps;`,
+      const otherProps = props as MissingPageProps;
+      interface CustomProps extends MissingPageProps {};`,
         errors: [
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
+            message,
             type: "ImportSpecifier",
           },
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
-            type: "TSTypeReference",
+            message,
+            type: "Identifier",
           },
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
-            type: "TSTypeReference",
+            message,
+            type: "Identifier",
+          },
+          {
+            message,
+            type: "Identifier",
           },
         ],
       },
       // named import with alias
       {
-        code: `import { InvalidObjectProps as InvObjProps } from '@patternfly/react-component-groups';`,
-        output: `import { MissingPageProps as InvObjProps } from '@patternfly/react-component-groups';`,
+        code: `import { InvalidObjectProps as InvObjProps } from '@patternfly/react-component-groups';
+        const props: InvObjProps;`,
+        output: `import { MissingPageProps as InvObjProps } from '@patternfly/react-component-groups';
+        const props: InvObjProps;`,
         errors: [
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
+            message,
             type: "ImportSpecifier",
           },
         ],
@@ -55,7 +65,7 @@ ruleTester.run(
         output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/cjs/InvalidObject';`,
         errors: [
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
+            message,
             type: "ImportSpecifier",
           },
         ],
@@ -65,7 +75,7 @@ ruleTester.run(
         output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/esm/InvalidObject';`,
         errors: [
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
+            message,
             type: "ImportSpecifier",
           },
         ],
@@ -75,7 +85,7 @@ ruleTester.run(
         output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';`,
         errors: [
           {
-            message: `InvalidObjectProps has been renamed to MissingPageProps.`,
+            message,
             type: "ImportSpecifier",
           },
         ],
