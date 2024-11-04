@@ -23,6 +23,31 @@ export function renameInterface(
       return {};
     }
 
+    const replaceIdentifier = (identifier: Identifier) => {
+      const getMatchingImport = (name: string) =>
+        imports.find((specifier) => specifier.local.name === name);
+
+      const matchingImport = getMatchingImport(identifier.name);
+      const shouldRename =
+        matchingImport &&
+        matchingImport.local.name === matchingImport.imported.name;
+
+      if (!shouldRename) {
+        return;
+      }
+
+      const oldName = identifier.name;
+      const newName = renames[oldName];
+
+      context.report({
+        node: identifier,
+        message: formatDefaultMessage(oldName, newName),
+        fix(fixer) {
+          return fixer.replaceText(identifier, newName);
+        },
+      });
+    };
+
     return {
       ImportSpecifier(node: ImportSpecifier) {
         if (
@@ -45,32 +70,14 @@ export function renameInterface(
         });
       },
       TSTypeReference(node: TSESTree.TSTypeReference) {
-        const getMatchingImport = (name: string) =>
-          imports.find((specifier) => specifier.local.name === name);
-
-        if (node.typeName.type !== "Identifier") {
-          return;
+        if (node.typeName.type === "Identifier") {
+          replaceIdentifier(node.typeName);
         }
-
-        const matchingImport = getMatchingImport(node.typeName.name);
-        const shouldRename =
-          matchingImport &&
-          matchingImport.local.name === matchingImport.imported.name;
-
-        if (!shouldRename) {
-          return;
+      },
+      TSInterfaceHeritage(node: TSESTree.TSInterfaceHeritage) {
+        if (node.expression.type === "Identifier") {
+          replaceIdentifier(node.expression);
         }
-
-        const oldName = node.typeName.name;
-        const newName = renames[oldName];
-
-        context.report({
-          node: node as unknown as Node,
-          message: formatDefaultMessage(oldName, newName),
-          fix(fixer) {
-            return fixer.replaceText(node.typeName as Identifier, newName);
-          },
-        });
       },
     };
   };
