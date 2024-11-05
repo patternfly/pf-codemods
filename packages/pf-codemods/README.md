@@ -385,7 +385,9 @@ import { Chart } from "@patternfly/react-charts";
 Out:
 
 ```jsx
-import { Chart } from '@patternfly/react-charts/victory';
+import {
+  Chart
+} from '@patternfly/react-charts/victory';
 ```
 
 ### checkbox-radio-replace-isLabelBeforeButton [(#10016)](https://github.com/patternfly/patternfly-react/pull/10016)
@@ -1517,6 +1519,56 @@ export const MastheadStructureChangesInputPostNameChange = () => (
 ### menuItemAction-warn-update-markup [(#10089)](https://github.com/patternfly/patternfly-react/pull/10089)
 
 The markup for MenuItemAction has been updated. It now uses our Button component internally, has a wrapper around the action button, and no longer renders an icon wrapper inside the action button.
+
+### menuToggle-remove-splitButtonOptions [(#11096)](https://github.com/patternfly/patternfly-react/pull/11096)
+
+We have replaced `splitButtonOptions` prop on MenuToggle with `splitButtonItems`. SplitButtonOptions interface has been deleted, because its `variant` prop no longer supports the "action" option. The `items` prop of SplitButtonOptions will be passed directly to MenuToggle's new `splitButtonItems` prop.
+
+#### Examples
+
+In:
+
+```jsx
+import { MenuToggle, SplitButtonOptions } from "@patternfly/react-core";
+
+const sbOptions: SplitButtonOptions = {
+  items: ["Item 1", "Item 2"],
+  variant: "action",
+};
+
+export const MenuToggleRemoveSplitButtonOptionsInput = () => (
+  <>
+    <MenuToggle
+      splitButtonOptions={{
+        items: ["Item 1", "Item 2"],
+        variant: "action",
+      }}
+    ></MenuToggle>
+    <MenuToggle splitButtonOptions={sbOptions}></MenuToggle>
+  </>
+);
+```
+
+Out:
+
+```jsx
+import { MenuToggle,  } from "@patternfly/react-core";
+
+const sbOptions = {
+  items: ["Item 1", "Item 2"],
+  variant: "action",
+};
+
+export const MenuToggleRemoveSplitButtonOptionsInput = () => (
+  <>
+    <MenuToggle
+      splitButtonItems={["Item 1", "Item 2"]}
+    ></MenuToggle>
+    <MenuToggle splitButtonItems={sbOptions.items}></MenuToggle>
+  </>
+);
+```
+
 
 ### menuToggle-warn-iconOnly-toggle [(#10097)](https://github.com/patternfly/patternfly-react/pull/10097)
 
