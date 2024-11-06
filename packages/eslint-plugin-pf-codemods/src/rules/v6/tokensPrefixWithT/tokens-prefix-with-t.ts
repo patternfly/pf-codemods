@@ -8,7 +8,7 @@ import {
   getImportPath,
 } from "../../helpers";
 import { Identifier, ImportSpecifier } from "estree-jsx";
-import { tokensToPrefixWithT } from "../../../tokenLists";
+import { tokensToPrefixWithT } from "tokenLists";
 
 module.exports = {
   meta: { fixable: "code" },
@@ -78,7 +78,7 @@ module.exports = {
       ImportSpecifier(node: ImportSpecifier) {
         if (tokenSpecifiers.includes(node)) {
           const token = node.imported.name;
-          if (tokensToPrefixWithT.includes(token)) {
+          if (tokensToPrefixWithT.has(token)) {
             replaceToken(node, token);
           }
         }
@@ -94,7 +94,7 @@ module.exports = {
 
         const { token } = specifierWithToken;
 
-        if (tokensToPrefixWithT.includes(token)) {
+        if (tokensToPrefixWithT.has(token)) {
           replaceToken(node, token);
         }
       },
@@ -114,7 +114,7 @@ module.exports = {
 
         if (specifierWithToken) {
           const { token } = specifierWithToken;
-          if (tokensToPrefixWithT.includes(token)) {
+          if (tokensToPrefixWithT.has(token)) {
             replaceToken(node, token);
           }
         }
@@ -125,10 +125,7 @@ module.exports = {
             node.name === specifier.local.name
         );
 
-        if (
-          unaliasedTokenSpecifier &&
-          tokensToPrefixWithT.includes(node.name)
-        ) {
+        if (unaliasedTokenSpecifier && tokensToPrefixWithT.has(node.name)) {
           replaceToken(node, node.name);
         }
       },
