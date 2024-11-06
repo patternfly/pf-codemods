@@ -1,0 +1,23 @@
+.custom-class {
+  /* Global non-color variables */
+  border-radius: var(--pf-v5-global--BorderRadius--lg);
+  row-gap: var(--pf-v5-global--spacer--md);
+  width: var(--pf-v5-global--arrow--width);
+
+  /* Global color variables */
+  color: var(--pf-v5-global--Color--100);
+  background-color: var(--pf-v5-global--BackgroundColor--200);
+
+  /* Removed variables */
+  max-width: var(--pf-v5-c-accordion__toggle-text--MaxWidth);
+
+  /* Variables staying in v6 */
+  height: var(--pf-v5-c-about-modal-box--Height);
+  box-shadow: var(--pf-v5-c-alert--BoxShadow);
+
+  /* Variables with direction updates */
+  padding-inline-start: var(--pf-v5-c-about-modal-box__brand--PaddingLeft);
+  padding-inline-end: var(--pf-v5-c-about-modal-box__brand--PaddingRight);
+  padding-block-start: var(--pf-v5-c-about-modal-box__brand--PaddingTop);
+  padding-block-end: var(--pf-v5-c-about-modal-box__brand--PaddingBottom);
+}

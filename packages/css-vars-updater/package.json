@@ -1,0 +1,31 @@
+{
+  "name": "@patternfly/css-vars-updater",
+  "version": "1.0.0",
+  "description": "Utility to update Patternfly CSS variables when migrating from V5 to a new design token system in V6",
+  "author": "Red Hat",
+  "license": "MIT",
+  "bin": {
+    "css-vars-updater": "./dist/cli.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --build --verbose ./tsconfig.json",
+    "clean": "rimraf ./dist"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "commander": "^5.1.0",
+    "diff": "^5.1.0",
+    "glob": "^10.2.6",
+    "inquirer": "^12.0.1"
+  },
+  "devDependencies": {
+    "@types/diff": "^5.0.9",
+    "typescript": "^5.4.2"
+  }
+}
