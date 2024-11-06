@@ -38,7 +38,8 @@
   },
   "homepage": "https://github.com/patternfly/pf-codemods#readme",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "tokenLists"
   ],
   "devDependencies": {
     "lerna": "^3.22.0",

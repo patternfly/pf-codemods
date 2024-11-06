@@ -1,4 +1,5 @@
 // Map of old global non-color tokens used in V5 and their suitable replacement token in V6
+// these V6 global tokens (if listed in tokensToPrefixWithT) will additionaly be prefixed with "t_" by the tokens-prefix-with-t rule
 export const globalNonColorTokensMap = {
   global_BorderRadius_lg: "global_border_radius_large", // 30em -> 24px
   global_BorderRadius_sm: "global_border_radius_small", // 3px -> 6px (optionally global_border_radius_tiny = 4px)
@@ -77,9 +78,11 @@ export const globalNonColorTokensMap = {
   global_target_size_MinWidth: "SKIP", // NO SUITABLE REPLACEMENT, value: 44px
 };
 
-export const oldGlobalNonColorTokens = Object.keys(globalNonColorTokensMap);
+export const oldGlobalNonColorTokens = new Set(
+  Object.keys(globalNonColorTokensMap)
+);
 
-export const oldGlobalColorTokens = [
+export const oldGlobalColorTokens = new Set([
   "global_BackgroundColor_100",
   "global_BackgroundColor_150",
   "global_BackgroundColor_200",
@@ -224,4 +227,4 @@ export const oldGlobalColorTokens = [
   "global_success_color_200",
   "global_warning_color_100",
   "global_warning_color_200",
-];
+]);
