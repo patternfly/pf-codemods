@@ -16,7 +16,7 @@ import {
   globalNonColorCssVarNamesMap,
   oldGlobalColorCssVarNames,
   oldGlobalColorTokens,
-} from "tokenLists";
+} from "../../../../../../helpers/tokenLists";
 
 module.exports = {
   meta: { fixable: "code" },

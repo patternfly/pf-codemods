@@ -4,7 +4,7 @@ import { Command } from "commander";
 const program = new Command();
 import inquirer from "inquirer";
 
-import { isDir } from "helpers/utils";
+import { isDir } from "../../../helpers/utils";
 import { cssVarsUpdate } from "./cssVarsUpdate";
 import { Answers } from "./answers";
 

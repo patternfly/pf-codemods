@@ -8,7 +8,7 @@ import {
   getImportPath,
 } from "../../helpers";
 import { Identifier, ImportSpecifier } from "estree-jsx";
-import { tokensToPrefixWithT } from "tokenLists";
+import { tokensToPrefixWithT } from "../../../../../../helpers/tokenLists";
 
 module.exports = {
   meta: { fixable: "code" },
