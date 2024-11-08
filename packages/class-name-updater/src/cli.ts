@@ -8,7 +8,7 @@ import { classNameUpdate } from "./classNameUpdate";
 
 program
   .version(
-    require('../package.json').version
+    require('../../../../package.json').version
   )
   .description("Update class name versioning")
   .arguments("<path> [otherPaths...]")

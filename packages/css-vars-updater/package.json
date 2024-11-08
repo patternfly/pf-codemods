@@ -5,7 +5,7 @@
   "author": "Red Hat",
   "license": "MIT",
   "bin": {
-    "css-vars-updater": "./dist/cli.js"
+    "css-vars-updater": "./dist/packages/css-vars-updater/src/cli.js"
   },
   "engines": {
     "node": ">=18"
