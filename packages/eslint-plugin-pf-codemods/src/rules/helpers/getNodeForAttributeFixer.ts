@@ -1,6 +1,6 @@
 import { Rule } from "eslint";
 import { JSXAttribute } from "estree-jsx";
-import { getVariableDeclaration } from "./JSXAttributes";
+import { getVariableDeclaration, getVariableInit } from "./JSXAttributes";
 
 /** Used to find the node where a prop value is initially assigned, to then be passed
  * as a fixer function's nodeOrToken argument. Useful for when a prop may have an inline value, e.g. `<Comp prop="value" />`, or
@@ -41,6 +41,6 @@ function getJSXExpressionContainerValue(
         scope
       );
 
-      return variableDeclaration && variableDeclaration.defs[0].node.init;
+      return getVariableInit(variableDeclaration);
   }
 }

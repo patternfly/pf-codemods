@@ -1,10 +1,5 @@
 import { Rule } from "eslint";
-import {
-  Identifier,
-  JSXOpeningElement,
-  ObjectExpression,
-  Property,
-} from "estree-jsx";
+import { JSXOpeningElement, ObjectExpression, Property } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 const componentsPropMap: { [key: string]: string } = {
@@ -57,7 +52,8 @@ module.exports = {
                   context,
                   attribute.value
                 ) as ObjectExpression["properties"]
-              ).filter((prop) => prop.type === "Property") as Property[];
+              ) // align prop on Toolbar[Component] accepts an object
+                .filter((prop) => prop.type === "Property") as Property[];
               if (
                 attributeValueProperties.every(
                   (property) =>
@@ -82,17 +78,13 @@ module.exports = {
                       continue;
                     }
 
-                    const propertyValueString = property.value.value as string;
+                    const propertyValueString = property.value.value as string; // value is expected to be "alignLeft" or "alignRight"
 
                     if (oldPropValues.includes(propertyValueString)) {
-                      const propertyKeyValue =
-                        property.key.type === "Literal"
-                          ? `"${property.key.value}"`
-                          : (property.key as Identifier).name;
                       fixes.push(
                         fixer.replaceText(
-                          property,
-                          `${propertyKeyValue}: "${newPropValueMap[propertyValueString]}"`
+                          property.value,
+                          `"${newPropValueMap[propertyValueString]}"`
                         )
                       );
                     }

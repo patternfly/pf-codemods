@@ -1,6 +1,5 @@
 import { Rule } from "eslint";
 import { JSXOpeningElement, ObjectExpression } from "estree-jsx";
-import { Property } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10418
@@ -39,7 +38,7 @@ module.exports = {
                 (getAttributeValue(
                   context,
                   spacerProp.value
-                ) as ObjectExpression["properties"]);
+                ) as ObjectExpression["properties"]); // spacer prop on Toolbar[Component] accepts an object
 
               context.report({
                 node,

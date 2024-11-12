@@ -53,7 +53,7 @@ module.exports = {
               const selectableActionsValue = getAttributeValue(
                 context,
                 selectableActionsProp.value
-              ) as ObjectExpression["properties"];
+              ) as ObjectExpression["properties"]; // selectableActions prop on CardHeader accepts an object
               if (!selectableActionsValue) {
                 return;
               }
@@ -99,7 +99,7 @@ module.exports = {
                     validPropertiesToRemove
                   );
                   const replacementProperties = propertiesToKeep
-                    .map((property: Property) =>
+                    .map((property) =>
                       context.getSourceCode().getText(property)
                     )
                     .join(", ");
@@ -108,6 +108,11 @@ module.exports = {
                     context,
                     selectableActionsProp
                   );
+
+                  if (!nodeToUpdate) {
+                    return [];
+                  }
+
                   return fixer.replaceText(
                     nodeToUpdate,
                     propertiesToKeep.length

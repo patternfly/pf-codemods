@@ -6,8 +6,6 @@ import {
   JSXEmptyExpression,
   JSXFragment,
   JSXOpeningElement,
-  MemberExpression,
-  Property,
 } from "estree-jsx";
 
 export function getAttribute(
@@ -95,19 +93,29 @@ export function getVariableDeclaration(
   return undefined;
 }
 
+export function getVariableInit(
+  variableDeclaration: Scope.Variable | undefined
+) {
+  if (!variableDeclaration || !variableDeclaration.defs.length) {
+    return;
+  }
+
+  const variableDefinition = variableDeclaration.defs[0];
+
+  if (variableDefinition.type !== "Variable") {
+    return;
+  }
+
+  return variableDefinition.node.init;
+}
+
 export function getVariableValue(
   name: string,
   scope: Scope.Scope | null,
   context: Rule.RuleContext
 ) {
   const variableDeclaration = getVariableDeclaration(name, scope);
-  if (!variableDeclaration) {
-    return;
-  }
-
-  const variableInit = variableDeclaration.defs.length
-    ? variableDeclaration.defs[0].node.init
-    : undefined;
+  const variableInit = getVariableInit(variableDeclaration);
 
   if (!variableInit) {
     return;
@@ -120,12 +128,12 @@ export function getVariableValue(
     );
   }
   if (variableInit.type === "Literal") {
-    return variableInit.value as string;
+    return variableInit.value;
   }
   if (variableInit.type === "MemberExpression") {
-    return variableInit as MemberExpression;
+    return variableInit;
   }
   if (variableInit.type === "ObjectExpression") {
-    return variableInit.properties as Property[];
+    return variableInit.properties;
   }
 }

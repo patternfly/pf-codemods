@@ -1,28 +1,26 @@
 import { Rule } from "eslint";
-import { Identifier, MemberExpression } from "estree-jsx";
-import { getVariableDeclaration } from ".";
+import { MemberExpression } from "estree-jsx";
+import { getVariableValue } from ".";
 
 /** Used to get a property name on an enum (MemberExpression). */
 export function getEnumPropertyName(
   context: Rule.RuleContext,
   enumNode: MemberExpression
 ) {
-  const isIdentifier = enumNode.property.type === "Identifier";
-  const computed = enumNode.computed;
+  if (enumNode.property.type === "Identifier") {
+    // E.g. const key = "key"; someEnum[key]
+    if (enumNode.computed) {
+      const scope = context.getSourceCode().getScope(enumNode);
+      const propertyName = enumNode.property.name;
 
-  // E.g. const key = "key"; someEnum[key]
-  if (isIdentifier && computed) {
-    const scope = context.getSourceCode().getScope(enumNode);
-    const propertyName = (enumNode.property as Identifier).name;
-    const propertyVariable = getVariableDeclaration(propertyName, scope);
-    return propertyVariable?.defs[0].node.init.value as string;
+      return getVariableValue(propertyName, scope, context)?.toString();
+    }
+    // E.g. someEnum.key
+    return enumNode.property.name;
   }
-  // E.g. someEnum.key
-  if (isIdentifier && !computed) {
-    return (enumNode.property as Identifier).name;
-  }
+
   // E.g. someEnum["key"]
   if (enumNode.property.type === "Literal") {
-    return enumNode.property.value as string;
+    return enumNode.property.value?.toString();
   }
 }
