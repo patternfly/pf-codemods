@@ -1,7 +1,8 @@
 import { Rule } from "eslint";
 import { TSESTree } from "@typescript-eslint/utils";
-import { Identifier, ImportSpecifier, Node } from "estree-jsx";
+import { Identifier, ImportSpecifier } from "estree-jsx";
 import { getFromPackage } from "./getFromPackage";
+import { checkMatchingImportSpecifier } from "./nodeMatches/checkMatchingImportSpecifier";
 
 interface InterfaceRenames {
   [currentName: string]: string;
@@ -23,19 +24,19 @@ export function renameInterface(
       return {};
     }
 
-    const replaceIdentifier = (identifier: Identifier) => {
-      const getMatchingImport = (name: string) =>
-        imports.find((specifier) => specifier.local.name === name);
+    const shouldRenameIdentifier = (identifier: Identifier) => {
+      const matchingImport = imports.find(
+        (specifier) => specifier.local.name === identifier.name
+      );
 
-      const matchingImport = getMatchingImport(identifier.name);
-      const shouldRename =
-        matchingImport &&
-        matchingImport.local.name === matchingImport.imported.name;
-
-      if (!shouldRename) {
-        return;
+      if (!matchingImport) {
+        return false;
       }
 
+      return matchingImport.local.name === matchingImport.imported.name;
+    };
+
+    const replaceIdentifier = (identifier: Identifier) => {
       const oldName = identifier.name;
       const newName = renames[oldName];
 
@@ -50,11 +51,7 @@ export function renameInterface(
 
     return {
       ImportSpecifier(node: ImportSpecifier) {
-        if (
-          !imports.some(
-            (specifier) => specifier.imported.name === node.imported.name
-          )
-        ) {
+        if (!checkMatchingImportSpecifier(node, imports)) {
           return;
         }
 
@@ -71,12 +68,14 @@ export function renameInterface(
       },
       TSTypeReference(node: TSESTree.TSTypeReference) {
         if (node.typeName.type === "Identifier") {
-          replaceIdentifier(node.typeName);
+          shouldRenameIdentifier(node.typeName) &&
+            replaceIdentifier(node.typeName);
         }
       },
       TSInterfaceHeritage(node: TSESTree.TSInterfaceHeritage) {
         if (node.expression.type === "Identifier") {
-          replaceIdentifier(node.expression);
+          shouldRenameIdentifier(node.expression) &&
+            replaceIdentifier(node.expression);
         }
       },
     };

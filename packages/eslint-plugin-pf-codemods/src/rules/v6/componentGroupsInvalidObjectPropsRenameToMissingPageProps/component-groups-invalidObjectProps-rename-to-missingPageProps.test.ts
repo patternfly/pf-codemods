@@ -16,14 +16,18 @@ ruleTester.run(
       {
         code: `import { InvalidObjectProps } from '@patternfly/react-core';`,
       },
+      // import of other props
+      {
+        code: `import { SomeOtherProps } from '@patternfly/react-component-groups';`,
+      },
     ],
     invalid: [
       {
-        code: `import { InvalidObjectProps } from '@patternfly/react-component-groups';
+        code: `import { InvalidObjectProps, SomethingElse } from '@patternfly/react-component-groups';
       const props: InvalidObjectProps;
       const otherProps = props as InvalidObjectProps;
       interface CustomProps extends InvalidObjectProps {};`,
-        output: `import { MissingPageProps } from '@patternfly/react-component-groups';
+        output: `import { MissingPageProps, SomethingElse } from '@patternfly/react-component-groups';
       const props: MissingPageProps;
       const otherProps = props as MissingPageProps;
       interface CustomProps extends MissingPageProps {};`,
