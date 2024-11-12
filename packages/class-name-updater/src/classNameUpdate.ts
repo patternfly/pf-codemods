@@ -1,8 +1,8 @@
 import { sync } from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
-import { isDir } from "../../../helpers/utils";
-import { printDiff } from "../../../helpers/printDiff";
+import { isDir } from "shared-helpers/dist/utils";
+import { printDiff } from "shared-helpers/dist/printDiff";
 
 export async function classNameUpdate(
   globTarget: string,

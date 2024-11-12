@@ -1,7 +1,7 @@
 import { sync } from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
-import { isDir } from "../../../helpers/utils";
+import { isDir } from "shared-helpers/dist/utils";
 // import { printDiff } from "../../../helpers/printDiff";
 import {
   globalNonColorCssVarNamesMap,
@@ -9,7 +9,7 @@ import {
   oldGlobalColorCssVarNames,
   oldGlobalNonColorCssVarNames,
   v6DirectionCssVars,
-} from "../../../helpers/tokenLists";
+} from "shared-helpers/dist/tokenLists";
 import { Answers } from "./answers";
 import { getDirectionMap } from "./directionalStyles";
 

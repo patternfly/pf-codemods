@@ -5,7 +5,7 @@
   "author": "Red Hat",
   "license": "MIT",
   "bin": {
-    "class-name-updater": "./dist/packages/class-name-updater/src/cli.js"
+    "class-name-updater": "./dist/cli.js"
   },
   "engines": {
     "node": ">=18"
@@ -17,14 +17,15 @@
     "build": "tsc --build --verbose ./tsconfig.json",
     "clean": "rimraf ./dist",
     "test": "yarn build && yarn test:v5 && yarn test:v6",
-    "test:v5": "node ./dist/packages/class-name-updater/src/cli.js test --exclude test/largeFile.js",
-    "test:v6": "node ./dist/packages/class-name-updater/src/cli.js test --exclude test/largeFile.js --v6"
+    "test:v5": "node ./dist/cli.js test --exclude test/largeFile.js",
+    "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --v6"
   },
   "dependencies": {
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "diff": "^5.1.0",
-    "glob": "^10.2.6"
+    "glob": "^10.2.6",
+    "shared-helpers": "^1.0.0"
   },
   "devDependencies": {
     "@types/diff": "^5.0.9",

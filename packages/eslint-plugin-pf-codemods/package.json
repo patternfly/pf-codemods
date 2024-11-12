@@ -17,6 +17,9 @@
     "test": "eslint . --ext .ts",
     "clean": "rimraf ./dist"
   },
+  "dependencies": {
+    "shared-helpers": "^1.0.0"
+  },
   "peerDependencies": {
     "@typescript-eslint/parser": ">=5.58.0",
     "eslint": ">=0.8.0",

@@ -3,12 +3,12 @@ import { join } from "path";
 import { Command } from "commander";
 const program = new Command();
 
-import { isDir } from "../../../helpers/utils";
+import { isDir } from "shared-helpers/dist/utils";
 import { classNameUpdate } from "./classNameUpdate";
 
 program
   .version(
-    require('../../../../package.json').version
+    require('../package.json').version
   )
   .description("Update class name versioning")
   .arguments("<path> [otherPaths...]")

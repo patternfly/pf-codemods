@@ -14,7 +14,8 @@
     "packages/eslint-plugin-pf-codemods",
     "packages/pf-codemods",
     "packages/class-name-updater",
-    "packages/css-vars-updater"
+    "packages/css-vars-updater",
+    "packages/shared-helpers"
   ],
   "version": "independent"
 }
