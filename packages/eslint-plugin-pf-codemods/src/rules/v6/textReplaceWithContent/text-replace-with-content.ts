@@ -71,7 +71,11 @@ module.exports = {
               const specifierName = specifierToReplace.imported.name;
               const newText = getNewText(specifierName);
 
-              const importPath = node.source.value?.toString() as string;
+              const importPath = node.source.value?.toString();
+
+              if (!importPath) {
+                return;
+              }
 
               context.report({
                 node,
