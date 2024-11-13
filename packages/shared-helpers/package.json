@@ -2,6 +2,8 @@
   "name": "shared-helpers",
   "version": "1.0.0",
   "description": "Shared helpers for the monorepo",
+  "author": "Red Hat",
+  "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,8 +11,6 @@
     "build": "tsc --build --verbose ./tsconfig.json",
     "clean": "rimraf ./dist"
   },
-  "author": "Red Hat",
-  "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
     "diff": "^5.1.0"

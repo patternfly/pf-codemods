@@ -25,7 +25,7 @@
     "commander": "^5.1.0",
     "diff": "^5.1.0",
     "glob": "^10.2.6",
-    "shared-helpers": "^1.0.0"
+    "shared-helpers": "workspace:^1.0.0"
   },
   "devDependencies": {
     "@types/diff": "^5.0.9",
