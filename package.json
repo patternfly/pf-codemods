@@ -24,7 +24,7 @@
     "build": "lerna run build",
     "build:generators": "tsc --build --verbose generators/tsconfig.cjs.json",
     "build:readme": "lerna run build:readme",
-    "build:classnames": "lerna run build --scope=@patternfly/class-name-updater",
+    "build:classnames": "lerna run build --scope=@patternfly/class-name-updater --include-dependencies",
     "clean": "lerna run clean"
   },
   "repository": {
