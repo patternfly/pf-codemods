@@ -70,10 +70,10 @@ In:
   box-shadow: var(--pf-v5-c-alert--BoxShadow);
 
   /* Variables with direction updates */
-  padding-inline-start: var(--pf-v5-c-app-launcher__menu-item--PaddingLeft);
-  padding-inline-end: var(--pf-v5-c-app-launcher__menu-item--PaddingRight);
-  padding-block-start: var(--pf-v5-c-app-launcher__menu-item--PaddingTop);
-  padding-block-end: var(--pf-v5-c-app-launcher__menu-item--PaddingBottom);
+  padding-inline-start: var(--pf-v5-c-about-modal-box__brand--PaddingLeft);
+  padding-inline-end: var(--pf-v5-c-about-modal-box__brand--PaddingRight);
+  padding-block-start: var(--pf-v5-c-about-modal-box__brand--PaddingTop);
+  padding-block-end: var(--pf-v5-c-about-modal-box__brand--PaddingBottom);
 }
 ```
 
