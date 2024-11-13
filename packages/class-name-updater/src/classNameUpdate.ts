@@ -1,6 +1,6 @@
 import { sync } from "glob";
 import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { isAbsolute, join } from "path";
 import { isDir } from "./utils";
 import { printDiff } from "./printDiff";
 
@@ -31,7 +31,7 @@ export async function classNameUpdate(
   );
 
   includedFiles.forEach(async (file: string) => {
-    const filePath = join(process.cwd(), file);
+    const filePath = isAbsolute(file) ? file : join(process.cwd(), file);
     const isDirectory = await isDir(filePath);
     const isUnexpectedFile = !acceptedFileTypesRegex.test(filePath);
 
