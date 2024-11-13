@@ -2,6 +2,9 @@
   "name": "shared-helpers",
   "version": "1.0.0",
   "description": "Shared helpers for the monorepo",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc --build --verbose ./tsconfig.json",
     "clean": "rimraf ./dist"

@@ -3,7 +3,7 @@ import { join } from "path";
 import { Command } from "commander";
 const program = new Command();
 
-import { isDir } from "shared-helpers/dist/utils";
+import { isDir } from "shared-helpers";
 import { classNameUpdate } from "./classNameUpdate";
 
 program

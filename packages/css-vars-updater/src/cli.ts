@@ -4,7 +4,7 @@ import { Command } from "commander";
 const program = new Command();
 import inquirer from "inquirer";
 
-import { isDir } from "shared-helpers/dist/utils";
+import { isDir } from "shared-helpers";
 import { cssVarsUpdate } from "./cssVarsUpdate";
 import { Answers } from "./answers";
 

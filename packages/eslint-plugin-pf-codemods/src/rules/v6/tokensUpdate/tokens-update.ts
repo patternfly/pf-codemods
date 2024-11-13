@@ -16,7 +16,7 @@ import {
   globalNonColorCssVarNamesMap,
   oldGlobalColorCssVarNames,
   oldGlobalColorTokens,
-} from "shared-helpers/dist/tokenLists";
+} from "shared-helpers";
 
 module.exports = {
   meta: { fixable: "code" },
