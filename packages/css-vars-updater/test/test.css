@@ -8,7 +8,7 @@
   color: var(--pf-v5-global--Color--100);
   background-color: var(--pf-v5-global--BackgroundColor--200);
 
-  /* Removed variables */
+  /* Variables removed from v6 */
   max-width: var(--pf-v5-c-accordion__toggle-text--MaxWidth);
 
   /* Variables staying in v6 */
