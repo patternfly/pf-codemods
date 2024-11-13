@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18'
+      - run: corepack enable
+      - run: corepack prepare yarn@4.5.1 --activate
       - uses: actions/cache@v2
         id: yarn-cache
         name: Cache npm deps
@@ -48,6 +50,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18'
+      - run: corepack enable
+      - run: corepack prepare yarn@4.5.1 --activate
       - uses: actions/cache@v2
         id: yarn-cache
         name: Cache npm deps
@@ -78,6 +82,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18'
+      - run: corepack enable
+      - run: corepack prepare yarn@4.5.1 --activate
       - uses: actions/cache@v2
         id: yarn-cache
         name: Cache npm deps
