@@ -10,6 +10,8 @@ import {
   getAttribute,
   getAttributeValue,
   attributeValueIsString,
+  getEnumPropertyName,
+  isEnumValue,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10649
@@ -76,14 +78,26 @@ module.exports = {
                 variant.value
               );
 
+              const isEnumToRemove =
+                enumImport &&
+                isEnumValue(
+                  context,
+                  variantValue as MemberExpression,
+                  enumImport.local.name,
+                  variantsToRemove
+                );
+
               if (
                 (variantValueIsLiteral &&
-                  variantsToRemove.includes(variantValue)) ||
-                (nodeIsEnum(variantValue) &&
-                  variantsToRemove.includes(variantValue.property.value))
+                  variantsToRemove.includes(variantValue as string)) ||
+                isEnumToRemove
               ) {
-                const variantToRemove =
-                  variantValue.property?.value ?? variantValue;
+                const variantToRemove = isEnumToRemove
+                  ? getEnumPropertyName(
+                      context,
+                      variantValue as MemberExpression
+                    )
+                  : variantValue;
 
                 context.report({
                   node,

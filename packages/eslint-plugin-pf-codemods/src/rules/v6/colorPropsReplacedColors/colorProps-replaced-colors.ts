@@ -32,7 +32,10 @@ module.exports = {
                 return;
               }
 
-              const colorValue = getAttributeValue(context, colorProp.value);
+              const colorValue = getAttributeValue(
+                context,
+                colorProp.value
+              ) as string;
               if (Object.keys(replacementMap).includes(colorValue)) {
                 const newColorValue = replacementMap[colorValue];
                 const message = `The \`color\` prop on ${node.name.name} has been updated to replace "${colorValue}" with "${newColorValue}".`;

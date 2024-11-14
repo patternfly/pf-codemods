@@ -1,6 +1,12 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement } from "estree-jsx";
-import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
+import { JSXOpeningElement, MemberExpression } from "estree-jsx";
+import {
+  getFromPackage,
+  getAttribute,
+  getAttributeValue,
+  getEnumPropertyName,
+  isEnumValue,
+} from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10674
 module.exports = {
@@ -20,6 +26,7 @@ module.exports = {
       "icon-button-group": "action-group-plain",
     };
     const oldVariantNames = Object.keys(renames);
+    type OldVariantType = "button-group" | "icon-button-group";
 
     return !componentImports.length
       ? {}
@@ -38,24 +45,37 @@ module.exports = {
               }
 
               const variantValue = getAttributeValue(context, variant.value);
+              const variantValueAsEnum = variantValue as MemberExpression;
+
               const isEnumToRename =
                 variantEnumImport &&
-                variantValue.object?.name === variantEnumImport.local.name &&
-                oldVariantNames.includes(variantValue.property.value);
+                isEnumValue(
+                  context,
+                  variantValueAsEnum,
+                  variantEnumImport.local.name,
+                  oldVariantNames
+                );
 
-              if (!oldVariantNames.includes(variantValue) && !isEnumToRename) {
+              if (
+                !oldVariantNames.includes(variantValue as string) &&
+                !isEnumToRename
+              ) {
                 return;
               }
 
-              const variantToRename: "button-group" | "icon-button-group" =
-                variantValue.property?.value ?? variantValue;
+              const variantToRename = isEnumToRename
+                ? (getEnumPropertyName(
+                    context,
+                    variantValueAsEnum
+                  ) as OldVariantType)
+                : (variantValue as OldVariantType);
 
               context.report({
                 node,
                 message: `The \`${variantToRename}\` variant of ${applicableComponent.imported.name} has been renamed to \`${renames[variantToRename]}\`.`,
                 fix(fixer) {
                   return fixer.replaceText(
-                    isEnumToRename ? variantValue.property : variant,
+                    isEnumToRename ? variantValueAsEnum.property : variant,
                     isEnumToRename
                       ? `"${renames[variantToRename]}"`
                       : `variant="${renames[variantToRename]}"`

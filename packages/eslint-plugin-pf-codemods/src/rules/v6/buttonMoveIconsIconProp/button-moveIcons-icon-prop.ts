@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXElement, JSXFragment } from "estree-jsx";
+import { JSXElement, JSXFragment, MemberExpression } from "estree-jsx";
 import {
   childrenIsEmpty,
   getFromPackage,
@@ -10,6 +10,8 @@ import {
   getChildJSXElementByName,
   isReactIcon,
   makeJSXElementSelfClosing,
+  propertyNameMatches,
+  isEnumValue,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10663
@@ -47,11 +49,16 @@ module.exports = {
                 variantProp?.value
               );
 
+              const variantValueAsEnum = variantValue as MemberExpression;
+
               const isEnumValuePlain =
-                buttonVariantEnumImport &&
-                variantValue?.object?.name ===
-                  buttonVariantEnumImport.local.name &&
-                variantValue?.property.name === "plain";
+                !!buttonVariantEnumImport &&
+                isEnumValue(
+                  context,
+                  variantValueAsEnum,
+                  buttonVariantEnumImport.local.name,
+                  "plain"
+                );
 
               const isPlain = variantValue === "plain" || isEnumValuePlain;
 

@@ -28,9 +28,11 @@ module.exports = {
               node,
               "statusPageLinkText"
             );
-            const statusPageLinkTextString: string =
-              getAttributeValue(context, statusPageLinkTextProp?.value) ??
-              "status page";
+            const statusPageLinkTextString =
+              (getAttributeValue(
+                context,
+                statusPageLinkTextProp?.value
+              ) as string) ?? "status page";
 
             if (statusPageLinkTextProp && statusPageLinkTextString.length) {
               const firstChar = statusPageLinkTextString.charAt(0);

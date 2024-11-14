@@ -6,7 +6,6 @@ import {
   JSXEmptyExpression,
   JSXFragment,
   JSXOpeningElement,
-  MemberExpression,
 } from "estree-jsx";
 
 export function getAttribute(
@@ -58,7 +57,7 @@ export function getAttributeValue(
     return getVariableValue(node.expression.name, variableScope, context);
   }
   if (node.expression.type === "MemberExpression") {
-    return getMemberExpression(node.expression);
+    return node.expression;
   }
   if (node.expression.type === "Literal") {
     return node.expression.value;
@@ -78,15 +77,6 @@ export function getExpression(node?: JSXAttribute["value"]) {
   }
 }
 
-function getMemberExpression(node: MemberExpression) {
-  if (!node) {
-    return;
-  }
-  const { object, property } = node;
-
-  return { object, property };
-}
-
 export function getVariableDeclaration(
   name: string,
   scope: Scope.Scope | null
@@ -103,19 +93,29 @@ export function getVariableDeclaration(
   return undefined;
 }
 
+export function getVariableInit(
+  variableDeclaration: Scope.Variable | undefined
+) {
+  if (!variableDeclaration || !variableDeclaration.defs.length) {
+    return;
+  }
+
+  const variableDefinition = variableDeclaration.defs[0];
+
+  if (variableDefinition.type !== "Variable") {
+    return;
+  }
+
+  return variableDefinition.node.init;
+}
+
 export function getVariableValue(
   name: string,
   scope: Scope.Scope | null,
   context: Rule.RuleContext
 ) {
   const variableDeclaration = getVariableDeclaration(name, scope);
-  if (!variableDeclaration) {
-    return;
-  }
-
-  const variableInit = variableDeclaration.defs.length
-    ? variableDeclaration.defs[0].node.init
-    : undefined;
+  const variableInit = getVariableInit(variableDeclaration);
 
   if (!variableInit) {
     return;
@@ -131,7 +131,7 @@ export function getVariableValue(
     return variableInit.value;
   }
   if (variableInit.type === "MemberExpression") {
-    return getMemberExpression(variableInit);
+    return variableInit;
   }
   if (variableInit.type === "ObjectExpression") {
     return variableInit.properties;

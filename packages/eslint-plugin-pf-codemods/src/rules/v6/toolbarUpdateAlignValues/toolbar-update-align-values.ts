@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, Property } from "estree-jsx";
+import { JSXOpeningElement, ObjectExpression, Property } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 const componentsPropMap: { [key: string]: string } = {
@@ -47,15 +47,21 @@ module.exports = {
                 return;
               }
 
-              const attributeValue = getAttributeValue(
-                context,
-                attribute.value
-              );
+              const attributeValueProperties = (
+                getAttributeValue(
+                  context,
+                  attribute.value
+                ) as ObjectExpression["properties"]
+              ) // align prop on Toolbar[Component] accepts an object
+                .filter((prop) => prop.type === "Property") as Property[];
               if (
-                attributeValue.every(
-                  (property: Property) =>
-                    property.value.type === "Literal" &&
-                    !oldPropValues.includes(property.value.value as string)
+                attributeValueProperties.every(
+                  (property) =>
+                    (property.value.type === "Literal" &&
+                      !oldPropValues.includes(
+                        property.value.value as string
+                      )) ||
+                    property.value.type !== "Literal"
                 )
               ) {
                 return;
@@ -67,18 +73,18 @@ module.exports = {
                 fix(fixer) {
                   const fixes = [];
 
-                  for (const property of attributeValue) {
-                    if (oldPropValues.includes(property.value.value)) {
-                      const propertyKeyValue =
-                        property.key.type === "Literal"
-                          ? `"${property.key.value}"`
-                          : property.key.name;
+                  for (const property of attributeValueProperties) {
+                    if (property.value.type !== "Literal") {
+                      continue;
+                    }
+
+                    const propertyValueString = property.value.value as string; // value is expected to be "alignLeft" or "alignRight"
+
+                    if (oldPropValues.includes(propertyValueString)) {
                       fixes.push(
                         fixer.replaceText(
-                          property,
-                          `${propertyKeyValue}: "${
-                            newPropValueMap[property.value.value]
-                          }"`
+                          property.value,
+                          `"${newPropValueMap[propertyValueString]}"`
                         )
                       );
                     }

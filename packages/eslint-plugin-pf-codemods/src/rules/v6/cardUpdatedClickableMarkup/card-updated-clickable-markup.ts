@@ -1,7 +1,6 @@
 import { Rule } from "eslint";
-import { JSXElement, Property, Literal } from "estree-jsx";
+import { JSXElement, ObjectExpression, Property } from "estree-jsx";
 import {
-  getAllImportsFromPackage,
   getFromPackage,
   checkMatchingJSXOpeningElement,
   getAttribute,
@@ -54,19 +53,23 @@ module.exports = {
               const selectableActionsValue = getAttributeValue(
                 context,
                 selectableActionsProp.value
-              );
+              ) as ObjectExpression["properties"]; // selectableActions prop on CardHeader accepts an object
               if (!selectableActionsValue) {
                 return;
               }
 
+              const selectableActionsProperties = selectableActionsValue.filter(
+                (val) => val.type === "Property"
+              ) as Property[];
+
               const nameProperty = getObjectProperty(
                 context,
-                selectableActionsValue,
+                selectableActionsProperties,
                 "name"
               );
               const idProperty = getObjectProperty(
                 context,
-                selectableActionsValue,
+                selectableActionsProperties,
                 "selectableActionId"
               );
 
@@ -92,11 +95,11 @@ module.exports = {
                     return [];
                   }
                   const propertiesToKeep = removePropertiesFromObjectExpression(
-                    selectableActionsValue,
+                    selectableActionsProperties,
                     validPropertiesToRemove
                   );
                   const replacementProperties = propertiesToKeep
-                    .map((property: Property) =>
+                    .map((property) =>
                       context.getSourceCode().getText(property)
                     )
                     .join(", ");
@@ -105,6 +108,11 @@ module.exports = {
                     context,
                     selectableActionsProp
                   );
+
+                  if (!nodeToUpdate) {
+                    return [];
+                  }
+
                   return fixer.replaceText(
                     nodeToUpdate,
                     propertiesToKeep.length
