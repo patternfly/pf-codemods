@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@2.0.7...@patternfly/class-name-updater@2.0.8) (2024-11-14)
+
+
+### Bug Fixes
+
+* class name updater does not support absolute paths ([#803](https://github.com/patternfly/pf-codemods/issues/803)) ([f5ec201](https://github.com/patternfly/pf-codemods/commit/f5ec20189f26e751335c6ec0ca296ab004d31bc8)), closes [#802](https://github.com/patternfly/pf-codemods/issues/802)
+
+
+
+
+
 ## [2.0.7](https://github.com/patternfly/pf-codemods/compare/@patternfly/class-name-updater@2.0.6...@patternfly/class-name-updater@2.0.7) (2024-09-30)
 
 
