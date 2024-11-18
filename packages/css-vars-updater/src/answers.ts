@@ -5,5 +5,5 @@ export type Answers = {
   fix: boolean;
   replaceGlobalColorsWithPink: boolean;
   replaceGlobalVars: boolean;
-  directionalStyles: "ltr" | "rtl" | "ttb" | "none";
+  direction: "ltr" | "rtl" | "ttb" | "none";
 };

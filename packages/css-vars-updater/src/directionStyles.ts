@@ -1,6 +1,6 @@
 import { Answers } from "./answers";
 
-export const getDirectionMap = (direction: Answers["directionalStyles"]) => {
+export const getDirectionMap = (direction: Answers["direction"]) => {
   const directionMapLTR = {
     Left: "InlineStart",
     Right: "InlineEnd",

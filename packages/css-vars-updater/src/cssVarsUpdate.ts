@@ -2,67 +2,9 @@ import { sync } from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { isDir } from "shared-helpers";
-// import { printDiff } from "../../../helpers/printDiff";
-import {
-  globalNonColorCssVarNamesMap,
-  oldCssVarNames,
-  oldGlobalColorCssVarNames,
-  oldGlobalNonColorCssVarNames,
-  v6DirectionCssVars,
-} from "shared-helpers";
 import { Answers } from "./answers";
-import { getDirectionMap } from "./directionalStyles";
-
-const getCssVarReplacement = (oldCssVar: string, answers: Answers) => {
-  const cssVarRemoved = (cssVar: string) =>
-    `${cssVar}/* CODEMODS: this var was removed in v6 */`;
-
-  if (oldGlobalNonColorCssVarNames.has(oldCssVar)) {
-    const newCssVar =
-      globalNonColorCssVarNamesMap[
-        oldCssVar as keyof typeof globalNonColorCssVarNamesMap
-      ];
-    if (newCssVar === "SKIP") {
-      return cssVarRemoved(oldCssVar);
-    }
-    if (answers.replaceGlobalVars) {
-      return newCssVar;
-    }
-    return oldCssVar;
-  }
-
-  if (oldGlobalColorCssVarNames.has(oldCssVar)) {
-    if (answers.replaceGlobalColorsWithPink) {
-      return `--pf-t--temp--dev--tbd/* CODEMODS: original v5 color was ${oldCssVar} */`;
-    }
-    return oldCssVar;
-  }
-
-  if (oldCssVarNames.has(oldCssVar)) {
-    const directionMap = getDirectionMap(answers.directionalStyles);
-    const directions = Object.keys(directionMap);
-
-    if (
-      answers.directionalStyles !== "none" &&
-      directions.some((direction) => oldCssVar.endsWith(direction))
-    ) {
-      const newCssVar = oldCssVar
-        .replace(
-          /(Left|Right|Top|Bottom)$/,
-          (match) => directionMap[match as keyof typeof directionMap]
-        )
-        .replace("v5", "v6");
-
-      if (v6DirectionCssVars.has(newCssVar)) {
-        return newCssVar;
-      }
-    }
-
-    return cssVarRemoved(oldCssVar);
-  }
-
-  return oldCssVar.replace("v5", "v6");
-};
+import { getCssVarReplacement } from "./cssVarReplacement";
+import { printLineChange } from "./printLineChange";
 
 export async function cssVarsUpdate(globTarget: string, answers: Answers) {
   const fileTypesRegex = answers.fileExtensions
@@ -75,7 +17,8 @@ export async function cssVarsUpdate(globTarget: string, answers: Answers) {
 
   const acceptedFileTypesRegex = fileTypesRegex || /\.(s?css|less|md)$/;
 
-  const isV5VarRegex = /(--pf-v5-[\w-]+)/g;
+  // negative lookbehind (?<!:) is used here to prevent matching codemod comments
+  const isV5VarRegex = /(?<!:)(--pf-v5-[\w-]+)/g;
 
   const files = sync(globTarget, { ignore: "**/node_modules/**" });
 
@@ -95,16 +38,36 @@ export async function cssVarsUpdate(globTarget: string, answers: Answers) {
     const fileContent = readFileSync(filePath, "utf8");
 
     const needsChange = isV5VarRegex.test(fileContent);
-
     if (!needsChange) {
       return;
     }
 
-    const newContent = fileContent.replace(isV5VarRegex, (match) =>
-      getCssVarReplacement(match, answers)
-    );
+    console.log(file);
 
-    // printDiff(file, fileContent, newContent, isV5VarRegex);
+    const newContent = fileContent
+      .split("\n")
+      .map((line, index) => {
+        let updatedLine = line;
+        let match;
+
+        // Check for matches in the line
+        while ((match = isV5VarRegex.exec(line)) !== null) {
+          const oldVar = match[0];
+          const replacement = getCssVarReplacement(oldVar, answers);
+          if (!replacement) {
+            continue;
+          }
+
+          printLineChange(index + 1, oldVar, replacement);
+
+          if (replacement.newVar) {
+            updatedLine = updatedLine.replace(oldVar, replacement.newVar);
+          }
+        }
+
+        return updatedLine;
+      })
+      .join("\n");
 
     if (answers.fix) {
       writeFileSync(filePath, newContent);

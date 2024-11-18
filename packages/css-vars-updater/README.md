@@ -62,7 +62,7 @@ In:
   color: var(--pf-v5-global--Color--100);
   background-color: var(--pf-v5-global--BackgroundColor--200);
 
-  /* Removed variables */
+  /* Variables removed from v6 */
   max-width: var(--pf-v5-c-accordion__toggle-text--MaxWidth);
 
   /* Variables staying in v6 */
@@ -84,14 +84,14 @@ Out:
   /* Global non-color variables */
   border-radius: var(--pf-t--global--border--radius--large);
   row-gap: var(--pf-t--global--spacer--md);
-  width: var(--pf-v5-global--arrow--width/* CODEMODS: this var was removed in v6 */);
+  width: var(--pf-v5-global--arrow--width);
 
   /* Global color variables */
-  color: var(--pf-t--temp--dev--tbd/* CODEMODS: original v5 color was --pf-v5-global--Color--100 */);
-  background-color: var(--pf-t--temp--dev--tbd/* CODEMODS: original v5 color was --pf-v5-global--BackgroundColor--200 */);
+  color: var(--pf-t--temp--dev--tbd /* CODEMODS: original v5 color was:--pf-v5-global--Color--100 */);
+  background-color: var(--pf-t--temp--dev--tbd /* CODEMODS: original v5 color was:--pf-v5-global--BackgroundColor--200 */);
 
-  /* Removed variables */
-  max-width: var(--pf-v5-c-accordion__toggle-text--MaxWidth/* CODEMODS: this var was removed in v6 */);
+  /* Variables removed from v6 */
+  max-width: var(--pf-v5-c-accordion__toggle-text--MaxWidth);
 
   /* Variables staying in v6 */
   height: var(--pf-v6-c-about-modal-box--Height);

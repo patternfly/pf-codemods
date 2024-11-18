@@ -30,7 +30,7 @@ async function runCssVarsUpdate(
     fix: options.fix,
     replaceGlobalColorsWithPink: true,
     replaceGlobalVars: true,
-    directionalStyles: "ltr",
+    direction: "ltr",
   };
 
   const answers: Answers = options.interactive
@@ -73,7 +73,7 @@ async function runCssVarsUpdate(
         },
         {
           type: "list",
-          name: "directionalStyles",
+          name: "direction",
           message:
             "Do you want to fix directional styles and how? E.g. PaddingLeft -> PaddingInlineStart",
           choices: [
