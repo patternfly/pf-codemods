@@ -1,0 +1,23 @@
+{
+  "name": "shared-helpers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared helpers for the monorepo",
+  "author": "Red Hat",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build --verbose ./tsconfig.json",
+    "clean": "rimraf ./dist"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "diff": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/diff": "^5.0.9",
+    "typescript": "^5.4.2"
+  }
+}

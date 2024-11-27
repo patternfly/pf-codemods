@@ -6,5 +6,14 @@ test/packages/*
 .DS_Store
 dist
 
+# Yarn modern
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # IDE - VSCode
 .history
