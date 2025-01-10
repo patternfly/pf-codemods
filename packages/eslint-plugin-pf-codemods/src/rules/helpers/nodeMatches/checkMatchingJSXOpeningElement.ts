@@ -4,7 +4,12 @@ import {
   ImportDefaultSpecifier,
 } from "estree-jsx";
 
-/** Used to check whether the current JSXOpeningElement node matches at least 1 of the import specifiers. */
+/**
+ * Use inline at the start of a JSXOpeningElement block to early return if no specifiers match the node name, or only run logic if at least 1 specifier matches the node name.
+ * @param node - The node to check for any import specifiers.
+ * @param imports - A single import specifier or an array of specifiers to check against the opening element node name.
+ * @returns A boolean depending on whether at least 1 import specifier matches the opening element node name.
+ */
 export function checkMatchingJSXOpeningElement(
   node: JSXOpeningElement,
   imports:

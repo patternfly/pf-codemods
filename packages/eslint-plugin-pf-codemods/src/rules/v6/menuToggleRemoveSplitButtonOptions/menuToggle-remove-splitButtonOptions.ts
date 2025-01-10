@@ -14,7 +14,7 @@ import {
   getFromPackage,
   getObjectProperty,
   ImportSpecifierWithParent,
-  removeSpecifierFromDeclaration,
+  getRemoveSpecifierFixes,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/11096
@@ -123,9 +123,9 @@ module.exports = {
             node,
             message: interfaceRemovedMessage,
             fix(fixer) {
-              return removeSpecifierFromDeclaration(
-                fixer,
+              return getRemoveSpecifierFixes(
                 context,
+                fixer,
                 (node as ImportSpecifierWithParent).parent!,
                 node
               );
@@ -142,9 +142,9 @@ module.exports = {
             node,
             message: interfaceRemovedMessage,
             fix(fixer) {
-              return removeSpecifierFromDeclaration(
-                fixer,
+              return getRemoveSpecifierFixes(
                 context,
+                fixer,
                 node,
                 specifierToRemove
               );

@@ -1,6 +1,6 @@
 import { Rule } from "eslint";
 import { ImportDeclaration, ImportSpecifier } from "estree-jsx";
-import { getFromPackage, removeSpecifierFromDeclaration } from "../../helpers";
+import { getFromPackage, getRemoveSpecifierFixes } from "../../helpers";
 
 // Cleanup from other rules
 module.exports = {
@@ -34,9 +34,9 @@ module.exports = {
                   node,
                   message: `Duplicate import specifier ${node.local.name} imported from '${importDeclaration.source.value}'.`,
                   fix(fixer) {
-                    return removeSpecifierFromDeclaration(
-                      fixer,
+                    return getRemoveSpecifierFixes(
                       context,
+                      fixer,
                       importDeclaration,
                       node
                     );

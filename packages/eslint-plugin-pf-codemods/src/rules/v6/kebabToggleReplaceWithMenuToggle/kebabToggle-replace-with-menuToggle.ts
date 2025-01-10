@@ -6,7 +6,7 @@ import {
   IdentifierWithParent,
   getAttribute,
   getAttributeValue,
-  removeSpecifierFromDeclaration,
+  getRemoveSpecifierFixes,
   getAllImportDeclarations,
 } from "../../helpers";
 
@@ -72,9 +72,9 @@ module.exports = {
                 }
 
                 fixes.push(
-                  ...removeSpecifierFromDeclaration(
-                    fixer,
+                  ...getRemoveSpecifierFixes(
                     context,
+                    fixer,
                     node,
                     kebabImportSpecifier
                   )

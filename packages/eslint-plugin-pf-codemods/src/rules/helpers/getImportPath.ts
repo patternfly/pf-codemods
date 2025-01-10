@@ -3,7 +3,11 @@ import {
   ImportSpecifierWithParent,
 } from "./interfaces";
 
-/** Gets the import path string for an import specifier (named or default) */
+/**
+ * Use inline to pair with other logic that depends on the import path of a specifier.
+ * @param importSpecifier The import specifier object to get the path of.
+ * @returns The import path string if found, otherwise undefined.
+ */
 export function getImportPath(
   importSpecifier: ImportDefaultSpecifierWithParent | ImportSpecifierWithParent
 ) {
