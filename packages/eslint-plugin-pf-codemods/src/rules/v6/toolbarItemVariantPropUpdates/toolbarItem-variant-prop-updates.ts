@@ -72,31 +72,29 @@ module.exports = {
                 return;
               }
 
-              const variantValue = getAttributeValue(context, variant.value);
+              const { type: variantType, value: variantValue } =
+                getAttributeValue(context, variant.value);
 
-              const variantValueIsLiteral = attributeValueIsString(
-                variant.value
-              );
+              const variantValueEnum =
+                variantType === "MemberExpression" ? variantValue : null;
 
               const isEnumToRemove =
                 enumImport &&
+                variantValueEnum &&
                 isEnumValue(
                   context,
-                  variantValue as MemberExpression,
+                  variantValueEnum,
                   enumImport.local.name,
                   variantsToRemove
                 );
 
               if (
-                (variantValueIsLiteral &&
-                  variantsToRemove.includes(variantValue as string)) ||
+                (variantType === "string" &&
+                  variantsToRemove.includes(variantValue)) ||
                 isEnumToRemove
               ) {
                 const variantToRemove = isEnumToRemove
-                  ? getEnumPropertyName(
-                      context,
-                      variantValue as MemberExpression
-                    )
+                  ? getEnumPropertyName(context, variantValueEnum)
                   : variantValue;
 
                 context.report({
@@ -108,7 +106,7 @@ module.exports = {
                 });
               }
 
-              if (variantValueIsLiteral && variantValue === "chip-group") {
+              if (variantType === "string" && variantValue === "chip-group") {
                 context.report({
                   node,
                   message:

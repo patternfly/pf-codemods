@@ -13,7 +13,7 @@ export function getEnumPropertyName(
       const scope = context.getSourceCode().getScope(enumNode);
       const propertyName = enumNode.property.name;
 
-      return getVariableValue(propertyName, scope, context)?.toString();
+      return getVariableValue(propertyName, scope, context).value?.toString();
     }
     // E.g. someEnum.key
     return enumNode.property.name;

@@ -24,7 +24,10 @@ module.exports = {
               if (!bodyProp) {
                 return;
               }
-              const bodyValue = getAttributeValue(context, bodyProp.value);
+              const bodyValue = getAttributeValue(
+                context,
+                bodyProp.value
+              ).value;
 
               if (bodyValue === null) {
                 context.report({

@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXElement, JSXFragment, MemberExpression } from "estree-jsx";
+import { JSXElement, JSXFragment } from "estree-jsx";
 import {
   childrenIsEmpty,
   getFromPackage,
@@ -10,7 +10,6 @@ import {
   getChildJSXElementByName,
   isReactIcon,
   makeJSXElementSelfClosing,
-  propertyNameMatches,
   isEnumValue,
 } from "../../helpers";
 
@@ -39,28 +38,39 @@ module.exports = {
               node.openingElement.name.type === "JSXIdentifier" &&
               buttonImport.local.name === node.openingElement.name.name
             ) {
-              const variantProp = getAttribute(node.openingElement, "variant");
               const iconProp = getAttribute(node.openingElement, "icon");
               if (iconProp) {
                 return;
               }
-              const variantValue = getAttributeValue(
-                context,
-                variantProp?.value
-              );
 
-              const variantValueAsEnum = variantValue as MemberExpression;
-
-              const isEnumValuePlain =
-                !!buttonVariantEnumImport &&
-                isEnumValue(
-                  context,
-                  variantValueAsEnum,
-                  buttonVariantEnumImport.local.name,
-                  "plain"
+              const isPlainVariant = () => {
+                const variantProp = getAttribute(
+                  node.openingElement,
+                  "variant"
                 );
+                const { value: variantValue, type: variantValueType } =
+                  getAttributeValue(context, variantProp?.value);
 
-              const isPlain = variantValue === "plain" || isEnumValuePlain;
+                if (variantValue === "plain") {
+                  return true;
+                }
+
+                if (variantValueType === "MemberExpression") {
+                  return (
+                    !!buttonVariantEnumImport &&
+                    isEnumValue(
+                      context,
+                      variantValue,
+                      buttonVariantEnumImport.local.name,
+                      "plain"
+                    )
+                  );
+                }
+
+                return false;
+              };
+
+              const isPlain = isPlainVariant();
 
               let plainButtonChildrenString: string | undefined;
               let nodeWithChildren: JSXElement | JSXFragment = node;

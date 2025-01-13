@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, ObjectExpression, Property } from "estree-jsx";
+import { JSXOpeningElement, Property } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 const componentsPropMap: { [key: string]: string } = {
@@ -47,13 +47,17 @@ module.exports = {
                 return;
               }
 
-              const attributeValueProperties = (
-                getAttributeValue(
-                  context,
-                  attribute.value
-                ) as ObjectExpression["properties"]
-              ) // align prop on Toolbar[Component] accepts an object
-                .filter((prop) => prop.type === "Property") as Property[];
+              const { type: attrValueType, value: attrValue } =
+                getAttributeValue(context, attribute.value);
+
+              // align prop on Toolbar[Component] accepts an object
+              if (attrValueType !== "ObjectExpression") {
+                return;
+              }
+
+              const attributeValueProperties = attrValue.filter(
+                (prop) => prop.type === "Property"
+              ) as Property[];
               if (
                 attributeValueProperties.every(
                   (property) =>

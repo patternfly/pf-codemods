@@ -50,11 +50,12 @@ module.exports = {
               if (!cardHeaderChild || !selectableActionsProp) {
                 return;
               }
-              const selectableActionsValue = getAttributeValue(
-                context,
-                selectableActionsProp.value
-              ) as ObjectExpression["properties"]; // selectableActions prop on CardHeader accepts an object
-              if (!selectableActionsValue) {
+              const {
+                value: selectableActionsValue,
+                type: selectableActionsValueType,
+              } = getAttributeValue(context, selectableActionsProp.value);
+              // selectableActions prop on CardHeader accepts an object
+              if (selectableActionsValueType !== "ObjectExpression") {
                 return;
               }
 

@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, MemberExpression } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 import {
   getFromPackage,
   getAttribute,
@@ -33,19 +33,20 @@ module.exports = {
                 return;
               }
 
-              const typeValue = getAttributeValue(context, typeProp.value);
-              const typeValueAsEnum = typeValue as MemberExpression;
+              const { type: typePropType, value: typePropValue } =
+                getAttributeValue(context, typeProp.value);
 
               const isEnumValueNav =
                 pageSectionTypeEnum &&
+                typePropType === "MemberExpression" &&
                 isEnumValue(
                   context,
-                  typeValueAsEnum,
+                  typePropValue,
                   pageSectionTypeEnum.local.name,
                   "nav"
                 );
 
-              if (typeValue !== "nav" && !isEnumValueNav) {
+              if (typePropValue !== "nav" && !isEnumValueNav) {
                 return;
               }
 

@@ -6,7 +6,7 @@ import {
   attributeValueIsString,
 } from "../../helpers";
 import { Rule } from "eslint";
-import { JSXOpeningElement, MemberExpression } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 
 // https://github.com/patternfly/patternfly-react/pull/9774
 // https://github.com/patternfly/patternfly-react/pull/9848
@@ -36,16 +36,17 @@ module.exports = {
               if (!variantProp || !variantProp.value) {
                 return;
               }
-              const variantValue = getAttributeValue(
-                context,
-                variantProp.value
-              );
-              const variantValueAsEnum = variantValue as MemberExpression;
+              const { type: variantPropType, value: variantPropValue } =
+                getAttributeValue(context, variantProp.value);
+              const variantValueEnum =
+                variantPropType === "MemberExpression"
+                  ? variantPropValue
+                  : null;
 
               const hasPatternFlyEnum =
                 pageSectionVariantImport &&
-                variantValueAsEnum?.object &&
-                context.getSourceCode().getText(variantValueAsEnum.object) ===
+                variantValueEnum?.object &&
+                context.getSourceCode().getText(variantValueEnum.object) ===
                   pageSectionVariantImport.local.name;
 
               if (
@@ -56,17 +57,18 @@ module.exports = {
               }
 
               const isValidEnumValue =
-                pageSectionVariantImport &&
+                hasPatternFlyEnum &&
                 isEnumValue(
                   context,
-                  variantValueAsEnum,
+                  variantValueEnum,
                   pageSectionVariantImport.local.name,
                   validValues
                 );
 
               const hasValidValue =
                 isValidEnumValue ||
-                validValues.includes(variantValue as string);
+                (variantPropType === "string" &&
+                  validValues.includes(variantPropValue));
 
               if (!hasValidValue) {
                 context.report({

@@ -26,7 +26,8 @@ module.exports = {
                 'Additionally, when the nav item has a status of "error" the icon will be rendered before the item content, and the WizardToggle will also now render an error icon.';
               const statusProp = getAttribute(node, "status");
               const statusValue =
-                statusProp && getAttributeValue(context, statusProp.value);
+                statusProp &&
+                getAttributeValue(context, statusProp.value).value;
 
               context.report({
                 node,

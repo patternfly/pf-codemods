@@ -2,7 +2,7 @@ import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
-const replacementMap: { [key: string]: string } = {
+const replacementMap = {
   cyan: "teal",
   gold: "yellow",
 };
@@ -35,8 +35,8 @@ module.exports = {
               const colorValue = getAttributeValue(
                 context,
                 colorProp.value
-              ) as string;
-              if (Object.keys(replacementMap).includes(colorValue)) {
+              ).value;
+              if (colorValue === "cyan" || colorValue === "gold") {
                 const newColorValue = replacementMap[colorValue];
                 const message = `The \`color\` prop on ${node.name.name} has been updated to replace "${colorValue}" with "${newColorValue}".`;
                 context.report({

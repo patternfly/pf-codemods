@@ -6,6 +6,9 @@ import {
   JSXEmptyExpression,
   JSXFragment,
   JSXOpeningElement,
+  MemberExpression,
+  Property,
+  SpreadElement,
 } from "estree-jsx";
 
 export function getAttribute(
@@ -34,22 +37,47 @@ export function getAnyAttribute(
   return foundAttribute;
 }
 
+/**
+ * Attribute value and its type
+ */
+type Attribute =
+  | { type: "string"; value: string }
+  | {
+      type: "Literal";
+      value: string | number | bigint | boolean | RegExp | null | undefined;
+    }
+  | { type: "MemberExpression"; value: MemberExpression }
+  | { type: "ObjectExpression"; value: (Property | SpreadElement)[] }
+  | { type: "undefined"; value: undefined };
+
+const UNDEFINED: Attribute = { type: "undefined", value: undefined };
+
+/**
+ * Helper to get the raw value from a JSXAttribute value. If the JSXAttribute value is an Identifier, it tries to get the value of that variable. If the JSXAttribute value is a JSXExpressionContainer: {"value"}, it returns the inner content.
+ * MemberExpressions and ObjectExpressions are not parsed further.
+ * @param context Rule context
+ * @param node JSXAttribute value
+ * @returns Attribute in this form: { type: [specific type of the returned value], value: [actual value]}. Literal types are further processed, if their value is of type "string", type: "string" is returned, otherwise type: "Literal"
+ */
 export function getAttributeValue(
   context: Rule.RuleContext,
   node?: JSXAttribute["value"]
-) {
+): Attribute {
   if (!node) {
-    return;
+    return UNDEFINED;
   }
 
   const valueType = node.type;
 
   if (valueType === "Literal") {
-    return node.value;
+    if (typeof node.value === "string") {
+      return { type: "string", value: node.value };
+    }
+    return { type: "Literal", value: node.value };
   }
 
   if (valueType !== "JSXExpressionContainer") {
-    return;
+    return UNDEFINED;
   }
 
   if (node.expression.type === "Identifier") {
@@ -57,14 +85,18 @@ export function getAttributeValue(
     return getVariableValue(node.expression.name, variableScope, context);
   }
   if (node.expression.type === "MemberExpression") {
-    return node.expression;
+    return { type: "MemberExpression", value: node.expression };
   }
   if (node.expression.type === "Literal") {
-    return node.expression.value;
+    if (typeof node.expression.value === "string") {
+      return { type: "string", value: node.expression.value };
+    }
+    return { type: "Literal", value: node.expression.value };
   }
   if (node.expression.type === "ObjectExpression") {
-    return node.expression.properties;
+    return { type: "ObjectExpression", value: node.expression.properties };
   }
+  return UNDEFINED;
 }
 
 export function getExpression(node?: JSXAttribute["value"]) {
@@ -109,16 +141,23 @@ export function getVariableInit(
   return variableDefinition.node.init;
 }
 
+/**
+ * Helper to get the raw value of a variable, given by its name. Returns an Attribute object, similarly to getAttributeValue helper.
+ * @param name Variable name
+ * @param scope Scope where to look for the variable declaration
+ * @param context Rule context
+ * @returns Attribute in this form: { type: [specific type of the returned value], value: [actual value]}. Literal types are further processed, if their value is of type "string", type: "string" is returned, otherwise type: "Literal"
+ */
 export function getVariableValue(
   name: string,
   scope: Scope.Scope | null,
   context: Rule.RuleContext
-) {
+): Attribute {
   const variableDeclaration = getVariableDeclaration(name, scope);
   const variableInit = getVariableInit(variableDeclaration);
 
   if (!variableInit) {
-    return;
+    return UNDEFINED;
   }
   if (variableInit.type === "Identifier") {
     return getVariableValue(
@@ -128,12 +167,16 @@ export function getVariableValue(
     );
   }
   if (variableInit.type === "Literal") {
-    return variableInit.value;
+    if (typeof variableInit.value === "string") {
+      return { type: "string", value: variableInit.value };
+    }
+    return { type: "Literal", value: variableInit.value };
   }
   if (variableInit.type === "MemberExpression") {
-    return variableInit;
+    return { type: "MemberExpression", value: variableInit };
   }
   if (variableInit.type === "ObjectExpression") {
-    return variableInit.properties;
+    return { type: "ObjectExpression", value: variableInit.properties };
   }
+  return UNDEFINED;
 }

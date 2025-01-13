@@ -19,7 +19,7 @@ export function propertyNameMatches(
         propertyName,
         scope,
         context
-      );
+      ).value;
 
       return propertyVariableValue === name;
     }

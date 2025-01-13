@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, MemberExpression } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 import {
   getFromPackage,
   getAttribute,
@@ -44,20 +44,26 @@ module.exports = {
                 return;
               }
 
-              const variantValue = getAttributeValue(context, variant.value);
-              const variantValueAsEnum = variantValue as MemberExpression;
+              const { value: variantValue, type: variantType } =
+                getAttributeValue(context, variant.value);
+              const variantValueEnum =
+                variantType === "MemberExpression" ? variantValue : null;
 
               const isEnumToRename =
                 variantEnumImport &&
+                variantValueEnum &&
                 isEnumValue(
                   context,
-                  variantValueAsEnum,
+                  variantValueEnum,
                   variantEnumImport.local.name,
                   oldVariantNames
                 );
 
               if (
-                !oldVariantNames.includes(variantValue as string) &&
+                !(
+                  variantType === "string" &&
+                  oldVariantNames.includes(variantValue)
+                ) &&
                 !isEnumToRename
               ) {
                 return;
@@ -66,7 +72,7 @@ module.exports = {
               const variantToRename = isEnumToRename
                 ? (getEnumPropertyName(
                     context,
-                    variantValueAsEnum
+                    variantValueEnum
                   ) as OldVariantType)
                 : (variantValue as OldVariantType);
 
@@ -75,7 +81,7 @@ module.exports = {
                 message: `The \`${variantToRename}\` variant of ${applicableComponent.imported.name} has been renamed to \`${renames[variantToRename]}\`.`,
                 fix(fixer) {
                   return fixer.replaceText(
-                    isEnumToRename ? variantValueAsEnum.property : variant,
+                    isEnumToRename ? variantValueEnum.property : variant,
                     isEnumToRename
                       ? `"${renames[variantToRename]}"`
                       : `variant="${renames[variantToRename]}"`

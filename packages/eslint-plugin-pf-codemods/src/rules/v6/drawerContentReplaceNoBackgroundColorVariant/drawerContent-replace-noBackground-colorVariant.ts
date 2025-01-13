@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement, MemberExpression } from "estree-jsx";
+import { JSXOpeningElement } from "estree-jsx";
 import {
   getFromPackage,
   getAttribute,
@@ -45,29 +45,30 @@ module.exports = {
               colorVariantProp.value
             );
 
-            const colorVariantValueAsEnum =
-              colorVariantValue as MemberExpression;
+            const colorVariantValueEnum =
+              colorVariantValue?.type === "MemberExpression"
+                ? colorVariantValue.value
+                : null;
 
             const hasPatternFlyEnum =
               drawerColorVariantEnumImport &&
-              colorVariantValueAsEnum &&
-              colorVariantValueAsEnum.object &&
-              context
-                .getSourceCode()
-                .getText(colorVariantValueAsEnum.object) ===
+              colorVariantValueEnum &&
+              colorVariantValueEnum.object &&
+              context.getSourceCode().getText(colorVariantValueEnum.object) ===
                 drawerColorVariantEnumImport.local.name;
 
             const isNoBackgroundEnum =
-              !!drawerColorVariantEnumImport &&
+              hasPatternFlyEnum &&
               isEnumValue(
                 context,
-                colorVariantValueAsEnum,
+                colorVariantValueEnum,
                 drawerColorVariantEnumImport.local.name,
                 "noBackground"
               );
 
             const hasNoBackgroundValue =
-              colorVariantValue === "no-background" || isNoBackgroundEnum;
+              colorVariantValue?.value === "no-background" ||
+              isNoBackgroundEnum;
 
             if (!hasPatternFlyEnum && !hasNoBackgroundValue) {
               return;
@@ -88,7 +89,7 @@ module.exports = {
                 if (!hasNoBackgroundValue && hasPatternFlyEnum) {
                   const enumPropertyName = getEnumPropertyName(
                     context,
-                    colorVariantValueAsEnum
+                    colorVariantValueEnum
                   );
                   enumPropertyName &&
                     fixes.push(
