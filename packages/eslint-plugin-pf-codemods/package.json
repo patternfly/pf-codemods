@@ -18,7 +18,7 @@
     "clean": "rimraf ./dist"
   },
   "dependencies": {
-    "shared-helpers": "workspace:^1.0.0"
+    "@patternfly/shared-codemod-helpers": "workspace:^"
   },
   "peerDependencies": {
     "@typescript-eslint/parser": ">=5.58.0",

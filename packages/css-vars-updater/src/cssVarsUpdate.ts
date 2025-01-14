@@ -1,7 +1,7 @@
 import { sync } from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
-import { isDir } from "shared-helpers";
+import { isDir } from "@patternfly/shared-codemod-helpers";
 import { Answers } from "./answers";
 import { getCssVarReplacement } from "./cssVarReplacement";
 import { printLineChange } from "./printLineChange";

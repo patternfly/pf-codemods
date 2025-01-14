@@ -4,9 +4,7 @@
   "description": "Utility to update class names with Patternfly version numbers",
   "author": "Red Hat",
   "license": "MIT",
-  "bin": {
-    "class-name-updater": "./dist/cli.js"
-  },
+  "bin": "./dist/cli.js",
   "engines": {
     "node": ">=18"
   },
@@ -21,11 +19,11 @@
     "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --v6"
   },
   "dependencies": {
+    "@patternfly/shared-codemod-helpers": "workspace:^",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "diff": "^5.1.0",
-    "glob": "^10.2.6",
-    "shared-helpers": "workspace:^1.0.0"
+    "glob": "^10.2.6"
   },
   "devDependencies": {
     "@types/diff": "^5.0.9",

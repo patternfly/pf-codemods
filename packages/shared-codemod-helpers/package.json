@@ -1,10 +1,12 @@
 {
-  "name": "shared-helpers",
+  "name": "@patternfly/shared-codemod-helpers",
   "version": "1.0.0",
-  "private": true,
-  "description": "Shared helpers for the monorepo",
+  "description": "Shared helpers for the codemods monorepo",
   "author": "Red Hat",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

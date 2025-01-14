@@ -4,7 +4,7 @@ import {
   oldGlobalColorCssVarNames,
   oldGlobalNonColorCssVarNames,
   v6DirectionCssVars,
-} from "shared-helpers";
+} from "@patternfly/shared-codemod-helpers";
 import { Answers } from "./answers";
 import { getDirectionMap } from "./directionStyles";
 

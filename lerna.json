@@ -15,7 +15,7 @@
     "packages/pf-codemods",
     "packages/class-name-updater",
     "packages/css-vars-updater",
-    "packages/shared-helpers"
+    "packages/shared-codemod-helpers"
   ],
   "version": "independent"
 }

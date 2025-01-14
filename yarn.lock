@@ -947,12 +947,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@patternfly/class-name-updater@workspace:packages/class-name-updater"
   dependencies:
+    "@patternfly/shared-codemod-helpers": "workspace:^"
     "@types/diff": "npm:^5.0.9"
     colors: "npm:^1.4.0"
     commander: "npm:^5.1.0"
     diff: "npm:^5.1.0"
     glob: "npm:^10.2.6"
-    shared-helpers: "workspace:^1.0.0"
     typescript: "npm:^5.4.2"
   bin:
     class-name-updater: ./dist/cli.js
@@ -963,13 +963,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@patternfly/css-vars-updater@workspace:packages/css-vars-updater"
   dependencies:
+    "@patternfly/shared-codemod-helpers": "workspace:^"
     "@types/diff": "npm:^5.0.9"
     colors: "npm:^1.4.0"
     commander: "npm:^5.1.0"
     diff: "npm:^5.1.0"
     glob: "npm:^10.2.6"
     inquirer: "npm:^12.0.1"
-    shared-helpers: "workspace:^1.0.0"
     typescript: "npm:^5.4.2"
   bin:
     css-vars-updater: ./dist/cli.js
@@ -980,9 +980,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@patternfly/eslint-plugin-pf-codemods@workspace:packages/eslint-plugin-pf-codemods"
   dependencies:
+    "@patternfly/shared-codemod-helpers": "workspace:^"
     "@types/eslint": "npm:^8.56.0"
     "@types/estree-jsx": "npm:^1.0.4"
-    shared-helpers: "workspace:^1.0.0"
   peerDependencies:
     "@typescript-eslint/parser": ">=5.58.0"
     eslint: ">=0.8.0"
@@ -1001,6 +1001,17 @@ __metadata:
     typescript: "npm:^5.4.2"
   bin:
     pf-codemods: ./index.js
+  languageName: unknown
+  linkType: soft
+
+"@patternfly/shared-codemod-helpers@workspace:^, @patternfly/shared-codemod-helpers@workspace:packages/shared-codemod-helpers":
+  version: 0.0.0-use.local
+  resolution: "@patternfly/shared-codemod-helpers@workspace:packages/shared-codemod-helpers"
+  dependencies:
+    "@types/diff": "npm:^5.0.9"
+    colors: "npm:^1.4.0"
+    diff: "npm:^5.1.0"
+    typescript: "npm:^5.4.2"
   languageName: unknown
   linkType: soft
 
@@ -6902,17 +6913,6 @@ __metadata:
   checksum: 10c0/7bab09613a1b9f480c85a9823aebec533015579fa055ba6634aa56ba1f984380670eaf33b8217502931872aa1401c9fcadaa15f9f604d631536df475b05bcf1e
   languageName: node
   linkType: hard
-
-"shared-helpers@workspace:^1.0.0, shared-helpers@workspace:packages/shared-helpers":
-  version: 0.0.0-use.local
-  resolution: "shared-helpers@workspace:packages/shared-helpers"
-  dependencies:
-    "@types/diff": "npm:^5.0.9"
-    colors: "npm:^1.4.0"
-    diff: "npm:^5.1.0"
-    typescript: "npm:^5.4.2"
-  languageName: unknown
-  linkType: soft
 
 "shebang-command@npm:^2.0.0":
   version: 2.0.0

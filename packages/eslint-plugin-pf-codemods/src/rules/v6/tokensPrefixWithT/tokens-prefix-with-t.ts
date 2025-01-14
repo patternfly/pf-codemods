@@ -8,7 +8,7 @@ import {
   getImportPath,
 } from "../../helpers";
 import { Identifier, ImportSpecifier } from "estree-jsx";
-import { tokensToPrefixWithT } from "shared-helpers";
+import { tokensToPrefixWithT } from "@patternfly/shared-codemod-helpers";
 
 module.exports = {
   meta: { fixable: "code" },

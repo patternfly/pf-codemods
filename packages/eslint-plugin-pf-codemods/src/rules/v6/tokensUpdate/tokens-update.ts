@@ -16,7 +16,7 @@ import {
   globalNonColorCssVarNamesMap,
   oldGlobalColorCssVarNames,
   oldGlobalColorTokens,
-} from "shared-helpers";
+} from "@patternfly/shared-codemod-helpers";
 
 module.exports = {
   meta: { fixable: "code" },
