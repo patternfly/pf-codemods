@@ -42,13 +42,15 @@
   ],
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.6",
     "case-anything": "^2.1.13",
     "fs-extra": "^11.2.0",
     "lerna": "^8.1.9",
     "mocha": "^7.2.0",
     "plop": "^3.1.2",
     "rimraf": "^6.0.1",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
   },
   "packageManager": "yarn@4.5.1"
 }
