@@ -1,3 +1,1 @@
-import {
-	Modal
-} from '@patternfly/react-core/deprecated';
+import { Modal, ModalProps } from "@patternfly/react-core/deprecated";

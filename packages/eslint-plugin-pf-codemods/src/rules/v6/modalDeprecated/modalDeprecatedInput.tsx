@@ -1,1 +1,1 @@
-import { Modal } from "@patternfly/react-core";
+import { Modal, ModalProps } from "@patternfly/react-core";

@@ -16,6 +16,7 @@ const specifiersToMove = [
   "ModalBoxHeader",
   "ModalBoxFooter",
   "ModalContent",
+  "ModalProps",
 ];
 
 const validTests: ValidTests = [];

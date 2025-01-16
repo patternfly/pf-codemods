@@ -11,6 +11,7 @@ const specifiersToMove = [
   "ModalBoxHeader",
   "ModalBoxFooter",
   "ModalContent",
+  "ModalProps",
 ];
 
 const fromPackage = "@patternfly/react-core";
