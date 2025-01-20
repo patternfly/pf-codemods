@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.139.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.139.2...@patternfly/eslint-plugin-pf-codemods@1.139.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* **TextReplaceWithContent:** update dist import path ([#797](https://github.com/patternfly/pf-codemods/issues/797)) ([564e836](https://github.com/patternfly/pf-codemods/commit/564e8368524838c44c03c8ec3af8802effc30ee4))
+
+
+
+
+
 ## [1.139.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.139.1...@patternfly/eslint-plugin-pf-codemods@1.139.2) (2025-01-16)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
