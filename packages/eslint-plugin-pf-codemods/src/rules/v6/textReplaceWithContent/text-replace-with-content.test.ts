@@ -183,6 +183,12 @@ ruleTester.run("text-replace-with-content", rule, {
         jsxClosingElementError,
       ],
     },
+    // dist import path (Text, TextContent, TextList and TextListItem are all under "Text")
+    {
+      code: `import { Text } from '@patternfly/react-core/dist/dynamic/components/Text';`,
+      output: `import { Content } from "@patternfly/react-core/dist/dynamic/components/Content";`,
+      errors: [importDeclarationError],
+    },
   ],
 });
 
