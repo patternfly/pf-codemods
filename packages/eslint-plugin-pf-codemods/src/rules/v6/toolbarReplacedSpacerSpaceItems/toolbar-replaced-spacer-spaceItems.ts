@@ -67,14 +67,18 @@ module.exports = {
                         return;
                       }
 
-                      const newValue =
+                      if (
                         val.value?.type === "Literal" &&
-                        (val.value.value as string).replace("spacer", "gap");
-
-                      newValue &&
+                        typeof val.value.value === "string"
+                      ) {
+                        const newValue = val.value.value.replace(
+                          "spacer",
+                          "gap"
+                        );
                         fixes.push(
                           fixer.replaceText(val.value, `"${newValue}"`)
                         );
+                      }
                     });
 
                     fixes.push(fixer.replaceText(spacerProp.name, "gap"));
