@@ -2,6 +2,7 @@ const ruleTester = require("../../ruletester");
 import * as rule from "./component-groups-invalidObjectProps-rename-to-missingPageProps";
 
 const message = `InvalidObjectProps has been renamed to MissingPageProps.`;
+const componentMessage = `InvalidObject has been renamed to MissingPage.`;
 
 ruleTester.run(
   "component-groups-invalidObjectProps-rename-to-missingPageProps",
@@ -66,8 +67,12 @@ ruleTester.run(
       // imports from dist
       {
         code: `import { InvalidObjectProps } from '@patternfly/react-component-groups/dist/cjs/InvalidObject';`,
-        output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/cjs/InvalidObject';`,
+        output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/cjs/MissingPage';`,
         errors: [
+          {
+            message: componentMessage,
+            type: "ImportDeclaration",
+          },
           {
             message,
             type: "ImportSpecifier",
@@ -76,8 +81,12 @@ ruleTester.run(
       },
       {
         code: `import { InvalidObjectProps } from '@patternfly/react-component-groups/dist/esm/InvalidObject';`,
-        output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/esm/InvalidObject';`,
+        output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/esm/MissingPage';`,
         errors: [
+          {
+            message: componentMessage,
+            type: "ImportDeclaration",
+          },
           {
             message,
             type: "ImportSpecifier",
@@ -86,8 +95,12 @@ ruleTester.run(
       },
       {
         code: `import { InvalidObjectProps } from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';`,
-        output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/dynamic/InvalidObject';`,
+        output: `import { MissingPageProps } from '@patternfly/react-component-groups/dist/dynamic/MissingPage';`,
         errors: [
+          {
+            message: componentMessage,
+            type: "ImportDeclaration",
+          },
           {
             message,
             type: "ImportSpecifier",

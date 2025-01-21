@@ -7,6 +7,9 @@ module.exports = {
     {
       InvalidObjectProps: "MissingPageProps",
     },
+    {
+      InvalidObject: "MissingPage",
+    },
     "@patternfly/react-component-groups"
   ),
 };
