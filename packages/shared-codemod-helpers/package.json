@@ -1,0 +1,25 @@
+{
+  "name": "@patternfly/shared-codemod-helpers",
+  "version": "1.0.0",
+  "description": "Shared helpers for the codemods monorepo",
+  "author": "Red Hat",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build --verbose ./tsconfig.json",
+    "clean": "rimraf ./dist"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "diff": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/diff": "^5.0.9",
+    "typescript": "^5.4.2"
+  }
+}

@@ -1,5 +1,5 @@
 // Map of old global non-color CSS vars used in V5 and their suitable replacement CSS var in V6
-// values and optional replacements are described in oldGlobalTokens.ts file 
+// values and optional replacements are described in oldGlobalTokens.ts file
 export const globalNonColorCssVarNamesMap = {
   "--pf-v5-global--BorderRadius--lg": "--pf-t--global--border--radius--large",
   "--pf-v5-global--BorderRadius--sm": "--pf-t--global--border--radius--small",
@@ -119,11 +119,11 @@ export const globalNonColorCssVarNamesMap = {
   "--pf-v5-global--spacer--xs": "--pf-t--global--spacer--xs",
 };
 
-export const oldGlobalNonColorCssVarNames = Object.keys(
-  globalNonColorCssVarNamesMap
+export const oldGlobalNonColorCssVarNames = new Set(
+  Object.keys(globalNonColorCssVarNamesMap)
 );
 
-export const oldGlobalColorCssVarNames = [
+export const oldGlobalColorCssVarNames = new Set([
   "--pf-v5-global--BackgroundColor--100",
   "--pf-v5-global--BackgroundColor--150",
   "--pf-v5-global--BackgroundColor--200",
@@ -268,4 +268,4 @@ export const oldGlobalColorCssVarNames = [
   "--pf-v5-global--success-color--200",
   "--pf-v5-global--warning-color--100",
   "--pf-v5-global--warning-color--200",
-];
+]);

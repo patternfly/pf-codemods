@@ -1,8 +1,7 @@
 import { sync } from "glob";
 import { readFileSync, writeFileSync } from "fs";
 import { isAbsolute, join } from "path";
-import { isDir } from "./utils";
-import { printDiff } from "./printDiff";
+import { isDir, printDiff } from "@patternfly/shared-codemod-helpers";
 
 export async function classNameUpdate(
   globTarget: string,

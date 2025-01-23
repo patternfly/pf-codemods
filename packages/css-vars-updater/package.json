@@ -1,7 +1,7 @@
 {
-  "name": "@patternfly/class-name-updater",
-  "version": "2.0.8",
-  "description": "Utility to update class names with Patternfly version numbers",
+  "name": "@patternfly/css-vars-updater",
+  "version": "1.0.0",
+  "description": "Utility to update Patternfly CSS variables when migrating from V5 to a new design token system in V6",
   "author": "Red Hat",
   "license": "MIT",
   "bin": "./dist/cli.js",
@@ -13,20 +13,19 @@
   },
   "scripts": {
     "build": "tsc --build --verbose ./tsconfig.json",
-    "clean": "rimraf ./dist",
-    "test": "yarn build && yarn test:v5 && yarn test:v6",
-    "test:v5": "node ./dist/cli.js test --exclude test/largeFile.js",
-    "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --v6"
+    "clean": "rimraf ./dist"
   },
   "dependencies": {
     "@patternfly/shared-codemod-helpers": "workspace:^",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "diff": "^5.1.0",
-    "glob": "^10.2.6"
+    "glob": "^10.2.6",
+    "inquirer": "^12.3.2"
   },
   "devDependencies": {
     "@types/diff": "^5.0.9",
+    "@types/node": "^22.10.6",
     "typescript": "^5.4.2"
   }
 }

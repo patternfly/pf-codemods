@@ -24,7 +24,7 @@
     "build": "lerna run build",
     "build:generators": "tsc --build --verbose generators/tsconfig.cjs.json",
     "build:readme": "lerna run build:readme",
-    "build:classnames": "lerna run build --scope=@patternfly/class-name-updater",
+    "build:classnames": "lerna run build --scope=@patternfly/class-name-updater --include-dependencies",
     "clean": "lerna run clean"
   },
   "repository": {
@@ -41,13 +41,16 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.22.0",
-    "mocha": "^7.2.0",
-    "plop": "^3.1.2",
-    "ts-node": "^10.9.2",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.10.6",
     "case-anything": "^2.1.13",
     "fs-extra": "^11.2.0",
-    "@types/fs-extra": "^11.0.4"
+    "lerna": "^8.1.9",
+    "mocha": "^7.2.0",
+    "plop": "^3.1.2",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "yarn@4.5.1"
 }

@@ -3,7 +3,7 @@ import { join } from "path";
 import { Command } from "commander";
 const program = new Command();
 
-import { isDir } from "./utils";
+import { isDir } from "@patternfly/shared-codemod-helpers";
 import { classNameUpdate } from "./classNameUpdate";
 
 program

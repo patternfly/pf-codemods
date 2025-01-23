@@ -10,13 +10,13 @@ import {
 import { Identifier, ImportSpecifier, Literal } from "estree-jsx";
 import {
   oldTokens,
-  oldCssVarNamesV5,
+  oldCssVarNames,
   globalNonColorTokensMap,
   oldGlobalNonColorTokens,
   globalNonColorCssVarNamesMap,
   oldGlobalColorCssVarNames,
   oldGlobalColorTokens,
-} from "../../../tokenLists";
+} from "@patternfly/shared-codemod-helpers";
 
 module.exports = {
   meta: { fixable: "code" },
@@ -51,7 +51,7 @@ module.exports = {
       } to prevent build errors. You should find a suitable replacement token in our new documentation https://staging-v6.patternfly.org/tokens/all-patternfly-tokens.`;
 
     const shouldReplaceToken = (token: string) =>
-      oldGlobalNonColorTokens.includes(token) &&
+      oldGlobalNonColorTokens.has(token) &&
       globalNonColorTokensMap[token as keyof typeof globalNonColorTokensMap] !==
         "SKIP";
 
@@ -148,7 +148,7 @@ module.exports = {
       node: ImportSpecifierWithParent | ImportDefaultSpecifierWithParent,
       token: string
     ) => {
-      if (oldGlobalColorTokens.includes(token)) {
+      if (oldGlobalColorTokens.has(token)) {
         updateColorTokenImport(node, token);
         return;
       }
@@ -158,7 +158,7 @@ module.exports = {
         return;
       }
 
-      if (oldTokens.includes(token)) {
+      if (oldTokens.has(token)) {
         context.report({
           node,
           message: getWarnMessage(token),
@@ -225,7 +225,7 @@ module.exports = {
           varName = varRegexMatch[1];
         }
 
-        if (oldGlobalColorCssVarNames.includes(varName)) {
+        if (oldGlobalColorCssVarNames.has(varName)) {
           const comment = `/* CODEMODS: original v5 color was ${varName} */`;
 
           context.report({
@@ -264,7 +264,7 @@ module.exports = {
           return;
         }
 
-        if (oldCssVarNames.includes(varName)) {
+        if (oldCssVarNames.has(varName)) {
           context.report({
             node,
             message: getWarnMessage(varName),
@@ -274,9 +274,3 @@ module.exports = {
     };
   },
 };
-
-// consumers may have run the old class-name-updater before codemods, so we should check also old tokens with v6 prefix
-const oldCssVarNamesV6 = oldCssVarNamesV5.map((cssVarName) =>
-  cssVarName.replace("v5", "v6")
-);
-const oldCssVarNames = [...oldCssVarNamesV5, ...oldCssVarNamesV6];
