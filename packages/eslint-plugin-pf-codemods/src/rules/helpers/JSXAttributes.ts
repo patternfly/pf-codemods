@@ -9,6 +9,12 @@ import {
   MemberExpression,
 } from "estree-jsx";
 
+/**
+ * Use inline to pair with other logic, such as to get the value of an attribute or call logic based on the attribute being present or not.
+ * @param node The node in which to find a specified attribute.
+ * @param attributeName An attribute name to find on the node.
+ * @returns The found JSXAttribute object, or undefined if the attribute is not found.
+ */
 export function getAttribute(
   node: JSXElement | JSXOpeningElement,
   attributeName: string
@@ -19,6 +25,12 @@ export function getAttribute(
   ) as JSXAttribute | undefined;
 }
 
+/**
+ * Use inline to pair with other logic based on whether any of the specified attributes are present, but not necessarily important which ones are.
+ * @param node The node in which to find a specified attribute.
+ * @param attributeNames An array of attribute names to find on the node.
+ * @returns The first found JSXAttribute object, or undefined if none are found.
+ */
 export function getAnyAttribute(
   node: JSXElement | JSXOpeningElement,
   attributeNames: string[]
@@ -33,6 +45,25 @@ export function getAnyAttribute(
   }
 
   return foundAttribute;
+}
+
+/**
+ * Use inline to pair with other logic (such as getting attribute values or calling logic based on an attribute being present or not) and when you need to get several attributes at once.
+ * @param node - The node in which to find the specified attributes.
+ * @param attributeNames - An array of attribute names to find on the node.
+ * @returns An object containing key:value pairs of the attribute names and either their found JSXAttribute object or undefined.
+ */
+export function getSpecifiedAttributes(
+  node: JSXElement | JSXOpeningElement,
+  attributeNames: string[]
+) {
+  const foundAttributes: { [attributeName: string]: JSXAttribute | undefined } =
+    {};
+  for (const attribute of attributeNames) {
+    foundAttributes[attribute] = getAttribute(node, attribute);
+  }
+
+  return foundAttributes;
 }
 
 export function getAttributeValue(
