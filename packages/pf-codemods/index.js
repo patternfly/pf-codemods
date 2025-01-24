@@ -23,6 +23,7 @@ program
   .option("--format <format>", "What eslint report format to use", "stylish")
   .option("--no-cache", "Disables eslint caching")
   .option("--v4", "Run v3 to v4 codemods")
+  .option("--v5", "Run v4 to v5 codemods")
   .option("--v6", "Run v5 to v6 codemods")
   .action(runCodemods);
 
@@ -68,14 +69,31 @@ async function printResults(eslint, results, format) {
   return true;
 }
 
-function getRulesToRemove(options) {
-  if (options.v4) {
-    return [...ruleVersionMapping["v5"], ...ruleVersionMapping["v6"]];
-  } else if (options.v6) {
-    return [...ruleVersionMapping["v4"], ...ruleVersionMapping["v5"]];
-  } else {
-    return [...ruleVersionMapping["v4"], ...ruleVersionMapping["v6"]];
+async function getRulesToRemove(options) {
+  const pfVersions = ["v6", "v5", "v4"];
+  let selectedVersion = pfVersions.find((version) => options[version]);
+
+  if (!selectedVersion) {
+    const inquirer = await import("inquirer");
+    const answer = await inquirer.default.prompt([
+      {
+        type: "list",
+        name: "version",
+        message: "What PatternFly version are you updating to?",
+        choices: [
+          { name: "V5 -> V6", value: "v6" },
+          { name: "V4 -> V5", value: "v5" },
+          { name: "V3 -> V4", value: "v4" },
+        ],
+      },
+    ]);
+
+    selectedVersion = answer.version;
   }
+
+  return pfVersions.flatMap((version) =>
+    version === selectedVersion ? [] : ruleVersionMapping[version]
+  );
 }
 
 async function runCodemods(path, otherPaths, options) {
@@ -95,7 +113,7 @@ async function runCodemods(path, otherPaths, options) {
       .forEach((rule) => delete configs.recommended.rules[prefix + rule]);
   }
 
-  const rulesToRemove = getRulesToRemove(options);
+  const rulesToRemove = await getRulesToRemove(options);
 
   rulesToRemove.forEach((rule) => {
     // data-codemods-cleanup rule should exist for any version of codemods

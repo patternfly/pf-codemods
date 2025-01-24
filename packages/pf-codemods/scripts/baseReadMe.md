@@ -16,7 +16,7 @@ Requires Node.js >= 10.
 npx @patternfly/pf-codemods ./path-to-src
 ```
 
-Note: when updating from PatternFly 5 to 6, add the `--v6` flag.
+Use the interactive menu to choose a PatternFly version to update to. Or you can specify the version directly with a flag:
 
 ```sh
 npx @patternfly/pf-codemods --v6 ./path-to-src
@@ -45,6 +45,7 @@ Options:
   --format <format>  What eslint report format to use (default: "stylish")
   --no-cache         Disables eslint caching
   --v4               Run v3 to v4 codemods
+  --v5               Run v4 to v5 codemods
   --v6               Run v5 to v6 codemods
   -h, --help         display help for command
 ```
