@@ -1,4 +1,10 @@
-import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
+import {
+  getFromPackage,
+  getAttribute,
+  getAttributeValue,
+  isEnumValue,
+  attributeValueIsString,
+} from "../../helpers";
 import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
 
@@ -30,25 +36,39 @@ module.exports = {
               if (!variantProp || !variantProp.value) {
                 return;
               }
-              const variantValue = getAttributeValue(
-                context,
-                variantProp.value
-              );
-              const pageSectionVariantLocalName =
-                pageSectionVariantImport && pageSectionVariantImport.local.name;
+              const { type: variantPropType, value: variantPropValue } =
+                getAttributeValue(context, variantProp.value);
+              const variantValueEnum =
+                variantPropType === "MemberExpression"
+                  ? variantPropValue
+                  : null;
+
               const hasPatternFlyEnum =
-                variantValue?.object &&
-                variantValue.object.name === pageSectionVariantLocalName;
-              const variantValueIsLiteral =
-                variantProp.value.type === "Literal" ||
-                (variantProp.value.type === "JSXExpressionContainer" &&
-                  variantProp.value.expression.type === "Literal");
-              if (!variantValueIsLiteral && !hasPatternFlyEnum) {
+                pageSectionVariantImport &&
+                variantValueEnum?.object &&
+                context.getSourceCode().getText(variantValueEnum.object) ===
+                  pageSectionVariantImport.local.name;
+
+              if (
+                !attributeValueIsString(variantProp.value) &&
+                !hasPatternFlyEnum
+              ) {
                 return;
               }
-              const hasValidValue = variantValue?.property
-                ? validValues.includes(variantValue.property.name)
-                : validValues.includes(variantValue);
+
+              const isValidEnumValue =
+                hasPatternFlyEnum &&
+                isEnumValue(
+                  context,
+                  variantValueEnum,
+                  pageSectionVariantImport.local.name,
+                  validValues
+                );
+
+              const hasValidValue =
+                isValidEnumValue ||
+                (variantPropType === "string" &&
+                  validValues.includes(variantPropValue));
 
               if (!hasValidValue) {
                 context.report({

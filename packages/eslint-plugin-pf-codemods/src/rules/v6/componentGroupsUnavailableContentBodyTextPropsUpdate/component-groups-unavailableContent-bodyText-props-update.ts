@@ -28,11 +28,22 @@ module.exports = {
               node,
               "statusPageLinkText"
             );
-            const statusPageLinkTextString: string =
-              getAttributeValue(context, statusPageLinkTextProp?.value) ??
-              "status page";
 
-            if (statusPageLinkTextProp && statusPageLinkTextString.length) {
+            const {
+              type: statusPageLinkTextPropType,
+              value: statusPageLinkTextPropValue,
+            } = getAttributeValue(context, statusPageLinkTextProp?.value);
+
+            const statusPageLinkTextString =
+              statusPageLinkTextPropType === "string"
+                ? statusPageLinkTextPropValue
+                : "status page";
+
+            if (
+              statusPageLinkTextProp &&
+              statusPageLinkTextPropType === "string" &&
+              statusPageLinkTextString.length
+            ) {
               const firstChar = statusPageLinkTextString.charAt(0);
 
               if (firstChar !== firstChar.toUpperCase()) {
@@ -66,10 +77,10 @@ module.exports = {
             }
 
             const preStatusLinkTextString =
-              getAttributeValue(context, preStatusLinkTextProp?.value) ??
+              getAttributeValue(context, preStatusLinkTextProp?.value).value ??
               "Try refreshing the page. If the problem persists, contact your organization administrator or visit our";
             const postStatusLinkTextString =
-              getAttributeValue(context, postStatusLinkTextProp?.value) ??
+              getAttributeValue(context, postStatusLinkTextProp?.value).value ??
               "for known outages.";
 
             const bodyTextAttribute = `bodyText="${preStatusLinkTextString} ${statusPageLinkTextString} ${postStatusLinkTextString}"`;

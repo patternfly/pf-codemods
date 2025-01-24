@@ -1,6 +1,11 @@
 import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
-import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
+import {
+  getFromPackage,
+  getAttribute,
+  getAttributeValue,
+  isEnumValue,
+} from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10650
 module.exports = {
@@ -28,12 +33,20 @@ module.exports = {
                 return;
               }
 
-              const typeValue = getAttributeValue(context, typeProp.value);
+              const { type: typePropType, value: typePropValue } =
+                getAttributeValue(context, typeProp.value);
+
               const isEnumValueNav =
                 pageSectionTypeEnum &&
-                typeValue.object?.name === pageSectionTypeEnum.local.name &&
-                typeValue.property.name === "nav";
-              if (typeValue !== "nav" && !isEnumValueNav) {
+                typePropType === "MemberExpression" &&
+                isEnumValue(
+                  context,
+                  typePropValue,
+                  pageSectionTypeEnum.local.name,
+                  "nav"
+                );
+
+              if (typePropValue !== "nav" && !isEnumValueNav) {
                 return;
               }
 

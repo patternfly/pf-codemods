@@ -1,6 +1,5 @@
 import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
-import { Property } from "estree-jsx";
 import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10418
@@ -34,8 +33,23 @@ module.exports = {
               const spaceItemsPropMessage = `${
                 spacerProp ? " Additionally, the" : "The"
               } spaceItems property has been removed from ${node.name.name}.`;
-              const spacerVal =
-                spacerProp && getAttributeValue(context, spacerProp.value);
+
+              const getSpacerValue = () => {
+                if (!spacerProp) {
+                  return;
+                }
+
+                const { type, value } = getAttributeValue(
+                  context,
+                  spacerProp.value
+                );
+
+                if (type !== "ObjectExpression") {
+                  return;
+                }
+
+                return value;
+              };
 
               context.report({
                 node,
@@ -45,18 +59,27 @@ module.exports = {
                 fix(fixer) {
                   const fixes = [];
 
-                  if (spacerProp) {
-                    spacerVal &&
-                      spacerVal.forEach((val: Property) => {
-                        const newValue =
-                          val.value?.type === "Literal" &&
-                          (val.value.value as string).replace("spacer", "gap");
+                  const spacerVal = getSpacerValue();
 
-                        newValue &&
-                          fixes.push(
-                            fixer.replaceText(val.value, `"${newValue}"`)
-                          );
-                      });
+                  if (spacerProp && spacerVal) {
+                    spacerVal.forEach((val) => {
+                      if (val.type !== "Property") {
+                        return;
+                      }
+
+                      if (
+                        val.value?.type === "Literal" &&
+                        typeof val.value.value === "string"
+                      ) {
+                        const newValue = val.value.value.replace(
+                          "spacer",
+                          "gap"
+                        );
+                        fixes.push(
+                          fixer.replaceText(val.value, `"${newValue}"`)
+                        );
+                      }
+                    });
 
                     fixes.push(fixer.replaceText(spacerProp.name, "gap"));
                   }

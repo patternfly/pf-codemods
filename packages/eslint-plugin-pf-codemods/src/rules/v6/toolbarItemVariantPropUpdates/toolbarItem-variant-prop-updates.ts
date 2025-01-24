@@ -10,6 +10,8 @@ import {
   getAttribute,
   getAttributeValue,
   attributeValueIsString,
+  getEnumPropertyName,
+  isEnumValue,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10649
@@ -70,20 +72,30 @@ module.exports = {
                 return;
               }
 
-              const variantValue = getAttributeValue(context, variant.value);
+              const { type: variantType, value: variantValue } =
+                getAttributeValue(context, variant.value);
 
-              const variantValueIsLiteral = attributeValueIsString(
-                variant.value
-              );
+              const variantValueEnum =
+                variantType === "MemberExpression" ? variantValue : null;
+
+              const isEnumToRemove =
+                enumImport &&
+                variantValueEnum &&
+                isEnumValue(
+                  context,
+                  variantValueEnum,
+                  enumImport.local.name,
+                  variantsToRemove
+                );
 
               if (
-                (variantValueIsLiteral &&
+                (variantType === "string" &&
                   variantsToRemove.includes(variantValue)) ||
-                (nodeIsEnum(variantValue) &&
-                  variantsToRemove.includes(variantValue.property.value))
+                isEnumToRemove
               ) {
-                const variantToRemove =
-                  variantValue.property?.value ?? variantValue;
+                const variantToRemove = isEnumToRemove
+                  ? getEnumPropertyName(context, variantValueEnum)
+                  : variantValue;
 
                 context.report({
                   node,
@@ -94,7 +106,7 @@ module.exports = {
                 });
               }
 
-              if (variantValueIsLiteral && variantValue === "chip-group") {
+              if (variantType === "string" && variantValue === "chip-group") {
                 context.report({
                   node,
                   message:

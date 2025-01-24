@@ -102,7 +102,8 @@ module.exports = {
               const iconProp = getAttribute(node, "icon");
               const variantProp = getAttribute(node, "variant");
               const variantValue =
-                variantProp && getAttributeValue(context, variantProp.value);
+                variantProp &&
+                getAttributeValue(context, variantProp.value).value;
 
               context.report({
                 node,

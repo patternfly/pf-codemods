@@ -1,6 +1,12 @@
 import { Rule } from "eslint";
 import { JSXOpeningElement } from "estree-jsx";
-import { getFromPackage, getAttribute, getAttributeValue } from "../../helpers";
+import {
+  getFromPackage,
+  getAttribute,
+  getAttributeValue,
+  isEnumValue,
+  getEnumPropertyName,
+} from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10211
 module.exports = {
@@ -38,18 +44,31 @@ module.exports = {
               context,
               colorVariantProp.value
             );
-            const drawerColorVariantLocalName =
-              drawerColorVariantEnumImport &&
-              drawerColorVariantEnumImport.local.name;
+
+            const colorVariantValueEnum =
+              colorVariantValue?.type === "MemberExpression"
+                ? colorVariantValue.value
+                : null;
+
             const hasPatternFlyEnum =
-              colorVariantValue &&
-              colorVariantValue.object &&
-              colorVariantValue.object.name === drawerColorVariantLocalName;
+              drawerColorVariantEnumImport &&
+              colorVariantValueEnum &&
+              colorVariantValueEnum.object &&
+              context.getSourceCode().getText(colorVariantValueEnum.object) ===
+                drawerColorVariantEnumImport.local.name;
+
+            const isNoBackgroundEnum =
+              hasPatternFlyEnum &&
+              isEnumValue(
+                context,
+                colorVariantValueEnum,
+                drawerColorVariantEnumImport.local.name,
+                "noBackground"
+              );
+
             const hasNoBackgroundValue =
-              colorVariantValue && colorVariantValue.property
-                ? hasPatternFlyEnum &&
-                  colorVariantValue.property.name === "noBackground"
-                : colorVariantValue === "no-background";
+              colorVariantValue?.value === "no-background" ||
+              isNoBackgroundEnum;
 
             if (!hasPatternFlyEnum && !hasNoBackgroundValue) {
               return;
@@ -68,15 +87,19 @@ module.exports = {
                 }
 
                 if (!hasNoBackgroundValue && hasPatternFlyEnum) {
-                  const enumPropertyName = colorVariantValue.property.name;
-                  fixes.push(
-                    fixer.replaceText(
-                      colorVariantProp,
-                      validDrawerContentValues.includes(enumPropertyName)
-                        ? `colorVariant="${colorVariantValue.property.name}"`
-                        : ""
-                    )
+                  const enumPropertyName = getEnumPropertyName(
+                    context,
+                    colorVariantValueEnum
                   );
+                  enumPropertyName &&
+                    fixes.push(
+                      fixer.replaceText(
+                        colorVariantProp,
+                        validDrawerContentValues.includes(enumPropertyName)
+                          ? `colorVariant="${enumPropertyName}"`
+                          : ""
+                      )
+                    );
                 }
                 return fixes;
               },

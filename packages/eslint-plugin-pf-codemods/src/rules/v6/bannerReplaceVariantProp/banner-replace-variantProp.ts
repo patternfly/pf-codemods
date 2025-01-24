@@ -27,7 +27,7 @@ module.exports = {
               const attributeValue = getAttributeValue(
                 context,
                 attribute.value
-              );
+              ).value;
               const isValueDefault = attributeValue === "default";
               const fixMessage = isValueDefault
                 ? "remove the variant property"

@@ -10,6 +10,7 @@ import {
   getChildJSXElementByName,
   isReactIcon,
   makeJSXElementSelfClosing,
+  isEnumValue,
 } from "../../helpers";
 
 // https://github.com/patternfly/patternfly-react/pull/10663
@@ -37,23 +38,39 @@ module.exports = {
               node.openingElement.name.type === "JSXIdentifier" &&
               buttonImport.local.name === node.openingElement.name.name
             ) {
-              const variantProp = getAttribute(node.openingElement, "variant");
               const iconProp = getAttribute(node.openingElement, "icon");
               if (iconProp) {
                 return;
               }
-              const variantValue = getAttributeValue(
-                context,
-                variantProp?.value
-              );
 
-              const isEnumValuePlain =
-                buttonVariantEnumImport &&
-                variantValue?.object?.name ===
-                  buttonVariantEnumImport.local.name &&
-                variantValue?.property.name === "plain";
+              const isPlainVariant = () => {
+                const variantProp = getAttribute(
+                  node.openingElement,
+                  "variant"
+                );
+                const { value: variantValue, type: variantValueType } =
+                  getAttributeValue(context, variantProp?.value);
 
-              const isPlain = variantValue === "plain" || isEnumValuePlain;
+                if (variantValue === "plain") {
+                  return true;
+                }
+
+                if (variantValueType === "MemberExpression") {
+                  return (
+                    !!buttonVariantEnumImport &&
+                    isEnumValue(
+                      context,
+                      variantValue,
+                      buttonVariantEnumImport.local.name,
+                      "plain"
+                    )
+                  );
+                }
+
+                return false;
+              };
+
+              const isPlain = isPlainVariant();
 
               let plainButtonChildrenString: string | undefined;
               let nodeWithChildren: JSXElement | JSXFragment = node;
