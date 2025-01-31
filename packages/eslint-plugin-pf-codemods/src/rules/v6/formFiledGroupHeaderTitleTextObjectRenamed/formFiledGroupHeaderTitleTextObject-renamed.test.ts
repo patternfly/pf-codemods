@@ -20,11 +20,11 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "ImportSpecifier",
+          type: "Identifier",
         },
         {
           message: errorMessage,
-          type: "TSTypeReference",
+          type: "Identifier",
         },
       ],
     },
@@ -34,11 +34,11 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "ImportSpecifier",
+          type: "Identifier",
         },
         {
           message: errorMessage,
-          type: "TSInterfaceHeritage",
+          type: "Identifier",
         },
       ],
     },
@@ -48,11 +48,11 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "ImportSpecifier",
+          type: "Identifier",
         },
         {
           message: errorMessage,
-          type: "ExportSpecifier",
+          type: "Identifier",
         },
       ],
     },
@@ -62,7 +62,7 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "ExportSpecifier",
+          type: "Identifier",
         },
       ],
     },

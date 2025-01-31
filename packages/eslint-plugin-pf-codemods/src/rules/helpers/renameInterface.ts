@@ -1,13 +1,27 @@
 import { Rule } from "eslint";
 import { TSESTree } from "@typescript-eslint/utils";
-import { Identifier, ImportDeclaration, ImportSpecifier } from "estree-jsx";
+import {
+  ExportSpecifier,
+  Identifier,
+  ImportDeclaration,
+  ImportSpecifier,
+} from "estree-jsx";
 import {
   checkMatchingImportSpecifier,
   getFromPackage,
   pfPackageMatches,
 } from ".";
 
-interface Renames {
+interface InterfaceRenames {
+  [currentName: string]:
+    | string
+    | {
+        newName: string;
+        message?: string;
+      };
+}
+
+interface ComponentRenames {
   [currentName: string]: string;
 }
 
@@ -16,37 +30,45 @@ function formatDefaultMessage(oldName: string, newName: string) {
 }
 
 export function renameInterface(
-  interfaceRenames: Renames,
-  componentRenames: Renames,
+  interfaceRenames: InterfaceRenames,
+  componentRenames: ComponentRenames = {},
   packageName = "@patternfly/react-core"
 ) {
   return function (context: Rule.RuleContext) {
     const oldNames = Object.keys(interfaceRenames);
-    const { imports } = getFromPackage(context, packageName, oldNames);
+    const { imports, exports } = getFromPackage(context, packageName, oldNames);
 
-    if (imports.length === 0) {
+    if (!imports.length && !exports.length) {
       return {};
     }
 
     const shouldRenameIdentifier = (identifier: Identifier) => {
       const matchingImport = imports.find(
-        (specifier) => specifier.local.name === identifier.name
+        (specifier) =>
+          specifier.imported.name === identifier.name &&
+          specifier.imported.name === specifier.local.name
       );
 
-      if (!matchingImport) {
-        return false;
+      return !!matchingImport;
+    };
+
+    const getRenameInfo = (oldName: string) => {
+      const newName = interfaceRenames[oldName];
+
+      if (typeof newName === "string") {
+        return { newName };
       }
 
-      return matchingImport.local.name === matchingImport.imported.name;
+      return newName;
     };
 
     const replaceIdentifier = (identifier: Identifier) => {
       const oldName = identifier.name;
-      const newName = interfaceRenames[oldName];
+      const { newName, message } = getRenameInfo(oldName);
 
       context.report({
         node: identifier,
-        message: formatDefaultMessage(oldName, newName),
+        message: message ?? formatDefaultMessage(oldName, newName),
         fix(fixer) {
           return fixer.replaceText(identifier, newName);
         },
@@ -79,16 +101,17 @@ export function renameInterface(
           return;
         }
 
-        const oldName = node.imported.name;
-        const newName = interfaceRenames[oldName];
-
-        context.report({
-          node,
-          message: formatDefaultMessage(oldName, newName),
-          fix(fixer) {
-            return fixer.replaceText(node.imported, newName);
-          },
-        });
+        replaceIdentifier(node.imported);
+      },
+      ExportSpecifier(node: ExportSpecifier) {
+        if (
+          exports.some(
+            (specifier) => specifier.local.name === node.local.name
+          ) ||
+          shouldRenameIdentifier(node.local)
+        ) {
+          replaceIdentifier(node.local);
+        }
       },
       TSTypeReference(node: TSESTree.TSTypeReference) {
         if (node.typeName.type === "Identifier") {

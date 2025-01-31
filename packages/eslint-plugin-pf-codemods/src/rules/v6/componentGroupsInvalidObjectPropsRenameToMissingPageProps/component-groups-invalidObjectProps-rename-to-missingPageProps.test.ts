@@ -35,7 +35,7 @@ ruleTester.run(
         errors: [
           {
             message,
-            type: "ImportSpecifier",
+            type: "Identifier",
           },
           {
             message,
@@ -60,7 +60,7 @@ ruleTester.run(
         errors: [
           {
             message,
-            type: "ImportSpecifier",
+            type: "Identifier",
           },
         ],
       },
@@ -75,7 +75,7 @@ ruleTester.run(
           },
           {
             message,
-            type: "ImportSpecifier",
+            type: "Identifier",
           },
         ],
       },
@@ -89,7 +89,7 @@ ruleTester.run(
           },
           {
             message,
-            type: "ImportSpecifier",
+            type: "Identifier",
           },
         ],
       },
@@ -103,7 +103,7 @@ ruleTester.run(
           },
           {
             message,
-            type: "ImportSpecifier",
+            type: "Identifier",
           },
         ],
       },
