@@ -81,7 +81,7 @@ export function getFromPackage(
     specifierNames.includes(specifier.imported.name)
   );
   const specifiedExports = exports.filter((specifier) =>
-    specifierNames.includes(specifier.exported.name)
+    specifierNames.includes(specifier.local.name)
   );
 
   return { imports: specifiedImports, exports: specifiedExports };
