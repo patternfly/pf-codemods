@@ -26,18 +26,18 @@ ruleTester.run('chip-replace-with-label', rule, {
       errors: [chipImportError],
     },
     {
-      code: `import { ChipGroup } from '@patternfly/react-core/deprecated'; <ChipGroup someOtherProp>This is a chipgroup</ChipGroup>`,
-      output: `import { LabelGroup } from '@patternfly/react-core'; <LabelGroup someOtherProp>This is a chipgroup</LabelGroup>`,
+      code: `import { ChipGroup } from '@patternfly/react-core/deprecated'; <ChipGroup numChips={3} someOtherProp>This is a chipgroup</ChipGroup>`,
+      output: `import { LabelGroup } from '@patternfly/react-core'; <LabelGroup numLabels={3} someOtherProp>This is a chipgroup</LabelGroup>`,
       errors: [chipImportError],
     },
     // with Chip nested in ChipGroup
     {
       code: `import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
-      <ChipGroup>
+      <ChipGroup numChips={3}>
         <Chip badge={identifier}onClick={handleOnClick} someOtherProp>This is a chip</Chip>
       </ChipGroup>`,
       output: `import { Label, LabelGroup } from '@patternfly/react-core';
-      <LabelGroup>
+      <LabelGroup numLabels={3}>
         <Label variant="outline" onClose={handleOnClick} someOtherProp>This is a chip {identifier}</Label>
       </LabelGroup>`,
       errors: [chipImportError],
@@ -45,11 +45,11 @@ ruleTester.run('chip-replace-with-label', rule, {
     // with aliased Chip and ChipGroup
     {
       code: `import { Chip as PFChip, ChipGroup as PFChipGroup } from '@patternfly/react-core/deprecated';
-      <PFChipGroup>
+      <PFChipGroup numChips={3}>
         <PFChip>This is a chip</PFChip>
       </PFChipGroup>`,
       output: `import { Label, LabelGroup } from '@patternfly/react-core';
-      <LabelGroup>
+      <LabelGroup numLabels={3}>
         <Label variant="outline">This is a chip</Label>
       </LabelGroup>`,
       errors: [chipImportError],
@@ -95,7 +95,7 @@ ruleTester.run('chip-replace-with-label', rule, {
       code: `import { LabelGroup } from '@patternfly/react-core';
       import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
       <>
-        <ChipGroup>
+        <ChipGroup numChips={3} someOtherProp>
           <Chip badge={identifier} onClick={handleOnClick} someOtherProp>
             This is a chip
           </Chip>
@@ -107,7 +107,7 @@ ruleTester.run('chip-replace-with-label', rule, {
       output: `import { LabelGroup, Label } from '@patternfly/react-core';
       
       <>
-        <LabelGroup>
+        <LabelGroup numLabels={3} someOtherProp>
           <Label variant="outline"  onClose={handleOnClick} someOtherProp>
             This is a chip
            {identifier}</Label>
