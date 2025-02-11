@@ -26,11 +26,29 @@ ruleTester.run('chip-replace-with-label', rule, {
       errors: [chipImportError],
     },
     {
+      code: `import { ChipGroup } from '@patternfly/react-core/deprecated'; <ChipGroup someOtherProp>This is a chipgroup</ChipGroup>`,
+      output: `import { LabelGroup } from '@patternfly/react-core'; <LabelGroup someOtherProp>This is a chipgroup</LabelGroup>`,
+      errors: [chipImportError],
+    },
+    // with ChipGroup that has numChips
+    {
       code: `import { ChipGroup } from '@patternfly/react-core/deprecated'; <ChipGroup numChips={3} someOtherProp>This is a chipgroup</ChipGroup>`,
       output: `import { LabelGroup } from '@patternfly/react-core'; <LabelGroup numLabels={3} someOtherProp>This is a chipgroup</LabelGroup>`,
       errors: [chipImportError],
     },
     // with Chip nested in ChipGroup
+    {
+      code: `import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
+      <ChipGroup>
+        <Chip badge={identifier}onClick={handleOnClick} someOtherProp>This is a chip</Chip>
+      </ChipGroup>`,
+      output: `import { Label, LabelGroup } from '@patternfly/react-core';
+      <LabelGroup>
+        <Label variant="outline" onClose={handleOnClick} someOtherProp>This is a chip {identifier}</Label>
+      </LabelGroup>`,
+      errors: [chipImportError],
+    },
+    // with Chip nested in ChipGroup that has numChips
     {
       code: `import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
       <ChipGroup numChips={3}>
@@ -43,6 +61,18 @@ ruleTester.run('chip-replace-with-label', rule, {
       errors: [chipImportError],
     },
     // with aliased Chip and ChipGroup
+    {
+      code: `import { Chip as PFChip, ChipGroup as PFChipGroup } from '@patternfly/react-core/deprecated';
+      <PFChipGroup>
+        <PFChip>This is a chip</PFChip>
+      </PFChipGroup>`,
+      output: `import { Label, LabelGroup } from '@patternfly/react-core';
+      <LabelGroup>
+        <Label variant="outline">This is a chip</Label>
+      </LabelGroup>`,
+      errors: [chipImportError],
+    },
+    // with aliased Chip and ChipGroup that has numChips
     {
       code: `import { Chip as PFChip, ChipGroup as PFChipGroup } from '@patternfly/react-core/deprecated';
       <PFChipGroup numChips={3}>
@@ -91,6 +121,34 @@ ruleTester.run('chip-replace-with-label', rule, {
       errors: [chipImportError],
     },
     // with LabelGroup import already included
+    {
+      code: `import { LabelGroup } from '@patternfly/react-core';
+      import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
+      <>
+        <ChipGroup someOtherProp>
+          <Chip badge={identifier} onClick={handleOnClick} someOtherProp>
+            This is a chip
+          </Chip>
+        </ChipGroup>
+        <LabelGroup>
+          This is a label group
+        </LabelGroup>
+      </>`,
+      output: `import { LabelGroup, Label } from '@patternfly/react-core';
+      
+      <>
+        <LabelGroup someOtherProp>
+          <Label variant="outline"  onClose={handleOnClick} someOtherProp>
+            This is a chip
+           {identifier}</Label>
+        </LabelGroup>
+        <LabelGroup>
+          This is a label group
+        </LabelGroup>
+      </>`,
+      errors: [chipImportError],
+    },
+    // with LabelGroup import already included and ChipGroup that has numChips
     {
       code: `import { LabelGroup } from '@patternfly/react-core';
       import { Chip, ChipGroup } from '@patternfly/react-core/deprecated';
