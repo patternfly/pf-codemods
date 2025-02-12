@@ -69,6 +69,14 @@ const renameOnClickAttribute = (node: JSXElement, fixer: Rule.RuleFixer) => {
     : [];
 };
 
+const renameNumChipsAttribute = (node: JSXElement, fixer: Rule.RuleFixer) => {
+  const onNumChipsAttribute = getAttribute(node, "numChips");
+
+  return onNumChipsAttribute
+    ? [fixer.replaceText(onNumChipsAttribute.name, "numLabels")]
+    : [];
+};
+
 const removeIsReadOnlyProp = (node: JSXElement, fixer: Rule.RuleFixer) => {
   const isReadOnlyProp = getAttribute(node, "isReadOnly");
 
@@ -225,6 +233,7 @@ module.exports = {
                         node.closingElement.name,
                         labelGroupName
                       ),
+                      ...renameNumChipsAttribute(node, fixer),
                     ]
                   : []),
               ];
