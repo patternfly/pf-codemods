@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.140.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.139.4...@patternfly/eslint-plugin-pf-codemods@1.140.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **chipGroup:** Replace numChips with numLabels ([#823](https://github.com/patternfly/pf-codemods/issues/823)) ([78f08a8](https://github.com/patternfly/pf-codemods/commit/78f08a8f0cb8463d1ff8d919757b6f44f1e81efe))
+* **formFiledGroupHeaderTitleTextObject:** use renameInterface helper ([#820](https://github.com/patternfly/pf-codemods/issues/820)) ([4d17ec9](https://github.com/patternfly/pf-codemods/commit/4d17ec94cff87bdf82e81685127a750992daf597))
+* type getVariableValue helper ([#796](https://github.com/patternfly/pf-codemods/issues/796)) ([3bacbc6](https://github.com/patternfly/pf-codemods/commit/3bacbc6b1e2a0491393c305a10d0cd19feaf93c3))
+
+
+### Features
+
+* **componentGroups:** rename InvalidObjectProps to MissingPageProps ([#799](https://github.com/patternfly/pf-codemods/issues/799)) ([05f3e13](https://github.com/patternfly/pf-codemods/commit/05f3e135e6cd111c045197122acd2ec4a3898226))
+* CSS vars updater package ([#801](https://github.com/patternfly/pf-codemods/issues/801)) ([8a46215](https://github.com/patternfly/pf-codemods/commit/8a462151b58cf43dfba13af8a37396b78de1269f))
+* **ExpandableSection:** Remove isActive prop ([#822](https://github.com/patternfly/pf-codemods/issues/822)) ([baef409](https://github.com/patternfly/pf-codemods/commit/baef4097ec0d17fb6053641fece96ed14958eaf6))
+
+
+
+
+
 ## [1.139.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.139.3...@patternfly/eslint-plugin-pf-codemods@1.139.4) (2025-01-22)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods

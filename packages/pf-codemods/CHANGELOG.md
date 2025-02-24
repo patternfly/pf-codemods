@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.3.5...@patternfly/pf-codemods@2.4.0) (2025-02-24)
+
+
+### Features
+
+* CSS vars updater package ([#801](https://github.com/patternfly/pf-codemods/issues/801)) ([8a46215](https://github.com/patternfly/pf-codemods/commit/8a462151b58cf43dfba13af8a37396b78de1269f))
+
+
+
+
+
 ## [2.3.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.3.4...@patternfly/pf-codemods@2.3.5) (2025-01-22)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
