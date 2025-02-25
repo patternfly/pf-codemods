@@ -104,3 +104,4 @@ Out:
   padding-block-end: var(--pf-v6-c-about-modal-box__brand--PaddingBlockEnd);
 }
 ```
+
