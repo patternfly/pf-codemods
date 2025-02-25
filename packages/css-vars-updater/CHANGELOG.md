@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/css-vars-updater@1.1.2...@patternfly/css-vars-updater@1.1.3) (2025-02-25)
+
+
+### Bug Fixes
+
+* **packaging:** update css-vars-updater to compile to CJS ([52a2c16](https://github.com/patternfly/pf-codemods/commit/52a2c1688bcb30fc80c6ab99d79d3ea615419fa8))
+
+
+
+
+
 ## [1.1.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/css-vars-updater@1.1.1...@patternfly/css-vars-updater@1.1.2) (2025-02-25)
 
 
