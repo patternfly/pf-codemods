@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/css-vars-updater",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Utility to update Patternfly CSS variables when migrating from V5 to a new design token system in V6",
   "author": "Red Hat",
   "license": "MIT",
