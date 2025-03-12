@@ -7,7 +7,7 @@ jobs:
     env:
       GH_PR_NUM: ${{ github.event.number }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       # Yes, we really want to checkout the PR
       - run: |
           if [[ ! -z "${GH_PR_NUM}" ]]; then 
@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
       - run: corepack enable
       - run: corepack prepare yarn@4.5.1 --activate
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         name: Cache npm deps
         with:
@@ -39,7 +39,7 @@ jobs:
     env:
       GH_PR_NUM: ${{ github.event.number }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       # Yes, we really want to checkout the PR
       - run: |
           if [[ ! -z "${GH_PR_NUM}" ]]; then 
@@ -52,7 +52,7 @@ jobs:
           node-version: '18'
       - run: corepack enable
       - run: corepack prepare yarn@4.5.1 --activate
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         name: Cache npm deps
         with:
@@ -71,7 +71,7 @@ jobs:
     env:
       GH_PR_NUM: ${{ github.event.number }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       # Yes, we really want to checkout the PR
       - run: |
           if [[ ! -z "${GH_PR_NUM}" ]]; then 
@@ -84,7 +84,7 @@ jobs:
           node-version: '18'
       - run: corepack enable
       - run: corepack prepare yarn@4.5.1 --activate
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: yarn-cache
         name: Cache npm deps
         with:
@@ -94,7 +94,7 @@ jobs:
           key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: packages-cache
         name: Cache downloaded packages
         with:
