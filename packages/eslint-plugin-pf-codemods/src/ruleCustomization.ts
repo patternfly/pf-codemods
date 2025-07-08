@@ -4,6 +4,7 @@
  */
 export const betaRuleNames: string[] = [
   "data-codemods-cleanup",
+  "enable-animations",
   "kebabToggle-replace-with-menuToggle",
 ];
 
