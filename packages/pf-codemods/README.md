@@ -3,7 +3,7 @@
 Hey PatternFly-React devs! `pf-codemods` is an eslint wrapper to update @patternfly/react-core@5.x.x code to 6.x.x.
 
 We hope these rules and their autofixers will help you more quickly adopt our breaking changes. These rules are not designed to fix all build errors, but they can help to fix easy ones as well as point out the more complicated ones and offer suggestions on how you might go about fixing them.
- 
+
 If you have any hardcoded Patternfly class names in your project (i.e. pf-c-button) you also might want to see if our [class-name-updater package](./packages/class-name-updater/README.md) would be helpful for you.
 
 ## Usage
@@ -455,7 +455,7 @@ In:
 import { Chip } from '@patternfly/react-core/deprecated';
 
 export const ChipReplaceWithLabelInput = () => (
-  <Chip onClick={handleClick} badge={badge}>
+  <Chip onClick={handleClick} badge={badge} numChips={3}>
     This is a chip
   </Chip>
 );
@@ -467,7 +467,7 @@ Out:
 import { Label } from '@patternfly/react-core';
 
 export const ChipReplaceWithLabelInput = () => (
-  <Label variant="outline" onClose={handleClick}>
+  <Label variant="outline" onClose={handleClick} numLabels={3}>
     This is a chip
     {badge}
   </Label>
@@ -608,6 +608,31 @@ export const ComponentGroupsErrorStateRenamePropsInput = () => (
     defaultBodyText="Sample default error description"
   />
 );
+```
+
+
+### component-groups-invalidObjectProps-rename-to-missingPageProps [(react-component-groups/#313)](https://github.com/patternfly/react-component-groups/pull/313)
+
+In react-component-groups, we've renamed InvalidObjectProps interface to MissingPageProps
+
+#### Examples
+
+In:
+
+```jsx
+import { InvalidObjectProps } from "@patternfly/react-component-groups";
+
+const props: InvalidObjectProps;
+interface CustomProps extends InvalidObjectProps {}
+```
+
+Out:
+
+```jsx
+import { MissingPageProps } from "@patternfly/react-component-groups";
+
+const props: MissingPageProps;
+interface CustomProps extends MissingPageProps {}
 ```
 
 
@@ -1190,6 +1215,96 @@ Out:
 import { EmptyStateHeader, EmptyStateIcon } from "@patternfly/react-core";
 ```
 
+### enable-animations
+
+This rule adds the `hasAnimations` prop to PatternFly components that support animations. This is an optional enhancement that enables smoother transitions and animations in your UI components.
+
+**⚠️ Important:** Enabling animations may change the DOM structure of some components. This could affect CSS selectors, testing queries, or other code that relies on the specific DOM structure. Review your code after enabling animations to ensure compatibility.
+
+The following components will have `hasAnimations` added:
+- AlertGroup
+- DualListSelector (only when `isTree` prop has a truthy value)
+- FormFieldGroupExpandable
+- SearchInputExpandable
+- TreeView
+- Table (from @patternfly/react-table)
+
+**Note:** For DualListSelector, the `hasAnimations` prop will only be added when the `isTree` prop is present and has a truthy value (e.g., `isTree`, `isTree={true}`, `isTree="yes"`, `isTree={1}`). It will not be added when `isTree` is falsy (e.g., `isTree={false}`, `isTree=""`, `isTree={0}`) or when the `isTree` prop is not present at all.
+
+This rule can only run using the `--only enable-animations` option.
+
+#### Examples
+
+In:
+
+```jsx
+import { AlertGroup, TreeView, DualListSelector, SearchInputExpandable, FormFieldGroupExpandable } from "@patternfly/react-core";
+import { Table } from "@patternfly/react-table";
+
+export const EnableAnimationsInput = () => (
+  <>
+    <AlertGroup isLiveRegion>
+      {/* alerts */}
+    </AlertGroup>
+    <TreeView />
+    <DualListSelector />
+    <DualListSelector isTree />
+    <DualListSelector isTree={true} />
+    <DualListSelector isTree={false} />
+    <SearchInputExpandable />
+    <FormFieldGroupExpandable />
+    <Table />
+  </>
+);
+```
+
+Out:
+
+```jsx
+import { AlertGroup, TreeView, DualListSelector, SearchInputExpandable, FormFieldGroupExpandable } from "@patternfly/react-core";
+import { Table } from "@patternfly/react-table";
+
+export const EnableAnimationsOutput = () => (
+  <>
+    <AlertGroup hasAnimations isLiveRegion>
+      {/* alerts */}
+    </AlertGroup>
+    <TreeView hasAnimations />
+    <DualListSelector />
+    <DualListSelector isTree hasAnimations />
+    <DualListSelector isTree={true} hasAnimations />
+    <DualListSelector isTree={false} />
+    <SearchInputExpandable hasAnimations />
+    <FormFieldGroupExpandable hasAnimations />
+    <Table hasAnimations />
+  </>
+);
+``` 
+### expandableSection-remove-isActive-prop [(#9881)](https://github.com/patternfly/patternfly-react/pull/9881)
+
+The `isActive` prop has been removed from ExpandableSection.
+
+#### Examples
+
+In:
+
+```jsx
+import { ExpandableSection } from "@patternfly/react-core";
+
+export const ExpandableSectionRemoveIsActivePropInput = () => <ExpandableSection isActive />
+```
+
+Out:
+
+```jsx
+import { ExpandableSection } from "@patternfly/react-core";
+
+export const ExpandableSectionRemoveIsActivePropInput = () => (
+  <ExpandableSection  />
+);
+```
+
+
 ### formFiledGroupHeaderTitleTextObject-renamed [(#10016)](https://github.com/patternfly/patternfly-react/pull/10016)
 
 There was a typo in FormFiledGroupHeaderTitleTextObject interface. It was renamed to the intended FormFieldGroupHeaderTitleTextObject.
@@ -1352,6 +1467,10 @@ export const LabelRemoveIsOverflowLabelInput2 = () => (
 );
 ```
 
+### logViewer-moved-styles [(#70)](https://github.com/patternfly/react-log-viewer/pull/70)
+
+The stylesheet for LogViewer has been moved out of the PatternFly package and into LogViewer itself. You may need to update stylesheet imports or import the stylesheet manually.
+
 ### loginMainFooterLinksItem-structure-updated [(#10107)](https://github.com/patternfly/patternfly-react/pull/10107)
 
 LoginMainFooterLinksItem structure has changed. Instead of passing it many properties, everything is now passed in a children component directly.
@@ -1395,10 +1514,6 @@ export const LoginMainFooterLinksItemStructureUpdatedInput = () => (
 ### loginMainHeader-warn-updated-markup [(#10880)](https://github.com/patternfly/patternfly-react/pull/10880)
 
 The markup for LoginMainHeader - which is used internally within LoginPage - has been updated, now using a `div` wrapper instead of a `header` element wrapper.
-
-### logViewer-moved-styles [(#70)](https://github.com/patternfly/react-log-viewer/pull/70)
-
-The stylesheet for LogViewer has been moved out of the PatternFly package and into LogViewer itself. You may need to update stylesheet imports or import the stylesheet manually.
 
 ### masthead-name-changes [(#10809)](https://github.com/patternfly/patternfly-react/pull/10809)
 
@@ -1618,15 +1733,13 @@ Our previous implementation of Modal has been deprecated. This rule will update 
 In:
 
 ```jsx
-import { Modal } from "@patternfly/react-core";
+import { Modal, ModalProps } from "@patternfly/react-core";
 ```
 
 Out:
 
 ```jsx
-import {
-	Modal
-} from '@patternfly/react-core/deprecated';
+import { Modal, ModalProps } from "@patternfly/react-core/deprecated";
 ```
 
 ### modalNext-promoted [(#10358)](https://github.com/patternfly/patternfly-react/pull/10358)
@@ -1752,14 +1865,6 @@ export const NoDuplicateImportSpecifiersInput = () => (
 );
 ```
 
-### notificationBadge-warn-markup-change [(#10020)](https://github.com/patternfly/patternfly-react/pull/10020)
-
-The markup for NotificationBadge has changed, as it now uses stateful button internally.
-
-### notificationDrawerHeader-warn-update-markup [(#10378)](https://github.com/patternfly/patternfly-react/pull/10378)
-
-NotificationDrawerHeader no longer uses our Text component internally, and instead renders a native `h1` element.
-
 ### no-unused-imports-v6
 
 PatternFly imports that are unused imports should be removed.
@@ -1782,6 +1887,14 @@ import { Bar } from "@patternfly/react-core";
 export const NoUnusedImportsInput = () => <Bar />;
 ```
 
+
+### notificationBadge-warn-markup-change [(#10020)](https://github.com/patternfly/patternfly-react/pull/10020)
+
+The markup for NotificationBadge has changed, as it now uses stateful button internally.
+
+### notificationDrawerHeader-warn-update-markup [(#10378)](https://github.com/patternfly/patternfly-react/pull/10378)
+
+NotificationDrawerHeader no longer uses our Text component internally, and instead renders a native `h1` element.
 
 ### pageBreadcrumbAndSection-warn-updated-wrapperLogic [(#10650)](https://github.com/patternfly/patternfly-react/pull/10650)
 
