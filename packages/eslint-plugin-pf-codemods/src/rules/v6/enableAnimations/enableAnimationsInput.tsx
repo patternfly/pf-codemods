@@ -1,4 +1,4 @@
-import { AlertGroup, TreeView, DualListSelector, SearchInput, FormFieldGroupExpandable } from "@patternfly/react-core";
+import { AlertGroup, TreeView, DualListSelector, SearchInputExpandable, FormFieldGroupExpandable } from "@patternfly/react-core";
 import { Table } from "@patternfly/react-table";
 
 export const EnableAnimationsInput = () => (
@@ -8,7 +8,10 @@ export const EnableAnimationsInput = () => (
     </AlertGroup>
     <TreeView />
     <DualListSelector />
-    <SearchInput />
+    <DualListSelector isTree />
+    <DualListSelector isTree={true} />
+    <DualListSelector isTree={false} />
+    <SearchInputExpandable />
     <FormFieldGroupExpandable />
     <Table />
   </>
