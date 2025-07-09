@@ -1,6 +1,7 @@
 import { Rule } from "eslint";
-import { JSXOpeningElement } from "estree-jsx";
+import { JSXOpeningElement, JSXAttribute } from "estree-jsx";
 import { getFromPackage, checkMatchingJSXOpeningElement } from "../../helpers";
+import { getAttribute, getAttributeValue } from "../../helpers/JSXAttributes";
 
 // Rule to add hasAnimations prop to components that support animations
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
       "DualListSelector", 
       "TreeView",
       "AlertGroup",
-      "SearchInput"
+      "SearchInputExpandable"
     ];
 
     // Table comes from react-table package
@@ -42,11 +43,51 @@ module.exports = {
     const message =
       "Consider adding hasAnimations prop to enable component animations.";
 
+    // Helper function to check if isTree prop exists and isn't explicitly false
+    function hasValidIsTreeProp(node: JSXOpeningElement): boolean {
+      const isTreeAttribute = getAttribute(node, "isTree");
+
+      if (!isTreeAttribute) {
+        return false; // No isTree prop found
+      }
+
+      // If isTree has no value, it defaults to true
+      if (!isTreeAttribute.value) {
+        return true;
+      }
+
+      // Get the actual value using the helper
+      const attributeValue = getAttributeValue(context, isTreeAttribute.value);
+      
+      // Check for explicit false: isTree={false}
+      if (attributeValue.type === "Literal" && attributeValue.value === false) {
+        return false;
+      }
+
+      // For anything else (including complex expressions), assume it could be truthy
+      return true;
+    }
+
+    // Helper function to get component name from node
+    function getComponentName(node: JSXOpeningElement): string | null {
+      if (node.name.type === "JSXIdentifier") {
+        return node.name.name;
+      }
+      return null;
+    }
+
     return allTargetImports.length === 0
       ? {}
       : {
           JSXOpeningElement(node: JSXOpeningElement) {
             if (checkMatchingJSXOpeningElement(node, allTargetImports)) {
+              const componentName = getComponentName(node);
+              
+              // Special handling for DualListSelector - only add hasAnimations if isTree is true
+              if (componentName === "DualListSelector" && !hasValidIsTreeProp(node)) {
+                return; // Skip this DualListSelector as it doesn't have isTree=true
+              }
+
               // Check if hasAnimations prop already exists
               const hasAnimationsAttribute = node.attributes.find(
                 (attr) =>
@@ -61,10 +102,14 @@ module.exports = {
                   node,
                   message,
                   fix(fixer) {
-                    return fixer.insertTextAfter(
-                      node.name,
-                      " hasAnimations"
-                    );
+                    // Insert hasAnimations at the end of existing attributes
+                    if (node.attributes.length > 0) {
+                      const lastAttribute = node.attributes[node.attributes.length - 1];
+                      return fixer.insertTextAfter(lastAttribute, " hasAnimations");
+                    } else {
+                      // No existing attributes, insert after component name
+                      return fixer.insertTextAfter(node.name, " hasAnimations");
+                    }
                   },
                 });
               }
