@@ -1,4 +1,4 @@
-import glob from "glob";
+import { sync } from "glob";
 import { join } from "path";
 import { readdir, readFile, writeFile } from "fs/promises";
 
@@ -9,7 +9,7 @@ const rulePath = require
 const baseReadMePath = join(process.cwd(), "scripts", "baseReadMe.md");
 const baseReadMeContent = readFile(baseReadMePath, "utf-8");
 
-const v6RuleDirs = glob.sync(join(rulePath, "*"));
+const v6RuleDirs = sync(join(rulePath, "*")).sort();
 
 const builtReadMes = v6RuleDirs.map(async (ruleDir) => {
   const files = await readdir(ruleDir);
