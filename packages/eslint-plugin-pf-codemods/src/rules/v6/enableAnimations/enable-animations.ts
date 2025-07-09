@@ -1,6 +1,7 @@
 import { Rule } from "eslint";
 import { JSXOpeningElement, JSXAttribute } from "estree-jsx";
 import { getFromPackage, checkMatchingJSXOpeningElement } from "../../helpers";
+import { getAttribute, getAttributeValue } from "../../helpers/JSXAttributes";
 
 // Rule to add hasAnimations prop to components that support animations
 module.exports = {
@@ -44,12 +45,7 @@ module.exports = {
 
     // Helper function to check if isTree prop exists and isn't explicitly false
     function hasValidIsTreeProp(node: JSXOpeningElement): boolean {
-      const isTreeAttribute = node.attributes.find(
-        (attr) =>
-          attr.type === "JSXAttribute" &&
-          attr.name.type === "JSXIdentifier" &&
-          attr.name.name === "isTree"
-      ) as JSXAttribute | undefined;
+      const isTreeAttribute = getAttribute(node, "isTree");
 
       if (!isTreeAttribute) {
         return false; // No isTree prop found
@@ -60,12 +56,12 @@ module.exports = {
         return true;
       }
 
+      // Get the actual value using the helper
+      const attributeValue = getAttributeValue(context, isTreeAttribute.value);
+      
       // Check for explicit false: isTree={false}
-      if (isTreeAttribute.value.type === "JSXExpressionContainer") {
-        const expression = isTreeAttribute.value.expression;
-        if (expression.type === "Literal" && expression.value === false) {
-          return false;
-        }
+      if (attributeValue.type === "Literal" && attributeValue.value === false) {
+        return false;
       }
 
       // For anything else (including complex expressions), assume it could be truthy
