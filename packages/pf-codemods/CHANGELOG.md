@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.4.3...@patternfly/pf-codemods@2.4.4) (2025-07-09)
+
+
+### Bug Fixes
+
+* **scripts:** Fix bug in readme builder and update readme ([#846](https://github.com/patternfly/pf-codemods/issues/846)) ([8877ea5](https://github.com/patternfly/pf-codemods/commit/8877ea53b1d2a91af5c3d6542fcc356897a7bf57))
+
+
+
+
+
 ## [2.4.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.4.2...@patternfly/pf-codemods@2.4.3) (2025-07-09)
 
 **Note:** Version bump only for package @patternfly/pf-codemods
