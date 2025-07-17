@@ -122,7 +122,7 @@ async function runCodemods(path, otherPaths, options) {
         type: "list",
         name: "includeTable",
         message:
-          "This will update several React Core components. Which components would you like to update? (Note: Some users have reported issues with enabling animations on Table.)",
+          "This will update several React Core components. Would you like to include Table? (Note: Some users have reported issues with enabling animations on Table.)",
         choices: [
           { name: "Just React Core components", value: false },
           { name: "React Core and Table components", value: true },
