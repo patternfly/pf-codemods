@@ -7,6 +7,12 @@ import { getAttribute, getAttributeValue } from "../../helpers/JSXAttributes";
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
+    // Get options from context (set by CLI)
+    const includeTable =
+      (context.settings && context.settings.enableAnimationsIncludeTable) ||
+      (context.options && context.options[0] && context.options[0].includeTable) ||
+      false;
+
     // Get imports from both react-core and react-table packages
     const { imports: coreImports } = getFromPackage(
       context,
@@ -34,9 +40,12 @@ module.exports = {
       targetComponents.includes(specifier.imported.name)
     );
 
-    const targetTableImports = tableImports.filter((specifier) =>
-      tableComponents.includes(specifier.imported.name)
-    );
+    // Only include Table if option is set
+    const targetTableImports = includeTable
+      ? tableImports.filter((specifier) =>
+          tableComponents.includes(specifier.imported.name)
+        )
+      : [];
 
     const allTargetImports = [...targetCoreImports, ...targetTableImports];
 
