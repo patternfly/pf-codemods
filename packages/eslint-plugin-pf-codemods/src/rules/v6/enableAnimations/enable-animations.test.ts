@@ -18,6 +18,30 @@ const valid = [
 ];
 
 const invalid = [
+  // --- Without includeTable (default) ---
+  {
+    code: "import { Table } from '@patternfly/react-table'; <Table />",
+    output: "import { Table } from '@patternfly/react-table'; <Table />",
+    errors: [
+      { 
+        message: "Consider adding hasAnimations prop to enable component animations.",
+        type: "JSXOpeningElement"
+      }
+    ]
+  },
+  // --- With includeTable: true ---
+  {
+    code: "import { Table } from '@patternfly/react-table'; <Table />",
+    output: "import { Table } from '@patternfly/react-table'; <Table hasAnimations />",
+    errors: [
+      { 
+        message: "Consider adding hasAnimations prop to enable component animations.",
+        type: "JSXOpeningElement"
+      }
+    ],
+    options: [{ includeTable: true }]
+  },
+  // --- Core components (unchanged) ---
   {
     code: "import { AlertGroup } from '@patternfly/react-core'; <AlertGroup />",
     output: "import { AlertGroup } from '@patternfly/react-core'; <AlertGroup hasAnimations />",
@@ -79,26 +103,10 @@ const invalid = [
     ]
   },
   {
-    code: "import { Table } from '@patternfly/react-table'; <Table />",
-    output: "import { Table } from '@patternfly/react-table'; <Table hasAnimations />",
-    errors: [
-      { 
-        message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
-      }
-    ]
-  },
-  {
     code: `import { AlertGroup, TreeView } from '@patternfly/react-core'; 
-      <>
-        <AlertGroup />
-        <TreeView />
-      </>`,
+      <><AlertGroup /><TreeView /></>`,
     output: `import { AlertGroup, TreeView } from '@patternfly/react-core'; 
-      <>
-        <AlertGroup hasAnimations />
-        <TreeView hasAnimations />
-      </>`,
+      <><AlertGroup hasAnimations /><TreeView hasAnimations /></>`,
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
