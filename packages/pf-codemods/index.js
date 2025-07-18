@@ -73,7 +73,13 @@ async function getRulesToRemove(options) {
   const pfVersions = ["v6", "v5", "v4"];
   let selectedVersion = pfVersions.find((version) => options[version]);
 
-  if (!selectedVersion) {
+  // If only enable-animations is being run, skip the PatternFly version prompt and default to v6 logic
+  let skipVersionPrompt = false;
+  if (options.only && options.only.split(",").length === 1 && options.only.includes("enable-animations")) {
+    skipVersionPrompt = true;
+  }
+
+  if (!selectedVersion && !skipVersionPrompt) {
     const inquirer = await import("inquirer");
     const answer = await inquirer.default.prompt([
       {
@@ -87,8 +93,9 @@ async function getRulesToRemove(options) {
         ],
       },
     ]);
-
     selectedVersion = answer.version;
+  } else if (skipVersionPrompt) {
+    return [];
   }
 
   return pfVersions.flatMap((version) =>
@@ -98,6 +105,33 @@ async function getRulesToRemove(options) {
 
 async function runCodemods(path, otherPaths, options) {
   const prefix = "@patternfly/pf-codemods/";
+
+  // Determine if enable-animations is being run
+  let enableAnimationsRule = false;
+  if (options.only) {
+    enableAnimationsRule = options.only.split(",").includes("enable-animations");
+  } else {
+    enableAnimationsRule = Object.keys(configs.recommended.rules).includes(prefix + "enable-animations");
+  }
+
+  let enableAnimationsIncludeTable = false;
+  if (enableAnimationsRule) {
+    const inquirer = await import("inquirer");
+    const answer = await inquirer.default.prompt([
+      {
+        type: "list",
+        name: "includeTable",
+        message:
+          "This will update several React Core components. Would you like to include Table? (Note: Opting into table animations may require structural updates in your codebase. See our release highlights for more information.)",
+        choices: [
+          { name: "Just React Core components", value: false },
+          { name: "React Core and Table components", value: true },
+        ],
+        default: 0,
+      },
+    ]);
+    enableAnimationsIncludeTable = answer.includeTable;
+  }
 
   if (options.only) {
     // Set rules to error like eslint likes
@@ -159,6 +193,9 @@ async function runCodemods(path, otherPaths, options) {
           {},
           ...rulesArr.filter(filterFunc).map((r) => r.rule)
         ),
+        settings: enableAnimationsRule ? {
+          enableAnimationsIncludeTable: enableAnimationsIncludeTable
+        } : {}
       },
     });
   });
