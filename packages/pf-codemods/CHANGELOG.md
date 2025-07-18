@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.4.4...@patternfly/pf-codemods@2.4.5) (2025-07-18)
+
+
+### Bug Fixes
+
+* split table hasAnimations fix with cli option ([#848](https://github.com/patternfly/pf-codemods/issues/848)) ([e7e93e5](https://github.com/patternfly/pf-codemods/commit/e7e93e5553590870c3711ec57cd465db91a3e326))
+
+
+
+
+
 ## [2.4.4](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.4.3...@patternfly/pf-codemods@2.4.4) (2025-07-09)
 
 

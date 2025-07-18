@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.140.3](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.140.2...@patternfly/eslint-plugin-pf-codemods@1.140.3) (2025-07-18)
+
+
+### Bug Fixes
+
+* split table hasAnimations fix with cli option ([#848](https://github.com/patternfly/pf-codemods/issues/848)) ([e7e93e5](https://github.com/patternfly/pf-codemods/commit/e7e93e5553590870c3711ec57cd465db91a3e326))
+
+
+
+
+
 ## [1.140.2](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.140.1...@patternfly/eslint-plugin-pf-codemods@1.140.2) (2025-07-09)
 
 **Note:** Version bump only for package @patternfly/eslint-plugin-pf-codemods
