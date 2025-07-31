@@ -9,7 +9,7 @@ import {
   ChartThemeVariant,
 } from "@patternfly/react-charts";
 import { CodeEditor } from "@patternfly/react-code-editor";
-import { FrogIcon } from "@patternfly/react-icons";
+import { BarsIcon, FrogIcon } from "@patternfly/react-icons";
 
 import {
   AboutModal,
@@ -193,6 +193,7 @@ const themeClassName = 'pf-theme-dark';
     direction={DropdownDirection.up}
   />
   <DropdownContext.Provider />
+  <PageToggleButton><BarsIcon /></PageToggleButton>
   <DropdownItem isHovered={true} />
   <DropdownToggle isPrimary onToggle={} />
   <DropdownToggleCheckbox
