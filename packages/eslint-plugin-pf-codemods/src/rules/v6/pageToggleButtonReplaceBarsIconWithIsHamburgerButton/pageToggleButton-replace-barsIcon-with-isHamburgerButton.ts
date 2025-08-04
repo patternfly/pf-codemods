@@ -42,6 +42,11 @@ module.exports = {
                 return; // No BarsIcon child found
               }
 
+              // Check if BarsIcon is imported from PatternFly
+              if (!isReactIcon(context, barsIconChild)) {
+                return; // BarsIcon is not from PatternFly, skip
+              }
+
               context.report({
                 node,
                 message: `The BarsIcon child component should be replaced with the \`isHamburgerButton\` prop on PageToggleButton.`,
