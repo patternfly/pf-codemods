@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.4.5...@patternfly/pf-codemods@2.5.0) (2025-08-04)
+
+
+### Features
+
+* **851:** PageToggleButton BarsIcon to isHamburgerButton prop ([#852](https://github.com/patternfly/pf-codemods/issues/852)) ([23adc28](https://github.com/patternfly/pf-codemods/commit/23adc287c8a51ef24a8835c22be60b42e9389f65))
+
+
+
+
+
 ## [2.4.5](https://github.com/patternfly/pf-codemods/compare/@patternfly/pf-codemods@2.4.4...@patternfly/pf-codemods@2.4.5) (2025-07-18)
 
 
