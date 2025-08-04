@@ -2206,6 +2206,35 @@ export const PageSidebarRemoveThemePropInput = () => (
 
 The markup for Page has changed. When either the `horizontalSubnav` or `breadcrumb` props are passed, a PageBody component will always wrap the contents.
 
+### pageToggleButton-replace-barsIcon-with-isHamburgerButton [(#11861)](https://github.com/patternfly/patternfly-react/pull/11861)
+
+The `BarsIcon` child component should be replaced with the `isHamburgerButton` prop on PageToggleButton. This simplifies the API and provides a more semantic way to indicate that the toggle button should render as a hamburger menu button. It also allows for the button to use animation.
+
+#### Examples
+
+In:
+
+```jsx
+import { PageToggleButton } from "@patternfly/react-core";
+import { BarsIcon } from "@patternfly/react-icons";
+
+export const PageToggleButtonReplaceBarsIconWithIsHamburgerButtonInput = () => (
+  <PageToggleButton>
+    <BarsIcon />
+  </PageToggleButton>
+);
+```
+
+Out:
+
+```jsx
+import { PageToggleButton } from "@patternfly/react-core";
+
+export const PageToggleButtonReplaceBarsIconWithIsHamburgerButtonOutput = () => (
+  <PageToggleButton isHamburgerButton />
+);
+```
+
 ### pagination-warn-markup-changed [(#10662)](https://github.com/patternfly/patternfly-react/pull/10662)
 
 The markup for Pagination has changed. There is now a wrapper element rendered around the PaginationOptionsMenu toggle. This rule does not provide a fixer, but will throw a warning.
