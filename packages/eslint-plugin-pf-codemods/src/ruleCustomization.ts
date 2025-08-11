@@ -13,6 +13,7 @@ export const warningRules = [
   "aboutModalBoxHero-remove-subcomponent",
   "accordionItem-warn-update-markup",
   "applicationLauncher-warn-input",
+  "button-support-favorite-variant",
   "card-deprecate-props",
   "card-warn-component",
   "charts-warn-tooltip",
