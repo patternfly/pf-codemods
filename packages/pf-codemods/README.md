@@ -2235,6 +2235,36 @@ export const PageToggleButtonReplaceBarsIconWithIsHamburgerButtonOutput = () => 
 );
 ```
 
+### button-support-favorite-variant [(#11853)](https://github.com/patternfly/patternfly-react/pull/11853)
+
+This rule detects when you're using `StarIcon` with Button components and suggests using the new `isFavorite` and `isFavorited` props instead. This supports the new favorite variant that includes animation styling.
+
+#### Examples
+
+In:
+
+```jsx
+import { Button } from "@patternfly/react-core";
+import { StarIcon } from "@patternfly/react-icons";
+
+export const ButtonSupportFavoriteVariantInput = () => (
+  <Button>
+    <StarIcon />
+  </Button>
+);
+```
+
+Out:
+
+```jsx
+import { Button } from "@patternfly/react-core";
+import { StarIcon } from "@patternfly/react-icons";
+
+export const ButtonSupportFavoriteVariantOutput = () => (
+  <Button isFavorite={true} />
+);
+```
+
 ### pagination-warn-markup-changed [(#10662)](https://github.com/patternfly/patternfly-react/pull/10662)
 
 The markup for Pagination has changed. There is now a wrapper element rendered around the PaginationOptionsMenu toggle. This rule does not provide a fixer, but will throw a warning.
