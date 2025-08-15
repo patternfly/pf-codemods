@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.142.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.141.0...@patternfly/eslint-plugin-pf-codemods@1.142.0) (2025-08-15)
+
+
+### Features
+
+* **853:** favorite button codemod ([#854](https://github.com/patternfly/pf-codemods/issues/854)) ([fed60da](https://github.com/patternfly/pf-codemods/commit/fed60da76fb58300728e32e343b3acca0d387fbb))
+
+
+
+
+
 # [1.141.0](https://github.com/patternfly/pf-codemods/compare/@patternfly/eslint-plugin-pf-codemods@1.140.3...@patternfly/eslint-plugin-pf-codemods@1.141.0) (2025-08-04)
 
 
