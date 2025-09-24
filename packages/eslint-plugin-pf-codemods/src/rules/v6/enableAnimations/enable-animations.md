@@ -2,6 +2,8 @@
 
 This rule adds the `hasAnimations` prop to PatternFly components that support animations. This is an optional enhancement that enables smoother transitions and animations in your UI components.
 
+**Noteworthy Alternative:** PatternFly now provides an `AnimationsProvider` context provider that can be used to enable animations globally across your application. The `hasAnimations` prop is still preferred for developers who want to enable animations manually on specific components without using the context provider.
+
 **⚠️ Important:** Enabling animations may change the DOM structure of some components. This could affect CSS selectors, testing queries, or other code that relies on the specific DOM structure. Review your code after enabling animations to ensure compatibility.
 
 The following components will have `hasAnimations` added:
