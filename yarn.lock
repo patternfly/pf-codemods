@@ -1331,7 +1331,7 @@ __metadata:
     "@types/diff": "npm:^5.0.9"
     colors: "npm:^1.4.0"
     commander: "npm:^5.1.0"
-    diff: "npm:^5.1.0"
+    diff: "npm:^8.0.3"
     glob: "npm:^10.2.6"
     typescript: "npm:^5.4.2"
   bin:
@@ -1348,7 +1348,7 @@ __metadata:
     "@types/node": "npm:^22.10.6"
     colors: "npm:^1.4.0"
     commander: "npm:^5.1.0"
-    diff: "npm:^5.1.0"
+    diff: "npm:^8.0.3"
     glob: "npm:^10.2.6"
     inquirer: "npm:^12.3.2"
     typescript: "npm:^5.4.2"
@@ -1395,7 +1395,7 @@ __metadata:
   dependencies:
     "@types/diff": "npm:^5.0.9"
     colors: "npm:^1.4.0"
-    diff: "npm:^5.1.0"
+    diff: "npm:^8.0.3"
     typescript: "npm:^5.4.2"
   languageName: unknown
   linkType: soft
@@ -3019,17 +3019,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "diff@npm:5.1.0"
-  checksum: 10c0/77a0d9beb9ed54796154ac2511872288432124ac90a1cabb1878783c9b4d81f1847f3b746a0630b1e836181461d2c76e1e6b95559bef86ed16294d114862e364
-  languageName: node
-  linkType: hard
-
 "diff@npm:^5.2.0":
   version: 5.2.0
   resolution: "diff@npm:5.2.0"
   checksum: 10c0/aed0941f206fe261ecb258dc8d0ceea8abbde3ace5827518ff8d302f0fc9cc81ce116c4d8f379151171336caf0516b79e01abdc1ed1201b6440d895a66689eb4
+  languageName: node
+  linkType: hard
+
+"diff@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "diff@npm:8.0.3"
+  checksum: 10c0/d29321c70d3545fdcb56c5fdd76028c3f04c012462779e062303d4c3c531af80d2c360c26b871e6e2b9a971d2422d47e1779a859106c4cac4b5d2d143df70e20
   languageName: node
   linkType: hard
 
