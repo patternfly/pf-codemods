@@ -22,7 +22,7 @@
     "@patternfly/shared-codemod-helpers": "workspace:^",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
-    "diff": "^5.1.0",
+    "diff": "^8.0.3",
     "glob": "^10.2.6"
   },
   "devDependencies": {
