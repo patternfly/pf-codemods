@@ -18,7 +18,7 @@
     "@patternfly/eslint-plugin-pf-codemods": "^1.142.2",
     "@typescript-eslint/parser": "^7.3.1",
     "commander": "^5.1.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.26.0",
     "glob": "^11.0.0",
     "inquirer": "^12.3.2",
     "typescript": "^5.4.2"
