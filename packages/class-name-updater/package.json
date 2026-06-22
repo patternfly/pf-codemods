@@ -19,7 +19,7 @@
     "test:v6": "node ./dist/cli.js test --exclude test/largeFile.js --v6"
   },
   "dependencies": {
-    "@patternfly/shared-codemod-helpers": "workspace:^",
+    "@patternfly/shared-codemod-helpers": "1.1.0",
     "colors": "^1.4.0",
     "commander": "^5.1.0",
     "diff": "^5.1.0",
