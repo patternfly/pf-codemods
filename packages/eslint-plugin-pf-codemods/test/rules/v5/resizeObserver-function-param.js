@@ -17,7 +17,6 @@ ruleTester.run("resizeObserver-function-param", rule, {
         {
           message:
             "A third parameter, useRequestAnimationFrame, has been added to the getResizeObserver function.",
-          type: "CallExpression",
           suggestions: [
             {
               desc: "Omit the third argument or pass in a value of false when the callback passed in is debounced. This is the new default functionality.",
@@ -37,7 +36,6 @@ ruleTester.run("resizeObserver-function-param", rule, {
         {
           message:
             "A third parameter, useRequestAnimationFrame, has been added to the getResizeObserver function.",
-          type: "CallExpression",
           suggestions: [
             {
               desc: "Omit the third argument or pass in a value of false when the callback passed in is debounced. This is the new default functionality.",

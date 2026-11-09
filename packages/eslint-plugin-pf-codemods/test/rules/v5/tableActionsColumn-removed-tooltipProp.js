@@ -19,7 +19,6 @@ ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
       errors: [
         {
           message: `The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -30,7 +29,6 @@ ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
       errors: [
         {
           message: `The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -41,7 +39,6 @@ ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
       errors: [
         {
           message: `The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -52,7 +49,6 @@ ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
       errors: [
         {
           message: `The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -63,7 +59,6 @@ ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
       errors: [
         {
           message: `The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -74,7 +69,6 @@ ruleTester.run("tableActionsColumn-removed-tooltipProp", rule, {
       errors: [
         {
           message: `The "tooltip" property has been removed from ActionsColumn's "item" prop interface. Instead a "content" property should be passed into the "tooltipProps" property of the "items" interface.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

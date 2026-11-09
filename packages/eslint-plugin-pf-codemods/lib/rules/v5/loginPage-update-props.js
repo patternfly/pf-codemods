@@ -31,7 +31,7 @@ module.exports = {
               (attribute) => attribute.name?.name === "backgroundImgSrc"
             );
             const getIdentifierType = (identifier) => {
-              const currentScope = context.getScope();
+              const currentScope = context.sourceCode.getScope(node);
               const matchingVariable = currentScope.variables.find(
                 (variable) => variable.name === identifier
               );

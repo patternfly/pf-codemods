@@ -38,7 +38,6 @@ ruleTester.run("componentGroups-errorState-rename-props", rule, {
       />`,
       errors: Object.entries(renameMap).map(([oldName, newName]) => ({
         message: `The ${oldName} prop for ErrorState has been renamed to ${newName}.`,
-        type: "JSXOpeningElement",
       })),
     },
     {
@@ -49,7 +48,6 @@ ruleTester.run("componentGroups-errorState-rename-props", rule, {
       errors: [
         {
           message: `The errorTitle prop for ErrorState has been renamed to titleText.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -61,7 +59,6 @@ ruleTester.run("componentGroups-errorState-rename-props", rule, {
       errors: [
         {
           message: `The errorTitle prop for ErrorState has been renamed to titleText.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -73,7 +70,6 @@ ruleTester.run("componentGroups-errorState-rename-props", rule, {
       errors: [
         {
           message: `The errorTitle prop for ErrorState has been renamed to titleText.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

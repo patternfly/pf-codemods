@@ -18,7 +18,6 @@ ruleTester.run("label-remove-isOverflowLabel", rule, {
         {
           message:
             'The `isOverflowLabel` prop for Label has been replaced with `variant="overflow"`.',
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -29,7 +28,6 @@ ruleTester.run("label-remove-isOverflowLabel", rule, {
         {
           message:
             'The `isOverflowLabel` prop for Label has been replaced with `variant="overflow"`. Running the fix for this rule will replace an existing `variant` prop (which had no effect if `isOverflowLabel` was used).',
-          type: "JSXOpeningElement",
         },
       ],
     },

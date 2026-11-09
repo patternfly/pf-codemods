@@ -31,10 +31,10 @@ module.exports = {
 
                   const { range } = chartThemeVariantImport[0];
                   const prevToken = context
-                    .getSourceCode()
+                    .sourceCode
                     .getTokenBefore(chartThemeVariantImport[0]);
                   const nextToken = context
-                    .getSourceCode()
+                    .sourceCode
                     .getTokenAfter(chartThemeVariantImport[0]);
 
                   const rangeStart =

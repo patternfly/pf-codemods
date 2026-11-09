@@ -23,11 +23,9 @@ ruleTester.run("menu-search-rename", rule, {
         {
           message:
             "add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message: `MenuInput has been renamed to MenuSearchInput and MenuSearch has been added as a wrapper.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -38,7 +36,6 @@ ruleTester.run("menu-search-rename", rule, {
         {
           message:
             "MenuInput has been renamed to MenuSearchInput, and should be wrapped inside MenuSearch.",
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -49,7 +46,6 @@ ruleTester.run("menu-search-rename", rule, {
         {
           message:
             "MenuInput has been renamed to MenuSearchInput, and should be wrapped inside MenuSearch.",
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -60,11 +56,9 @@ ruleTester.run("menu-search-rename", rule, {
         {
           message:
             "add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message: `MenuInput has been renamed to MenuSearchInput and MenuSearch has been added as a wrapper.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -75,11 +69,9 @@ ruleTester.run("menu-search-rename", rule, {
         {
           message:
             "add missing imports MenuSearch, MenuSearchInput from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message: `MenuInput has been renamed to MenuSearchInput and MenuSearch has been added as a wrapper.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

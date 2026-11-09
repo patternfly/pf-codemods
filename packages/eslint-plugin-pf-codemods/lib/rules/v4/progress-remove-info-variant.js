@@ -12,7 +12,7 @@ module.exports = {
         if (progressImports.map(imp => imp.local.name).includes(node.name.name)) {
           const progressAttribute = node.attributes.find(node => node.name && node.name.name === 'variant');
           if (progressAttribute) {
-            const progressValueString = context.getSourceCode().getText(progressAttribute.value);
+            const progressValueString = context.sourceCode.getText(progressAttribute.value);
             if (progressValueString.includes('info')) {
               context.report({
                 node,

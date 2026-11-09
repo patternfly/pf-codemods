@@ -24,19 +24,15 @@ ruleTester.run("formhelpertext-remove-props", rule, {
       errors: [
         {
           message: `isError prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `isHidden prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `icon prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `component prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         }
       ],
     },
@@ -46,19 +42,15 @@ ruleTester.run("formhelpertext-remove-props", rule, {
       errors: [
         {
           message: `isError prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `isHidden prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `icon prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `component prop for FormHelperText has been removed. Use HelperText and HelperTextItem directly in children.`,
-          type: "JSXOpeningElement",
         }
       ],
     },

@@ -53,7 +53,7 @@ module.exports = {
               if (disableProp?.shorthand) {
                 const variable = findVariableDeclaration(
                   "disable",
-                  context.getSourceCode().getScope(expr)
+                  context.sourceCode.getScope(expr)
                 );
 
                 variable && toReplace.push(variable.defs[0].node.id);
@@ -72,7 +72,7 @@ module.exports = {
               if (expr.type === "Identifier") {
                 const variable = findVariableDeclaration(
                   expr.name,
-                  context.getSourceCode().getScope(node)
+                  context.sourceCode.getScope(node)
                 );
 
                 const variableValue = variable.defs[0].node.init;

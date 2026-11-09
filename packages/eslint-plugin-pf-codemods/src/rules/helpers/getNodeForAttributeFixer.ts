@@ -35,7 +35,7 @@ function getJSXExpressionContainerValue(
     case "MemberExpression":
       return attribute.value.expression;
     case "Identifier":
-      const scope = context.getSourceCode().getScope(attribute);
+      const scope = context.sourceCode.getScope(attribute);
       const variableDeclaration = getVariableDeclaration(
         attribute.value.expression.name,
         scope

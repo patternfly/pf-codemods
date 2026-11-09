@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require("fs");
 const fspath = require("path");
 const { ESLint } = require("eslint");
 const {
@@ -105,13 +106,14 @@ async function getRulesToRemove(options) {
 
 async function runCodemods(path, otherPaths, options) {
   const prefix = "@patternfly/pf-codemods/";
+  const recommendedConfig = configs["flat/recommended"];
 
   // Determine if enable-animations is being run
   let enableAnimationsRule = false;
   if (options.only) {
     enableAnimationsRule = options.only.split(",").includes("enable-animations");
   } else {
-    enableAnimationsRule = Object.keys(configs.recommended.rules).includes(prefix + "enable-animations");
+    enableAnimationsRule = Object.keys(recommendedConfig.rules).includes(prefix + "enable-animations");
   }
 
   let enableAnimationsIncludeTable = false;
@@ -135,7 +137,7 @@ async function runCodemods(path, otherPaths, options) {
 
   if (options.only) {
     // Set rules to error like eslint likes
-    configs.recommended.rules = options.only.split(",").reduce((acc, rule) => {
+    recommendedConfig.rules = options.only.split(",").reduce((acc, rule) => {
       acc[prefix + rule] = "error";
       return acc;
     }, {});
@@ -144,7 +146,7 @@ async function runCodemods(path, otherPaths, options) {
   if (options.exclude) {
     options.exclude
       .split(",")
-      .forEach((rule) => delete configs.recommended.rules[prefix + rule]);
+      .forEach((rule) => delete recommendedConfig.rules[prefix + rule]);
   }
 
   const rulesToRemove = await getRulesToRemove(options);
@@ -152,31 +154,60 @@ async function runCodemods(path, otherPaths, options) {
   rulesToRemove.forEach((rule) => {
     // data-codemods-cleanup rule should exist for any version of codemods
     if (rule !== "data-codemods-cleanup") {
-      delete configs.recommended.rules[prefix + rule];
+      delete recommendedConfig.rules[prefix + rule];
     }
   });
+  // eslint v9+ only lints files under its base path (cwd). When inputs fall
+  // outside the current working directory (e.g. absolute paths passed to the
+  // CLI), move the base path to their common ancestor directory so they are
+  // still linted, matching eslint v8 behavior.
+  const inputPaths = otherPaths.concat(path);
+  const inputBaseDirs = inputPaths.map((p) => {
+    const abs = fspath.resolve(p);
+    const globStart = abs.search(/[*{]/);
+    if (globStart !== -1) {
+      return fspath.dirname(abs.slice(0, globStart));
+    }
+    try {
+      return fs.statSync(abs).isDirectory() ? abs : fspath.dirname(abs);
+    } catch {
+      return fspath.dirname(abs);
+    }
+  });
+  const commonAncestor = inputBaseDirs.reduce((acc, dir) => {
+    if (!acc || acc === dir) return acc || dir;
+    const a = acc.split(fspath.sep);
+    const b = dir.split(fspath.sep);
+    let i = 0;
+    while (i < a.length && i < b.length && a[i] === b[i]) i++;
+    return a.slice(0, i).join(fspath.sep) || fspath.sep;
+  }, null);
+  const eslintCwd =
+    commonAncestor === process.cwd() ||
+    commonAncestor.startsWith(process.cwd() + fspath.sep)
+      ? undefined
+      : commonAncestor;
+  // when the eslint cwd moves, inputs must be resolved against the original
+  // cwd before being handed to eslint
+  const lintPaths = eslintCwd
+    ? inputPaths.map((p) => fspath.resolve(p))
+    : inputPaths;
+
   const eslintBaseConfig = {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
-    baseConfig: configs.recommended,
-    ignore: true,
-    overrideConfig: { ignorePatterns: ["**/node_modules/**"] },
-    overrideConfigFile: fspath.resolve(__dirname, ".eslintrc"),
-    rulePaths: [],
-    useEslintrc: false,
+    cwd: eslintCwd,
+    overrideConfigFile: true,
+    ignorePatterns: ["**/node_modules/**"],
     cache: options.cache,
     cacheLocation: ".eslintcache",
-    cacheLocation: process.cwd(),
     fix: options.fix,
-    // Allow `npx` to work its magic
-    resolvePluginsRelativeTo: __dirname,
   };
 
   // runFirstRules = setupRules.map(r => prefix + r);
   // runLastRules = cleanupRules.map(r => cleanupRules + r);
-  rulesArr = Object.keys(configs.recommended.rules).map((k) => {
+  const rulesArr = Object.keys(recommendedConfig.rules).map((k) => {
     return {
       name: k,
-      rule: { [k]: configs.recommended.rules[k] },
+      rule: { [k]: recommendedConfig.rules[k] },
     };
   });
   const eslints = [
@@ -187,22 +218,24 @@ async function runCodemods(path, otherPaths, options) {
   ].map((filterFunc) => {
     return new ESLint({
       ...eslintBaseConfig,
-      baseConfig: {
-        ...configs.recommended,
-        rules: Object.assign(
-          {},
-          ...rulesArr.filter(filterFunc).map((r) => r.rule)
-        ),
-        settings: enableAnimationsRule ? {
-          enableAnimationsIncludeTable: enableAnimationsIncludeTable
-        } : {}
-      },
+      overrideConfig: [
+        {
+          ...recommendedConfig,
+          rules: Object.assign(
+            {},
+            ...rulesArr.filter(filterFunc).map((r) => r.rule)
+          ),
+          settings: enableAnimationsRule ? {
+            enableAnimationsIncludeTable: enableAnimationsIncludeTable
+          } : {},
+        },
+      ],
     });
   });
 
   const results = [];
   for await (const eslint of eslints) {
-    const result = await eslint.lintFiles(otherPaths.concat(path));
+    const result = await eslint.lintFiles(lintPaths);
     if (options.fix) {
       await ESLint.outputFixes(result);
     }

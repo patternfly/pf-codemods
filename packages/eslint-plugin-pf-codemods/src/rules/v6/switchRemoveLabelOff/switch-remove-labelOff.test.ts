@@ -17,7 +17,6 @@ ruleTester.run("switch-remove-labelOff", rule, {
       errors: [
         {
           message: `The \`labelOff\` prop has been removed from Switch. The label for a Switch should not dynamically update based on the on/off state.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("switch-remove-labelOff", rule, {
       errors: [
         {
           message: `The \`labelOff\` prop has been removed from Switch. The label for a Switch should not dynamically update based on the on/off state.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -37,7 +35,6 @@ ruleTester.run("switch-remove-labelOff", rule, {
       errors: [
         {
           message: `The \`labelOff\` prop has been removed from Switch. The label for a Switch should not dynamically update based on the on/off state.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -47,7 +44,6 @@ ruleTester.run("switch-remove-labelOff", rule, {
       errors: [
         {
           message: `The \`labelOff\` prop has been removed from Switch. The label for a Switch should not dynamically update based on the on/off state.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

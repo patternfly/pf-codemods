@@ -10,11 +10,10 @@ ruleTester.run("menuToggle-warn-iconOnly-toggle", rule, {
   invalid: [
     {
       code: `import { MenuToggle } from '@patternfly/react-core'; <MenuToggle />`,
-      output: `import { MenuToggle } from '@patternfly/react-core'; <MenuToggle />`,
+      output: null,
       errors: [
         {
           message: `We now recommend passing any icon to the \`icon\` prop instead of passing it as children, such as for plain, icon only toggles. Passing an icon as children will result in incorrect styling.`,
-          type: "ImportDeclaration",
         },
       ],
     },

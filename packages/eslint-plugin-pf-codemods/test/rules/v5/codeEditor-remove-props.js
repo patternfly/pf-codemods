@@ -21,7 +21,6 @@ ruleTester.run("codeEditor-remove-props", rule, {
       errors: ['entryDelay', 'exitDelay', 'maxWidth', 'position', 'toolTipText'].map(prop => {
         return {
           message: `${prop} has been removed for CodeEditor. This can instead be passed via the tooltipProps prop`,
-          type: "JSXOpeningElement",
         }
       })
     },
@@ -31,7 +30,6 @@ ruleTester.run("codeEditor-remove-props", rule, {
       errors: ['entryDelay', 'exitDelay', 'maxWidth', 'position', 'toolTipText'].map(prop => {
         return {
           message: `${prop} has been removed for CodeEditor. This can instead be passed via the tooltipProps prop`,
-          type: "JSXOpeningElement",
         }
       })
     }

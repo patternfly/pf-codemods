@@ -20,7 +20,6 @@ ruleTester.run("wizardStep-updated-body-typing", rule, {
       errors: [
         {
           message: `The \`body\` prop on WizardStep no longer accepts a value of "null".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -30,7 +29,6 @@ ruleTester.run("wizardStep-updated-body-typing", rule, {
       errors: [
         {
           message: `The \`body\` prop on WizardStep no longer accepts a value of "null".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -40,7 +38,6 @@ ruleTester.run("wizardStep-updated-body-typing", rule, {
       errors: [
         {
           message: `The \`body\` prop on WizardStep no longer accepts a value of "null".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -50,7 +47,6 @@ ruleTester.run("wizardStep-updated-body-typing", rule, {
       errors: [
         {
           message: `The \`body\` prop on WizardStep no longer accepts a value of "null".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -60,7 +56,6 @@ ruleTester.run("wizardStep-updated-body-typing", rule, {
       errors: [
         {
           message: `The \`body\` prop on WizardStep no longer accepts a value of "null".`,
-          type: "JSXOpeningElement",
         },
       ],
     },

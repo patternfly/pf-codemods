@@ -19,7 +19,6 @@ components.forEach((component) => {
     )
   );
 
-  const type = "JSXOpeningElement";
   invalidTests.push(
     createInvalidTest(
       `import { ${component} } from '@patternfly/react-core'; <${component} color="gold" />`,
@@ -27,7 +26,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on ${component} has been updated to replace "gold" with "yellow".`,
-          type,
         },
       ]
     )
@@ -39,7 +37,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on ${component} has been updated to replace "cyan" with "teal".`,
-          type,
         },
       ]
     )
@@ -51,7 +48,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on ${component} has been updated to replace "gold" with "yellow".`,
-          type,
         },
       ]
     )
@@ -63,7 +59,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on CustomThing has been updated to replace "gold" with "yellow".`,
-          type,
         },
       ]
     )
@@ -75,7 +70,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on ${component} has been updated to replace "cyan" with "teal".`,
-          type,
         },
       ]
     )
@@ -87,7 +81,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on ${component} has been updated to replace "cyan" with "teal".`,
-          type,
         },
       ]
     )
@@ -99,7 +92,6 @@ components.forEach((component) => {
       [
         {
           message: `The \`color\` prop on ${component} has been updated to replace "cyan" with "teal".`,
-          type,
         },
       ]
     )

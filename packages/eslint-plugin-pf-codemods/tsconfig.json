@@ -2,7 +2,13 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist/esm",
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      // eslint >= 9 bundles its own types, which are incompatible with the
+      // estree-jsx based types used throughout our rules. Type-check against
+      // @types/eslint instead; the runtime APIs we use are still present.
+      "eslint": ["../../node_modules/@types/eslint"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["dist", "test", "node_modules", "src/rules/**/*.tsx"]

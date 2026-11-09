@@ -6,7 +6,7 @@ module.exports = {
   create: function(context) {
     const imports = getFromPackage(context, '@patternfly/react-core')
       .imports.filter(specifier => ['Wizard', 'WizardBody', 'WizardToggle'].includes(specifier.imported.name));
-    const sourceCode = context.getSourceCode();
+    const sourceCode = context.sourceCode;
       
     return imports.length == 0 ? {} : {
       JSXOpeningElement(node) {

@@ -20,7 +20,6 @@ ruleTester.run("numberInput-remove-allowEmptyInput", rule, {
       output: `import { NumberInput } from '@patternfly/react-core'; <NumberInput  />`,
       errors: [{
         message: `allowEmptyInput prop has been removed for NumberInput, allowing empty input is now the default behavior.`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("numberInput-remove-allowEmptyInput", rule, {
       output: `import { NumberInput } from '@patternfly/react-core/dist/esm/components/NumberInput/index.js'; <NumberInput  />`,
       errors: [{
         message: `allowEmptyInput prop has been removed for NumberInput, allowing empty input is now the default behavior.`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

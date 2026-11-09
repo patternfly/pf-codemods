@@ -25,27 +25,24 @@ ruleTester.run("backgroundImage-update-props", rule, {
       errors: [
         {
           message: `filter prop for BackgroundImage has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { BackgroundImage } from '@patternfly/react-core'; <BackgroundImage src={{a: 1}} />`,
-      output: `import { BackgroundImage } from '@patternfly/react-core'; <BackgroundImage src={{a: 1}} />`,
+      output: null,
       errors: [
         {
           message: `The "src" prop for BackgroundImage has had it's type updated to just a string and no longer accepts a BackgroundImageSrcMap. The prop must be manually updated to the desired image src.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { BackgroundImage } from '@patternfly/react-core'; const tester={a: 1}; <BackgroundImage src={tester} />`,
-      output: `import { BackgroundImage } from '@patternfly/react-core'; const tester={a: 1}; <BackgroundImage src={tester} />`,
+      output: null,
       errors: [
         {
           message: `The "src" prop for BackgroundImage has had it's type updated to just a string and no longer accepts a BackgroundImageSrcMap. The prop must be manually updated to the desired image src.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -55,11 +52,9 @@ ruleTester.run("backgroundImage-update-props", rule, {
       errors: [
         {
           message: `filter prop for BackgroundImage has been removed`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "src" prop for BackgroundImage has had it's type updated to just a string and no longer accepts a BackgroundImageSrcMap. The prop must be manually updated to the desired image src.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

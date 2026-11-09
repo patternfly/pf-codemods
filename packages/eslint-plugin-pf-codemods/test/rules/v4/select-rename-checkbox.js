@@ -18,11 +18,9 @@ ruleTester.run("select-rename-checkbox", rule, {
       errors: [
         {
           message: `CheckboxSelect has been removed. Use <Select variant="checkbox"> instead.`,
-          type: "JSXIdentifier",
         },
         {
           message: `CheckboxSelect has been removed. Use <Select variant="checkbox"> instead.`,
-          type: "JSXIdentifier",
         },
       ]
     },
@@ -32,11 +30,9 @@ ruleTester.run("select-rename-checkbox", rule, {
       errors: [
         {
           message: `CheckboxSelectOption has been removed. Use <SelectOption> instead.`,
-          type: "JSXIdentifier",
         },
         {
           message: `CheckboxSelectOption has been removed. Use <SelectOption> instead.`,
-          type: "JSXIdentifier",
         },
       ]
     },
@@ -54,27 +50,21 @@ ruleTester.run("select-rename-checkbox", rule, {
       errors: [
         {
           message: 'CheckboxSelect has been removed. Use <Select variant="checkbox"> instead.',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CheckboxSelectOption has been removed. Use <SelectOption> instead.',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CheckboxSelectOption has been removed. Use <SelectOption> instead.',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CheckboxSelectOption has been removed. Use <SelectOption> instead.',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CheckboxSelectOption has been removed. Use <SelectOption> instead.',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CheckboxSelect has been removed. Use <Select variant="checkbox"> instead.',
-          type: 'JSXIdentifier'
         }
       ]
     },

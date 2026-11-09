@@ -12,7 +12,6 @@ const validTests: ValidTests = [];
 const invalidTests: InvalidTests = [];
 const createErrorObject = (message: string) => ({
   message,
-  type: "JSXOpeningElement",
 });
 
 toolbarComponents.forEach((component) => {

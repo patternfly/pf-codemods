@@ -17,7 +17,7 @@ module.exports = {
         if (titleImports.map(imp => imp.local.name).includes(node.name.name)) {
           const sizeAttribute = node.attributes.find(n => n.name && n.name.name === 'size');;
           if (sizeAttribute && !validSizes.includes(sizeAttribute.value.value)) {
-            const sizeValueString = context.getSourceCode().getText(sizeAttribute.value);
+            const sizeValueString = context.sourceCode.getText(sizeAttribute.value);
             const valueGuess = validSizes.find(val => sizeValueString.includes(val)) || 'md';
             context.report({
               node,

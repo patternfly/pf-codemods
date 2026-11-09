@@ -29,7 +29,7 @@ module.exports = {
                   if (node.specifiers.length > 1) {
                     const { range } = chartResizeImport[0];
                     const nextToken = context
-                      .getSourceCode()
+                      .sourceCode
                       .getTokenAfter(chartResizeImport[0]);
                     const rangeEnd =
                       nextToken && nextToken.value === ","

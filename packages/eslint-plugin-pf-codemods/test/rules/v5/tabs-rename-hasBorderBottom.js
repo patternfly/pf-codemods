@@ -21,7 +21,6 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
       errors: [
         {
           message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
       errors: [
         {
           message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -41,7 +39,6 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
       errors: [
         {
           message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -51,7 +48,6 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
       errors: [
         {
           message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -61,7 +57,6 @@ ruleTester.run("tabs-rename-hasBorderBottom", rule, {
       errors: [
         {
           message: `hasBorderBottom prop has been removed for Tabs. Use hasNoBorderBottom instead`,
-          type: "JSXOpeningElement",
         },
       ],
     },

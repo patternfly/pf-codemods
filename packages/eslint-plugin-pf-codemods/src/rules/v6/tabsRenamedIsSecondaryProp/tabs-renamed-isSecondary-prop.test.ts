@@ -17,7 +17,6 @@ ruleTester.run("tabs-renamed-isSecondary-prop", rule, {
       errors: [
         {
           message: `The \`isSecondary\` prop for Tabs has been renamed to \`isSubtab\`.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

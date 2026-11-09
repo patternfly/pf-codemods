@@ -17,7 +17,6 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
       errors: [
         {
           message: `ChartThemeVariant has been removed from react-charts.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
       errors: [
         {
           message: `ChartThemeVariant has been removed from react-charts.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -37,7 +35,6 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
       errors: [
         {
           message: `ChartThemeVariant has been removed from react-charts.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -47,7 +44,6 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
       errors: [
         {
           message: `ChartThemeVariant has been removed from react-charts.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -57,7 +53,6 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
       errors: [
         {
           message: `ChartThemeVariant has been removed from react-charts.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -67,7 +62,6 @@ ruleTester.run("charts-remove-ChartThemeVariant", rule, {
       errors: [
         {
           message: `ChartThemeVariant has been removed from react-charts.`,
-          type: "ImportDeclaration",
         },
       ],
     },

@@ -38,7 +38,6 @@ ruleTester.run("pageToggleButton-replace-barsIcon-with-isHamburgerButton", rule,
       errors: [
         {
           message: `The BarsIcon child component should be replaced with the \`isHamburgerButton\` prop on PageToggleButton.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -48,7 +47,6 @@ ruleTester.run("pageToggleButton-replace-barsIcon-with-isHamburgerButton", rule,
       errors: [
         {
           message: `The BarsIcon child component should be replaced with the \`isHamburgerButton\` prop on PageToggleButton.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -58,7 +56,6 @@ ruleTester.run("pageToggleButton-replace-barsIcon-with-isHamburgerButton", rule,
       errors: [
         {
           message: `The BarsIcon child component should be replaced with the \`isHamburgerButton\` prop on PageToggleButton.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -68,7 +65,6 @@ ruleTester.run("pageToggleButton-replace-barsIcon-with-isHamburgerButton", rule,
       errors: [
         {
           message: `The BarsIcon child component should be replaced with the \`isHamburgerButton\` prop on PageToggleButton.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -78,7 +74,6 @@ ruleTester.run("pageToggleButton-replace-barsIcon-with-isHamburgerButton", rule,
       errors: [
         {
           message: `The BarsIcon child component should be replaced with the \`isHamburgerButton\` prop on PageToggleButton.`,
-          type: "JSXElement",
         },
       ],
     },

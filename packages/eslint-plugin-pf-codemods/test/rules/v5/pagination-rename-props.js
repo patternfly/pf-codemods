@@ -40,7 +40,6 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "defaultToFullPage" prop for Pagination has been renamed to "isLastFullPageShown".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -50,7 +49,6 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "perPageComponent" prop for Pagination has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -60,7 +58,6 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "perPageComponent" prop for Pagination has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -70,7 +67,6 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "${titlesPropName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[titlesPropName]}".`,
-          type: "JSXOpeningElement",
         },
       ],
     })),
@@ -80,15 +76,12 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "defaultToFullPage" prop for Pagination has been renamed to "isLastFullPageShown".`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "perPageComponent" prop for Pagination has been removed.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "${titlesPropName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[titlesPropName]}".`,
-          type: "JSXOpeningElement",
         },
       ],
     })),
@@ -98,15 +91,12 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "defaultToFullPage" prop for Pagination has been renamed to "isLastFullPageShown".`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "perPageComponent" prop for Pagination has been removed.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "${titlesPropName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[titlesPropName]}".`,
-          type: "JSXOpeningElement",
         },
       ],
     })),
@@ -142,7 +132,6 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "${oldName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[oldName]}".`,
-          type: "JSXOpeningElement",
         },
       ],
     })),
@@ -162,7 +151,6 @@ ruleTester.run("pagination-rename-props", rule, {
       errors: [
         {
           message: `The "${oldName}" sub-prop for Pagination's "titles" prop has been renamed to "${updatedTitlesPropNames[oldName]}".`,
-          type: "JSXOpeningElement",
         },
       ],
     })),

@@ -3,7 +3,6 @@ import * as rule from './page-rename-header';
 
 const error = {
   message: `We've renamed the \`header\` prop for Page to \`masthead\`.`,
-  type: 'JSXOpeningElement',
 };
 
 ruleTester.run('page-rename-header', rule, {

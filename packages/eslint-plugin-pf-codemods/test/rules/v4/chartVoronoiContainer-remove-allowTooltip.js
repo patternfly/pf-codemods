@@ -13,7 +13,6 @@ ruleTester.run("chartVoronoiContainer-remove-allowTooltip", rule, {
       output: `import { ChartVoronoiContainer } from '@patternfly/react-charts'; <ChartVoronoiContainer  />`,
       errors: [{
         message: `allowTooltip prop for ChartVoronoiContainer has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

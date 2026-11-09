@@ -19,7 +19,6 @@ ruleTester.run("card-remove-isHoverable", rule, {
       errors: [
         {
           message: `isHoverable prop for Card has been removed and should be replaced with isSelectable or isSelectableRaised as needed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -29,7 +28,6 @@ ruleTester.run("card-remove-isHoverable", rule, {
       errors: [
         {
           message: `isHoverable prop for Card has been removed and should be replaced with isSelectable or isSelectableRaised as needed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

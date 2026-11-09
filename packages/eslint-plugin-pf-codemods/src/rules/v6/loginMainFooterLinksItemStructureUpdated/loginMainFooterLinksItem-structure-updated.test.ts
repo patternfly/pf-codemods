@@ -3,7 +3,6 @@ import * as rule from "./loginMainFooterLinksItem-structure-updated";
 
 const loginMainFooterLinksItemError = {
   message: `LoginMainFooterLinksItem structure has changed. Instead of passing it many properties, everything is now passed directly in a children component.`,
-  type: "JSXElement",
 };
 
 ruleTester.run("loginMainFooterLinksItem-structure-updated", rule, {

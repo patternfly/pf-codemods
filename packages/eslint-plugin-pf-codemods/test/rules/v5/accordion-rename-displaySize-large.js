@@ -17,7 +17,6 @@ ruleTester.run("accordion-rename-displaySize-large", rule, {
       output: `import { Accordion } from '@patternfly/react-core'; <Accordion displaySize="lg" />`,
       errors: [{
         message: `displaySize "large" has been renamed for Accordion. Use displaySize="lg" instead.`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -25,7 +24,6 @@ ruleTester.run("accordion-rename-displaySize-large", rule, {
       output: `import { Accordion } from '@patternfly/react-core/dist/esm/components/Accordion/index.js'; <Accordion displaySize="lg" />`,
       errors: [{
         message: `displaySize "large" has been renamed for Accordion. Use displaySize="lg" instead.`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

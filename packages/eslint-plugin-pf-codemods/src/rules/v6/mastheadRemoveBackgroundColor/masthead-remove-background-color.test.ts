@@ -16,7 +16,6 @@ ruleTester.run("masthead-remove-background-color", rule, {
       output: `import { Masthead } from '@patternfly/react-core'; <Masthead  />`,
       errors: [{
         message: `We've removed the \`backgroundColor\` prop from Masthead as theming is no longer handled React-side.`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

@@ -23,7 +23,7 @@ module.exports = {
                   {
                     desc: "Omit the third argument or pass in a value of false when the callback passed in is debounced. This is the new default functionality.",
                     fix: function (fixer) {
-                      const lastToken = context.getLastToken(node);
+                      const lastToken = context.sourceCode.getLastToken(node);
                       const fixes = [
                         fixer.insertTextBefore(lastToken, ", false"),
                       ];
@@ -33,7 +33,7 @@ module.exports = {
                   {
                     desc: "Pass in a value of true if the callback passed in is not debounced. This maintains the previous functionality.",
                     fix: function (fixer) {
-                      const lastToken = context.getLastToken(node);
+                      const lastToken = context.sourceCode.getLastToken(node);
                       const fixes = [
                         fixer.insertTextBefore(lastToken, ", true"),
                       ];

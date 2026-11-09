@@ -23,8 +23,8 @@ module.exports = {
       : {
           ImportSpecifier(node: ImportSpecifier) {
             if (duplicatesToRemove.includes(node)) {
-              const importDeclaration = context
-                .getAncestors()
+              const importDeclaration = context.sourceCode
+                .getAncestors(node)
                 .find(
                   (ancestor) => ancestor.type === "ImportDeclaration"
                 ) as ImportDeclaration;

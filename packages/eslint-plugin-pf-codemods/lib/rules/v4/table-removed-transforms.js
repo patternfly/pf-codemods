@@ -25,7 +25,7 @@ module.exports = {
 
         const isCellHeightAutoNode = node.callee.name && node.callee.name === 'cellHeightAuto';
         if (isCellHeightAutoNode && cellHeightAutoImport.length) {
-          const sourceCode = context.getSourceCode();
+          const sourceCode = context.sourceCode;
           const previousToken = sourceCode.getTokenBefore(node);
           const previousTokenText = sourceCode.getText(previousToken);
           const lastNodeToken = sourceCode.getLastToken(node);

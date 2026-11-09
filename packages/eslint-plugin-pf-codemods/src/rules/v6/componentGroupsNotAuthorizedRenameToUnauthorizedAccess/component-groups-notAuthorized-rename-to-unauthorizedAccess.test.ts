@@ -4,7 +4,6 @@ import * as rule from "./component-groups-notAuthorized-rename-to-unauthorizedAc
 const errors = [
   {
     message: `NotAuthorized has been renamed to UnauthorizedAccess.`,
-    type: "JSXOpeningElement",
   },
 ];
 

@@ -21,7 +21,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardActions is no longer exported and is instead rendered internally within CardHeader. CardActions props and content should instead be passed as an object to CardHeader's "actions" prop.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -42,11 +40,9 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
         {
           message: `CardActions is no longer exported and is instead rendered internally within CardHeader. CardActions props and content should instead be passed as an object to CardHeader's "actions" prop.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -57,7 +53,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -68,7 +63,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -79,7 +73,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -90,7 +83,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -101,7 +93,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -112,7 +103,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardHeaderMain is no longer exported and is instead rendered internally within CardHeader. CardHeaderMain content should instead be passed directly as children to CardHeader.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -123,7 +113,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardActions is no longer exported and is instead rendered internally within CardHeader. CardActions props and content should instead be passed as an object to CardHeader's "actions" prop.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -134,7 +123,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardActions is no longer exported and is instead rendered internally within CardHeader. CardActions props and content should instead be passed as an object to CardHeader's "actions" prop.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -145,7 +133,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardActions is no longer exported and is instead rendered internally within CardHeader. CardActions props and content should instead be passed as an object to CardHeader's "actions" prop.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -156,7 +143,6 @@ ruleTester.run("cardHeader-update-api", rule, {
       errors: [
         {
           message: `CardActions is no longer exported and is instead rendered internally within CardHeader. CardActions props and content should instead be passed as an object to CardHeader's "actions" prop.`,
-          type: "JSXElement",
         },
       ],
     },

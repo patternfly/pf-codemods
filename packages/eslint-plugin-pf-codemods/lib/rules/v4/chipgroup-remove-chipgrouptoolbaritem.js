@@ -26,7 +26,7 @@ module.exports = {
           };
           if (hasSingleChipGroupParent) {
             const childText = node.children
-              .map(child => context.getSourceCode().getText(child))
+              .map(child => context.sourceCode.getText(child))
               .join('');
             const attributes = node.openingElement.attributes
               .map(attr => `${attr.name.name}=${attr.value.raw}`)

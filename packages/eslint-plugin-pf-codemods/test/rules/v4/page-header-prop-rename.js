@@ -16,7 +16,6 @@ ruleTester.run("page-header-prop-rename", rule, {
       output: `import { PageHeader } from '@patternfly/react-core'; <PageHeader headerTools="tools" />`,
       errors: [{
         message: `toolbar prop for PageHeader has been renamed to headerTools`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

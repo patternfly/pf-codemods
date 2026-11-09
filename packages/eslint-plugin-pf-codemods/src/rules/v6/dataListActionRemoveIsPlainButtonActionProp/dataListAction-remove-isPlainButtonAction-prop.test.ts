@@ -17,7 +17,6 @@ ruleTester.run("dataListAction-remove-isPlainButtonAction-prop", rule, {
       errors: [
         {
           message: `The \`isPlainButtonAction\` prop has been removed from DataListAction as a wrapper is no longer needed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

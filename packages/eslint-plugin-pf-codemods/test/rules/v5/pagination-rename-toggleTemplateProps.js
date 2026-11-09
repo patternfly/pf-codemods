@@ -21,7 +21,6 @@ ruleTester.run("pagination-rename-toggleTemplateProps", rule, {
       errors: [
         {
           message: "ToggleTemplateProps has been renamed to PaginationToggleTemplateProps.",
-          type: "ImportDeclaration",
         }
       ]
     },
@@ -31,11 +30,9 @@ ruleTester.run("pagination-rename-toggleTemplateProps", rule, {
       errors: [
         {
           message: "ToggleTemplateProps has been renamed to PaginationToggleTemplateProps.",
-          type: "ImportDeclaration",
         },
         {
           message: "ToggleTemplateProps has been renamed to PaginationToggleTemplateProps.",
-          type: "JSXOpeningElement",
         }
       ]
     },
@@ -45,11 +42,9 @@ ruleTester.run("pagination-rename-toggleTemplateProps", rule, {
       errors: [
         {
           message: "ToggleTemplateProps has been renamed to PaginationToggleTemplateProps.",
-          type: "ImportDeclaration",
         },
         {
           message: "ToggleTemplateProps has been renamed to PaginationToggleTemplateProps.",
-          type: "JSXOpeningElement",
         }
       ]
     }

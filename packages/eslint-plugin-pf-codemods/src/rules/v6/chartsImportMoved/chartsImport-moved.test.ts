@@ -67,28 +67,28 @@ specifiersToMove.forEach((specifier) => {
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-charts';`,
       `import {\n\t${specifier}\n} from '@patternfly/react-charts/victory';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} as CustomSpecifier } from '@patternfly/react-charts';`,
       `import {\n\t${specifier} as CustomSpecifier\n} from '@patternfly/react-charts/victory';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-charts/dist/esm/components/index.js';`,
       `import {\n\t${specifier}\n} from '@patternfly/react-charts/dist/esm/victory/components/index.js';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-charts/dist/js/components/index.js';`,
       `import {\n\t${specifier}\n} from '@patternfly/react-charts/dist/js/victory/components/index.js';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
 });

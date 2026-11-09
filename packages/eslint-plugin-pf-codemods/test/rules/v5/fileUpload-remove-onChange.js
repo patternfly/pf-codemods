@@ -19,7 +19,6 @@ ruleTester.run("fileUpload-remove-onChange", rule, {
       errors: [
         {
           message: `onChange prop for FileUpload has been removed and should be replaced with onFileInputChange, onTextChange, onDataChange, and onClearClick as needed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -29,7 +28,6 @@ ruleTester.run("fileUpload-remove-onChange", rule, {
       errors: [
         {
           message: `onChange prop for FileUpload has been removed and should be replaced with onFileInputChange, onTextChange, onDataChange, and onClearClick as needed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

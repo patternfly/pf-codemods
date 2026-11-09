@@ -4,7 +4,6 @@ import * as rule from "./component-groups-invalidObject-rename-to-missingPage";
 const errors = [
   {
     message: `InvalidObject has been renamed to MissingPage.`,
-    type: "JSXOpeningElement",
   },
 ];
 

@@ -17,7 +17,6 @@ ruleTester.run('page-rename-isTertiaryNavGrouped', rule, {
       errors: [
         {
           message: `We've renamed the \`isTertiaryNavGrouped\` prop to \`isHorizontalSubnavGrouped\`.`,
-          type: 'JSXOpeningElement',
         },
       ],
     },

@@ -17,7 +17,6 @@ ruleTester.run("charts-resizeObserver-import", rule, {
       errors: [
         {
           message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("charts-resizeObserver-import", rule, {
       errors: [
         {
           message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -37,7 +35,6 @@ ruleTester.run("charts-resizeObserver-import", rule, {
       errors: [
         {
           message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -47,7 +44,6 @@ ruleTester.run("charts-resizeObserver-import", rule, {
       errors: [
         {
           message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -57,7 +53,6 @@ ruleTester.run("charts-resizeObserver-import", rule, {
       errors: [
         {
           message: `The getResizeObserver function has been removed from react-charts and should be imported from react-core instead.`,
-          type: "ImportDeclaration",
         },
       ],
     },

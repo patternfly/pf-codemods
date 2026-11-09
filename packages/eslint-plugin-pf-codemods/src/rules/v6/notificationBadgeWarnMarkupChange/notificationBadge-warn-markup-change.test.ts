@@ -10,11 +10,10 @@ ruleTester.run('notificationBadge-warn-markup-change', rule, {
   invalid: [
     {
       code: `import { NotificationBadge } from '@patternfly/react-core';`,
-      output: `import { NotificationBadge } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `The markup for NotificationBadge has changed, as it now uses stateful button internally.`,
-          type: 'ImportDeclaration',
         },
       ],
     },

@@ -17,7 +17,6 @@ ruleTester.run("accordionContent-remove-isHidden-prop", rule, {
       errors: [
         {
           message: `The \`isHidden\` prop has been removed from AccordionContent, as its visibility will now be set automatically based on the \`isExpanded\` prop on AccordionItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

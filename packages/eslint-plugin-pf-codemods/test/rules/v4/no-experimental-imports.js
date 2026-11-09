@@ -13,7 +13,6 @@ ruleTester.run("no-experimental-imports", rule, {
       output: `import { Divider } from '@patternfly/react-core';`,
       errors: [{
         message: `Experimental imports have been removed. Import directly from @patternfly/react-core instead`,
-        type: "ImportDeclaration",
       }]
     }
   ]

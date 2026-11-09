@@ -13,11 +13,10 @@ ruleTester.run("logViewer-moved-styles", rule, {
   invalid: [
     {
       code: `import { LogViewer } from '@patternfly/react-log-viewer';`,
-      output: `import { LogViewer } from '@patternfly/react-log-viewer';`,
+      output: null,
       errors: [
         {
           message: `The stylesheet for LogViewer has been moved out of the PatternFly package and into LogViewer itself. You may need to update stylesheet imports or import the stylesheet manually.`,
-          type: "ImportDeclaration",
         },
       ],
     },

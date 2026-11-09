@@ -21,11 +21,10 @@ const invalid = [
   // --- Without includeTable (default) ---
   {
     code: "import { Table } from '@patternfly/react-table'; <Table />",
-    output: "import { Table } from '@patternfly/react-table'; <Table />",
+    output: null,
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -36,7 +35,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ],
     options: [{ includeTable: true }]
@@ -48,7 +46,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -58,7 +55,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -68,7 +64,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -78,7 +73,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -88,7 +82,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -98,7 +91,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -110,11 +102,9 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       },
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   },
@@ -124,7 +114,6 @@ const invalid = [
     errors: [
       { 
         message: "Consider adding hasAnimations prop to enable component animations.",
-        type: "JSXOpeningElement"
       }
     ]
   }

@@ -25,7 +25,7 @@ module.exports = {
                 "The themeVariant prop has been removed for all react-charts components.",
               fix(fixer) {
                 const prevToken = context
-                  .getSourceCode()
+                  .sourceCode
                   .getTokenBefore(themeVariantProp);
                 return fixer.replaceTextRange(
                   [prevToken.range[1], themeVariantProp.range[1]],
@@ -54,7 +54,7 @@ module.exports = {
             fix(fixer) {
               const { range } = node.arguments[1];
               const prevToken = context
-                .getSourceCode()
+                .sourceCode
                 .getTokenBefore(node.arguments[1]);
 
               return fixer.replaceTextRange([prevToken.range[0], range[1]], "");

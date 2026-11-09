@@ -17,7 +17,6 @@ ruleTester.run("masthead-name-changes", rule, {
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -28,7 +27,6 @@ ruleTester.run("masthead-name-changes", rule, {
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -39,7 +37,6 @@ ruleTester.run("masthead-name-changes", rule, {
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -50,7 +47,6 @@ ruleTester.run("masthead-name-changes", rule, {
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -60,7 +56,6 @@ ruleTester.run("masthead-name-changes", rule, {
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -70,7 +65,6 @@ ruleTester.run("masthead-name-changes", rule, {
       errors: [
         {
           message: `MastheadBrand has been renamed to MastheadLogo.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

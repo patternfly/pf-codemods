@@ -16,7 +16,6 @@ ruleTester.run("pagination-removed-variant", rule, {
       output: `import { Pagination } from '@patternfly/react-core'; <Pagination  />`,
       errors: [{
         message: `variant "left" has been removed from Pagination`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -24,7 +23,6 @@ ruleTester.run("pagination-removed-variant", rule, {
       output: `import { Pagination } from '@patternfly/react-core'; <Pagination  />`,
       errors: [{
         message: `variant "right" has been removed from Pagination`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -32,7 +30,6 @@ ruleTester.run("pagination-removed-variant", rule, {
       output: `import { Pagination, PaginationVariant } from '@patternfly/react-core'; <Pagination  />`,
       errors: [{
         message: `variant {PaginationVariant.right} has been removed from Pagination`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

@@ -40,7 +40,6 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: renameMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -53,7 +52,6 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: renameMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -66,7 +64,6 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: renameMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -79,7 +76,6 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: statusPageMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -94,7 +90,6 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: statusPageMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -115,11 +110,9 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: statusPageMessage,
-          type: "JSXOpeningElement",
         },
         {
           message: renameMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -132,7 +125,6 @@ ruleTester.run("componentGroupsUnavailableContentBodyTextPropsUpdate", rule, {
       errors: [
         {
           message: statusPageMessage,
-          type: "JSXOpeningElement",
         },
       ],
     },

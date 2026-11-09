@@ -14,7 +14,6 @@ ruleTester.run('chip-deprecated', rule, {
       errors: [
         {
           message: `Chip has been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using Label instead.`,
-          type: 'ImportDeclaration',
         },
       ],
     },

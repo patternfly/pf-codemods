@@ -15,7 +15,7 @@ const { getFromPackage } = require('../../helpers');
               return;
             }
             const attrValType = isReadAttr.value?.expression?.type;
-            let attrValStr = !attrValType ? '' : context.getSourceCode().getText(isReadAttr.value.expression);
+            let attrValStr = !attrValType ? '' : context.sourceCode.getText(isReadAttr.value.expression);
             let newVal = "";
             if (attrValType === undefined || (attrValType === "Literal" && attrValStr === "true")) {
               newVal = '"read"';

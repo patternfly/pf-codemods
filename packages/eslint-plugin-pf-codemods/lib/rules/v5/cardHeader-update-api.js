@@ -37,7 +37,7 @@ module.exports = {
     };
     const getNodeContent = (node) => {
       return node.children
-        ?.map((child) => context.getSourceCode().getText(child))
+        ?.map((child) => context.sourceCode.getText(child))
         .join("");
     };
     const createReplacementContent = (content, conditionOrLogicExpression) => {
@@ -47,7 +47,7 @@ module.exports = {
         return isCardHeaderMainContent ? content : `actions={${content}}`;
       }
 
-      const sourceCode = context.getSourceCode();
+      const sourceCode = context.sourceCode;
 
       if (conditionOrLogicExpression.type === "LogicalExpression") {
         const logicalExpressionContent = sourceCode.getText(

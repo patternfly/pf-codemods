@@ -10,7 +10,7 @@ If you have any hardcoded Patternfly class names in your project (i.e. pf-c-butt
 
 ### Simple case
 
-Requires Node.js >= 10.
+Requires Node.js ^20.19.0 || ^22.13.0 || >=24.
 
 ```sh
 npx @patternfly/pf-codemods ./path-to-src

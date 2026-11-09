@@ -29,7 +29,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The "no-background" value of the \`colorVariant\` prop on DrawerContent has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -39,7 +38,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The "no-background" value of the \`colorVariant\` prop on DrawerContent has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -49,7 +47,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The "no-background" value of the \`colorVariant\` prop on DrawerContent has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -59,7 +56,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The DrawerContentColorVariant enum should be used instead of the DrawerColorVariant enum when passed to the DrawerContent component. This fix will replace the colorVariant prop value with a string.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -69,7 +65,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The "no-background" value of the \`colorVariant\` prop on DrawerContent has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -79,7 +74,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The DrawerContentColorVariant enum should be used instead of the DrawerColorVariant enum when passed to the DrawerContent component. This fix will replace the colorVariant prop value with a string.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -89,7 +83,6 @@ ruleTester.run("drawerContent-replace-noBackground-colorVariant", rule, {
       errors: [
         {
           message: `The "no-background" value of the \`colorVariant\` prop on DrawerContent has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

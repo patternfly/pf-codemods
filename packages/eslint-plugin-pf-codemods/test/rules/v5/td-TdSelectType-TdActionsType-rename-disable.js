@@ -75,23 +75,18 @@ ruleTester.run("td-TdSelectType-TdActionsType-rename-disable", rule, {
       errors: [
         {
           message: `'disable' prop of interface TdSelectType has been renamed to 'isDisabled'`,
-          type: "JSXOpeningElement",
         },
         {
           message: `'disable' prop of interface TdActionsType has been renamed to 'isDisabled'`,
-          type: "JSXOpeningElement",
         },
         {
           message: `'disable' prop of interface TdSelectType has been renamed to 'isDisabled'`,
-          type: "JSXOpeningElement",
         },
         {
           message: `'disable' prop of interface TdActionsType has been renamed to 'isDisabled'`,
-          type: "JSXOpeningElement",
         },
         {
           message: `'disable' prop of interface TdActionsType has been renamed to 'isDisabled'`,
-          type: "JSXOpeningElement",
         } 
       ],
     },

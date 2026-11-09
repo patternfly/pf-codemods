@@ -20,7 +20,6 @@ ruleTester.run("divider-remove-isVertical", rule, {
       output: `import { Divider } from '@patternfly/react-core'; <Divider orientation={{ default: 'vertical' }} />`,
       errors: [{
         message: `isVertical prop has been removed for Divider and replaced with the orientation prop, which can specify verticality at various breakpoints.`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("divider-remove-isVertical", rule, {
       output: `import { Divider } from '@patternfly/react-core/dist/esm/components/Divider/index.js'; <Divider orientation={{ default: 'vertical' }} />`,
       errors: [{
         message: `isVertical prop has been removed for Divider and replaced with the orientation prop, which can specify verticality at various breakpoints.`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

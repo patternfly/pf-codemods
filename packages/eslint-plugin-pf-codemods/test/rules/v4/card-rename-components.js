@@ -59,31 +59,24 @@ ruleTester.run("card-rename-components", rule, {
       errors: [
         {
           message: 'add missing imports CardTitle, CardHeaderMain from @patternfly/react-core',
-          type: 'ImportDeclaration'
         },
         {
           message: 'CardHead renamed to CardHeader',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHeadMain renamed to CardHeaderMain',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHeadMain renamed to CardHeaderMain',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHead renamed to CardHeader',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHeader renamed to CardTitle',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHeader renamed to CardTitle',
-          type: 'JSXIdentifier'
         }
       ]
     },
@@ -95,23 +88,18 @@ ruleTester.run("card-rename-components", rule, {
       errors: [
         {
           message: 'add missing imports CardTitle, CardHeaderMain from @patternfly/react-core',
-          type: 'ImportDeclaration'
         },
         {
           message: 'CardHead renamed to CardHeader',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHeadMain renamed to CardHeaderMain',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHeadMain renamed to CardHeaderMain',
-          type: 'JSXIdentifier'
         },
         {
           message: 'CardHead renamed to CardHeader',
-          type: 'JSXIdentifier'
         }
       ]
     }

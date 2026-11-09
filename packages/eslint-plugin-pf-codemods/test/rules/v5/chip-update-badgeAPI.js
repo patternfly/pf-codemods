@@ -29,7 +29,6 @@ ruleTester.run("chip-update-badgeAPI", rule, {
       errors: [
         {
           message: `Badge components should now be passed to the "badge" prop on Chip instead of passed as children.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -40,7 +39,6 @@ ruleTester.run("chip-update-badgeAPI", rule, {
       errors: [
         {
           message: `Badge components should now be passed to the "badge" prop on Chip instead of passed as children.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -51,7 +49,6 @@ ruleTester.run("chip-update-badgeAPI", rule, {
       errors: [
         {
           message: `Badge components should now be passed to the "badge" prop on Chip instead of passed as children.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -62,7 +59,6 @@ ruleTester.run("chip-update-badgeAPI", rule, {
       errors: [
         {
           message: `Badge components should now be passed to the "badge" prop on Chip instead of passed as children.`,
-          type: "JSXElement",
         },
       ],
     },

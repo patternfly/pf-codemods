@@ -24,7 +24,6 @@ ruleTester.run("banner-replace-variantProp", rule, {
       errors: [
         {
           message: createErrorMessage(true),
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -34,7 +33,6 @@ ruleTester.run("banner-replace-variantProp", rule, {
       errors: [
         {
           message: createErrorMessage(),
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -44,7 +42,6 @@ ruleTester.run("banner-replace-variantProp", rule, {
       errors: [
         {
           message: createErrorMessage(true),
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -54,7 +51,6 @@ ruleTester.run("banner-replace-variantProp", rule, {
       errors: [
         {
           message: createErrorMessage(true),
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -64,7 +60,6 @@ ruleTester.run("banner-replace-variantProp", rule, {
       errors: [
         {
           message: createErrorMessage(true),
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -74,7 +69,6 @@ ruleTester.run("banner-replace-variantProp", rule, {
       errors: [
         {
           message: createErrorMessage(true),
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -3,7 +3,6 @@ import * as rule from './chip-replace-with-label';
 
 const chipImportError = {
   message: `Chip has been deprecated. Running the fix flag will replace Chip and ChipGroup components with Label and LabelGroup components respectively.`,
-  type: 'ImportDeclaration',
 };
 
 ruleTester.run('chip-replace-with-label', rule, {

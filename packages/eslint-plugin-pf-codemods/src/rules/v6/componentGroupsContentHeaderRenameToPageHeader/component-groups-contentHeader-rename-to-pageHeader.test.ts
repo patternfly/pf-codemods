@@ -4,7 +4,6 @@ import * as rule from "./component-groups-contentHeader-rename-to-pageHeader";
 const errors = [
   {
     message: `ContentHeader has been renamed to PageHeader.`,
-    type: "JSXOpeningElement",
   },
 ];
 

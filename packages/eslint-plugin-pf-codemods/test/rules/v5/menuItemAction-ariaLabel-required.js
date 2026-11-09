@@ -20,7 +20,6 @@ ruleTester.run("menuItemAction-ariaLabel-required", rule, {
       errors: [
         {
           message: `The aria-label prop for MenuItemAction is now required.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -29,7 +28,6 @@ ruleTester.run("menuItemAction-ariaLabel-required", rule, {
       errors: [
         {
           message: `The aria-label prop for MenuItemAction is now required.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

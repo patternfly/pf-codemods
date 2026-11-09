@@ -9,7 +9,7 @@ export const removeEmptyLineAfter = (
   if (!node) {
     return [];
   }
-  const token = context.getSourceCode().getTokenAfter(node);
+  const token = context.sourceCode.getTokenAfter(node);
 
   return token && token.type === "JSXText" && token.value.trim() === ""
     ? [fixer.remove(token)]

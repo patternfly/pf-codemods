@@ -44,7 +44,6 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
       errors: [
         {
           message: `ApplicationLauncher has been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -54,7 +53,6 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
       errors: [
         {
           message: `ApplicationLauncher has been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -64,7 +62,6 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
       errors: [
         {
           message: `ApplicationLauncher has been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -83,7 +80,6 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
               /, (\w+)$/,
               ", and $1"
             )} have been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -102,7 +98,6 @@ ruleTester.run("applicationLauncher-deprecated", rule, {
               /, (\w+)$/,
               ", and $1"
             )} have been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package, but we suggest using our new Dropdown or Select implementation.`,
-          type: "ImportDeclaration",
         },
       ],
     },

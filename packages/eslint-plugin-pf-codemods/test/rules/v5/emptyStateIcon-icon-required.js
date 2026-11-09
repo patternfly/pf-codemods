@@ -17,18 +17,16 @@ ruleTester.run("emptyStateIcon-icon-required", rule, {
   invalid: [
     {
       code:   `import { EmptyStateIcon } from '@patternfly/react-core'; <EmptyStateIcon />`,
-      output: `import { EmptyStateIcon } from '@patternfly/react-core'; <EmptyStateIcon />`,
+      output: null,
       errors: [{
         message: `icon prop is now required on the EmptyStateIcon.`,
-        type: "JSXOpeningElement",
       }]
     },
     {
       code:   `import { EmptyStateIcon } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <EmptyStateIcon />`,
-      output: `import { EmptyStateIcon } from '@patternfly/react-core/dist/esm/components/EmptyState/index.js'; <EmptyStateIcon />`,
+      output: null,
       errors: [{
         message: `icon prop is now required on the EmptyStateIcon.`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

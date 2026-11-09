@@ -13,14 +13,12 @@ ruleTester.run("remove-toggleMenuBaseProps", rule, {
       code:   `import { ToggleMenuBaseProps } from '@patternfly/react-core'; <ToggleMenuBaseProps />`,
       errors: [{
         message: `The ToggleMenuBaseProps interface has been removed.`,
-        type: "JSXOpeningElement",
       }]
     },
     {
       code:   `import { ToggleMenuBaseProps } from '@patternfly/react-core/dist/esm/helpers/Popper'; <ToggleMenuBaseProps />`,
       errors: [{
         message: `The ToggleMenuBaseProps interface has been removed.`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

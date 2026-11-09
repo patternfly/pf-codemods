@@ -13,7 +13,7 @@ import {
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
     const { imports } = getFromPackage(context, "@patternfly/react-core");
 
     const pageToggleButtonImport = imports.find(

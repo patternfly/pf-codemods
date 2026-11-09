@@ -31,7 +31,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
       errors: [
         {
           message: `itemId prop for SelectOption has been renamed to value`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -41,7 +40,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
       errors: [
         {
           message: `itemId prop for DropdownItem has been renamed to value`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -52,7 +50,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
       errors: [
         {
           message: `itemId prop for SelectOption has been renamed to value`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -62,7 +59,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
       errors: [
         {
           message: `itemId prop for DropdownItem has been renamed to value`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -73,7 +69,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
       errors: [
         {
           message: `itemId prop for PFSO has been renamed to value`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -83,7 +78,6 @@ ruleTester.run("selectDropdown-rename-itemId", rule, {
       errors: [
         {
           message: `itemId prop for PFDI has been renamed to value`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -27,77 +27,70 @@ ruleTester.run("tokens-warn", rule, {
     // WARNINGS - tokens
     {
       code: `import { c_badge_PaddingLeft } from '@patternfly/react-tokens';`,
-      output: `import { c_badge_PaddingLeft } from '@patternfly/react-tokens';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportSpecifier",
         },
       ],
     },
     {
       // with alias
       code: `import { c_badge_PaddingLeft as badgePL } from '@patternfly/react-tokens';`,
-      output: `import { c_badge_PaddingLeft as badgePL } from '@patternfly/react-tokens';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportSpecifier",
         },
       ],
     },
     {
       // named import - esm
       code: `import { c_badge_PaddingLeft } from '@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft';`,
-      output: `import { c_badge_PaddingLeft } from '@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportSpecifier",
         },
       ],
     },
     {
       // named import - js
       code: `import { c_badge_PaddingLeft } from '@patternfly/react-tokens/dist/js/c_badge_PaddingLeft';`,
-      output: `import { c_badge_PaddingLeft } from '@patternfly/react-tokens/dist/js/c_badge_PaddingLeft';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportSpecifier",
         },
       ],
     },
     {
       // default import - esm
       code: `import c_badge_PaddingLeft from '@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft';`,
-      output: `import c_badge_PaddingLeft from '@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportDefaultSpecifier",
         },
       ],
     },
     {
       // default import - js
       code: `import c_badge_PaddingLeft from '@patternfly/react-tokens/dist/js/c_badge_PaddingLeft';`,
-      output: `import c_badge_PaddingLeft from '@patternfly/react-tokens/dist/js/c_badge_PaddingLeft';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportDefaultSpecifier",
         },
       ],
     },
     {
       // default import with custom name
       code: `import someToken from '@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft';`,
-      output: `import someToken from '@patternfly/react-tokens/dist/esm/c_badge_PaddingLeft';`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("c_badge_PaddingLeft"),
-          type: "ImportDefaultSpecifier",
         },
       ],
     },
@@ -105,21 +98,19 @@ ruleTester.run("tokens-warn", rule, {
     // WARNINGS - CSS variables
     {
       code: `document.documentElement.style.setProperty("--pf-v5-c-button--PaddingTop", "2rem");`,
-      output: `document.documentElement.style.setProperty("--pf-v5-c-button--PaddingTop", "2rem");`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("--pf-v5-c-button--PaddingTop"),
-          type: "Literal",
         },
       ],
     },
     {
       code: `<div style={{ paddingBottom: "var(--pf-v5-c-banner--PaddingBottom)" }}>Some banner</div>`,
-      output: `<div style={{ paddingBottom: "var(--pf-v5-c-banner--PaddingBottom)" }}>Some banner</div>`,
+      output: null,
       errors: [
         {
           message: getWarnMessage("--pf-v5-c-banner--PaddingBottom"),
-          type: "Literal",
         },
       ],
     },
@@ -136,14 +127,12 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportSpecifier",
         },
         {
           message: getFixMessage(
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "Identifier",
         },
       ],
     },
@@ -159,7 +148,6 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -175,14 +163,12 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportSpecifier",
         },
         {
           message: getFixMessage(
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "Identifier",
         },
       ],
     },
@@ -198,14 +184,12 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportSpecifier",
         },
         {
           message: getFixMessage(
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "Identifier",
         },
       ],
     },
@@ -221,14 +205,12 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportDefaultSpecifier",
         },
         {
           message: getFixMessage(
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "Identifier",
         },
       ],
     },
@@ -244,14 +226,12 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportDefaultSpecifier",
         },
         {
           message: getFixMessage(
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "Identifier",
         },
       ],
     },
@@ -267,14 +247,12 @@ ruleTester.run("tokens-warn", rule, {
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "ImportDefaultSpecifier",
         },
         {
           message: getFixMessage(
             "global_FontWeight_normal",
             "global_font_weight_body_default"
           ),
-          type: "Identifier",
         },
       ],
     },
@@ -289,7 +267,6 @@ ruleTester.run("tokens-warn", rule, {
             "--pf-v5-global--ZIndex--lg",
             "--pf-t--global--z-index--lg"
           ),
-          type: "Literal",
         },
       ],
     },
@@ -302,7 +279,6 @@ ruleTester.run("tokens-warn", rule, {
             "--pf-v5-global--BorderWidth--lg",
             "--pf-t--global--border--width--extra-strong"
           ),
-          type: "Literal",
         },
       ],
     },
@@ -314,7 +290,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -325,7 +300,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -336,7 +310,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -347,7 +320,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -358,7 +330,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportDefaultSpecifier",
         },
       ],
     },
@@ -369,7 +340,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportDefaultSpecifier",
         },
       ],
     },
@@ -380,7 +350,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("global_Color_100"),
-          type: "ImportDefaultSpecifier",
         },
       ],
     },
@@ -392,7 +361,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("--pf-v5-global--success-color--200", false),
-          type: "Literal",
         },
       ],
     },
@@ -402,7 +370,6 @@ ruleTester.run("tokens-warn", rule, {
       errors: [
         {
           message: getColorFixMessage("--pf-v5-global--Color--100", false),
-          type: "Literal",
         },
       ],
     },

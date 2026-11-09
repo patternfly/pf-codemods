@@ -36,7 +36,6 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
       ]
     )
@@ -48,7 +47,6 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
       ]
     )
@@ -60,11 +58,9 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
         {
           message,
-          type: "TSTypeReference",
         },
       ]
     )
@@ -76,7 +72,6 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
       ]
     )
@@ -88,11 +83,9 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
         {
           message,
-          type: "TSInterfaceHeritage",
         },
       ]
     )
@@ -104,7 +97,6 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
       ]
     )
@@ -116,11 +108,9 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ImportSpecifier",
         },
         {
           message,
-          type: "ExportSpecifier",
         },
       ]
     )
@@ -132,7 +122,6 @@ for (const previousName in replacementMap) {
       [
         {
           message,
-          type: "ExportSpecifier",
         },
       ]
     )

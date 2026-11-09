@@ -39,7 +39,6 @@ ruleTester.run('dragDrop-deprecated', rule, {
       errors: [
         {
           message: `DragDrop, Droppable, and Draggable have been deprecated. Running the fix flag will update your imports to our deprecated package, but we suggest using our new drag and drop implementation (DragDropSort component), that lives in '@patternfly/react-drag-drop' package.`,
-          type: 'ImportDeclaration',
         },
       ],
     },

@@ -33,7 +33,7 @@ module.exports = {
               importedNode?.local?.name !== importedNode?.imported?.name;
             if (importedNode?.imported?.name === "TableComposable") {
               const updateTagName = (node) => {
-                const tagName = context.getSourceCode().getText(node);
+                const tagName = context.sourceCode.getText(node);
 
                 if (isAliased) {
                   return tagName;

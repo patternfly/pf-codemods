@@ -44,70 +44,70 @@ specifiersToMove.forEach((specifier) => {
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/next';`,
       `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} as CustomSpecifier } from '@patternfly/react-core/next';`,
       `import {\n\t${specifier} as CustomSpecifier /* data-codemods */\n} from '@patternfly/react-core';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/esm/next/components/Modal/index.js';`,
       `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/esm/components/Modal/index.js';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/js/next/components/Modal/index.js';`,
       `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/js/components/Modal/index.js';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/dist/dynamic/next/components/Modal/index.js';`,
       `import {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/dynamic/components/Modal/index.js';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/next';`,
       `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
-      [{ message: errorMessage, type: "ExportNamedDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/esm/next/components/Modal/index.js';`,
       `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/esm/components/Modal/index.js';`,
-      [{ message: errorMessage, type: "ExportNamedDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/js/next/components/Modal/index.js';`,
       `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/js/components/Modal/index.js';`,
-      [{ message: errorMessage, type: "ExportNamedDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `export { ${specifier} } from '@patternfly/react-core/dist/dynamic/next/components/Modal/index.js';`,
       `export {\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core/dist/dynamic/components/Modal/index.js';`,
-      [{ message: errorMessage, type: "ExportNamedDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
   invalidTests.push(
     createInvalidTest(
       `import { ${specifier} } from '@patternfly/react-core/next';\nimport { Button } from '@patternfly/react-core';`,
       `\nimport {\n\tButton,\n\t${specifier} /* data-codemods */\n} from '@patternfly/react-core';`,
-      [{ message: errorMessage, type: "ImportDeclaration" }]
+      [{ message: errorMessage }]
     )
   );
 });

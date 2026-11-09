@@ -10,11 +10,10 @@ ruleTester.run("drawerHead-warn-updated-markup", rule, {
   invalid: [
     {
       code: `import { DrawerHead } from '@patternfly/react-core'; <DrawerHead />`,
-      output: `import { DrawerHead } from '@patternfly/react-core'; <DrawerHead />`,
+      output: null,
       errors: [
         {
           message: `DrawerPanelBody is no longer rendered internally to DrawerHead. We recommend using these components independent of one another and to not pass DrawerPanelBody to DrawerHead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

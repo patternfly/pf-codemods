@@ -11,7 +11,7 @@ module.exports = {
     );
     if (victoryCoreImports.length === 0) {
       const lastImportNode = context
-        .getSourceCode()
+        .sourceCode
         .ast.body.filter((node) => node.type === "ImportDeclaration")
         .pop();
       const importStatement = `import { VictoryZoomContainer } from 'victory-zoom-container';`;

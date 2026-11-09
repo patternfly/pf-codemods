@@ -18,7 +18,7 @@ module.exports = {
     const importExportMessage =
       "The BackgroundImageSrcMap interface has been removed.";
     const removeSpecifier = (fixer, context, node, specifier) => {
-      const tokenAfter = context.getSourceCode().getTokenAfter(specifier);
+      const tokenAfter = context.sourceCode.getTokenAfter(specifier);
 
       const { range } = specifier;
       return node.specifiers.length > 1

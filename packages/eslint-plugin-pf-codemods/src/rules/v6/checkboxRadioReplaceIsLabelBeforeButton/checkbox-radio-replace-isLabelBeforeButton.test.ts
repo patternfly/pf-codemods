@@ -22,7 +22,6 @@ ruleTester.run("checkbox-radio-replace-isLabelBeforeButton", rule, {
     errors: [
       {
         message: `isLabelBeforeButton prop for ${component} has been replaced with labelPosition="start"`,
-        type: "JSXOpeningElement",
       },
     ],
   })),

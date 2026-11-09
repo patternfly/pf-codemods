@@ -18,7 +18,6 @@ ruleTester.run("card-deprecate-props", rule, {
       errors: [
         {
           message: `The "isSelectableRaised" prop on Card has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -28,7 +27,6 @@ ruleTester.run("card-deprecate-props", rule, {
       errors: [
         {
           message: `The "isDisabledRaised" prop on Card has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -38,11 +36,10 @@ ruleTester.run("card-deprecate-props", rule, {
       "onSelectableInputChange",
     ].map((inputProp) => ({
       code: `import { Card } from '@patternfly/react-core'; <Card ${inputProp} />`,
-      output: `import { Card } from '@patternfly/react-core'; <Card ${inputProp} />`,
+      output: null,
       errors: [
         {
           message: `The "${inputProp}" prop on Card has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     })),
@@ -53,7 +50,6 @@ ruleTester.run("card-deprecate-props", rule, {
       errors: [
         {
           message: `The "isSelectableRaised" prop on Card has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -64,7 +60,6 @@ ruleTester.run("card-deprecate-props", rule, {
       errors: [
         {
           message: `The "isSelectableRaised" prop on PFCard has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -75,11 +70,9 @@ ruleTester.run("card-deprecate-props", rule, {
       errors: [
         {
           message: `The "isSelectableRaised" prop on Card has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "hasSelectableInput" prop on Card has been deprecated. We recommend using our new implementation of clickable and selectable Cards instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -14,7 +14,7 @@ module.exports = {
         if (imports.map(imp => imp.local.name).includes(node.name.name)) {
           const attribute = node.attributes.find(node => node.name?.name === 'action');
           if (attribute) {
-            const attributeValue = context.getSourceCode().getText(attribute.value);
+            const attributeValue = context.sourceCode.getText(attribute.value);
             const isLink = attributeValue.includes('Link');
             context.report({
               node,

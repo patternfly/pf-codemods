@@ -93,7 +93,7 @@ module.exports = {
                 node,
                 message: `Any non-InputGroupText child passed to ${parentName} must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
                 fix(fixer) {
-                  const sourceCode = context.getSourceCode();
+                  const sourceCode = context.sourceCode;
                   const newChild = sourceCode.getText(child);
 
                   return fixer.replaceText(

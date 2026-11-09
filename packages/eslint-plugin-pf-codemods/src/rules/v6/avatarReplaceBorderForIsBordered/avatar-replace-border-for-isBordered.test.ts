@@ -17,7 +17,6 @@ ruleTester.run('avatar-replace-border-for-isBordered', rule, {
       errors: [
         {
           message: `border prop has been removed from Avatar since theming is not longer handled React-side. We recommend using the isBordered prop instead to add a border to Avatar.`,
-          type: 'JSXOpeningElement',
         },
       ],
     },

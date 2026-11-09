@@ -21,7 +21,6 @@ ruleTester.run("overflowMenuDropdownItem-renamed-prop", rule, {
       errors: [
         {
           message: `the "index" prop for OverflowMenuDropdownItem has been renamed to "itemId", and its type has been updated to either a number or string.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("overflowMenuDropdownItem-renamed-prop", rule, {
       errors: [
         {
           message: `the "index" prop for OMDropdownItem has been renamed to "itemId", and its type has been updated to either a number or string.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -41,7 +39,6 @@ ruleTester.run("overflowMenuDropdownItem-renamed-prop", rule, {
       errors: [
         {
           message: `the "index" prop for OMDropdownItem has been renamed to "itemId", and its type has been updated to either a number or string.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

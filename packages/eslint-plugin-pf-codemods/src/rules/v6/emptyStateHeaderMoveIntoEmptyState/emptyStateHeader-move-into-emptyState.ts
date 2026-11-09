@@ -85,7 +85,7 @@ const getIconPropText = (
 ) => {
   if (emptyStateIconComponentIconAttribute) {
     return context
-      .getSourceCode()
+      .sourceCode
       .getText(emptyStateIconComponentIconAttribute);
   }
 
@@ -127,7 +127,7 @@ const getIcon = (
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
     const pkg = "@patternfly/react-core";
     const { imports } = getFromPackage(context, pkg);
 

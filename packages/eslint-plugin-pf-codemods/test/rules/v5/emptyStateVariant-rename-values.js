@@ -34,11 +34,9 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
       errors: [
         {
           message: `EmptyStateVariant enum value 'small' was renamed to 'sm'`,
-          type: "MemberExpression",
         },
         {
           message: `EmptyStateVariant enum value 'large' was renamed to 'lg'`,
-          type: "MemberExpression",
         },
       ],
     },
@@ -50,7 +48,6 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
       errors: [
         {
           message: `The "variant" prop type for EmptyState has been updated. The previous values of "small" and "large" have been replaced with values of "sm" and "lg" respectively.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -64,11 +61,9 @@ ruleTester.run("emptyStateVariant-rename-values", rule, {
       errors: [
         {
           message: `EmptyStateVariant enum value 'small' was renamed to 'sm'`,
-          type: "MemberExpression",
         },
         {
           message: `EmptyStateVariant enum value 'large' was renamed to 'lg'`,
-          type: "MemberExpression",
         },
       ],
     },

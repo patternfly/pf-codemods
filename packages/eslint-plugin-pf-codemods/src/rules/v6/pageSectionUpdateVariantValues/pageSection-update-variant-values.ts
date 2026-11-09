@@ -46,7 +46,7 @@ module.exports = {
               const hasPatternFlyEnum =
                 pageSectionVariantImport &&
                 variantValueEnum?.object &&
-                context.getSourceCode().getText(variantValueEnum.object) ===
+                context.sourceCode.getText(variantValueEnum.object) ===
                   pageSectionVariantImport.local.name;
 
               if (

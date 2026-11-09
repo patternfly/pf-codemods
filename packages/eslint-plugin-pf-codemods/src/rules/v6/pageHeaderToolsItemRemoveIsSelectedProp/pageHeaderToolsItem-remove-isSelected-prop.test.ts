@@ -17,7 +17,6 @@ ruleTester.run("pageHeaderToolsItem-remove-isSelected-prop", rule, {
       errors: [
         {
           message: `The \`isSelected\` prop has been removed from PageHeaderToolsItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

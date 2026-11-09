@@ -44,7 +44,7 @@ module.exports = {
                       current.openingElement.name.name === "AccordionItem"
                   );
                   const attributeValue = context
-                    .getSourceCode()
+                    .sourceCode
                     .getText(attribute);
 
                   return accordionItemAncestor &&

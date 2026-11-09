@@ -17,7 +17,6 @@ ruleTester.run("navItem-remove-hasNavLinkWrapper-prop", rule, {
       errors: [
         {
           message: `The \`hasNavLinkWrapper\` prop has been removed from NavItem. Additionally, any icons for a NavItem should be passed to its new \`icon\` prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("navItem-remove-hasNavLinkWrapper-prop", rule, {
       errors: [
         {
           message: `The \`hasNavLinkWrapper\` prop has been removed from NavItem. Additionally, any icons for a NavItem should be passed to its new \`icon\` prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -37,7 +35,6 @@ ruleTester.run("navItem-remove-hasNavLinkWrapper-prop", rule, {
       errors: [
         {
           message: `The \`hasNavLinkWrapper\` prop has been removed from NavItem. Additionally, any icons for a NavItem should be passed to its new \`icon\` prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -47,7 +44,6 @@ ruleTester.run("navItem-remove-hasNavLinkWrapper-prop", rule, {
       errors: [
         {
           message: `The \`hasNavLinkWrapper\` prop has been removed from NavItem. Additionally, any icons for a NavItem should be passed to its new \`icon\` prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

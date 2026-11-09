@@ -19,18 +19,16 @@ ruleTester.run("label-warn-truncated-default", rule, {
   invalid: [
     {
       code:   `import { Label } from '@patternfly/react-core'; <Label />`,
-      output: `import { Label } from '@patternfly/react-core'; <Label />`,
+      output: null,
       errors: [{
         message: 'The Label component is now truncated by default. There is also a new property (textMaxWidth) to customize when truncation occurs. The DOM will be a little different and may require changes in your tests.',
-        type: "JSXOpeningElement",
       }]
     },
     {
       code:   `import { Label } from '@patternfly/react-core/dist/esm/components/Label/index.js'; <Label />`,
-      output: `import { Label } from '@patternfly/react-core/dist/esm/components/Label/index.js'; <Label />`,
+      output: null,
       errors: [{
         message: 'The Label component is now truncated by default. There is also a new property (textMaxWidth) to customize when truncation occurs. The DOM will be a little different and may require changes in your tests.',
-        type: "JSXOpeningElement",
       }]
     }
   ]

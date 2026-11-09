@@ -17,7 +17,6 @@ ruleTester.run("modal-variant", rule, {
       output: `import { Modal } from '@patternfly/react-core'; <Modal variant="large" />`,
       errors: [{
         message: `isLarge prop for Modal has been replaced with variant="large"`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -25,7 +24,6 @@ ruleTester.run("modal-variant", rule, {
       output: `import { Modal } from '@patternfly/react-core'; <Modal variant="small" />`,
       errors: [{
         message: `isSmall prop for Modal has been replaced with variant="small"`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

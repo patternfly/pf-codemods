@@ -20,7 +20,6 @@ ruleTester.run("toolbar-remove-visiblity", rule, {
       output: `import { ToolbarContent } from '@patternfly/react-core'; <ToolbarContent visibility={{ default: 'hidden'}} />`,
       errors: [{
         message: `visiblity prop for ToolbarContent has been renamed to visibility`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("toolbar-remove-visiblity", rule, {
       output: `import { ToolbarContent } from '@patternfly/react-core/dist/esm/components/ToolbarContent/index.js'; <ToolbarContent visibility={{ default: 'hidden'}} />`,
       errors: [{
         message: `visiblity prop for ToolbarContent has been renamed to visibility`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

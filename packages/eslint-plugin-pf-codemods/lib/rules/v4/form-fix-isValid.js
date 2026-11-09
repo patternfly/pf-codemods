@@ -30,7 +30,7 @@ module.exports = {
                 let replacementValue = '"default"';
 
                 if (attribute.value && attribute.value.type === 'JSXExpressionContainer') { // isValid={cond}
-                  const boolCondition = context.getSourceCode().getText(attribute.value.expression);
+                  const boolCondition = context.sourceCode.getText(attribute.value.expression);
                   if (boolCondition === 'false') {
                     replacementValue = '"error"'
                   }

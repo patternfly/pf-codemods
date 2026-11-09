@@ -57,7 +57,7 @@ module.exports = {
         );
         const linkComponentPropsSpread = linkComponentPropsExpression
           ? `{...${context
-              .getSourceCode()
+              .sourceCode
               .getText(linkComponentPropsExpression)}}`
           : "";
 
@@ -65,7 +65,7 @@ module.exports = {
           childrenAttribute?.value
         );
         const childrenAttributeValueText = childrenAttributeExpression
-          ? context.getSourceCode().getText(childrenAttributeExpression)
+          ? context.sourceCode.getText(childrenAttributeExpression)
           : "";
 
         const wrapperProps = [

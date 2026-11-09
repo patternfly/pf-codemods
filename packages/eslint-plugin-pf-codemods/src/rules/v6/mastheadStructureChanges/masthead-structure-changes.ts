@@ -32,7 +32,7 @@ function moveNodeIntoMastheadMain(
 
   const fixes = [fixer.remove(node.parent)];
 
-  const nodeString = context.getSourceCode().getText(node.parent);
+  const nodeString = context.sourceCode.getText(node.parent);
 
   fixes.push(fixer.insertTextAfter(mastheadMain.openingElement, nodeString));
 

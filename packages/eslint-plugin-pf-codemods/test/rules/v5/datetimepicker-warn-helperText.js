@@ -21,30 +21,26 @@ ruleTester.run("datetimepicker-warn-helperText", rule, {
   invalid: [
     {
       code:   `import { DatePicker } from '@patternfly/react-core'; <DatePicker helperText="test" />`,
-      output: `import { DatePicker } from '@patternfly/react-core'; <DatePicker helperText="test" />`,
+      output: null,
       errors: [{
         message: 'The helperText property now expects a <HelperText> component.',
-        type: "JSXOpeningElement",
       }]
     },
     {
       code:   `import { TimePicker } from '@patternfly/react-core'; <TimePicker />`,
-      output: `import { TimePicker } from '@patternfly/react-core'; <TimePicker />`,
+      output: null,
       errors: [{
         message: 'TimePicker now uses a <HelperText> component for its helper text.',
-        type: "ImportDeclaration",
       }]
     },
     {
       code:   `import { TimePicker } from '@patternfly/react-core/dist/esm/components/TimePicker/index.js'; import { DatePicker } from '@patternfly/react-core/dist/esm/components/DatePicker/index.js'; <><DatePicker helperText="test" /><TimePicker /></>`,
-      output: `import { TimePicker } from '@patternfly/react-core/dist/esm/components/TimePicker/index.js'; import { DatePicker } from '@patternfly/react-core/dist/esm/components/DatePicker/index.js'; <><DatePicker helperText="test" /><TimePicker /></>`,
+      output: null,
       errors: [{
         message: 'TimePicker now uses a <HelperText> component for its helper text.',
-        type: "ImportDeclaration",
       },
       {
         message: 'The helperText property now expects a <HelperText> component.',
-        type: "JSXOpeningElement",
       }]
     }
   ]

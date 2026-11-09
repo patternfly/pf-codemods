@@ -17,7 +17,6 @@ ruleTester.run("progress-remove-info-variant", rule, {
       output: `import { Progress } from '@patternfly/react-core'; <Progress  />`,
       errors: [{
         message: `info variant which adds no styling has been removed for Progress. Don't pass this prop`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -25,7 +24,6 @@ ruleTester.run("progress-remove-info-variant", rule, {
       output: `import { Progress, ProgressVariant } from '@patternfly/react-core'; <Progress  />`,
       errors: [{
         message: `info variant which adds no styling has been removed for Progress. Don't pass this prop`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

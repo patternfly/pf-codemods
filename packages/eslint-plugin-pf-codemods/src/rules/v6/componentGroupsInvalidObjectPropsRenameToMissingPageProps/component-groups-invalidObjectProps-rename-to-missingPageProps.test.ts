@@ -35,19 +35,15 @@ ruleTester.run(
         errors: [
           {
             message,
-            type: "Identifier",
           },
           {
             message,
-            type: "Identifier",
           },
           {
             message,
-            type: "Identifier",
           },
           {
             message,
-            type: "Identifier",
           },
         ],
       },
@@ -60,7 +56,6 @@ ruleTester.run(
         errors: [
           {
             message,
-            type: "Identifier",
           },
         ],
       },
@@ -71,11 +66,9 @@ ruleTester.run(
         errors: [
           {
             message: componentMessage,
-            type: "ImportDeclaration",
           },
           {
             message,
-            type: "Identifier",
           },
         ],
       },
@@ -85,11 +78,9 @@ ruleTester.run(
         errors: [
           {
             message: componentMessage,
-            type: "ImportDeclaration",
           },
           {
             message,
-            type: "Identifier",
           },
         ],
       },
@@ -99,11 +90,9 @@ ruleTester.run(
         errors: [
           {
             message: componentMessage,
-            type: "ImportDeclaration",
           },
           {
             message,
-            type: "Identifier",
           },
         ],
       },

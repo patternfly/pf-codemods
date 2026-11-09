@@ -15,7 +15,6 @@ const componentsAttributes = {
 
 const errors = Object.keys(componentsAttributes).map((key) => ({
   message: `${baseMessage} ${componentsAttributes[key]} prop of ${key} component`,
-  type: "JSXOpeningElement",
 }));
 
 ruleTester.run("various-rename-default", rule, {
@@ -109,11 +108,9 @@ ruleTester.run("various-rename-default", rule, {
       errors: [
         {
           message: alertVariantEnumMessage,
-          type: "MemberExpression",
         },
         {
           message: alertVariantEnumMessage,
-          type: "MemberExpression",
         },
         ...errors,
       ],

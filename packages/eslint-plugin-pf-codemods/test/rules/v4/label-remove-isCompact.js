@@ -5,9 +5,6 @@ ruleTester.run("label-remove-isCompact", rule, {
   valid: [
     {
       code: `<Label isCompact />`,
-    },
-    {
-      code: `<Label isCompact />`,
     }
   ],
   invalid: [
@@ -16,7 +13,6 @@ ruleTester.run("label-remove-isCompact", rule, {
       output: `import { Label } from '@patternfly/react-core'; <Label >Label</Label>`,
       errors: [{
         message: `isCompact prop for Label has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

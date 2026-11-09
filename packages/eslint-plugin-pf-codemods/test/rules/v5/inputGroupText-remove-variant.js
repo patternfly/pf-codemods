@@ -17,7 +17,6 @@ ruleTester.run("inputGroupText-remove-variant", rule, {
       errors: [
         {
           message: `variant prop for InputGroupText has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("inputGroupText-remove-variant", rule, {
       errors: [
         {
           message: `variant prop for InputGroupText has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -14,7 +14,7 @@ module.exports = {
         if (imports.map(imp => imp.local.name).includes(node.name.name)) {
           const attribute = node.attributes.find(node => node.name && node.name.name === 'variant');
           if (attribute) {
-            const attributeValue = context.getSourceCode().getText(attribute.value);
+            const attributeValue = context.sourceCode.getText(attribute.value);
             if (/left|right/.test(attributeValue))
               context.report({
                 node,

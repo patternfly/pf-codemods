@@ -17,7 +17,6 @@ ruleTester.run("pageSidebar-remove-theme-prop", rule, {
       errors: [
         {
           message: `The \`theme\` prop has been removed from PageSidebar as theming is no longer handled React-side.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

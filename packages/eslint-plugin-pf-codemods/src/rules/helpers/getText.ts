@@ -16,7 +16,7 @@ export function getAttributeText(
     return "";
   }
 
-  return context.getSourceCode().getText(attribute);
+  return context.sourceCode.getText(attribute);
 }
 
 export function getAttributeValueText(
@@ -27,11 +27,11 @@ export function getAttributeValueText(
     return "";
   }
 
-  return context.getSourceCode().getText(attribute.value);
+  return context.sourceCode.getText(attribute.value);
 }
 
 export function getNodesText(context: Rule.RuleContext, nodes: Node[]) {
-  return nodes.map((node) => context.getSourceCode().getText(node)).join("");
+  return nodes.map((node) => context.sourceCode.getText(node)).join("");
 }
 
 export function getChildrenAsAttributeValueText(
@@ -60,7 +60,7 @@ export function getChildrenAsAttributeValueText(
   if (nonEmptyChildrenNodes.length === 1) {
     const singleChild = nonEmptyChildrenNodes[0];
     const singleChildText = context
-      .getSourceCode()
+      .sourceCode
       .getText(
         singleChild as JSXExpressionContainer | JSXElement | JSXFragment
       );

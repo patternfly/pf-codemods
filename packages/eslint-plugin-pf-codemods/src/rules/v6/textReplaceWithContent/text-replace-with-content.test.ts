@@ -4,19 +4,15 @@ import * as rule from "./text-replace-with-content";
 const errorMessage = `We have replaced Text, TextContent, TextList and TextListItem with one Content component. Running this fix will change all of those components names to Content and add a \`component\` prop where necessary.`;
 const importDeclarationError = {
   message: errorMessage,
-  type: "ImportDeclaration",
 };
 const jsxOpeningElementError = {
   message: errorMessage,
-  type: "JSXOpeningElement",
 };
 const jsxClosingElementError = {
   message: errorMessage,
-  type: "JSXClosingElement",
 };
 const identifierError = {
   message: errorMessage,
-  type: "Identifier",
 };
 
 ruleTester.run("text-replace-with-content", rule, {

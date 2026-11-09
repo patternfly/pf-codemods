@@ -38,15 +38,12 @@ import { VictoryZoomContainer } from 'victory-zoom-container';
       errors: [
         {
           message: `add missing import { VictoryZoomContainer } from 'victory-zoom-container';`,
-          type: "ImportDeclaration",
         },
         {
           message: `allowZoom prop for Chart has been replaced with containerComponent={<VictoryZoomContainer />}`,
-          type: "JSXOpeningElement",
         },
         {
           message: `allowZoom prop for ChartGroup has been removed`,
-          type: "JSXOpeningElement",
         }]
     },
     {
@@ -70,15 +67,12 @@ import { VictoryZoomContainer } from 'victory-zoom-container';
       errors: [
         {
           message: `add missing import { VictoryZoomContainer } from 'victory-zoom-container';`,
-          type: "ImportDeclaration",
         },
         {
           message: `allowZoom prop for Chart has been replaced with containerComponent={<VictoryZoomContainer />}`,
-          type: "JSXOpeningElement",
         },
         {
           message: `allowZoom prop for ChartGroup has been removed`,
-          type: "JSXOpeningElement",
         }]
     },
   ]

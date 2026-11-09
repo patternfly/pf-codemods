@@ -16,7 +16,6 @@ ruleTester.run("table-removed-transforms", rule, {
         <Table cells={[{ transforms: [cellWidth(100)] }]}></Table>`,
       errors: [{
         message: `cellWidth('max') has been replaced with cellWidth(100)`,
-        type: "CallExpression",
       }]
     },
     {
@@ -27,11 +26,9 @@ ruleTester.run("table-removed-transforms", rule, {
       errors: [
         {
           message: `cellWidth('max') has been replaced with cellWidth(100)`,
-          type: "CallExpression",
         },
         {
           message: `cellHeightAuto has been deprecated, remove usage`,
-          type: "CallExpression"
         }
       ]
     },

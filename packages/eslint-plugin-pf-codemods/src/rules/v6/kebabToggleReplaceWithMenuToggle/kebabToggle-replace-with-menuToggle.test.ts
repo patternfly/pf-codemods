@@ -34,7 +34,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -44,7 +43,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -54,7 +52,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -64,7 +61,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -74,11 +70,9 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
         {
           message,
-          type: "JSXElement",
         },
       ],
     },
@@ -88,11 +82,9 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
         {
           message,
-          type: "JSXElement",
         },
       ],
     },
@@ -102,11 +94,9 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
         {
           message,
-          type: "JSXElement",
         },
       ],
     },
@@ -118,11 +108,9 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
         {
           message,
-          type: "JSXElement",
         },
       ],
     },
@@ -132,11 +120,9 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },
@@ -146,7 +132,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -156,7 +141,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -166,7 +150,6 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -176,11 +159,9 @@ ruleTester.run("kebabToggle-replace-with-menuToggle", rule, {
       errors: [
         {
           message,
-          type: "ImportDeclaration",
         },
         {
           message,
-          type: "JSXElement",
         },
       ],
     },

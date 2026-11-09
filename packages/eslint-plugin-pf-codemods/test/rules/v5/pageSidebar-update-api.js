@@ -22,11 +22,9 @@ Content
       errors: [
         {
           message: `The PageSidebar API has been updated and our new PageSidebarBody sub-component should be wrapped around the PageSidebar content.`,
-          type: "ImportDeclaration",
         },
         {
           message: `The PageSidebar API has been updated and the "nav" prop has been renamed to "children". Our new PageSidebarBody sub-component should also be wrapped around the content passed as children to PageSidebar.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -41,11 +39,9 @@ Content
       errors: [
         {
           message: `The PageSidebar API has been updated and our new PageSidebarBody sub-component should be wrapped around the PageSidebar content.`,
-          type: "ImportDeclaration",
         },
         {
           message: `The PageSidebar API has been updated and the "nav" prop has been renamed to "children". Our new PageSidebarBody sub-component should also be wrapped around the content passed as children to PageSidebar.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

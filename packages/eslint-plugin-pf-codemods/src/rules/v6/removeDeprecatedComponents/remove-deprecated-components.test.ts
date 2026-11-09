@@ -23,7 +23,6 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
         ]
       )
@@ -35,7 +34,6 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
         ]
       )
@@ -47,7 +45,6 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ExportSpecifier",
           },
         ]
       )
@@ -59,11 +56,9 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ExportDefaultDeclaration",
           },
         ]
       )
@@ -75,11 +70,9 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ExportDefaultDeclaration",
           },
         ]
       )
@@ -93,7 +86,6 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
         ]
       )
@@ -105,7 +97,6 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
         ]
       )
@@ -117,7 +108,6 @@ function createAllInvalidTests(
         [
           {
             message: createErrorMessage(specifier, baseErrorMessage),
-            type: "ImportSpecifier",
           },
         ]
       )
@@ -254,25 +244,22 @@ ruleTester.run("remove-deprecated-components", rule, {
     ...invalidTests,
     {
       code: `import { ApplicationLauncher, Dropdown, Select, Chip } from '@patternfly/react-core/deprecated';`,
-      output: `import { ApplicationLauncher, Dropdown, Select, Chip } from '@patternfly/react-core/deprecated';`,
+      output: null,
       errors: [
         {
           message: createErrorMessage(
             "ApplicationLauncher",
             componentErrorMessages.appLauncher
           ),
-          type: "ImportSpecifier",
         },
         {
           message: createErrorMessage(
             "Dropdown",
             componentErrorMessages.dropdown
           ),
-          type: "ImportSpecifier",
         },
         {
           message: createErrorMessage("Select", componentErrorMessages.select),
-          type: "ImportSpecifier",
         },
       ],
     },

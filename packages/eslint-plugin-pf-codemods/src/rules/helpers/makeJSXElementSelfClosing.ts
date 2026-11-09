@@ -21,7 +21,7 @@ export function makeJSXElementSelfClosing(
 
   if (removeChildren || emptyChildren) {
     const closingSymbol = context
-      .getSourceCode()
+      .sourceCode
       .getLastToken(node.openingElement)!;
 
     fixes.push(

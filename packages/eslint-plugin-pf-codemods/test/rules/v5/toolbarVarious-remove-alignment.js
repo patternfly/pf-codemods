@@ -20,7 +20,6 @@ ruleTester.run("toolbarVarious-remove-alignment", rule, {
       output: `import { ToolbarContent } from '@patternfly/react-core'; <ToolbarContent  />`,
       errors: [{
         message: `alignment prop for ToolbarContent has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     ...['ToolbarGroup', 'ToolbarItem'].map( c => {
@@ -29,7 +28,6 @@ ruleTester.run("toolbarVarious-remove-alignment", rule, {
         output: `import { ${c} } from '@patternfly/react-core'; <${c} align={{ default: 'alignLeft' }} />`,
         errors: [{
           message: `alignment prop for ${c} has been renamed to align`,
-          type: "JSXOpeningElement",
         }]
       };
     }),
@@ -39,7 +37,6 @@ ruleTester.run("toolbarVarious-remove-alignment", rule, {
         output: `import { ${c} } from '@patternfly/react-core/dist/esm/components/Toolbar/index.js'; <${c} align={{ default: 'alignLeft' }} />`,
         errors: [{
           message: `alignment prop for ${c} has been renamed to align`,
-          type: "JSXOpeningElement",
         }]
       };
     })

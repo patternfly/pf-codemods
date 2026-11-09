@@ -101,7 +101,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher  />`,
       errors: [{
         message: `removeFindDomNode prop for ApplicationLauncher has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -109,7 +108,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy  />`,
       errors: [{
         message: `removeFindDomNode prop for ClipboardCopy has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -117,7 +115,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { ContextSelector } from '@patternfly/react-core'; <ContextSelector  />`,
       errors: [{
         message: `removeFindDomNode prop for ContextSelector has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -125,7 +122,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Dropdown } from '@patternfly/react-core'; <Dropdown  />`,
       errors: [{
         message: `removeFindDomNode prop for Dropdown has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -133,7 +129,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { NavItem } from '@patternfly/react-core'; <NavItem  />`,
       errors: [{
         message: `removeFindDomNode prop for NavItem has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -141,7 +136,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { OptionsMenu } from '@patternfly/react-core'; <OptionsMenu  />`,
       errors: [{
         message: `removeFindDomNode prop for OptionsMenu has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -149,7 +143,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Popover } from '@patternfly/react-core'; <Popover  />`,
       errors: [{
         message: `removeFindDomNode prop for Popover has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -157,7 +150,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Popover as Pop } from '@patternfly/react-core'; <Pop  />`,
       errors: [{
         message: `removeFindDomNode prop for Pop has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -165,7 +157,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { SearchInput } from '@patternfly/react-core'; <SearchInput  />`,
       errors: [{
         message: `removeFindDomNode prop for SearchInput has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -173,7 +164,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Select } from '@patternfly/react-core'; <Select  />`,
       errors: [{
         message: `removeFindDomNode prop for Select has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -181,7 +171,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { OverflowTab } from '@patternfly/react-core'; <OverflowTab  />`,
       errors: [{
         message: `removeFindDomNode prop for OverflowTab has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -189,7 +178,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Timepicker } from '@patternfly/react-core'; <Timepicker  />`,
       errors: [{
         message: `removeFindDomNode prop for Timepicker has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -197,7 +185,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Tooltip } from '@patternfly/react-core'; <Tooltip  />`,
       errors: [{
         message: `removeFindDomNode prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -205,7 +192,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Truncate } from '@patternfly/react-core'; <Truncate  />`,
       errors: [{
         message: `removeFindDomNode prop for Truncate has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -213,7 +199,6 @@ ruleTester.run("remove-removeFindDomNode", rule, {
       output: `import { Truncate } from '@patternfly/react-core/dist/esm/components/Truncate/index.js'; <Truncate  />`,
       errors: [{
         message: `removeFindDomNode prop for Truncate has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

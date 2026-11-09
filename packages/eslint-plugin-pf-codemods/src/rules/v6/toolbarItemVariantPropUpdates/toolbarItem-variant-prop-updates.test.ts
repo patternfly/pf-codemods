@@ -26,7 +26,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -36,7 +35,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -46,7 +44,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -56,7 +53,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "MemberExpression",
         },
       ],
     },
@@ -66,7 +62,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "MemberExpression",
         },
       ],
     },
@@ -76,7 +71,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -86,7 +80,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -96,7 +89,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "chip-group" variant for ToolbarItem has been replaced with "label-group".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -106,7 +98,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -116,7 +107,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "overflow-menu" variant for ToolbarItem has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -126,7 +116,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "search-filter" variant for ToolbarItem has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -136,7 +125,6 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -146,11 +134,9 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "MemberExpression",
         },
       ],
     },
@@ -162,22 +148,19 @@ ruleTester.run("toolbarItem-replace-chipGroup-variant", rule, {
       errors: [
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "MemberExpression",
         },
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     // error without the option to fix
     {
       code: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; const variant = ToolbarItemVariant["bulk-select"];`,
-      output: `import { ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core'; const variant = ToolbarItemVariant["bulk-select"];`,
+      output: null,
       errors: [
         {
           message: `The "bulk-select" variant for ToolbarItem has been removed.`,
-          type: "MemberExpression",
         },
       ],
     },

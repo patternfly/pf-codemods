@@ -39,12 +39,10 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "add missing imports EmptyStateActions from @patternfly/react-core/dist/esm/components/EmptyState/index.js",
-          type: "ImportDeclaration",
         },
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
       ],
     },
@@ -55,7 +53,6 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -65,12 +62,10 @@ ruleTester.run("emptyState-rename-components", rule, {
       errors: [
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "ExportNamedDeclaration",
         },
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -81,12 +76,10 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "add missing imports EmptyStateActions from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
       ],
     },
@@ -97,11 +90,9 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "add missing imports EmptyStateActions from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
       ],
     },
@@ -112,11 +103,9 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "add missing imports EmptyStateActions from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
       ],
     },
@@ -135,16 +124,13 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "add missing imports EmptyStateActions from @patternfly/react-core",
-          type: "ImportDeclaration",
         },
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
       ],
     },
@@ -163,16 +149,13 @@ ruleTester.run("emptyState-rename-components", rule, {
         {
           message:
             "add missing imports EmptyStateActions from @patternfly/react-core/dist/esm/components/EmptyState/index.js",
-          type: "ImportDeclaration",
         },
         {
           message: "EmptyStatePrimary has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
         {
           message:
             "EmptyStateSecondaryActions has been replaced with EmptyStateActions",
-          type: "JSXElement",
         },
       ],
     },

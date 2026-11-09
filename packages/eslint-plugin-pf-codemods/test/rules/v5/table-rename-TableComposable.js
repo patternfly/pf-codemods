@@ -21,15 +21,12 @@ ruleTester.run("table-rename-TableComposable", rule, {
       errors: [
         {
           message: "TableComposable has been replaced with Table",
-          type: "ImportSpecifier",
         },
         {
           message: "TableComposable has been replaced with Table",
-          type: "JSXIdentifier",
         },
         {
           message: "TableComposable has been replaced with Table",
-          type: "JSXIdentifier",
         },
       ],
     },
@@ -39,7 +36,6 @@ ruleTester.run("table-rename-TableComposable", rule, {
       errors: [
         {
           message: "TableComposable has been replaced with Table",
-          type: "ExportNamedDeclaration",
         },
       ],
     },

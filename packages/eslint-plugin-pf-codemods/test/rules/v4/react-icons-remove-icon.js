@@ -15,11 +15,9 @@ import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`,
       errors: [
         {
           message: `add missing import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`,
-          type: "ImportDeclaration",
         },
         {
           message: `Removed OutlinedFontAwesomeLogoFullIcon. Import it from @FortAwesome instead.`,
-          type: "ImportSpecifier",
         }
       ]
     },
@@ -30,7 +28,6 @@ import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`,
 import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`,
       errors: [{
         message: `Removed OutlinedFontAwesomeLogoFullIcon. Import it from @FortAwesome instead.`,
-        type: "ImportSpecifier",
       }]
     },
     {
@@ -41,11 +38,9 @@ import { anotherIcon, fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-
       errors: [
         {
           message: `Removed OutlinedFontAwesomeLogoFullIcon. Import it from @FortAwesome instead.`,
-          type: "ImportSpecifier",
         },
         {
           message: `add missing import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`,
-          type: "ImportDeclaration",
         }
       ]
     },

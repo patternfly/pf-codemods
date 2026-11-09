@@ -18,7 +18,6 @@ ruleTester.run("alert-remove-ariaLabel", rule, {
       errors: [
         {
           message: `aria-label prop for Alert has been removed and should not be used as it is not well supported on div elements without a role.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -28,7 +27,6 @@ ruleTester.run("alert-remove-ariaLabel", rule, {
       errors: [
         {
           message: `aria-label prop for Al has been removed and should not be used as it is not well supported on div elements without a role.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -38,7 +36,6 @@ ruleTester.run("alert-remove-ariaLabel", rule, {
       errors: [
         {
           message: `aria-label prop for Alert has been removed and should not be used as it is not well supported on div elements without a role.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -48,7 +45,6 @@ ruleTester.run("alert-remove-ariaLabel", rule, {
       errors: [
         {
           message: `aria-label prop for Al has been removed and should not be used as it is not well supported on div elements without a role.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

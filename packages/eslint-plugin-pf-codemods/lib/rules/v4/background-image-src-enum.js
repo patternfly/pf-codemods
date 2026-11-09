@@ -23,7 +23,7 @@ module.exports = {
                 const fixes = [
                   fixer.remove(node)
                 ];
-                const nextToken = context.getSourceCode().getTokenAfter(node);
+                const nextToken = context.sourceCode.getTokenAfter(node);
                 // Remove trailing ,
                 if (nextToken && nextToken.value === ',') {
                   fixes.push(fixer.remove(nextToken));

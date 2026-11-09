@@ -38,7 +38,7 @@ module.exports = {
                   return [
                     fixer.insertTextAfter(
                       chipAncestor.openingElement.name,
-                      ` badge={${context.getSourceCode().getText(node)}}`
+                      ` badge={${context.sourceCode.getText(node)}}`
                     ),
                     fixer.remove(node),
                   ];

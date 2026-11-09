@@ -17,7 +17,6 @@ ruleTester.run("modal-remove-props", rule, {
       output: `import { Modal } from '@patternfly/react-core'; <Modal  />`,
       errors: [{
         message: `isFooterLeftAligned prop for Modal has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -25,7 +24,6 @@ ruleTester.run("modal-remove-props", rule, {
       output: `import { Modal } from '@patternfly/react-core'; <Modal  />`,
       errors: [{
         message: `hideTitle prop for Modal has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

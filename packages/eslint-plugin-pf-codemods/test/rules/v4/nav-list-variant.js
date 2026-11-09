@@ -45,7 +45,6 @@ ruleTester.run("nav-list-variant", rule, {
           navListName: navListName,
           variantVal: variant.default
         },
-        type: "JSXElement",
       }]
     },
     {
@@ -67,7 +66,6 @@ ruleTester.run("nav-list-variant", rule, {
           navListName: navListName,
           variantVal: variant.tertiary
         },
-        type: "JSXElement",
       }]
     },
     {
@@ -89,7 +87,6 @@ ruleTester.run("nav-list-variant", rule, {
           navListName: navListName,
           variantVal: variant.horizontal
         },
-        type: "JSXElement",
       }]
     },
     {
@@ -111,7 +108,6 @@ ruleTester.run("nav-list-variant", rule, {
           navListName: navListName,
           variantVal: variant.all
         },
-        type: "JSXElement",
       }]
     },
     {
@@ -129,7 +125,6 @@ ruleTester.run("nav-list-variant", rule, {
           navListName: navListName,
           variantVal: variant.all
         },
-        type: "JSXElement",
       }]
     },
     {
@@ -147,7 +142,6 @@ ruleTester.run("nav-list-variant", rule, {
           navListName: navListName,
           variantVal: variant.horizontal
         },
-        type: "JSXElement",
       }]
     },
     {
@@ -161,7 +155,6 @@ ruleTester.run("nav-list-variant", rule, {
 </NavList>`,
       errors: [{
         messageId: "removeNavListSimpleVariant",
-        type: "JSXElement",
       }]
     },
     {
@@ -179,7 +172,6 @@ ruleTester.run("nav-list-variant", rule, {
 </Nav>`,
       errors: [{
         messageId: "removeNavListSimpleVariant",
-        type: "JSXElement",
       }]
     },
     {
@@ -201,7 +193,6 @@ ruleTester.run("nav-list-variant", rule, {
         navListName: navListName,
         variantVal: `variant="tertiary"`
       },
-      type: "JSXElement",
     }]
     }
   ]

@@ -17,7 +17,6 @@ ruleTester.run("wizard-remove-props", rule, {
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
         message: `isCompactNav prop for Wizard has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -25,7 +24,6 @@ ruleTester.run("wizard-remove-props", rule, {
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
         message: `inPage prop for Wizard has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -33,7 +31,6 @@ ruleTester.run("wizard-remove-props", rule, {
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
         message: `isFullHeight prop for Wizard has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -41,15 +38,6 @@ ruleTester.run("wizard-remove-props", rule, {
       output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
       errors: [{
         message: `isFullWidth prop for Wizard has been removed`,
-        type: "JSXOpeningElement",
-      }]
-    },
-    {
-      code:   `import { Wizard } from '@patternfly/react-core'; <Wizard inPage />`,
-      output: `import { Wizard } from '@patternfly/react-core'; <Wizard  />`,
-      errors: [{
-        message: `inPage prop for Wizard has been removed`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

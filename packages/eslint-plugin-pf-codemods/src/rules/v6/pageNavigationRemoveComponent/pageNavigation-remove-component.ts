@@ -66,7 +66,7 @@ module.exports = {
                     return [];
                   }
                   const tokenAfter = context
-                    .getSourceCode()
+                    .sourceCode
                     .getTokenAfter(pageNavSpecifier);
                   const isCommaAfter = tokenAfter && tokenAfter.value === ",";
                   const rangeToRemove: AST.Range = [

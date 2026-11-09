@@ -27,7 +27,7 @@ module.exports = {
             let variantValue;
 
             if (variantProp?.value?.expression?.type === "Identifier") {
-              const scope = context.getSourceCode().getScope(node);
+              const scope = context.sourceCode.getScope(node);
               const findVariableDeclaration = (name, scope) => {
                 while (scope !== null) {
                   const variable = scope.variables.find((v) => v.name === name);

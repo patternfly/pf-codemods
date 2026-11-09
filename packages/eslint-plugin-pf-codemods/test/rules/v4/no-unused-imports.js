@@ -13,7 +13,6 @@ ruleTester.run("no-unused-imports", rule, {
       output: `import { Nav  } from '@patternfly/react-core'; <Nav variant="default" />`,
       errors: [{
         message: `unused patternfly import NavVariants`,
-        type: "ImportDeclaration",
       }]
     },
   ]

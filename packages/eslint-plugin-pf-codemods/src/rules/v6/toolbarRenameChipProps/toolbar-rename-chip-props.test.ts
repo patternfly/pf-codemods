@@ -57,7 +57,6 @@ for (const component in renames) {
         [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ]
       )
@@ -69,7 +68,6 @@ for (const component in renames) {
         [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ]
       )
@@ -81,7 +79,6 @@ for (const component in renames) {
         [
           {
             message: createMessage("CustomThing"),
-            type: "JSXOpeningElement",
           },
         ]
       )
@@ -93,7 +90,6 @@ for (const component in renames) {
         [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ]
       )
@@ -105,7 +101,6 @@ for (const component in renames) {
         [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ]
       )
@@ -117,7 +112,6 @@ for (const component in renames) {
         [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ]
       )

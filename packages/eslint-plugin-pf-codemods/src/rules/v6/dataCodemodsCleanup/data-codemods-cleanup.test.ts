@@ -19,7 +19,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -30,7 +29,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -40,7 +38,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -50,7 +47,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -61,7 +57,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -71,7 +66,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -82,7 +76,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -93,7 +86,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -104,7 +96,6 @@ ruleTester.run("data-codemods-cleanup", rule, {
       errors: [
         {
           message,
-          type: "JSXOpeningElement",
         },
       ],
     },
