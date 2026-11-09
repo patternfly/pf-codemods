@@ -1453,8 +1453,8 @@ __metadata:
     "@typescript-eslint/utils": "npm:^8.12.2"
     typescript: "npm:^5.4.2"
   peerDependencies:
-    "@typescript-eslint/parser": ">=5.58.0"
-    eslint: ">=0.8.0"
+    "@typescript-eslint/parser": ">=8.0.0"
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=3.8.3"
   languageName: unknown
   linkType: soft
