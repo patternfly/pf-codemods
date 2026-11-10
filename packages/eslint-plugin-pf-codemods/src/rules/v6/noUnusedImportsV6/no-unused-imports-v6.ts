@@ -6,7 +6,7 @@ import { getEndRange } from "../../helpers";
 module.exports = {
   meta: { fixable: "code" },
   create: function (context: Rule.RuleContext) {
-    const sourceCode = context.getSourceCode();
+    const sourceCode = context.sourceCode;
 
     const allTokens = [
       ...new Set(

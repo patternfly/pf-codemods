@@ -17,7 +17,6 @@ ruleTester.run('page-rename-tertiaryNav', rule, {
       errors: [
         {
           message: `We've renamed the \`tertiaryNav\` prop to \`horizontalSubnav\`.`,
-          type: 'JSXOpeningElement',
         },
       ],
     },

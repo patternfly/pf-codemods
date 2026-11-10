@@ -18,7 +18,6 @@ ruleTester.run("expandableSection-remove-isActive-prop", rule, {
       errors: [
         {
           message: `The \`isActive\` prop has been removed from ExpandableSection.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -29,7 +28,6 @@ ruleTester.run("expandableSection-remove-isActive-prop", rule, {
       errors: [
         {
           message: `The \`isActive\` prop has been removed from ExpandableSection.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -40,7 +38,6 @@ ruleTester.run("expandableSection-remove-isActive-prop", rule, {
       errors: [
         {
           message: `The \`isActive\` prop has been removed from ExpandableSection.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -51,7 +48,6 @@ ruleTester.run("expandableSection-remove-isActive-prop", rule, {
       errors: [
         {
           message: `The \`isActive\` prop has been removed from ExpandableSection.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

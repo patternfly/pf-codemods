@@ -7,7 +7,6 @@ const interfaceRemovedMessage = `The SplitButtonOptions interface has been remov
 
 const generalError = {
   message,
-  type: "JSXOpeningElement",
 };
 
 ruleTester.run("menuToggle-remove-splitButtonOptions", rule, {
@@ -65,11 +64,9 @@ ruleTester.run("menuToggle-remove-splitButtonOptions", rule, {
       errors: [
         {
           message: interfaceRemovedMessage,
-          type: "ImportSpecifier",
         },
         {
           message: interfaceRemovedMessage,
-          type: "Identifier",
         },
         generalError,
       ],
@@ -83,11 +80,9 @@ ruleTester.run("menuToggle-remove-splitButtonOptions", rule, {
       errors: [
         {
           message: interfaceRemovedMessage,
-          type: "ImportSpecifier",
         },
         {
           message: interfaceRemovedMessage,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -100,11 +95,9 @@ ruleTester.run("menuToggle-remove-splitButtonOptions", rule, {
       errors: [
         {
           message: interfaceRemovedMessage,
-          type: "ImportSpecifier",
         },
         {
           message: interfaceRemovedMessage,
-          type: "ExportDefaultDeclaration",
         },
       ],
     },

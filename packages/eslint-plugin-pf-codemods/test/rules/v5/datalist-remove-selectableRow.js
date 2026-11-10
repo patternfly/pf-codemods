@@ -84,7 +84,6 @@ ruleTester.run("datalist-remove-selectableRow", rule, {
       errors: [
         {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -98,7 +97,6 @@ ruleTester.run("datalist-remove-selectableRow", rule, {
       errors: [
         {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -112,7 +110,6 @@ ruleTester.run("datalist-remove-selectableRow", rule, {
       errors: [
         {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -138,7 +135,6 @@ ruleTester.run("datalist-remove-selectableRow", rule, {
       errors: [
         {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -166,7 +162,6 @@ ruleTester.run("datalist-remove-selectableRow", rule, {
       errors: [
         {
           message: `DataList's selectableRow property has been replaced with onSelectableRowChange. The order of the params in the callback has also been updated so that the event param is first.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

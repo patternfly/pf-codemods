@@ -13,21 +13,19 @@ ruleTester.run("emptyState-nonExported-components", rule, {
   invalid: [
     {
       code: `import { EmptyStateHeader } from '@patternfly/react-core';`,
-      output: `import { EmptyStateHeader } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
       ],
     },
     {
       code: `import { EmptyStateHeader as CustomHeader } from '@patternfly/react-core';`,
-      output: `import { EmptyStateHeader as CustomHeader } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -37,7 +35,6 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -47,7 +44,6 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -57,7 +53,6 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader and EmptyStateIcon are no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -67,11 +62,9 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
         {
           message: `EmptyStateIcon is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -81,11 +74,9 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -95,11 +86,9 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
         {
           message: `CustomHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -109,11 +98,9 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -123,11 +110,9 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportDefaultDeclaration",
         },
       ],
     },
@@ -137,36 +122,19 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
         {
           message: `CustomHeader is no longer exported by PatternFly.`,
-          type: "ExportDefaultDeclaration",
         },
       ],
     },
     // We want to ensure the rule only gets thrown for the applicable components
     {
       code: `import { EmptyStateHeader, SomeOtherThing } from '@patternfly/react-core';`,
-      output: `import { EmptyStateHeader, SomeOtherThing } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
-        },
-      ],
-    },
-    {
-      code: `import { EmptyStateHeader } from '@patternfly/react-core';export default EmptyStateHeader;`,
-      output: `import { EmptyStateHeader } from '@patternfly/react-core';`,
-      errors: [
-        {
-          message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
-        },
-        {
-          message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportDefaultDeclaration",
         },
       ],
     },
@@ -176,11 +144,9 @@ ruleTester.run("emptyState-nonExported-components", rule, {
       errors: [
         {
           message: `EmptyStateHeader is no longer exported by PatternFly. This rule will not fix any imports, as our cleanup rule handles removal of unused imports.`,
-          type: "ImportSpecifier",
         },
         {
           message: `EmptyStateHeader is no longer exported by PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },

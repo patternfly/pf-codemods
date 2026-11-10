@@ -18,21 +18,21 @@ const oldVariantNames = Object.keys(renames) as (
 
 const validTests: ValidTests = [];
 const invalidTests: InvalidTests = [];
+for (const oldName of oldVariantNames) {
+  validTests.push(createValidTest(`<ToolbarGroup variant="${oldName}" />`));
+  validTests.push(
+    createValidTest(
+      `import { ToolbarGroup } from '@patternfly/react-core'; <ToolbarGroup variant={ToolbarGroupVariant["${oldName}"]} />`
+    )
+  );
+}
 for (const component of applicableComponents) {
   for (const oldName of oldVariantNames) {
     const newName = renames[oldName];
 
-    validTests.push(createValidTest(`<ToolbarGroup variant="${oldName}" />`));
-    validTests.push(
-      createValidTest(
-        `import { ToolbarGroup } from '@patternfly/react-core'; <ToolbarGroup variant={ToolbarGroupVariant["${oldName}"]} />`
-      )
-    );
-
     const message = `The \`${oldName}\` variant of ${component} has been renamed to \`${newName}\`.`;
     const errorObject = {
       message,
-      type: "JSXOpeningElement",
     };
     invalidTests.push(
       createInvalidTest(

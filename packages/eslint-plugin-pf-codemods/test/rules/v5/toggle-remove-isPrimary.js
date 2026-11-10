@@ -21,7 +21,6 @@ ruleTester.run("toggle-remove-isPrimary", rule, {
       errors: [
         {
           message: `isPrimary prop has been removed for Toggle and replaced by using 'primary' value on the toggleVariant prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("toggle-remove-isPrimary", rule, {
       errors: [
         {
           message: `isPrimary prop has been removed for Toggle and replaced by using 'primary' value on the toggleVariant prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

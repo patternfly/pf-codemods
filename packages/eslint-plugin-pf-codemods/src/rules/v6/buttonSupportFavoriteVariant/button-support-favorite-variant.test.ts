@@ -49,7 +49,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -59,7 +58,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -69,7 +67,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -79,7 +76,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -89,7 +85,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -99,7 +94,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -109,7 +103,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },
@@ -119,7 +112,6 @@ ruleTester.run("button-support-favorite-variant", rule, {
       errors: [
         {
           message: "It looks like you are trying to create a custom favorites button. Use `isFavorite` and `isFavorited` button properties instead to apply the correct styling.",
-          type: "JSXElement",
         },
       ],
     },

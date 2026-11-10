@@ -21,7 +21,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -41,7 +39,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -51,7 +48,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -61,7 +57,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -71,7 +66,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -81,7 +75,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -92,7 +85,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -103,7 +95,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -114,7 +105,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -125,7 +115,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -136,7 +125,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -147,7 +135,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -158,7 +145,6 @@ ruleTester.run("button-moveIcons-icon-prop", rule, {
       errors: [
         {
           message: `Icons must now be passed to the \`icon\` prop of Button instead of as children. If you are passing anything other than an icon as children, ignore this rule when running fixes.`,
-          type: "JSXElement",
         },
       ],
     },

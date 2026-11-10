@@ -14,7 +14,6 @@ ruleTester.run("chipgroup-remove-props", rule, {
       errors: [
         {
           message: `withToolbar has been removed from ChipGroup. Add the categoryName prop instead for a category.`,
-          type: "JSXOpeningElement",
         },
       ]
     },
@@ -24,7 +23,6 @@ ruleTester.run("chipgroup-remove-props", rule, {
       errors: [
         {
           message: `headingLevel has been removed from ChipGroup since the category name is now a <span>`,
-          type: "JSXOpeningElement",
         },
       ]
     },

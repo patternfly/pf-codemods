@@ -9,7 +9,6 @@ const renameMap = {
 const getErrors = (component: string) =>
   Object.entries(renameMap).map(([oldName, newName]) => ({
     message: `The ${oldName} prop for ${component} has been renamed to ${newName}.`,
-    type: "JSXOpeningElement",
   }));
 
 const components = ["NotAuthorized", "UnauthorizedAccess"];

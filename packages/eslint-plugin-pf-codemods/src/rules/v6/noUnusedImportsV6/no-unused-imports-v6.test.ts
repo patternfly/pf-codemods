@@ -18,7 +18,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly import Foo from '@patternfly/react-core' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -29,7 +28,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly import Foo from '@patternfly/react-core' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -40,7 +38,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly import Foo from '@patternfly/react-core' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -51,7 +48,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly imports Bash, Foo, Bang from '@patternfly/react-core' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -62,7 +58,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly import Foo from '@patternfly/react-core/dist/esm/components' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -73,7 +68,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly import Foo from '@patternfly/react-core/dist/js/components' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -84,7 +78,6 @@ ruleTester.run("no-unused-imports-v6", rule, {
       errors: [
         {
           message: `Unused PatternFly import Foo from '@patternfly/react-core/dist/dynamic/components' should be removed`,
-          type: "ImportDeclaration",
         },
       ],
     },

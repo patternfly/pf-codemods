@@ -54,7 +54,6 @@ ruleTester.run("remove-sticky-props", rule, {
       output: `import { PageSection } from '@patternfly/react-core'; <PageSection  />`,
       errors: [{
         message: `sticky prop for PageSection has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -62,7 +61,6 @@ ruleTester.run("remove-sticky-props", rule, {
       output: `import { PageSection } from '@patternfly/react-core'; <PageSection  />`,
       errors: [{
         message: `sticky prop for PageSection has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -70,7 +68,6 @@ ruleTester.run("remove-sticky-props", rule, {
         output: `import { PageNavigation } from '@patternfly/react-core'; <PageNavigation  />`,
         errors: [{
           message: `sticky prop for PageNavigation has been removed`,
-          type: "JSXOpeningElement",
         }]
       },
       {
@@ -78,7 +75,6 @@ ruleTester.run("remove-sticky-props", rule, {
         output: `import { PageNavigation } from '@patternfly/react-core'; <PageNavigation  />`,
         errors: [{
           message: `sticky prop for PageNavigation has been removed`,
-          type: "JSXOpeningElement",
         }]
       },
       {
@@ -86,7 +82,6 @@ ruleTester.run("remove-sticky-props", rule, {
         output: `import { PageGroup } from '@patternfly/react-core'; <PageGroup  />`,
         errors: [{
           message: `sticky prop for PageGroup has been removed`,
-          type: "JSXOpeningElement",
         }]
       },
       {
@@ -94,7 +89,6 @@ ruleTester.run("remove-sticky-props", rule, {
         output: `import { PageGroup } from '@patternfly/react-core'; <PageGroup  />`,
         errors: [{
           message: `sticky prop for PageGroup has been removed`,
-          type: "JSXOpeningElement",
         }]
       },
       {
@@ -102,7 +96,6 @@ ruleTester.run("remove-sticky-props", rule, {
         output: `import { PageBreadcrumb } from '@patternfly/react-core'; <PageBreadcrumb  />`,
         errors: [{
           message: `sticky prop for PageBreadcrumb has been removed`,
-          type: "JSXOpeningElement",
         }]
       },
       {
@@ -110,7 +103,6 @@ ruleTester.run("remove-sticky-props", rule, {
         output: `import { PageBreadcrumb } from '@patternfly/react-core'; <PageBreadcrumb  />`,
         errors: [{
           message: `sticky prop for PageBreadcrumb has been removed`,
-          type: "JSXOpeningElement",
         }]
       },
       {
@@ -119,15 +111,12 @@ ruleTester.run("remove-sticky-props", rule, {
         errors: [
           {
             message: `sticky prop for PageSection has been removed`,
-            type: "JSXOpeningElement",
           },
           {
             message: `sticky prop for PageGroup has been removed`,
-            type: "JSXOpeningElement",
           },
           {
             message: `sticky prop for PageBreadcrumb has been removed`,
-            type: "JSXOpeningElement",
           },
         ]
       },

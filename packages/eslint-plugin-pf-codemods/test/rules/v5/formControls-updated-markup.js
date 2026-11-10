@@ -31,53 +31,48 @@ ruleTester.run("formControls-updated-markup", rule, {
   invalid: [
     {
       code: `import { Slider } from '@patternfly/react-core';`,
-      output: `import { Slider } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `The markup for Slider with the isInputVisible prop has been changed. Selectors may need to be updated.`,
-          type: "ImportDeclaration",
         },
       ],
     },
     {
       code: `import { Select } from '@patternfly/react-core/deprecated';`,
-      output: `import { Select } from '@patternfly/react-core/deprecated';`,
+      output: null,
       errors: [
         {
           message: `The markup for Select with the hasInlineFilter prop has been changed. Selectors may need to be updated.`,
-          type: "ImportDeclaration",
         },
       ],
     },
     ...affectedWithoutProp.map((component) => ({
       code: `import { ${component} } from '@patternfly/react-core';`,
-      output: `import { ${component} } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `The markup for ${component} has been changed. Selectors may need to be updated.`,
-          type: "ImportDeclaration",
         },
       ],
     })),
     // Import from dist
     {
       code: `import { FormSelect } from '@patternfly/react-core/dist/esm/components/FormSelect/index.js';`,
-      output: `import { FormSelect } from '@patternfly/react-core/dist/esm/components/FormSelect/index.js';`,
+      output: null,
       errors: [
         {
           message: `The markup for FormSelect has been changed. Selectors may need to be updated.`,
-          type: "ImportDeclaration",
         },
       ],
     },
     // Aliased import
     {
       code: `import { FormSelect as PFFS } from '@patternfly/react-core';`,
-      output: `import { FormSelect as PFFS } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `The markup for FormSelect has been changed. Selectors may need to be updated.`,
-          type: "ImportDeclaration",
         },
       ],
     },

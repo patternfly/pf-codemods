@@ -51,10 +51,10 @@ module.exports = {
           const needsDataAttr = ['Toolbar', 'ToolbarGroup', 'ToolbarItem'].includes(toolbarName);
           const addDataAttr = jsxStr => `${jsxStr.slice(0, -1)} data-codemods="true">`;
           const updateTagName = node => context
-          	.getSourceCode()
+          	.sourceCode
           	.getText(node)
             .replace('DataToolbar', 'Toolbar');
-          const isOpeningTag = context.getSourceCode().getTokenBefore(node).value !== '/';
+          const isOpeningTag = context.sourceCode.getTokenBefore(node).value !== '/';
           const newOpeningParentTag = needsDataAttr ? addDataAttr(updateTagName(node.parent)) : updateTagName(node.parent);
           const newClosingTag = updateTagName(node);
           context.report({

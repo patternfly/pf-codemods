@@ -86,7 +86,7 @@ module.exports = {
                   if (prop?.shorthand) {
                     const variable = findVariableDeclaration(
                       propName,
-                      context.getSourceCode().getScope(expr)
+                      context.sourceCode.getScope(expr)
                     );
 
                     variable &&
@@ -102,7 +102,7 @@ module.exports = {
               if (expr?.type === "Identifier") {
                 const variable = findVariableDeclaration(
                   expr.name,
-                  context.getSourceCode().getScope(node)
+                  context.sourceCode.getScope(node)
                 );
 
                 const variableValue = variable.defs[0].node.init;

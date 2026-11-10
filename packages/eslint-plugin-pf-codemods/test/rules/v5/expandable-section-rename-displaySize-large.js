@@ -20,7 +20,6 @@ ruleTester.run("expandable-section-rename-displaySize-large", rule, {
       output: `import { ExpandableSection } from '@patternfly/react-core'; <ExpandableSection displaySize="lg" />`,
       errors: [{
         message: `displaySize "large" has been renamed for ExpandableSection. Use displaySize="lg" instead.`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("expandable-section-rename-displaySize-large", rule, {
       output: `import { ExpandableSection } from '@patternfly/react-core/dist/esm/components/ExpandableSection/index.js'; <ExpandableSection displaySize="lg" />`,
       errors: [{
         message: `displaySize "large" has been renamed for ExpandableSection. Use displaySize="lg" instead.`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

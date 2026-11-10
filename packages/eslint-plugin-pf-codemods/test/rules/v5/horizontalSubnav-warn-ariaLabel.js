@@ -26,7 +26,6 @@ ruleTester.run("horizontalSubnav-warn-ariaLabel", rule, {
       errors: [
         {
           message: `The default value of the aria-label for Nav with a 'horizontal-subnav' variant has been updated to "local".`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -35,7 +34,6 @@ ruleTester.run("horizontalSubnav-warn-ariaLabel", rule, {
       errors: [
         {
           message: `The default value of the aria-label for Nav with a 'horizontal-subnav' variant has been updated to "local".`,
-          type: "JSXOpeningElement",
         },
       ],
     },

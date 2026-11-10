@@ -89,7 +89,7 @@ module.exports = {
 
           if (itemsProperty) {
             const itemsPropertyValueString = context
-              .getSourceCode()
+              .sourceCode
               .getText(itemsProperty.value);
 
             reportAndFix(itemsPropertyValueString);

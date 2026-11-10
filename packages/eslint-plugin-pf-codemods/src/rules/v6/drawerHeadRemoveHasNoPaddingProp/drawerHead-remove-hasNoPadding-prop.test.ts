@@ -17,7 +17,6 @@ ruleTester.run("drawerHead-remove-hasNoPadding-prop", rule, {
       errors: [
         {
           message: `The \`hasNoPadding\` prop has been removed from DrawerHead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

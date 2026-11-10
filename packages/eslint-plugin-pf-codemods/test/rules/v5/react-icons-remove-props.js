@@ -17,7 +17,6 @@ ruleTester.run("react-icons-remove-props", rule, {
       errors: [
         {
           message: `The size, color, and noVerticalAlign properties have been removed from react-icons. Wrap your react-icon with the <Icon> component to customize its size and color.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

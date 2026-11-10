@@ -29,7 +29,6 @@ ruleTester.run("hasCheck-prop-rename", rule, {
       errors: [
         {
           message: `The 'hasCheck' prop for SelectOption has been renamed to 'hasCheckbox'.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -39,7 +38,6 @@ ruleTester.run("hasCheck-prop-rename", rule, {
       errors: [
         {
           message: `The 'hasCheck' prop for MenuItem has been renamed to 'hasCheckbox'.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -49,7 +47,6 @@ ruleTester.run("hasCheck-prop-rename", rule, {
       errors: [
         {
           message: `The 'hasCheck' prop for TreeView has been renamed to 'hasCheckbox'.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -59,7 +56,6 @@ ruleTester.run("hasCheck-prop-rename", rule, {
       errors: [
         {
           message: `The 'hasCheck' prop for TreeView has been renamed to 'hasCheckbox'.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -31,7 +31,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -41,7 +40,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -51,7 +49,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -62,7 +59,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -72,7 +68,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -82,7 +77,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -92,7 +86,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -102,7 +95,6 @@ ruleTester.run("menu-moved-ariaLabel", rule, {
       errors: [
         {
           message: `The aria-label prop has been removed from Menu and should be passed into MenuList instead. If using MenuGroup with the "label" prop, an aria-label on MenuList is not necessary.`,
-          type: "JSXElement",
         },
       ],
     },

@@ -14,11 +14,9 @@ ruleTester.run("empty-state-icon-removed-props", rule, {
       errors: [
         {
           message: `Removed prop size from EmptyStateIcon. Use the icon prop instead.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `Removed prop title from EmptyStateIcon. Use the icon prop instead.`,
-          type: "JSXOpeningElement",
         },
       ]
     },

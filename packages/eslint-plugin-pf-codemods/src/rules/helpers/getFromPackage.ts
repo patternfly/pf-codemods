@@ -60,7 +60,7 @@ export function getFromPackage(
   packageName: string,
   specifierNames?: string[]
 ) {
-  const astBody = context.getSourceCode().ast.body;
+  const astBody = context.sourceCode.ast.body;
 
   const imports = getSpecifiers<ImportDeclaration, ImportSpecifier>(
     astBody,
@@ -92,7 +92,7 @@ export function getDefaultImportsFromPackage(
   packageName: string,
   componentName: string = ""
 ): ImportDefaultSpecifierWithParent[] {
-  const astBody = context.getSourceCode().ast.body;
+  const astBody = context.sourceCode.ast.body;
 
   const importDeclarations = astBody.filter(
     (node) => node?.type === "ImportDeclaration"

@@ -21,7 +21,6 @@ ruleTester.run("emptyStateIcon-remove-props", rule, {
       errors: [
         {
           message: `variant prop for EmptyStateIcon has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -31,11 +30,9 @@ ruleTester.run("emptyStateIcon-remove-props", rule, {
       errors: [
         {
           message: `component prop for EmptyStateIcon has been renamed to icon`,
-          type: "JSXOpeningElement",
         },
         {
           message: `variant prop for EmptyStateIcon has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -45,11 +42,9 @@ ruleTester.run("emptyStateIcon-remove-props", rule, {
       errors: [
         {
           message: `component prop for EmptyStateIcon has been renamed to icon`,
-          type: "JSXOpeningElement",
         },
         {
           message: `variant prop for EmptyStateIcon has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },

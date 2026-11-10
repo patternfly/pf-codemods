@@ -53,7 +53,7 @@ module.exports = {
                     ? node.property
                     : findVariableDeclaration(
                         node.property.name,
-                        context.getSourceCode().getScope(node)
+                        context.sourceCode.getScope(node)
                       )?.defs[0].node.init;
                 if (
                   nodeToReplace &&
@@ -116,7 +116,7 @@ module.exports = {
               if (expr.type === "Identifier") {
                 nodeToReplace = findVariableDeclaration(
                   expr.name,
-                  context.getSourceCode().getScope(expr)
+                  context.sourceCode.getScope(expr)
                 )?.defs[0].node.init;
               }
             }

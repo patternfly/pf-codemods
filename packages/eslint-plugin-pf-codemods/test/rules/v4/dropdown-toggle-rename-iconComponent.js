@@ -13,7 +13,6 @@ ruleTester.run("dropdown-toggle-rename-iconComponent", rule, {
       output: `import { DropdownToggle } from '@patternfly/react-core'; <DropdownToggle toggleIndicator={CaretDownIcon} />`,
       errors: [{
         message: `iconComponent prop for DropdownToggle has been renamed to toggleIndicator`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

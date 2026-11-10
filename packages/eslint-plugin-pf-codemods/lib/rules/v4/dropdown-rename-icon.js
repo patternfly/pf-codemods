@@ -21,7 +21,7 @@ module.exports = {
             child.openingElement.name.name === dropdownItemIconImport.local.name
           );
           const childText = dropdownIcons.length === 1 && dropdownIcons[0].children
-              .map(child => context.getSourceCode().getText(child))
+              .map(child => context.sourceCode.getText(child))
               .join('')
               .trim();
           const variant = node.openingElement.attributes.find(attr => attr.name && attr.name.name === 'variant');

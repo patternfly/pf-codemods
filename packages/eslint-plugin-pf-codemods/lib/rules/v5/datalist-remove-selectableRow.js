@@ -15,7 +15,7 @@ module.exports = {
 
     let rangeStartsToReplaceConst = [];
 
-    const sourceCode = context.getSourceCode();
+    const sourceCode = context.sourceCode;
 
     const getObjectProp = (expr, propName) =>
       expr.properties.find(

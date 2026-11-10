@@ -3,12 +3,10 @@ import * as rule from "./componentGroups-logSnippet-rename-leftBorderVariant";
 
 const propError = {
   message: `We've renamed leftBorderVariant prop to variant on LogSnippet component group.`,
-  type: "JSXOpeningElement",
 };
 
 const enumError = {
   message: `We've replaced LogSnippetBorderVariant enum with PatternFly's AlertVariant enum.`,
-  type: "MemberExpression",
 };
 
 ruleTester.run("componentGroups-logSnippet-rename-leftBorderVariant", rule, {

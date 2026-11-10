@@ -38,7 +38,7 @@ module.exports = {
               fix(fixer) {
                 if (!headerToolsAttr) {
                   // comment out
-                  return fixer.replaceText(avatarAttr, `/*TODO: move to PageHeaderTools - ${context.getSourceCode().getText(avatarAttr)}*/`)
+                  return fixer.replaceText(avatarAttr, `/*TODO: move to PageHeaderTools - ${context.sourceCode.getText(avatarAttr)}*/`)
                 } else {
                   // move into headerTools if possible
                   if (
@@ -47,7 +47,7 @@ module.exports = {
                     headerToolsAttr.value.expression.openingElement.name.name === 'PageHeaderTools' &&
                     headerToolsAttr.value.expression.closingElement
                   ) {
-                    const intermediateValue = context.getSourceCode().getText(avatarAttr.value);
+                    const intermediateValue = context.sourceCode.getText(avatarAttr.value);
                     if (avatarAttr.value.expression && avatarAttr.value.expression.type === 'JSXElement') {
                       avatarValue = `${intermediateValue.substring(1, intermediateValue.length - 1)}`;
                     } else {
@@ -62,7 +62,7 @@ module.exports = {
                     ]
                   } else {
                     // well we tried... just comment it out then
-                    return fixer.replaceText(avatarAttr, `/*TODO: move to PageHeaderTools - ${context.getSourceCode().getText(avatarAttr)}*/`)
+                    return fixer.replaceText(avatarAttr, `/*TODO: move to PageHeaderTools - ${context.sourceCode.getText(avatarAttr)}*/`)
                   }
                   
                 }

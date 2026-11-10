@@ -13,7 +13,6 @@ ruleTester.run("skip-to-content-remove-component", rule, {
       output: `import { SkipToContent } from '@patternfly/react-core'; <SkipToContent  />`,
       errors: [{
         message: `component prop was removed from SkipToContent in favor of always using an anchor tag`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

@@ -11,31 +11,28 @@ ruleTester.run("overflowMenu-warn-updated-dropdownItem", rule, {
   invalid: [
     {
       code: `import { OverflowMenuDropdownItem } from '@patternfly/react-core'; <OverflowMenuDropdownItem />`,
-      output: `import { OverflowMenuDropdownItem } from '@patternfly/react-core'; <OverflowMenuDropdownItem />`,
+      output: null,
       errors: [
         {
           message: `OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.`,
-          type: "ImportDeclaration",
         },
       ],
     },
     {
       code: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core'; <OMDropdownItem />`,
-      output: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core'; <OMDropdownItem />`,
+      output: null,
       errors: [
         {
           message: `OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.`,
-          type: "ImportDeclaration",
         },
       ],
     },
     {
       code: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <OMDropdownItem />`,
-      output: `import { OverflowMenuDropdownItem as OMDropdownItem } from '@patternfly/react-core/dist/esm/components/Dropdown/index.js'; <OMDropdownItem />`,
+      output: null,
       errors: [
         {
           message: `OverflowMenuDropdownItem now uses the Next implementation of DropdownItem and DropdownItemProps internally, and may require updating selectors for tests. Any other Dropdown componments used to build an OverflowMenu should also use the Next Dropdown components.`,
-          type: "ImportDeclaration",
         },
       ],
     },

@@ -13,7 +13,6 @@ ruleTester.run("alert-new-action", rule, {
       output: `import { Alert } from '@patternfly/react-core'; <Alert actionLinks={<AlertActionLink>Close</AlertActionLink>} />`,
       errors: [{
         message: `action prop for Alert has been replaced with actionLinks or actionClose`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -21,7 +20,6 @@ ruleTester.run("alert-new-action", rule, {
       output: `import { Alert } from '@patternfly/react-core'; <Alert actionClose={<AlertActionCloseButton>Close</AlertActionCloseButton>} />`,
       errors: [{
         message: `action prop for Alert has been replaced with actionLinks or actionClose`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

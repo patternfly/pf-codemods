@@ -2,9 +2,9 @@
 module.exports = {
   meta: { fixable: 'code' },
   create: function(context) {
-    const allTokens = context.getSourceCode().ast.body
+    const allTokens = context.sourceCode.ast.body
       .filter(node => node.type !== 'ImportDeclaration')
-      .map(node => context.getSourceCode().getTokens(node).map(token => token.value))
+      .map(node => context.sourceCode.getTokens(node).map(token => token.value))
       .reduce((acc, val) => acc.concat(val), []);
 
     return {
@@ -20,7 +20,7 @@ module.exports = {
                 message: `unused patternfly import ${spec.local.name}`,
                 fix(fixer) {
                   const fixes = [fixer.remove(spec)];
-                  const prevToken = context.getSourceCode().getTokenBefore(spec);
+                  const prevToken = context.sourceCode.getTokenBefore(spec);
                   if (prevToken && prevToken.value === ',') {
                     fixes.push(fixer.remove(prevToken));
                   }

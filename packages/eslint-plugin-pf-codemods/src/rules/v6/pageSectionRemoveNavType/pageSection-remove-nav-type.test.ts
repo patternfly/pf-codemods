@@ -17,7 +17,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -37,7 +35,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -47,7 +44,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -57,7 +53,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -67,7 +62,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -77,7 +71,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -87,7 +80,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -97,7 +89,6 @@ ruleTester.run("pageSection-remove-nav-type", rule, {
       errors: [
         {
           message: `The "nav" type for PageSection has been removed.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

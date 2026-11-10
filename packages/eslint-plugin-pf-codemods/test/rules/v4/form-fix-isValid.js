@@ -13,7 +13,6 @@ ruleTester.run("form-fix-isValid", rule, {
       output: `import { FormGroup } from '@patternfly/react-core'; <FormGroup validated="default" />`,
       errors: [{
         message: `isValid prop has been replaced with validated={'default' | 'error' | 'success'}`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -21,7 +20,6 @@ ruleTester.run("form-fix-isValid", rule, {
       output: `import { FormGroup } from '@patternfly/react-core'; <FormGroup validated="error" />`,
       errors: [{
         message: `isValid prop has been replaced with validated={'default' | 'error' | 'success'}`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -29,7 +27,6 @@ ruleTester.run("form-fix-isValid", rule, {
       output: `import { FormGroup } from '@patternfly/react-core'; <FormGroup validated="default" />`,
       errors: [{
         message: `isValid prop has been replaced with validated={'default' | 'error' | 'success'}`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -37,7 +34,6 @@ ruleTester.run("form-fix-isValid", rule, {
       output: `import { FormGroup } from '@patternfly/react-core'; <FormGroup validated={(cond) ? 'default' : 'error'} />`,
       errors: [{
         message: `isValid prop has been replaced with validated={'default' | 'error' | 'success'}`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

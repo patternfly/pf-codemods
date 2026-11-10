@@ -7,7 +7,7 @@ function moveSpecifiers(
   messageAfterSpecifierPathChange
 ) {
   return function (context) {
-    const src = context.getSourceCode();
+    const src = context.sourceCode;
     const { imports: fromPackageImports, exports: fromPackageExports } =
       getFromPackage(context, fromPackage, specifiersToMove);
 
@@ -308,7 +308,7 @@ function pfPackageMatches(packageName, nodeSrc) {
  * @returns {Object} an object containing an array of imports and array of named exports
  */
 function getFromPackage(context, packageName, specifierNames = []) {
-  const astBody = context.getSourceCode().ast.body;
+  const astBody = context.sourceCode.ast.body;
   const getSpecifiers = (nodeType) =>
     astBody
       .filter((node) => node?.type === nodeType)
@@ -531,7 +531,7 @@ function renameComponents(
           // if no data-codemods && closing tag, rename
           const newName = componentMap[nodeName];
           const updateTagName = (node) =>
-            context.getSourceCode().getText(node).replace(nodeName, newName);
+            context.sourceCode.getText(node).replace(nodeName, newName);
           const addDataAttr = (jsxStr) =>
             `${jsxStr.slice(0, -1)} data-codemods="true">`;
           const newOpeningParentTag = newName.includes("Toolbar")
@@ -645,7 +645,7 @@ function addCallbackParam(
                 } else if (propProperties.type === "Identifier") {
                   const matchingVariable = findVariableDeclaration(
                     propProperties.name,
-                    context.getSourceCode().getScope(node)
+                    context.sourceCode.getScope(node)
                   );
                   const matchingDefinition = matchingVariable?.defs.find(
                     (def) => def.name?.name === propProperties.name
@@ -686,7 +686,7 @@ function addCallbackParam(
                     if (isStateSetter(callee)) {
                       propProperties.isStateSetter = true;
                       propProperties.stateType =
-                        matchingDefinition?.node.init.typeParameters?.params[0].typeName?.name;
+                        matchingDefinition?.node.init.typeArguments?.params[0].typeName?.name;
                     }
                   }
                 } else if (propProperties.type === "MemberExpression") {
@@ -810,14 +810,14 @@ function addCallbackParam(
 
                         const newParamsText = `${newParam}, ${params
                           .filter((p) => p.name !== newParam)
-                          .map((p) => context.getSourceCode().getText(p))
+                          .map((p) => context.sourceCode.getText(p))
                           .join(", ")}`;
 
                         fixes.push(
                           fixer.replaceText(
                             propProperties.nodeToReplace,
                             `(${newParamsText}) => ${context
-                              .getSourceCode()
+                              .sourceCode
                               .getText(propProperties.nodeToReplace)}(${params
                               .map((p) => p.name)
                               .join(", ")})`
@@ -828,11 +828,11 @@ function addCallbackParam(
                           const firstParam = params[0];
 
                           const replacementParams = `${newParam}, ${context
-                            .getSourceCode()
+                            .sourceCode
                             .getText(firstParam)}`;
 
                           const hasParenthesis =
-                            context.getTokenBefore(firstParam).value === "(";
+                            context.sourceCode.getTokenBefore(firstParam).value === "(";
 
                           return fixer.replaceText(
                             firstParam,
@@ -846,7 +846,7 @@ function addCallbackParam(
                           currentUseOfNewParam
                         ) => {
                           const tokenBeforeCurrentUse =
-                            context.getTokenBefore(currentUseOfNewParam);
+                            context.sourceCode.getTokenBefore(currentUseOfNewParam);
                           const targetRange = [
                             tokenBeforeCurrentUse.range[0],
                             currentUseOfNewParam.range[1],
@@ -910,7 +910,7 @@ function getAllJSXElements(context) {
     }
   };
 
-  traverse(context.getSourceCode().ast);
+  traverse(context.sourceCode.ast);
 
   return jsxElements;
 }

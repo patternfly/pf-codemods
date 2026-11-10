@@ -37,7 +37,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -47,7 +46,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -57,7 +55,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -67,7 +64,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -78,7 +74,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -88,7 +83,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -99,7 +93,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -110,7 +103,6 @@ ruleTester.run("deprecatedSelect-warn-markupUpdated", rule, {
         {
           message:
             "Typeahead variants of our deprecated Select have had their markup changed. Selectors may need updating.",
-          type: "JSXOpeningElement",
         },
       ],
     },

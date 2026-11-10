@@ -32,7 +32,6 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `isIconSprite prop for FormSelect has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -42,7 +41,6 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `isIconSprite prop for TextArea has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -52,19 +50,15 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `isIconSprite prop for TextInput has been removed`,
-          type: "JSXOpeningElement",
         },
         {
           message: `"iconVariant" prop on TextInput has been removed. We recommend using the customIcon prop instead.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `"customIconUrl" prop on TextInput has been removed. We recommend using the customIcon prop instead.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `customIconDimensions prop for TextInput has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -75,11 +69,9 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `"isReadOnly" prop on TextArea has been removed and should be replaced with the "readOnlyVariant" prop.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `"isReadOnly" prop on TextInput has been removed and should be replaced with the "readOnlyVariant" prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -90,11 +82,9 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `"isReadOnly" prop on TextArea has been removed and should be replaced with the "readOnlyVariant" prop.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `"isReadOnly" prop on TextInput has been removed and should be replaced with the "readOnlyVariant" prop.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -105,7 +95,6 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `isIconSprite prop for FormSelect has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -116,7 +105,6 @@ ruleTester.run("formControls-removed-props", rule, {
       errors: [
         {
           message: `isIconSprite prop for PFFS has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },

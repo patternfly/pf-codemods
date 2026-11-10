@@ -13,7 +13,7 @@ export function propertyNameMatches(
   if (key.type === "Identifier") {
     // E.g. const key = "key"; {[key]: value}; someObject[key]
     if (computed) {
-      const scope = context.getSourceCode().getScope(key);
+      const scope = context.sourceCode.getScope(key);
       const propertyName = key.name;
       const propertyVariableValue = getVariableValue(
         propertyName,

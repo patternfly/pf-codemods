@@ -14,11 +14,9 @@ ruleTester.run("remove-isPseudo-props", rule, {
       errors: [
         {
           message: `isHover prop for Button has been removed`,
-          type: "JSXOpeningElement",
         },
         {
           message: `isFocus prop for Button has been removed`,
-          type: "JSXOpeningElement",
         },
       ]
     },
@@ -28,11 +26,9 @@ ruleTester.run("remove-isPseudo-props", rule, {
       errors: [
         {
           message: `isHovered prop for ContextSelectorToggle has been removed`,
-          type: "JSXOpeningElement",
         },
         {
           message: `isFocused prop for ContextSelectorToggle has been removed`,
-          type: "JSXOpeningElement",
         },
       ]
     }

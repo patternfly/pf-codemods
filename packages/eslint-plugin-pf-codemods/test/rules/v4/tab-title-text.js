@@ -28,27 +28,21 @@ ruleTester.run("tab-title-text", rule, {
       errors: [
         {
           message: 'add missing imports TabTitleText, TabTitleIcon from @patternfly/react-core',
-          type: "ImportDeclaration"
         },
         {
           message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
-          type: "JSXOpeningElement",
         },
         {
           message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
-          type: "JSXOpeningElement",
         },
         {
           message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
-          type: "JSXOpeningElement",
         },
         {
           message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
-          type: "JSXOpeningElement",
         },
         {
           message: `title needs to be wrapped with the TabTitleText and/or TabTitleIcon component`,
-          type: "JSXOpeningElement",
         }
       ]
     },

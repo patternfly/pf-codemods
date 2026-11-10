@@ -101,7 +101,7 @@ module.exports = {
                   );
                   const replacementProperties = propertiesToKeep
                     .map((property) =>
-                      context.getSourceCode().getText(property)
+                      context.sourceCode.getText(property)
                     )
                     .join(", ");
 

@@ -1,12 +1,15 @@
 const { RuleTester } = require('eslint');
+const parser = require('@typescript-eslint/parser');
 
 module.exports = new RuleTester({
-  parser: require.resolve('@typescript-eslint/parser'),
-  parserOptions: {
+  languageOptions: {
+    parser,
+    ecmaVersion: 'latest',
     sourceType: 'module',
-    ecmaVersion: 2015,
-    ecmaFeatures: {
-      jsx: true
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true
+      }
     }
   }
 });

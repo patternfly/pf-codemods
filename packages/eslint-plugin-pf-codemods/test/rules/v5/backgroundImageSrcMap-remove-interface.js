@@ -18,11 +18,9 @@ ruleTester.run("backgroundImageSrcMap-remove-interface", rule, {
       errors: [
         {
           message: `The BackgroundImageSrcMap interface has been removed.`,
-          type: "ImportDeclaration",
         },
         {
           message: `The BackgroundImageSrcMap interface has been removed.`,
-          type: "Identifier",
         },
       ],
     },
@@ -32,7 +30,6 @@ ruleTester.run("backgroundImageSrcMap-remove-interface", rule, {
       errors: [
         {
           message: `The BackgroundImageSrcMap interface has been removed.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -42,7 +39,6 @@ ruleTester.run("backgroundImageSrcMap-remove-interface", rule, {
       errors: [
         {
           message: `The BackgroundImageSrcMap interface has been removed.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -52,11 +48,9 @@ ruleTester.run("backgroundImageSrcMap-remove-interface", rule, {
       errors: [
         {
           message: `The BackgroundImageSrcMap interface has been removed.`,
-          type: "ImportDeclaration",
         },
         {
           message: `The BackgroundImageSrcMap interface has been removed.`,
-          type: "Identifier",
         },
       ],
     },

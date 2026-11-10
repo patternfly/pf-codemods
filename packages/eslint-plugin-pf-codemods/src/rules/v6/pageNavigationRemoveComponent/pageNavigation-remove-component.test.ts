@@ -23,7 +23,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -33,7 +32,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -43,7 +41,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -53,7 +50,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -63,7 +59,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -73,7 +68,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -83,7 +77,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -93,7 +86,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -103,7 +95,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "ExportDefaultDeclaration",
         },
       ],
     },
@@ -113,7 +104,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -123,7 +113,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -133,7 +122,6 @@ ruleTester.run("pageNavigation-remove-component", rule, {
       errors: [
         {
           message: `The PageNavigation component has been removed from PatternFly.`,
-          type: "JSXElement",
         },
       ],
     },

@@ -36,11 +36,9 @@ ruleTester.run("no-unused-imports-v5", rule, {
       errors: [
         {
           message: `unused PatternFly imports Alert, Title from '@patternfly/react-core'`,
-          type: "ImportDeclaration",
         },
         {
           message: `unused PatternFly import CubesIcon from '@patternfly/react-icons/dist/esm/icons/cubes-icon'`,
-          type: "ImportDeclaration",
         },
       ],
     },

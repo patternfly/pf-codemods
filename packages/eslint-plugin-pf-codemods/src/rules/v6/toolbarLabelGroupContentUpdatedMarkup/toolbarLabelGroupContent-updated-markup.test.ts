@@ -16,17 +16,16 @@ const message =
   "The markup for ToolbarLabelGruopContent has changed when numberOfFilters is greater than 0, showClearFilterButton is true, or customLabelGroupContent is passed.";
 const errorObject = {
   message,
-  type: "JSXOpeningElement",
 };
 const validTests: ValidTests = [];
 const invalidTests: InvalidTests = [];
+validTests.push(
+  createValidTest(
+    `import { ToolbarLabelGroupContent } from '@patternfly/react-core'; <ToolbarLabelGroupContent someOtherProp />`
+  )
+);
 for (const prop of applicableProps) {
   validTests.push(createValidTest(`<ToolbarLabelGroupContent ${prop} />`));
-  validTests.push(
-    createValidTest(
-      `import { ToolbarLabelGroupContent } from '@patternfly/react-core'; <ToolbarLabelGroupContent someOtherProp />`
-    )
-  );
 
   invalidTests.push(
     createInvalidTest(

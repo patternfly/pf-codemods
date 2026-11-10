@@ -37,7 +37,6 @@ ruleTester.run("chipgroup-remove-chipgrouptoolbaritem", rule, {
 </ChipGroup>`,
       errors: [{
         message: `ChipGroupToolbarItem has been removed, move its props up to parent ChipGroup and remove it`,
-        type: "JSXElement",
       }]
     },
     {
@@ -52,25 +51,13 @@ ruleTester.run("chipgroup-remove-chipgrouptoolbaritem", rule, {
   <ChipGroupToolbarItem>
   </ChipGroupToolbarItem>
 </ChipGroup>`,
-      output: `import { ChipGroup, ChipGroupToolbarItem } from '@patternfly/react-core';
-<ChipGroup>
-  <ChipGroupToolbarItem prop1="ab" prop2="bc">
-    Item
-    <Chip>
-      Another item
-    </Chip>
-  </ChipGroupToolbarItem>
-  <ChipGroupToolbarItem>
-  </ChipGroupToolbarItem>
-</ChipGroup>`,
+      output: null,
       errors: [
         {
           message: `ChipGroupToolbarItem has been removed, move its props up to parent ChipGroup and remove it`,
-          type: "JSXElement",
         },
         {
           message: `ChipGroupToolbarItem has been removed, move its props up to parent ChipGroup and remove it`,
-          type: "JSXElement",
         }
       ]
     },

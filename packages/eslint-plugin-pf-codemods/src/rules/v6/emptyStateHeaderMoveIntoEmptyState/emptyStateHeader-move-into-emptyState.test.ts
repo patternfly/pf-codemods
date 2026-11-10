@@ -57,7 +57,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -87,7 +86,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -117,7 +115,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -147,7 +144,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -179,7 +175,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -215,7 +210,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -253,7 +247,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -263,28 +256,17 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
         EmptyState,
         EmptyStateHeader,
       } from "@patternfly/react-core";
-      
+
       export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
         <EmptyState>
           <EmptyStateHeader titleText="Bar">Foo</EmptyStateHeader>
         </EmptyState>
       );
       `,
-      output: `import {
-        EmptyState,
-        EmptyStateHeader,
-      } from "@patternfly/react-core";
-      
-      export const EmptyStateHeaderMoveIntoEmptyStateInput = () => (
-        <EmptyState>
-          <EmptyStateHeader titleText="Bar">Foo</EmptyStateHeader>
-        </EmptyState>
-      );
-      `,
+      output: null,
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Because the children for EmptyStateHeader are now inaccessible you must remove either the children or the titleText prop, then you can rerun this codemod.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -318,11 +300,9 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
-          type: "JSXElement",
         },
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -352,7 +332,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -389,7 +368,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -426,7 +404,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -468,7 +445,6 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -515,11 +491,9 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
-          type: "JSXElement",
         },
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -562,11 +536,9 @@ ruleTester.run("emptyStateHeader-move-into-emptyState", rule, {
       errors: [
         {
           message: `The color prop on EmptyStateIcon has been removed. We suggest using the new status prop on EmptyState to apply colors to the icon.`,
-          type: "JSXElement",
         },
         {
           message: `EmptyStateHeader has been moved inside of the EmptyState component and is now only customizable using props. Additionally, the EmptyStateIcon component now wraps content passed to the icon prop automatically.`,
-          type: "JSXElement",
         },
       ],
     },

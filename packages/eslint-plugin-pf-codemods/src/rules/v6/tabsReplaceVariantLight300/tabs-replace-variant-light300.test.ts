@@ -17,7 +17,6 @@ ruleTester.run("tabs-replace-variant-light300", rule, {
       errors: [
         {
           message: `The "light300" value for the \`variant\` prop on Tabs has been replaced with the "secondary" value.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -18,11 +18,10 @@ ruleTester.run("tooltip-warn-triggerRef-may-be-required", rule, {
   invalid: [
     {
       code: `import { Tooltip } from '@patternfly/react-core'; <Tooltip />`,
-      output: `import { Tooltip } from '@patternfly/react-core'; <Tooltip />`,
+      output: null,
       errors: [
         {
           message: `Tooltips without a \`triggerRef\` will now have a wrapping div which may cause issues. Snapshots may need to be updated, or to avoid the wrapping div add a \`triggerRef\` with a ref which is attached to the trigger element.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -81,7 +81,7 @@ export function getAttributeValue(
   }
 
   if (node.expression.type === "Identifier") {
-    const variableScope = context.getSourceCode().getScope(node);
+    const variableScope = context.sourceCode.getScope(node);
     return getVariableValue(node.expression.name, variableScope, context);
   }
   if (node.expression.type === "MemberExpression") {
@@ -162,7 +162,7 @@ export function getVariableValue(
   if (variableInit.type === "Identifier") {
     return getVariableValue(
       variableInit.name,
-      context.getSourceCode().getScope(variableInit),
+      context.sourceCode.getScope(variableInit),
       context
     );
   }

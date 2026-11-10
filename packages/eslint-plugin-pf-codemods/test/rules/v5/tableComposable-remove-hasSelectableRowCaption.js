@@ -21,7 +21,6 @@ ruleTester.run("tableComposable-remove-hasSelectableRowCaption", rule, {
       errors: [
         {
           message: `hasSelectableRowCaption prop for TableComposable has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("tableComposable-remove-hasSelectableRowCaption", rule, {
       errors: [
         {
           message: `hasSelectableRowCaption prop for TableComposable has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -42,7 +40,6 @@ ruleTester.run("tableComposable-remove-hasSelectableRowCaption", rule, {
       errors: [
         {
           message: `hasSelectableRowCaption prop for Table has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },

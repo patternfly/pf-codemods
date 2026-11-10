@@ -17,7 +17,6 @@ ruleTester.run("aria-props", rule, {
       output: `import { AboutModalContainer } from '@patternfly/react-core'; <AboutModalContainer aboutModalBoxHeaderId="123" />`,
       errors: [{
         message: `ariaLabelledbyId prop for AboutModalContainer has been renamed to aboutModalBoxHeaderId`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -25,7 +24,6 @@ ruleTester.run("aria-props", rule, {
       output: `import { WizardNav } from '@patternfly/react-core'; <WizardNav aria-label="123" />`,
       errors: [{
         message: `ariaLabel prop for WizardNav has been renamed to aria-label`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -33,7 +31,6 @@ ruleTester.run("aria-props", rule, {
       output: `import { LoginForm } from '@patternfly/react-core'; <LoginForm  />`,
       errors: [{
         message: `rememberMeAriaLabel prop for LoginForm has been removed`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

@@ -20,7 +20,6 @@ ruleTester.run("clipboardCopy-remove-switchDelay", rule, {
       output: `import { ClipboardCopy } from '@patternfly/react-core'; <ClipboardCopy  />`,
       errors: [{
         message: `switchDelay prop for ClipboardCopy has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("clipboardCopy-remove-switchDelay", rule, {
       output: `import { ClipboardCopy } from '@patternfly/react-core/dist/esm/components/Clipboard/index.js'; <ClipboardCopy  />`,
       errors: [{
         message: `switchDelay prop for ClipboardCopy has been removed`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

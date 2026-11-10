@@ -40,7 +40,6 @@ ruleTester.run("no-duplicate-import-specifiers", rule, {
       errors: [
         {
           message: `Duplicate import specifier Button imported from '@patternfly/react-core'.`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -54,7 +53,6 @@ ruleTester.run("no-duplicate-import-specifiers", rule, {
       errors: [
         {
           message: `Duplicate import specifier Button imported from '@patternfly/react-core'.`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -68,7 +66,6 @@ ruleTester.run("no-duplicate-import-specifiers", rule, {
       errors: [
         {
           message: `Duplicate import specifier Button imported from '@patternfly/react-core/dist/dynamic/components/Button'.`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -86,7 +83,6 @@ ruleTester.run("no-duplicate-import-specifiers", rule, {
       errors: [
         {
           message: `Duplicate import specifier BTN imported from '@patternfly/react-core'.`,
-          type: "ImportSpecifier",
         },
       ],
     },

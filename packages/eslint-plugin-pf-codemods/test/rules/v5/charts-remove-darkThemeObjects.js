@@ -27,7 +27,6 @@ ruleTester.run("charts-remove-darkThemeObjects", rule, {
         errors: [
           {
             message: `All dark theme objects have been removed from react-charts.`,
-            type: "ImportDeclaration",
           },
         ],
       };
@@ -40,7 +39,6 @@ ruleTester.run("charts-remove-darkThemeObjects", rule, {
         errors: [
           {
             message: `All dark theme objects have been removed from react-charts.`,
-            type: "ImportDeclaration",
           },
         ],
       };

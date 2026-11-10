@@ -46,7 +46,7 @@ const moveBadgeAttributeToBody = (
 
   const textToInsert = badgeAttribute?.value
     ? ` ${context
-        .getSourceCode()
+        .sourceCode
         .getText(parseBadgeAttributeValue(badgeAttribute.value))}`
     : "";
 
@@ -144,7 +144,7 @@ module.exports = {
                 if (specifier) {
                   fixes.push(fixer.remove(specifier));
                   const tokenAfter = context
-                    .getSourceCode()
+                    .sourceCode
                     .getTokenAfter(specifier);
                   if (tokenAfter?.value === ",") {
                     fixes.push(fixer.remove(tokenAfter));

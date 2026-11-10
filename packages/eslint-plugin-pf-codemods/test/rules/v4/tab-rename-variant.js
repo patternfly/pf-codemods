@@ -18,23 +18,18 @@ ruleTester.run("tab-rename-variant", rule, {
       errors: [
         {
           message: 'TabsVariant enum has been renamed to TabsComponent',
-          type: 'ImportSpecifier'
         },
         {
           message: 'variant prop for Tabs has been renamed to component',
-          type: "JSXOpeningElement"
         },
         {
           message: 'TabsVariant enum has been renamed to TabsComponent',
-          type: "MemberExpression"
         },
         {
           message: 'variant prop for Tabs has been renamed to component',
-          type: "JSXOpeningElement"
         },
         {
           message: 'TabsVariant enum has been renamed to TabsComponent',
-          type: "MemberExpression"
         }
       ]
     },
@@ -48,23 +43,18 @@ ruleTester.run("tab-rename-variant", rule, {
       errors: [
         {
           message: 'MyTabsVariant enum has been renamed to TabsComponent',
-          type: 'ImportSpecifier'
         },
         {
           message: 'variant prop for Tabs has been renamed to component',
-          type: "JSXOpeningElement"
         },
         {
           message: 'MyTabsVariant enum has been renamed to TabsComponent',
-          type: "MemberExpression"
         },
         {
           message: 'variant prop for Tabs has been renamed to component',
-          type: "JSXOpeningElement"
         },
         {
           message: 'MyTabsVariant enum has been renamed to TabsComponent',
-          type: "MemberExpression"
         }
       ]
     },

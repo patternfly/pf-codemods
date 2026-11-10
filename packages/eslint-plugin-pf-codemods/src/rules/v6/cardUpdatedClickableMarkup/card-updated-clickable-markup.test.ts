@@ -27,11 +27,10 @@ ruleTester.run("card-updated-clickable-markup", rule, {
     // No invalid properties
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
-      output: `import { Card, CardHeader } from '@patternfly/react-core'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
+      output: null,
       errors: [
         {
           message: baseMessage,
-          type: "JSXElement",
         },
       ],
     },
@@ -42,7 +41,6 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       errors: [
         {
           message: baseMessage + propertyMessage,
-          type: "JSXElement",
         },
       ],
     },
@@ -53,7 +51,6 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       errors: [
         {
           message: baseMessage + propertyMessage,
-          type: "JSXElement",
         },
       ],
     },
@@ -64,7 +61,6 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       errors: [
         {
           message: baseMessage + propertyMessage,
-          type: "JSXElement",
         },
       ],
     },
@@ -75,7 +71,6 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       errors: [
         {
           message: baseMessage + propertyMessage,
-          type: "JSXElement",
         },
       ],
     },
@@ -86,49 +81,44 @@ ruleTester.run("card-updated-clickable-markup", rule, {
       errors: [
         {
           message: baseMessage + propertyMessage,
-          type: "JSXElement",
         },
       ],
     },
     // Aliased
     {
       code: `import { Card as CustomCard, CardHeader as CustomCardHeader } from '@patternfly/react-core'; <CustomCard isClickable><CustomCardHeader selectableActions={{to: "#"}} /></CustomCard>`,
-      output: `import { Card as CustomCard, CardHeader as CustomCardHeader } from '@patternfly/react-core'; <CustomCard isClickable><CustomCardHeader selectableActions={{to: "#"}} /></CustomCard>`,
+      output: null,
       errors: [
         {
           message: baseMessage,
-          type: "JSXElement",
         },
       ],
     },
     // Dist Imports
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core/dist/esm/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
-      output: `import { Card, CardHeader } from '@patternfly/react-core/dist/esm/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
+      output: null,
       errors: [
         {
           message: baseMessage,
-          type: "JSXElement",
         },
       ],
     },
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core/dist/js/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
-      output: `import { Card, CardHeader } from '@patternfly/react-core/dist/js/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
+      output: null,
       errors: [
         {
           message: baseMessage,
-          type: "JSXElement",
         },
       ],
     },
     {
       code: `import { Card, CardHeader } from '@patternfly/react-core/dist/dynamic/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
-      output: `import { Card, CardHeader } from '@patternfly/react-core/dist/dynamic/components/Card/index.js'; <Card isClickable><CardHeader selectableActions={{to: "#"}} /></Card>`,
+      output: null,
       errors: [
         {
           message: baseMessage,
-          type: "JSXElement",
         },
       ],
     },

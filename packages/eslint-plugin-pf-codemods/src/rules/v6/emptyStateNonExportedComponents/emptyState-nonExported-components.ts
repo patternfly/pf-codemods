@@ -75,11 +75,11 @@ module.exports = {
         exportsToRemove.forEach((exportToRemove) => {
           const { range } = exportToRemove;
           const tokenBefore = context
-            .getSourceCode()
+            .sourceCode
             .getTokenBefore(exportToRemove);
           const isCommaBefore = tokenBefore?.value === ",";
           const tokenAfter = context
-            .getSourceCode()
+            .sourceCode
             .getTokenAfter(exportToRemove);
           const isCommaAfter = tokenAfter?.value === ",";
           const rangeStartValue = isCommaBefore

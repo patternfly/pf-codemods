@@ -54,7 +54,7 @@ module.exports = {
       },
       ImportSpecifier(node: ImportSpecifier) {
         if (imports.some((specifier) => specifier === node)) {
-          const comments = context.getSourceCode().getCommentsAfter(node);
+          const comments = context.sourceCode.getCommentsAfter(node);
           const dataCodemodsComment = comments.find((comment) =>
             comment.value.includes("data-codemods")
           );

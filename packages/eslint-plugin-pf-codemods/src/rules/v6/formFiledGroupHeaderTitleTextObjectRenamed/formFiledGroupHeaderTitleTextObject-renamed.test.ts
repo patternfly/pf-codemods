@@ -20,11 +20,9 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "Identifier",
         },
         {
           message: errorMessage,
-          type: "Identifier",
         },
       ],
     },
@@ -34,11 +32,9 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "Identifier",
         },
         {
           message: errorMessage,
-          type: "Identifier",
         },
       ],
     },
@@ -48,11 +44,9 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "Identifier",
         },
         {
           message: errorMessage,
-          type: "Identifier",
         },
       ],
     },
@@ -62,7 +56,6 @@ ruleTester.run("formFiledGroupHeaderTitleTextObject-renamed", rule, {
       errors: [
         {
           message: errorMessage,
-          type: "Identifier",
         },
       ],
     },

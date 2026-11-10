@@ -17,7 +17,6 @@ ruleTester.run("nav-remove-theme-prop", rule, {
       errors: [
         {
           message: `The \`theme\` prop is no longer supported in Nav. Use light/dark mode theming instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("nav-remove-theme-prop", rule, {
       errors: [
         {
           message: `The \`theme\` prop is no longer supported in Nav. Use light/dark mode theming instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -44,27 +44,21 @@ const images = {
       errors: [
         {
           message: "BackgroundImageSrc.lg has been removed. Use the string 'lg' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.sm has been removed. Use the string 'sm' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.sm2x has been removed. Use the string 'sm2x' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.xs has been removed. Use the string 'xs' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.xs2x has been removed. Use the string 'xs2x' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.filter has been removed. If you want a custom filter, use the new filter prop instead",
-          type: "Property",
         }
       ]
     },
@@ -92,27 +86,21 @@ const images = {
       errors: [
         {
           message: "BackgroundImageSrc.lg has been removed. Use the string 'lg' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.sm has been removed. Use the string 'sm' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.sm2x has been removed. Use the string 'sm2x' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.xs has been removed. Use the string 'xs' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.xs2x has been removed. Use the string 'xs2x' instead",
-          type: "Property",
         },
         {
           message: "BackgroundImageSrc.filter has been removed. If you want a custom filter, use the new filter prop instead",
-          type: "Property",
         }
       ]
     }

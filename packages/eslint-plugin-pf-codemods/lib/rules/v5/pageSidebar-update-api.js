@@ -50,13 +50,13 @@ module.exports = {
               );
               const otherPropValues = otherProps
                 ? otherProps
-                    .map((prop) => context.getSourceCode().getText(prop))
+                    .map((prop) => context.sourceCode.getText(prop))
                     .join(" ")
                 : "";
 
               const getSidebarContent = () => {
                 const navPropValue = context
-                  .getSourceCode()
+                  .sourceCode
                   .getText(navProp.value);
                 if (
                   navProp.value.type === "Literal" ||

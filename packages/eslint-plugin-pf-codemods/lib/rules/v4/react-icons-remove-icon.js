@@ -11,7 +11,7 @@ module.exports = {
     const importStatement = `import { fontAwesomeLogoFull } from '@fortawesome/free-regular-svg-icons';`
     if (imports.length) {
       if (fortAwesomeImports.length === 0) {
-        const lastImportNode = context.getSourceCode().ast.body
+        const lastImportNode = context.sourceCode.ast.body
           .filter(node => node.type === 'ImportDeclaration')
           .pop();
         context.report({
@@ -40,7 +40,7 @@ module.exports = {
       ImportSpecifier(node) {
         if (imports.map(imp => imp.local.name).includes(node.local.name)) {
 
-          const sourceCode = context.getSourceCode();
+          const sourceCode = context.sourceCode;
           const previousToken = sourceCode.getTokenBefore(node);
           const previousTokenText = sourceCode.getText(previousToken);
           const lastNodeToken = sourceCode.getLastToken(node);

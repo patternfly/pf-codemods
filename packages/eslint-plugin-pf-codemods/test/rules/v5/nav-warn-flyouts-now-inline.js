@@ -17,21 +17,19 @@ ruleTester.run("nav-warn-flyouts-now-inline", rule, {
   invalid: [
     {
       code: `import { Nav } from '@patternfly/react-core'; <Nav flyout={menu} />`,
-      output: `import { Nav } from '@patternfly/react-core'; <Nav flyout={menu} />`,
+      output: null,
       errors: [
         {
           message: "The placement Nav flyouts in the DOM has been changed, you may need to update some selectors or snapshots in your test suites.",
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Nav } from '@patternfly/react-core/dist/esm/components/Nav/index.js'; <Nav flyout={menu} />`,
-      output: `import { Nav } from '@patternfly/react-core/dist/esm/components/Nav/index.js'; <Nav flyout={menu} />`,
+      output: null,
       errors: [
         {
           message: "The placement Nav flyouts in the DOM has been changed, you may need to update some selectors or snapshots in your test suites.",
-          type: "JSXOpeningElement",
         },
       ],
     },

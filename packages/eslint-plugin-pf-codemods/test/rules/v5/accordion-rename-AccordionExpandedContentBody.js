@@ -23,17 +23,14 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
       errors: [
         {
           message: `add missing imports AccordionExpandableContentBody from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message:
             "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
-          type: "JSXIdentifier",
         },
         {
           message:
             "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
-          type: "JSXIdentifier",
         },
       ],
     },
@@ -44,7 +41,6 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
         {
           message:
             "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
-          type: "ExportNamedDeclaration",
         },
       ],
     },
@@ -54,17 +50,14 @@ ruleTester.run("accordion-rename-AccordionExpandedContentBody", rule, {
       errors: [
         {
           message: `add missing imports AccordionExpandableContentBody from @patternfly/react-core/dist/esm/components/Accordion/index.js`,
-          type: "ImportDeclaration",
         },
         {
           message:
             "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
-          type: "JSXIdentifier",
         },
         {
           message:
             "AccordionExpandedContentBody has been replaced with AccordionExpandableContentBody",
-          type: "JSXIdentifier",
         },
       ],
     },

@@ -23,11 +23,10 @@ ruleTester.run("charts-lightThemeObjects", rule, {
     ...oldLightThemeObjects.map((themeObj) => {
       return {
         code: `import { ${themeObj} } from '@patternfly/react-charts'`,
-        output: `import { ${themeObj} } from '@patternfly/react-charts'`,
+        output: null,
         errors: [
           {
             message: `The light theme objects from react-charts have been renamed to omit "Light" in the name. Rather than importing these objects directly, you must use the getTheme function from react-charts instead.`,
-            type: "ImportDeclaration",
           },
         ],
       };
@@ -36,11 +35,10 @@ ruleTester.run("charts-lightThemeObjects", rule, {
     ...oldLightThemeObjects.map((themeObj) => {
       return {
         code: `import { ${themeObj} } from '@patternfly/react-charts/dist/js/components/ChartTheme/themes/colors/multi-ordered-theme'`,
-        output: `import { ${themeObj} } from '@patternfly/react-charts/dist/js/components/ChartTheme/themes/colors/multi-ordered-theme'`,
+        output: null,
         errors: [
           {
             message: `The light theme objects from react-charts have been renamed to omit "Light" in the name. Rather than importing these objects directly, you must use the getTheme function from react-charts instead.`,
-            type: "ImportDeclaration",
           },
         ],
       };

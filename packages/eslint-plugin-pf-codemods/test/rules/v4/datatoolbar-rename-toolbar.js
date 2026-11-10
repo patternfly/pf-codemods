@@ -29,51 +29,39 @@ ruleTester.run("datatoolbar-rename-toolbar", rule, {
       errors: [
         {
           message: `DataToolbar has been replaced with Toolbar`,
-          type: "ImportSpecifier",
         },
         {
           message: `DataToolbarContent has been replaced with ToolbarContent`,
-          type: "ImportSpecifier",
         },
         {
           message: `DataToolbarGroup has been replaced with ToolbarGroup`,
-          type: "ImportSpecifier",
         },
         {
           message: `DataToolbarItem has been replaced with ToolbarItem`,
-          type: "ImportSpecifier",
         },
         {
           message: `DataToolbar has been replaced with Toolbar`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbarContent has been replaced with ToolbarContent`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbarGroup has been replaced with ToolbarGroup`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbarItem has been replaced with ToolbarItem`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbarItem has been replaced with ToolbarItem`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbarGroup has been replaced with ToolbarGroup`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbarContent has been replaced with ToolbarContent`,
-          type: "JSXIdentifier",
         },
         {
           message: `DataToolbar has been replaced with Toolbar`,
-          type: "JSXIdentifier",
         }
       ]
     },
@@ -84,7 +72,6 @@ ruleTester.run("datatoolbar-rename-toolbar", rule, {
         <MyComponent></MyComponent>`,
       errors: [{
         message: `DataToolbar has been replaced with Toolbar`,
-        type: "ImportSpecifier",
       }]
     }
   ]

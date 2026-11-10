@@ -3,7 +3,6 @@ import * as rule from "./component-groups-multi-content-card-remove-props";
 
 const errors = ["leftBorderVariant", "withHeaderBorder"].map((prop) => ({
   message: `The ${prop} prop for MultiContentCard has been removed.`,
-  type: "JSXOpeningElement",
 }));
 
 ruleTester.run("component-groups-multi-content-card-remove-props", rule, {

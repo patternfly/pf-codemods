@@ -13,71 +13,64 @@ ruleTester.run("page-warn-updated-markup", rule, {
   invalid: [
     {
       code: `import { Page } from '@patternfly/react-core'; <Page horizontalSubnav />`,
-      output: `import { Page } from '@patternfly/react-core'; <Page horizontalSubnav />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Page } from '@patternfly/react-core'; <Page breadcrumb />`,
-      output: `import { Page } from '@patternfly/react-core'; <Page breadcrumb />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Page } from '@patternfly/react-core'; <Page horizontalSubnav breadcrumb />`,
-      output: `import { Page } from '@patternfly/react-core'; <Page horizontalSubnav breadcrumb />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Page as CustomThing } from '@patternfly/react-core'; <CustomThing horizontalSubnav />`,
-      output: `import { Page as CustomThing } from '@patternfly/react-core'; <CustomThing horizontalSubnav />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Page } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <Page horizontalSubnav />`,
-      output: `import { Page } from '@patternfly/react-core/dist/esm/components/Page/index.js'; <Page horizontalSubnav />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Page } from '@patternfly/react-core/dist/js/components/Page/index.js'; <Page horizontalSubnav />`,
-      output: `import { Page } from '@patternfly/react-core/dist/js/components/Page/index.js'; <Page horizontalSubnav />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Page } from '@patternfly/react-core/dist/dynamic/components/Page/index.js'; <Page horizontalSubnav />`,
-      output: `import { Page } from '@patternfly/react-core/dist/dynamic/components/Page/index.js'; <Page horizontalSubnav />`,
+      output: null,
       errors: [
         {
           message: `The markup for Page has changed. When either the \`horizontalSubnav\` or \`breadcrumb\` props are passed, a PageBody component will always wrap the contents.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

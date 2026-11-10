@@ -17,7 +17,6 @@ ruleTester.run("button-rename-isActive", rule, {
       errors: [
         {
           message: `isActive prop for Button has been renamed to isClicked`,
-          type: "JSXOpeningElement",
         },
       ],
     },

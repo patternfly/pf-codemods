@@ -20,7 +20,6 @@ ruleTester.run("notificationBadge-remove-isRead", rule, {
       output: `import { NotificationBadge } from '@patternfly/react-core'; <NotificationBadge variant="read" />`,
       errors: [{
         message: `the isRead prop on NotificationBadge has been removed, use variant prop with "read" or "unread"`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("notificationBadge-remove-isRead", rule, {
       output: `import { NotificationBadge } from '@patternfly/react-core'; <NotificationBadge baz variant="read" />`,
       errors: [{
         message: `the isRead prop on NotificationBadge has been removed, use variant prop with "read" or "unread"`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -36,7 +34,6 @@ ruleTester.run("notificationBadge-remove-isRead", rule, {
       output: `import { NotificationBadge } from '@patternfly/react-core'; <NotificationBadge baz variant="unread" />`,
       errors: [{
         message: `the isRead prop on NotificationBadge has been removed, use variant prop with "read" or "unread"`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -44,7 +41,6 @@ ruleTester.run("notificationBadge-remove-isRead", rule, {
       output: `import { NotificationBadge } from '@patternfly/react-core'; <NotificationBadge bar variant={isRead ? "read" : "unread"} />`,
       errors: [{
         message: `the isRead prop on NotificationBadge has been removed, use variant prop with "read" or "unread"`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -52,7 +48,6 @@ ruleTester.run("notificationBadge-remove-isRead", rule, {
       output: `import { NotificationBadge } from '@patternfly/react-core'; <NotificationBadge foo variant={(info.read || info.markedRead) ? "read" : "unread"} />`,
       errors: [{
         message: `the isRead prop on NotificationBadge has been removed, use variant prop with "read" or "unread"`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -60,7 +55,6 @@ ruleTester.run("notificationBadge-remove-isRead", rule, {
       output: `import { NotificationBadge } from '@patternfly/react-core/dist/esm/components/NotificationBadge/index.js'; <NotificationBadge foo variant={(info.read || info.markedRead) ? "read" : "unread"} />`,
       errors: [{
         message: `the isRead prop on NotificationBadge has been removed, use variant prop with "read" or "unread"`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

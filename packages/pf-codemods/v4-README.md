@@ -8,7 +8,7 @@ I hope these rules and their autofixers will help you more quickly adopt our bre
 
 ### Simple case
 
-Requires Node.js >= 10.
+Requires Node.js ^20.19.0 || ^22.13.0 || >=24.
 
 ```sh
 npx pf-codemods ./src

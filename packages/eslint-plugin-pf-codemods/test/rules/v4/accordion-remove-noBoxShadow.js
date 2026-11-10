@@ -17,7 +17,6 @@ ruleTester.run("accordion-remove-noBoxShadow", rule, {
       output: `import { Accordion } from '@patternfly/react-core'; <Accordion  />`,
       errors: [{
         message: `noBoxShadow prop has been removed for Accordion. If a shadow is needed, the accordion can be placed in a card, or a shadow can be applied either using CSS or a box-shadow utility class`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

@@ -57,7 +57,6 @@ ruleTester.run("charts-various-imports", rule, {
         const errors = [
           {
             message: getErrorMessage(imp),
-            type: "ImportDeclaration",
           },
         ];
 

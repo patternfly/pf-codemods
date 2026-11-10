@@ -14,11 +14,10 @@ ruleTester.run("aboutModalBoxHero-remove-subcomponent", rule, {
   invalid: [
     {
       code: `import { AboutModal } from '@patternfly/react-core';`,
-      output: `import { AboutModal } from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `The AboutModalBoxHero sub-component has been removed from AboutModal. Selectors in tests may need to be updated.`,
-          type: "ImportDeclaration",
         },
       ],
     },

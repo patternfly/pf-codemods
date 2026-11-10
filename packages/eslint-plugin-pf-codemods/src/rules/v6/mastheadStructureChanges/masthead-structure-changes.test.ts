@@ -28,11 +28,9 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The structure of Masthead has been updated, the PF5 MastheadBrand has been renamed to MastheadLogo (this renaming is handled by our masthead-name-changes codemod) and should now be wrapped in a new MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -43,7 +41,6 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, the PF5 MastheadBrand has been renamed to MastheadLogo (this renaming is handled by our masthead-name-changes codemod) and should now be wrapped in a new MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -54,11 +51,9 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The structure of Masthead has been updated, MastheadLogo should now be wrapped in MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -69,7 +64,6 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -80,11 +74,9 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The structure of Masthead has been updated, the PF5 MastheadBrand has been renamed to MastheadLogo (this renaming is handled by our masthead-name-changes codemod) and should now be wrapped in a new MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -94,7 +86,6 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, the PF5 MastheadBrand has been renamed to MastheadLogo (this renaming is handled by our masthead-name-changes codemod) and should now be wrapped in a new MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -105,11 +96,9 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The structure of Masthead has been updated, MastheadLogo should now be wrapped in MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -119,7 +108,6 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -129,11 +117,9 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The structure of Masthead has been updated, MastheadLogo should now be wrapped in MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -143,7 +129,6 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -153,11 +138,9 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The structure of Masthead has been updated, MastheadLogo should now be wrapped in MastheadBrand.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -167,7 +150,6 @@ ruleTester.run("masthead-structure-changes", rule, {
       errors: [
         {
           message: `The structure of Masthead has been updated, MastheadToggle should now be wrapped in MastheadMain.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

@@ -21,15 +21,12 @@ ruleTester.run("expandable-rename-expandablesection", rule, {
       errors: [
         {
           message: `add missing imports ExpandableSection from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: 'Expandable has been replaced with ExpandableSection',
-          type: "JSXIdentifier"
         },
         {
           message: 'Expandable has been replaced with ExpandableSection',
-          type: "JSXIdentifier"
         }
       ]
     },

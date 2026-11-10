@@ -2,7 +2,7 @@
 module.exports = {
   meta: { fixable: "code" },
   create: function (context) {
-    const sourceCode = context.getSourceCode();
+    const sourceCode = context.sourceCode;
 
     const allTokens = [
       ...new Set(

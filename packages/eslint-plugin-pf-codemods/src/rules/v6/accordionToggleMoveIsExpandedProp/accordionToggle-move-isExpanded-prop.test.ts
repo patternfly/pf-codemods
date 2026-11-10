@@ -17,7 +17,6 @@ ruleTester.run("accordionToggle-move-isExpanded-prop", rule, {
       errors: [
         {
           message: `The \`isExpanded\` prop for AccordionToggle has been moved to AccordionItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("accordionToggle-move-isExpanded-prop", rule, {
       errors: [
         {
           message: `The \`isExpanded\` prop for AccordionToggle has been moved to AccordionItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -38,7 +36,6 @@ ruleTester.run("accordionToggle-move-isExpanded-prop", rule, {
       errors: [
         {
           message: `The \`isExpanded\` prop for AccordionToggle has been moved to AccordionItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

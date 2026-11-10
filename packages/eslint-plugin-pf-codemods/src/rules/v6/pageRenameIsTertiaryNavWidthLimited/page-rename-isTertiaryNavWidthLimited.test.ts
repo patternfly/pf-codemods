@@ -17,7 +17,6 @@ ruleTester.run('page-rename-isTertiaryNavWidthLimited', rule, {
       errors: [
         {
           message: `We've renamed the \`isTertiaryNavWidthLimited\` prop to \`isHorizontalSubnavWidthLimited\`.`,
-          type: 'JSXOpeningElement',
         },
       ],
     },

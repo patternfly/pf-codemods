@@ -29,7 +29,7 @@ export function removeSpecifierFromDeclaration(
   }
 
   const startRange = specifierToRemove.range[0];
-  const endRange = getEndRange(context.getSourceCode(), specifierToRemove);
+  const endRange = getEndRange(context.sourceCode, specifierToRemove);
   if (!startRange || !endRange) {
     return [];
   }

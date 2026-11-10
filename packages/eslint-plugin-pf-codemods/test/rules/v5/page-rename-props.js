@@ -25,7 +25,6 @@ ruleTester.run("page-rename-props", rule, {
       errors: [
         {
           message: `isNavOpen prop for PageSidebar has been renamed to isSidebarOpen`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -35,7 +34,6 @@ ruleTester.run("page-rename-props", rule, {
       errors: [
         {
           message: `isNavOpen prop for PFPageSidebar has been renamed to isSidebarOpen`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -45,7 +43,6 @@ ruleTester.run("page-rename-props", rule, {
       errors: [
         {
           message: `isNavOpen prop for PageToggleButton has been renamed to isSidebarOpen`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -55,7 +52,6 @@ ruleTester.run("page-rename-props", rule, {
       errors: [
         {
           message: `onNavToggle prop for PageToggleButton has been renamed to onSidebarToggle`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -65,7 +61,6 @@ ruleTester.run("page-rename-props", rule, {
       errors: [
         {
           message: `onNavToggle prop for PFPTButton has been renamed to onSidebarToggle`,
-          type: "JSXOpeningElement",
         },
       ],
     },

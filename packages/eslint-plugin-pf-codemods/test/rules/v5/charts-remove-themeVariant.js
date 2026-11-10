@@ -25,7 +25,6 @@ ruleTester.run("charts-remove-themeVariant", rule, {
       errors: [
         {
           message: `The themeVariant argument has been removed from the react-charts' getCustomTheme function.`,
-          type: "CallExpression",
         },
       ],
     },
@@ -35,7 +34,6 @@ ruleTester.run("charts-remove-themeVariant", rule, {
       errors: [
         {
           message: `The themeVariant prop has been removed for all react-charts components.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -46,7 +44,6 @@ ruleTester.run("charts-remove-themeVariant", rule, {
       errors: [
         {
           message: `The themeVariant prop has been removed for all react-charts components.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

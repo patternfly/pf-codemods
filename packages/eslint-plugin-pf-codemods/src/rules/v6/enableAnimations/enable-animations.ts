@@ -5,7 +5,18 @@ import { getAttribute, getAttributeValue } from "../../helpers/JSXAttributes";
 
 // Rule to add hasAnimations prop to components that support animations
 module.exports = {
-  meta: { fixable: "code" },
+  meta: {
+    fixable: "code",
+    schema: [
+      {
+        type: "object",
+        properties: {
+          includeTable: { type: "boolean" },
+        },
+        additionalProperties: false,
+      },
+    ],
+  },
   create: function (context: Rule.RuleContext) {
     // Get options from context (set by CLI)
     const includeTable =

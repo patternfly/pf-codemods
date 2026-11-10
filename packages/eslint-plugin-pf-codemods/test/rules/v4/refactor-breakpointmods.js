@@ -47,11 +47,9 @@ ruleTester.run("refactor-breakpointmods", rule, {
       errors: [
         {
           message: `Removed breakpointMods prop from Flex in favor of spacer, spaceItems, grow, shrink, flex, direction, alignItems, alignContent, alignSelf, align, justifyContent, display, fullWidth and flexWrap`,
-          type: "JSXOpeningElement",
         },
         {
           message: `Removed breakpointMods prop from FlexItem in favor of spacer, grow, shrink, flex, alignSelf, align, and fullWidth`,
-          type: "JSXOpeningElement",
         },
       ]
     },
@@ -62,7 +60,6 @@ ruleTester.run("refactor-breakpointmods", rule, {
         <MyPageSection padding={{ default: 'noPadding' }}></MyPageSection>`,
       errors: [{
         message: `hasNoPadding prop on PageSection component removed in favor of padding={{ default: 'noPadding' }}`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -76,7 +73,6 @@ ruleTester.run("refactor-breakpointmods", rule, {
         <ToolbarItem spacer={{"default":"spacerNone","lg":"spacerLg"}} align={{"sm":"alignRight"}} ></ToolbarItem>`,
       errors: [{
         message: `Removed breakpointMods prop from ToolbarItem in favor of visiblity, alignment, and spacer`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -90,11 +86,9 @@ ruleTester.run("refactor-breakpointmods", rule, {
       errors: [
         {
           message: `breakpoint prop on ToolbarToggleGroup removed in favor of show={{ xl: 'show' }}`,
-          type: "JSXOpeningElement",
         },
         {
           message: `Removed breakpointMods prop from ToolbarToggleGroup in favor of visiblity, alignment, spacer, and spaceItems`,
-          type: "JSXOpeningElement",
         }
       ]
     },
@@ -105,7 +99,6 @@ ruleTester.run("refactor-breakpointmods", rule, {
         <Flex justifyContent={{"default":"justifyContentSpaceBetween"}} ></Flex>`,
       errors: [ {
         message: `Removed breakpointMods prop from Flex in favor of spacer, spaceItems, grow, shrink, flex, direction, alignItems, alignContent, alignSelf, align, justifyContent, display, fullWidth and flexWrap`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

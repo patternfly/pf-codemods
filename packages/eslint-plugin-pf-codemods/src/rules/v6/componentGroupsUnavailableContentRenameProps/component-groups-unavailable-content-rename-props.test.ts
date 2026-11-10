@@ -5,7 +5,6 @@ const errors = [
   {
     message:
       "The unavailableTitleText prop for UnavailableContent has been renamed to titleText.",
-    type: "JSXOpeningElement",
   },
 ];
 

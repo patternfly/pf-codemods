@@ -22,11 +22,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -37,11 +35,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -51,11 +47,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -65,11 +59,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -79,11 +71,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -94,11 +84,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -109,11 +97,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -124,11 +110,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to PFInputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -138,11 +122,9 @@ ruleTester.run("inputGroup-update-api", rule, {
       errors: [
         {
           message: `add missing import InputGroupItem from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `Any non-InputGroupText child passed to InputGroup must now be wrapped within an InputGroupItem. The InputGroupItem may need the "isFill", "isPlain", and/or "isBox" props adjusted.`,
-          type: "JSXElement",
         },
       ],
     },

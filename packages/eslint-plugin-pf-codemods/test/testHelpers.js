@@ -64,7 +64,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -78,7 +77,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -104,7 +102,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -130,7 +127,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -144,7 +140,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -158,7 +153,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -172,7 +166,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -186,7 +179,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -200,7 +192,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -214,7 +205,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -228,7 +218,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -242,7 +231,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -259,7 +247,6 @@ function getInvalidAddCallbackParamTests(
                 propName,
                 newParamName
               ),
-              type: "JSXOpeningElement",
             },
           ],
         });
@@ -273,7 +260,6 @@ function getInvalidAddCallbackParamTests(
                 propName,
                 newParamName
               ),
-              type: "JSXOpeningElement",
             },
           ],
         });
@@ -287,7 +273,6 @@ function getInvalidAddCallbackParamTests(
                 propName,
                 newParamName
               ),
-              type: "JSXOpeningElement",
             },
           ],
         });
@@ -301,7 +286,6 @@ function getInvalidAddCallbackParamTests(
                 propName,
                 newParamName
               ),
-              type: "JSXOpeningElement",
             },
           ],
         });
@@ -325,7 +309,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -347,7 +330,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -369,7 +351,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -391,7 +372,6 @@ function getInvalidAddCallbackParamTests(
               propName,
               newParamName
             ),
-            type: "JSXOpeningElement",
           },
         ],
       });
@@ -455,7 +435,6 @@ function getInvalidSwapCallbackParamTests(
                   propName,
                   variation
                 ),
-                type: "JSXOpeningElement",
               },
             ],
           });
@@ -469,7 +448,6 @@ function getInvalidSwapCallbackParamTests(
                   propName,
                   variation
                 ),
-                type: "JSXOpeningElement",
               },
             ],
           });
@@ -616,7 +594,6 @@ function getMoveSpecifiersInvalidtests(
         movingFrom === "deprecated"
           ? `${specifierName} has been deprecated. Running the fix flag will update your imports and/or exports to our deprecated package${endOfMessage}`
           : `${specifierName} has been promoted as our default implementation. Running the fix flag will update your imports and/or exports.`,
-      type: isExportTest ? "ExportNamedDeclaration" : "ImportDeclaration",
     },
   ];
 

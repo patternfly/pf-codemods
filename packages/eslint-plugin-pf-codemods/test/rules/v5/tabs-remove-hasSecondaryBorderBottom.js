@@ -21,7 +21,6 @@ ruleTester.run("tabs-remove-hasSecondaryBorderBottom", rule, {
       errors: [
         {
           message: `hasSecondaryBorderBottom prop for Tabs has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -31,7 +30,6 @@ ruleTester.run("tabs-remove-hasSecondaryBorderBottom", rule, {
       errors: [
         {
           message: `hasSecondaryBorderBottom prop for Tabs has been removed`,
-          type: "JSXOpeningElement",
         },
       ],
     },

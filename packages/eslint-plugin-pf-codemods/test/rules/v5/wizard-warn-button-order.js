@@ -19,21 +19,19 @@ ruleTester.run("wizard-warn-button-order", rule, {
   invalid: [
     {
       code: `import {Wizard} from '@patternfly/react-core';`,
-      output: `import {Wizard} from '@patternfly/react-core';`,
+      output: null,
       errors: [
         {
           message: `The order of the "next" and "back" buttons in the Wizard has been updated, with the "next" button now coming after the "back" button.`,
-          type: "ImportDeclaration",
         },
       ],
     },
     {
       code: `import {WizardFooter} from '@patternfly/react-core/next';`,
-      output: `import {WizardFooter} from '@patternfly/react-core/next';`,
+      output: null,
       errors: [
         {
           message: `The order of the "next" and "back" buttons in the WizardFooter has been updated, with the "next" button now coming after the "back" button.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -42,7 +40,6 @@ ruleTester.run("wizard-warn-button-order", rule, {
       errors: [
         {
           message: `The order of the "next" and "back" buttons in the Wizard has been updated, with the "next" button now coming after the "back" button.`,
-          type: "ImportDeclaration",
         },
       ],
     },
@@ -51,7 +48,6 @@ ruleTester.run("wizard-warn-button-order", rule, {
       errors: [
         {
           message: `The order of the "next" and "back" buttons in the WizardFooter has been updated, with the "next" button now coming after the "back" button.`,
-          type: "ImportDeclaration",
         },
       ],
     },

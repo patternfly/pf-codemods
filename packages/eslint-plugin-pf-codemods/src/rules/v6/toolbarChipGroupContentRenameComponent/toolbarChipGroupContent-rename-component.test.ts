@@ -23,7 +23,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -33,7 +32,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ExportSpecifier",
         },
       ],
     },
@@ -43,11 +41,9 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ExportSpecifier",
         },
       ],
     },
@@ -57,7 +53,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -67,7 +62,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -77,15 +71,12 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "JSXIdentifier",
         },
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "JSXIdentifier",
         },
       ],
     },
@@ -95,11 +86,9 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "JSXIdentifier",
         },
       ],
     },
@@ -109,7 +98,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -119,11 +107,9 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "Identifier",
         },
       ],
     },
@@ -133,7 +119,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -143,7 +128,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -153,7 +137,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -163,7 +146,6 @@ ruleTester.run("toolbarChipGroupContent-rename-component", rule, {
       errors: [
         {
           message: `The ToolbarChipGroupContent component has been renamed to ToolbarLabelGroupContent`,
-          type: "ImportSpecifier",
         },
       ],
     },

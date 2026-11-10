@@ -54,7 +54,7 @@ module.exports = {
               drawerColorVariantEnumImport &&
               colorVariantValueEnum &&
               colorVariantValueEnum.object &&
-              context.getSourceCode().getText(colorVariantValueEnum.object) ===
+              context.sourceCode.getText(colorVariantValueEnum.object) ===
                 drawerColorVariantEnumImport.local.name;
 
             const isNoBackgroundEnum =

@@ -10,7 +10,7 @@ const validTests: { code: string }[] = [];
 const invalidTests: {
   code: string;
   output: string;
-  errors: { message: string; type: string }[];
+  errors: { message: string }[];
 }[] = [];
 affectedDrawerComponents.forEach((component) => {
   validTests.push({
@@ -32,7 +32,6 @@ affectedDrawerComponents.forEach((component) => {
     errors: [
       {
         message: `The "light-200" value for the \`colorVariant\` prop has been replaced with the "secondary" value for ${component}.`,
-        type: "JSXOpeningElement",
       },
     ],
   });
@@ -40,9 +39,6 @@ affectedDrawerComponents.forEach((component) => {
 
 ruleTester.run("drawer-replace-colorVariant-light200", rule, {
   valid: [
-    {
-      code: `<DrawerContent colorVariant={DrawerColorVariant.light200} />`,
-    },
     {
       code: `import { DrawerColorVariant } from '@patternfly/react-core'; <DrawerContent colorVariant={DrawerColorVariant.secondary} />`,
     },
@@ -56,7 +52,6 @@ ruleTester.run("drawer-replace-colorVariant-light200", rule, {
         {
           message:
             "The `light200` property for the DrawerColorVariant enum has been replaced with the `secondary` property.",
-          type: "MemberExpression",
         },
       ],
     },
@@ -68,7 +63,6 @@ ruleTester.run("drawer-replace-colorVariant-light200", rule, {
         {
           message:
             "The `light200` property for the DrawerColorVariant enum has been replaced with the `secondary` property.",
-          type: "MemberExpression",
         },
       ],
     },

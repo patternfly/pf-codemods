@@ -61,7 +61,7 @@ module.exports = {
 
           const variantVal = variantAttr.value.expression && variantAttr.value.expression.object.name === 'NavListVariants'
             ? `variant="${variantAttr.value.expression.property.name}"`
-            : context.getSourceCode().getText(variantAttr);
+            : context.sourceCode.getText(variantAttr);
           context.report({
             node,
             messageId: "removeNavListVariant",

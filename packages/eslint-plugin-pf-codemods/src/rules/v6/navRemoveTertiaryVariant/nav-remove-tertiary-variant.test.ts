@@ -20,7 +20,6 @@ ruleTester.run("nav-remove-tertiary-variant", rule, {
       errors: [
         {
           message: `The "tertiary" Nav variant is no longer supported. Use variant="horizontal-subnav" instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -30,7 +29,6 @@ ruleTester.run("nav-remove-tertiary-variant", rule, {
       errors: [
         {
           message: `The "tertiary" Nav variant is no longer supported. Use variant="horizontal-subnav" instead.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

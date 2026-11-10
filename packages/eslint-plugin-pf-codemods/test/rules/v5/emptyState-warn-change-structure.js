@@ -117,15 +117,12 @@ ruleTester.run("emptyState-warn-change-structure", rule, {
       errors: [
         {
           message: `add missing imports EmptyStateHeader, EmptyStateFooter from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `We've added an EmptyStateHeader sub-component which should be used instead of passing Title and EmptyStateIcon directly as children to EmptyState.`,
-          type: "JSXElement",
         },
         {
           message: `We've added the EmptyStateFooter sub-component, which should be added to wrap content after EmptyStateBody.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -166,15 +163,12 @@ ruleTester.run("emptyState-warn-change-structure", rule, {
       errors: [
         {
           message: `add missing imports EmptyStateHeader, EmptyStateFooter from @patternfly/react-core/dist/esm/components/EmptyState/index.js`,
-          type: "ImportDeclaration",
         },
         {
           message: `We've added an EmptyStateHeader sub-component which should be used instead of passing Title and EmptyStateIcon directly as children to EmptyState.`,
-          type: "JSXElement",
         },
         {
           message: `We've added the EmptyStateFooter sub-component, which should be added to wrap content after EmptyStateBody.`,
-          type: "JSXElement",
         },
       ],
     },
@@ -213,7 +207,6 @@ ruleTester.run("emptyState-warn-change-structure", rule, {
       errors: [
         {
           message: `add missing imports EmptyStateHeader, EmptyStateFooter from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
       ],
     },

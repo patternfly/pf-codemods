@@ -13,7 +13,7 @@ module.exports = {
         if (expandableSectionImports.map(imp => imp.local.name).includes(node.name.name)) {
           const sizeAttribute = node.attributes.find(n => n.name?.name === 'displaySize');;
           if (sizeAttribute && sizeAttribute.value.value === "large") {
-            const sizeValueString = context.getSourceCode().getText(sizeAttribute.value);
+            const sizeValueString = context.sourceCode.getText(sizeAttribute.value);
             const valueGuess = 'lg';
             context.report({
               node,

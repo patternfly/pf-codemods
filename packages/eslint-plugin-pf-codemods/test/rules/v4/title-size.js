@@ -24,7 +24,6 @@ ruleTester.run("title-size", rule, {
       output: `import { Title } from '@patternfly/react-core'; <Title size="md">MyTitle</Title>`,
       errors: [{
         message: `size "sm" has been removed for Title. Use size=md|lg|xl|2xl|3xl|4xl instead`,
-        type: "JSXOpeningElement",
       }]
     },
     // Suggest TitleSize.xl -> "xl"
@@ -33,7 +32,6 @@ ruleTester.run("title-size", rule, {
       output: `import { Title, TitleSize } from '@patternfly/react-core'; <Title size="xl">MyTitle</Title>`,
       errors: [{
         message: `size {TitleSize.xl} has been removed for Title. Use size=md|lg|xl|2xl|3xl|4xl instead`,
-        type: "JSXOpeningElement",
       }]
     },
     // Suggest TitleSize.sm -> "md"
@@ -42,7 +40,6 @@ ruleTester.run("title-size", rule, {
       output: `import { Title, TitleSize } from '@patternfly/react-core'; <Title size="md">MyTitle</Title>`,
       errors: [{
         message: `size {TitleSize.sm} has been removed for Title. Use size=md|lg|xl|2xl|3xl|4xl instead`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

@@ -17,15 +17,12 @@ ruleTester.run("chipgroup-remove-chipbutton", rule, {
       errors: [
         {
           message: `add missing imports Button from @patternfly/react-core`,
-          type: "ImportDeclaration",
         },
         {
           message: `ChipButton has been replaced with Button`,
-          type: "JSXIdentifier",
         },
         {
           message: `ChipButton has been replaced with Button`,
-          type: "JSXIdentifier",
         },
       ]
     },

@@ -6,7 +6,7 @@
   "license": "MIT",
   "bin": "./index.js",
   "engines": {
-    "node": ">=18"
+    "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "publishConfig": {
     "access": "public"
@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@patternfly/eslint-plugin-pf-codemods": "^1.142.2",
-    "@typescript-eslint/parser": "^7.3.1",
+    "@typescript-eslint/parser": "^8.12.2",
     "commander": "^5.1.0",
-    "eslint": "^8.57.1",
-    "glob": "^11.0.0",
+    "eslint": "^10.0.0",
+    "glob": "^14.0.3",
     "inquirer": "^12.3.2",
     "typescript": "^5.4.2"
   }

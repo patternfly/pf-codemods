@@ -37,7 +37,7 @@ module.exports = {
                 type: shouldCloseAttr.value?.expression?.type,
                 name: shouldCloseAttr.value?.expression?.name,
               };
-              const currentScope = context.getScope();
+              const currentScope = context.sourceCode.getScope(node);
               const matchingVariable = currentScope.variables.find(
                 (variable) => variable.name === propProperties.name
               );
@@ -70,7 +70,7 @@ module.exports = {
                   type: attr.value?.expression?.type,
                   name: attr.value?.expression?.name,
                 };
-                const currentScope = context.getScope();
+                const currentScope = context.sourceCode.getScope(node);
                 const matchingVariable = currentScope.variables.find(
                   (variable) => variable.name === propProperties.name
                 );

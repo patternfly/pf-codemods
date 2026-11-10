@@ -33,10 +33,10 @@ module.exports = {
 
               const { range } = darkThemeImport;
               const prevToken = context
-                .getSourceCode()
+                .sourceCode
                 .getTokenBefore(darkThemeImport);
               const nextToken = context
-                .getSourceCode()
+                .sourceCode
                 .getTokenAfter(darkThemeImport);
 
               const rangeStart =

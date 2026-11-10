@@ -17,7 +17,6 @@ ruleTester.run("application-launcher-rename-dropdownItems", rule, {
       output: `import { ApplicationLauncher } from '@patternfly/react-core'; <ApplicationLauncher items={[1,2,3]} />`,
       errors: [{
         message: `dropdownItems prop for ApplicationLauncher has been renamed to items`,
-        type: "JSXOpeningElement",
       }]
     },
   ]

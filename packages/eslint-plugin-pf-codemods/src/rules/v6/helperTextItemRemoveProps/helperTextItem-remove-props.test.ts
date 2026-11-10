@@ -17,7 +17,6 @@ ruleTester.run("helperTextItem-remove-props", rule, {
       errors: [
         {
           message: `The \`hasIcon\` prop has been removed from HelperTextItem. An icon will now render automatically when the \`variant\` prop has a value other than "default" or when the \`icon\` prop is passed in.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -27,7 +26,6 @@ ruleTester.run("helperTextItem-remove-props", rule, {
       errors: [
         {
           message: `The \`isDynamic\` prop has been removed from HelperTextItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -38,11 +36,9 @@ ruleTester.run("helperTextItem-remove-props", rule, {
       errors: [
         {
           message: `The \`hasIcon\` prop has been removed from HelperTextItem. An icon will now render automatically when the \`variant\` prop has a value other than "default" or when the \`icon\` prop is passed in.`,
-          type: "JSXOpeningElement",
         },
         {
           message: `The \`isDynamic\` prop has been removed from HelperTextItem.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

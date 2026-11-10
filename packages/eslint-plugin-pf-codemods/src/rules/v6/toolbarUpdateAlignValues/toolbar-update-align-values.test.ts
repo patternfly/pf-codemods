@@ -34,7 +34,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -44,7 +43,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -54,7 +52,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -65,7 +62,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -76,7 +72,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(`Custom${component}`),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -87,7 +82,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -98,7 +92,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },
@@ -109,7 +102,6 @@ for (const component in componentProps) {
         errors: [
           {
             message: createMessage(),
-            type: "JSXOpeningElement",
           },
         ],
       },

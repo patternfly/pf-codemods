@@ -27,11 +27,9 @@ ruleTester.run("popover-remove-props", rule, {
       output: `import { Popover } from '@patternfly/react-core'; <Popover   />`,
       errors: [{
         message: "Popover boundary prop has been removed.",
-        type: "JSXElement",
       },
       {
         message: "Popover tippyProps prop has been removed.",
-        type: "JSXElement",
       }],
     },
     {
@@ -39,11 +37,9 @@ ruleTester.run("popover-remove-props", rule, {
       output: `import { Popover as Pop } from '@patternfly/react-core'; <Pop   />`,
       errors: [{
         message: "Popover boundary prop has been removed.",
-        type: "JSXElement",
       },
       {
         message: "Popover tippyProps prop has been removed.",
-        type: "JSXElement",
       }],
     },
     {
@@ -51,7 +47,6 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [ 
       {
         message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
-        type: "JSXElement",
       }],
     },
     {
@@ -59,7 +54,6 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [ 
       {
         message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
-        type: "JSXElement",
       }],
     },
     { //based on 3 params without a match on 'tip'
@@ -67,7 +61,6 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [ 
       {
         message: "Popover shouldClose function's tip parameter has been removed. Please update accordingly",
-        type: "JSXElement",
       }],
     },
     {
@@ -75,23 +68,18 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [
       {
         message: "Popover onHidden function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onHide function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onMount function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onShow function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onShown function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       }],
     },
     {
@@ -99,23 +87,18 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [
       {
         message: "Popover onHidden function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onHide function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onMount function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onShow function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onShown function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       }],
     },
     {
@@ -123,23 +106,18 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [
       {
         message: "Popover onHidden function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onHide function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onMount function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onShow function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       },
       {
         message: "Popover onShown function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       }],
     },
     {
@@ -147,7 +125,6 @@ ruleTester.run("popover-remove-props", rule, {
       errors: [
       {
         message: "Popover onHide function's parameter has been removed. Please update your code accordingly.",
-        type: "JSXElement",
       }],
     }
   ]

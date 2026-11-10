@@ -20,15 +20,12 @@ ruleTester.run("tooltip-remove-props", rule, {
       output: `import { Tooltip } from '@patternfly/react-core'; <Tooltip    />`,
       errors: [{
         message: `boundary prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       },
       {
         message: `tippyProps prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       },
       {
         message: `isAppLauncher prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -36,15 +33,12 @@ ruleTester.run("tooltip-remove-props", rule, {
       output: `import { Tooltip } from '@patternfly/react-core/dist/esm/components/Tooltip/index.js'; <Tooltip    />`,
       errors: [{
         message: `boundary prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       },
       {
         message: `tippyProps prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       },
       {
         message: `isAppLauncher prop for Tooltip has been removed`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

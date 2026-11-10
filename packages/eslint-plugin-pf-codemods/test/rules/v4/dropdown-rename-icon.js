@@ -22,7 +22,6 @@ ruleTester.run("dropdown-rename-icon", rule, {
 </DropdownItem>`,
       errors: [{
         message: `variant="icon" has been removed from DropdownItem, use icon={<CogIcon />} instead`,
-        type: "JSXElement",
       }]
     },
     {
@@ -43,7 +42,6 @@ ruleTester.run("dropdown-rename-icon", rule, {
 </DropdownItem>`,
       errors: [{
         message: `variant="icon" has been removed from DropdownItem, use icon={<Icon />} instead`,
-        type: "JSXElement",
       }]
     },
   ]

@@ -22,11 +22,9 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },
@@ -39,7 +37,6 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
       ],
     },
@@ -52,11 +49,9 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },
@@ -69,11 +64,9 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportSpecifier",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },
@@ -86,11 +79,9 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportDefaultSpecifier",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },
@@ -103,11 +94,9 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportDefaultSpecifier",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },
@@ -120,11 +109,9 @@ ruleTester.run("tokens-prefix-with-t", rule, {
       errors: [
         {
           message,
-          type: "ImportDefaultSpecifier",
         },
         {
           message,
-          type: "Identifier",
         },
       ],
     },

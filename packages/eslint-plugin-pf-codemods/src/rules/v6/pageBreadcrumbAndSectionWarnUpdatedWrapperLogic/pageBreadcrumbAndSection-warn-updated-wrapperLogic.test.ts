@@ -16,7 +16,6 @@ for (const component of applicableComponents) {
   const message = `The isWidthLimited prop on ${component} will no longer determine whether the children are wrapped in a PageBody. Instead the new hasBodyWrapper prop must be used. By default this new prop is set to true. Running the fix for this rule will apply hasBodyWrapper with the same value as the isWidthLimited prop or false if isWidthLimited is not passed.`;
   const errorObject = {
     message,
-    type: "JSXOpeningElement",
   };
   invalidTests.push(
     createInvalidTest(

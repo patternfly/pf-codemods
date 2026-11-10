@@ -10,7 +10,7 @@ If you have any hardcoded Patternfly class names in your project (i.e. pf-c-butt
 
 ### Simple case
 
-Requires Node.js >= 10.
+Requires Node.js ^20.19.0 || ^22.13.0 || >=24.
 
 ```sh
 npx @patternfly/pf-codemods ./path-to-src
@@ -253,6 +253,100 @@ import { Button } from "@patternfly/react-core";
 export const ButtonRenameIsActiveInput = () => <Button isClicked />;
 ```
 
+
+### button-support-favorite-variant [(#11853)](https://github.com/patternfly/patternfly-react/pull/11853)
+
+This rule detects when you're using `StarIcon` with Button components and suggests using the new `isFavorite` and `isFavorited` props instead. This supports the new favorite variant that includes animation styling.
+
+#### Examples
+
+In:
+
+```jsx
+import { Button } from "@patternfly/react-core";
+import { StarIcon, SomeIcon } from "@patternfly/react-icons";
+
+export const ButtonSupportFavoriteVariantInput = () => (
+  <>
+    {/* Simple case - can be auto-fixed */}
+    <Button>
+      <StarIcon />
+    </Button>
+
+    {/* StarIcon in icon prop - can be auto-fixed */}
+    <Button icon={<StarIcon />} />
+
+    {/* StarIcon with existing props - can be auto-fixed */}
+    <Button variant="primary">
+      <StarIcon />
+    </Button>
+
+    {/* StarIcon with text - warning only */}
+    <Button>
+      Favorite <StarIcon />
+    </Button>
+
+    {/* StarIcon with other icon - warning only */}
+    <Button>
+      <SomeIcon />
+      <StarIcon />
+    </Button>
+
+    {/* StarIcon in fragment - warning only */}
+    <Button>
+      <>Favorite <StarIcon /></>
+    </Button>
+
+    {/* Already using new props - should be ignored */}
+    <Button isFavorite={true} />
+    <Button isFavorited={true} />
+  </>
+);
+```
+
+Out:
+
+```jsx
+import { Button } from "@patternfly/react-core";
+import { StarIcon, SomeIcon } from "@patternfly/react-icons";
+
+export const ButtonSupportFavoriteVariantInput = () => (
+  <>
+    {/* Simple case - warning only */}
+    <Button>
+      <StarIcon />
+    </Button>
+
+    {/* StarIcon in icon prop - warning only */}
+    <Button icon={<StarIcon />} />
+
+    {/* StarIcon with existing props - warning only */}
+    <Button variant="primary">
+      <StarIcon />
+    </Button>
+
+    {/* StarIcon with text - warning only */}
+    <Button>
+      Favorite <StarIcon />
+    </Button>
+
+    {/* StarIcon with other icon - warning only */}
+    <Button>
+      <SomeIcon />
+      <StarIcon />
+    </Button>
+
+    {/* StarIcon in fragment - warning only */}
+    <Button>
+      <>Favorite <StarIcon /></>
+    </Button>
+
+    {/* Already using new props - no warning */}
+    <Button isFavorite={true} />
+    <Button isFavorited={true} />
+  </>
+);
+```
 
 ### card-remove-various-props [(#10056)](https://github.com/patternfly/patternfly-react/pull/10056)
 
@@ -1307,6 +1401,29 @@ export const ExpandableSectionRemoveIsActivePropInput = () => (
 ```
 
 
+### foo-the-bar [(#1234)](https://github.com/patternfly/patternfly-react/pull/1234)
+
+We foo'd and bar'd
+
+#### Examples
+
+In:
+
+```jsx
+import { Foo } from "@patternfly/react-core";
+
+export const FooTheBarInput = () => <Foo bar />
+```
+
+Out:
+
+```jsx
+import { Foo } from "@patternfly/react-core";
+
+export const FooTheBarInput = () => <Foo bar />
+```
+
+
 ### formFiledGroupHeaderTitleTextObject-renamed [(#10016)](https://github.com/patternfly/patternfly-react/pull/10016)
 
 There was a typo in FormFiledGroupHeaderTitleTextObject interface. It was renamed to the intended FormFieldGroupHeaderTitleTextObject.
@@ -2204,10 +2321,6 @@ export const PageSidebarRemoveThemePropInput = () => (
 );
 ```
 
-### page-warn-updated-markup [(#10650)](https://github.com/patternfly/patternfly-react/pull/10650)
-
-The markup for Page has changed. When either the `horizontalSubnav` or `breadcrumb` props are passed, a PageBody component will always wrap the contents.
-
 ### pageToggleButton-replace-barsIcon-with-isHamburgerButton [(#11861)](https://github.com/patternfly/patternfly-react/pull/11861)
 
 The `BarsIcon` child component should be replaced with the `isHamburgerButton` prop on PageToggleButton. This simplifies the API and provides a more semantic way to indicate that the toggle button should render as a hamburger menu button. It also allows for the button to use animation.
@@ -2235,37 +2348,10 @@ import { PageToggleButton } from "@patternfly/react-core";
 export const PageToggleButtonReplaceBarsIconWithIsHamburgerButtonOutput = () => (
   <PageToggleButton isHamburgerButton />
 );
-```
+``` 
+### page-warn-updated-markup [(#10650)](https://github.com/patternfly/patternfly-react/pull/10650)
 
-### button-support-favorite-variant [(#11853)](https://github.com/patternfly/patternfly-react/pull/11853)
-
-This rule detects when you're using `StarIcon` with Button components and suggests using the new `isFavorite` and `isFavorited` props instead. This supports the new favorite variant that includes animation styling.
-
-#### Examples
-
-In:
-
-```jsx
-import { Button } from "@patternfly/react-core";
-import { StarIcon } from "@patternfly/react-icons";
-
-export const ButtonSupportFavoriteVariantInput = () => (
-  <Button>
-    <StarIcon />
-  </Button>
-);
-```
-
-Out:
-
-```jsx
-import { Button } from "@patternfly/react-core";
-import { StarIcon } from "@patternfly/react-icons";
-
-export const ButtonSupportFavoriteVariantOutput = () => (
-  <Button isFavorite={true} />
-);
-```
+The markup for Page has changed. When either the `horizontalSubnav` or `breadcrumb` props are passed, a PageBody component will always wrap the contents.
 
 ### pagination-warn-markup-changed [(#10662)](https://github.com/patternfly/patternfly-react/pull/10662)
 

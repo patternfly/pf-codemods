@@ -21,7 +21,6 @@ ruleTester.run("various-rename-reference", rule, {
         output: `import { ${c} } from '@patternfly/react-core'; <${c} triggerRef />`,
         errors: [{
           message: `reference prop for ${c} has been renamed to triggerRef`,
-          type: "JSXOpeningElement",
         }]
       };
     }),
@@ -31,11 +30,9 @@ ruleTester.run("various-rename-reference", rule, {
       errors: [
         {
           message: `reference prop for Tooltip has been renamed to triggerRef`,
-          type: "JSXOpeningElement",
         },
         {
           message: `reference prop for Popover has been renamed to triggerRef`,
-          type: "JSXOpeningElement",
         },
       ]
     }

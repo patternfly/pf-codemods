@@ -16,7 +16,7 @@ module.exports = {
           const attribute = node.attributes.find(node => node.name && node.name.name === 'title');
           if (attribute) {
             const { value } = attribute;
-            const valueText = context.getSourceCode().getText(value);
+            const valueText = context.sourceCode.getText(value);
             if (valueText.indexOf('TabTitleText') !== -1 || valueText.indexOf('TabTitleIcon') !== -1) {
               return;
             }

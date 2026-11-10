@@ -147,7 +147,7 @@ module.exports = {
             }
 
             const titleChildren = title.children
-              .map((child) => context.getSourceCode().getText(child).trim())
+              .map((child) => context.sourceCode.getText(child).trim())
               .join("");
 
             return `{<>${titleChildren}</>}`;
@@ -155,13 +155,13 @@ module.exports = {
 
           const getHeaderText = () => {
             const icon = emptyStateIcon
-              ? `icon={${context.getSourceCode().getText(emptyStateIcon)}} `
+              ? `icon={${context.sourceCode.getText(emptyStateIcon)}} `
               : "";
 
             const titleText = title ? `titleText=${getTitleText()} ` : "";
 
             const headingLevel = headingLevelAttribute
-              ? `${context.getSourceCode().getText(headingLevelAttribute)} `
+              ? `${context.sourceCode.getText(headingLevelAttribute)} `
               : "";
 
             return `<EmptyStateHeader ${titleText}${icon}${headingLevel}/>`;
@@ -177,7 +177,7 @@ module.exports = {
                   return [];
                 }
                 const token = context
-                  .getSourceCode()
+                  .sourceCode
                   .getTokenAfter(emptyStateIcon);
 
                 return token.type === "JSXText" && token.value.trim() === ""
@@ -186,10 +186,10 @@ module.exports = {
               };
 
               const getImportEndRange = (imp) => {
-                const nextComma = context.getSourceCode().getTokenAfter(imp);
+                const nextComma = context.sourceCode.getTokenAfter(imp);
 
-                return context.getSourceCode().getText(nextComma) === ","
-                  ? context.getSourceCode().getTokenAfter(nextComma).range[0]
+                return context.sourceCode.getText(nextComma) === ","
+                  ? context.sourceCode.getTokenAfter(nextComma).range[0]
                   : imp.range[1];
               };
 

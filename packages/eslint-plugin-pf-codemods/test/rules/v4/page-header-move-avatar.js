@@ -18,7 +18,6 @@ ruleTester.run("page-header-move-avatar", rule, {
       errors: [
         {
           message: 'avatar prop was removed from PageHeader, move the avatar component into PageHeaderTools',
-          type: 'JSXElement'
         }
       ]
     },
@@ -28,7 +27,6 @@ ruleTester.run("page-header-move-avatar", rule, {
       errors: [
         {
           message: 'avatar prop was removed from PageHeader, move the avatar component into PageHeaderTools',
-          type: 'JSXElement'
         }
       ]
     },

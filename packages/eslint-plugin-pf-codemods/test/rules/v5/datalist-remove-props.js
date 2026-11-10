@@ -21,7 +21,6 @@ ruleTester.run("datalist-remove-props", rule, {
       errors: [`onDragStart`, `onDragMove`, `onDragFinish`,`onDragCancel`].map( name => {
         return {
           message: name + ` prop for DataList has been removed. Implement drag and drop using the DragDrop component instead.`,
-          type: "JSXOpeningElement",
         }
       }),
     },
@@ -31,7 +30,6 @@ ruleTester.run("datalist-remove-props", rule, {
       errors: [`onDragStart`, `onDragMove`, `onDragFinish`,`onDragCancel`].map( name => {
         return {
           message: name + ` prop for DataList has been removed. Implement drag and drop using the DragDrop component instead.`,
-          type: "JSXOpeningElement",
         }
       }),
     },
@@ -40,7 +38,6 @@ ruleTester.run("datalist-remove-props", rule, {
       output: `import { DataList } from '@patternfly/react-core'; <DataList  />`,
       errors: [{
         message: `itemOrder prop for DataList has been removed`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

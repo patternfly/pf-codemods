@@ -34,7 +34,6 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
       errors: [
         {
           message: `PopoverPosition type has been removed for the position prop on ClipboardCopy.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -44,7 +43,6 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
       errors: [
         {
           message: `PopoverPosition type has been removed for the position prop on ClipboardCopyButton.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -54,7 +52,6 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
       errors: [
         {
           message: `PopoverPosition type has been removed for the position prop on PFClipCopy.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -64,7 +61,6 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
       errors: [
         {
           message: `PopoverPosition type has been removed for the position prop on PFClipCopyButton.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -74,7 +70,6 @@ ruleTester.run("clipboardCopy-remove-popoverPosition", rule, {
       errors: [
         {
           message: `PopoverPosition type has been removed for the position prop on PFClipCopyButton.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

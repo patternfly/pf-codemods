@@ -13,21 +13,19 @@ ruleTester.run("jumpLinksItem-href-required", rule, {
   invalid: [
     {
       code: `import { JumpLinksItem } from '@patternfly/react-core'; <JumpLinksItem />`,
-      output: `import { JumpLinksItem } from '@patternfly/react-core'; <JumpLinksItem />`,
+      output: null,
       errors: [
         {
           message: `The \`href\` prop on JumpLinksItem is now required.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { JumpLinksItem } from '@patternfly/react-core'; <JumpLinksItem href />`,
-      output: `import { JumpLinksItem } from '@patternfly/react-core'; <JumpLinksItem href />`,
+      output: null,
       errors: [
         {
           message: `The \`href\` prop on JumpLinksItem is now required.`,
-          type: "JSXOpeningElement",
         },
       ],
     },

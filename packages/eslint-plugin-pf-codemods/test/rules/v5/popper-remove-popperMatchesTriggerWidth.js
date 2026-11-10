@@ -20,7 +20,6 @@ ruleTester.run("popper-remove-popperMatchesTriggerWidth", rule, {
       output: `import { Popper } from '@patternfly/react-core'; <Popper  />`,
       errors: [{
         message: `popperMatchesTriggerWidth prop has been removed for Popper. The width can instead be modified via the new minWidth, maxWidth, and width properties`,
-        type: "JSXOpeningElement",
       }]
     },
     {
@@ -28,7 +27,6 @@ ruleTester.run("popper-remove-popperMatchesTriggerWidth", rule, {
       output: `import { Popper } from '@patternfly/react-core/dist/esm/components/Popover/index.js'; <Popper  />`,
       errors: [{
         message: `popperMatchesTriggerWidth prop has been removed for Popper. The width can instead be modified via the new minWidth, maxWidth, and width properties`,
-        type: "JSXOpeningElement",
       }]
     }
   ]

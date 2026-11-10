@@ -10,7 +10,7 @@ export function getEnumPropertyName(
   if (enumNode.property.type === "Identifier") {
     // E.g. const key = "key"; someEnum[key]
     if (enumNode.computed) {
-      const scope = context.getSourceCode().getScope(enumNode);
+      const scope = context.sourceCode.getScope(enumNode);
       const propertyName = enumNode.property.name;
 
       return getVariableValue(propertyName, scope, context).value?.toString();

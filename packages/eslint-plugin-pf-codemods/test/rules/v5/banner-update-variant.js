@@ -29,21 +29,19 @@ ruleTester.run("banner-update-variant", rule, {
   invalid: [
     {
       code: `import { Banner } from '@patternfly/react-core'; const status = 'default'; <Banner variant={status} />`,
-      output: `import { Banner } from '@patternfly/react-core'; const status = 'default'; <Banner variant={status} />`,
+      output: null,
       errors: [
         {
           message: `The "variant" prop type for Banner has been updated. "default" is still a valid value, but the previous status values of "info", "success", "warning", and "danger" have been replaced with color values of "blue", "green", "gold", and "red", respectively.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
     {
       code: `import { Banner } from '@patternfly/react-core/dist/esm/components/Banner/index.js'; const status = 'default'; <Banner variant={status} />`,
-      output: `import { Banner } from '@patternfly/react-core/dist/esm/components/Banner/index.js'; const status = 'default'; <Banner variant={status} />`,
+      output: null,
       errors: [
         {
           message: `The "variant" prop type for Banner has been updated. "default" is still a valid value, but the previous status values of "info", "success", "warning", and "danger" have been replaced with color values of "blue", "green", "gold", and "red", respectively.`,
-          type: "JSXOpeningElement",
         },
       ],
     },
@@ -56,7 +54,6 @@ ruleTester.run("banner-update-variant", rule, {
         errors: [
           {
             message: `The "variant" prop type for Banner has been updated. "default" is still a valid value, but the previous status values of "info", "success", "warning", and "danger" have been replaced with color values of "blue", "green", "gold", and "red", respectively.`,
-            type: "JSXOpeningElement",
           },
         ],
       };

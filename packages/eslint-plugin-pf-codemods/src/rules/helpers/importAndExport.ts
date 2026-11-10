@@ -23,7 +23,7 @@ export function getAllImportDeclarations(
   context: Rule.RuleContext,
   packageName?: string
 ) {
-  const astBody = context.getSourceCode().ast.body;
+  const astBody = context.sourceCode.ast.body;
 
   const importDeclarationsFromPackage = filterByDeclarationType(
     astBody,

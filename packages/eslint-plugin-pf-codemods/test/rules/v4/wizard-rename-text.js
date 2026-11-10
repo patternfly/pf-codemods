@@ -17,7 +17,6 @@ ruleTester.run("wizard-rename-text", rule, {
       output: `import { WizardNavItem } from '@patternfly/react-core'; <WizardNavItem content="sm" />`,
       errors: [{
         message: "text prop for WizardNavItem has been renamed to content",
-        type: "JSXOpeningElement",
       }]
     }
   ]

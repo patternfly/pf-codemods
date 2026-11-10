@@ -37,7 +37,7 @@ module.exports = {
 
             let itemsPropValue;
             if (itemsProp.value.expression?.type === "Identifier") {
-              const currentScope = context.getSourceCode().getScope(node);
+              const currentScope = context.sourceCode.getScope(node);
               const itemsPropDeclaration = findVariableDeclaration(
                 itemsProp.value.expression.name,
                 currentScope
@@ -69,7 +69,7 @@ module.exports = {
                 }
 
                 if (type === "JSXElement") {
-                  return context.getSourceCode().getText(tooltipProp.value);
+                  return context.sourceCode.getText(tooltipProp.value);
                 }
               };
 
@@ -102,7 +102,7 @@ module.exports = {
                       );
 
                       const tooltipPropertyHasComma =
-                        context.getSourceCode().getTokenAfter(tooltipProperty)
+                        context.sourceCode.getTokenAfter(tooltipProperty)
                           .value === ",";
                       const { range } = tooltipProperty;
                       fixes.push(
