@@ -1443,7 +1443,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@patternfly/eslint-plugin-pf-codemods@npm:^1.142.2, @patternfly/eslint-plugin-pf-codemods@workspace:packages/eslint-plugin-pf-codemods":
+"@patternfly/eslint-plugin-pf-codemods@npm:^1.142.3, @patternfly/eslint-plugin-pf-codemods@workspace:packages/eslint-plugin-pf-codemods":
   version: 0.0.0-use.local
   resolution: "@patternfly/eslint-plugin-pf-codemods@workspace:packages/eslint-plugin-pf-codemods"
   dependencies:
@@ -1463,7 +1463,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@patternfly/pf-codemods@workspace:packages/pf-codemods"
   dependencies:
-    "@patternfly/eslint-plugin-pf-codemods": "npm:^1.142.2"
+    "@patternfly/eslint-plugin-pf-codemods": "npm:^1.142.3"
     "@typescript-eslint/parser": "npm:^8.12.2"
     commander: "npm:^5.1.0"
     eslint: "npm:^10.0.0"
